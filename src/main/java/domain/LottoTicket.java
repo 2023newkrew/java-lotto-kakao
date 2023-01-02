@@ -17,5 +17,11 @@ public class LottoTicket {
         if (lottoBalls.size() != LOTTO_TICKET_BALL_COUNT) {
             throw new IllegalArgumentException("로또 티켓 한 장은 6개의 로또볼이 필요합니다.");
         }
+
+        //TODO: 중복되는 LottoBall이 있는지 확인
+    }
+
+    public boolean contains(LottoBall lottoBall) {
+        return lottoBalls.contains(lottoBall);
     }
 }
