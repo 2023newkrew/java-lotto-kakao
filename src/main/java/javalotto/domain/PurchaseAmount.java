@@ -3,6 +3,8 @@ package javalotto.domain;
 import javalotto.exception.AmountNotMultipleOfUnitPriceException;
 import javalotto.exception.AmountOutOfRangeException;
 
+import java.util.Objects;
+
 public class PurchaseAmount {
     public static final int PURCHASE_AMOUNT_MIN_VALUE = 1000;
     public static final int PURCHASE_AMOUNT_MAX_VALUE = Integer.MAX_VALUE / 1000 * 1000;
@@ -40,5 +42,22 @@ public class PurchaseAmount {
 
     public int getPurchaseAmount() {
         return purchaseAmount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        PurchaseAmount that = (PurchaseAmount) o;
+        return purchaseAmount == that.purchaseAmount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(purchaseAmount);
     }
 }
