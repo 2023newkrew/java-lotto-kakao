@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.*;
 
 class WinningNumbersTest {
@@ -29,5 +31,27 @@ class WinningNumbersTest {
                         bonusNumber
                 )
         ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1, 2, 3, 4, 5, 6:7:6",
+            "1, 2, 3, 4, 5, 7:8:5",
+            "1, 2, 3, 4, 5, 7:6:15",
+            "6, 5, 4, 3, 2, 1:7:6"
+    }, delimiter = ':')
+    void 당첨_확인(String sixNumbers, String bonusNumber, int result){
+        WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, bonusNumber);
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
+                new LottoValue(1),
+                new LottoValue(2),
+                new LottoValue(3),
+                new LottoValue(4),
+                new LottoValue(5),
+                new LottoValue(6)
+        ));
+        assertThat(winningNumbers.matchValues(lottoTicket)).isEqualTo(result);
+
     }
 }

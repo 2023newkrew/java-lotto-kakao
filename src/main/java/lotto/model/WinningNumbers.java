@@ -31,4 +31,18 @@ public class WinningNumbers {
                         numberString -> new LottoValue(Integer.parseInt(numberString)))
                 .collect(Collectors.toList()));
     }
+
+    public int matchValues(LottoTicket lottoTicket) {
+        int sixCount = (int) lottoTicket.getLottoValues()
+                .stream()
+                .filter(sixNumbers::contains)
+                .count();
+
+        int bonusCount = 0;
+        if (sixCount == 5 && lottoTicket.contains(bonusNumber)) {
+            bonusCount++;
+        }
+
+        return sixCount + 10 * bonusCount;
+    }
 }

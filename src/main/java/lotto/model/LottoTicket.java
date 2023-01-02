@@ -28,4 +28,8 @@ public class LottoTicket {
     public boolean contains(LottoValue bonusNumber) {
         return lottoValues.contains(bonusNumber);
     }
+
+    public List<LottoValue> getLottoValues(){
+        return new ArrayList<>(lottoValues);
+    }
 }
