@@ -3,17 +3,29 @@ package lotto;
 import java.util.Objects;
 
 public class Price {
-    private int value;
+    private final long value;
 
-    public Price(int value) {
+    public Price(long value) {
         this.value = value;
     }
 
-    public void add(int addValue) {
-        if (addValue < 0) {
-            throw new IllegalArgumentException("더하는 금액은 0 미만이 될 수 없습니다.");
-        }
-        this.value += addValue;
+    public Price(Price other) {
+        this.value = other.value;
+    }
+
+    public Price add(Number other) {
+        return new Price(this.value + other.longValue());
+    }
+
+    public Price add(Price other) {
+        return new Price(this.value + other.value);
+    }
+
+    @Override
+    public String toString() {
+        return "Price{" +
+                "value=" + value +
+                '}';
     }
 
     @Override
@@ -33,7 +45,15 @@ public class Price {
         return ((float) outcome.value) / this.value;
     }
 
-    public int floorDivide(Price other) {
+    public Price multiply(int other) {
+        return new Price(value * other);
+    }
+
+    public Price multiply(long other) {
+        return new Price(value * other);
+    }
+
+    public long floorDivide(Price other) {
 
         return this.value / other.value;
     }

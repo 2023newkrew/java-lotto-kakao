@@ -23,7 +23,7 @@ public class Main {
     }
 
     private static List<LottoTicket> generateLottoTickets(Price income) {
-        int ticketNumber = income.floorDivide(new Price(1000));
+        long ticketNumber = income.floorDivide(new Price(1000));
         System.out.println(ticketNumber + "개를 구매했습니다.");
 
         List<LottoTicket> lottoTickets = new ArrayList<>();

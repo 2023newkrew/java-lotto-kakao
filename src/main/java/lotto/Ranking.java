@@ -3,24 +3,30 @@ package lotto;
 import java.util.Map;
 
 public enum Ranking {
-    FIRST(2000000000),
-    SECOND(30000000),
-    THIRD(1500000),
-    FOURTH(50000),
-    FIFTH(5000),
-    OTHER(0);
+    FIRST(new Price(2000000000)),
+    SECOND(new Price(30000000)),
+    THIRD(new Price(1500000)),
+    FOURTH(new Price(50000)),
+    FIFTH(new Price(5000)),
+    OTHER(new Price(0));
 
-    private final int price;
+    private final Price price;
 
-    Ranking(int price) {
+    Ranking(Price price) {
         this.price = price;
     }
 
     public static Price totalPrice(Map<Ranking, Integer> rankingMap) {
-        Price result = new Price(0);
-        for (Map.Entry<Ranking, Integer> rankingIntegerEntry : rankingMap.entrySet()) {
-            result.add(rankingIntegerEntry.getKey().price * rankingIntegerEntry.getValue());
-        }
-        return result;
+        return rankingMap.entrySet()
+                .stream()
+                .reduce(
+                        new Price(0),
+                        (acc, other) -> acc.add(other.getKey().price.multiply(other.getValue())),
+                        Price::add
+                );
+    }
+
+    public Price intoPrice() {
+        return this.price;
     }
 }
