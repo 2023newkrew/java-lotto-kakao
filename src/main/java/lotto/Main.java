@@ -28,8 +28,8 @@ public class Main {
 
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < ticketNumber; i++) {
-            LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator();
-            LottoTicket generatedTicket = lottoTicketGenerator.generate(() -> new LottoBall(new Random().nextInt(45) + 1));
+            LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(() -> new LottoBall(new Random().nextInt(45) + 1));
+            LottoTicket generatedTicket = lottoTicketGenerator.generate();
             lottoTickets.add(generatedTicket);
         }
         return lottoTickets;

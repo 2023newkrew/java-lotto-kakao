@@ -19,8 +19,8 @@ public class LottoTicketGeneratorTest {
         List<Integer> balls = Arrays.stream(rawBalls.split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator();
-        LottoTicket lottoTicket = lottoTicketGenerator.generate(new MockBallGenerator(balls));
+        LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator(new MockBallGenerator(balls));
+        LottoTicket lottoTicket = lottoTicketGenerator.generate();
 
         assertThat(lottoTicket)
                 .isEqualTo(
