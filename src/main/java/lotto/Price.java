@@ -27,4 +27,8 @@ public class Price {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+    public float scale(Price outcome) {
+        return ((float) outcome.value) / this.value;
+    }
 }
