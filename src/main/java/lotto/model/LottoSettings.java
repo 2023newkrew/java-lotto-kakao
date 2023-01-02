@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 public enum LottoSettings {
     MAX_LENGTH(6),
