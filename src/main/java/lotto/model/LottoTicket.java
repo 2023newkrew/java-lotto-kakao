@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
-    private static final int VALUES_COUNT = 6;
+    public static final int VALUES_COUNT = 6;
     private final List<LottoValue> lottoValues;
 
     public LottoTicket(List<LottoValue> lottoValues) {

@@ -20,10 +20,3 @@
     [ ] 유효하지 않은 경우 다시 입력받는다
 [ ] 당첨 번호와 비교해서 일치하는 개수 확인
 [ ] 수익률 계산
-
-
-feat : 자동으로 1~45 사이 임의의 다른 수 6개를 생성
-
-LottoValue - 1~45 범위를 갖는 숫자 Wrapper
-LottoTicket - 중복이 없는 6개의 LottoValue를 갖는 일급 콜렉션
-LottoTicketGenerator - 난수 6개를 갖는 LottoTicket 생성하는 공장
