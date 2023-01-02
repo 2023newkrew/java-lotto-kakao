@@ -29,13 +29,29 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @MethodSource("getFailToGenerateDuplicatedLottoNumbersData")
     public void fail_to_generate_duplicated_lotto_numbers(List<Integer> numbers) {
-        Assertions.assertThatThrownBy(() -> new LottoNumbers(numbers)).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> new LottoNumbers(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     private static Stream<Arguments> getFailToGenerateDuplicatedLottoNumbersData() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 1, 3, 4, 5, 6)),
                 Arguments.of(Arrays.asList(41, 6, 12, 21, 41, 43))
+        );
+    }
+
+    @DisplayName("6개 이외의 숫자 배열 생성시 실패")
+    @ParameterizedTest
+    @MethodSource("getFailToGenerateLottoNumbersOtherThan6Data")
+    public void fail_to_generate_lotto_numbers_other_than_6(List<Integer> numbers) {
+        Assertions.assertThatThrownBy(() -> new LottoNumbers(numbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private static Stream<Arguments> getFailToGenerateLottoNumbersOtherThan6Data() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(1, 3, 4, 5, 6)),
+                Arguments.of(Arrays.asList(6, 12, 21, 41, 43, 44, 45))
         );
     }
 }
