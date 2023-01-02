@@ -8,7 +8,7 @@ import java.util.Set;
 public class LottoTicket {
 
     private final ArrayList<Integer> lottoNumbers;
-    private static int LOTTO_NUMBER_COUNT = 6;
+    public static int LOTTO_NUMBER_COUNT = 6;
 
     public LottoTicket() {
         this.lottoNumbers = createRandomNumbers();

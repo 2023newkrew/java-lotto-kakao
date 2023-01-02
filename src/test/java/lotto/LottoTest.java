@@ -2,7 +2,9 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.LottoTicket;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -27,6 +29,18 @@ public class LottoTest {
         for(int num : lottoNumbers){
             assertThat(dupCheck.contains(num)).isFalse();
             dupCheck.add(num);
+        }
+    }
+
+    @RepeatedTest(20)
+    @DisplayName("랜덤 숫자가 1~45 사이에 존재해야만 한다.")
+    void lottoNumberRangeTest(){
+        LottoTicket lottoTicket = new LottoTicket();
+        lottoTicket.createRandomNumbers();
+        for (int i=0; i<6; i++) { // stream 으로 수정 필요
+            Assertions.assertThat(lottoTicket.getLottoNumbers().get(i)).
+                    isGreaterThanOrEqualTo(1).
+                    isLessThanOrEqualTo(45);
         }
     }
 }
