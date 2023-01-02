@@ -7,6 +7,7 @@ import lotto.exception.LottoException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 public class LottoTicket {
     private static final Integer LOTTO_TICKET_LENGTH = 6;
     private static final Integer LOTTO_NUMBER_LOWER_BOUNDARY = 1;

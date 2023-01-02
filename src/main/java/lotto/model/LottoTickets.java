@@ -12,4 +12,5 @@ public class LottoTickets {
     public LottoResult getLottoResult(LottoWinningNumber lottoWinningNumber) {
         return null;
     }
+
 }

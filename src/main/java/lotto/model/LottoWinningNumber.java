@@ -19,4 +19,10 @@ public class LottoWinningNumber {
         }
     }
 
+    public LottoRank checkRank(LottoTicket lottoTicket){
+        Integer sameCount = winningNumber.countIncludedNumber(lottoTicket);
+        boolean isBonus = lottoTicket.contains(bonusBall);
+
+        return LottoRank.fromCountAndBonus(sameCount, isBonus);
+    }
 }
