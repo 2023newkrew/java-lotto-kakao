@@ -1,4 +1,4 @@
-package javalotto.exception;
+package javalotto.exception.purchaseamount;
 
 import static javalotto.domain.PurchaseAmount.PURCHASE_AMOUNT_UNIT_PRICE;
 

@@ -1,7 +1,7 @@
 package javalotto.domain;
 
-import javalotto.exception.AmountNotMultipleOfUnitPriceException;
-import javalotto.exception.AmountOutOfRangeException;
+import javalotto.exception.purchaseamount.AmountNotMultipleOfUnitPriceException;
+import javalotto.exception.purchaseamount.AmountOutOfRangeException;
 
 import java.util.Objects;
 
