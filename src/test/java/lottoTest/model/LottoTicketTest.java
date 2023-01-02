@@ -25,9 +25,6 @@ public class LottoTicketTest {
 
         //when & then
         assertDoesNotThrow(() -> new LottoTicket(input));
-        assertThatThrownBy(() -> new LottoTicket(input))
-                .isInstanceOf(LottoException.class)
-                .hasMessage(ErrorCode.INVALID_LOTTO_NUMBER.getMessage());
     }
     @ParameterizedTest
     @MethodSource("validateInvalidLottoNumberTestGenerator")
@@ -49,6 +46,17 @@ public class LottoTicketTest {
                 Arguments.of(List.of(1, 2, 3, 4, 5), ErrorCode.INVALID_LOTTO_NUMBER_LENGTH),
                 Arguments.of(null, ErrorCode.INVALID_LOTTO_NUMBER_LENGTH)
         );
+    }
+
+    @Test
+    public void includeNumberTest() {
+        // given
+        List<Integer> input = List.of(1,2,3,4,5,6);
+        LottoTicket lottoTicket = new LottoTicket(input);
+
+        // when & then
+        assertThat(lottoTicket.contains(1)).isEqualTo(true);
+        assertThat(lottoTicket.contains(7)).isEqualTo(false);
     }
 
 }
