@@ -8,7 +8,6 @@ import static lotto.exception.ExceptionMessages.NOT_UNIQUE_EXCEPTION_MESSAGE;
 import static lotto.exception.ExceptionMessages.OUT_OF_BOUNDS_EXCEPTION_MESSAGE;
 
 import java.util.List;
-import lotto.exception.ExceptionMessages;
 
 public class LottoNumbers {
 
@@ -16,6 +15,7 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> lottoNumbers) {
         validate(lottoNumbers);
+        lottoNumbers.sort(Integer::compare);
         this.lottoNumbers = lottoNumbers;
     }
 
