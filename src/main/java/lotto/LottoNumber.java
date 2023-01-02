@@ -1,22 +1,45 @@
 package lotto;
 
-import java.util.List;
+import java.util.Objects;
 
 public class LottoNumber {
 
-    private final List<Integer> numbers;
+    private static final int MIN_NUMBER = 1;
 
-    public LottoNumber(List<Integer> numbers) {
-        this.numbers = numbers;
+    private static final int MAX_NUMBER = 45;
+
+    private final int number;
+
+    public LottoNumber(int number){
+        validateRange(number);
+        this.number = number;
     }
 
-    public boolean hasNumber(int number){
-        return numbers.contains(number);
+    private void validateRange(int number) {
+        if (isOutOfRange(number)) {
+            String errorMessage = String.format("로또 번호는 %d ~ %d 사이의 숫자입니다.", MIN_NUMBER, MAX_NUMBER);
+            throw new IllegalArgumentException(errorMessage);
+        }
     }
 
-    public int countOverlappedNumber(LottoNumber other){
-        return (int) numbers.stream()
-                .filter(other::hasNumber)
-                .count();
+    private static boolean isOutOfRange(int number) {
+        return number < MIN_NUMBER || number > MAX_NUMBER;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber) o;
+        return number == that.number;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
