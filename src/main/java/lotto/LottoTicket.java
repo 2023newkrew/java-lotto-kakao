@@ -36,6 +36,7 @@ public class LottoTicket {
     public String toString() {
         return String.format(
                 "[%s]", lottoBalls.stream()
+                        .sorted()
                         .map(LottoBall::toString)
                         .collect(Collectors.joining(", "))
         );
