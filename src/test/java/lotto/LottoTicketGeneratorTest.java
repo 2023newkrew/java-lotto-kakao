@@ -10,10 +10,11 @@ import java.util.List;
 public class LottoTicketGeneratorTest {
     @DisplayName("")
     @Test
-    void generate(){
+    void generate() {
         LottoTicketGenerator lottoTicketGenerator = new LottoTicketGenerator();
         LottoTicketGenerator.LottoBallGenerator lottoBallGenerator = new LottoTicketGenerator.LottoBallGenerator() {
             int index = 0;
+
             @Override
             public LottoBall generateBall() {
                 index += 1;

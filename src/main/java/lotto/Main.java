@@ -37,7 +37,8 @@ public class Main {
 
     private static LottoWinningNumber scanWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String[] lottoNumberStrings = sc.next().split(",");
+        String[] lottoNumberStrings = sc.next()
+                .split(",");
 
         List<LottoBall> lottoNumbers = new ArrayList<>();
         for (String lottoNumber : lottoNumberStrings) {

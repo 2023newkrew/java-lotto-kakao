@@ -5,7 +5,7 @@ import java.util.*;
 public class LottoTicket {
     protected final List<LottoBall> lottoBalls;
 
-    public LottoTicket(List<LottoBall> lottoBalls){
+    public LottoTicket(List<LottoBall> lottoBalls) {
         this.lottoBalls = lottoBalls;
 
         if (lottoBalls.size() != 6) {
@@ -40,7 +40,8 @@ public class LottoTicket {
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
         for (LottoBall lottoBall : lottoBalls) {
-            sb.append(lottoBall.toString()).append(",");
+            sb.append(lottoBall.toString())
+                    .append(",");
         }
         sb.deleteCharAt(sb.length() - 1);
         sb.append("]");

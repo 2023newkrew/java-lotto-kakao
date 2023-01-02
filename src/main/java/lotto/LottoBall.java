@@ -4,8 +4,9 @@ import java.util.Objects;
 
 public class LottoBall implements Comparable<LottoBall> {
     private final int ball;
+
     public LottoBall(int ball) {
-        if( ball <= 0 || ball > 45){
+        if (ball <= 0 || ball > 45) {
             throw new IllegalArgumentException("ball 은 1 ~ 45 사이의 숫자여야 합니다.");
         }
         this.ball = ball;

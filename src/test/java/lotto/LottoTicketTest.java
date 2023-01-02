@@ -36,6 +36,7 @@ public class LottoTicketTest {
             )));
         });
     }
+
     @DisplayName("로또 숫자가 없으면 예외가 발생한다.")
     @Test
     void _lotto_6ball_restriction_0() {

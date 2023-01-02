@@ -4,12 +4,13 @@ import java.util.Objects;
 
 public class Price {
     private int value;
+
     public Price(int value) {
         this.value = value;
     }
 
     public void add(int addValue) {
-        if (addValue < 0){
+        if (addValue < 0) {
             throw new IllegalArgumentException("더하는 금액은 0 미만이 될 수 없습니다.");
         }
         this.value += addValue;
