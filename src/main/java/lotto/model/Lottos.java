@@ -5,11 +5,11 @@ import lotto.util.RandomGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoGenerator {
+public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
-    public void createLottos(int count) {
+    public Lottos(int count) {
         RandomGenerator randomGenerator = new RandomGenerator();
 
         lottos = new ArrayList<>();
