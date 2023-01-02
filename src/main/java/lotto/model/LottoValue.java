@@ -6,10 +6,14 @@ public class LottoValue {
     private final int value;
 
     public LottoValue(int value) {
-        if (value < 1 || value > 45) {
-            throw new IllegalArgumentException();
+        if (isOutOfRange(value)) {
+            throw new IllegalArgumentException("LottoValue는 1~45의 정수 값이어야 한다.");
         }
         this.value = value;
+    }
+
+    private boolean isOutOfRange(int value) {
+        return value < 1 || value > 45;
     }
 
     @Override
