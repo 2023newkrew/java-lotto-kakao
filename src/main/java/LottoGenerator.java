@@ -1,26 +1,20 @@
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGenerator {
     private static final Integer LOTTO_SIZE = 6;
     private static final Integer LOTTO_NUMBER_START = 1;
     private static final Integer LOTTO_NUMBER_END = 45;
 
-    public List<LottoNumber> run() {
-        List<LottoNumber> numbers = new ArrayList<>();
-        for (int i = 0; i < LOTTO_SIZE; i++) {
-            numbers.add(chooseUniqueLottoNumber(numbers));
-        }
-        return numbers;
-    }
+    private static final List<LottoNumber> LOTTO_NUMBERS = IntStream
+            .range(LOTTO_NUMBER_START, LOTTO_NUMBER_END+1)
+            .mapToObj(LottoNumber::new)
+            .collect(Collectors.toList());
 
-    private LottoNumber chooseUniqueLottoNumber(List<LottoNumber> numbers) {
-        LottoNumber lottoNumber = new LottoNumber(new Random().nextInt(LOTTO_NUMBER_END) + LOTTO_NUMBER_START);
-        while (numbers.contains(lottoNumber)) {
-            lottoNumber = new LottoNumber(new Random().nextInt(LOTTO_NUMBER_END) + LOTTO_NUMBER_START);
-        }
-        return lottoNumber;
+    public static List<LottoNumber> run() {
+        Collections.shuffle(LOTTO_NUMBERS);
+        return LOTTO_NUMBERS.subList(0, LOTTO_SIZE);
     }
-
 }
