@@ -6,6 +6,8 @@ import javalotto.exception.lotto.LottoNumberOutOfRangeException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotto {
     public static final int LOTTO_NUMBER_MIN_VALUE = 1;
@@ -21,7 +23,11 @@ public class Lotto {
     public static Lotto from(List<Integer> numbers) {
         validateLotto(numbers);
 
-        return new Lotto(numbers);
+        List<Integer> sortedNumbers = numbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
+
+        return new Lotto(sortedNumbers);
     }
 
     private static void validateLotto(List<Integer> numbers) {
@@ -57,5 +63,9 @@ public class Lotto {
 
     private static boolean isInvalidSize(List<Integer> numbers) {
         return numbers.size() != LOTTO_NUMBERS_COUNT;
+    }
+
+    public boolean containsExactly(List<Integer> numbers) {
+        return Objects.equals(this.numbers, numbers);
     }
 }

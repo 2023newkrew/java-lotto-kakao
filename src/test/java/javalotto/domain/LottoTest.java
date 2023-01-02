@@ -23,6 +23,16 @@ class LottoTest {
         assertThat(lotto).isNotNull();
     }
 
+    @Test
+    void should_storeNumbersInSortedOrder() {
+        List<Integer> numbers = List.of(2, 1, 3, 4, 5, 6);
+        List<Integer> sortedNumbers = List.of(1, 2, 3, 4, 5, 6);
+
+        Lotto lotto = Lotto.from(numbers);
+
+        assertThat(lotto.containsExactly(sortedNumbers)).isTrue();
+    }
+
     @ParameterizedTest
     @MethodSource
     void should_throwException_when_outOfRangeNumber(List<Integer> numbers) {
