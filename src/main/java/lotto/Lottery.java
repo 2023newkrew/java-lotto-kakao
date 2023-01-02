@@ -16,6 +16,10 @@ public class Lottery {
         numbers = numberCollection.subList(0, 6);
     }
 
+    public Lottery(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
     public List<Integer> getNumbers() {
         return numbers;
     }
