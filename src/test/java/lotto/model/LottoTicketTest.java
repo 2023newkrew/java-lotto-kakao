@@ -31,4 +31,16 @@ class LottoTicketTest {
                         new LottoValue(6)
                 ))).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 개수가_6개가_아니면_예외_발생() {
+        assertThatCode(()->new LottoTicket(
+                Arrays.asList(
+                        new LottoValue(1),
+                        new LottoValue(2),
+                        new LottoValue(3),
+                        new LottoValue(4),
+                        new LottoValue(5)
+                ))).isInstanceOf(IllegalArgumentException.class);
+    }
 }
