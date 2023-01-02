@@ -7,13 +7,16 @@ import static lotto.exception.ExceptionMessages.INVALID_COUNT_EXCEPTION_MESSAGE;
 import static lotto.exception.ExceptionMessages.NOT_UNIQUE_EXCEPTION_MESSAGE;
 import static lotto.exception.ExceptionMessages.OUT_OF_BOUNDS_EXCEPTION_MESSAGE;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LottoNumbers {
 
     private final List<Integer> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
+        lottoNumbers = new ArrayList<>(lottoNumbers);
         validate(lottoNumbers);
         lottoNumbers.sort(Integer::compare);
         this.lottoNumbers = lottoNumbers;
@@ -47,4 +50,20 @@ public class LottoNumbers {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumbers that = (LottoNumbers) o;
+        return Objects.equals(lottoNumbers, that.lottoNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumbers);
+    }
 }
