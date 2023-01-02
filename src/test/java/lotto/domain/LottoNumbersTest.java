@@ -1,12 +1,14 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
+
 
 public class LottoNumbersTest {
 
@@ -51,5 +53,45 @@ public class LottoNumbersTest {
         );
 
         assertThatThrownBy(() -> new LottoNumbers(duplicatedLottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 7, 8, 6})
+    void 보너스_번호를_받아서_포함되어_있으면_true를_반환한다(int bonusNumberValue) {
+        SingleLottoNumber bonusNumber = new SingleLottoNumber(bonusNumberValue);
+        LottoNumbers lottoNumbers = new LottoNumbers(
+                Arrays.asList(
+                        new SingleLottoNumber(1),
+                        new SingleLottoNumber(2),
+                        new SingleLottoNumber(3),
+                        new SingleLottoNumber(7),
+                        new SingleLottoNumber(8),
+                        new SingleLottoNumber(6)
+                )
+        );
+
+        assertThat(lottoNumbers.containsBonusNumber(bonusNumber)).isTrue();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {10, 11, 12, 13, 14, 15})
+    void 보너스_번호를_받아서_포함되어_있지_않으면_false를_반환한다(int bonusNumberValue) {
+        SingleLottoNumber bonusNumber = new SingleLottoNumber(bonusNumberValue);
+        LottoNumbers lottoNumbers = new LottoNumbers(
+                Arrays.asList(
+                        new SingleLottoNumber(1),
+                        new SingleLottoNumber(2),
+                        new SingleLottoNumber(3),
+                        new SingleLottoNumber(7),
+                        new SingleLottoNumber(8),
+                        new SingleLottoNumber(6)
+                )
+        );
+
+        assertThat(lottoNumbers.containsBonusNumber(bonusNumber)).isFalse();
+    }
+
+    void 로또_번호들을_받아서_일치하는_번호의_개수를_반환한다() {
+
     }
 }
