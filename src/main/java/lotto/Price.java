@@ -41,8 +41,13 @@ public class Price extends Number {
         return Objects.hash(value);
     }
 
+    @Deprecated
     public float scale(Price outcome) {
         return ((float) outcome.value) / this.value;
+    }
+
+    public Ratio<Price> ratio(Price outcome) {
+        return new Ratio<>(this, outcome);
     }
 
     public Price multiply(int other) {

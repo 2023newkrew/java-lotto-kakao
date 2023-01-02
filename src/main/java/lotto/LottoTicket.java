@@ -1,26 +1,22 @@
 package lotto;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
-    protected final List<LottoBall> lottoBalls;
+    protected final Set<LottoBall> lottoBalls;
 
-    public LottoTicket(List<LottoBall> lottoBalls) {
-        this.lottoBalls = lottoBalls;
-
-        if (lottoBalls.size() != 6) {
+    public LottoTicket(Collection<LottoBall> lottoBalls) {
+        Set<LottoBall> balls = Set.copyOf(lottoBalls);
+        if (balls.size() != lottoBalls.size()) {
+            throw new IllegalArgumentException("각 숫자는 중복을 허용하지 않습니다.");
+        }
+        if (balls.size() != 6) {
             throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
         }
-        if (hasDuplicate()) {
-            throw new IllegalArgumentException("로또 숫자는 중복될 수 없습니다.");
-        }
-
-        Collections.sort(lottoBalls);
-    }
-
-    private boolean hasDuplicate() {
-        Set<LottoBall> set = new HashSet<>(lottoBalls);
-        return set.size() != lottoBalls.size();
+        this.lottoBalls = balls;
     }
 
     @Override
@@ -38,13 +34,10 @@ public class LottoTicket {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("[");
-        for (LottoBall lottoBall : lottoBalls) {
-            sb.append(lottoBall.toString())
-                    .append(",");
-        }
-        sb.deleteCharAt(sb.length() - 1);
-        sb.append("]");
-        return sb.toString();
+        return String.format(
+                "[%s]", lottoBalls.stream()
+                        .map(LottoBall::toString)
+                        .collect(Collectors.joining(", "))
+        );
     }
 }

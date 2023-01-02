@@ -1,44 +1,46 @@
 package lotto;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PriceTest {
-    @DisplayName("Price가 같은 경우")
-    @Test
-    void equal() {
-        Price price = new Price(0);
-        assertThat(price).isEqualTo(new Price(0));
-    }
-
-    @DisplayName("Price가 다른 경우")
-    @Test
-    void not_equal() {
-        Price price = new Price(0);
-        assertThat(price).isNotEqualTo(new Price(1));
+    @DisplayName("가격의 동등성 확인")
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', value = {
+            "1000 | 1000 | true",
+            "1000 | 2000 | false",
+    })
+    void equality(long a, long b, boolean expectedEquality) {
+        Price priceA = new Price(a);
+        Price priceB = new Price(b);
+        assertThat(priceA.equals(priceB)).isEqualTo(expectedEquality);
     }
 
     @DisplayName("금액 추가")
-    @Test
-    void add_price() {
-        Price price = new Price(0);
-        price.add(100);
-        assertThat(price).isEqualTo(new Price(100));
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', value = {
+            "1000 | 1000 | 2000",
+            "1000 | 2000 | 3000",
+    })
+    void add(long a, long b, long expectedResult) {
+        Price priceA = new Price(a);
+        Price priceB = new Price(b);
+        assertThat(priceA.add(priceB)).isEqualTo(new Price(expectedResult));
     }
 
     @DisplayName("금액 비율 계산")
     @ParameterizedTest
     @CsvSource(delimiter = '|', value = {
-            "1000 | 1000 | 1",
-            "2000 | 1000 | 0.5",
-            "1000 | 2000 | 2"
+            "1000 | 1000 | 1 | 1",
+            "2000 | 1000 | 2 | 1",
+            "1000 | 2000 | 1 | 2"
     })
-    void scale(int income, int outcome, float expectedScale) {
-        assertThat(new Price(income).scale(new Price(outcome))).isEqualTo(expectedScale);
+    void ratio(long income, long outcome, int numerator, int denominator) {
+        assertThat(new Price(income).ratio(new Price(outcome)))
+                .isEqualTo(new Ratio<>(numerator, denominator));
     }
 
 
