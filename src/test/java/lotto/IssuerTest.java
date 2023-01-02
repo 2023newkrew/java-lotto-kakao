@@ -27,8 +27,8 @@ public class IssuerTest {
         LottoList lottoList = Issuer.issue(1);
         Lotto lotto = lottoList.get(0);
         for (int index = 0; index < lotto.length(); index++) {
-            assertTrue(lotto.getIthNumber(index) <= LottoSettings.MAX_RANGE.getValue() &&
-                    lotto.getIthNumber(index) >= LottoSettings.MIN_RANGE.getValue());
+            assertTrue(lotto.get(index) <= LottoSettings.MAX_RANGE.getValue() &&
+                    lotto.get(index) >= LottoSettings.MIN_RANGE.getValue());
         }
     }
 

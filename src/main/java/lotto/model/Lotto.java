@@ -19,7 +19,7 @@ public class Lotto {
         return numbers.size();
     }
 
-    public Integer getIthNumber(int index) {
+    public Integer get(int index) {
         return numbers.get(index);
     }
 }
