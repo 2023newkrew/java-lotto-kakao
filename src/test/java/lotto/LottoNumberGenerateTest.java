@@ -31,4 +31,36 @@ class LottoNumberGenerateTest {
                 List.of(1,2,3,4,5,6).stream().filter(number -> 1 <= number && number <= 45).count()
         ).isEqualTo(6);
     }
+
+    @Test
+    @DisplayName("로또 번호가 6개가 아니면 에러를 던진다.")
+    void lottoInvalidNumbersTest1() {
+        assertThatThrownBy(()->{
+            new LottoNumber(List.of(1,2,3,4));
+        }).isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(()->{
+            new LottoNumber(List.of(1,2,3,4,5,6,7));
+        }).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("로또 번호가 1 미만 45초과의 숫자를 가지면 에러를 던진다.")
+    void lottoInvalidNumbersTest2() {
+        assertThatThrownBy(()->{
+            new LottoNumber(Arrays.asList(1, 2, 3, 4, 5, 100));
+        }).isInstanceOf(RuntimeException.class);
+
+        assertThatThrownBy(()->{
+            new LottoNumber(Arrays.asList(0, 2, 3, 4, 5, 6));
+        }).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("로또 번호에 중복이 있으면 에러를 던진다.")
+    void lottoInvalidNumberTest3() {
+        assertThatThrownBy(()->{
+            new LottoNumber(Arrays.asList(1, 1, 3, 4, 5, 6));
+        }).isInstanceOf(RuntimeException.class);
+    }
 }
