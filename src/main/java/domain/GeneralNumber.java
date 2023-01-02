@@ -1,11 +1,11 @@
 package domain;
 
-import util.validator.GeneralNumberValidator;
+import util.validator.SingleNumberValidator;
 
 public class GeneralNumber {
     private final int number;
     public GeneralNumber(String input) {
-        GeneralNumberValidator.validate(input);
+        SingleNumberValidator.validate(input);
         number = Integer.parseInt(input);
     }
 

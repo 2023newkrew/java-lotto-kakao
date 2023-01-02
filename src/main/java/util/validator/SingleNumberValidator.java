@@ -1,6 +1,6 @@
 package util.validator;
 
-public class GeneralNumberValidator {
+public class SingleNumberValidator {
     private static final int LOWER_BOUND = 0;
     private static final int UPPER_BOUND = 45;
 
