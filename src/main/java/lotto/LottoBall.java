@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.Objects;
 
-public class LottoBall {
+public class LottoBall implements Comparable<LottoBall> {
     private final int ball;
     public LottoBall(int ball) {
         if( ball <= 0 || ball > 45){
@@ -29,5 +29,10 @@ public class LottoBall {
     @Override
     public int hashCode() {
         return Objects.hash(ball);
+    }
+
+    @Override
+    public int compareTo(LottoBall o) {
+        return ball - o.ball;
     }
 }
