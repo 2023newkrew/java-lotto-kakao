@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public final class LottoConstants {
     public static final int LOTTO_NUMBER_LOWER_BOUND = 1;
