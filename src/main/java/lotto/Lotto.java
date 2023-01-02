@@ -4,39 +4,39 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class Lotto {
 
     private static final int SIZE = 6;
 
     private final List<LottoNumber> numbers;
 
-    public static LottoNumbers create(int... numbers) {
+    public static Lotto create(int... numbers) {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
         return create(lottoNumbers);
     }
 
-    public static LottoNumbers create(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != SIZE || hasDuplicated(lottoNumbers)) {
+    public static Lotto create(List<LottoNumber> numbers) {
+        if (numbers.size() != SIZE || hasDuplicated(numbers)) {
             throw new IllegalArgumentException("로또 번호는 중복이 없는 " + SIZE + "자리 숫자입니다.");
         }
-        return new LottoNumbers(lottoNumbers);
+        return new Lotto(numbers);
     }
 
     private static boolean hasDuplicated(List<LottoNumber> numbers){
         return numbers.stream().distinct().count() != SIZE;
     }
 
-    private LottoNumbers(List<LottoNumber> numbers) {
+    private Lotto(List<LottoNumber> numbers) {
         this.numbers = numbers;
     }
 
-    public boolean hasNumber(LottoNumber lottoNumber) {
-        return numbers.contains(lottoNumber);
+    public boolean hasNumber(LottoNumber number) {
+        return numbers.contains(number);
     }
 
-    public int countOverlappedNumber(LottoNumbers other) {
+    public int countOverlappedNumber(Lotto other) {
         return (int) numbers.stream()
                 .filter(other::hasNumber)
                 .count();

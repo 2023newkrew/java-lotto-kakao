@@ -7,13 +7,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class LottoNumbersTest {
+class LottoTest {
 
     @DisplayName("잘못된 숫자로 생성 시 예외 발생")
     @ParameterizedTest
     @MethodSource
     void consistByInvalidNumbers(int[] numbers, String message) {
-        Assertions.assertThatThrownBy(() -> LottoNumbers.create(numbers))
+        Assertions.assertThatThrownBy(() -> Lotto.create(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(message);
     }

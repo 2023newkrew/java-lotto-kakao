@@ -1,4 +1,4 @@
-# java-lottoNumbers-kakao
+# java-lotto-kakao
 
 ## 기능 요구사항
  
