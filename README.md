@@ -57,34 +57,34 @@
 ### Domain
 
 - `Lotto`
-  - `LottoNumbers lottoNumbers`
-  - `SingleLottoNumber bonusNumber`
-  - `isValidLotto()`
+    - `LottoNumbers lottoNumbers`
+    - `SingleLottoNumber bonusNumber`
+    - `isValidLotto()`
 
 - `SingleLottoNumber`
 
 - `LottoNumbers`
-  - `List<SingleLottoNumber> nums`
+    - `List<SingleLottoNumber> nums`
 
 - `UserLotto`
-  - `LottoNumbers lottoNumbers`
+    - `LottoNumbers lottoNumbers`
 
 - `UserLottos`
-  - `List<UserLotto> lottos`
-  - `Money userMoney`
-  - `ResultMap resultMap`
+    - `List<UserLotto> lottos`
+    - `Money userMoney`
+    - `ResultMap resultMap`
 
 - `ResultMap`
-  - `HashMap<prize, amount> resultMap`
+    - `HashMap<prize, amount> resultMap`
 
 - `Money`
-  - `getLottoAmount()`
-  - `isValidLottoMoney()`
+    - `getLottoAmount()`
+    - `isValidLottoMoney()`
 
 - `LottoStatistics`
-  - `Money totalInputMoney`
-  - `ResultMap resultMap`
-  - `calculateProfit()`
+    - `Money totalInputMoney`
+    - `ResultMap resultMap`
+    - `calculateProfit()`
 
 ### View
 
@@ -103,17 +103,18 @@
 
 ### MoneyTest
 
-- [ ] 구매금액은 1000원 단위여야 한다
-- [ ] 구매금액이 1000원 단위가 아니면 예외가 발생한다
-- [ ] 구매금액이 양수가 아니면 예외가 발생한다
-- [ ] 구매금액만큼 살 수 있는 로또의 개수를 반환한다
+- [x] 구매금액은 1000원 단위여야 한다
+- [x] 구매금액이 1000원 단위가 아니면 예외가 발생한다
+- [x] 구매금액이 양수가 아니면 예외가 발생한다
+- [x] 구매금액만큼 살 수 있는 로또의 개수를 반환한다
 
 ### SingleLottoNumberTest
 
-- [ ] 로또 번호는 1에서 45 사이여야 한다
-- [ ] 로또 번호는 1에서 45 사이가 아니면 예외가 발생한다
+- [x] 로또 번호는 1에서 45 사이여야 한다
+- [x] 로또 번호는 1에서 45 사이가 아니면 예외가 발생한다
 
 ### LottoNumbersTest
 
-- [ ] 입력되는 로또 번호가 6개여야 한다
-- [ ] 입력되는 로또 번호가 6개가 아니면 예외가 발생한다
+- [x] 입력되는 로또 번호가 6개여야 한다
+- [x] 입력되는 로또 번호가 6개가 아니면 예외가 발생한다
+- [x] 중복된 로또 번호가 있으면 예외가 발생한다
