@@ -22,8 +22,12 @@ public class LottoNumbers {
     }
 
     private void validateLottoNumber(LottoNumber lottoNumber) {
-        if (lottoNumbers.contains(lottoNumber)) {
+        if (hasNumber(lottoNumber)) {
             throw new IllegalArgumentException("중복되지 않는 숫자를 입력해주세요.");
         }
+    }
+
+    public boolean hasNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }

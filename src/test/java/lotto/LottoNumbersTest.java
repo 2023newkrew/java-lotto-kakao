@@ -54,4 +54,19 @@ public class LottoNumbersTest {
                 Arguments.of(Arrays.asList(6, 12, 21, 41, 43, 44, 45))
         );
     }
+
+    @DisplayName("숫자가 숫자 배열에 포함되어 있는지 확인")
+    @ParameterizedTest
+    @MethodSource("getCheckLottoNumberIncludedInLottoNumbersData")
+    public void check_lotto_number_included_in_lotto_numbers(LottoNumbers lottoNumbers,
+            LottoNumber lottoNumber, boolean expected) {
+        Assertions.assertThat(lottoNumbers.hasNumber(lottoNumber)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> getCheckLottoNumberIncludedInLottoNumbersData() {
+        return Stream.of(
+                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(3), true),
+                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(33), false)
+        );
+    }
 }
