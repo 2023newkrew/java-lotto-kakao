@@ -16,7 +16,7 @@ public class LottoStoreTest {
         LottoStore lottoStore = new LottoStore();
 
         // when
-        List<Lotto> lottos = lottoStore.buyLotto(money);
+        List<Lotto> lottos = lottoStore.buy(money);
 
         // then
         assertThat(lottos.size()).isEqualTo(amount);
@@ -29,7 +29,7 @@ public class LottoStoreTest {
         LottoStore lottoStore = new LottoStore();
 
         // then
-        assertThatThrownBy(() -> lottoStore.buyLotto(money))
+        assertThatThrownBy(() -> lottoStore.buy(money))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

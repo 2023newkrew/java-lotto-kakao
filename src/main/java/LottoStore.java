@@ -2,11 +2,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoStore {
+public class LottoStore implements LottoObtainPlace{
 
     private static final Integer COST = 1000;
 
-    public List<Lotto> buyLotto(Integer money) {
+    @Override
+    public List<Lotto> buy(Integer money) {
         Integer amount = getLottoAmount(money);
 
         return IntStream
