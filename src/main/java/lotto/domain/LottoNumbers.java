@@ -23,7 +23,14 @@ public class LottoNumbers {
         }
     }
 
-    public boolean containsBonusNumber(SingleLottoNumber bonusNumber) {
-        return this.singleLottoNumbers.stream().anyMatch(number -> number.equals(bonusNumber));
+    public boolean containsLottoNumber(SingleLottoNumber bonusNumber) {
+        return this.singleLottoNumbers.stream()
+                .anyMatch(bonusNumber::equals);
+    }
+
+    public int countMatchNumber(LottoNumbers other) {
+        return (int) this.singleLottoNumbers.stream()
+                .filter(other::containsLottoNumber)
+                .count();
     }
 }
