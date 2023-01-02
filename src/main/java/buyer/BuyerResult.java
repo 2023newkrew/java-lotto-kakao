@@ -26,6 +26,11 @@ public class BuyerResult {
     }
 
     public void matches(Rank matchResult) {
-        result.set(matchResult.index, result.get(matchResult.index)+1);
+        if(matchResult != Rank.NONE)
+            result.set(matchResult.index, result.get(matchResult.index)+1);
+    }
+
+    public List<Integer> getResult() {
+        return result;
     }
 }

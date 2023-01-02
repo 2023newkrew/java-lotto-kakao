@@ -7,7 +7,8 @@ public enum Rank {
     SECOND(3, new LotteryMatch(5,true),30000000),
     THIRD(2, new LotteryMatch(5,false),1500000),
     FOURTH(1, new LotteryMatch(4,false), 50000),
-    FIFTH(0, new LotteryMatch(3,false), 5000);
+    FIFTH(0, new LotteryMatch(3,false), 5000),
+    NONE(-1, new LotteryMatch(0,false), 0);
 
     public final int index;
     public final LotteryMatch match;
@@ -23,6 +24,6 @@ public enum Rank {
         return Arrays.stream(values())
                 .filter(Rank -> Rank.match.equals(match))
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(NONE);
     }
 }
