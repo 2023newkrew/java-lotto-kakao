@@ -1,5 +1,7 @@
 package lotto;
 
+import buyer.BuyerResult;
+
 import java.util.List;
 
 public class LotteryResult {
@@ -29,5 +31,9 @@ public class LotteryResult {
         }
 
         return count;
+    }
+
+    public BuyerResult getResult(List<Lottery> lotteries) {
+        return new BuyerResult(List.of(1,0,0,0,0));
     }
 }
