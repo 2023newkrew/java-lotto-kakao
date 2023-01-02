@@ -22,7 +22,7 @@ public class LotteryResult {
         return this.winningNumbers.equals(cp.winningNumbers) && this.bonusNumber == cp.bonusNumber;
     }
 
-    public BuyerResult.Result getMatchCount(Lottery lottery) {
+    public Rank getMatchCount(Lottery lottery) {
         int count = 0;
         List<Integer> lotteryNumbers = lottery.getNumbers();
 
@@ -30,7 +30,7 @@ public class LotteryResult {
             count += lotteryNumbers.contains(number) ? 1 : 0;
         }
 
-        return BuyerResult.Result.getResult(count);
+        return Rank.getRank(count);
     }
 
     public BuyerResult getResult(List<Lottery> lotteries) {

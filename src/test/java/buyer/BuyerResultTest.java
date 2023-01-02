@@ -1,5 +1,6 @@
 package buyer;
 
+import lotto.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ public class BuyerResultTest {
     void buyerAddTest(){
         BuyerResult buyerResult = new BuyerResult(new ArrayList<>(List.of(0,0,0,0,0)));
 
-        buyerResult.matches(BuyerResult.Result.FIFTH);
+        buyerResult.matches(Rank.FIFTH);
 
         assertThat(buyerResult).isEqualTo(new BuyerResult(List.of(1,0,0,0,0)));
     }

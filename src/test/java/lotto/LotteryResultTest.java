@@ -24,7 +24,7 @@ public class LotteryResultTest {
         LotteryResult lotteryResult = new LotteryResult(List.of(1,2,3,4,5,6), 7);
         Lottery lottery = new Lottery(List.of(1,2,3,9,10,11));
 
-        assertThat(lotteryResult.getMatchCount(lottery)).isEqualTo(BuyerResult.Result.FIFTH);
+        assertThat(lotteryResult.getMatchCount(lottery)).isEqualTo(Rank.FIFTH);
     }
 
     @DisplayName("로또 하나에 대한 결과 객체 확인")
