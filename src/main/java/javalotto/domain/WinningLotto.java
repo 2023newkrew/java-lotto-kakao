@@ -3,6 +3,8 @@ package javalotto.domain;
 import javalotto.exception.winninglotto.BonusNumberDuplicateException;
 import javalotto.exception.winninglotto.BonusNumberOutOfRangeException;
 
+import java.util.Optional;
+
 public class WinningLotto {
     private final Lotto lotto;
     private final int bonusNumber;
@@ -28,4 +30,10 @@ public class WinningLotto {
         }
     }
 
+    public Optional<Rank> getRank(Lotto lotto) {
+        int matchCount = this.lotto.getMatchCount(lotto);
+        boolean isBonusNumberMatch = lotto.contains(bonusNumber);
+
+        return Rank.from(matchCount, isBonusNumberMatch);
+    }
 }

@@ -73,6 +73,12 @@ public class Lotto {
         return Objects.equals(this.numbers, numbers);
     }
 
+    public int getMatchCount(Lotto other) {
+        return (int) this.numbers.stream()
+                .filter(other.numbers::contains)
+                .count();
+    }
+
     @Override
     public String toString() {
         return numbers.toString();
