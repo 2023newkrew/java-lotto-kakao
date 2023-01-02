@@ -35,4 +35,15 @@ public class LottoTicket {
         LottoTicket that = (LottoTicket) o;
         return Objects.equals(lottoBalls, that.lottoBalls);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        for (LottoBall lottoBall : lottoBalls) {
+            sb.append(lottoBall.toString()).append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append("]");
+        return sb.toString();
+    }
 }

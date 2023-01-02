@@ -40,4 +40,16 @@ public class PriceTest {
     void scale(int income, int outcome, float expectedScale) {
         assertThat(new Price(income).scale(new Price(outcome))).isEqualTo(expectedScale);
     }
+
+
+    @DisplayName("나머지를 무시하는 나누기 연산을 확인합니다.(floor divide)")
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', value = {
+            "1000 | 1000 | 1",
+            "1500 | 1000 | 1",
+            "2000 | 1000 | 2"
+    })
+    void floorDivide(int valueA, int valueB, int expectedValue) {
+        assertThat(new Price(valueA).floorDivide(new Price(valueB))).isEqualTo(expectedValue);
+    }
 }

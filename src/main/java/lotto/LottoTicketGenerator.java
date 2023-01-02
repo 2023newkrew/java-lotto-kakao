@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LottoTicketGenerator {
 
-    LottoTicket generate(LottoBallGenerator generator){
+    public LottoTicket generate(LottoBallGenerator generator){
         List<LottoBall> lottoNumbers = new ArrayList<>();
         while (lottoNumbers.size() != 6) {
             lottoNumbers.add(generateEachBall(lottoNumbers, generator));

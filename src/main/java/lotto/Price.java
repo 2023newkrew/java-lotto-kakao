@@ -31,4 +31,9 @@ public class Price {
     public float scale(Price outcome) {
         return ((float) outcome.value) / this.value;
     }
+
+    public int floorDivide(Price other) {
+
+        return this.value / other.value;
+    }
 }

@@ -13,9 +13,7 @@ public class LottoBall implements Comparable<LottoBall> {
 
     @Override
     public String toString() {
-        return "LottoBall{" +
-                "ball=" + ball +
-                '}';
+        return "" + ball;
     }
 
     @Override
