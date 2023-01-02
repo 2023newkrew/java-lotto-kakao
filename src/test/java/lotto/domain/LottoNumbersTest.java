@@ -64,13 +64,13 @@ public class LottoNumbersTest {
                         new SingleLottoNumber(1),
                         new SingleLottoNumber(2),
                         new SingleLottoNumber(3),
+                        new SingleLottoNumber(6),
                         new SingleLottoNumber(7),
-                        new SingleLottoNumber(8),
-                        new SingleLottoNumber(6)
+                        new SingleLottoNumber(8)
                 )
         );
 
-        assertThat(lottoNumbers.containsBonusNumber(bonusNumber)).isTrue();
+        assertThat(lottoNumbers.containsLottoNumber(bonusNumber)).isTrue();
     }
 
     @ParameterizedTest
@@ -82,16 +82,38 @@ public class LottoNumbersTest {
                         new SingleLottoNumber(1),
                         new SingleLottoNumber(2),
                         new SingleLottoNumber(3),
+                        new SingleLottoNumber(6),
                         new SingleLottoNumber(7),
-                        new SingleLottoNumber(8),
-                        new SingleLottoNumber(6)
+                        new SingleLottoNumber(8)
                 )
         );
 
-        assertThat(lottoNumbers.containsBonusNumber(bonusNumber)).isFalse();
+        assertThat(lottoNumbers.containsLottoNumber(bonusNumber)).isFalse();
     }
 
-    void 로또_번호들을_받아서_일치하는_번호의_개수를_반환한다() {
+    @Test
+    void 사용자의_로또_번호들을_받아서_일치하는_번호의_개수를_반환한다() {
+        LottoNumbers answerLottos = new LottoNumbers(Arrays.asList(
+                new SingleLottoNumber(1),
+                new SingleLottoNumber(2),
+                new SingleLottoNumber(3),
+                new SingleLottoNumber(4),
+                new SingleLottoNumber(5),
+                new SingleLottoNumber(6)
+        ));
 
+        LottoNumbers userLottos = new LottoNumbers(
+                Arrays.asList(
+                        new SingleLottoNumber(1),
+                        new SingleLottoNumber(2),
+                        new SingleLottoNumber(3),
+                        new SingleLottoNumber(6),
+                        new SingleLottoNumber(7),
+                        new SingleLottoNumber(8)
+                )
+        );
+
+        assertThat(answerLottos.countMatchNumber(userLottos)).isEqualTo(4);
     }
+
 }
