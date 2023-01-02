@@ -46,4 +46,10 @@ public class LottoTicket {
     public boolean contains(Integer number) {
         return lotto.contains(number);
     }
+
+    public Integer countIncludedNumber(LottoTicket lottoTicket) {
+        return Math.toIntExact(lotto.stream()
+                .filter(lottoTicket::contains)
+                .count());
+    }
 }
