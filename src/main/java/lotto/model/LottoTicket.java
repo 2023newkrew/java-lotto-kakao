@@ -24,4 +24,8 @@ public class LottoTicket {
             throw new IllegalArgumentException();
         }
     }
+
+    public boolean contains(LottoValue bonusNumber) {
+        return lottoValues.contains(bonusNumber);
+    }
 }
