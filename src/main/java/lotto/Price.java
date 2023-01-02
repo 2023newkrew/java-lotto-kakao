@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.Objects;
 
-public class Price {
+public class Price extends Number {
     private final long value;
 
     public Price(long value) {
@@ -56,5 +56,25 @@ public class Price {
     public long floorDivide(Price other) {
 
         return this.value / other.value;
+    }
+
+    @Override
+    public int intValue() {
+        return (int) this.value;
+    }
+
+    @Override
+    public long longValue() {
+        return this.value;
+    }
+
+    @Override
+    public float floatValue() {
+        return (float) this.value;
+    }
+
+    @Override
+    public double doubleValue() {
+        return (double) this.value;
     }
 }
