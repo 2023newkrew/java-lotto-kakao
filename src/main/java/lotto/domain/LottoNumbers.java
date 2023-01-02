@@ -22,4 +22,8 @@ public class LottoNumbers {
             throw new IllegalArgumentException("중복된 로또 번호가 있으면 안됩니다.");
         }
     }
+
+    public boolean containsBonusNumber(SingleLottoNumber bonusNumber) {
+        return this.singleLottoNumbers.stream().anyMatch(number -> number.equals(bonusNumber));
+    }
 }
