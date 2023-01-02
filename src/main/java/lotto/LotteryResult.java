@@ -22,7 +22,7 @@ public class LotteryResult {
         return this.winningNumbers.equals(cp.winningNumbers) && this.bonusNumber == cp.bonusNumber;
     }
 
-    public int getMatchCount(Lottery lottery) {
+    public BuyerResult.Result getMatchCount(Lottery lottery) {
         int count = 0;
         List<Integer> lotteryNumbers = lottery.getNumbers();
 
@@ -30,10 +30,14 @@ public class LotteryResult {
             count += lotteryNumbers.contains(number) ? 1 : 0;
         }
 
-        return count;
+        return BuyerResult.Result.getResult(count);
     }
 
     public BuyerResult getResult(List<Lottery> lotteries) {
-        return new BuyerResult(List.of(1,0,0,0,0));
+        BuyerResult buyerResult = new BuyerResult();
+        for (Lottery lottery : lotteries) {
+            buyerResult.matches(getMatchCount(lottery));
+        }
+        return buyerResult;
     }
 }

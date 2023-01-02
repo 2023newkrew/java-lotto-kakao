@@ -24,7 +24,18 @@ public class LotteryResultTest {
         LotteryResult lotteryResult = new LotteryResult(List.of(1,2,3,4,5,6), 7);
         Lottery lottery = new Lottery(List.of(1,2,3,9,10,11));
 
-        assertThat(lotteryResult.getMatchCount(lottery)).isEqualTo(3);
+        assertThat(lotteryResult.getMatchCount(lottery)).isEqualTo(BuyerResult.Result.FIFTH);
+    }
+
+    @DisplayName("로또 하나에 대한 결과 객체 확인")
+    @Test
+    void lotteryResult() {
+        LotteryResult lotteryResult = new LotteryResult(List.of(1,2,3,4,5,6), 7);
+        List<Lottery> lotteries = new ArrayList<>(
+                List.of(new Lottery(List.of(1,2,3,12,13,14)))
+        );
+        BuyerResult buyerResult = lotteryResult.getResult(lotteries);
+        assertThat(buyerResult).isEqualTo(new BuyerResult(List.of(1,0,0,0,0)));
     }
 
     @DisplayName("로또 뭉치에 대한 결과 객체 확인")
@@ -32,9 +43,9 @@ public class LotteryResultTest {
     void lotteryListResult() {
         LotteryResult lotteryResult = new LotteryResult(List.of(1,2,3,4,5,6), 7);
         List<Lottery> lotteries = new ArrayList<>(
-                List.of(new Lottery(List.of(1,2,3,12,13,14)))
+                List.of(new Lottery(List.of(1,2,3,12,13,14)), new Lottery(List.of(1,2,3,4,13,14)))
         );
         BuyerResult buyerResult = lotteryResult.getResult(lotteries);
-        assertThat(buyerResult).isEqualTo(new BuyerResult(List.of(1,0,0,0,0)));
+        assertThat(buyerResult).isEqualTo(new BuyerResult(List.of(1,1,0,0,0)));
     }
 }
