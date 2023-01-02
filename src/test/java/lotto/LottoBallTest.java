@@ -1,18 +1,58 @@
 package lotto;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoBallTest {
-    @Test
-    void 로또볼은_1에서_45_사이_숫자여야_한다() {
-        assertDoesNotThrow(() -> new LottoBall(1));
+    @DisplayName("1~45사이의 정수인 경우")
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', value = {
+            "1",
+            "45",
+    })
+    void validBall(int value) {
+        new LottoBall(value);
     }
 
-    @Test
-    void _1에서_45_밖의_숫자에서는_예외가_발생한다() {
-        assertThrows(IllegalArgumentException.class, () -> new LottoBall(0));
+    @DisplayName("1~45사이의 정수가 아닌 경우")
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', value = {
+            "" + Integer.MIN_VALUE,
+            "-1",
+            "0",
+            "46",
+            "" + Integer.MAX_VALUE,
+    })
+    void invalidBall(int value) {
+        assertThatThrownBy(() -> new LottoBall(value));
+    }
+
+
+    @DisplayName("공 동등성 비교")
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', value = {
+            "1      | 1     | true",
+            "1      | 2     | false",
+            "44     | 45    | false",
+            "45     | 45    | true",
+    })
+    void ballEquality(int a, int b, boolean equality) {
+        assertThat(new LottoBall(a).equals(new LottoBall(b)))
+                .isEqualTo(equality);
+    }
+
+    @DisplayName("공 순서 비교")
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', value = {
+            "1      | 2         | -1",
+            "2      | 2         | 0",
+            "2      | 1         | 1",
+    })
+    void ballEquality(int a, int b, int expectedValue) {
+        assertThat(new LottoBall(a).compareTo(new LottoBall(b))).isEqualTo(expectedValue);
     }
 }
