@@ -37,4 +37,8 @@ public class PurchaseAmount {
     private static boolean isNotMultipleOfUnitPrice(int purchaseAmount) {
         return purchaseAmount % PURCHASE_AMOUNT_UNIT_PRICE != 0;
     }
+
+    public int getPurchaseAmount() {
+        return purchaseAmount;
+    }
 }
