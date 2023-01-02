@@ -11,7 +11,7 @@ class LottoGeneratorTest {
     @DisplayName("자동으로 로또를 생성할 수 있다.")
     public void testCreateLotto() {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        List<Integer> lotto = lottoGenerator.createLotto();
+        List<Integer> lotto = lottoGenerator.createLotto().getNumbers();
         assertThat(lotto).hasSize(6);
         assertThat(lotto).isSorted();
         for (Integer number : lotto) {

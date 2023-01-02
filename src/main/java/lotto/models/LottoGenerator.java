@@ -20,10 +20,13 @@ public class LottoGenerator {
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> createLotto() {
+    public Lotto createLotto() {
         Collections.shuffle(lottoPreset);
-        return lottoPreset.subList(0, LOTTO_COUNT).stream()
+
+        List<Integer> numbers = lottoPreset.subList(0, LOTTO_COUNT).stream()
                 .sorted()
                 .collect(Collectors.toList());
+
+        return new Lotto(numbers);
     }
 }
