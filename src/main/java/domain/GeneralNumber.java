@@ -1,3 +1,5 @@
+package domain;
+
 import util.validator.GeneralNumberValidator;
 
 public class GeneralNumber {
