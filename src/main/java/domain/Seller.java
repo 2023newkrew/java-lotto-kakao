@@ -13,10 +13,10 @@ public class Seller {
         this.lottoNumberPicker = new LottoNumberPicker();
     }
 
-    public List<List<LottoBall>> sellLottoTickets(int payMoney) {
+    public List<LottoTicket> sellLottoTickets(int payMoney) {
         validatePayMoney(payMoney);
         int lottoTicketCount = payMoney / SINGLE_LOTTO_TICKET_PRICE;
-        List<List<LottoBall>> lottoTicketBought = new ArrayList<>();
+        List<LottoTicket> lottoTicketBought = new ArrayList<>();
         for (int i = 0; i < lottoTicketCount; i++) {
             lottoTicketBought.add(lottoNumberPicker.makeLottoTicket());
         }

@@ -20,12 +20,12 @@ public class LottoNumberPicker {
         return lottoNumbers;
     }
 
-    public List<LottoBall> makeLottoTicket() {
+    public LottoTicket makeLottoTicket() {
         Collections.shuffle(lottoNumbers);
         List<LottoBall> selectedNumbers = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             selectedNumbers.add((lottoNumbers.get(i)));
         }
-        return selectedNumbers;
+        return new LottoTicket(selectedNumbers);
     }
 }

@@ -1,4 +1,5 @@
 import domain.LottoBall;
+import domain.LottoTicket;
 import domain.Seller;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,8 +20,8 @@ public class SellerTest {
         int payMoney2 = 13500;
 
         //when
-        List<List<LottoBall>> lottoTickets = seller.sellLottoTickets(payMoney);
-        List<List<LottoBall>> lottoTickets2 = seller.sellLottoTickets(payMoney2);
+        List<LottoTicket> lottoTickets = seller.sellLottoTickets(payMoney);
+        List<LottoTicket> lottoTickets2 = seller.sellLottoTickets(payMoney2);
 
         //then
         assertThat(lottoTickets.size()).isEqualTo(14);
