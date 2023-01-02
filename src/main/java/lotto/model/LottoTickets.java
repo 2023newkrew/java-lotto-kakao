@@ -10,7 +10,10 @@ public class LottoTickets {
     }
 
     public LottoResult getLottoResult(LottoWinningNumber lottoWinningNumber) {
-        return null;
+        LottoResult lottoResult = new LottoResult();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            lottoResult.addLottoRank(lottoWinningNumber.checkRank(lottoTicket));
+        }
+        return lottoResult;
     }
-
 }
