@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.controller.LottoController;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
@@ -11,9 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
@@ -53,5 +52,13 @@ public class LottoTest {
     void lottoBuyTest(int cost){
         LottoController lottoController = new LottoController(cost);
         assertThat(lottoController.getLottoTicketCount()).isEqualTo(cost/1000);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {999, 0})
+    @DisplayName("1000원 이하의 금액이 들어온다면 예외를 발생한다.")
+    void lottoLowerThan1000Test(int amount) {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoTickets(amount));
     }
 }
