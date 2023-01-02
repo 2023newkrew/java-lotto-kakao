@@ -16,7 +16,7 @@ public class Goal extends Lotto{
     }
 
     public LottoResult compareLotto(Lotto lotto, Integer bonusBall) {
-        return new LottoResult(getMatchCount(lotto), lotto.getNumbers().contains(bonusBall));
+        return LottoResult.findLottoResult(getMatchCount(lotto), lotto.getNumbers().contains(bonusBall));
     }
 
     private Integer getMatchCount(Lotto lotto) {

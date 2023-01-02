@@ -14,8 +14,7 @@ class GoalTest {
         Goal goal = new Goal(testNumbers, bonusBall);
         Lotto lotto = new Lotto(testNumbers);
         LottoResult lottoResult = goal.compareLotto(lotto, bonusBall);
-        LottoResult targetLottoResult = new LottoResult(6, false);
 
-        assertThat(lottoResult).isEqualTo(targetLottoResult);
+        assertThat(lottoResult).isEqualTo(LottoResult.FIRST);
     }
 }

@@ -1,31 +1,36 @@
 package lotto.models;
 
-import java.util.Objects;
+import java.util.Arrays;
 
-public class LottoResult {
-    private final Integer matchCount;
+public enum LottoResult {
+    FIRST(2_000_000_000, 6),
+    SECOND(30_000_000, 5),
+    THIRD(1_500_000, 5),
+    FOURTH(50_000, 4),
+    FIFTH(5_000, 3),
+    NONE(0, 0);
 
-    private final boolean matchBonus;
+    private final long prize;
 
-    public LottoResult(Integer matchCount, boolean matchBonus) {
+    private final int matchCount;
+
+    LottoResult(long prize, int matchCount) {
+        this.prize = prize;
         this.matchCount = matchCount;
-        this.matchBonus = matchBonus;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoResult that = (LottoResult) o;
-        return matchBonus == that.matchBonus && Objects.equals(matchCount, that.matchCount);
+    public long getPrize() {
+        return prize;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(matchCount, matchBonus);
+    static public LottoResult findLottoResult(Integer matchCount, boolean includeBonus) {
+        if (matchCount == 5 && !includeBonus) {
+            return LottoResult.THIRD;
+        }
+
+        return Arrays.stream(values())
+                .filter(lottoResult -> lottoResult.matchCount == matchCount)
+                .findFirst()
+                .orElse(LottoResult.NONE);
     }
 }
