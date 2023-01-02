@@ -3,23 +3,23 @@ package lotto;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(4,6),
-    SECOND(3,5),
-    THIRD(2,5),
-    FOURTH(1,4),
-    FIFTH(0,3);
+    FIRST(4, new LotteryMatch(6,false)),
+    SECOND(3, new LotteryMatch(5,true)),
+    THIRD(2, new LotteryMatch(5,false)),
+    FOURTH(1, new LotteryMatch(4,false)),
+    FIFTH(0, new LotteryMatch(3,false));
 
     public final int index;
-    public final int matches;
+    public final LotteryMatch match;
 
-    Rank(int index, int matches) {
+    Rank(int index, LotteryMatch match) {
         this.index = index;
-        this.matches = matches;
+        this.match = match;
     }
 
-    public static Rank getRank(int match){
+    public static Rank getRank(LotteryMatch match){
         return Arrays.stream(values())
-                .filter(Rank -> Rank.matches == match)
+                .filter(Rank -> Rank.match.equals(match))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
     }
