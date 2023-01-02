@@ -47,7 +47,7 @@ public class Lotto {
                 .anyMatch(Lotto::isInvalidRange);
     }
 
-    private static boolean isInvalidRange(int number) {
+    public static boolean isInvalidRange(int number) {
         return LOTTO_NUMBER_MIN_VALUE > number || number > LOTTO_NUMBER_MAX_VALUE;
     }
 
@@ -63,6 +63,10 @@ public class Lotto {
 
     private static boolean isInvalidSize(List<Integer> numbers) {
         return numbers.size() != LOTTO_NUMBERS_COUNT;
+    }
+
+    public boolean contains(int number) {
+        return numbers.contains(number);
     }
 
     public boolean containsExactly(List<Integer> numbers) {
