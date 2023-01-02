@@ -38,4 +38,18 @@ public class LottoNumbersTest {
 
         assertThatThrownBy(() -> new LottoNumbers((singleLottoNumbers))).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 중복된_로또_번호가_있으면_예외가_발생한다() {
+        List<SingleLottoNumber> duplicatedLottoNumbers = Arrays.asList(
+                new SingleLottoNumber(1),
+                new SingleLottoNumber(2),
+                new SingleLottoNumber(3),
+                new SingleLottoNumber(4),
+                new SingleLottoNumber(6),
+                new SingleLottoNumber(6)
+        );
+
+        assertThatThrownBy(() -> new LottoNumbers(duplicatedLottoNumbers)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
