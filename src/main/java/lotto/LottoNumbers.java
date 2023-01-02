@@ -2,9 +2,10 @@ package lotto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    List<LottoNumber> lottoNumbers = new ArrayList<>();
+    private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     public LottoNumbers(List<Integer> numbers) {
         validateNumbersSize(numbers);
@@ -29,5 +30,11 @@ public class LottoNumbers {
 
     public boolean hasNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public String getString() {
+        return "[" + lottoNumbers.stream()
+                .map(LottoNumber::getString)
+                .collect(Collectors.joining(", ")) + "]";
     }
 }
