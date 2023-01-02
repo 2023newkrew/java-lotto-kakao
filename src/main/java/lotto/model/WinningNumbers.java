@@ -6,9 +6,9 @@ public class WinningNumbers {
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
 
-    public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
-        this.winningNumbers = winningNumbers;
-        this.bonusNumber = bonusNumber;
+    public WinningNumbers(List<Integer> winningNumbers) {
+        this.winningNumbers = winningNumbers.subList(0, winningNumbers.size() - 1);
+        this.bonusNumber = winningNumbers.get(winningNumbers.size() - 1);
     }
 
     public Price getPrice(Lotto lotto) {
