@@ -20,4 +20,13 @@
 - LottoResult
 - View
 - Parser
-- 
+
+## 1.3
+
+- Buyer budget  일급객체로
+- Buyer lotteries 일급컬렉션으로
+- Lottery numbers 일급컬렉션으로
+- LotteryResult winningNumbers 일급컬렉션으로
+- Lottery의 numberCollection을 일급 컬렉션으로
+- Rank에 index 없애기
+- Lottery Match에서 bonusNumber 분리
