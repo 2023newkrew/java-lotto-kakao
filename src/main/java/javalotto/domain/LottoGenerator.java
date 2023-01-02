@@ -18,14 +18,14 @@ public class LottoGenerator {
         return new LottoGenerator(numberGenerator);
     }
 
-    public List<Lotto> getLottos(LottoCount lottoCount) {
+    public Lottos getLottos(LottoCount lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount.getCount(); i++) {
             lottos.add(getLotto(lottoCount));
         }
 
-        return lottos;
+        return Lottos.from(lottos);
     }
 
     private Lotto getLotto(LottoCount lottoCount) {
