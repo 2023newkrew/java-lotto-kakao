@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 public class Lottery {
     private final List<Integer> numbers;
-    private static final List<Integer> numberCollection = IntStream.range(1,46)
+    private final List<Integer> numberCollection = IntStream.range(1,46)
             .boxed()
             .collect(Collectors.toList());
 
@@ -18,6 +18,11 @@ public class Lottery {
 
     public Lottery(List<Integer> numbers) {
         this.numbers = numbers;
+    }
+
+    @Override
+    public String toString() {
+        return numbers.stream().map(Object::toString).collect(Collectors.joining(" "));
     }
 
     public List<Integer> getNumbers() {
