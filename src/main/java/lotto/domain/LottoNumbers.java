@@ -23,9 +23,9 @@ public class LottoNumbers {
         }
     }
 
-    public boolean containsLottoNumber(SingleLottoNumber bonusNumber) {
+    public boolean containsLottoNumber(SingleLottoNumber singleLottoNumber) {
         return this.singleLottoNumbers.stream()
-                .anyMatch(bonusNumber::equals);
+                .anyMatch(singleLottoNumber::equals);
     }
 
     public int countMatchNumber(LottoNumbers other) {
