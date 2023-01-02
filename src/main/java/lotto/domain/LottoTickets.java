@@ -12,4 +12,8 @@ public class LottoTickets {
             tickets.add(new LottoTicket());
         }
     }
+
+    public int getLottoTicketCount(){
+        return tickets.size();
+    }
 }
