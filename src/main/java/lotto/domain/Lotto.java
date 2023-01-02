@@ -11,5 +11,12 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    private int getMatchCount(LottoNumbers otherLottoNumbers) {
+        return lottoNumbers.getMatchCount(otherLottoNumbers);
 
+    }
+
+    private boolean hasBonus(int bonusNumber){
+        return lottoNumbers.contains(bonusNumber);
+    }
 }

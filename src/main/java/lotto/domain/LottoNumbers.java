@@ -50,6 +50,14 @@ public class LottoNumbers {
         }
     }
 
+    public int getMatchCount(LottoNumbers otherLottoNumbers) {
+        return (int) otherLottoNumbers.lottoNumbers.stream().filter(this.lottoNumbers::contains).count();
+    }
+
+    public boolean contains(int number) {
+        return this.lottoNumbers.contains(number);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
