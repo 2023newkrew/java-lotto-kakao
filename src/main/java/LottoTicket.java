@@ -16,6 +16,7 @@ public class LottoTicket {
         this.lottoNumbers.addAll(lottoNumbers);
     }
 
+
     private void validateNumberDuplication(List<Integer> lottoNumbers) {
         HashSet<Integer> hs = new HashSet<>(lottoNumbers);
         if (hs.size() != LOTTO_NUMBER_SIZE) throw new IllegalArgumentException();
@@ -24,7 +25,7 @@ public class LottoTicket {
     private void validateNumberRange(List<Integer> lottoNumbers) {
         lottoNumbers
                 .forEach((number) -> {
-                    if (number < 1 || number > 45) throw new IllegalArgumentException();
+                    if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) throw new IllegalArgumentException();
                 });
     }
 
