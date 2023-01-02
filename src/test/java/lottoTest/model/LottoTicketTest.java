@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -41,12 +42,12 @@ public class LottoTicketTest {
     }
     private static Stream<Arguments> validateInvalidLottoNumberTestGenerator(){
         return Stream.of(
-                Arguments.of(List.of(-1, 1, 2, 3, 4, 5), ErrorCode.INVALID_LOTTO_NUMBER),
-                Arguments.of(List.of(0, 1, 2, 3, 4, 5), ErrorCode.INVALID_LOTTO_NUMBER),
-                Arguments.of(List.of(1, 2, 3, 4, 5, 6, 7), ErrorCode.INVALID_LOTTO_NUMBER),
-                Arguments.of(List.of(46, 1, 2, 3, 4, 5), ErrorCode.INVALID_LOTTO_NUMBER),
-                Arguments.of(List.of(1, 2, 3, 4, 5), ErrorCode.INVALID_LOTTO_NUMBER),
-                Arguments.of(null, ErrorCode.INVALID_LOTTO_NUMBER)
+                Arguments.of(List.of(-1, 1, 2, 3, 4, 5), ErrorCode.INVALID_LOTTO_NUMBER_RANGE),
+                Arguments.of(List.of(0, 1, 2, 3, 4, 5), ErrorCode.INVALID_LOTTO_NUMBER_RANGE),
+                Arguments.of(List.of(46, 1, 2, 3, 4, 5), ErrorCode.INVALID_LOTTO_NUMBER_RANGE),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6, 7), ErrorCode.INVALID_LOTTO_NUMBER_LENGTH),
+                Arguments.of(List.of(1, 2, 3, 4, 5), ErrorCode.INVALID_LOTTO_NUMBER_LENGTH),
+                Arguments.of(null, ErrorCode.INVALID_LOTTO_NUMBER_LENGTH)
         );
     }
 
