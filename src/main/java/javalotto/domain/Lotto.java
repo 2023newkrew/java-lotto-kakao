@@ -68,4 +68,9 @@ public class Lotto {
     public boolean containsExactly(List<Integer> numbers) {
         return Objects.equals(this.numbers, numbers);
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

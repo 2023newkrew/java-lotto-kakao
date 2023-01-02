@@ -61,4 +61,14 @@ class LottoTest {
         assertThatThrownBy(() -> Lotto.from(numbers))
                 .isInstanceOf(LottoInvalidSizeException.class);
     }
+
+    @Test
+    void should_toStringReturnValidFormat() {
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = Lotto.from(numbers);
+
+        String toStringValue = lotto.toString();
+
+        assertThat(toStringValue).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
 }
