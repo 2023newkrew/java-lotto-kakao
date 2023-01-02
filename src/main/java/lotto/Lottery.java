@@ -6,26 +6,22 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottery {
-    private final List<Integer> numbers;
+    private final LotteryNumber lotteryNumber;
     private final List<Integer> numberCollection = IntStream.range(1,46)
             .boxed()
             .collect(Collectors.toList());
 
     public Lottery() {
         Collections.shuffle(numberCollection);
-        numbers = numberCollection.subList(0, 6);
+        lotteryNumber = new LotteryNumber(numberCollection.subList(0, 6));
+
     }
 
     public Lottery(List<Integer> numbers) {
-        this.numbers = numbers;
+        this.lotteryNumber = new LotteryNumber(numbers);
     }
 
-    @Override
-    public String toString() {
-        return numbers.stream().map(Object::toString).collect(Collectors.joining(" "));
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<Integer> getLotteryNumber() {
+        return lotteryNumber.getNumbers();
     }
 }

@@ -13,7 +13,7 @@ public class LotteryTest {
         //given
         Lottery lottery = new Lottery();
         //when
-        List<Integer> lotteryNumbers = lottery.getNumbers();
+        List<Integer> lotteryNumbers = lottery.getLotteryNumber();
         //then
         Assertions.assertThat(lotteryNumbers).hasSize(6);
     }
@@ -24,7 +24,7 @@ public class LotteryTest {
         //given
         Lottery lottery = new Lottery();
         //when
-        List<Integer> lotteryNumbers = lottery.getNumbers();
+        List<Integer> lotteryNumbers = lottery.getLotteryNumber();
         //then
         for (Integer lotteryNumber : lotteryNumbers) {
             Assertions.assertThat(lotteryNumber).isBetween(1, 45);

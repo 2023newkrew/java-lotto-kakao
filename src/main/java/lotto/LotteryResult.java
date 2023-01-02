@@ -5,11 +5,11 @@ import buyer.BuyerResult;
 import java.util.List;
 
 public class LotteryResult {
-    private final List<Integer> winningNumbers;
+    private final LotteryNumber winningNumbers;
     private final int bonusNumber;
 
     public LotteryResult(List<Integer> winningNumbers, int bonusNumber) {
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = new LotteryNumber(winningNumbers);
         this.bonusNumber = bonusNumber;
     }
 
@@ -24,9 +24,9 @@ public class LotteryResult {
 
     public Rank getRank(Lottery lottery) {
         int count = 0;
-        List<Integer> lotteryNumbers = lottery.getNumbers();
+        List<Integer> lotteryNumbers = lottery.getLotteryNumber();
 
-        for(final Integer number : winningNumbers){
+        for(final Integer number : winningNumbers.getNumbers()){
             count += lotteryNumbers.contains(number) ? 1 : 0;
         }
 
@@ -34,7 +34,7 @@ public class LotteryResult {
     }
 
     private boolean isBonusMatch(Lottery lottery) {
-        return lottery.getNumbers().contains(bonusNumber);
+        return lottery.getLotteryNumber().contains(bonusNumber);
     }
 
     public BuyerResult getResult(List<Lottery> lotteries) {
