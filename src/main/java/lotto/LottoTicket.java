@@ -3,7 +3,7 @@ package lotto;
 import java.util.*;
 
 public class LottoTicket {
-    private final List<LottoBall> lottoBalls;
+    protected final List<LottoBall> lottoBalls;
 
     public LottoTicket(List<LottoBall> lottoBalls){
         this.lottoBalls = lottoBalls;
