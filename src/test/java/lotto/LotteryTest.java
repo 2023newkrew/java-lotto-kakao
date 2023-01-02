@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class LottoTest {
+public class LotteryTest {
     @DisplayName("로또 숫자가 6개인지 확인한다")
     @Test
     void lottoSizeTest() {
         //given
-        Lotto lotto = new Lotto();
+        Lottery lottery = new Lottery();
         //when
         List<Integer> lottoNumbers = lotto.getNumbers();
         //then
@@ -22,7 +22,7 @@ public class LottoTest {
     @Test
     void lottoNumberTest() {
         //given
-        Lotto lotto = new Lotto();
+        Lottery lottery = new Lottery();
         //when
         List<Integer> lottoNumbers = lotto.getNumbers();
         //then

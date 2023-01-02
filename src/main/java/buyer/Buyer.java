@@ -1,23 +1,23 @@
 package buyer;
 
-import lotto.Lotto;
+import lotto.Lottery;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class Buyer {
-    private final List<Lotto> lotteries = new ArrayList<>();
+    private final List<Lottery> lotteries = new ArrayList<>();
     private int budget;
 
     public Buyer(int budget) {
         this.budget = budget;
         for (int i = 0; i < budget; i += 1000) {
-            lotteries.add(new Lotto());
+            lotteries.add(new Lottery());
         }
     }
 
-    public Collection<Lotto> getLotteries() {
+    public Collection<Lottery> getLotteries() {
         return lotteries;
     }
 }
