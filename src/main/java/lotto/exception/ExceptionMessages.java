@@ -11,4 +11,7 @@ public final class ExceptionMessages {
     public static final String INVALID_COUNT_EXCEPTION_MESSAGE = String.format("로또는 %d개의 숫자로 이루어져야 합니다.",
             LOTTO_NUMBER_COUNT);
 
+    public static final String DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE = "보너스 넘버는 기존 넘버와 중복될 수 업습니다.";
+    public static final String INVALID_LOTTO_RESULT_INPUT_EXCEPTION = "Lotto result에 잘못된 입력이 주어졌습니다.";
+
 }
