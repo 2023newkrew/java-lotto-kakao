@@ -3,7 +3,6 @@ package buyer;
 import lotto.Lottery;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Buyer {
@@ -12,12 +11,17 @@ public class Buyer {
 
     public Buyer(int budget) {
         this.budget = budget;
-        for (int i = 0; i < budget; i += 1000) {
-            lotteries.add(new Lottery());
-        }
     }
 
-    public Collection<Lottery> getLotteries() {
+    public int getBudget() {
+        return budget;
+    }
+
+    public void decreaseBudgetByPrice(int price) {
+        this.budget -= price;
+    }
+
+    public List<Lottery> getLotteries() {
         return lotteries;
     }
 }
