@@ -1,17 +1,13 @@
 package lotto.domain;
 
 public class Money {
+    private final static int LOTTO_PRICE = 1000;
     private final int money;
 
     public Money(int money) {
-        if (money % 1000 != 0) {
-            throw new IllegalArgumentException("돈은 1000원 단위여야 합니다.");
+        if (money < LOTTO_PRICE) {
+            throw new IllegalArgumentException("로또 한 장의 가격보다 커야 합니다.");
         }
-
-        if (money <= 0) {
-            throw new IllegalArgumentException("돈은 양수여야 합니다.");
-        }
-
         this.money = money;
     }
 
