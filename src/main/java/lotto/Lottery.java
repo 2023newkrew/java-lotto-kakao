@@ -7,11 +7,12 @@ import java.util.stream.IntStream;
 
 public class Lottery {
     private final LotteryNumber lotteryNumber;
-    private final List<Integer> numberCollection = IntStream.range(1,46)
-            .boxed()
-            .collect(Collectors.toList());
 
     public Lottery() {
+        List<Integer> numberCollection = IntStream.range(1,46)
+                .boxed()
+                .collect(Collectors.toList());
+
         Collections.shuffle(numberCollection);
         lotteryNumber = new LotteryNumber(numberCollection.subList(0, 6));
 
