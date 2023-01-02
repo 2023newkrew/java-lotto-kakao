@@ -56,7 +56,7 @@ public class LottoTest {
 
     @ParameterizedTest
     @ValueSource(ints = {999, 0})
-    @DisplayName("1000원 이하의 금액이 들어온다면 예외를 발생한다.")
+    @DisplayName("1000원 미만의 금액이 들어온다면 예외를 발생한다.")
     void lottoLowerThan1000Test(int amount) {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoTickets(amount));
