@@ -9,8 +9,8 @@ public class Price {
     }
 
     public void add(int addValue) {
-        if (addValue <= 0){
-            throw new IllegalArgumentException("더하는 금액은 0 이하가 될 수 없습니다.");
+        if (addValue < 0){
+            throw new IllegalArgumentException("더하는 금액은 0 미만이 될 수 없습니다.");
         }
         this.value += addValue;
     }
