@@ -21,6 +21,10 @@ public class Buyer {
         this.budget -= price;
     }
 
+    public void addLottery(Lottery lottery) {
+        lotteries.add(lottery);
+    }
+
     public List<Lottery> getLotteries() {
         return lotteries;
     }

@@ -13,6 +13,8 @@ public class LotteryGeneratorTest {
         LotteryGenerator lotteryGenerator = new LotteryGenerator();
         Buyer buyer = new Buyer(2000);
 
-        assertThat(lotteryGenerator.generate(buyer)).hasSize(2);
+        lotteryGenerator.generate(buyer);
+
+        assertThat(buyer.getLotteries()).hasSize(2);
     }
 }
