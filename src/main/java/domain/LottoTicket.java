@@ -24,4 +24,10 @@ public class LottoTicket {
     public boolean contains(LottoBall lottoBall) {
         return lottoBalls.contains(lottoBall);
     }
+
+    public int countMatch(LottoTicket lottoTicket) {
+        return (int) lottoBalls.stream()
+                .filter(lottoBall -> lottoTicket.contains(lottoBall))
+                .count();
+    }
 }

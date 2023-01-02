@@ -16,4 +16,15 @@ public class WinnerCombination {
             throw new IllegalArgumentException("보너스볼은 당첨번호와 중복될 수 없습니다.");
         }
     }
+
+    public LottoResult compare(LottoTicket lottoTicket) {
+        if (lottoTicket.equals(winnerTicket)) {
+            return LottoResult.SIX_MATCH;
+        }
+
+        int matchCount = lottoTicket.countMatch(winnerTicket);
+        boolean bonusBallMatch = lottoTicket.contains(bonusBall);
+
+        return LottoResult.findResult(matchCount, bonusBallMatch);
+    }
 }
