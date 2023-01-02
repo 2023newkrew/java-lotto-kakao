@@ -4,16 +4,18 @@ import java.util.function.BiPredicate;
 import java.util.stream.Stream;
 
 public enum Prize {
-    NOTHING((overlappedNumberCount, hasBonus) -> overlappedNumberCount < 3),
-    FIFTH((overlappedNumberCount, hasBonus) -> overlappedNumberCount == 3),
-    FOURTH((overlappedNumberCount, hasBonus) -> overlappedNumberCount == 4),
-    THIRD((overlappedNumberCount, hasBonus) -> overlappedNumberCount == 5 && !hasBonus),
-    SECOND((overlappedNumberCount, hasBonus) -> overlappedNumberCount == 5 && hasBonus),
-    FIRST((overlappedNumberCount, hasBonus) -> overlappedNumberCount == 6);
+    NOTHING(0L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount < 3),
+    FIFTH(5_000L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount == 3),
+    FOURTH(50_000L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount == 4),
+    THIRD(150_000L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount == 5 && !hasBonus),
+    SECOND(30_000_000L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount == 5 && hasBonus),
+    FIRST(2_000_000_000L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount == 6);
 
+    private final long amount;
     private final BiPredicate<Long, Boolean> isMatched;
 
-    Prize(BiPredicate<Long, Boolean> isMatched) {
+    Prize(long amount, BiPredicate<Long, Boolean> isMatched) {
+        this.amount = amount;
         this.isMatched = isMatched;
     }
 
@@ -22,6 +24,10 @@ public enum Prize {
                 .filter(p -> p.isMatched(overlappedNumberCount, hasBonus))
                 .findAny()
                 .orElse(Prize.NOTHING);
+    }
+
+    public long getAmount(){
+        return amount;
     }
 
     private boolean isMatched(long overlappedNumberCount, boolean hasBonus) {
