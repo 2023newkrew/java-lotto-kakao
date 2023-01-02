@@ -5,13 +5,22 @@ import java.util.ArrayList;
 public class LottoTickets {
     private final ArrayList<LottoTicket> tickets;
 
-    public LottoTickets(int count) {
-        count /= 1000;
+    public LottoTickets(int amount) {
+        if(!checkAmountUpperThan1000(amount)){
+            throw new IllegalArgumentException("입력한 금액이 1000원 미만입니다.");
+        }
+
+        int count = amount / 1000;
         this.tickets = new ArrayList<>(count);
 
         for (int i=0; i<count;i++){  // stream 으로 변경 필요
             tickets.add(new LottoTicket());
         }
+    }
+
+    // 사용자가 입력한 금액이 1000원 이상인지 확인
+    private boolean checkAmountUpperThan1000(int amount){
+        return amount >= 1000;
     }
 
     public int getLottoTicketCount(){
