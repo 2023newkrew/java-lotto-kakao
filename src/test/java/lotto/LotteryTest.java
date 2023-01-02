@@ -9,25 +9,25 @@ import java.util.List;
 public class LotteryTest {
     @DisplayName("로또 숫자가 6개인지 확인한다")
     @Test
-    void lottoSizeTest() {
+    void lotterySizeTest() {
         //given
         Lottery lottery = new Lottery();
         //when
-        List<Integer> lottoNumbers = lotto.getNumbers();
+        List<Integer> lotteryNumbers = lottery.getNumbers();
         //then
-        Assertions.assertThat(lottoNumbers).hasSize(6);
+        Assertions.assertThat(lotteryNumbers).hasSize(6);
     }
 
     @DisplayName("모든 로또 숫자가 1부터 45 사이인지 확인")
     @Test
-    void lottoNumberTest() {
+    void lotteryNumberTest() {
         //given
         Lottery lottery = new Lottery();
         //when
-        List<Integer> lottoNumbers = lotto.getNumbers();
+        List<Integer> lotteryNumbers = lottery.getNumbers();
         //then
-        for (Integer lottoNumber : lottoNumbers) {
-            Assertions.assertThat(lottoNumber).isBetween(1, 45);
+        for (Integer lotteryNumber : lotteryNumbers) {
+            Assertions.assertThat(lotteryNumber).isBetween(1, 45);
         }
     }
 }
