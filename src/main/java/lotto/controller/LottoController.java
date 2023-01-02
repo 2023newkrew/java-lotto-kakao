@@ -1,12 +1,12 @@
 package lotto.controller;
 
-import lotto.domain.LottoTicket;
-
-import java.util.List;
+import lotto.domain.LottoTickets;
 
 public class LottoController {
+    private final LottoTickets lottoTickets;
 
-    public LottoTicket createNumber() {
-        return new LottoTicket();
+    public LottoController(int count) {
+        this.lottoTickets = new LottoTickets(count);
     }
+
 }
