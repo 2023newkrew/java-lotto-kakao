@@ -13,17 +13,6 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BuyerResultTest {
-    @DisplayName("BuyerResult 증가 함수 테스트")
-    @Test
-    void buyerAddTest() {
-        BuyerResult buyerResult = new BuyerResult();
-        buyerResult.matches(Rank.FIFTH);
-
-        EnumMap<Rank, Integer> cpMap = new EnumMap<>(Map.of(Rank.FIFTH, 1));
-
-        assertThat(buyerResult).isEqualTo(new BuyerResult(cpMap));
-    }
-
     @DisplayName("로또 하나에 대한 결과 객체 확인")
     @Test
     void lotteryResult() {

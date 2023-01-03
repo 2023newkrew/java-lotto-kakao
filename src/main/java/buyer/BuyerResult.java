@@ -8,10 +8,6 @@ import java.util.EnumMap;
 public class BuyerResult {
     private final EnumMap<Rank, Integer> result;
 
-    public BuyerResult() {
-        result = new EnumMap<>(Rank.class);
-    }
-
     public BuyerResult(Lotteries lotteries, LotteryResult lotteryResult) {
         result = new EnumMap<>(Rank.class);
         for (Lottery lottery : lotteries.getLotteries()) {
@@ -30,10 +26,6 @@ public class BuyerResult {
         BuyerResult cp = (BuyerResult) obj;
 
         return this.result.equals(cp.result);
-    }
-
-    public void matches(Rank matchResult) {
-        result.put(matchResult, result.getOrDefault(matchResult, 0) + 1);
     }
 
     public Integer getRankCount(Rank rank) {
