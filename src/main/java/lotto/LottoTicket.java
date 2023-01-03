@@ -3,7 +3,10 @@ package lotto;
 import java.util.List;
 
 public class LottoTicket {
-    LottoNumbers lottoNumbers;
+
+    public static final int LOTTO_TICKET_PRICE = 1000;
+
+    private final LottoNumbers lottoNumbers;
 
     public LottoTicket(List<Integer> numbers) {
         lottoNumbers = new LottoNumbers(numbers);
