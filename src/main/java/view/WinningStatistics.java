@@ -13,7 +13,7 @@ public class WinningStatistics {
     private static final String STATISTIC_FORMAT = "%d개 일치 (%d원) - %d개";
     private static final String SECOND_PLACE_STATISTIC_FORMAT = "%d개, 보너스 볼 일치 (%d원) - %d개";
 
-    private Map<Rank, Integer> rankMap;
+    private final Map<Rank, Integer> rankMap;
 
     public WinningStatistics(Map<Rank, Integer> rankMap) {
         this.rankMap = rankMap;
