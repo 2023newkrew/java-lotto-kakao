@@ -25,11 +25,11 @@ public class LottoBuyerTest {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         LottoResult lottoResult = lottoBuyer.calculateResult(winningLotto);
-        assertThat(lottoResult.getLottoPlaces().get(LottoRank.FIRST_RANK)).isEqualTo(1);
-        assertThat(lottoResult.getLottoPlaces().get(LottoRank.SECOND_RANK)).isEqualTo(0);
-        assertThat(lottoResult.getLottoPlaces().get(LottoRank.THIRD_RANK)).isEqualTo(0);
-        assertThat(lottoResult.getLottoPlaces().get(LottoRank.FOURTH_RANK)).isEqualTo(1);
-        assertThat(lottoResult.getLottoPlaces().get(LottoRank.FIFTH_RANK)).isEqualTo(0);
+        assertThat(lottoResult.getLottoRanks().get(Rank.FIRST_RANK)).isEqualTo(1);
+        assertThat(lottoResult.getLottoRanks().get(Rank.SECOND_RANK)).isEqualTo(0);
+        assertThat(lottoResult.getLottoRanks().get(Rank.THIRD_RANK)).isEqualTo(0);
+        assertThat(lottoResult.getLottoRanks().get(Rank.FOURTH_RANK)).isEqualTo(1);
+        assertThat(lottoResult.getLottoRanks().get(Rank.FIFTH_RANK)).isEqualTo(0);
     }
 
     @Test
@@ -47,6 +47,6 @@ public class LottoBuyerTest {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         LottoResult lottoResult = lottoBuyer.calculateResult(winningLotto);
 
-        assertThat(lottoBuyer.calculateEarningRate(lottoResult.getLottoPlaces())).isEqualTo(666683.33);
+        assertThat(lottoBuyer.calculateEarningRate(lottoResult.getLottoRanks())).isEqualTo(666683.33);
     }
 }

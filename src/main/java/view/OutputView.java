@@ -1,7 +1,7 @@
 package view;
 
 import domain.Lotto;
-import domain.LottoRank;
+import domain.Rank;
 import dto.LottoResult;
 
 import java.util.List;
@@ -16,10 +16,10 @@ public class OutputView {
     }
 
     public void printLottoStatistics(LottoResult lottoResult) {
-        for (LottoRank place : LottoRank.values()) {
+        for (Rank place : Rank.values()) {
             System.out.print(place.toString());
             System.out.print(" - ");
-            System.out.print(lottoResult.getLottoPlaces().get(place));
+            System.out.print(lottoResult.getLottoRanks().get(place));
             System.out.println("개");
         }
         System.out.print("총 수익률은 " + lottoResult.getEarningRate() + "입니다.");

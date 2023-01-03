@@ -3,7 +3,7 @@ package controller;
 import domain.Lotto;
 import domain.LottoBuyer;
 import domain.LottoNumber;
-import domain.LottoStore;
+import domain.Store;
 import dto.LottoResult;
 import dto.WinningLotto;
 import utils.NumberParser;
@@ -20,7 +20,7 @@ public class LottoApplication {
             String moneyInput = inputView.getMoneyInput();
             Integer money = NumberParser.parse(moneyInput);
 
-            LottoBuyer lottoBuyer = new LottoBuyer(money, new LottoStore());
+            LottoBuyer lottoBuyer = new LottoBuyer(money, new Store());
             outputView.printPurchasedLottos(lottoBuyer.getLottos());
 
             String winningLottoInput = inputView.getWinningLottoInput();

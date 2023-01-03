@@ -2,7 +2,7 @@ package domain;
 
 import java.util.Arrays;
 
-public enum LottoRank {
+public enum Rank {
     FIRST_RANK(6, false, 2000000000L),
     SECOND_RANK(5, true, 30000000L),
     THIRD_RANK(5, false, 1500000L),
@@ -14,7 +14,7 @@ public enum LottoRank {
     private final Boolean isCorrectBonusNumber;
     private final Long reward;
 
-    LottoRank(Integer correctWinningNumberCount, Boolean isCorrectBonusNumber, Long reward) {
+    Rank(Integer correctWinningNumberCount, Boolean isCorrectBonusNumber, Long reward) {
         this.correctWinningNumberCount = correctWinningNumberCount;
         this.isCorrectBonusNumber = isCorrectBonusNumber;
         this.reward = reward;
@@ -24,12 +24,11 @@ public enum LottoRank {
         return reward;
     }
 
-    public static LottoRank getLottoRank(Integer correctWinningNumberCount, Boolean isCorrectBonusNumber) {
-       return Arrays.stream(LottoRank.values())
+    public static Rank getLottoRank(Integer correctWinningNumberCount, Boolean isCorrectBonusNumber) {
+       return Arrays.stream(Rank.values())
                .filter(lottoStatus -> {
-                           return lottoStatus.isCorrectBonusNumber == isCorrectBonusNumber && lottoStatus.correctWinningNumberCount == correctWinningNumberCount;
-                       }
-               )
+                    return lottoStatus.isCorrectBonusNumber == isCorrectBonusNumber && lottoStatus.correctWinningNumberCount == correctWinningNumberCount;
+               })
                .findFirst().orElseGet(() -> LOSE);
     }
 

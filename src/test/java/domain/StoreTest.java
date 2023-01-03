@@ -9,16 +9,16 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoStoreTest {
+public class StoreTest {
 
     @CsvSource({"2000,2", "3020,3","10432,10"})
     @ParameterizedTest
     void 구매금액만큼_로또를_구매한다(int money, int amount) {
         // given
-        LottoStore lottoStore = new LottoStore();
+        Store store = new Store();
 
         // when
-        List<Lotto> lottos = lottoStore.buy(money);
+        List<Lotto> lottos = store.buy(money);
 
         // then
         assertThat(lottos.size()).isEqualTo(amount);
@@ -28,10 +28,10 @@ public class LottoStoreTest {
     @ParameterizedTest
     void 구매금액은_1000원_이상이여야_한다(int money) {
         // given
-        LottoStore lottoStore = new LottoStore();
+        Store store = new Store();
 
         // then
-        assertThatThrownBy(() -> lottoStore.buy(money))
+        assertThatThrownBy(() -> store.buy(money))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

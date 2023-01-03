@@ -11,8 +11,7 @@ public class LottoGenerator {
     private static final Integer LOTTO_NUMBER_START = 1;
     private static final Integer LOTTO_NUMBER_END = 45;
 
-    private static final List<LottoNumber> LOTTO_NUMBERS = IntStream
-            .range(LOTTO_NUMBER_START, LOTTO_NUMBER_END+1)
+    private static final List<LottoNumber> LOTTO_NUMBERS = IntStream.range(LOTTO_NUMBER_START, LOTTO_NUMBER_END + 1)
             .mapToObj(LottoNumber::new)
             .collect(Collectors.toList());
 

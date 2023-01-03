@@ -23,25 +23,22 @@ public class LottoBuyer {
     }
 
     public LottoResult calculateResult(WinningLotto winningLotto) {
-        List<LottoRank> statuses = lottos.stream()
+        List<Rank> statuses = lottos.stream()
                 .map(lotto -> lotto.getRank(winningLotto))
                 .collect(Collectors.toList());
-
-        Map<LottoRank, Integer> map = new EnumMap<>(LottoRank.class);
-        for (LottoRank lottoRank : LottoRank.values()) {
-            map.put(lottoRank, Collections.frequency(statuses, lottoRank));
+        Map<Rank, Integer> map = new EnumMap<>(Rank.class);
+        for (Rank rank : Rank.values()) {
+            map.put(rank, Collections.frequency(statuses, rank));
         }
-
         Double earningRate =  calculateEarningRate(map);
-
         return new LottoResult(map, earningRate);
     }
 
-    public Double calculateEarningRate(Map<LottoRank, Integer> map) {
+    public Double calculateEarningRate(Map<Rank, Integer> map) {
         Integer investMoney = (money / 1000) * 1000;
         Long earningMoney = 0L;
-        for (LottoRank lottoRank : LottoRank.values()) {
-            earningMoney +=  (map.get(lottoRank) * lottoRank.getReward());
+        for (Rank rank : Rank.values()) {
+            earningMoney +=  (map.get(rank) * rank.getReward());
         }
         if (earningMoney == 0L) {
             return 0.00d;
