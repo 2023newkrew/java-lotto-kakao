@@ -18,7 +18,7 @@ public class LottoResult {
 
     public double getRateOfReturn(PurchaseAmount purchaseAmount) {
         int returnAmount = lottoResultMap.entrySet().stream()
-                .map(entry -> entry.getKey().matchCount * entry.getValue())
+                .map(entry -> entry.getKey().prize * entry.getValue())
                 .mapToInt(Integer::intValue)
                 .sum();
 
