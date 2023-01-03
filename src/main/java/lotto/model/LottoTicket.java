@@ -15,13 +15,13 @@ public class LottoTicket {
 
     private void validateValuesCount(List<LottoValue> lottoValues) {
         if (lottoValues.size() != VALUES_COUNT) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("입력된 값의 개수가 일치하지 않습니다.");
         }
     }
 
     private void validateDistinction(List<LottoValue> lottoValues) {
         if (lottoValues.stream().distinct().count() != VALUES_COUNT) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("값들이 중복되지 않아야 합니다.");
         }
     }
 

@@ -24,12 +24,24 @@ public class LottoMain {
         rv.printLottoTickets(tickets);
 
         String winningNumbers, bonusNumber;
-        winningNumbers = iv.getWinningNumbers();
-        bonusNumber = iv.getBonusNumber();
+        WinningNumbers wn;
+        do {
+            winningNumbers = iv.getWinningNumbers();
+            bonusNumber = iv.getBonusNumber();
+            wn = createWinningNumbersInstance(winningNumbers, bonusNumber);
+        } while (wn == null);
 
-        WinningNumbers wn = new WinningNumbers(winningNumbers, bonusNumber);
 
         Result result = tickets.getResults(wn);
         rv.printResultStatistics(result, money);
+    }
+
+    private static WinningNumbers createWinningNumbersInstance(String winningNumbers, String bonusNumber) {
+        try {
+            return new WinningNumbers(winningNumbers, bonusNumber);
+        } catch (Exception E) {
+            System.out.println(E.getMessage());
+            return null;
+        }
     }
 }

@@ -9,7 +9,7 @@ public class WinningNumbers {
     private final LottoValue bonusNumber;
 
     public WinningNumbers(String sixNumbersString, String bonusNumberString) {
-        List<String> sixNumbersList = new ArrayList<>(List.of(sixNumbersString.split(", ")));
+        List<String> sixNumbersList = new ArrayList<>(List.of(sixNumbersString.split(", |,")));
         sixNumbers = parseSixNumbers(sixNumbersList);
         bonusNumber = parseBonusNumber(bonusNumberString);
     }
