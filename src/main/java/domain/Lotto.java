@@ -26,4 +26,10 @@ public class Lotto {
         this.numbers = Collections.unmodifiableList(numbers);
     }
 
+    public Lotto(String input) {
+        this.numbers = Arrays.stream(input.split(Constants.DELIMITER))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
 }
