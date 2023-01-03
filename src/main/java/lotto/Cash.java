@@ -2,15 +2,17 @@ package lotto;
 
 import lotto.exception.InvalidCashValue;
 
-import java.util.Comparator;
 import java.util.Objects;
 
+@SuppressWarnings("rawtypes")
 public class Cash implements Comparable {
     private final long cash;
+
     public Cash(long cash){
         if (cash < 0) {
             throw new InvalidCashValue();
         }
+
         this.cash = cash;
     }
 
@@ -27,12 +29,13 @@ public class Cash implements Comparable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()){
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         Cash cash1 = (Cash)o;
         return cash == cash1.cash;
     }
@@ -49,13 +52,12 @@ public class Cash implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        if (Long.class == o.getClass()){
-            return cash > ((Long)o) ? 1 : (cash == (Long)o ? 0 : -1);
+        if (Long.class == o.getClass()) {
+            return Long.compare(cash, (Long)o);
         }
-        if (o == null || getClass() != o.getClass()){
+        if (getClass() != o.getClass()){
             throw new RuntimeException();
         }
-        long otherCash = ((Cash)o).cash;
-        return cash > otherCash ? 1 : (cash == otherCash ? 0 : -1);
+        return Long.compare(this.cash, ((Cash)o).getCash());
     }
 }
