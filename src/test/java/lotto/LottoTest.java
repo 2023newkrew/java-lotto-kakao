@@ -127,6 +127,15 @@ public class LottoTest {
                 .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    @DisplayName("보너스 볼이 1 ~ 45 사이의 정수가 아니라면, 예외를 발생한다.")
+    void lottoBonusNumberTest(int bonus){
+        LottoTicket lottoTicket = new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoWinnerTicket(lottoTicket, bonus));
+    }
 
     private Integer[] changeToArray(String userInput){
         return Stream.of(userInput
