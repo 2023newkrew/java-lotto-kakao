@@ -22,7 +22,7 @@ public class WinningLottoValidator {
 
     private static void validateLength(String[] inputs) {
         if (inputs.length != Constants.LENGTH) {
-            throw new IllegalLengthException("길이");
+            throw new IllegalLengthException("총 여섯 개의 숫자로 이루어져 있어야 합니다.");
         }
     }
 
@@ -30,7 +30,7 @@ public class WinningLottoValidator {
         Set<Integer> distinctNumbers = new HashSet<>();
         inputs.stream().forEach(input -> distinctNumbers.add(input));
         if (distinctNumbers.size() != Constants.LENGTH) {
-            throw new DuplicateNumberException("");
+            throw new DuplicateNumberException("중복된 숫자가 있습니다.");
         }
     }
 
