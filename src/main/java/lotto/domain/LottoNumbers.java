@@ -25,8 +25,7 @@ public class LottoNumbers {
     }
 
     public boolean containsLottoNumber(SingleLottoNumber singleLottoNumber) {
-        return this.singleLottoNumbers.stream()
-                .anyMatch(singleLottoNumber::equals);
+        return this.singleLottoNumbers.contains(singleLottoNumber);
     }
 
     public int countMatchNumber(LottoNumbers other) {
