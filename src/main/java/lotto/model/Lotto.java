@@ -1,16 +1,28 @@
 package lotto.model;
 
+import lotto.util.RandomGenerator;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
+    private final List<Ticket> tickets;
+    private final RandomGenerator randomGenerator;
 
-    private final List<Integer> numbers;
+    public Lotto() {
+        this.tickets = new ArrayList<>();
 
-    public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+        List<Integer> generationRange = new ArrayList<>();
+        for (int i = 1; i <= Ticket.NUMBERS_RANGE; i++) {
+            generationRange.add(i);
+        }
+        this.randomGenerator = new RandomGenerator(generationRange);
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public List<Ticket> purchaseRandomLotto(long quantity) {
+        for (int i = 0; i < quantity; i++) {
+            this.tickets.add(new Ticket(this.randomGenerator.getOrderedNumbers(Ticket.NUMBERS_LENGTH)));
+        }
+        return this.tickets;
     }
 }
