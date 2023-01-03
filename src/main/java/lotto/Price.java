@@ -23,9 +23,11 @@ public class Price extends Number {
 
     @Override
     public String toString() {
-        return "Price{" +
-                "value=" + value +
-                '}';
+        return String.format(
+                "%s 원",
+                Long.toString(value)
+                        .replaceAll("(.)(?=(.{4})+(?!.))", "$1,")
+        );
     }
 
     @Override

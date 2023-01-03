@@ -71,11 +71,11 @@ public class MainUI {
 
         System.out.println("당첨 통계");
         System.out.println("----------");
-        System.out.printf("3개 일치 (5000원)- %d개\n", rankingMap.getOrDefault(Ranking.FIFTH, 0));
-        System.out.printf("4개 일치 (50000원)- %d개\n", rankingMap.getOrDefault(Ranking.FOURTH, 0));
-        System.out.printf("5개 일치 (1500000원)- %d개\n", rankingMap.getOrDefault(Ranking.THIRD, 0));
-        System.out.printf("5개 일치, 보너스 볼 일치 (30000000원)- %d개\n", rankingMap.getOrDefault(Ranking.SECOND, 0));
-        System.out.printf("6개 일치 (2000000000원)- %d개\n", rankingMap.getOrDefault(Ranking.FIRST, 0));
+        System.out.printf("3개 일치 (%s)- %d개\n", Ranking.FIFTH.intoPrice(), rankingMap.getOrDefault(Ranking.FIFTH, 0));
+        System.out.printf("4개 일치 (%s)- %d개\n", Ranking.FOURTH.intoPrice(), rankingMap.getOrDefault(Ranking.FOURTH, 0));
+        System.out.printf("5개 일치 (%s)- %d개\n", Ranking.THIRD.intoPrice(), rankingMap.getOrDefault(Ranking.THIRD, 0));
+        System.out.printf("5개 일치, 보너스 볼 일치 (%s)- %d개\n", Ranking.SECOND.intoPrice(), rankingMap.getOrDefault(Ranking.SECOND, 0));
+        System.out.printf("6개 일치 (%s)- %d개\n", Ranking.FIRST.intoPrice(), rankingMap.getOrDefault(Ranking.FIRST, 0));
         System.out.printf("총 수익률은 %.6f 입니다.\n",
                 outcome.ratio(income)
                         .doubleValue()
