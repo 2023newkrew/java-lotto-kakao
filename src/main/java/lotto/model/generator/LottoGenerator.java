@@ -15,7 +15,7 @@ public interface LottoGenerator {
 
     static private List<Integer> initializeLottoPreset() {
         return IntStream
-                .rangeClosed(MIN_VALUE, MAX_VALUE)
+                .rangeClosed(MIN_VALUE.getValue(), MAX_VALUE.getValue())
                 .boxed()
                 .collect(Collectors.toList());
     }

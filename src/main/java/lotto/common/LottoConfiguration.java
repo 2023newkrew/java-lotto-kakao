@@ -1,8 +1,15 @@
 package lotto.common;
 
-public class LottoConfiguration {
-    static public final Integer MIN_VALUE = 1;
-    static public final Integer MAX_VALUE = 45;
-    static public final Integer LOTTO_COUNT = 6;
-    private LottoConfiguration() {}
+public enum LottoConfiguration {
+    MIN_VALUE(1), MAX_VALUE(45), LOTTO_COUNT(6);
+
+    private final Integer value;
+
+    LottoConfiguration(Integer value) {
+        this.value = value;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
 }

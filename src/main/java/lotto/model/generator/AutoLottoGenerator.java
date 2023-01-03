@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class AutoLottoGenerator implements LottoGenerator {
     public LottoNumber createLotto() {
         Collections.shuffle(lottoPreset);
-        List<Integer> numbers = lottoPreset.subList(0, LOTTO_COUNT).stream()
+        List<Integer> numbers = lottoPreset.subList(0, LOTTO_COUNT.getValue()).stream()
                 .sorted()
                 .collect(Collectors.toList());
 
