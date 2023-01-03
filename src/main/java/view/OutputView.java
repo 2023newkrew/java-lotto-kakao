@@ -3,16 +3,15 @@ package view;
 import domain.lotto.result.LottoResultType;
 import domain.lotto.result.LottoResults;
 import domain.lotto.ticket.LottoTicket;
-import domain.lotto.ticket.LottoTickets;
+import domain.lotto.ticket.LottoTicketList;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class OutputView {
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getLottoTickets().size() + "개를 구매했습니다.");
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+    public static void printLottoTickets(LottoTicketList lottoTicketList) {
+        System.out.println(lottoTicketList.getLottoTickets().size() + "개를 구매했습니다.");
+        for (LottoTicket lottoTicket : lottoTicketList.getLottoTickets()) {
             System.out.println(lottoTicket.toString());
         }
     }

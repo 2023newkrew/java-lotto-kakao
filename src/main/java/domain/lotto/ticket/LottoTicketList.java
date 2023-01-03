@@ -2,10 +2,10 @@ package domain.lotto.ticket;
 
 import java.util.List;
 
-public class LottoTickets {
+public class LottoTicketList {
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
+    public LottoTicketList(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 

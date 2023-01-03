@@ -3,7 +3,7 @@ import domain.lotto.WinningNumbers;
 import domain.lotto.result.LottoResultType;
 import domain.lotto.result.LottoResults;
 import domain.lotto.ticket.LottoTicket;
-import domain.lotto.ticket.LottoTickets;
+import domain.lotto.ticket.LottoTicketList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,9 +21,9 @@ public class LottoGameTest {
         LottoTicket lottoTicket3 = new LottoTicket(List.of(1,2,3,4,5,8));  //3등
 
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6),7);
-        LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicket1, lottoTicket2, lottoTicket3));
+        LottoTicketList lottoTicketList = new LottoTicketList(List.of(lottoTicket1, lottoTicket2, lottoTicket3));
 
-        LottoGame lottoGame = new LottoGame(lottoTickets, winningNumbers);
+        LottoGame lottoGame = new LottoGame(lottoTicketList, winningNumbers);
 
         LottoResults lottoResults = lottoGame.getLottoTicketsResult();
 
