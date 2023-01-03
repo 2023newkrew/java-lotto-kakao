@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 import java.util.List;
 import lotto.domain.LottoNumbers;
+import lotto.generatepolicy.DefaultGeneratePolicy;
 import lotto.generatepolicy.GeneratePolicy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ class LottoNumbersFactoryTest {
     @DisplayName("매개변수가_없으면_기본정책으로_생성한다")
     @Test
     void 매개변수가_없으면_기본정책으로_생성한다() {
-        assertThatCode(() -> LottoNumbersFactory.create()).doesNotThrowAnyException();
+        assertThatCode(() -> LottoNumbersFactory.create(new DefaultGeneratePolicy())).doesNotThrowAnyException();
     }
 
     @DisplayName("정책을 인자로 전달하면 해당 정책을 반영하여 생성한다")

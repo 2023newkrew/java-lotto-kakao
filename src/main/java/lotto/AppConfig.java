@@ -1,19 +1,26 @@
 package lotto;
 
-import lotto.domain.DefaultRankingPolicy;
+import lotto.controller.LottoController;
+import lotto.rankingpolicy.DefaultRankingPolicy;
 import lotto.domain.LottoGame;
-import lotto.domain.RankingPolicy;
+import lotto.rankingpolicy.RankingPolicy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class AppConfig {
-    InputView inputView = new InputView();
-    RankingPolicy rankingPolicy = new DefaultRankingPolicy();
-    OutputView outputView = new OutputView();
-    LottoGame lottoGame;
+    private static final InputView inputView = new InputView();
+    private static final RankingPolicy rankingPolicy = new DefaultRankingPolicy();
+    private static final OutputView outputView = new OutputView();
+    private final LottoGame lottoGame;
+    private final LottoController lottoController;
 
-    public AppConfig(){
+    public AppConfig() {
         this.lottoGame = new LottoGame(rankingPolicy);
+        this.lottoController = new LottoController(inputView, outputView, lottoGame);
+    }
+
+    public LottoController getLottoController() {
+        return lottoController;
     }
 
     public LottoGame getLottoGame() {

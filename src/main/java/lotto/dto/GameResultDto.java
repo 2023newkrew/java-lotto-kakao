@@ -1,8 +1,10 @@
-package lotto.domain;
+package lotto.dto;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import lotto.domain.LottoConstants;
+import lotto.domain.LottoRank;
 
 public class GameResultDto {
 

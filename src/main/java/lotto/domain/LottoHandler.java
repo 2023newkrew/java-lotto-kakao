@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 import lotto.factory.LottoNumbersFactory;
 import lotto.generatepolicy.DefaultGeneratePolicy;
 import lotto.generatepolicy.GeneratePolicy;
+import lotto.rankingpolicy.RankingPolicy;
 
 public class LottoHandler {
 

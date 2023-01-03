@@ -6,19 +6,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.utils.StringUtils;
 
 public class InputView {
     private final Scanner scanner = new Scanner(System.in);
 
     public int readPrice() {
-        try {
-            int price = Integer.parseInt(scanner.nextLine());
+        String line = scanner.nextLine();
+        validateNPE(line);
+        int price = parseInt(line);
+        validatePrice(price);
+        return price;
 
-            validatePrice(price);
-            return price;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
-        }
     }
 
     public List<Integer> readLottoAnswerNumbers() {
@@ -26,9 +25,21 @@ public class InputView {
     }
 
     public Integer readBonusBall() {
+        String line = scanner.nextLine();
+        validateNPE(line);
+        return parseInt(line);
+    }
+
+    private void validateNPE(String line) {
+        if (StringUtils.isNullOrBlank(line)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public int parseInt(String num) {
         try {
-            int bonusBall = scanner.nextInt();
-            return bonusBall;
+            return Integer.parseInt(num);
+
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }

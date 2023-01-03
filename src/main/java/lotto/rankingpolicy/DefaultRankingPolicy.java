@@ -1,7 +1,9 @@
-package lotto.domain;
+package lotto.rankingpolicy;
 
 import java.util.HashMap;
 import java.util.Map;
+import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 
 public class DefaultRankingPolicy implements RankingPolicy {
 

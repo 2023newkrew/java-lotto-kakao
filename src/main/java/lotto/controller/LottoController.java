@@ -17,10 +17,10 @@ public class LottoController {
 
     LottoGame lottoGame;
 
-    public LottoController(AppConfig appConfig){
-        this.inputView = appConfig.getInputView();
-        this.outputView = appConfig.getOutputView();
-        this.lottoGame = appConfig.getLottoGame();
+    public LottoController(InputView inputView, OutputView outputView, LottoGame lottoGame){
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.lottoGame = lottoGame;
     }
 
 

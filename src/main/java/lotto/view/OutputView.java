@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.GameResultDto;
+import lotto.dto.GameResultDto;
 import lotto.domain.LottoHandler;
 
 public class OutputView {

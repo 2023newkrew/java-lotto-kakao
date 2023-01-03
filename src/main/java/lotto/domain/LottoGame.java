@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.List;
 import lotto.generatepolicy.DefaultGeneratePolicy;
 import lotto.generatepolicy.GeneratePolicy;
+import lotto.rankingpolicy.RankingPolicy;
 
 public class LottoGame {
     private RankingPolicy rankingPolicy;
