@@ -1,18 +1,17 @@
 package javalotto.domain;
 
+import javalotto.constants.LottoConstants;
 import javalotto.exception.lotto.LottoInvalidSizeException;
 import javalotto.exception.lotto.LottoNumberDuplicateException;
 import javalotto.exception.lotto.LottoNumberOutOfRangeException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static javalotto.constants.LottoConstants.*;
+
 public class Lotto {
-    public static final int LOTTO_NUMBER_MIN_VALUE = 1;
-    public static final int LOTTO_NUMBER_MAX_VALUE = 45;
-    public static final int LOTTO_NUMBERS_COUNT = 6;
 
     private final List<Integer> numbers;
 

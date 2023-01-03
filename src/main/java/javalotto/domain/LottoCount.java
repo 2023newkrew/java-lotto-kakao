@@ -2,7 +2,7 @@ package javalotto.domain;
 
 import java.util.Objects;
 
-import static javalotto.domain.PurchaseAmount.PURCHASE_AMOUNT_UNIT_PRICE;
+import static javalotto.constants.PurchaseAmountConstants.PURCHASE_AMOUNT_UNIT_PRICE;
 
 public class LottoCount {
     private final int count;

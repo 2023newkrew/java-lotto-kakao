@@ -1,6 +1,6 @@
 package javalotto.exception.purchaseamount;
 
-import static javalotto.domain.PurchaseAmount.PURCHASE_AMOUNT_UNIT_PRICE;
+import static javalotto.constants.PurchaseAmountConstants.PURCHASE_AMOUNT_UNIT_PRICE;
 
 public class AmountNotMultipleOfUnitPriceException extends IllegalArgumentException {
     public AmountNotMultipleOfUnitPriceException(int amount) {

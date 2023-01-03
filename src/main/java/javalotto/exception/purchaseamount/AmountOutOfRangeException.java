@@ -1,7 +1,7 @@
 package javalotto.exception.purchaseamount;
 
-import static javalotto.domain.PurchaseAmount.PURCHASE_AMOUNT_MAX_VALUE;
-import static javalotto.domain.PurchaseAmount.PURCHASE_AMOUNT_MIN_VALUE;
+import static javalotto.constants.PurchaseAmountConstants.PURCHASE_AMOUNT_MAX_VALUE;
+import static javalotto.constants.PurchaseAmountConstants.PURCHASE_AMOUNT_MIN_VALUE;
 
 public class AmountOutOfRangeException extends IllegalArgumentException {
     public AmountOutOfRangeException(int amount) {

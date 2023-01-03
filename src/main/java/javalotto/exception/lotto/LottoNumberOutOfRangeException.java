@@ -2,8 +2,8 @@ package javalotto.exception.lotto;
 
 import java.util.List;
 
-import static javalotto.domain.Lotto.LOTTO_NUMBER_MAX_VALUE;
-import static javalotto.domain.Lotto.LOTTO_NUMBER_MIN_VALUE;
+import static javalotto.constants.LottoConstants.LOTTO_NUMBER_MAX_VALUE;
+import static javalotto.constants.LottoConstants.LOTTO_NUMBER_MIN_VALUE;
 
 public class LottoNumberOutOfRangeException extends IllegalArgumentException {
 

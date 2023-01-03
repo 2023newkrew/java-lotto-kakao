@@ -2,7 +2,7 @@ package javalotto.exception.lotto;
 
 import java.util.List;
 
-import static javalotto.domain.Lotto.LOTTO_NUMBERS_COUNT;
+import static javalotto.constants.LottoConstants.LOTTO_NUMBERS_COUNT;
 
 public class LottoInvalidSizeException extends IllegalArgumentException {
     public LottoInvalidSizeException(List<Integer> numbers) {
