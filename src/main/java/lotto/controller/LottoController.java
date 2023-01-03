@@ -1,21 +1,29 @@
-package lotto.controllers;
+package lotto.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
-import lotto.models.Goal;
-import lotto.models.Lotto;
-import lotto.models.LottoGenerator;
-import lotto.models.LottoResult;
-import lotto.views.*;
+
+import lotto.model.generator.LottoGenerator;
+import lotto.model.number.GoalNumber;
+import lotto.model.number.LottoNumber;
+import lotto.model.generator.AutoLottoGenerator;
+import lotto.model.statistic.LottoStatistic;
+import lotto.view.console.Console;
+import lotto.view.input.InputView;
+import lotto.view.output.OutputView;
 
 public class LottoController {
+
+    private static final Integer LOTTO_PRICE = 1000;
     private final OutputView outputView;
     private final InputView inputView;
-    private final LottoGenerator lottoGenerator = new LottoGenerator();
+    private final LottoGenerator lottoGenerator = new AutoLottoGenerator();
+    private final LottoStatistic statistics = new LottoStatistic();
+
+    private List<LottoNumber> lottoNumberList;
+
+    private Integer numberOfLotto;
+    private GoalNumber goalNumber;
 
     public LottoController(Console console) {
         outputView = new OutputView(console);
@@ -23,52 +31,52 @@ public class LottoController {
     }
 
     public void run() {
+        setLottoNumberListFromUser();
+        outputView.printLottos(lottoNumberList);
+        setLottoGoalNumberFromUser();
+        setStatistics();
+        outputView.printStatistics(statistics, getRate());
+    }
+
+    private double getRate() {
+        Long sumOfPrize = statistics.getSumOfPrize();
+        int sumOfLottoPrice = LOTTO_PRICE * numberOfLotto;
+
+        return (double) sumOfPrize / sumOfLottoPrice;
+    }
+
+    private void setStatistics() {
+        lottoNumberList.stream()
+                .map(lotto -> goalNumber.getLottoResultByCompareLotto(lotto))
+                .forEach(statistics::raiseCount);
+    }
+
+    private void setLottoNumberListFromUser() {
         outputView.askForMoneyToBuyLotto();
-        Integer numberOfLottos = parseNumberOfLottos(inputView.getInteger());
-        outputView.printNumberOfLotto(numberOfLottos);
-        List<Lotto> lottoList = createLottoList(numberOfLottos);
-        outputView.printLottos(lottoList);
+        numberOfLotto = parseNumberOfLottos(inputView.getInteger());
+        outputView.printNumberOfLotto(numberOfLotto);
+        lottoNumberList = createLottoList(numberOfLotto);
+    }
+
+    private void setLottoGoalNumberFromUser() {
         outputView.askForLastGoalNumbers();
         List<Integer> goalNumbers = getGoalNumbers();
         outputView.askForBonusBall();
         Integer bonusBall = inputView.getInteger();
-        Goal goal = new Goal(goalNumbers, bonusBall);
-        // get statistics
-        Map<LottoResult, Integer> statistics = initializeStatisticsMap();
-        lottoList.forEach((lotto) -> {
-            LottoResult currentKey = goal.compareLotto(lotto);
-            statistics.put(currentKey, statistics.get(currentKey) + 1);
-        });
-        // get rate
-        long sumOfPrize = 0;
-        for(LottoResult key: statistics.keySet()) {
-            long numberOfPrize = statistics.get(key);
-            sumOfPrize += key.getPrize() * numberOfPrize;
-        }
-        double rate = (double) sumOfPrize / (1000 * numberOfLottos);
-        
-        outputView.printStatistics(statistics, rate);
+
+        goalNumber = new GoalNumber(goalNumbers, bonusBall);
     }
 
     private Integer parseNumberOfLottos(Integer input) {
-        return input / 1000;
+        return input / LOTTO_PRICE;
     }
 
-    private List<Lotto> createLottoList(int numberOfLotto) {
-        List<Lotto> list = new ArrayList<>();
+    private List<LottoNumber> createLottoList(int numberOfLotto) {
+        List<LottoNumber> list = new ArrayList<>();
         for (int i = 0; i < numberOfLotto; i++) {
             list.add(lottoGenerator.createLotto());
         }
         return list;
-    }
-
-    private Map<LottoResult, Integer> initializeStatisticsMap() {
-        Map<LottoResult, Integer> statistics = new HashMap<>();
-        for (LottoResult lottoResult: LottoResult.values()) {
-            statistics.put(lottoResult, 0);
-        }
-
-        return statistics;
     }
 
     private List<Integer> getGoalNumbers() {
