@@ -1,5 +1,8 @@
 package domain.lotto.result;
 
+import domain.lotto.LottoMetaData;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
