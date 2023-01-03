@@ -1,3 +1,6 @@
+package domain;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +18,8 @@ public class LottoGenerator {
 
     public static List<LottoNumber> run() {
         Collections.shuffle(LOTTO_NUMBERS);
-        return LOTTO_NUMBERS.subList(0, LOTTO_SIZE);
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LOTTO_NUMBERS.subList(0, LOTTO_SIZE));
+        Collections.sort(lottoNumbers);
+        return lottoNumbers;
     }
 }
