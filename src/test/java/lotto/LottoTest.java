@@ -125,7 +125,7 @@ public class LottoTest {
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
-    }    
+    }
 
 
     private Integer[] changeToArray(String userInput){

@@ -12,6 +12,7 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
         lottoNumberCountCheck();
         lottoNumberRangeCheck();
+        lottoNumberDuplicateCheck();
     }
 
     public ArrayList<Integer> getLottoNumbers() {
@@ -33,6 +34,12 @@ public class LottoTicket {
     private void rangeCheck(int number){
         if(number < LOTTO_LOWER_BOUND || number > LOTTO_UPPER_BOUND) {
             throw new IllegalArgumentException("로또 번호가 1 ~ 45 사이의 숫자여야 합니다.");
+        }
+    }
+
+    private void lottoNumberDuplicateCheck() {
+        if (lottoNumbers.stream().distinct().count() != LOTTO_TICKET_SIZE) {
+            throw new IllegalArgumentException("로또 번호에 중복이 존재합니다.");
         }
     }
 }
