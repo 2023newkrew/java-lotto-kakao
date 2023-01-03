@@ -1,11 +1,14 @@
 package lotto.controllers;
 
+import static lotto.common.LottoConfiguration.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.common.LottoConfiguration;
 import lotto.models.Goal;
 import lotto.models.Lotto;
 import lotto.models.LottoGenerator;
@@ -51,7 +54,7 @@ public class LottoController {
     }
 
     private Integer parseNumberOfLottos(Integer input) {
-        return input / 1000;
+        return input / LOTTO_PRICE;
     }
 
     private List<Lotto> createLottoList(int numberOfLotto) {

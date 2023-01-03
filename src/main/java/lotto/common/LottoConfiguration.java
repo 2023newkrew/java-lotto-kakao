@@ -6,5 +6,8 @@ public class LottoConfiguration {
     static public final Integer MAX_VALUE = 45;
 
     static public final Integer LOTTO_COUNT = 6;
+
+    static public final Integer LOTTO_PRICE = 1000;
+
     private LottoConfiguration() {}
 }
