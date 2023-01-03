@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class LottoChecker {
 
-    public static LottoResultType getResult(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+    public static LottoResultType getResult(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
         List<Integer> containedNumbers = lottoTicket.getLottoNumbers().stream()
                 .filter((number) -> winningNumbers.getLottoNumber().contains(number))
                 .collect(Collectors.toList());
@@ -17,7 +17,7 @@ public class LottoChecker {
                 lottoTicket.getLottoNumbers().contains(winningNumbers.getBonusNumber()));
     }
 
-    private static LottoResultType getRank(int size, boolean hasBonusNumber) {
+    private static LottoResultType getRank(final Integer size, final Boolean hasBonusNumber) {
         if (size < 3) return LottoResultType.FAIL;
         if (size == 3) return LottoResultType.FIFTH_PLACE;
         if (size == 4) return LottoResultType.FOURTH_PLACE;

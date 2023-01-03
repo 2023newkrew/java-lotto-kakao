@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class LottoResults {
 
-    private static Map<LottoResultType, Integer> lottoResultCount = new HashMap<>();
+    private static final Map<LottoResultType, Integer> lottoResultCount = new HashMap<>();
 
     public LottoResults() {
         for (LottoResultType lottoResultType : LottoResultType.values()) {
@@ -16,11 +16,11 @@ public class LottoResults {
         }
     }
 
-    public Integer getResultCount(LottoResultType lottoResultType) {
+    public Integer getResultCount(final LottoResultType lottoResultType) {
         return lottoResultCount.getOrDefault(lottoResultType, 0);
     }
 
-    public void countResult(LottoResultType resultType) {
+    public void countResult(final LottoResultType resultType) {
         lottoResultCount.put(resultType, lottoResultCount.getOrDefault(resultType, 0) + 1);
     }
 

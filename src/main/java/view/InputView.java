@@ -20,7 +20,7 @@ public class InputView {
         return purchaseBudget / LottoMetaData.LOTTO_TICKET_PRICE;
     }
 
-    private static void validatePurchaseBudget(Integer purchaseBudget) {
+    private static void validatePurchaseBudget(final Integer purchaseBudget) {
         if (purchaseBudget == null || purchaseBudget == 0)
             throw new IllegalArgumentException("구입 금액을 입력해주세요. (" + LottoMetaData.LOTTO_TICKET_PRICE + "원)");
 

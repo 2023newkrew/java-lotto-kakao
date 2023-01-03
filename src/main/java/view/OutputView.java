@@ -10,14 +10,14 @@ import java.util.List;
 
 public class OutputView {
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
+    public static void printLottoTickets(final LottoTickets lottoTickets) {
         System.out.println(lottoTickets.getLottoTickets().size() + "개를 구매했습니다.");
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
             System.out.println(lottoTicket.toString());
         }
     }
 
-    public static void printLottoResults(LottoResults lottoResults) {
+    public static void printLottoResults(final LottoResults lottoResults) {
         System.out.println("당첨 통계\n" + "---------");
         Arrays.stream(LottoResultType.values())
                 .forEach((resultType) -> {

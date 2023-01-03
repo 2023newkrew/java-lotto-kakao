@@ -15,7 +15,7 @@ public class WinningNumbers {
         return bonusNumber;
     }
 
-    public WinningNumbers(List<Integer> winningNumbers, Integer bonusNumber) {
+    public WinningNumbers(final List<Integer> winningNumbers, final Integer bonusNumber) {
         if (winningNumbers == null || bonusNumber == null)
             throw new NullPointerException();
         validateNumberDuplication(winningNumbers, bonusNumber);
@@ -24,13 +24,13 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateNumberDuplication(List<Integer> lottoNumbers, Integer bonusNumber) {
+    private void validateNumberDuplication(final List<Integer> lottoNumbers, final Integer bonusNumber) {
         HashSet<Integer> hs = new HashSet<>(lottoNumbers);
         if (hs.size() != LottoMetaData.LOTTO_NUMBER_SIZE) throw new IllegalArgumentException();
         if (hs.contains(bonusNumber)) throw new IllegalArgumentException();
     }
 
-    private void validateNumberRange(List<Integer> lottoNumbers) {
+    private void validateNumberRange(final List<Integer> lottoNumbers) {
         lottoNumbers
                 .forEach((number) -> {
                     if (number < LottoMetaData.MIN_LOTTO_NUMBER || number > LottoMetaData.MAX_LOTTO_NUMBER)

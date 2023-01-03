@@ -12,7 +12,7 @@ public enum LottoResultType {
     private final Integer prize;
     private final String message;
 
-    LottoResultType(Integer prize, String message) {
+    LottoResultType(final Integer prize, final String message) {
         this.prize = prize;
         this.message = message;
     }

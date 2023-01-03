@@ -7,11 +7,10 @@ import domain.lotto.ticket.LottoTickets;
 import java.util.List;
 
 public class LottoGame {
-
     private final LottoTickets lottoTickets;
     private final WinningNumbers winningNumbers;
 
-    public LottoGame(LottoTickets lottoTickets, WinningNumbers winningNumbers) {
+    public LottoGame(final LottoTickets lottoTickets, final WinningNumbers winningNumbers) {
         this.lottoTickets = lottoTickets;
         this.winningNumbers = winningNumbers;
     }
