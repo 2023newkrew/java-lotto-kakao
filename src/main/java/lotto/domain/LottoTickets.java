@@ -14,7 +14,7 @@ public class LottoTickets {
         int count = amount / 1000;
         this.tickets = new ArrayList<>(count);
         this.lottoRandom = new LottoRandom();
-        for (int i=0; i<count;i++){  // stream 으로 변경 필요
+        for (int i=0; i<count; i++){  // stream 으로 변경 필요
             tickets.add(new LottoTicket(lottoRandom.createRandomNumbers()));
         }
     }
