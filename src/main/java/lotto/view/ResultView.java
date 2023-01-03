@@ -44,7 +44,7 @@ public class ResultView {
 
         //수익률 출력
         float rate = (float) (
-                result.get(Grade.THREE) * 5000 + result.get(Grade.FOUR) * 50000 + result.get(Grade.FIVE) * 1500000 + result.get(Grade.FIVE_BONUS) * 300000000 + result.get(Grade.SIX)
+                result.get(Grade.THREE) * 5000 + result.get(Grade.FOUR) * 50000 + result.get(Grade.FIVE) * 1500000 + result.get(Grade.FIVE_BONUS) * 30000000 + result.get(Grade.SIX) * 2000000000
         ) / (float) money;
 
         System.out.println();
