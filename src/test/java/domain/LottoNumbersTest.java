@@ -80,7 +80,7 @@ public class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoRank")
-    void 숫자가_3개_미만으로_일치하면_아무일도_일어나지_않는다(LottoNumbers winLottoNumbers, LottoNumber bonusBall, Rank expected) {
+    void 로또_결과에_맞는_랭크를_반환한다(LottoNumbers winLottoNumbers, LottoNumber bonusBall, Rank expected) {
         // given
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
 

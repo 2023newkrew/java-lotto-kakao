@@ -31,11 +31,15 @@ public class LottoNumbers {
         matchedLottoNumbers.retainAll(winLottoNumbers.lottoNumbers);
 
         int matchCount = matchedLottoNumbers.size();
-        if(matchCount == BONUS_BALL_FLAG && lottoNumbers.contains(bonusBall)) {
+
+        if(isSecondPlace(bonusBall, matchCount)) {
             return Optional.of(Rank.SECOND_PLACE);
         }
-
         return Optional.ofNullable(Rank.findRank(matchCount));
+    }
+
+    private boolean isSecondPlace(LottoNumber bonusBall, int matchCount) {
+        return matchCount == BONUS_BALL_FLAG && lottoNumbers.contains(bonusBall);
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {

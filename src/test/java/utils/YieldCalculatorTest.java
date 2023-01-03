@@ -1,6 +1,7 @@
 package utils;
 
 import domain.Rank;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import utils.YieldCalculator;
 
@@ -10,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class YieldCalculatorTest {
     @Test
+    @DisplayName("총상금 / 지불액의 비율을 소수점 둘째자리 까지 반환한다.")
     void calculate() {
         YieldCalculator yieldCalculator = new YieldCalculator();
         Map<Rank, Integer> rankMap = Map.of(
