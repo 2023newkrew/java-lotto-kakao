@@ -20,11 +20,11 @@ public class Lotto {
         }
     }
 
-    public int getAmountOfNumbersInWinningNumbers(LottoNumberList lottoNumberList) {
-        return this.lottoNumberList.getAmountOfNumbersInNumbers(lottoNumberList);
+    public int countCorrectNumbers(LottoNumberList lottoNumberList) {
+        return this.lottoNumberList.countSameNumbers(lottoNumberList);
     }
 
-    public boolean checkBonusNumberInNumbers(LottoNumberList lottoNumberList) {
+    public boolean checkBonusNumberInNumberList(LottoNumberList lottoNumberList) {
         return lottoNumberList.hasNumber(bonusNumber);
     }
 }

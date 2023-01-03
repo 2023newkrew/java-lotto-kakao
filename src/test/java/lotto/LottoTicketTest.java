@@ -19,7 +19,7 @@ public class LottoTicketTest {
     @MethodSource("getCheckStringTypeOfLottoNumbersData")
     public void check_string_type_of_lotto_numbers(List<Integer> numbers, String expected) {
         LottoTicket lottoTicket = new LottoTicket(numbers);
-        Assertions.assertThat(lottoTicket.getString()).isEqualTo(expected);
+        Assertions.assertThat(lottoTicket.getDetail()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> getCheckStringTypeOfLottoNumbersData() {

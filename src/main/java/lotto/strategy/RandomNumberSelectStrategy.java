@@ -12,7 +12,7 @@ public class RandomNumberSelectStrategy implements NumberSelectStrategy {
     private static final int NUMBER_LIMIT = 6;
 
     @Override
-    public List<Integer> select() {
+    public List<Integer> selectNumbers() {
         List<Integer> numbers = Stream.iterate(NUMBER_MIN_BOUND, n -> n + 1)
                 .limit(NUMBER_MAX_BOUND - NUMBER_MIN_BOUND + 1)
                 .collect(Collectors.toList());

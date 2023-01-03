@@ -32,13 +32,13 @@ public class LottoNumberList {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public String getString() {
+    public String getDetail() {
         return "[" + lottoNumbers.stream()
                 .map(LottoNumber::getString)
                 .collect(Collectors.joining(", ")) + "]";
     }
 
-    public int getAmountOfNumbersInNumbers(LottoNumberList lottoNumberList) {
+    public int countSameNumbers(LottoNumberList lottoNumberList) {
         return this.lottoNumbers.stream()
                 .map(lottoNumberList::hasNumber)
                 .mapToInt(it -> it.compareTo(false)).sum();

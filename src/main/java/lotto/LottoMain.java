@@ -19,8 +19,8 @@ public class LottoMain {
     private static void buyLotto(LottoGame lottoGame) {
         int money = InputView.getMoney();
 
-        lottoGame.buy(money);
-        ResultView.printQuantity(lottoGame.getCountOfLottoTickets());
+        lottoGame.buyLottoTickets(money);
+        ResultView.printQuantity(lottoGame.getQuantityOfLottoTickets());
         ResultView.print(lottoGame.getLottoTicketsString());
     }
 
@@ -30,6 +30,6 @@ public class LottoMain {
         Lotto lotto
                 = new Lotto(winningNumbers, bonusNumber);
 
-        ResultView.print(lottoGame.getWinningString(lotto));
+        ResultView.print(lottoGame.getLottoGameResult(lotto));
     }
 }

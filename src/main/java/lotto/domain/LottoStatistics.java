@@ -26,18 +26,18 @@ public class LottoStatistics {
                 .filter(it -> it != LottoResult.MISS)
                 .map(this::getLottoResultString)
                 .collect(Collectors.joining("\n"))
-                + "\n" + getLottoIncomeRateString();
+                + "\n" + getLottoEarningRateString();
     }
 
     private String getLottoResultString(LottoResult lottoResult) {
         return lottoResult.getString() + " - " + lottoStatistics.get(lottoResult) + "개";
     }
 
-    private String getLottoIncomeRateString() {
-        return String.format("총 수익률은 %.2f입니다.", getLottoIncomeRate());
+    private String getLottoEarningRateString() {
+        return String.format("총 수익률은 %.2f입니다.", getLottoEarningRate());
     }
 
-    private float getLottoIncomeRate() {
+    private float getLottoEarningRate() {
         return Arrays.stream(LottoResult.values())
                 .mapToInt(it -> it.getPrize() * lottoStatistics.get(it))
                 .sum() / (float) (LottoTicket.LOTTO_TICKET_PRICE * total);

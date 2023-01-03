@@ -15,7 +15,7 @@ public class LottoTicketsManager {
 
     public String getLottoNumbersString() {
         return lottoTickets.stream()
-                .map(LottoTicket::getString)
+                .map(LottoTicket::getDetail)
                 .collect(Collectors.joining("\n"));
     }
 
@@ -26,7 +26,7 @@ public class LottoTicketsManager {
         return new LottoStatistics(lottoResults);
     }
 
-    public int getCount() {
+    public int getSize() {
         return lottoTickets.size();
     }
 }

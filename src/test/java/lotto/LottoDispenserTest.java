@@ -19,7 +19,7 @@ public class LottoDispenserTest {
     @MethodSource("getIssueLottoTicketByPriceData")
     public void issue_lotto_ticket_by_price(int price, int number) {
         LottoDispenser lottoDispenser = new LottoDispenser(new RandomNumberSelectStrategy());
-        Assertions.assertThat(lottoDispenser.getLottoTicket(price).getCount()).isEqualTo(number);
+        Assertions.assertThat(lottoDispenser.getLottoTicket(price).getSize()).isEqualTo(number);
     }
 
     private static Stream<Arguments> getIssueLottoTicketByPriceData() {
@@ -58,7 +58,7 @@ public class LottoDispenserTest {
         return new NumberSelectStrategy() {
             int index = 0;
             @Override
-            public List<Integer> select() {
+            public List<Integer> selectNumbers() {
                 return randomNumbers.get(index++);
             }
         };

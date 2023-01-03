@@ -11,7 +11,7 @@ public class LottoGame {
         this.lottoDispenser = new LottoDispenser(numberSelectStrategy);
     }
 
-    public void buy(int money) {
+    public void buyLottoTickets(int money) {
         lottoTicketsManager = lottoDispenser.getLottoTicket(money);
     }
 
@@ -19,11 +19,11 @@ public class LottoGame {
         return lottoTicketsManager.getLottoNumbersString();
     }
 
-    public int getCountOfLottoTickets() {
-        return lottoTicketsManager.getCount();
+    public int getQuantityOfLottoTickets() {
+        return lottoTicketsManager.getSize();
     }
 
-    public String getWinningString(Lotto lotto) {
+    public String getLottoGameResult(Lotto lotto) {
         return lottoTicketsManager.getStatistics(lotto).getString();
     }
 }

@@ -17,7 +17,7 @@ public class LottoDispenser {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         int ticketQuantity = calculateTicketQuantity(money);
         for (int i = 0; i < ticketQuantity; i++) {
-            lottoTickets.add(new LottoTicket(numberSelectStrategy.select()));
+            lottoTickets.add(new LottoTicket(numberSelectStrategy.selectNumbers()));
         }
         return new LottoTicketsManager(lottoTickets);
     }
