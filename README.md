@@ -12,11 +12,11 @@
 ---
 
 ## 도메인
-- Number (숫자 클래스)
+- GeneralNumber (숫자 클래스)
   - 검증
     - 최소 최대값 범위 확인
     - 숫자가 맞는지
-- WinningNumbers (당첨 번호 숫자 리스트 일급 컬렉션) extends Numbers
+- WinningLotto (당첨 번호 숫자 리스트 일급 컬렉션) extend Lotto
   - 입력된 친구
   - 검증
     - 사이즈 6개
@@ -24,21 +24,26 @@
 - Lotto (로또 번호 숫자 리스트)
   - [1, ... , 45] 변수로 가지고 있음
   - 생성자에서 Collections.shuffle() -> 앞의 6개 뽑아서 저장
-- Bonus (보너스)
-  - Number 클래스 상속
+  - getResult(WinningLotto, BonusNumber)
+    - 알맞은 Result를 계산하는 로직
+    - contains 합
+    - 보너스볼 일치여부
+    - Result Enum 타입 마다 테스트 구현
+- BonusNumber (보너스)
+  - GeneralNumber 클래스 상속
   - 당첨 번호와 다른 숫자
 - Lottos (List<Lotto>)
   - 생성자(금액) -> List<Lotto> 생성
-- Check (당첨)
-  - checkWin(Lottos lottos) 당첨 확인 기능
-    - contains()
+  - checkWin(WinningLotto, Bonus) 당첨 확인 기능
     - Map<Result, Integer> return
-  - WinningNumbers랑 Bonus를 가지고 있음 생성할 때
+  - WinningLotto, Bonus를 가지고 있음 생성할 때
 - Profit (일치 결과 맵 일급 컬렉션)
   - Map<Result, Integer>
   - 수익률 계산
-- Result (로또 일치 여부 enum)
+- Result (로또 일치 여부 Enum)
   - Result.[THREE, FOUR, FIVE, FIVEBONUS, SIX]
+- Constants (공통 상수 모음)
+  - 로또 범위 최소/최대, 로또 번호 길이, 구분자 등
 
 ---
 
@@ -51,7 +56,7 @@
 - 컨트롤러 (Controller)
   - 구입 금액 입력 요구 (Out)
   - 구입 금액 입력 (In)
-  - 구입 금액 확인 출력 (Out)
+  - 로또 개수 출력 (Out)
   - 구입 금액에 맞는 로또 번호 목록 생성 (Lottos)
   - 로또 번호 목록 출력 (Out)
   - 당첨 번호 입력 요구 (Out)
@@ -102,4 +107,7 @@
 
 1. 일급컬렉션에 static 변수가 있어도 되는가?
 2. Map 변수 이름,,,
-3. 
+3. 메서드 파라미터에 왜 final?
+4. 생성자 바디에서 this()는 왜,,,맨 위로 가야되나요ㅠ
+5. test코드에서 특정 예외가 발생하지 않는다는 것은 어떻게 테스트하나요?
+6. 
