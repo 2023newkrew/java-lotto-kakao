@@ -3,7 +3,7 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.LottoResult;
+import lotto.domain.enumeration.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinningNumbers;
 import org.assertj.core.api.Assertions;

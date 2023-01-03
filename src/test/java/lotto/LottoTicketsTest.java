@@ -1,7 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
-import lotto.domain.LottoResult;
+import lotto.domain.enumeration.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoWinningNumbers;

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.enumeration.LottoResult;
+
 import java.util.List;
 
 public class LottoTicket {

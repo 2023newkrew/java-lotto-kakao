@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.strategy.NumberSelectStrategy;
+
 public class LottoGame {
 
     private final LottoDispenser lottoDispenser;

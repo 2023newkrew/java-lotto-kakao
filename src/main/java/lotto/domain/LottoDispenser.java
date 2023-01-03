@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.strategy.NumberSelectStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 

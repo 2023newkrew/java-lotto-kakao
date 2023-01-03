@@ -3,7 +3,7 @@ package lotto;
 import java.util.List;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoWinningNumbers;
-import lotto.domain.RandomNumberSelectStrategy;
+import lotto.strategy.RandomNumberSelectStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
