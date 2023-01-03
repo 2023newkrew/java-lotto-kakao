@@ -42,6 +42,6 @@ public class LottoStatisticsTest {
             lottoStatistics.put(LottoResult.match(winningNumbers.check(lottoList.get(i))));
         }
 
-        assertEquals(50000, lottoStatistics.getProfit());
+        assertEquals(5000, lottoStatistics.getProfit());
     }
 }

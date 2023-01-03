@@ -3,53 +3,41 @@ package lotto.model.enums;
 import lotto.model.MatchedResult;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
 
 public enum LottoResult {
 
-    // 6
-    SIX_NUMBERS_MATCHED_AND_BONUS_NOT_MATCHED(List.of(6), false, 2_000_000_000),
+    SIX_NUMBERS_MATCHED(6, false, 2_000_000_000),
 
-    FIVE_NUMBERS_MATCHED_AND_BONUS_MATCHED(List.of(5), true, 30_000_000),
+    FIVE_NUMBERS_MATCHED_AND_BONUS_MATCHED(5, true, 30_000_000),
 
-    // 5
-    FIVE_NUMBERS_MATCHED_AND_BONUS_NOT_MATCHED(List.of(5), false, 1_500_000),
+    FIVE_NUMBERS_MATCHED_AND_BONUS_NOT_MATCHED(5, false, 1_500_000),
 
-    FOUR_NUMBERS_MATCHED_AND_BONUS_MATCHED(List.of(4), true, 1_500_000),
+    FOUR_NUMBERS_MATCHED(4, null, 50_000),
 
-    // 4
-    FOUR_NUMBERS_MATCHED_AND_BONUS_NOT_MATCHED(List.of(4), false, 50_000),
+    THREE_NUMBERS_MATCHED(3, null, 5_000),
 
-    THREE_NUMBERS_MATCHED_AND_BONUS_MATCHED(List.of(3), true, 50_000),
-
-    // 3
-    THREE_NUMBERS_MATCHED_AND_BONUS_NOT_MATCHED(List.of(3), false, 5_000),
-
-    TWO_NUMBERS_MATCHED_AND_BONUS_MATCHED(List.of(2), true, 5_000),
-
-    // etc
-    LOSE(List.of(), null, 0),
+    LOSE(null, null, 0),
     ;
 
-    private final List<Integer> matchedMainNumberCount;
+    private final Integer matchedMainNumberCount;
 
-    private final Boolean bonusMatched;
+    private final Boolean containsBonusNumber;
 
     private final Integer prizeMoney;
 
-    LottoResult(List<Integer> matchedMainNumberCount, Boolean bonusMatched, Integer prizeMoney) {
+    LottoResult(Integer matchedMainNumberCount, Boolean containsBonusNumber, Integer prizeMoney) {
         this.matchedMainNumberCount = matchedMainNumberCount;
-        this.bonusMatched = bonusMatched;
+        this.containsBonusNumber = containsBonusNumber;
         this.prizeMoney = prizeMoney;
     }
 
     public static LottoResult match(MatchedResult matchedResult) {
         return Arrays.stream(LottoResult.values())
-                .filter(lottoResult -> lottoResult.matchedMainNumberCount.contains(matchedResult.getMatchedCount())
-                        && Optional.ofNullable(lottoResult.bonusMatched).orElseGet(matchedResult::getBonusNumberMatched) == matchedResult.getBonusNumberMatched())
+                .filter(lottoResult -> Objects.equals(lottoResult.matchedMainNumberCount, matchedResult.getMatchedCount())
+                        && Optional.ofNullable(lottoResult.containsBonusNumber).orElseGet(matchedResult::getBonusNumberMatched) == matchedResult.getBonusNumberMatched())
                 .findFirst()
                 .orElse(LottoResult.LOSE)
                 ;
@@ -57,14 +45,6 @@ public enum LottoResult {
 
     public Integer getPrizeMoney() {
         return prizeMoney;
-    }
-
-    private String[] convertToString() {
-        return matchedMainNumberCount.stream()
-                .map(String::valueOf)
-                .collect(Collectors.toList())
-                .toArray(String[]::new)
-                ;
     }
 
     @Override
@@ -75,8 +55,8 @@ public enum LottoResult {
 
         StringJoiner stringJoiner = new StringJoiner(" ");
         stringJoiner
-                .add(String.format("%s개 일치", String.join(", ", convertToString())))
-                .add(Boolean.TRUE.equals(bonusMatched) ? "보너스 볼 일치" : "")
+                .add(String.format("%d개 일치", matchedMainNumberCount))
+                .add(Boolean.TRUE.equals(containsBonusNumber) ? "보너스 볼 일치" : "")
                 .add(String.format("(%d원)", prizeMoney))
         ;
         return stringJoiner.toString();
