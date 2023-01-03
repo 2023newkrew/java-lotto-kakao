@@ -30,7 +30,6 @@ public enum LottoResult {
     }
 
     public String getString() {
-
         return String.format(stringFormat, numberCount, prize);
     }
 
