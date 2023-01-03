@@ -49,11 +49,10 @@ class WinningNumberTest {
         @MethodSource
         void should_returnPrize_when_givenNumbers(WinningNumber winningNumber, List<Integer> numbers, Prize prize) {
             Lotto lotto = Lotto.from(toLottoNumbers(numbers));
-            LottoBundle lottoBundle = LottoBundle.from(List.of(lotto));
 
-            PrizeMap actual = winningNumber.judge(lottoBundle);
+            Prize actual = winningNumber.judge(lotto);
 
-            Assertions.assertThat(actual.countBy(prize)).isOne();
+            Assertions.assertThat(actual).isEqualTo(prize);
         }
 
         List<Arguments> should_returnPrize_when_givenNumbers() {

@@ -1,6 +1,5 @@
 package lotto.model.vo;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -57,13 +56,6 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    public static List<LottoNumber> generateRandomNumbers(int size) {
-        List<LottoNumber> numberPool = createNumberPool();
-        Collections.shuffle(numberPool);
-
-        return numberPool.subList(0, size);
     }
 
     @Override

@@ -3,6 +3,7 @@ package lotto.model;
 import lotto.model.generator.LottoGenerator;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoBundle;
+import lotto.model.lotto.PurchaseResult;
 import lotto.model.vo.Money;
 
 import java.util.List;

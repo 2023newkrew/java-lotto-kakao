@@ -1,6 +1,5 @@
 package lotto.model.prize;
 
-import lotto.model.vo.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -13,6 +12,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static lotto.TestUtil.repeatPrizes;
 
 class PrizeMapTest {
 
@@ -52,34 +53,26 @@ class PrizeMapTest {
 
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
-    class getProfitRate {
+    class getTotalProfit {
 
-        @DisplayName("총 수익률 계산")
+        @DisplayName("총 상금의 합산 반환")
         @ParameterizedTest
         @MethodSource
-        void should_returnProfitRate_when_givenPrizes(Prize prize, BigDecimal expected) {
-            Money money = Money.valueOf(1000L);
+        void should_returnTotalProfit_when_givenPrizes(List<Prize> prizes, BigDecimal expected) {
+            PrizeMap prizeMap = PrizeMap.from(prizes);
 
-            PrizeMap prizeMap = PrizeMap.from(List.of(prize));
-
-            Assertions.assertThat(prizeMap.getProfitRate(money, money)).isEqualByComparingTo(expected);
+            Assertions.assertThat(prizeMap.getTotalProfit()).isEqualTo(expected);
         }
 
-        List<Arguments> should_returnProfitRate_when_givenPrizes() {
+        List<Arguments> should_returnTotalProfit_when_givenPrizes() {
             return List.of(
-                    Arguments.of(Prize.FIRST, BigDecimal.valueOf(2_000_000L)),
-                    Arguments.of(Prize.SECOND, BigDecimal.valueOf(30_000L)),
-                    Arguments.of(Prize.THIRD, BigDecimal.valueOf(150L)),
-                    Arguments.of(Prize.FOURTH, BigDecimal.valueOf(50L)),
-                    Arguments.of(Prize.FIFTH, BigDecimal.valueOf(5L)),
-                    Arguments.of(Prize.NOTHING, BigDecimal.valueOf(0L))
+                    Arguments.of(repeatPrizes(Prize.FIRST, 1), BigDecimal.valueOf(2_000_000_000L)),
+                    Arguments.of(repeatPrizes(Prize.SECOND, 2), BigDecimal.valueOf(60_000_000L)),
+                    Arguments.of(repeatPrizes(Prize.THIRD, 3), BigDecimal.valueOf(450_000L)),
+                    Arguments.of(repeatPrizes(Prize.FOURTH, 4), BigDecimal.valueOf(200_000L)),
+                    Arguments.of(repeatPrizes(Prize.FIFTH, 5), BigDecimal.valueOf(25_000L)),
+                    Arguments.of(repeatPrizes(Prize.NOTHING, 6), BigDecimal.valueOf(0L))
             );
-        }
-
-        List<Prize> createPrizes(Prize prize, int count) {
-            return IntStream.range(0, count)
-                    .mapToObj(ignore -> prize)
-                    .collect(Collectors.toList());
         }
     }
 }

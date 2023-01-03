@@ -1,6 +1,5 @@
-package lotto.model;
+package lotto.model.lotto;
 
-import lotto.model.lotto.LottoBundle;
 import lotto.model.vo.Money;
 
 public class PurchaseResult {

@@ -1,12 +1,10 @@
 package lotto.model.generator;
 
-import lotto.model.vo.LottoNumber;
 import lotto.model.lotto.Lotto;
+import lotto.model.vo.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 public class RandomLottoGenerator implements LottoGenerator {
 
@@ -23,6 +21,7 @@ public class RandomLottoGenerator implements LottoGenerator {
     public Lotto generate() {
         List<LottoNumber> numberPool = LottoNumber.createNumberPool();
         Collections.shuffle(numberPool);
+
         return Lotto.from(numberPool.subList(0, Lotto.SIZE));
     }
 }
