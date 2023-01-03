@@ -16,7 +16,7 @@ public class InputView {
     public List<Integer> getAnswerLottoInput() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String answerNumbers = sc.nextLine();
-        return Arrays.stream(answerNumbers.split("[,\\s]"))
+        return Arrays.stream(answerNumbers.split("[\\s,]+"))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
 
