@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.*;
@@ -33,4 +35,11 @@ public class LottoTest {
                 .hasMessage(INVALID_DUPLICATED_LOTTO_NUMBER);
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 10, 100, 300, 333})
+    void 입력된_수의_로또를_자동_생성해_반환한다(int number) {
+        List<Lotto> lottos = Lotto.autoGenerateLottos(number);
+
+        assertThat(lottos).hasSize(number);
+    }
 }

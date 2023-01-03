@@ -3,13 +3,15 @@ package lotto.domain;
 import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
 import static lotto.constant.MessageConstant.INVALID_LOTTO_SIZE;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
+    private static final List<Integer> fullNumbers = IntStream.range(1, 46)
+            .boxed()
+            .collect(Collectors.toList());
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
@@ -17,6 +19,17 @@ public class Lotto {
         this.lottoNumbers = numbers.stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
+    }
+
+    public static Lotto autoGenerateLotto() {
+        Collections.shuffle(fullNumbers);
+        return new Lotto(fullNumbers.subList(0, 6));
+    }
+
+    public static List<Lotto> autoGenerateLottos(int amount) {
+        List<Lotto> lottos = new ArrayList<>();
+        IntStream.range(0, amount).forEach((i) -> lottos.add(autoGenerateLotto()));
+        return lottos;
     }
 
     private void validateLotto(List<Integer> numbers) {
