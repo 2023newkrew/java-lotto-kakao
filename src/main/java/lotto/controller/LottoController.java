@@ -23,6 +23,10 @@ public class LottoController {
         List<Integer> mainNumbers = inputView.inputMainNumbers();
         Integer bonusNumber = inputView.inputBonusBall();
 
+        getResult(mainNumbers, bonusNumber, lottoList, price);
+    }
+
+    public void getResult(List<Integer> mainNumbers, Integer bonusNumber, LottoList lottoList, Integer price) {
         WinningNumbers winningNumbers = new WinningNumbers(mainNumbers, bonusNumber);
         LottoStatistics lottoStatistics = new LottoStatistics();
 
