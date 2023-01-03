@@ -31,6 +31,11 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
     }
 
     @Override
+    public int hashCode() {
+        return Integer.hashCode(number);
+    }
+
+    @Override
     public int compareTo(LotteryNumber o) {
         return Integer.compare(this.number, o.number);
     }

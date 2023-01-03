@@ -9,7 +9,11 @@ public class Lottery {
         this.lotteryNumbers = new LotteryNumbers(numbers);
     }
 
-    public List<LotteryNumber> getLotteryNumber() {
-        return lotteryNumbers.getNumbers();
+    public LotteryNumbers getLotteryNumber() {
+        return lotteryNumbers;
+    }
+
+    public boolean contains(LotteryNumber lotteryNumber) {
+        return lotteryNumbers.contains(lotteryNumber);
     }
 }

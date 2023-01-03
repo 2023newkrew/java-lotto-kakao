@@ -29,17 +29,14 @@ public class LotteryResult {
     }
 
     public Rank getRank(Lottery lottery) {
-        int count = 0;
-        List<LotteryNumber> lotteryNumbers = lottery.getLotteryNumber();
+        return Rank.getRank(new LotteryMatch(getCount(lottery), isBonusMatch(lottery)));
+    }
 
-        for (final LotteryNumber number : winningNumbers.getNumbers()) {
-            count += lotteryNumbers.contains(number) ? 1 : 0;
-        }
-
-        return Rank.getRank(new LotteryMatch(count, isBonusMatch(lottery)));
+    private int getCount(Lottery lottery) {
+        return (int) winningNumbers.stream().filter(lottery::contains).count();
     }
 
     private boolean isBonusMatch(Lottery lottery) {
-        return lottery.getLotteryNumber().contains(bonusNumber);
+        return lottery.contains(bonusNumber);
     }
 }
