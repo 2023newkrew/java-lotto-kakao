@@ -13,4 +13,6 @@ public class LottoTicket {
     public ArrayList<Integer> getLottoNumbers() {
         return this.lottoNumbers;
     }
+
+
 }

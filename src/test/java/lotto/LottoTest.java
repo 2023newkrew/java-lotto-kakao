@@ -13,10 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
@@ -97,5 +95,20 @@ public class LottoTest {
 
         LottoTicket userTicket2 = new LottoTicket(new ArrayList<>(List.of(1, 3, 4, 5, 6, 23)));
         Assertions.assertThat(lottoCalculator.calcBonusNumber(userTicket2)).isFalse();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1, 2, 3,   4, 5, 6, 7", " 1,   2, 3"})
+    @DisplayName("당첨 번호가 6개가 아닌 경우 예외를 발생한다.")
+    void lottoWinNumberCountTest(String userInput){
+        Integer[] splitNumbers = Stream.of(userInput
+                        .replace(" ", "")
+                        .split(","))
+                        .mapToInt(Integer::parseInt)
+                        .boxed()
+                        .toArray(Integer[]::new);
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
     }
 }
