@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class LottoService {
     private static final Integer LOTTO_PRICE = 1000;
 
-    public void purchaseLotto(Integer purchaseAmount){
+    public void purchaseLotto(Integer purchaseAmount) {
         for (int count = 0; count < purchaseAmount / LOTTO_PRICE; count++) {
             LottoRepository.saveLottoTicket(new LottoTicket());
         }
@@ -38,7 +38,7 @@ public class LottoService {
 
     public Double getRateOfReturn(Integer inputPurchaseAmount, Map<LottoRank, Integer> lottoResult) {
         int totalRevenue = 0;
-        for(LottoRank lottoRank : lottoResult.keySet()){
+        for (LottoRank lottoRank : lottoResult.keySet()) {
             totalRevenue += lottoRank.getReward() * lottoResult.get(lottoRank);
         }
         return (double) totalRevenue / inputPurchaseAmount;

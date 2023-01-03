@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class LottoWinningNumberTest {
-    private final List<LottoNumber> input = createLottoNumberList(List.of(1,2,3,4,5,6));
+    private final List<LottoNumber> input = createLottoNumberList(List.of(1, 2, 3, 4, 5, 6));
 
     @Test
     @DisplayName("보너스 번호가 winningNumber에 포함되어 있지 않은 경우")
@@ -47,43 +47,50 @@ public class LottoWinningNumberTest {
     @ParameterizedTest
     @MethodSource("checkRankTestGenerator")
     @DisplayName("로또 티켓의 등수 구하기")
-    public void checkRankTest(LottoWinningNumber lottoWinningNumber, LottoRank expected){
+    public void checkRankTest(LottoWinningNumber lottoWinningNumber, LottoRank expected) {
         //given
         LottoTicket lottoTicket = new LottoTicket(input);
 
         //when & then
         assertThat(lottoWinningNumber.checkLottoRank(lottoTicket)).isEqualTo(expected);
     }
-    private static Stream<Arguments> checkRankTestGenerator(){
+
+    private static Stream<Arguments> checkRankTestGenerator() {
         return Stream.of(
                 Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,5,6))), new LottoNumber(7)),
+                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))),
+                                new LottoNumber(7)),
                         LottoRank.RANK1
                 ),
                 Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,5,8))), new LottoNumber(6)),
+                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 8))),
+                                new LottoNumber(6)),
                         LottoRank.RANK2)
                 ,
                 Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,5,8))), new LottoNumber(7)),
+                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 8))),
+                                new LottoNumber(7)),
                         LottoRank.RANK3
                 ),
                 Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,8,9))), new LottoNumber(7)),
+                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 8, 9))),
+                                new LottoNumber(7)),
                         LottoRank.RANK4
                 ),
                 Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,8,9,10))), new LottoNumber(7)),
+                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 8, 9, 10))),
+                                new LottoNumber(7)),
                         LottoRank.RANK5
                 ),
                 Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,8,9,10,11))), new LottoNumber(7)),
+                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 8, 9, 10, 11))),
+                                new LottoNumber(7)),
                         LottoRank.RANK6
                 )
         );
     }
 
-    private static List<LottoNumber> createLottoNumberList(List<Integer> integerList){
+    private static List<LottoNumber> createLottoNumberList(List<Integer> integerList) {
         return integerList.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());

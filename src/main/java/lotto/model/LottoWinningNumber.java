@@ -14,12 +14,12 @@ public class LottoWinningNumber {
     }
 
     private void validateBonusBall(LottoNumber bonusBall) {
-        if(winningNumber.contains(bonusBall)) {
+        if (winningNumber.contains(bonusBall)) {
             throw new LottoException(ErrorCode.INVALID_BONUS_BALL);
         }
     }
 
-    public LottoRank checkLottoRank(LottoTicket lottoTicket){
+    public LottoRank checkLottoRank(LottoTicket lottoTicket) {
         Integer sameCount = winningNumber.countOverlappingNumber(lottoTicket);
         boolean isBonus = lottoTicket.contains(bonusBall);
 

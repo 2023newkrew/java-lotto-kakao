@@ -21,6 +21,7 @@ public class LottoRankTest {
         //when & then
         assertThat(LottoRank.fromCountAndBonus(count, bonusBall)).isEqualTo(expected);
     }
+
     private static Stream<Arguments> fromCountAndBonusTestGenerator() {
         return Stream.of(
                 Arguments.of(6, false, RANK1),

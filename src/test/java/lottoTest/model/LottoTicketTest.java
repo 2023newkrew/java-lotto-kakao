@@ -37,7 +37,7 @@ public class LottoTicketTest {
     @ParameterizedTest
     @MethodSource("validateInvalidLottoNumberTestGenerator")
     @DisplayName("길이가 잘못된 로또 번호의 리스트가 주어지면 예외반환")
-    public void validateWrongLottoTicketLengthTest(List<LottoNumber> input, ErrorCode expected){
+    public void validateWrongLottoTicketLengthTest(List<LottoNumber> input, ErrorCode expected) {
         //given
 
         //when & then
@@ -46,7 +46,8 @@ public class LottoTicketTest {
                 .hasMessage(expected.getMessage());
 
     }
-    private static Stream<Arguments> validateInvalidLottoNumberTestGenerator(){
+
+    private static Stream<Arguments> validateInvalidLottoNumberTestGenerator() {
         return Stream.of(
                 Arguments.of(List.of(
                         new LottoNumber(1), new LottoNumber(2),
@@ -83,7 +84,8 @@ public class LottoTicketTest {
         // when & then
         assertThat(lottoTicket.countOverlappingNumber(other)).isEqualTo(count);
     }
-    private static Stream<Arguments> countOverlappingNumberTestGenerator(){
+
+    private static Stream<Arguments> countOverlappingNumberTestGenerator() {
         return Stream.of(
                 Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))), 6),
                 Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 7))), 5),
@@ -95,7 +97,7 @@ public class LottoTicketTest {
         );
     }
 
-    private static List<LottoNumber> createLottoNumberList(List<Integer> integerList){
+    private static List<LottoNumber> createLottoNumberList(List<Integer> integerList) {
         return integerList.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());

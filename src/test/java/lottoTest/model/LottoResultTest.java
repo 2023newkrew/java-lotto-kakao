@@ -13,7 +13,7 @@ public class LottoResultTest {
     @ParameterizedTest
     @EnumSource(LottoRank.class)
     @DisplayName("LottoResult에 등수 추가 테스트")
-    void addLottoRankTest(LottoRank lottoRank){
+    void addLottoRankTest(LottoRank lottoRank) {
         //given
         LottoResult lottoResult = new LottoResult();
 

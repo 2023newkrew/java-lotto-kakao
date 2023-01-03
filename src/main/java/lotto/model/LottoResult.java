@@ -27,17 +27,21 @@ public class LottoResult {
     }
 
     public void addLottoRankCount(LottoRank lottoRank) {
-        rankCountMap.put(lottoRank, rankCountMap.get(lottoRank)+1);
+        rankCountMap.put(lottoRank, rankCountMap.get(lottoRank) + 1);
     }
 
-    public Map<LottoRank, Integer> getRankCountMap(){
+    public Map<LottoRank, Integer> getRankCountMap() {
         return rankCountMap;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoResult that = (LottoResult) o;
 
         return Objects.equals(rankCountMap, that.rankCountMap);

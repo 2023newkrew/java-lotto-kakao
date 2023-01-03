@@ -13,7 +13,7 @@ public class LottoController {
     private final LottoOutputTemplate lottoOutputTemplate;
     private final LottoService lottoService;
 
-    public LottoController(){
+    public LottoController() {
         lottoInputTemplate = new LottoInputTemplate();
         lottoOutputTemplate = new LottoOutputTemplate();
         lottoService = new LottoService();

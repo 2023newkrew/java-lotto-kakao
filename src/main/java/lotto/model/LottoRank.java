@@ -14,16 +14,16 @@ public enum LottoRank {
     private final boolean bonusBall;
     private final Integer reward;
 
-    LottoRank(Integer matchedCount, boolean bonusBall, Integer reward){
+    LottoRank(Integer matchedCount, boolean bonusBall, Integer reward) {
         this.matchedCount = matchedCount;
         this.bonusBall = bonusBall;
         this.reward = reward;
     }
 
-    public static LottoRank fromCountAndBonus(Integer count, boolean bonus){
+    public static LottoRank fromCountAndBonus(Integer count, boolean bonus) {
         return Arrays.stream(values())
                 .filter(value -> {
-                    if(value.matchedCount != 5){
+                    if (value.matchedCount != 5) {
                         return value.matchedCount.equals(count);
                     }
                     return value.bonusBall == bonus && value.matchedCount.equals(count);
@@ -36,7 +36,7 @@ public enum LottoRank {
         return matchedCount;
     }
 
-    public Integer getReward(){
+    public Integer getReward() {
         return reward;
     }
 

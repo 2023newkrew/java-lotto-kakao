@@ -5,7 +5,7 @@ import lotto.exception.LottoException;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final Integer LOTTO_NUMBER_LOWER_BOUNDARY = 1;
     private static final Integer LOTTO_NUMBER_UPPER_BOUNDARY = 45;
 
@@ -17,7 +17,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
     }
 
     private void validateLottoNumber(Integer lottoNumber) {
-        if(lottoNumber < LOTTO_NUMBER_LOWER_BOUNDARY || lottoNumber > LOTTO_NUMBER_UPPER_BOUNDARY){
+        if (lottoNumber < LOTTO_NUMBER_LOWER_BOUNDARY || lottoNumber > LOTTO_NUMBER_UPPER_BOUNDARY) {
             throw new LottoException(ErrorCode.INVALID_LOTTO_NUMBER_RANGE);
         }
     }
@@ -28,8 +28,12 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoNumber that = (LottoNumber) o;
         return Objects.equals(lottoNumber, that.lottoNumber);
     }

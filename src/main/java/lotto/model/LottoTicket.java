@@ -16,14 +16,14 @@ public class LottoTicket {
 
     private final List<LottoNumber> lotto;
 
-    public LottoTicket(){
+    public LottoTicket() {
         lotto = createRandomLottoTicket();
         Collections.sort(lotto);
     }
 
-    private List<LottoNumber> createRandomLottoTicket(){
+    private List<LottoNumber> createRandomLottoTicket() {
         List<LottoNumber> list = new ArrayList<>();
-        for(int number = LOTTO_NUMBER_LOWER_BOUNDARY; number <= LOTTO_NUMBER_UPPER_BOUNDARY; number++){
+        for (int number = LOTTO_NUMBER_LOWER_BOUNDARY; number <= LOTTO_NUMBER_UPPER_BOUNDARY; number++) {
             list.add(new LottoNumber(number));
         }
 
@@ -31,13 +31,13 @@ public class LottoTicket {
         return list.subList(0, LOTTO_TICKET_LENGTH);
     }
 
-    public LottoTicket(List<LottoNumber> input){
+    public LottoTicket(List<LottoNumber> input) {
         validateLottoTicketLength(input);
         lotto = input;
     }
 
-    private void validateLottoTicketLength(List<LottoNumber> input){
-        if(input == null || input.size() != LOTTO_TICKET_LENGTH){
+    private void validateLottoTicketLength(List<LottoNumber> input) {
+        if (input == null || input.size() != LOTTO_TICKET_LENGTH) {
             throw new LottoException(ErrorCode.INVALID_LOTTO_NUMBER_LENGTH);
         }
     }
@@ -49,8 +49,8 @@ public class LottoTicket {
     public Integer countOverlappingNumber(LottoTicket lottoTicket) {
         return Math.toIntExact(
                 lotto.stream()
-                .filter(lottoTicket::contains)
-                .count()
+                        .filter(lottoTicket::contains)
+                        .count()
         );
     }
 
@@ -58,8 +58,8 @@ public class LottoTicket {
     public String toString() {
         return "[" +
                 lotto.stream()
-                .map(LottoNumber::getLottoNumberString)
-                .collect(Collectors.joining(", ")) +
+                        .map(LottoNumber::getLottoNumberString)
+                        .collect(Collectors.joining(", ")) +
                 "]";
     }
 }

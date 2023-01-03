@@ -19,31 +19,35 @@ public class LottoTicketsTest {
     public void getLottoResultTest(LottoWinningNumber lottoWinningNumber, LottoResult expected) {
         //given
         LottoTickets lottoTickets = new LottoTickets();
-        lottoTickets.addLottoTicket(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,5,6))));
-        lottoTickets.addLottoTicket(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,5,7))));
-        lottoTickets.addLottoTicket(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,7,8))));
+        lottoTickets.addLottoTicket(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))));
+        lottoTickets.addLottoTicket(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 7))));
+        lottoTickets.addLottoTicket(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 7, 8))));
 
         //when & then
         assertThat(lottoTickets.getLottoResult(lottoWinningNumber)).isEqualTo(expected);
     }
-    private static Stream<Arguments> getLottoResultTestGenerator(){
+
+    private static Stream<Arguments> getLottoResultTestGenerator() {
         return Stream.of(
                 Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,5,6))), new LottoNumber(7)),
-                        new LottoResult(List.of(1,1,0,1,0,0))
+                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))),
+                                new LottoNumber(7)),
+                        new LottoResult(List.of(1, 1, 0, 1, 0, 0))
                 ),
                 Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,5,8))), new LottoNumber(6)),
-                        new LottoResult(List.of(0,1,2,0,0,0))
+                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 8))),
+                                new LottoNumber(6)),
+                        new LottoResult(List.of(0, 1, 2, 0, 0, 0))
                 ),
                 Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,8,9,10,11))), new LottoNumber(7)),
-                        new LottoResult(List.of(0,0,0,0,1,2))
+                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 8, 9, 10, 11))),
+                                new LottoNumber(7)),
+                        new LottoResult(List.of(0, 0, 0, 0, 1, 2))
                 )
         );
     }
 
-    private static List<LottoNumber> createLottoNumberList(List<Integer> integerList){
+    private static List<LottoNumber> createLottoNumberList(List<Integer> integerList) {
         return integerList.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
