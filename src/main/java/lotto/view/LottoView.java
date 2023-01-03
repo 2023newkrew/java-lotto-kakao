@@ -1,9 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoRank;
-import lotto.domain.Lottos;
+import lotto.domain.*;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -18,7 +15,7 @@ public class LottoView {
 
     public int inputPurchase() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public void printAmount(int amount) {
