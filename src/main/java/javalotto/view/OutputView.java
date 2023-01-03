@@ -32,7 +32,7 @@ public class OutputView {
 
     private void printRateOfReturn(LottoResult lottoResult, PurchaseAmount purchaseAmount) {
         double rateOfReturn = lottoResult.getRateOfReturn(purchaseAmount);
-        System.out.println(String.format("총 수익률은 %2f입니다." + rateOfReturnDescription(rateOfReturn)));
+        System.out.println(String.format("총 수익률은 %.2f입니다.%s", rateOfReturn, rateOfReturnDescription(rateOfReturn)));
     }
 
     private String rateOfReturnDescription(double rateOfReturn) {

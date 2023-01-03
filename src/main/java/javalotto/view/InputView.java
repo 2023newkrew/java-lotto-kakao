@@ -23,7 +23,7 @@ public class InputView {
     public PurchaseAmount getPurchaseAmountInput() {
         System.out.println("구입금액을 입력해 주세요.");
 
-        return PurchaseAmount.from(scanner.nextInt());
+        return PurchaseAmount.from(Integer.parseInt(scanner.nextLine()));
     }
 
     public WinningLotto getWinningLottoInput() {
@@ -37,7 +37,8 @@ public class InputView {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String inputNumbers = scanner.nextLine();
 
-        return Arrays.stream(inputNumbers.split(", "))
+        return Arrays.stream(inputNumbers.split(","))
+                .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
