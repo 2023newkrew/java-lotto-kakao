@@ -10,7 +10,6 @@ public enum LottoStatus {
 
     private final Integer correctWinningNumberCount;
     private final Boolean isCorrectBonusNumber;
-
     private final Long reward;
 
     LottoStatus(Integer correctWinningNumberCount, Boolean isCorrectBonusNumber, Long reward) {
@@ -23,11 +22,11 @@ public enum LottoStatus {
         return reward;
     }
 
-    public static LottoStatus getStatus(Integer correctWinningNumberCount, boolean isCorrectBonusNumber) {
+    public static LottoStatus getStatus(Integer correctWinningNumberCount, Boolean isCorrectBonusNumber) {
        return Arrays.stream(LottoStatus.values())
                .filter(lottoStatus -> {
-                   return lottoStatus.correctWinningNumberCount == correctWinningNumberCount
-                            && lottoStatus.isCorrectBonusNumber == isCorrectBonusNumber;
+                   return lottoStatus.correctWinningNumberCount.equals(correctWinningNumberCount)
+                            && lottoStatus.isCorrectBonusNumber.equals(isCorrectBonusNumber);
                })
                .findFirst().orElseGet(()->LOSE);
     }

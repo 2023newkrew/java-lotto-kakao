@@ -3,7 +3,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoStore implements LottoObtainPlace{
-
     private static final Integer COST = 1000;
 
     @Override

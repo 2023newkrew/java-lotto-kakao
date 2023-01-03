@@ -1,10 +1,10 @@
 import java.util.Objects;
 
 public class LottoNumber {
-    private Integer number;
-
     private static final Integer LOTTO_NUMBER_START = 1;
     private static final Integer LOTTO_NUMBER_END = 45;
+
+    private Integer number;
 
     public LottoNumber(Integer number) {
         validateLottoNumber(number);
