@@ -3,6 +3,9 @@ package domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,7 +32,8 @@ public class WinningLottoTest {
         lottoTicketGenerator = new StubLottoTicketGenerator(6, 5, 4, 3, 2, 1);
         LottoTicket lottoTicket = lottoTicketGenerator.generate();
 
-        assertThat(winningLotto.match(lottoTicket)).isEqualTo(6);
+        assertThat(winningLotto.match(lottoTicket))
+                .isEqualTo(new LottoMatchResult(6, false));
     }
 
     @DisplayName("5개의 로또 번호가 동일하고, 나머지 로또 번호가 보너스 번호와 같다면 일치하는 번호의 수는 6개이다.")
@@ -43,7 +47,8 @@ public class WinningLottoTest {
         lottoTicketGenerator = new StubLottoTicketGenerator(1, 2, 3, 4, 5, 44);
         LottoTicket lottoTicket = lottoTicketGenerator.generate();
 
-        assertThat(winningLotto.match(lottoTicket)).isEqualTo(6);
+        assertThat(winningLotto.match(lottoTicket))
+                .isEqualTo(new LottoMatchResult(6, true));
     }
 
     @DisplayName("5개의 로또 번호가 동일하고, 나머지 로또 번호가 보너스 번호와 다르다면, 일치하는 번호의 수는 5개이다.")
@@ -57,6 +62,7 @@ public class WinningLottoTest {
         lottoTicketGenerator = new StubLottoTicketGenerator(1, 2, 3, 4, 5, 42);
         LottoTicket lottoTicket = lottoTicketGenerator.generate();
 
-        assertThat(winningLotto.match(lottoTicket)).isEqualTo(5);
+        assertThat(winningLotto.match(lottoTicket))
+                .isEqualTo(new LottoMatchResult(5, false));
     }
 }

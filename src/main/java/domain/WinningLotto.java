@@ -17,12 +17,14 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public int match(LottoTicket lottoTicket) {
+    public LottoMatchResult match(LottoTicket lottoTicket) {
         List<LottoNumber> unMatchLottoNumbers = lottoTicket.findUnMatchLottoNumbers(this.winningLottoTicket);
         List<LottoNumber> remainLottoNumbers = unMatchLottoNumbers.stream()
                 .filter(lottoNumber -> (!lottoNumber.equals(bonusNumber)))
                 .collect(Collectors.toList());
 
-        return this.winningLottoTicket.size() - remainLottoNumbers.size();
+        int matchCount = this.winningLottoTicket.size() - remainLottoNumbers.size();
+        boolean isBonusNumberMatched = (unMatchLottoNumbers.size() - remainLottoNumbers.size() != 0);
+        return new LottoMatchResult(matchCount, isBonusNumberMatched);
     }
 }
