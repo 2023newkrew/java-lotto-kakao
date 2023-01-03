@@ -1,10 +1,11 @@
 package lotto.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class DefaultRankingPolicy implements RankingPolicy {
 
-    private Map<LottoResult, LottoRank> lottoResultLottoRankMap;
+    private Map<LottoResult, LottoRank> lottoResultLottoRankMap = new HashMap<>();
 
     public DefaultRankingPolicy() {
         lottoResultLottoRankMap.put(new LottoResult(6, false), LottoRank.FIRST);

@@ -4,6 +4,8 @@ import static lotto.domain.LottoConstants.LOTTO_MIN_COUNT;
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;
 import static lotto.exception.ExceptionMessages.INVALID_LOTTO_RESULT_INPUT_EXCEPTION;
 
+import java.util.Objects;
+
 public class LottoResult {
     private final int matchCount;
     private final boolean hasBonus;
@@ -33,5 +35,22 @@ public class LottoResult {
 
     public boolean isHasBonus() {
         return hasBonus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoResult that = (LottoResult) o;
+        return matchCount == that.matchCount && hasBonus == that.hasBonus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matchCount, hasBonus);
     }
 }

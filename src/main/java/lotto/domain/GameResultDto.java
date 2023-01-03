@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,17 +11,15 @@ public class GameResultDto {
 
     public GameResultDto(List<Integer> rankCount, int lottoCount) {
         StringBuilder stringBuilder = new StringBuilder();
-
         for (LottoRank rank : LottoRank.values()) {
-            stringBuilder.append(LottoConstants.getString(rank, rankCount.get(rank.index())));
+            stringBuilder.insert(0, LottoConstants.getString(rank, rankCount.get(rank.index())));
         }
         result = stringBuilder.toString();
         yield = calculateYield(rankCount, lottoCount);
     }
 
     public double calculateYield(List<Integer> rankCount, int lottoCount) {
-        return (double) (calculateTotalWinning(rankCount) / (lottoCount * LottoConstants.LOTTO_PRICE));
-
+        return (double) calculateTotalWinning(rankCount) / (lottoCount * LottoConstants.LOTTO_PRICE);
     }
 
     private long calculateTotalWinning(List<Integer> rankCount) {

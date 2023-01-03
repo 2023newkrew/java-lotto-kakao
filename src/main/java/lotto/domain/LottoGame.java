@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import lotto.generatepolicy.DefaultGeneratePolicy;
 import lotto.generatepolicy.GeneratePolicy;
 
 public class LottoGame {
@@ -13,12 +14,17 @@ public class LottoGame {
     private List<Integer> rankCounts;
 
     public LottoGame(RankingPolicy rankingPolicy) {
+        this(rankingPolicy, new DefaultGeneratePolicy());
+    }
+
+    public LottoGame(RankingPolicy rankingPolicy, GeneratePolicy generatePolicy) {
         this.rankingPolicy = rankingPolicy;
+        this.generatePolicy = generatePolicy;
     }
 
     public void createLotto(int lottoCount) {
         this.lottoCount = lottoCount;
-        lottoHandler = new LottoHandler(lottoCount, rankingPolicy);
+        lottoHandler = new LottoHandler(lottoCount, rankingPolicy, generatePolicy);
     }
 
     public void setLottoAnswer(LottoAnswer lottoAnswer) {
@@ -33,5 +39,7 @@ public class LottoGame {
         return new GameResult(rankCounts, lottoCount);
     }
 
-
+    public LottoHandler getLottoHandler() {
+        return lottoHandler;
+    }
 }

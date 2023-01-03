@@ -39,4 +39,10 @@ public class LottoHandler {
         }
         return rankCounts;
     }
+
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        lottos.forEach(lotto -> stringBuilder.append(lotto.toString()).append('\n'));
+        return stringBuilder.toString();
+    }
 }

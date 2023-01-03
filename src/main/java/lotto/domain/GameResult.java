@@ -8,7 +8,7 @@ public class GameResult {
 
 
     public GameResult(List<Integer> rankCounts, int lottoCount) {
-        GameResultDto result = new GameResultDto(rankCounts, lottoCount);
+        result = new GameResultDto(rankCounts, lottoCount);
     }
 
 
