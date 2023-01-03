@@ -37,8 +37,7 @@ public class LottoView {
 
     static private List<Integer> inputWinningLottoNumbers() {
         printWinningLottoNumbers();
-        return Arrays.stream(scanner.nextLine()
-                        .split(", "))
+        return Arrays.stream(scanner.nextLine().split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }

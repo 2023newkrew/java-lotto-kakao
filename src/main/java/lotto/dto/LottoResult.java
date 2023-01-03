@@ -19,7 +19,6 @@ public class LottoResult implements Comparable<LottoResult> {
         return gradeCount;
     }
 
-
     @Override
     public int compareTo(LottoResult o) {
         return Integer.compare(this.lottoGrade.price, o.lottoGrade.price);
