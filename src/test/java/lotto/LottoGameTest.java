@@ -16,7 +16,7 @@ public class LottoGameTest {
     @DisplayName("로또 티켓 구매 (구매한 개수 리턴)")
     @ParameterizedTest
     @MethodSource("getBuyLottoTicketData")
-    public void buy_lotto_ticket(int price, int number) {
+    public void buyLottoTicket(int price, int number) {
         lottoGame.buy(price);
         Assertions.assertThat(lottoGame.getCountOfLottoTickets()).isEqualTo(number);
     }

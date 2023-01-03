@@ -17,7 +17,7 @@ public class LottoDispenserTest {
     @DisplayName("금액에 따른 로또 티켓 발급")
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketByPriceData")
-    public void issue_lotto_ticket_by_price(int price, int number) {
+    public void issueLottoTicketByPrice(int price, int number) {
         LottoDispenser lottoDispenser = new LottoDispenser(new RandomNumberSelectStrategy());
         Assertions.assertThat(lottoDispenser.getLottoTicket(price).getCount()).isEqualTo(number);
     }
@@ -33,7 +33,7 @@ public class LottoDispenserTest {
     @DisplayName("숫자 생성 전략을 통한 숫자 생성")
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketByNumberSelectStrategyData")
-    public void issue_lotto_ticket_by_price(List<List<Integer>> randomNumbers, int price, String expected) {
+    public void issueLottoTicketByPrice(List<List<Integer>> randomNumbers, int price, String expected) {
         LottoDispenser lottoDispenser = new LottoDispenser(createNumberSelectStrategy(randomNumbers));
         LottoTicketList lottoTickets = lottoDispenser.getLottoTicket(price);
         Assertions.assertThat(lottoTickets.getLottoNumbersString()).isEqualTo(expected);

@@ -13,7 +13,7 @@ public class LottoTicketsTest {
 
     @DisplayName("로또 티켓 번호 일괄 확인")
     @Test
-    public void get_lotto_numbers_string() {
+    public void getLottoNumbersString() {
         LottoTicketList lottoTickets = new LottoTicketList(Arrays.asList(
                 new LottoTicket(Arrays.asList(1,2,3,4,5,6)),
                 new LottoTicket(Arrays.asList(3,6,15,21,38,41))
@@ -24,7 +24,7 @@ public class LottoTicketsTest {
 
     @DisplayName("당첨 통계 계산")
     @Test
-    public void get_lotto_numbers_statistics() {
+    public void getLottoNumbersStatistics() {
         LottoWinningNumberList lottoWinningNumbers = new LottoWinningNumberList(
                 Arrays.asList(1, 2, 3, 4, 5, 6), 7
         );

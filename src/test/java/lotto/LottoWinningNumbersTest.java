@@ -15,7 +15,7 @@ public class LottoWinningNumbersTest {
     @DisplayName("6개의 숫자 배열에 1개의 보너스 볼을 가진 당첨 번호 생성")
     @ParameterizedTest
     @MethodSource("getCreateWinningNumbersWith6NumbersAnd1BonusNumber")
-    public void create_winning_numbers_with_6_numbers_and_1_bonus_number(
+    public void createWinningNumbersWith6NumbersAnd1BonusNumber(
             List<Integer> numbers, int bonusNumber) {
         Assertions.assertThatCode(() -> new LottoWinningNumberList(numbers, bonusNumber))
                 .doesNotThrowAnyException();
@@ -31,7 +31,7 @@ public class LottoWinningNumbersTest {
     @DisplayName("보너스 볼이 중복된 당첨 번호 생성시 실패")
     @ParameterizedTest
     @MethodSource("getCreateWinningNumbersWithDuplicatedBonusNumberData")
-    public void create_winning_numbers_with_duplicated_bonus_number(
+    public void createWinningNumbersWithDuplicatedBonusNumber(
             List<Integer> numbers, int bonusNumber) {
         Assertions.assertThatThrownBy(() -> new LottoWinningNumberList(numbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);

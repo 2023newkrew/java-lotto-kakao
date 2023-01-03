@@ -16,7 +16,7 @@ public class LottoNumbersTest {
     @DisplayName("6개의 중복되지 않은 숫자 배열 생성")
     @ParameterizedTest
     @MethodSource("getGenerateLottoNumbersData")
-    public void generate_lotto_numbers(List<Integer> numbers) {
+    public void generateLottoNumbers(List<Integer> numbers) {
         Assertions.assertThatCode(() -> new LottoNumberList(numbers)).doesNotThrowAnyException();
     }
 
@@ -30,7 +30,7 @@ public class LottoNumbersTest {
     @DisplayName("6개 중 중복된 숫자 존재시 실패")
     @ParameterizedTest
     @MethodSource("getFailToGenerateDuplicatedLottoNumbersData")
-    public void fail_to_generate_duplicated_lotto_numbers(List<Integer> numbers) {
+    public void failToGenerateDuplicatedLottoNumbers(List<Integer> numbers) {
         Assertions.assertThatThrownBy(() -> new LottoNumberList(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -45,7 +45,7 @@ public class LottoNumbersTest {
     @DisplayName("6개 이외의 숫자 배열 생성시 실패")
     @ParameterizedTest
     @MethodSource("getFailToGenerateLottoNumbersOtherThan6Data")
-    public void fail_to_generate_lotto_numbers_other_than_6(List<Integer> numbers) {
+    public void failToGenerateLottoNumbersOtherThan6(List<Integer> numbers) {
         Assertions.assertThatThrownBy(() -> new LottoNumberList(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -60,7 +60,7 @@ public class LottoNumbersTest {
     @DisplayName("숫자가 숫자 배열에 포함되어 있는지 확인")
     @ParameterizedTest
     @MethodSource("getCheckLottoNumberIncludedInLottoNumbersData")
-    public void check_lotto_number_included_in_lotto_numbers(LottoNumberList lottoNumbers,
+    public void checkLottoNumberIncludedInLottoNumbers(LottoNumberList lottoNumbers,
             LottoNumber lottoNumber, boolean expected) {
         Assertions.assertThat(lottoNumbers.hasNumber(lottoNumber)).isEqualTo(expected);
     }
