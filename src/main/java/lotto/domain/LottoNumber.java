@@ -32,4 +32,8 @@ public class LottoNumber {
     public List<Integer> getNumbers() {
         return numbers;
     }
+
+    public int compare(LottoNumber other) {
+        return (int) numbers.stream().filter(number->other.numbers.contains(number)).count();
+    }
 }
