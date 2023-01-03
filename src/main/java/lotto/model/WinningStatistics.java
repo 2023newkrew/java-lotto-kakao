@@ -1,6 +1,7 @@
 package lotto.model;
 
 import lotto.model.prize.Prize;
+import lotto.model.prize.PrizeMap;
 import lotto.model.vo.Money;
 
 import java.math.BigDecimal;
@@ -14,15 +15,15 @@ public class WinningStatistics {
 
     private final Money money;
 
-    private final Map<Prize, Long> prizeMap;
+    private final PrizeMap prizeMap;
 
-    public WinningStatistics(Money money, Map<Prize, Long> prizeMap) {
+    public WinningStatistics(Money money, PrizeMap prizeMap) {
         this.money = money;
         this.prizeMap = prizeMap;
     }
 
     public Long countBy(Prize prize) {
-        return prizeMap.getOrDefault(prize, 0L);
+        return prizeMap.countBy(prize);
     }
 
     public BigDecimal getProfitRate() {

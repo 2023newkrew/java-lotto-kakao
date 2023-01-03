@@ -1,14 +1,11 @@
 package lotto.model;
 
 import lotto.TestUtil;
-import lotto.model.LottoCompany;
-import lotto.model.WinningNumbers;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoBundle;
 import lotto.model.vo.LottoNumber;
 import lotto.model.vo.Money;
 import lotto.model.prize.Prize;
-import lotto.model.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -27,8 +24,8 @@ class LottoCompanyTest {
         List<Lotto> lottos = List.of(firstPrizeLotto,
                                      thirdPrizeLotto, thirdPrizeLotto,
                                      fifthPrizeLotto, fifthPrizeLotto, fifthPrizeLotto);
-        WinningNumbers winningNumbers = new WinningNumbers(firstPrizeLotto, LottoNumber.valueOf(7));
-        LottoCompany lottoCompany = new LottoCompany(winningNumbers);
+        WinningNumber winningNumber = WinningNumber.from(firstPrizeLotto, LottoNumber.valueOf(7));
+        LottoCompany lottoCompany = new LottoCompany(winningNumber);
         Money money = Money.valueOf(6000);
 
         WinningStatistics actual = lottoCompany.judge(LottoBundle.from(lottos), money);

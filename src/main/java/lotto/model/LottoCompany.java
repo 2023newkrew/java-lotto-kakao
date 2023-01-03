@@ -1,26 +1,23 @@
 package lotto.model;
 
-import lotto.model.WinningNumbers;
 import lotto.model.lotto.LottoBundle;
+import lotto.model.prize.PrizeMap;
 import lotto.model.vo.Money;
 import lotto.model.prize.Prize;
-import lotto.model.WinningStatistics;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoCompany {
 
-    private final WinningNumbers winningNumbers;
+    private final WinningNumber winningNumber;
 
-    public LottoCompany(WinningNumbers winningNumbers) {
-        this.winningNumbers = winningNumbers;
+    public LottoCompany(WinningNumber winningNumber) {
+        this.winningNumber = winningNumber;
     }
 
     public WinningStatistics judge(LottoBundle lottoBundle, Money money) {
-        Map<Prize, Long> prizeMap = lottoBundle.stream()
-                .map(winningNumbers::judge)
-                .collect(Collectors.toMap(p -> p, p -> 1L, Long::sum));
+        PrizeMap prizeMap = winningNumber.judge(lottoBundle);
 
         return new WinningStatistics(money, prizeMap);
     }

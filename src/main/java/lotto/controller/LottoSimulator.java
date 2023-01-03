@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoBundle;
 import lotto.model.LottoCompany;
-import lotto.model.WinningNumbers;
+import lotto.model.WinningNumber;
 import lotto.model.generator.LottosGenerator;
 import lotto.model.generator.RandomLottosGenerator;
 import lotto.model.vo.LottoNumber;
@@ -27,16 +27,16 @@ public class LottoSimulator {
         long lottoCount = money.getPurchasableCount(LOTTO_PRICE);
         List<Lotto> lottos = lottosGenerator.generate(lottoCount);
         outputView.printLottos(lottos);
-        WinningNumbers winningNumbers = inputWinningNumbers();
-        LottoCompany lottoCompany = new LottoCompany(winningNumbers);
+        WinningNumber winningNumber = inputWinningNumbers();
+        LottoCompany lottoCompany = new LottoCompany(winningNumber);
         WinningStatistics winningStatistics = lottoCompany.judge(LottoBundle.from(lottos), money);
         outputView.printWinningStatistics(winningStatistics);
     }
 
-    private WinningNumbers inputWinningNumbers() {
+    private WinningNumber inputWinningNumbers() {
         Lotto winningNumbers = inputView.inputWinningLotto();
         LottoNumber bonus = inputView.inputBonusNumber();
-        return new WinningNumbers(winningNumbers, bonus);
+        return WinningNumber.from(winningNumbers, bonus);
     }
 
 }
