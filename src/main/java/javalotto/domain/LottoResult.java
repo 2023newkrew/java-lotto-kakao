@@ -19,6 +19,17 @@ public class LottoResult {
         return entry.getKey() + "- " + entry.getValue() + "개";
     }
 
+    public Double getTotalRateOfReturn(PurchaseAmount purchaseAmount) {
+        long totalPrize = lottoResultMap.entrySet().stream()
+                .mapToLong(LottoResult::getEachSumOfPrize)
+                .sum();
+        return totalPrize / (double) purchaseAmount.getPurchaseAmount();
+    }
+
+    private static long getEachSumOfPrize(Map.Entry<Rank, Integer> entry) {
+        return (long) entry.getKey().prize * entry.getValue();
+    }
+
     @Override
     public String toString() {
         return lottoResultMap.entrySet().stream()
