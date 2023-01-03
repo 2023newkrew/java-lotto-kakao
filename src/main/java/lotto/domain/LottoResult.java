@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import static lotto.domain.LottoConstants.LOTTO_MIN_COUNT;
-import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;
+import static lotto.domain.LottoConstants.LOTTO_MIN_MATCH_COUNT;
+import static lotto.domain.LottoConstants.LOTTO_NUMBERS_LENGTH;
 import static lotto.exception.ExceptionMessages.INVALID_LOTTO_RESULT_INPUT_EXCEPTION;
 
 import java.util.Objects;
@@ -17,7 +17,7 @@ public class LottoResult {
     }
 
     private void validate(int matchCount, boolean hasBonus) {
-        if ( matchCount < LOTTO_MIN_COUNT || getSum(matchCount, hasBonus) > LOTTO_NUMBER_COUNT) {
+        if ( matchCount < LOTTO_MIN_MATCH_COUNT || getSum(matchCount, hasBonus) > LOTTO_NUMBERS_LENGTH) {
             throw new IllegalArgumentException(INVALID_LOTTO_RESULT_INPUT_EXCEPTION);
         }
     }
@@ -33,7 +33,7 @@ public class LottoResult {
         return matchCount;
     }
 
-    public boolean isHasBonus() {
+    public boolean hasBonus() {
         return hasBonus;
     }
 

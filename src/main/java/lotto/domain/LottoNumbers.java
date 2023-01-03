@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;
+import static lotto.domain.LottoConstants.LOTTO_NUMBERS_LENGTH;
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_LOWER_BOUND;
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_UPPER_BOUND;
 import static lotto.exception.ExceptionMessages.INVALID_COUNT_EXCEPTION_MESSAGE;
@@ -29,13 +29,13 @@ public class LottoNumbers {
     }
 
     private void validateUniqueness(List<Integer> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() != LOTTO_NUMBER_COUNT) {
+        if (lottoNumbers.stream().distinct().count() != LOTTO_NUMBERS_LENGTH) {
             throw new IllegalArgumentException(NOT_UNIQUE_EXCEPTION_MESSAGE);
         }
     }
 
     private void validateCount(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+        if (lottoNumbers.size() != LOTTO_NUMBERS_LENGTH) {
             throw new IllegalArgumentException(INVALID_COUNT_EXCEPTION_MESSAGE);
         }
     }

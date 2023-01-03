@@ -1,29 +1,24 @@
 package lotto.factory;
 
-import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;
+import static lotto.domain.LottoConstants.LOTTO_MIN_INDEX;
+import static lotto.domain.LottoConstants.LOTTO_NUMBERS_LENGTH;
+import static lotto.domain.LottoConstants.LOTTO_NUMBER_LOWER_BOUND;
+import static lotto.domain.LottoConstants.LOTTO_NUMBER_UPPER_BOUND;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lotto.domain.LottoNumbers;
-import lotto.generatepolicy.GeneratePolicy;
 
 public class LottoNumbersFactory {
-    public static LottoNumbers create(GeneratePolicy generatePolicy) {
-        List<Integer> numbers = new ArrayList<>();
-        while (isNotFull(numbers)) {
-            addNumbers(numbers, generatePolicy.generate());
-        }
-        numbers.sort(Integer::compare);
-        return new LottoNumbers(numbers);
-    }
+    public final static List<Integer> list = IntStream.range(LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND + 1)
+            .boxed()
+            .collect(Collectors.toList());
 
-    private static boolean isNotFull(List<Integer> numbers) {
-        return numbers.size() != LOTTO_NUMBER_COUNT;
-    }
-
-    private static void addNumbers(List<Integer> numbers, int target) {
-        if (!numbers.contains(target)) {
-            numbers.add(target);
-        }
+    public static LottoNumbers create() {
+        Collections.shuffle(list);
+        List<Integer> subList = list.subList(LOTTO_MIN_INDEX, LOTTO_MIN_INDEX + LOTTO_NUMBERS_LENGTH);
+        return new LottoNumbers(subList);
     }
 }

@@ -40,6 +40,4 @@ class LottoNumbersTest {
         assertThat(new LottoNumbers(List.of(1, 2, 4, 5, 3, 6))).isEqualTo(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
 
     }
-
-
 }
