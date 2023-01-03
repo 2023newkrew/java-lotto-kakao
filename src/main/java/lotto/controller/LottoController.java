@@ -22,8 +22,8 @@ public class LottoController {
 
     public void play() {
         int amount = purchase();
-        UserLottos userLottos = new UserLottos(RandomLottoGenerator.generateLottos(amount));
-        outputView.printUserLottos(userLottos.getLottoNumbers());
+        List<LottoNumbers> userLottos = RandomLottoGenerator.generateLottos(amount);
+        outputView.printUserLottos(userLottos);
         List<Integer> lottoNumbers = inputView.getAnswerLottoInput();
         SingleLottoNumber bonusNumber = new SingleLottoNumber(inputView.getBonusBallInput());
 
@@ -31,7 +31,7 @@ public class LottoController {
                 .map(SingleLottoNumber::new)
                 .collect(Collectors.toList());
         Lotto lotto = new Lotto(new LottoNumbers(answerLottoNumbers), bonusNumber);
-        outputView.printResult(lotto.getPrizeCountMap(userLottos.getLottoNumbers()));
+        outputView.printResult(lotto.getPrizeCountMap(userLottos));
     }
 
 }
