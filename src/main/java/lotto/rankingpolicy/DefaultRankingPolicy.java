@@ -1,26 +1,31 @@
 package lotto.rankingpolicy;
 
+import static lotto.domain.LottoRank.*;
+import static lotto.domain.LottoRank.SECOND;
+
 import java.util.HashMap;
 import java.util.Map;
 import lotto.domain.LottoRank;
+import lotto.domain.DefaultLottoResult;
 import lotto.domain.LottoResult;
 
 public class DefaultRankingPolicy implements RankingPolicy {
 
-    private Map<LottoResult, LottoRank> lottoResultLottoRankMap = new HashMap<>();
+    private Map<DefaultLottoResult, LottoRank> lottoResultLottoRankMap = new HashMap<>();
 
     public DefaultRankingPolicy() {
-        lottoResultLottoRankMap.put(new LottoResult(6, false), LottoRank.FIRST);
-        lottoResultLottoRankMap.put(new LottoResult(5, true), LottoRank.SECOND);
-        lottoResultLottoRankMap.put(new LottoResult(5, false), LottoRank.THIRD);
-        lottoResultLottoRankMap.put(new LottoResult(4, true), LottoRank.FOURTH);
-        lottoResultLottoRankMap.put(new LottoResult(4, false), LottoRank.FOURTH);
-        lottoResultLottoRankMap.put(new LottoResult(3, true), LottoRank.FIFTH);
-        lottoResultLottoRankMap.put(new LottoResult(3, false), LottoRank.FIFTH);
+        lottoResultLottoRankMap.put(new DefaultLottoResult(FIRST.getMatchCount(), FIRST.isRequiredBonus()), FIRST);
+        lottoResultLottoRankMap.put(new DefaultLottoResult(SECOND.getMatchCount(), SECOND.isRequiredBonus()), SECOND);
+        lottoResultLottoRankMap.put(new DefaultLottoResult(THIRD.getMatchCount(), THIRD.isRequiredBonus()), THIRD);
+        lottoResultLottoRankMap.put(new DefaultLottoResult(FOURTH.getMatchCount(), FOURTH.isRequiredBonus()), FOURTH);
+        lottoResultLottoRankMap.put(new DefaultLottoResult(FIFTH.getMatchCount(), FIFTH.isRequiredBonus()), FIFTH);
+        lottoResultLottoRankMap.put(new DefaultLottoResult(THIRD.getMatchCount(), THIRD.isRequiredBonus()), THIRD);
+        lottoResultLottoRankMap.put(new DefaultLottoResult(FOURTH.getMatchCount(), FOURTH.isRequiredBonus()), FOURTH);
+        lottoResultLottoRankMap.put(new DefaultLottoResult(FIFTH.getMatchCount(), FIFTH.isRequiredBonus()), FIFTH);
     }
 
     @Override
     public LottoRank grade(LottoResult lottoResult) {
-        return lottoResultLottoRankMap.getOrDefault(lottoResult, LottoRank.SIXTH);
+        return lottoResultLottoRankMap.getOrDefault(lottoResult, SIXTH);
     }
 }

@@ -15,7 +15,7 @@ public class Lotto {
     }
 
     public LottoResult createLottoResult(LottoAnswer lottoAnswer) {
-        return new LottoResult(getMatchCount(lottoAnswer.getLottoNumbers()), hasBonus(lottoAnswer.getBonus()));
+        return new DefaultLottoResult(getMatchCount(lottoAnswer.getLottoNumbers()), hasBonus(lottoAnswer.getBonus()));
     }
     private int getMatchCount(LottoNumbers otherLottoNumbers) {
         return lottoNumbers.getMatchCount(otherLottoNumbers);

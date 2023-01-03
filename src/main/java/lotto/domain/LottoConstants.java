@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.domain.LottoRank.*;
+
 public final class LottoConstants {
     public static final int LOTTO_NUMBER_LOWER_BOUND = 1;
     public static final int LOTTO_NUMBER_UPPER_BOUND = 45;
@@ -9,21 +11,19 @@ public final class LottoConstants {
 
 
     public static String getString(LottoRank lottoRank, int count) {
-        if (lottoRank == LottoRank.FIRST) {
-            return String.format("6개 일치 (%d원) - %d개\n", lottoRank.winning(), count);
-        }
-        if (lottoRank == LottoRank.SECOND) {
+        if (lottoRank.isRequiredBonus()) {
             return hasBonusString(lottoRank, count);
         }
-        if (lottoRank == LottoRank.SIXTH) {
+        if(lottoRank == SIXTH){
             return "";
         }
-        return String.format("%d개 일치 (%d원) - %d개\n", 7 - lottoRank.index(), lottoRank.winning(), count);
+        return String.format("%d개 일치 (%d원) - %d개\n", lottoRank.getMatchCount(), lottoRank.getWinning(),
+                count);
     }
 
     public static String hasBonusString(LottoRank lottoRank, int count) {
 
-        return String.format(("5개 일치, 보너스 볼 일치 (%d원) - %d개\n"), lottoRank.winning(), count);
+        return String.format(("5개 일치, 보너스 볼 일치 (%d원) - %d개\n"), lottoRank.getWinning(), count);
     }
 
 
