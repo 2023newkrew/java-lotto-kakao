@@ -1,15 +1,14 @@
 package lotto;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
 public class LotteryNumbers {
     private static final int LOTTERY_NUMBER_SIZE = 6;
 
-    private final Set<LotteryNumber> numbers = new HashSet<>();
+    private final Set<LotteryNumber> numbers = new TreeSet<>();
 
     public LotteryNumbers(List<Integer> numbers) {
         for (Integer number : numbers) {
@@ -17,8 +16,6 @@ public class LotteryNumbers {
         }
 
         validateNumbers();
-
-        Collections.sort(numbers);
     }
 
     private void validateNumbers() {
