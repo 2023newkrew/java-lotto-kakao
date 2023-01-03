@@ -1,5 +1,7 @@
 package domain.lotto;
 
+import domain.lotto.prize.LottoPrize;
+
 import java.util.Map;
 
 public class LottoResult {

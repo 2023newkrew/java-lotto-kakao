@@ -1,7 +1,7 @@
-package domain.judgment;
+package domain.lotto.prize.judgment;
 
-import domain.lotto.LottoTicket;
 import domain.lotto.LottoWinningNumber;
+import domain.lotto.ticket.LottoTicket;
 
 public interface LottoPrizeJudgment {
 

@@ -1,4 +1,7 @@
-package domain.lotto;
+package domain.lotto.ticket.generator;
+
+import domain.lotto.LottoNumber;
+import domain.lotto.ticket.LottoTicket;
 
 import java.util.Collections;
 import java.util.List;

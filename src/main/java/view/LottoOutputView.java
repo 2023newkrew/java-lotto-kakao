@@ -1,9 +1,9 @@
 package view;
 
 import domain.lotto.LottoNumber;
-import domain.lotto.LottoPrize;
 import domain.lotto.LottoResult;
-import domain.lotto.LottoTicket;
+import domain.lotto.prize.LottoPrize;
+import domain.lotto.ticket.LottoTicket;
 
 import java.util.List;
 import java.util.Map;

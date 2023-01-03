@@ -1,9 +1,9 @@
-package domain.judgment.impl;
+package domain.lotto.prize.judgment.impl;
 
-import domain.judgment.LottoPrizeJudgment;
 import domain.lotto.LottoNumber;
-import domain.lotto.LottoTicket;
 import domain.lotto.LottoWinningNumber;
+import domain.lotto.prize.judgment.LottoPrizeJudgment;
+import domain.lotto.ticket.LottoTicket;
 import util.ListUtils;
 
 import java.util.List;

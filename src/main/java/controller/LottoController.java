@@ -1,6 +1,11 @@
 package controller;
 
-import domain.lotto.*;
+import domain.lotto.Cost;
+import domain.lotto.LottoResultCalculator;
+import domain.lotto.LottoShop;
+import domain.lotto.LottoWinningNumber;
+import domain.lotto.ticket.LottoTicket;
+import domain.lotto.ticket.generator.LottoTicketRandomGenerator;
 import view.LottoInputView;
 import view.LottoOutputView;
 

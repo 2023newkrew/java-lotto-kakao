@@ -1,5 +1,7 @@
 package domain.lotto;
 
+import domain.lotto.ticket.LottoTicket;
+import domain.lotto.ticket.generator.LottoTicketRandomGenerator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
