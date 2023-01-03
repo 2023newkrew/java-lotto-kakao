@@ -14,11 +14,22 @@ public class WinningNumbers {
     public WinningNumbers(MainNumbers mainNumbers, Integer bonusNumber) {
         this.mainNumbers = mainNumbers;
         this.bonusNumber = bonusNumber;
+        validateBonusNumber();
     }
 
     public WinningNumbers(List<Integer> mainNumbers, Integer bonusNumber) {
-        this.mainNumbers = new MainNumbers(mainNumbers);
-        this.bonusNumber = bonusNumber;
+        this(new MainNumbers(mainNumbers), bonusNumber);
+    }
+
+    private void validateBonusNumber() {
+        if (bonusNumber < LottoSettings.MIN_RANGE.getValue()
+                || bonusNumber > LottoSettings.MAX_RANGE.getValue()) {
+            throw new IllegalArgumentException();
+        }
+
+        if (mainNumbers.numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public MatchedResult check(Lotto lotto) {
