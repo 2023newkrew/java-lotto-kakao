@@ -4,9 +4,9 @@ import lotto.exception.InvalidLottoNumberValue;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class LottoCount {
     private int number;
-    public LottoNumber(int number) {
+    public LottoCount(int number) {
         if (number<0){
             throw new InvalidLottoNumberValue();
         }
@@ -21,7 +21,7 @@ public class LottoNumber {
         if (o == null || getClass() != o.getClass()){
             return false;
         }
-        LottoNumber that = (LottoNumber) o;
+        LottoCount that = (LottoCount) o;
         return number == that.number;
     }
 
