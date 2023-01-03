@@ -23,7 +23,5 @@
     - [x] Enum
         - 1등 ~ 5등 + 꽝
             - GRADE (MATCH_COUNT, BONUS_MATCH, PRICE)
-
 - [x] View
-
 - [x] Controller (Application)
