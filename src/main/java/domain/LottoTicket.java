@@ -3,6 +3,7 @@ package domain;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static domain.LottoConstant.LOTTO_LENGTH;
 
@@ -34,5 +35,15 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber lottoNumber){
         return lottoNumbers.contains(lottoNumber);
+    }
+
+    public int size(){
+        return lottoNumbers.size();
+    }
+
+    public List<LottoNumber> findUnMatchLottoNumbers(LottoTicket lottoTicket) {
+        return lottoNumbers.stream()
+                .filter((lottoNumber) -> !lottoTicket.contains(lottoNumber))
+                .collect(Collectors.toList());
     }
 }
