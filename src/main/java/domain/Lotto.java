@@ -14,17 +14,17 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     public static final int START_INDEX = 0;
-    public static final List<Integer> WHOLE_NUMBERS = IntStream.rangeClosed(Constants.MINIMUM, Constants.MAXIMUM)
-            .boxed()
-            .collect(Collectors.toList());
 
     private final List<Integer> numbers;
 
     public Lotto() {
+        List<Integer> WHOLE_NUMBERS = IntStream.rangeClosed(Constants.MINIMUM, Constants.MAXIMUM)
+            .boxed()
+            .collect(Collectors.toList());
         Collections.shuffle(WHOLE_NUMBERS);
-        List<Integer> numbers = WHOLE_NUMBERS.subList(START_INDEX, START_INDEX + Constants.LENGTH);
-        Collections.sort(numbers);
-        this.numbers = Collections.unmodifiableList(numbers);
+        List<Integer> numbersIn = WHOLE_NUMBERS.subList(START_INDEX, START_INDEX + Constants.LENGTH);
+        Collections.sort(numbersIn);
+        this.numbers = Collections.unmodifiableList(numbersIn);
     }
 
     public Lotto(String input) {
@@ -60,5 +60,9 @@ public class Lotto {
 
     public boolean isBonus(BonusNumber bonusNumber) {
         return numbers.contains(bonusNumber.number);
+    }
+
+    public String getLottoNumbers() {
+        return numbers.toString();
     }
 }
