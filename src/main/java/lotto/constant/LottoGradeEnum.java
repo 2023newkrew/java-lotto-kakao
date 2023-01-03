@@ -9,8 +9,8 @@ public enum LottoGradeEnum {
     SECOND(5, true, 300_000_000),
     THIRD(5, false, 1_500_000),
     FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5000),
-    NONE_GRADE(0, false, 0);
+    FIFTH(3, false, 5_000),
+    NONE(0, false, 0);
 
 
     public final int matchCount;
@@ -28,7 +28,7 @@ public enum LottoGradeEnum {
         return Arrays.stream(LottoGradeEnum.values())
                 .filter((lottoGrade) -> lottoGrade.matchCount == matchCount && lottoGrade.isBonusMatches == isBonusMatches)
                 .findFirst()
-                .orElse(NONE_GRADE);
+                .orElse(NONE);
     }
 
     private static void validateMatchCount(int matchCount) {
