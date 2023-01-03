@@ -33,29 +33,15 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    // 꼭 고치겠습니다 :(
     public Result getResult(WinningLotto winningLotto, BonusNumber bonusNumber) {
         List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
         int count = (int)numbers.stream()
                 .filter(number -> winningLottoNumbers.contains(number))
                 .count();
-
-        if (count == 3) {
-            return Result.THREE;
-        }
-        if (count == 4) {
-            return Result.FOUR;
-        }
         if (count == 5 && isBonus(bonusNumber)) {
             return Result.FIVEBONUS;
         }
-        if (count == 5) {
-            return Result.FIVE;
-        }
-        if (count == 6) {
-            return Result.SIX;
-        }
-        return Result.NONE;
+        return Result.of(count);
     }
 
     public boolean isBonus(BonusNumber bonusNumber) {
