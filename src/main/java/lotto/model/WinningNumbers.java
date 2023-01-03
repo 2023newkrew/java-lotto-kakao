@@ -11,43 +11,32 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public Price getPrice(Lotto lotto) {
-        return judgePrice(matchNumbers(lotto), hasBonus(lotto));
+    public static boolean isValidWinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
+        return Ticket.isValidNumbers(winningNumbers)
+                && Ticket.isValidNumber(bonusNumber)
+                && !winningNumbers.contains(bonusNumber);
     }
 
-    private Price judgePrice(int matchNumbers, boolean hasBonus) {
-        if (matchNumbers == 6) {
-            return Price.FIRST;
-        }
-        if (matchNumbers == 5 && hasBonus) {
-            return Price.SECOND;
-        }
-        if (matchNumbers == 5) {
-            return Price.THIRD;
-        }
-        if (matchNumbers == 4) {
-            return Price.FOURTH;
-        }
-        if (matchNumbers == 3) {
-            return Price.FIFTH;
-        }
-        return Price.NOTHING;
+    private boolean isMatched(int number) {
+        return this.winningNumbers.contains(number);
     }
 
-    private boolean hasBonus(Lotto lotto) {
-        return lotto.getNumbers().contains(bonusNumber);
-    }
-
-    private int matchNumbers(Lotto lotto) {
-        int count = 0;
-        for (Integer number : lotto.getNumbers()) {
-            count += returnValueIfContain(number);
+    private int count(int number) {
+        if (this.isMatched(number)) {
+            return 1;
         }
-
-        return count;
+        return 0;
     }
 
-    private int returnValueIfContain(int number) {
-        return winningNumbers.contains(number) ? 1 : 0;
+    public int matchNumbers(Ticket ticket) {
+        int matchCount = 0;
+        for (int number : ticket.getNumbers()) {
+            matchCount += this.count(number);
+        }
+        return matchCount;
+    }
+
+    public boolean hasBonus(Ticket ticket) {
+        return ticket.getNumbers().contains(this.bonusNumber);
     }
 }

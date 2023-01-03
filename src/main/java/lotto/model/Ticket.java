@@ -24,6 +24,9 @@ public class Ticket {
         for (int number : numbers) {
             isValid = isValid && Ticket.isValidNumber(number);
         }
+        for (int idx = 1; idx < numbers.size(); idx++) {
+            isValid = isValid && numbers.get(idx - 1) < numbers.get(idx);
+        }
         return isValid;
     }
 
