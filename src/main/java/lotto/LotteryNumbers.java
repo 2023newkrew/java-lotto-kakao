@@ -6,6 +6,7 @@ import java.util.List;
 
 public class LotteryNumbers {
     private static final int LOTTERY_NUMBER_SIZE = 6;
+    
     private final List<LotteryNumber> numbers = new ArrayList<>();
 
     public LotteryNumbers(List<Integer> numbers) {
@@ -14,7 +15,7 @@ public class LotteryNumbers {
         for (Integer number : numbers) {
             this.numbers.add(new LotteryNumber(number));
         }
-        
+
         Collections.sort(this.numbers);
     }
 

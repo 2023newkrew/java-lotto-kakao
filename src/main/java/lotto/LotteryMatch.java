@@ -2,6 +2,7 @@ package lotto;
 
 public class LotteryMatch {
     private static final int MATCH_FIVE = 5;
+    
     private final int matchCount;
     private final Boolean isBonusMatch;
 
