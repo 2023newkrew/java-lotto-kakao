@@ -4,6 +4,12 @@ package javalotto.view;
 import javalotto.domain.*;
 
 public class OutputView {
+    private OutputView() {
+    }
+
+    public static OutputView create() {
+        return new OutputView();
+    }
 
     public void printLottoCount(LottoCount lottoCount) {
         System.out.println(lottoCount.getCount() + "개를 구매했습니다.");
@@ -13,18 +19,19 @@ public class OutputView {
         System.out.println(lottos);
     }
 
-    public void printResult(WinningLotto winningLotto, Lottos lottos) {
+    public void printResult(WinningLotto winningLotto, Lottos lottos, PurchaseAmount purchaseAmount) {
         LottoResult lottoResult = lottos.getLottoResult(winningLotto);
         printWinningStatistics(lottoResult);
+        printRateOfReturn(lottoResult, purchaseAmount);
     }
 
-    public void printWinningStatistics(LottoResult lottoResult) {
+    private void printWinningStatistics(LottoResult lottoResult) {
         System.out.println("당첨 통계");
         System.out.println("--------");
         System.out.println(lottoResult);
     }
 
-    public void printRateOfReturn(LottoResult lottoResult, PurchaseAmount purchaseAmount) {
+    private void printRateOfReturn(LottoResult lottoResult, PurchaseAmount purchaseAmount) {
         Double totalRateOfReturn = lottoResult.getTotalRateOfReturn(purchaseAmount);
         String rateOfReturnMeaningMessage = getRateOfReturnMeaningMessage(totalRateOfReturn);
         System.out.printf("총 수익률은 %.2f 입니다. %s%n", totalRateOfReturn, rateOfReturnMeaningMessage);

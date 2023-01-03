@@ -10,10 +10,14 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-    private Scanner scanner;
+    private final Scanner scanner;
 
-    public InputView() {
-        this.scanner = new Scanner(System.in);
+    private InputView(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    public static InputView create() {
+        return new InputView(new Scanner(System.in));
     }
 
     public PurchaseAmount getPurchaseAmountInput() {
