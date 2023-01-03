@@ -24,6 +24,6 @@ public class LottoResult {
         if(LottoRank.FIFTH.COUNT == myLotto.compare(winningLotto))
             return LottoRank.FIFTH;
 
-        return LottoRank.FIRST;
+        return LottoRank.FAIL;
     }
 }
