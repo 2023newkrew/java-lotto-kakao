@@ -1,21 +1,40 @@
 package lotto;
 
-import java.util.Map;
-
 public enum Ranking {
-    FIRST(2000000000), SECOND(30000000), THIRD(1500000), FOURTH(50000), FIFTH(5000), OTHER(0);
+    FIRST(6, 2000000000),
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
+    OTHER(0, 0);
 
-    private final int price;
+    private final int matchingCount;
+    private final int prize;
 
-    Ranking(int price) {
-        this.price = price;
+    Ranking(int matchingCount, int prize) {
+        this.matchingCount = matchingCount;
+        this.prize = prize;
     }
 
-    public static Price totalPrice(Map<Ranking, Integer> rankingMap) {
-        Price result = new Price(0);
-        for (Map.Entry<Ranking, Integer> rankingIntegerEntry : rankingMap.entrySet()) {
-            result.add(rankingIntegerEntry.getKey().price * rankingIntegerEntry.getValue());
+    public static Ranking matchRanking(int matchingCount, boolean matchBonusBall) {
+        Ranking matchRanking = null;
+
+        for (Ranking ranking : Ranking.values()) {
+            matchRanking = ranking.match(matchingCount) ? ranking : matchRanking;
         }
-        return result;
+
+        if (matchingCount == 5 && matchBonusBall) {
+            matchRanking = SECOND;
+        }
+
+        return matchRanking == null ? OTHER : matchRanking;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
+
+    private boolean match(int matchingCount) {
+        return matchingCount == this.matchingCount;
     }
 }

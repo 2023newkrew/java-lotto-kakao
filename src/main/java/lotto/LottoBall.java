@@ -4,11 +4,17 @@ import java.util.Objects;
 
 public class LottoBall implements Comparable<LottoBall> {
     private final int ball;
+
     public LottoBall(int ball) {
-        if( ball <= 0 || ball > 45){
-            throw new IllegalArgumentException("ball 은 1 ~ 45 사이의 숫자여야 합니다.");
+        if (ball <= 0 || ball > 45) {
+            throw new IllegalArgumentException("ball은 1 ~ 45 사이의 숫자여야 합니다.");
         }
         this.ball = ball;
+    }
+
+    @Override
+    public int compareTo(LottoBall o) {
+        return ball - o.ball;
     }
 
     @Override
@@ -27,10 +33,5 @@ public class LottoBall implements Comparable<LottoBall> {
     @Override
     public int hashCode() {
         return Objects.hash(ball);
-    }
-
-    @Override
-    public int compareTo(LottoBall o) {
-        return ball - o.ball;
     }
 }

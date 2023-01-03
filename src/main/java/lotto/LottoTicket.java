@@ -5,7 +5,7 @@ import java.util.*;
 public class LottoTicket {
     protected final List<LottoBall> lottoBalls;
 
-    public LottoTicket(List<LottoBall> lottoBalls){
+    public LottoTicket(List<LottoBall> lottoBalls) {
         this.lottoBalls = lottoBalls;
 
         if (lottoBalls.size() != 6) {
@@ -24,6 +24,11 @@ public class LottoTicket {
     }
 
     @Override
+    public String toString() {
+        return lottoBalls.toString();
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(lottoBalls);
     }
@@ -34,16 +39,5 @@ public class LottoTicket {
         if (o == null || getClass() != o.getClass()) return false;
         LottoTicket that = (LottoTicket) o;
         return Objects.equals(lottoBalls, that.lottoBalls);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("[");
-        for (LottoBall lottoBall : lottoBalls) {
-            sb.append(lottoBall.toString()).append(",");
-        }
-        sb.deleteCharAt(sb.length() - 1);
-        sb.append("]");
-        return sb.toString();
     }
 }
