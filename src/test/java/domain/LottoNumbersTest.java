@@ -98,7 +98,7 @@ public class LottoNumbersTest {
                 new LottoNumber(9)
         ));
 
-        LottoNumbers secondorThirdPlaceLottoNumbers = new LottoNumbers(List.of(
+        LottoNumbers secondOrThirdPlaceLottoNumbers = new LottoNumbers(List.of(
                 new LottoNumber(31),
                 new LottoNumber(18),
                 new LottoNumber(5),
@@ -136,8 +136,8 @@ public class LottoNumbersTest {
 
         return Stream.of(
                 Arguments.arguments(firstPlaceLottoNumbers, new LottoNumber(45), Rank.FIRST_PLACE),
-                Arguments.arguments(secondorThirdPlaceLottoNumbers, new LottoNumber(9), Rank.SECOND_PLACE),
-                Arguments.arguments(secondorThirdPlaceLottoNumbers, new LottoNumber(45), Rank.THIRD_PLACE),
+                Arguments.arguments(secondOrThirdPlaceLottoNumbers, new LottoNumber(9), Rank.SECOND_PLACE),
+                Arguments.arguments(secondOrThirdPlaceLottoNumbers, new LottoNumber(45), Rank.THIRD_PLACE),
                 Arguments.arguments(fourthPlaceLottoNumbers, new LottoNumber(45), Rank.FOURTH_PLACE),
                 Arguments.arguments(fifthPlaceLottoNumbers, new LottoNumber(45), Rank.FIFTH_PLACE),
                 Arguments.arguments(noPlaceLottoNumbers, new LottoNumber(45), null)

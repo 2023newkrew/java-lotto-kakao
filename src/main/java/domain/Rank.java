@@ -5,7 +5,7 @@ import java.util.Arrays;
 public enum Rank {
 
     FIRST_PLACE(6, 2_000_000_000),
-    SECOND_PLACE(-1, 30_000_000),
+    SECOND_PLACE(5, 30_000_000),
     THIRD_PLACE(5, 1_500_000),
     FOURTH_PLACE(4, 50_000),
     FIFTH_PLACE(3, 5_000),
@@ -30,7 +30,8 @@ public enum Rank {
     public static Rank findRank(int matchCount) {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
-                .findAny()
+                .reduce((second, third) -> third)
+                .stream().findFirst()
                 .orElse(null);
     }
 
