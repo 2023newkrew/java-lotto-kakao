@@ -1,10 +1,12 @@
 package lotto.controller;
 
+import lotto.model.LottoStore;
+import lotto.model.PurchaseResult;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoBundle;
 import lotto.model.WinningNumber;
-import lotto.model.generator.LottosGenerator;
-import lotto.model.generator.RandomLottosGenerator;
+import lotto.model.generator.LottoGenerator;
+import lotto.model.generator.RandomLottoGenerator;
 import lotto.model.prize.PrizeMap;
 import lotto.model.vo.LottoNumber;
 import lotto.model.vo.Money;
@@ -16,22 +18,20 @@ import java.util.List;
 
 public class LottoSimulator {
 
-    private static final Money LOTTO_PRICE = Money.valueOf(1000L);
+    private final LottoStore lottoStore = LottoStore.create(RandomLottoGenerator.getInstance());
 
-    private final LottosGenerator lottosGenerator = new RandomLottosGenerator();
     private final LottoInputView inputView = new LottoInputView();
+
     private final LottoOutputView outputView = new LottoOutputView();
 
     public void run() {
         Money money = inputView.inputMoney();
-        long lottoCount = money.getPurchasableCount(LOTTO_PRICE);
-        Money totalPrice = Money.valueOf(money.longValue() - lottoCount * LOTTO_PRICE.longValue());
-        List<Lotto> lottos = lottosGenerator.generate(lottoCount);
-        LottoBundle lottoBundle = LottoBundle.from(lottos);
-        outputView.printLottos(lottos);
+        PurchaseResult purchaseResult = lottoStore.buyLotto(money);
+        LottoBundle lottoBundle = purchaseResult.getLottoBundle();
+        outputView.printLottos(lottoBundle);
         WinningNumber winningNumber = inputWinningNumbers();
         PrizeMap prizeMap = winningNumber.judge(lottoBundle);
-        BigDecimal profitRate = prizeMap.getProfitRate(money, totalPrice);
+        BigDecimal profitRate = prizeMap.getProfitRate(money, purchaseResult.getTotalPrice());
         outputView.printWinningStatistics(prizeMap, profitRate);
     }
 

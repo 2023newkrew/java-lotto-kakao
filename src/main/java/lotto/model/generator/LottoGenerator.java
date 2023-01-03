@@ -4,7 +4,7 @@ import lotto.model.lotto.Lotto;
 
 import java.util.List;
 
-public interface LottosGenerator {
+public interface LottoGenerator {
 
-    List<Lotto> generate(long count);
+    Lotto generate();
 }

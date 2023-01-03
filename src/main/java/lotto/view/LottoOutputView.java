@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.lotto.Lotto;
+import lotto.model.lotto.LottoBundle;
 import lotto.model.prize.Prize;
 import lotto.model.prize.PrizeMap;
 
@@ -9,11 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoOutputView {
-    public void printLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottos) {
-            printLotto(lotto);
-        }
+    public void printLottos(LottoBundle lottoBundle) {
+        System.out.println(lottoBundle.size() + "개를 구매했습니다.");
+        lottoBundle.stream().forEach(this::printLotto);
         System.out.println();
     }
 
@@ -25,7 +24,7 @@ public class LottoOutputView {
         System.out.println(lottoString);
     }
 
-    public void printWinningStatistics(PrizeMap prizeMap, BigDecimal profitRate){
+    public void printWinningStatistics(PrizeMap prizeMap, BigDecimal profitRate) {
         printWinningStatisticsHeader();
         printWinningPrizes(prizeMap);
         printProfitRate(profitRate);
