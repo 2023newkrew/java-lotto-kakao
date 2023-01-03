@@ -5,9 +5,6 @@ import lotto.exception.InvalidLottoCountValue;
 import java.util.Objects;
 
 public class LottoCount {
-    public int getCount() {
-        return count;
-    }
 
     private final int count;
     public LottoCount(int number) {
@@ -20,6 +17,9 @@ public class LottoCount {
         this((int)(cash.getCash() / LottoConstants.LOTTO_PRICE));
     }
 
+    public int getCount() {
+        return count;
+    }
     public LottoCount add(int val){
         return new LottoCount(count+val);
     }
