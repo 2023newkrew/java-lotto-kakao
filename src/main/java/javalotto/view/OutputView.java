@@ -3,6 +3,7 @@ package javalotto.view;
 
 import javalotto.domain.LottoCount;
 import javalotto.domain.Lottos;
+import javalotto.domain.WinningLotto;
 
 public class OutputView {
 
@@ -12,5 +13,15 @@ public class OutputView {
 
     public void printLottos(Lottos lottos) {
         System.out.println(lottos);
+    }
+
+    public void printResult(WinningLotto winningLotto, Lottos lottos) {
+        printWinningStatistics(winningLotto, lottos);
+    }
+
+    public void printWinningStatistics(WinningLotto winningLotto, Lottos lottos) {
+        System.out.println("당첨 통계");
+        System.out.println("--------");
+        System.out.println(lottos.getLottoResult(winningLotto));
     }
 }
