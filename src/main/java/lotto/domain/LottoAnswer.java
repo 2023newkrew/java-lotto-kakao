@@ -2,8 +2,8 @@ package lotto.domain;
 
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_LOWER_BOUND;
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_UPPER_BOUND;
-import static lotto.exception.ExceptionMessages.DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE;
-import static lotto.exception.ExceptionMessages.OUT_OF_BOUNDS_EXCEPTION_MESSAGE;
+import static lotto.exception.ExceptionMessage.DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE;
+import static lotto.exception.ExceptionMessage.OUT_OF_BOUNDS_EXCEPTION_MESSAGE;
 
 public class LottoAnswer {
     private final LottoNumbers lottoNumbers;

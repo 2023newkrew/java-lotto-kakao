@@ -2,7 +2,7 @@ package lotto.domain;
 
 import static lotto.domain.LottoConstants.LOTTO_MIN_COUNT;
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;
-import static lotto.exception.ExceptionMessages.INVALID_LOTTO_RESULT_INPUT_EXCEPTION;
+import static lotto.exception.ExceptionMessage.INVALID_LOTTO_RESULT_INPUT_EXCEPTION;
 
 import java.util.Objects;
 
