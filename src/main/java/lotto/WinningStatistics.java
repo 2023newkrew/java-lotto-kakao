@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 
-public class Prizes {
+public class WinningStatistics {
 
     private final Map<Prize, Long> prizeMap;
 
-    public Prizes(Map<Prize, Long> prizeMap) {
+    public WinningStatistics(Map<Prize, Long> prizeMap) {
         this.prizeMap = prizeMap;
     }
 

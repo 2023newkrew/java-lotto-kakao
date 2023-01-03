@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class PrizesTest {
+class WinningStatisticsTest {
 
     @DisplayName("개별 상금을 합산한다.")
     @ParameterizedTest
@@ -18,11 +18,11 @@ class PrizesTest {
             "FOURTH, 50_000", "FIFTH, 5_000", "NOTHING, 0"
     })
     void sumFirstPrize(Prize prize, long expected) {
-        Prizes prizes = new Prizes(
+        WinningStatistics winningStatistics = new WinningStatistics(
                 Map.of(prize, 1L)
         );
 
-        BigDecimal actual = prizes.getTotalAmount();
+        BigDecimal actual = winningStatistics.getTotalAmount();
 
         assertThat(actual).isEqualByComparingTo(BigDecimal.valueOf(expected));
     }
@@ -30,7 +30,7 @@ class PrizesTest {
     @DisplayName("전체 상금을 합산한다.")
     @Test
     void sumFirstAndSecondPrize() {
-        Prizes prizes = new Prizes(
+        WinningStatistics winningStatistics = new WinningStatistics(
                 Map.of(Prize.FIRST, 1L,
                         Prize.SECOND, 2L,
                         Prize.THIRD, 3L,
@@ -38,7 +38,7 @@ class PrizesTest {
                         Prize.FIFTH, 5L,
                         Prize.NOTHING, 10L));
 
-        BigDecimal actual = prizes.getTotalAmount();
+        BigDecimal actual = winningStatistics.getTotalAmount();
 
         assertThat(actual).isEqualByComparingTo(BigDecimal.valueOf(2_060_675_000L));
     }
