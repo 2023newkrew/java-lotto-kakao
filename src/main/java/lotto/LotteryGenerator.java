@@ -7,8 +7,7 @@ public class LotteryGenerator {
 
     public void generate(Buyer buyer) {
         while (buyer.hasMoreBudgetThan(LOTTERY_PRICE)) {
-            buyer.decreaseBudgetByPrice(LOTTERY_PRICE);
-            buyer.addLottery(new Lottery());
+            buyer.buyLottery(LOTTERY_PRICE, new Lottery());
         }
     }
 }
