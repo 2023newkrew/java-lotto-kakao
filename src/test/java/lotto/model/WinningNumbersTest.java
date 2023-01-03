@@ -12,8 +12,8 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("can validate incorrect winning numbers")
     void can_validate_incorrect_winning_numbers() {
-        assertTrue(WinningNumbers.isValidWinningNumbers(List.of(1,2,3,4,5,6), 7));
-        assertFalse(WinningNumbers.isValidWinningNumbers(List.of(1,2,3,4,5,6), 6));
+        assertTrue(WinningNumbers.isValidBonusNumber(List.of(1, 2, 3, 4, 5, 6), 7));
+        assertFalse(WinningNumbers.isValidBonusNumber(List.of(1, 2, 3, 4, 5, 6), 6));
         // The other cases are dependent on TicketTest
     }
 }

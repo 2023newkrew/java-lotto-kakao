@@ -21,7 +21,7 @@ public class RandomGeneratorTest {
             numbers = randomGenerator.getOrderedNumbers(size);
             assertEquals(size, numbers.size());
             for (int j = 1; j < size; j++) {
-                assertTrue(numbers.get(j) > numbers.get(j-1));
+                assertTrue(numbers.get(j) > numbers.get(j - 1));
             }
         }
     }

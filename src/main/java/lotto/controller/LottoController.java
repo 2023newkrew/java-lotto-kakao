@@ -11,7 +11,7 @@ public class LottoController {
         Exchange exchange = new Exchange();
 
         long purchaseAmount = 0;
-        while(!Exchange.isEnough(purchaseAmount)) {
+        while (!Exchange.isEnough(purchaseAmount)) {
             purchaseAmount = InputView.getPurchaseAmount();
         }
 
@@ -19,12 +19,12 @@ public class LottoController {
         OutputView.sendPurchasedLotto(lotto);
 
         List<Integer> winningNumbers = new ArrayList<>();
-        while(!WinningNumbers.isValidWinningNumbers(winningNumbers)) {
+        while (!WinningNumbers.isValidWinningNumbers(winningNumbers)) {
             winningNumbers = InputView.getWinningNumbers();
         }
 
         int bonusNumber = 0;
-        while(!WinningNumbers.isValidBonusNumber(winningNumbers, bonusNumber)) {
+        while (!WinningNumbers.isValidBonusNumber(winningNumbers, bonusNumber)) {
             bonusNumber = InputView.getBonusNumber();
         }
 

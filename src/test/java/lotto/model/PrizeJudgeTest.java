@@ -12,7 +12,7 @@ public class PrizeJudgeTest {
     @Test
     @DisplayName("can judge first prize")
     void can_judge_first_prize() {
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6), 7);
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         PrizeJudge prizeJudge = new PrizeJudge(winningNumbers);
 
         Prize prize = prizeJudge.getPrizeOf(new Ticket(List.of(1, 2, 3, 4, 5, 6)));
@@ -22,7 +22,7 @@ public class PrizeJudgeTest {
     @Test
     @DisplayName("can judge second prize")
     void can_judge_second_prize() {
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6), 7);
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         PrizeJudge prizeJudge = new PrizeJudge(winningNumbers);
 
         Prize prize = prizeJudge.getPrizeOf(new Ticket(List.of(1, 2, 3, 4, 5, 7)));
@@ -32,7 +32,7 @@ public class PrizeJudgeTest {
     @Test
     @DisplayName("can judge third prize")
     void can_judge_third_prize() {
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6), 7);
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         PrizeJudge prizeJudge = new PrizeJudge(winningNumbers);
 
         Prize prize = prizeJudge.getPrizeOf(new Ticket(List.of(1, 2, 3, 4, 5, 8)));
@@ -42,7 +42,7 @@ public class PrizeJudgeTest {
     @Test
     @DisplayName("can judge fourth prize")
     void can_judge_fourth_prize() {
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6), 7);
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         PrizeJudge prizeJudge = new PrizeJudge(winningNumbers);
 
         Prize prize = prizeJudge.getPrizeOf(new Ticket(List.of(1, 2, 3, 4, 7, 8)));
@@ -52,7 +52,7 @@ public class PrizeJudgeTest {
     @Test
     @DisplayName("can judge fifth prize")
     void can_judge_fifth_prize() {
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6), 7);
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         PrizeJudge prizeJudge = new PrizeJudge(winningNumbers);
 
         Prize prize = prizeJudge.getPrizeOf(new Ticket(List.of(1, 2, 3, 7, 8, 9)));
@@ -62,7 +62,7 @@ public class PrizeJudgeTest {
     @Test
     @DisplayName("can judge losing")
     void can_judge_losing() {
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6), 7);
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         PrizeJudge prizeJudge = new PrizeJudge(winningNumbers);
 
         Prize prize = prizeJudge.getPrizeOf(new Ticket(List.of(1, 2, 7, 8, 9, 10)));
