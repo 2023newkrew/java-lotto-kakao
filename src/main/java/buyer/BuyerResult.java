@@ -2,23 +2,22 @@ package buyer;
 
 import lotto.Rank;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EnumMap;
 
 public class BuyerResult {
-    private final List<Integer> result;
+    private final EnumMap<Rank, Integer> result;
 
     public BuyerResult() {
-        this(new ArrayList<>(List.of(0, 0, 0, 0, 0)));
+        result = new EnumMap<>(Rank.class);
     }
 
-    public BuyerResult(List<Integer> result) {
+    public BuyerResult(EnumMap<Rank, Integer> result) {
         this.result = result;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof BuyerResult)) return false;
+        if (!(obj instanceof BuyerResult)) return false;
 
         BuyerResult cp = (BuyerResult) obj;
 
@@ -26,11 +25,15 @@ public class BuyerResult {
     }
 
     public void matches(Rank matchResult) {
-        if(matchResult != Rank.NONE)
-            result.set(matchResult.index, result.get(matchResult.index)+1);
+        if (result.get(matchResult) == null) {
+            result.put(matchResult, 1);
+
+            return;
+        }
+        result.put(matchResult, result.get(matchResult) + 1);
     }
 
-    public List<Integer> getResult() {
+    public EnumMap<Rank, Integer> getResult() {
         return result;
     }
 }

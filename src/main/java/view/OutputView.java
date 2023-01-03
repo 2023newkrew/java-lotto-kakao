@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public void printLotteries(List<Lottery> lotteries){
+    public void printLotteries(List<Lottery> lotteries) {
         lotteries.forEach(this::printLottery);
     }
 
-    private void printLottery(Lottery lottery){
+    private void printLottery(Lottery lottery) {
         System.out.println(
                 lottery.getLotteryNumber()
                         .stream()
@@ -22,10 +22,18 @@ public class OutputView {
         );
     }
 
-    public void printResult(BuyerResult result){
-        Arrays.stream(Rank.values()).forEach((e)->{
-            if(e != Rank.NONE)
-                System.out.println(e.match.getMatchCount()+"개 일치"+"("+e.prize+")- "+result.getResult().get(e.index)+"개");
+    public void printResult(BuyerResult result) {
+        Arrays.stream(Rank.values()).forEach((e) -> {
+            if (e != Rank.NONE) {
+                printRankInfo(e);
+                System.out.println(
+                        (result.getResult().getOrDefault(e, 0)) + "개");
+            }
         });
+    }
+
+    private void printRankInfo(Rank rank) {
+        System.out.print(rank.match.getMatchCount() + "개 일치");
+        System.out.print("(" + rank.prize + ")- ");
     }
 }
