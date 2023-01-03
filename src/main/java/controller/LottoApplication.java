@@ -32,7 +32,7 @@ public class LottoApplication {
             outputView.printLottoStatistics(lottoResult);
         }
         catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }
