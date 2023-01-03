@@ -10,6 +10,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoBuyer {
+    private static final Integer LOTTO_COST = 1000;
+    private static final Integer DECIMAL_POINT = 100;
+
     private Integer money;
     private List<Lotto> lottos;
 
@@ -38,7 +41,6 @@ public class LottoBuyer {
     }
 
     public Double calculateEarningRate(Map<LottoRank, Integer> map) {
-        Integer investMoney = (money / 1000) * 1000;
         Long earningMoney = 0L;
         for (LottoRank lottoRank : LottoRank.values()) {
             earningMoney +=  (map.get(lottoRank) * lottoRank.getReward());
@@ -46,7 +48,8 @@ public class LottoBuyer {
         if (earningMoney == 0L) {
             return 0.00d;
         }
-        return Math.floor(earningMoney / (double) investMoney * 100) / 100;
+        Integer investMoney = (money / LOTTO_COST) * LOTTO_COST;
+        return Math.floor(earningMoney / (double) investMoney * DECIMAL_POINT) / DECIMAL_POINT;
     }
 
 }

@@ -31,8 +31,8 @@ public class LottoApplication {
             LottoResult lottoResult = lottoBuyer.calculateResult(new WinningLotto(winningLotto, bonusNumber));
             outputView.printLottoStatistics(lottoResult);
         }
-        catch (Exception e) {
-            System.out.println(e);
+        catch (Exception exception) {
+            System.out.println(exception);
         }
     }
 }

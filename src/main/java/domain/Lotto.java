@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final Integer LOTTO_SIZE = 6;
+    private static final String ERROR_LOTTO_SIZE = "로또 숫자는 6개이어야 합니다.";
+    private static final String ERROR_LOTTO_DUPLICATE = "로또 숫자는 중복이 불가합니다.";
     private final List<LottoNumber> numbers;
 
     public Lotto() {
@@ -21,12 +23,12 @@ public class Lotto {
 
     static private void validateLotto(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 숫자는 6개이어야 합니다.");
+            throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
         }
 
         Set<Integer> uniqueNumbers = new HashSet<>(numbers);
         if (uniqueNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 숫자는 중복이 불가합니다.");
+            throw new IllegalArgumentException(ERROR_LOTTO_DUPLICATE);
         }
     }
 

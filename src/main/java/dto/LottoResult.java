@@ -8,8 +8,8 @@ public class LottoResult {
     private final Map<LottoRank, Integer> lottoRanks;
     private final Double earningRate;
 
-    public LottoResult(Map<LottoRank, Integer> lottosStatus, Double earningRate) {
-        this.lottoRanks = lottosStatus;
+    public LottoResult(Map<LottoRank, Integer> lottoRanks, Double earningRate) {
+        this.lottoRanks = lottoRanks;
         this.earningRate = earningRate;
     }
 

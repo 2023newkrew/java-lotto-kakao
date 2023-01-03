@@ -26,23 +26,25 @@ public enum LottoRank {
 
     public static LottoRank getRank(Integer matchCount, Boolean isBonus) {
        return Arrays.stream(LottoRank.values())
-               .filter(lottoStatus -> {
-                   if (lottoStatus.matchCount.equals(matchCount) && lottoStatus.matchCount == 5) {
-                       return lottoStatus.isBonus.equals(isBonus);
-                   }
-                   return lottoStatus.matchCount.equals(matchCount);
-               })
+               .filter(lottoRank -> isMatchLottoRank(lottoRank, matchCount, isBonus))
                .findFirst().orElseGet(() -> NO_RANK);
+    }
+
+    private static Boolean isMatchLottoRank(LottoRank lottoRank, Integer matchCount, Boolean isBonus) {
+        if (lottoRank.matchCount.equals(matchCount) && LottoRank.SECOND_RANK.matchCount.equals(lottoRank.matchCount)) {
+            return lottoRank.isBonus.equals(isBonus);
+        }
+        return lottoRank.matchCount.equals(matchCount);
     }
 
     @Override
     public String toString() {
-        StringBuffer str = new StringBuffer();
-        str.append(matchCount).append("개 일치");
+        StringBuilder builder = new StringBuilder();
+        builder.append(matchCount).append("개 일치");
         if (isBonus) {
-            str.append(", 보너스 볼 일치");
+            builder.append(", 보너스 볼 일치");
         }
-        str.append(" (").append(reward).append("원)");
-        return str.toString();
+        builder.append(" (").append(reward).append("원)");
+        return builder.toString();
     }
 }
