@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.controller.LottoController;
+import lotto.config.AppConfig;
 
 public class LottoApp {
 

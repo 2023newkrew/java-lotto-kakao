@@ -1,4 +1,4 @@
-package lotto;
+package lotto.config;
 
 import lotto.controller.LottoController;
 import lotto.rankingpolicy.DefaultRankingPolicy;
@@ -21,21 +21,5 @@ public class AppConfig {
 
     public LottoController getLottoController() {
         return lottoController;
-    }
-
-    public LottoGame getLottoGame() {
-        return lottoGame;
-    }
-
-    public InputView getInputView() {
-        return inputView;
-    }
-
-    public OutputView getOutputView() {
-        return outputView;
-    }
-
-    public RankingPolicy getRankingPolicy() {
-        return rankingPolicy;
     }
 }
