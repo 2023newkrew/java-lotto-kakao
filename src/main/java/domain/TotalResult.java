@@ -32,8 +32,12 @@ public class TotalResult {
         return Objects.hash(totalResult);
     }
 
-    public void put(Result result) {
-        Integer previousValue = totalResult.getOrDefault(result, 0);
+    public void increaseValueOfResult(Result result) {
+        Integer previousValue = this.getValueOfResult(result);
         totalResult.put(result, previousValue + 1);
+    }
+
+    public int getValueOfResult(Result result) {
+        return totalResult.getOrDefault(result, 0);
     }
 }
