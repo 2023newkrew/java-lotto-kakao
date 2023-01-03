@@ -17,12 +17,12 @@ public enum LottoPrize {
 
     private final long prizeMoney;
     private final String description;
-    private final LottoRuleStrategy lottoRuleStrategy;
+    private final PrizeStrategy prizeStrategy;
 
-    LottoPrize(long prizeMoney, String description, LottoRuleStrategy lottoRuleStrategy) {
+    LottoPrize(long prizeMoney, String description, PrizeStrategy prizeStrategy) {
         this.prizeMoney = prizeMoney;
         this.description = description;
-        this.lottoRuleStrategy = lottoRuleStrategy;
+        this.prizeStrategy = prizeStrategy;
     }
 
     public long getPrizeMoney() {
@@ -34,6 +34,6 @@ public enum LottoPrize {
     }
 
     public boolean isWon(int matchNumberCount, boolean hasMagicNumber) {
-        return this.lottoRuleStrategy.isWon(matchNumberCount, hasMagicNumber);
+        return this.prizeStrategy.isWon(matchNumberCount, hasMagicNumber);
     }
 }

@@ -1,7 +1,7 @@
 package lotto.domain;
 
 @FunctionalInterface
-interface LottoRuleStrategy {
+interface PrizeStrategy {
 
     boolean isWon(int matchNumberCount, boolean hasMagicNumber);
 }
