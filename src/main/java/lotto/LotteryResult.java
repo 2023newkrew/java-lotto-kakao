@@ -1,12 +1,17 @@
 package lotto;
 
 import buyer.BuyerResult;
+import util.StringParser;
 
 import java.util.List;
 
 public class LotteryResult {
     private final LotteryNumbers winningNumbers;
     private final LotteryNumber bonusNumber;
+
+    public LotteryResult(String winningNumbersInput, int bonusNumber) {
+        this(StringParser.parse(winningNumbersInput), bonusNumber);
+    }
 
     public LotteryResult(List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
