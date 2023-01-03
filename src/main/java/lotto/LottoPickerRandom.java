@@ -6,10 +6,8 @@ import java.util.List;
 
 public class LottoPickerRandom implements LottoPicker{
     private final List<LottoBallNumber> picker = new ArrayList<>();
-    private static final int MIN_VALUE = 1;
-    private static final int MAX_VALUE = 45;
     public LottoPickerRandom(){
-        for (int i=MIN_VALUE;i<=MAX_VALUE;i++){
+        for (int i=LottoConstants.BALLNUMBER_MIN_VALUE;i<=LottoConstants.BALLNUMBER_MAX_VALUE;i++){
             picker.add(new LottoBallNumber(i));
         }
         Collections.shuffle(picker);
