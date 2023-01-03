@@ -56,6 +56,7 @@ public class LottoView {
 
         System.out.println("당첨 통계");
         System.out.println("-----------");
+        lottoResultCounter.remove(LottoGradeEnum.NONE_GRADE);
         lottoResultCounter.keySet().stream()
                 .sorted(Comparator.comparingInt(o -> o.price))
                 .forEach((lottoGradeEnum) -> System.out.printf(
