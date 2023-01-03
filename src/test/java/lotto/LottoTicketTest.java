@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoWinningNumbers;
+import lotto.domain.LottoWinningNumberList;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,8 +37,8 @@ public class LottoTicketTest {
     public void calculate_winning_result(List<Integer> numbers, List<Integer> winningNumbers,
             int bonusNumber, LottoResult result) {
         LottoTicket lottoTicket = new LottoTicket(numbers);
-        LottoWinningNumbers lottoWinningNumbers
-                = new LottoWinningNumbers(winningNumbers, bonusNumber);
+        LottoWinningNumberList lottoWinningNumbers
+                = new LottoWinningNumberList(winningNumbers, bonusNumber);
         Assertions.assertThat(lottoTicket.getResult(lottoWinningNumbers)).isEqualTo(result);
     }
 

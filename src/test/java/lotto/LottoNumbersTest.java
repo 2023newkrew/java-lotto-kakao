@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
+import lotto.domain.LottoNumberList;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,7 +17,7 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @MethodSource("getGenerateLottoNumbersData")
     public void generate_lotto_numbers(List<Integer> numbers) {
-        Assertions.assertThatCode(() -> new LottoNumbers(numbers)).doesNotThrowAnyException();
+        Assertions.assertThatCode(() -> new LottoNumberList(numbers)).doesNotThrowAnyException();
     }
 
     private static Stream<Arguments> getGenerateLottoNumbersData() {
@@ -31,7 +31,7 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @MethodSource("getFailToGenerateDuplicatedLottoNumbersData")
     public void fail_to_generate_duplicated_lotto_numbers(List<Integer> numbers) {
-        Assertions.assertThatThrownBy(() -> new LottoNumbers(numbers))
+        Assertions.assertThatThrownBy(() -> new LottoNumberList(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -46,7 +46,7 @@ public class LottoNumbersTest {
     @ParameterizedTest
     @MethodSource("getFailToGenerateLottoNumbersOtherThan6Data")
     public void fail_to_generate_lotto_numbers_other_than_6(List<Integer> numbers) {
-        Assertions.assertThatThrownBy(() -> new LottoNumbers(numbers))
+        Assertions.assertThatThrownBy(() -> new LottoNumberList(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -60,15 +60,15 @@ public class LottoNumbersTest {
     @DisplayName("숫자가 숫자 배열에 포함되어 있는지 확인")
     @ParameterizedTest
     @MethodSource("getCheckLottoNumberIncludedInLottoNumbersData")
-    public void check_lotto_number_included_in_lotto_numbers(LottoNumbers lottoNumbers,
+    public void check_lotto_number_included_in_lotto_numbers(LottoNumberList lottoNumbers,
             LottoNumber lottoNumber, boolean expected) {
         Assertions.assertThat(lottoNumbers.hasNumber(lottoNumber)).isEqualTo(expected);
     }
 
     private static Stream<Arguments> getCheckLottoNumberIncludedInLottoNumbersData() {
         return Stream.of(
-                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(3), true),
-                Arguments.of(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(33), false)
+                Arguments.of(new LottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(3), true),
+                Arguments.of(new LottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(33), false)
         );
     }
 }

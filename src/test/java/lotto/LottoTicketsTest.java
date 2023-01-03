@@ -3,8 +3,8 @@ package lotto;
 import java.util.Arrays;
 import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.LottoWinningNumbers;
+import lotto.domain.LottoTicketList;
+import lotto.domain.LottoWinningNumberList;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ public class LottoTicketsTest {
     @DisplayName("로또 티켓 번호 일괄 확인")
     @Test
     public void get_lotto_numbers_string() {
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(
+        LottoTicketList lottoTickets = new LottoTicketList(Arrays.asList(
                 new LottoTicket(Arrays.asList(1,2,3,4,5,6)),
                 new LottoTicket(Arrays.asList(3,6,15,21,38,41))
         ));
@@ -25,10 +25,10 @@ public class LottoTicketsTest {
     @DisplayName("당첨 통계 계산")
     @Test
     public void get_lotto_numbers_statistics() {
-        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(
+        LottoWinningNumberList lottoWinningNumbers = new LottoWinningNumberList(
                 Arrays.asList(1, 2, 3, 4, 5, 6), 7
         );
-        LottoTickets lottoTickets = new LottoTickets(Arrays.asList(
+        LottoTicketList lottoTickets = new LottoTicketList(Arrays.asList(
                 createCustomTicket(LottoResult.FIRST),
                 createCustomTicket(LottoResult.FOURTH),
                 createCustomTicket(LottoResult.FIFTH)
@@ -45,7 +45,7 @@ public class LottoTicketsTest {
     private LottoTicket createCustomTicket(LottoResult lottoResult) {
         return new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)) {
             @Override
-            public LottoResult getResult(LottoWinningNumbers lottoWinningNumbers) {
+            public LottoResult getResult(LottoWinningNumberList lottoWinningNumbers) {
                 return lottoResult;
             }
         };

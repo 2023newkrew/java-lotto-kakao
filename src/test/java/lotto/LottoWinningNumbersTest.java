@@ -3,7 +3,7 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.LottoWinningNumbers;
+import lotto.domain.LottoWinningNumberList;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,7 +17,7 @@ public class LottoWinningNumbersTest {
     @MethodSource("getCreateWinningNumbersWith6NumbersAnd1BonusNumber")
     public void create_winning_numbers_with_6_numbers_and_1_bonus_number(
             List<Integer> numbers, int bonusNumber) {
-        Assertions.assertThatCode(() -> new LottoWinningNumbers(numbers, bonusNumber))
+        Assertions.assertThatCode(() -> new LottoWinningNumberList(numbers, bonusNumber))
                 .doesNotThrowAnyException();
     }
 
@@ -33,7 +33,7 @@ public class LottoWinningNumbersTest {
     @MethodSource("getCreateWinningNumbersWithDuplicatedBonusNumberData")
     public void create_winning_numbers_with_duplicated_bonus_number(
             List<Integer> numbers, int bonusNumber) {
-        Assertions.assertThatThrownBy(() -> new LottoWinningNumbers(numbers, bonusNumber))
+        Assertions.assertThatThrownBy(() -> new LottoWinningNumberList(numbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoTickets {
+public class LottoTicketList {
 
     private final List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
+    public LottoTicketList(List<LottoTicket> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
@@ -17,7 +17,7 @@ public class LottoTickets {
                 .collect(Collectors.joining("\n"));
     }
 
-    public LottoStatistics getStatistics(LottoWinningNumbers lottoWinningNumbers) {
+    public LottoStatistics getStatistics(LottoWinningNumberList lottoWinningNumbers) {
         List<LottoResult> lottoResults = lottoTickets.stream()
                 .map(it -> it.getResult(lottoWinningNumbers))
                 .collect(Collectors.toList());

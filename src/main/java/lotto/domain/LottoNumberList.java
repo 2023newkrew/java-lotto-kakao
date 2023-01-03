@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoNumbers {
+public class LottoNumberList {
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoNumberList(List<Integer> numbers) {
         validateNumbersSize(numbers);
         for (Integer number : numbers) {
             LottoNumber lottoNumber = new LottoNumber(number);
@@ -38,7 +38,7 @@ public class LottoNumbers {
                 .collect(Collectors.joining(", ")) + "]";
     }
 
-    public int getAmountOfNumbersInNumbers(LottoNumbers lottoNumbers) {
+    public int getAmountOfNumbersInNumbers(LottoNumberList lottoNumbers) {
         return this.lottoNumbers.stream()
                 .map(lottoNumbers::hasNumber)
                 .mapToInt(it -> it.compareTo(false)).sum();

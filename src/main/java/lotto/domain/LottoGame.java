@@ -3,7 +3,7 @@ package lotto.domain;
 public class LottoGame {
 
     private final LottoDispenser lottoDispenser;
-    private LottoTickets lottoTickets;
+    private LottoTicketList lottoTickets;
 
     public LottoGame(NumberSelectStrategy numberSelectStrategy) {
         this.lottoDispenser = new LottoDispenser(numberSelectStrategy);
@@ -21,7 +21,7 @@ public class LottoGame {
         return lottoTickets.getCount();
     }
 
-    public String getWinningString(LottoWinningNumbers lottoWinningNumbers) {
+    public String getWinningString(LottoWinningNumberList lottoWinningNumbers) {
         return lottoTickets.getStatistics(lottoWinningNumbers).getString();
     }
 }

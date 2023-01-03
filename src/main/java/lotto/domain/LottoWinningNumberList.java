@@ -2,13 +2,13 @@ package lotto.domain;
 
 import java.util.List;
 
-public class LottoWinningNumbers {
+public class LottoWinningNumberList {
 
-    private final LottoNumbers lottoNumbers;
+    private final LottoNumberList lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    public LottoWinningNumbers(List<Integer> numbers, int bonusNumber) {
-        this.lottoNumbers = new LottoNumbers(numbers);
+    public LottoWinningNumberList(List<Integer> numbers, int bonusNumber) {
+        this.lottoNumbers = new LottoNumberList(numbers);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
         validateDuplicateBonusNumber(bonusLottoNumber);
         this.bonusNumber = new LottoNumber(bonusNumber);
@@ -20,11 +20,11 @@ public class LottoWinningNumbers {
         }
     }
 
-    public int getAmountOfNumbersInWinningNumbers(LottoNumbers lottoNumbers) {
+    public int getAmountOfNumbersInWinningNumbers(LottoNumberList lottoNumbers) {
         return this.lottoNumbers.getAmountOfNumbersInNumbers(lottoNumbers);
     }
 
-    public boolean checkBonusNumberInNumbers(LottoNumbers lottoNumbers) {
+    public boolean checkBonusNumberInNumbers(LottoNumberList lottoNumbers) {
         return lottoNumbers.hasNumber(bonusNumber);
     }
 }

@@ -11,13 +11,13 @@ public class LottoDispenser {
         this.numberSelectStrategy = numberSelectStrategy;
     }
 
-    public LottoTickets getLottoTicket(int money) {
+    public LottoTicketList getLottoTicket(int money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         int ticketQuantity = calculateTicketQuantity(money);
         for (int i = 0; i < ticketQuantity; i++) {
             lottoTickets.add(new LottoTicket(numberSelectStrategy.select()));
         }
-        return new LottoTickets(lottoTickets);
+        return new LottoTicketList(lottoTickets);
     }
 
     private int calculateTicketQuantity(int money) {
