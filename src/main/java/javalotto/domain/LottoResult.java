@@ -18,11 +18,15 @@ public class LottoResult {
 
     public double getRateOfReturn(PurchaseAmount purchaseAmount) {
         int returnAmount = lottoResultMap.entrySet().stream()
-                .map(entry -> entry.getKey().prize * entry.getValue())
+                .map(this::prizeSumOfEntry)
                 .mapToInt(Integer::intValue)
                 .sum();
 
         return (double) returnAmount / (double) purchaseAmount.getPurchaseAmount();
+    }
+
+    private int prizeSumOfEntry(Map.Entry<Rank, Integer> entry) {
+        return entry.getKey().getPrize() * entry.getValue();
     }
 
     private static String entryToString(Map.Entry<Rank, Integer> entry) {
@@ -32,7 +36,7 @@ public class LottoResult {
     @Override
     public String toString() {
         return lottoResultMap.entrySet().stream()
-                .sorted(Comparator.comparingInt(entry -> entry.getKey().prize))
+                .sorted(Comparator.comparingInt(entry -> entry.getKey().getPrize()))
                 .map(LottoResult::entryToString)
                 .collect(Collectors.joining("\n"));
     }
