@@ -8,9 +8,7 @@ public abstract class LottoTrial {
     protected final List<LottoBallNumber> ballNumbers = new ArrayList<>();
     void check(LottoTrial lottoTrial){
         Set<LottoBallNumber> lottoSet = new HashSet<>();
-        for (LottoBallNumber bn : ballNumbers){
-            lottoSet.add(bn);
-        }
+        lottoSet.addAll(ballNumbers);
         if (lottoSet.size()!=LottoConstants.BALLCOUNT_LIMIT) {
             throw new DuplicatedBallNumber();
         }
