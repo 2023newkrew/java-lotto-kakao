@@ -49,7 +49,7 @@ public class Main {
 
     private static void processLotto(){
         for (int i=0; i<lottoTrials.size();i++){
-            totalResult.add(winNumber.compareLotto(lottoTrials.get(i)));
+            totalResult.addResult(winNumber.compareLotto(lottoTrials.get(i)));
         }
         System.out.println(totalResult);
     }
