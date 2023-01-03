@@ -3,9 +3,9 @@ package lotto.view;
 import java.util.Scanner;
 
 public class InputView {
-    private static Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
-    public static int scanPurchaseAmount() {
+    public int scanPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         int purchaseAmount = sc.nextInt();
 
@@ -15,13 +15,13 @@ public class InputView {
         return purchaseAmount;
     }
 
-    public static String scanWinningNumberString() {
+    public String scanWinningNumberString() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String winningNumberString = sc.next();
         return winningNumberString;
     }
 
-    public static int scanBonusNumber() {
+    public int scanBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusNumber = sc.nextInt();
         return bonusNumber;

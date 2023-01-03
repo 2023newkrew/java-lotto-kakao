@@ -7,13 +7,13 @@ import lotto.Ranking;
 import java.util.List;
 
 public class OutputView {
-    public static void printLottoTickets(List<LottoTicket> lottoTickets) {
+    public void printLottoTickets(List<LottoTicket> lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket);
         }
     }
 
-    public static void printMatchResult(MatchResult matchResult) {
+    public void printMatchResult(MatchResult matchResult) {
         System.out.println("당첨 통계");
         System.out.println("----------");
         System.out.printf("3개 일치 (5000원)- %d개\n", matchResult.getCount(Ranking.FIFTH));

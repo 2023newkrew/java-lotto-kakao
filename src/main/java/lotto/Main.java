@@ -8,16 +8,18 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         LottoMachine lottoMachine = new LottoMachine();
+        InputView inputView = new InputView();
+        OutputView outputView = new OutputView();
 
-        int purchaseAmount = InputView.scanPurchaseAmount();
+        int purchaseAmount = inputView.scanPurchaseAmount();
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(purchaseAmount);
-        OutputView.printLottoTickets(lottoTickets);
+        outputView.printLottoTickets(lottoTickets);
 
-        String winningNumberString = InputView.scanWinningNumberString();
-        int bonusNumber = InputView.scanBonusNumber();
+        String winningNumberString = inputView.scanWinningNumberString();
+        int bonusNumber = inputView.scanBonusNumber();
         lottoMachine.setWinningNumber(winningNumberString, bonusNumber);
 
         MatchResult matchResult = lottoMachine.match(lottoTickets);
-        OutputView.printMatchResult(matchResult);
+        outputView.printMatchResult(matchResult);
     }
 }
