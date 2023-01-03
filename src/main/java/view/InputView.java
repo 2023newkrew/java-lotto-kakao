@@ -33,6 +33,7 @@ public class InputView {
     }
 
     private static List<Integer> inputWinningLottoNumbers() {
+        sc.nextLine();
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         String[] tokens = sc.nextLine().split(",");
         for (String token : tokens) {

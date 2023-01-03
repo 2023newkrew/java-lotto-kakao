@@ -1,9 +1,11 @@
 package controller;
 
 import domain.dto.WinningNumbersDto;
+import domain.lotto.LottoGame;
 import domain.lotto.WinningNumbers;
 import domain.lotto.number.LottoNumberMaker;
 import domain.lotto.number.RandomNumberGenerator;
+import domain.lotto.result.LottoResults;
 import domain.lotto.ticket.LottoTicket;
 import domain.lotto.ticket.LottoTickets;
 import view.InputView;
@@ -13,6 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
+
+    public void start() {
+        LottoTickets lottoTickets = createLottoTickets();
+        OutputView.printLottoTickets(lottoTickets);
+        LottoGame lottoGame = new LottoGame(lottoTickets, createWinningNumbers());
+        LottoResults lottoResults = lottoGame.getLottoTicketsResult();
+        OutputView.printLottoResults(lottoResults);
+    }
 
     private LottoTickets createLottoTickets() {
         Integer purchaseAmount = InputView.inputPurchaseAmount();

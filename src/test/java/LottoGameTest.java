@@ -34,7 +34,17 @@ public class LottoGameTest {
         assertThat(lottoResults.getResultCount(LottoResultType.FIRST_PLACE)).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("수익률 계산 기능")
+    void lottoProfitRateTest(){
+        LottoResults lottoResults = new LottoResults();
 
+        for(int i = 0; i < 13; i++)
+            lottoResults.countResult(LottoResultType.FAIL);
+        lottoResults.countResult(LottoResultType.FIFTH_PLACE);
+
+        assertThat(String.format("%.2f", lottoResults.getProfitRate())).isEqualTo("0.36");
+    }
 }
 
 
