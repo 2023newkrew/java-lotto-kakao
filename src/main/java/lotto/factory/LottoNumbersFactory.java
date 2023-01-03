@@ -1,9 +1,10 @@
-package lotto.domain;
+package lotto.factory;
 
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.LottoNumbers;
 import lotto.generatepolicy.DefaultGeneratePolicy;
 import lotto.generatepolicy.GeneratePolicy;
 

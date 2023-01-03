@@ -27,4 +27,11 @@ public class LottoResult {
         return matchCount;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isHasBonus() {
+        return hasBonus;
+    }
 }

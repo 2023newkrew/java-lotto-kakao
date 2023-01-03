@@ -1,10 +1,10 @@
-package lotto.domain;
+package lotto.factory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
 import java.util.List;
-import lotto.factory.LottoNumbersFactory;
+import lotto.domain.LottoNumbers;
 import lotto.generatepolicy.GeneratePolicy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

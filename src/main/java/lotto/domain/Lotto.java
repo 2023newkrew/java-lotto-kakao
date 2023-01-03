@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.factory.LottoNumbersFactory;
+
 public class Lotto {
     private final LottoNumbers lottoNumbers;
 
