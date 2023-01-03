@@ -101,14 +101,28 @@ public class LottoTest {
     @ValueSource(strings = {"1, 2, 3,   4, 5, 6, 7", " 1,   2, 3"})
     @DisplayName("당첨 번호가 6개가 아닌 경우 예외를 발생한다.")
     void lottoWinNumberCountTest(String userInput){
-        Integer[] splitNumbers = Stream.of(userInput
+        Integer[] splitNumbers = changeToArray(userInput);
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5,46", "1,99,100,2,3,7"})
+    @DisplayName("당첨 번호가 1 ~ 45 사이의 정수가 아니라면, 예외를 발생한다.")
+    void lottoWinNumberRangeTest(String userInput){
+        Integer[] splitNumbers = changeToArray(userInput);
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
+    }
+
+    public Integer[] changeToArray(String userInput){
+        return Stream.of(userInput
                         .replace(" ", "")
                         .split(","))
                         .mapToInt(Integer::parseInt)
                         .boxed()
                         .toArray(Integer[]::new);
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
     }
 }
