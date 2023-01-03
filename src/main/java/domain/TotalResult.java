@@ -40,4 +40,15 @@ public class TotalResult {
     public int getValueOfResult(Result result) {
         return totalResult.getOrDefault(result, 0);
     }
+
+    private int getWinningsOfResult(Result result) {
+        return getValueOfResult(result) * result.getWinnings();
+    }
+
+    public double getProfit(int paidPrice) {
+        Integer winnings = Arrays.stream(Result.values()).map(this::getWinningsOfResult).reduce(Integer::sum).orElse(0);
+        return Math.floor((double) winnings * 100.0 / (double) paidPrice) / 100.0;
+    }
+
+
 }

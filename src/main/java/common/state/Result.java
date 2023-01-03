@@ -10,4 +10,7 @@ public enum Result {
         this.winnings = winnings;
     }
 
+    public int getWinnings() {
+        return winnings;
+    }
 }
