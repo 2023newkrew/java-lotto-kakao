@@ -42,4 +42,11 @@ public class LottoTicket {
         Collections.sort(values);
         return values;
     }
+
+    @Override
+    public String toString() {
+        return "LottoTicket{" +
+                "numbers=" + numbers +
+                '}';
+    }
 }

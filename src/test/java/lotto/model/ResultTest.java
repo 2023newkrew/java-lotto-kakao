@@ -35,9 +35,9 @@ public class ResultTest {
             put(Grade.FOUR, 2);
             put(Grade.FIVE, 3);
         }});
-        assertThat(result.get(Grade.THREE)).isEqualTo(1);
-        assertThat(result.get(Grade.FOUR)).isEqualTo(2);
-        assertThat(result.get(Grade.FIVE)).isEqualTo(3);
-        assertThat(result.get(Grade.FIVE_BONUS)).isEqualTo(0);
+        assertThat(result.getValue(Grade.THREE)).isEqualTo(1);
+        assertThat(result.getValue(Grade.FOUR)).isEqualTo(2);
+        assertThat(result.getValue(Grade.FIVE)).isEqualTo(3);
+        assertThat(result.getValue(Grade.FIVE_BONUS)).isEqualTo(0);
     }
 }

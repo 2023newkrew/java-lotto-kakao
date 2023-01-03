@@ -29,21 +29,21 @@ public class Result {
     }
 
     public int addUp(Grade grade) {
-        values.put(grade, get(grade) + 1);
+        values.put(grade, getValue(grade) + 1);
         return values.get(grade);
     }
 
-    public int get(Grade grade) {
+    public int getValue(Grade grade) {
         return values.getOrDefault(grade, 0);
     }
 
-    public float getProfitRate(int money) {
-        return (float) (
-                values.get(Grade.THREE) * Grade.THREE.getReward()
-                        + values.get(Grade.FOUR) * Grade.FOUR.getReward()
-                        + values.get(Grade.FIVE) * Grade.FIVE.getReward()
-                        + values.get(Grade.FIVE_BONUS) * Grade.FIVE_BONUS.getReward()
-                        + values.get(Grade.SIX) * Grade.SIX.getReward()
-        ) / (float) money;
+    public double getProfitRate(int money) {
+        return (double) (
+                getValue(Grade.THREE) * Grade.THREE.getReward()
+                        + getValue(Grade.FOUR) * Grade.FOUR.getReward()
+                        + getValue(Grade.FIVE) * Grade.FIVE.getReward()
+                        + getValue(Grade.FIVE_BONUS) * Grade.FIVE_BONUS.getReward()
+                        + getValue(Grade.SIX) * Grade.SIX.getReward()
+        ) / (double) money;
     }
 }

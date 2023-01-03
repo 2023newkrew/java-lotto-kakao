@@ -22,8 +22,8 @@ public class ResultView {
     }
 
     public void printLottoTickets(LottoTickets tickets) {
-        System.out.printf("%d개 구매했습니다.\n", tickets.getTicket().size());
-        for (LottoTicket ticket : tickets.getTicket()) {
+        System.out.printf("%d개 구매했습니다.\n", tickets.toTicketList().size());
+        for (LottoTicket ticket : tickets.toTicketList()) {
             List<String> numbers = ticket.toIntegerList()
                     .stream().map(
                             number -> Integer.toString(number)
@@ -42,12 +42,13 @@ public class ResultView {
                         "5개 일치, 보너스 볼 일치(30000000원) - %d개\n" +
                         "6개 일치 (2000000000원) - %d개\n" +
                         "총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)\n",
-                result.get(Grade.THREE),
-                result.get(Grade.FOUR),
-                result.get(Grade.FIVE),
-                result.get(Grade.FIVE_BONUS),
-                result.get(Grade.SIX),
+                result.getValue(Grade.THREE),
+                result.getValue(Grade.FOUR),
+                result.getValue(Grade.FIVE),
+                result.getValue(Grade.FIVE_BONUS),
+                result.getValue(Grade.SIX),
                 result.getProfitRate(money),
-                result.getProfitRate(money) > 1 ? "이익" : "손해");
+                result.getProfitRate(money) > 1 ? "이익이" : "손해"
+        );
     }
 }

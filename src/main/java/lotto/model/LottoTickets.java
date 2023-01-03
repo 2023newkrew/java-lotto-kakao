@@ -21,16 +21,13 @@ public class LottoTickets {
 
     public Result getResults(WinningNumbers winningNumbers) {
         Result result = new Result();
-        Grade key;
         for (LottoTicket ticket : tickets) {
-            key = winningNumbers.matchValues(ticket);
-            result.addUp(key);
+            result.addUp(winningNumbers.matchValues(ticket));
         }
         return result;
     }
 
-    public List<LottoTicket> getTicket() {
+    public List<LottoTicket> toTicketList() {
         return new ArrayList<>(tickets);
     }
-
 }
