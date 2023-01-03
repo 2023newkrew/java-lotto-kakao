@@ -44,6 +44,7 @@ public class LottoCalculator {
     }
 
     public double calcRateOfReturn(int amount, long summary) {
-        return 0.0;
+        amount -= amount % 1000;
+        return summary / amount;
     }
 }
