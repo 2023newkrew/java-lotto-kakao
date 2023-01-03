@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,14 +16,14 @@ class LottoCompanyTest {
         Lotto firstPrizeLotto = Lotto.create(1, 2, 3, 4, 5, 6);
         Lotto thirdPrizeLotto = Lotto.create(1, 2, 3, 4, 5, 8);
         Lotto fifthPrizeLotto = Lotto.create(1, 2, 3, 7, 8, 9);
-        LottosGenerator lottosGenerator = count ->
-                List.of(firstPrizeLotto,
-                        thirdPrizeLotto, thirdPrizeLotto,
-                        fifthPrizeLotto, fifthPrizeLotto, fifthPrizeLotto);
+        List<Lotto> lottos = List.of(firstPrizeLotto,
+                                     thirdPrizeLotto, thirdPrizeLotto,
+                                     fifthPrizeLotto, fifthPrizeLotto, fifthPrizeLotto);
         WinningNumbers winningNumbers = new WinningNumbers(firstPrizeLotto, new LottoNumber(7));
-        LottoCompany lottoCompany = new LottoCompany(winningNumbers, lottosGenerator);
+        LottoCompany lottoCompany = new LottoCompany(winningNumbers);
+        Money money = new Money(6000);
 
-        WinningStatistics actual = lottoCompany.play(new Money(6000));
+        WinningStatistics actual = lottoCompany.judge(lottos, money);
 
         assertThat(actual.countBy(Prize.FIRST)).isEqualTo(1L);
         assertThat(actual.countBy(Prize.SECOND)).isEqualTo(0L);

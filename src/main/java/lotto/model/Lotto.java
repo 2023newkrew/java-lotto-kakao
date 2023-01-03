@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -47,5 +47,11 @@ public class Lotto {
         return (int) numbers.stream()
                 .filter(other::hasNumber)
                 .count();
+    }
+
+    public List<Integer> getLottoNumbers() {
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
     }
 }
