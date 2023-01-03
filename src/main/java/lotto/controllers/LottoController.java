@@ -3,9 +3,7 @@ package lotto.controllers;
 import static lotto.common.LottoConfiguration.LOTTO_PRICE;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import lotto.models.Goal;
 import lotto.models.Lotto;
 import lotto.models.LottoGenerator;
@@ -34,6 +32,10 @@ public class LottoController {
     }
 
     private Integer getBudget() {
+        return outputView.requestUntilSuccess(this::getBudgetLogic);
+    }
+
+    private Integer getBudgetLogic() {
         outputView.askForMoneyToBuyLotto();
         return inputView.getInteger();
     }
@@ -54,21 +56,29 @@ public class LottoController {
     }
 
     private Goal getGoal() {
+        return outputView.requestUntilSuccess(this::getGoalLogic);
+    }
+
+    private Goal getGoalLogic() {
         List<Integer> goalNumbers = getGoalNumbers();
         Integer bonusBall = getBonusBall();
         return new Goal(goalNumbers, bonusBall);
     }
 
     private List<Integer> getGoalNumbers() {
+        return outputView.requestUntilSuccess(this::getGoalNumbersLogic);
+    }
+
+    private List<Integer> getGoalNumbersLogic() {
         outputView.askForLastGoalNumbers();
-        String input = inputView.getString();
-        return Arrays.stream(input.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        return inputView.getIntegerList();
     }
 
     private Integer getBonusBall() {
+        return outputView.requestUntilSuccess(this::getBonusBallLogic);
+    }
+
+    private Integer getBonusBallLogic() {
         outputView.askForBonusBall();
         return inputView.getInteger();
     }

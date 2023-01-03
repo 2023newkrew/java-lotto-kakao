@@ -15,6 +15,7 @@ public class LottoStatistics {
         earningsRate = calculateEarningsRate(budget);
 
     }
+
     public Double getEarningsRate() {
         return earningsRate;
     }
@@ -34,16 +35,16 @@ public class LottoStatistics {
 
     private Double calculateEarningsRate(Integer budget) {
         long sumOfPrize = 0;
-        for(LottoResult key: rankCounts.keySet()) {
+        for (LottoResult key : rankCounts.keySet()) {
             long numberOfPrize = rankCounts.get(key);
             sumOfPrize += key.getPrize() * numberOfPrize;
         }
-        return  (double) sumOfPrize / budget;
+        return (double) sumOfPrize / budget;
     }
 
     private Map<LottoResult, Integer> initializeRankCounts() {
         Map<LottoResult, Integer> rankCounts = new HashMap<>();
-        for (LottoResult lottoResult: LottoResult.values()) {
+        for (LottoResult lottoResult : LottoResult.values()) {
             rankCounts.put(lottoResult, 0);
         }
 

@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Goal extends Lotto{
+public class Goal extends Lotto {
     private final Integer bonusBall;
 
     public Goal(List<Integer> goal, Integer bonusBall) {

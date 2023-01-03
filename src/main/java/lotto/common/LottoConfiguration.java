@@ -9,5 +9,6 @@ public class LottoConfiguration {
 
     static public final Integer LOTTO_PRICE = 1000;
 
-    private LottoConfiguration() {}
+    private LottoConfiguration() {
+    }
 }

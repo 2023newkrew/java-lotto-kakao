@@ -1,6 +1,8 @@
 package lotto.views;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Supplier;
 import lotto.models.Lotto;
 import lotto.models.LottoResult;
 import lotto.models.LottoStatistics;
@@ -21,8 +23,8 @@ public class OutputView {
     }
 
     public void printLottos(List<Lotto> Lottos) {
-        for (Lotto lotto:
-             Lottos) {
+        for (Lotto lotto :
+                Lottos) {
             console.printOutput(lotto.getNumbers().toString());
         }
     }
@@ -43,8 +45,26 @@ public class OutputView {
                 + "3개 일치 (" + LottoResult.FIFTH.getPrize() + "원)- " + statistics.getCountOf(LottoResult.FIFTH) + "개\n"
                 + "4개 일치 (" + LottoResult.FOURTH.getPrize() + "원)- " + statistics.getCountOf(LottoResult.FOURTH) + "개\n"
                 + "5개 일치 (" + LottoResult.THIRD.getPrize() + "원)- " + statistics.getCountOf(LottoResult.THIRD) + "개\n"
-                + "5개 일치, 보너스 볼 일치(" + LottoResult.SECOND.getPrize() + "원) - " + statistics.getCountOf(LottoResult.SECOND) + "개\n"
+                + "5개 일치, 보너스 볼 일치(" + LottoResult.SECOND.getPrize() + "원) - " + statistics.getCountOf(
+                LottoResult.SECOND) + "개\n"
                 + "6개 일치 (" + LottoResult.FIRST.getPrize() + "원)- " + statistics.getCountOf(LottoResult.FIRST) + "개\n"
                 + "총 수익률은 " + rateString + "입니다.\n");
+    }
+
+    public <T> T requestUntilSuccess(Supplier<T> getT) {
+        Optional<T> result = wrapTryCatch(getT);
+        while (result.isEmpty()) {
+            result = wrapTryCatch(getT);
+        }
+        return result.get();
+    }
+
+    private <T> Optional<T> wrapTryCatch(Supplier<T> getT) {
+        try {
+            return Optional.of(getT.get());
+        } catch (RuntimeException e) {
+            console.printError(e.getMessage());
+            return Optional.empty();
+        }
     }
 }
