@@ -16,10 +16,10 @@ public class LottoCheckerTest {
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,45), 7);
 
         // when
-        LottoResult lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
+        LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
 
         // then
-        assertThat(lottoResult).isEqualTo(LottoResult.FAIL);
+        assertThat(lottoResult).isEqualTo(LottoResultType.FAIL);
     }
 
     @Test
@@ -31,10 +31,10 @@ public class LottoCheckerTest {
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,43,44,45), 7);
 
         // when
-        LottoResult lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
+        LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
 
         // then
-        assertThat(lottoResult).isEqualTo(LottoResult.FIFTH_PLACE);
+        assertThat(lottoResult).isEqualTo(LottoResultType.FIFTH_PLACE);
     }
     @Test
     @DisplayName("로또 4등 당첨 테스트")
@@ -45,10 +45,10 @@ public class LottoCheckerTest {
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,45), 7);
 
         // when
-        LottoResult lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
+        LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
 
         // then
-        assertThat(lottoResult).isEqualTo(LottoResult.FOURTH_PLACE);
+        assertThat(lottoResult).isEqualTo(LottoResultType.FOURTH_PLACE);
     }
     @Test
     @DisplayName("로또 3등 당첨 테스트")
@@ -59,10 +59,10 @@ public class LottoCheckerTest {
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,45), 42);
 
         // when
-        LottoResult lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
+        LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
 
         // then
-        assertThat(lottoResult).isEqualTo(LottoResult.THIRD_PLACE);
+        assertThat(lottoResult).isEqualTo(LottoResultType.THIRD_PLACE);
     }
     @Test
     @DisplayName("로또 2등 당첨 테스트")
@@ -73,10 +73,10 @@ public class LottoCheckerTest {
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,45), 7);
 
         // when
-        LottoResult lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
+        LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
 
         // then
-        assertThat(lottoResult).isEqualTo(LottoResult.SECOND_PLACE);
+        assertThat(lottoResult).isEqualTo(LottoResultType.SECOND_PLACE);
     }
 
     @Test
@@ -88,9 +88,9 @@ public class LottoCheckerTest {
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,7), 12);
 
         // when
-        LottoResult lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
+        LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
 
         // then
-        assertThat(lottoResult).isEqualTo(LottoResult.FIRST_PLACE);
+        assertThat(lottoResult).isEqualTo(LottoResultType.FIRST_PLACE);
     }
 }

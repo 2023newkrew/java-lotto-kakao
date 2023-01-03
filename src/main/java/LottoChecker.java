@@ -1,11 +1,9 @@
-import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoChecker {
 
-    public LottoResult getResult(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
+    public static LottoResultType getResult(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
         List<Integer> containedNumbers = lottoTicket.getLottoNumbers().stream()
                 .filter((number) -> winningNumbers.getLottoNumber().contains(number))
                 .collect(Collectors.toList());
@@ -14,12 +12,12 @@ public class LottoChecker {
                 lottoTicket.getLottoNumbers().contains(winningNumbers.getBonusNumber()));
     }
 
-    private LottoResult getRank(int size, boolean hasBonusNumber) {
-        if (size < 3) return LottoResult.FAIL;
-        if (size == 3) return LottoResult.FIFTH_PLACE;
-        if (size == 4) return LottoResult.FOURTH_PLACE;
-        if (hasBonusNumber) return LottoResult.SECOND_PLACE;
-        if (size == 5) return LottoResult.THIRD_PLACE;
-        return LottoResult.FIRST_PLACE;
+    private static LottoResultType getRank(int size, boolean hasBonusNumber) {
+        if (size < 3) return LottoResultType.FAIL;
+        if (size == 3) return LottoResultType.FIFTH_PLACE;
+        if (size == 4) return LottoResultType.FOURTH_PLACE;
+        if (hasBonusNumber) return LottoResultType.SECOND_PLACE;
+        if (size == 5) return LottoResultType.THIRD_PLACE;
+        return LottoResultType.FIRST_PLACE;
     }
 }

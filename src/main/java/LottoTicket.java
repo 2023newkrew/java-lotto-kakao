@@ -10,8 +10,7 @@ public class LottoTicket {
 
         validateNumberDuplication(lottoNumbers);
         validateNumberRange(lottoNumbers);
-        Collections.sort(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        this.lottoNumbers = new ArrayList<>(new TreeSet<>(lottoNumbers));
     }
 
     public List<Integer> getLottoNumbers() {
