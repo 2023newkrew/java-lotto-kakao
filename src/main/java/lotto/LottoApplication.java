@@ -1,6 +1,10 @@
 package lotto;
 
 import lotto.controller.LottoController;
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoWinnerTicket;
+import lotto.service.LottoCalculator;
+import lotto.utils.ChangeInput;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -19,13 +23,18 @@ public class LottoApplication {
         ResultView resultView = new ResultView();
         resultView.printLottoTickets(lottoController.getLottoTickets());
 
-        // 지난주 당첨 번호 입력
-        inputView.inputWinNumber();
+        // 지난주 당첨 번호 및 보너스볼 입력
+        ChangeInput changeInput = new ChangeInput();
+
         // 보너스볼 입력
-        inputView.inputBonusNumber();
+        LottoWinnerTicket lottoWinnerTicket = changeInput.changeToWinnerTicket(
+                inputView.inputWinNumber(),
+                inputView.inputBonusNumber());
+
+        LottoCalculator lottoCalculator = new LottoCalculator(lottoWinnerTicket);
 
         // Winner 뽑아내기
-        ArrayList<Integer> result = lottoController.getResult();
+        ArrayList<Integer> result = lottoCalculator.getResult(lottoController.getLottoTickets());
 
         // 당첨 통계 출력
         resultView.printWinningStatics(result);

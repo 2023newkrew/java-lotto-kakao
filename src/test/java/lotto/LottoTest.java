@@ -93,10 +93,10 @@ public class LottoTest {
         LottoCalculator lottoCalculator = new LottoCalculator(winTicket);
 
         LottoTicket userTicket1 = new LottoTicket(new ArrayList<>(List.of(1, 3, 4, 5, 6, 22)));
-        Assertions.assertThat(lottoCalculator.calcBonusNumber(userTicket1)).isTrue();
+        Assertions.assertThat(lottoCalculator.isBonusNumber(userTicket1)).isTrue();
 
         LottoTicket userTicket2 = new LottoTicket(new ArrayList<>(List.of(1, 3, 4, 5, 6, 23)));
-        Assertions.assertThat(lottoCalculator.calcBonusNumber(userTicket2)).isFalse();
+        Assertions.assertThat(lottoCalculator.isBonusNumber(userTicket2)).isFalse();
     }
 
     @ParameterizedTest

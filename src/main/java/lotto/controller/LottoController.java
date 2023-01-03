@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoTickets;
+import lotto.service.LottoCalculator;
 
 import java.util.ArrayList;
 
@@ -17,8 +18,5 @@ public class LottoController {
 
     public LottoTickets getLottoTickets(){
         return this.lottoTickets;
-    }
-
-    public ArrayList<Integer> getResult() {
     }
 }

@@ -19,8 +19,8 @@ public class ResultView {
         System.out.println(RESULT_THREE_MATCHING.getMessage() + result.get(0));
         System.out.println(RESULT_FOUR_MATCHING.getMessage() + result.get(1));
         System.out.println(RESULT_FIVE_MATCHING.getMessage() + result.get(2));
-        System.out.println(RESULT_FIVE_BONUS_MATCHING.getMessage() + result.get(3));
-        System.out.println(RESULT_SIX_MATCHING.getMessage() + result.get(4));
+        System.out.println(RESULT_FIVE_BONUS_MATCHING.getMessage() + result.get(4));
+        System.out.println(RESULT_SIX_MATCHING.getMessage() + result.get(3));
     }
 
     private void printRateOfReturn(double rate){
