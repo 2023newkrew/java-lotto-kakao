@@ -21,7 +21,7 @@ class LottoCompanyTest {
                                      fifthPrizeLotto, fifthPrizeLotto, fifthPrizeLotto);
         WinningNumbers winningNumbers = new WinningNumbers(firstPrizeLotto, new LottoNumber(7));
         LottoCompany lottoCompany = new LottoCompany(winningNumbers);
-        Money money = new Money(6000);
+        Money money = Money.valueOf(6000);
 
         WinningStatistics actual = lottoCompany.judge(lottos, money);
 

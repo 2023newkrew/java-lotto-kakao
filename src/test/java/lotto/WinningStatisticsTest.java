@@ -24,7 +24,7 @@ class WinningStatisticsTest {
     })
     void sumFirstPrize(Prize prize, long expectedProfit) {
         WinningStatistics winningStatistics = new WinningStatistics(
-                new Money(1000), Map.of(prize, 1L)
+                Money.valueOf(1000), Map.of(prize, 1L)
         );
 
         BigDecimal profit = winningStatistics.getProfitRate();
@@ -36,7 +36,7 @@ class WinningStatisticsTest {
     @Test
     void sumFirstAndSecondPrize() {
         WinningStatistics winningStatistics = new WinningStatistics(
-                new Money(25345), Map.of(Prize.FIRST, 1L,
+                Money.valueOf(25345), Map.of(Prize.FIRST, 1L,
                         Prize.SECOND, 2L,
                         Prize.THIRD, 3L,
                         Prize.FOURTH, 4L,

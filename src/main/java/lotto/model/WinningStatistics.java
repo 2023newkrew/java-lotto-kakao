@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class WinningStatistics {
 
+    private static final long LOTTO_PRICE = 1000L;
+
     private final Money money;
 
     private final Map<Prize, Long> prizeMap;
@@ -21,8 +23,8 @@ public class WinningStatistics {
     }
 
     public BigDecimal getProfitRate() {
-        BigDecimal baseMoney = BigDecimal.valueOf(money.getAmount());
-        BigDecimal remainMoney = BigDecimal.valueOf(money.getRemain());
+        BigDecimal baseMoney = BigDecimal.valueOf(money.longValue());
+        BigDecimal remainMoney = BigDecimal.valueOf(money.longValue() % LOTTO_PRICE);
         BigDecimal totalProfit = getTotalProfit();
         return totalProfit.add(remainMoney)
                 .divide(baseMoney, 2, RoundingMode.DOWN);

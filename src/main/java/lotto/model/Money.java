@@ -2,26 +2,25 @@ package lotto.model;
 
 public class Money {
 
-    private static final long LOTTO_PRICE = 1000L;
+    private final long value;
 
-    private final long amount;
-
-    public Money(long amount) {
-        if (amount <= 0L) {
-            throw new IllegalArgumentException("구매 금액은 0원을 초과해야 합니다.");
+    public static Money valueOf(long value) {
+        if (value <= 0L) {
+            throw new IllegalArgumentException("돈은 0원을 초과해야 합니다.");
         }
-        this.amount = amount;
+
+        return new Money(value);
     }
 
-    public long getLottoCount() {
-        return amount / LOTTO_PRICE;
+    private Money(long value) {
+        this.value = value;
     }
 
-    public long getAmount() {
-        return amount;
+    public long longValue() {
+        return value;
     }
 
-    public long getRemain() {
-        return amount - getLottoCount() * LOTTO_PRICE;
+    public long getPurchasableCount(Money price) {
+        return value / price.value;
     }
 }

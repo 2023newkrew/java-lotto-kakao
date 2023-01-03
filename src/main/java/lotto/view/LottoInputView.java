@@ -20,7 +20,7 @@ public class LottoInputView {
     public Money inputMoney() {
         System.out.println("구매 금액을 입력해 주세요.");
         long amount = Long.parseLong(scanner.nextLine());
-        return new Money(amount);
+        return Money.valueOf(amount);
     }
 
     public Lotto inputWinningLotto() {
