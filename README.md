@@ -10,27 +10,9 @@
 - [x] 여러 장의 로또 용지를 가지는 일급 콜렉션
 - [x] 여러 장의 로또 용지의 당첨 결과를 반환하는 기능
 - [x] 구입금액을 입력하는 기능
-- [] 구입 개수만큼 로또 용지를 생성
+- [x] 구입 개수만큼 로또 용지를 생성
 - [] 당첨 번호를 입력하는 기능 (보너스 볼 포함)
 - [] 당첨 통계를 출력하는 기능
 - [] 수익률을 계산하는 기능
 
-
-
----------
-controller
-  - aa
-
-domain
-  - lotto
-    - ticket
-    - result
-    - number
-    LottoGame
-      로또 티켓스도 만들고
-      위닝 넘버스도 만들고
-      지금 있는 생성자에 넣음
-    LottoMetaData
-    LottoChecker
-    WinningNumbers
     

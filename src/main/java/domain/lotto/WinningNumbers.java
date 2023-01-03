@@ -1,16 +1,14 @@
 package domain.lotto;
 
-import domain.lotto.LottoMetaData;
-
 import java.util.HashSet;
 import java.util.List;
 
 public class WinningNumbers {
-    private final List<Integer> lottoNumber;
+    private final List<Integer> lottoNumbers;
     private final Integer bonusNumber;
 
     public List<Integer> getLottoNumber() {
-        return lottoNumber;
+        return lottoNumbers;
     }
 
     public Integer getBonusNumber() {
@@ -22,7 +20,7 @@ public class WinningNumbers {
             throw new NullPointerException();
         validateNumberDuplication(winningNumbers, bonusNumber);
         validateNumberRange(winningNumbers);
-        this.lottoNumber = winningNumbers;
+        this.lottoNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
     }
 
