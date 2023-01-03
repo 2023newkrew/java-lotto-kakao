@@ -1,12 +1,11 @@
 package buyer;
 
 import lotto.*;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class BuyerProfitTest {
     @DisplayName("수익률 테스트")
@@ -19,8 +18,7 @@ public class BuyerProfitTest {
         //when
         BuyerResult buyerResult = lotteryResult.getResult(lotteries);
         //then
-
-        assertThat(buyerResult.getProfit()).isEqualTo(new BuyerProfit((double) Rank.FIRST.prize / 1000));
+        Assertions.assertThat(buyerResult.getProfit()).isEqualTo(new BuyerProfit((double) Rank.FIRST.prize / 1000));
 
     }
 }
