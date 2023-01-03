@@ -2,12 +2,10 @@ package lotto.dto;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoConstants;
 import lotto.domain.LottoRank;
-import lotto.domain.LottoResult;
 import lotto.domain.LottoResultMessage;
 
 public class GameResultDto {
