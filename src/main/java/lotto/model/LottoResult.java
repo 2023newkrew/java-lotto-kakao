@@ -2,6 +2,8 @@ package lotto.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 public enum LottoResult {
     SIX_NUMBERS_MATCHED(List.of(6), List.of(true, false), 2000000000),
@@ -21,10 +23,6 @@ public enum LottoResult {
         this.prizeMoney = prizeMoney;
     }
 
-    public Integer getPrizeMoney() {
-        return prizeMoney;
-    }
-
     public static LottoResult match(MatchedResult matchedResult) {
         return Arrays.stream(LottoResult.values())
                 .filter(lottoResult -> lottoResult.mainMatchCountCase.contains(matchedResult.getMatchedCount()))
@@ -32,5 +30,28 @@ public enum LottoResult {
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new)
                 ;
+    }
+
+    public Integer getPrizeMoney() {
+        return prizeMoney;
+    }
+
+    private String[] convertToString() {
+        return mainMatchCountCase.stream()
+                .map(String::valueOf)
+                .collect(Collectors.toList())
+                .toArray(String[]::new)
+                ;
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner stringJoiner = new StringJoiner(" ");
+        stringJoiner
+                .add(String.format("%s개 일치", String.join(", ", convertToString())))
+                .add(bonusMatched.equals(List.of(true)) ? "보너스 볼 일치" : "")
+                .add(String.format("(%d원)", prizeMoney))
+        ;
+        return stringJoiner.toString();
     }
 }

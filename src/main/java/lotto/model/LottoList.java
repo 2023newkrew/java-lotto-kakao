@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class LottoList {
 
@@ -31,5 +32,12 @@ public class LottoList {
 
     public Integer length() {
         return lottoList.size();
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner stringJoiner = new StringJoiner("\n");
+        lottoList.forEach(lotto -> stringJoiner.add(lotto.toString()));
+        return stringJoiner.toString();
     }
 }

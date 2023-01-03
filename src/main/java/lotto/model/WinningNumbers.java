@@ -16,6 +16,11 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
+    public WinningNumbers(List<Integer> mainNumbers, Integer bonusNumber) {
+        this.mainNumbers = new MainNumbers(mainNumbers);
+        this.bonusNumber = bonusNumber;
+    }
+
     public MatchedResult check(Lotto lotto) {
         return new MatchedResult(checkMainNumbers(lotto), checkBonusNumber(lotto));
     }

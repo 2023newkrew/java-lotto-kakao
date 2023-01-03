@@ -43,4 +43,13 @@ public class Lotto {
     public Integer get(int index) {
         return numbers.get(index);
     }
+
+    @Override
+    public String toString() {
+        return "[" +
+                numbers.stream()
+                        .map(String::valueOf)
+                        .collect(Collectors.joining(", ")) +
+                ']';
+    }
 }
