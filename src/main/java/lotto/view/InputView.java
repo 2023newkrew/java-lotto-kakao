@@ -1,6 +1,10 @@
 package lotto.view;
 
 import static lotto.domain.LottoConstants.LOTTO_PRICE;
+import static lotto.view.InputErrorMessage.BOUND_EXCEPTION_MESSAGE;
+import static lotto.view.InputErrorMessage.MODULAR_EXCEPTION_MESSAGE;
+import static lotto.view.InputErrorMessage.NULL_OR_BLANK_EXCEPTION_MESSAGE;
+import static lotto.view.InputErrorMessage.REQUIRED_NUMBER_EXCEPTION_MESSAGE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +33,7 @@ public class InputView {
 
     private void validateNPE(String line) {
         if (StringUtils.isNullOrBlank(line)) {
-            throw new IllegalArgumentException("널 또는 빈 문자열이 올 수 없습니다.");
+            throw new IllegalArgumentException(NULL_OR_BLANK_EXCEPTION_MESSAGE.getMessage());
         }
     }
 
@@ -38,7 +42,7 @@ public class InputView {
         try {
             return Integer.parseInt(num);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자가 주어져야 합니다.");
+            throw new IllegalArgumentException(REQUIRED_NUMBER_EXCEPTION_MESSAGE.getMessage());
         }
 
     }
@@ -50,14 +54,15 @@ public class InputView {
 
     private void validateRange(int price) {
         if (price < LOTTO_PRICE.getValue()) {
-            throw new IllegalArgumentException("1000원 이상이 주어져야합니다.");
+            throw new IllegalArgumentException(BOUND_EXCEPTION_MESSAGE.getMessage());
         }
 
     }
 
     private void validateIsValid(int price) {
         if (price % LOTTO_PRICE.getValue() != 0) {
-            throw new IllegalArgumentException("1000의 배수가 주어져야합니다.");
+            throw new IllegalArgumentException(MODULAR_EXCEPTION_MESSAGE.getMessage());
         }
+
     }
 }

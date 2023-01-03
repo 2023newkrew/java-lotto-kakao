@@ -1,15 +1,17 @@
 package lotto.view;
 
+import static lotto.view.OutputMessage.*;
+
 import lotto.dto.GameResultDto;
 import lotto.domain.LottoHandler;
 
 public class OutputView {
     public void printReadPrice() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(PRINT_READ_PRICE.getMessage());
     }
 
     public void printCount(int lottoCount) {
-        System.out.printf("%d개를 구매했습니다.\n", lottoCount);
+        System.out.printf(PRINT_COUNT.getMessage(), lottoCount);
     }
 
     public void printAllLotto(LottoHandler lottoHandler) {
@@ -17,16 +19,16 @@ public class OutputView {
     }
 
     public void printReadLottoAnswerNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println(PRINT_READ_LOTTO_ANSWER.getMessage());
     }
 
     public void printReadBonusBall() {
-        System.out.println("보너스 볼을 입력해 주세요.");
+        System.out.println(PRINT_READ_BONUS_BALL.getMessage());
     }
 
     public void printGameResult(GameResultDto gameResultDto) {
-        System.out.println("\n당첨 통계\n---------");
+        System.out.println(PRINT_WINNING_RESULT.getMessage());
         System.out.println(gameResultDto.getResult());
-        System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", gameResultDto.getYield());
+        System.out.printf(PRINT_STATICS.getMessage(), gameResultDto.getYield());
     }
 }

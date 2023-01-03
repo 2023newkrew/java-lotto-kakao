@@ -2,7 +2,7 @@ package lotto.domain;
 
 import static lotto.domain.LottoRank.SIXTH;
 
-public final class LottoResultString {
+public final class LottoResultMessage {
     public static String getString(LottoRank lottoRank, int count) {
         if (lottoRank.isRequiredBonus()) {
             return hasBonusString(lottoRank, count);

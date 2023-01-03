@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import lotto.domain.LottoConstants;
 import lotto.domain.LottoRank;
-import lotto.domain.LottoResultString;
+import lotto.domain.LottoResultMessage;
 
 public class GameResultDto {
 
@@ -14,7 +14,7 @@ public class GameResultDto {
     public GameResultDto(List<Integer> rankCount, int lottoCount) {
         StringBuilder stringBuilder = new StringBuilder();
         for (LottoRank rank : LottoRank.values()) {
-            stringBuilder.insert(0, LottoResultString.getString(rank, rankCount.get(rank.getIndex())));
+            stringBuilder.insert(0, LottoResultMessage.getString(rank, rankCount.get(rank.getIndex())));
         }
         result = stringBuilder.toString();
         yield = calculateYield(rankCount, lottoCount);
