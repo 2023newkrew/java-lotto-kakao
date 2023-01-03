@@ -1,5 +1,6 @@
-package domain.lotto;
+package domain.lotto.number;
 
+import domain.lotto.LottoMetaData;
 import domain.lotto.number.LottoNumbers;
 
 import java.util.ArrayList;

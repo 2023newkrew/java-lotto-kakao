@@ -1,4 +1,4 @@
-import domain.lotto.WinningNumbers;
+import domain.lotto.number.WinningNumbers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

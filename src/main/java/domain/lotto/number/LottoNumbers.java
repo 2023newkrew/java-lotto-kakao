@@ -9,7 +9,7 @@ import java.util.List;
 public class LottoNumbers {
     private final List<Integer> numbers;
 
-    public LottoNumbers(List<Integer> numbers) {
+    public LottoNumbers(final List<Integer> numbers) {
         validateNumberDuplication(numbers);
         numbers.forEach(this::validateNumberRange);
         this.numbers = new ArrayList<>(numbers);

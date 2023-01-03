@@ -1,5 +1,5 @@
 import domain.lotto.LottoGame;
-import domain.lotto.WinningNumbers;
+import domain.lotto.number.WinningNumbers;
 import domain.lotto.result.LottoResultType;
 import domain.lotto.result.LottoResults;
 import domain.lotto.ticket.LottoTicket;
