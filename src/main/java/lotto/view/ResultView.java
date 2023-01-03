@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
+
 import java.util.ArrayList;
 
 import static lotto.utils.LottoMessage.*;
@@ -27,5 +30,19 @@ public class ResultView {
             return;
         }
         System.out.println(RESULT_GOOD.getMessage());
+    }
+    public void printLottoTickets(LottoTickets lottoTickets) {
+        ArrayList<LottoTicket> tickets = lottoTickets.getTickets();
+        for(LottoTicket ticket : tickets){
+            printEachTicket(ticket.getLottoNumbers());
+        }
+    }
+
+    private void printEachTicket(ArrayList<Integer> numbers){
+        System.out.print("[");
+        for(int number : numbers) {
+            System.out.print(number);
+        }
+        System.out.println("]");
     }
 }
