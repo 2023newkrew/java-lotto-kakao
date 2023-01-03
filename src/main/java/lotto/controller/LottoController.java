@@ -1,9 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.LottoTickets;
-import lotto.service.LottoCalculator;
-
-import java.util.ArrayList;
 
 public class LottoController {
     private final LottoTickets lottoTickets;

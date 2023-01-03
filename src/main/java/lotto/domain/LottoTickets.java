@@ -7,6 +7,7 @@ public class LottoTickets {
     private final LottoRandom lottoRandom;
 
     public LottoTickets(int amount) {
+        // 입력한 금액이 1000원 미만이면 로또 구입 불가능
         if(!checkAmountUpperThan1000(amount)){
             throw new IllegalArgumentException("입력한 금액이 1000원 미만입니다.");
         }
