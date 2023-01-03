@@ -5,6 +5,12 @@ import javalotto.domain.*;
 
 public class OutputView {
 
+    private OutputView() {}
+
+    public static OutputView newInstance() {
+        return new OutputView();
+    }
+
     public void printLottoCount(LottoCount lottoCount) {
         System.out.println(lottoCount.getCount() + "개를 구매했습니다.");
     }
@@ -13,9 +19,9 @@ public class OutputView {
         System.out.println(lottos);
     }
 
-    public void printResult(WinningLotto winningLotto, Lottos lottos) {
-        LottoResult lottoResult = lottos.getLottoResult(winningLotto);
+    public void printLottoResult(LottoResult lottoResult, PurchaseAmount purchaseAmount) {
         printWinningStatistics(lottoResult);
+        printRateOfReturn(lottoResult, purchaseAmount);
     }
 
     private void printWinningStatistics(LottoResult lottoResult) {
@@ -24,7 +30,7 @@ public class OutputView {
         System.out.println(lottoResult);
     }
 
-    public void printRateOfReturn(LottoResult lottoResult, PurchaseAmount purchaseAmount) {
+    private void printRateOfReturn(LottoResult lottoResult, PurchaseAmount purchaseAmount) {
         double rateOfReturn = lottoResult.getRateOfReturn(purchaseAmount);
         System.out.println(String.format("총 수익률은 %2f입니다." + rateOfReturnDescription(rateOfReturn)));
     }

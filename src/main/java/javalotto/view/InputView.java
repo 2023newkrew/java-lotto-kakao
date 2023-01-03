@@ -12,8 +12,12 @@ import java.util.stream.Collectors;
 public class InputView {
     private Scanner scanner;
 
-    public InputView() {
+    private InputView() {
         this.scanner = new Scanner(System.in);
+    }
+
+    public static InputView newInstance() {
+        return new InputView();
     }
 
     public PurchaseAmount getPurchaseAmountInput() {
