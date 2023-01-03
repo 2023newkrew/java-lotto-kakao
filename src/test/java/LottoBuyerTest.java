@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,10 +16,7 @@ public class LottoBuyerTest {
         );
         LottoBuyer lottoBuyer = new LottoBuyer(price, (money)->lottos);
 
-        List<LottoNumber> winningNumbers = IntStream
-                .range(1, 7)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+        Lotto winningNumbers = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(45);
 
         LottoResult lottoResult = lottoBuyer.check(winningNumbers, bonusNumber);
@@ -40,10 +35,7 @@ public class LottoBuyerTest {
                 Lotto.ofNumbers(List.of(3,4,5,6,7,8)),
                 Lotto.ofNumbers(List.of(5,6,7,8,9,10))
         );
-        List<LottoNumber> winningNumbers = IntStream
-                .range(1, 7)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
+        Lotto winningNumbers = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(45);
 
         LottoBuyer lottoBuyer = new LottoBuyer(price, (money)->lottos);
