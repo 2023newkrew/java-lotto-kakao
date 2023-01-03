@@ -1,9 +1,13 @@
-package lotto.views;
+package lotto.view.output;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import lotto.models.Lotto;
-import lotto.models.LottoResult;
+import lotto.model.number.LottoNumber;
+import lotto.common.LottoResult;
+import lotto.model.statistic.LottoStatistic;
+import lotto.view.console.Console;
 
 public class OutputView {
     Console console;
@@ -20,10 +24,10 @@ public class OutputView {
         console.printOutput(numberOfLotto.toString() + "개를 구매했습니다.");
     }
 
-    public void printLottos(List<Lotto> Lottos) {
-        for (Lotto lotto:
-             Lottos) {
-            console.printOutput(lotto.getNumbers().toString());
+    public void printLottos(List<LottoNumber> lottoNumbers) {
+        for (LottoNumber lottoNumber :
+                lottoNumbers) {
+            console.printOutput(lottoNumber.getNumbers().toString());
         }
     }
 
@@ -35,16 +39,31 @@ public class OutputView {
         console.printOutput("보너스 볼을 입력해 주세요.");
     }
 
-    public void printStatistics(Map<LottoResult, Integer> statistics, Double rate) {
+    public void printStatistics(LottoStatistic statistics, Double rate) {
         String rateString = String.format("%.2f", rate);
+        List<LottoResult> lottoResults = Arrays.asList(LottoResult.values());
+        Collections.reverse(lottoResults);
 
-        console.printOutput("당첨 통계\n"
-                + "----------\n"
-                + "3개 일치 (" + LottoResult.FIFTH.getPrize() + "원)- " + statistics.get(LottoResult.FIFTH) + "개\n"
-                + "4개 일치 (" + LottoResult.FOURTH.getPrize() + "원)- " + statistics.get(LottoResult.FOURTH) + "개\n"
-                + "5개 일치 (" + LottoResult.THIRD.getPrize() + "원)- " + statistics.get(LottoResult.THIRD) + "개\n"
-                + "5개 일치, 보너스 볼 일치(" + LottoResult.SECOND.getPrize() + "원) - " + statistics.get(LottoResult.SECOND) + "개\n"
-                + "6개 일치 (" + LottoResult.FIRST.getPrize() + "원)- " + statistics.get(LottoResult.FIRST) + "개\n"
-                + "총 수익률은 " + rateString + "입니다.\n");
+        console.printOutput("당첨 통계\n----------\n");
+        lottoResults.forEach((result) -> console.printOutput(getStatisticsFormat(statistics, result)));
+        console.printOutput("총 수익률은 " + rateString + "입니다.\n");
+    }
+
+    private String getStatisticsFormat(LottoStatistic statistics, LottoResult lottoResult) {
+        Integer numberOfMatchedLotto = statistics.getCount(lottoResult);
+        String bonusMatchString = getBonusMatchString(lottoResult);
+
+        if (lottoResult == LottoResult.NONE) {
+            return "";
+        }
+
+        return String.format("%d개 일치%s (%d)원-%d개", lottoResult.getMatchCount(), bonusMatchString, lottoResult.getPrize(), numberOfMatchedLotto);
+    }
+
+    private String getBonusMatchString(LottoResult lottoResult) {
+        if (lottoResult == LottoResult.SECOND) {
+            return ", 보너스 볼 일치";
+        }
+        return "";
     }
 }
