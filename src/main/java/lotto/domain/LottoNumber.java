@@ -1,39 +1,27 @@
 package lotto.domain;
 
-import java.util.List;
-
 public class LottoNumber {
-    public static final int FIXED_SIZE = 6;
     public static final int MINIMUM_BOUNDARY = 1;
     public static final int MAXIMUM_BOUNDARY = 45;
 
-    private final List<Integer> numbers;
+    private final int number;
 
-    public LottoNumber(List<Integer> numbers) {
-        validateNumbers(numbers);
-        this.numbers = numbers;
-    }
-
-    private void validateNumbers(List<Integer> numbers) throws RuntimeException {
-        if(numbers.size() != FIXED_SIZE){
+    public LottoNumber(int number) {
+        if (number < MINIMUM_BOUNDARY || number > MAXIMUM_BOUNDARY) {
             throw new RuntimeException();
         }
-
-        if(numbers.stream()
-                .anyMatch(number -> number < MINIMUM_BOUNDARY || number > MAXIMUM_BOUNDARY)) {
-            throw new RuntimeException();
-        }
-
-        if(numbers.stream().distinct().count() != 6) {
-            throw new RuntimeException();
-        }
+        this.number = number;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    @Override
+    public int hashCode() {
+        return this.number;
     }
 
-    public int compare(LottoNumber other) {
-        return (int) numbers.stream().filter(number->other.numbers.contains(number)).count();
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (!(obj instanceof LottoNumber)) return false;
+        return this.number == ((LottoNumber) obj).number;
     }
 }
