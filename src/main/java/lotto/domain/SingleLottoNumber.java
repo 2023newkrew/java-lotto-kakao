@@ -2,10 +2,10 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class SingleLottoNumber {
+public class SingleLottoNumber implements Comparable<SingleLottoNumber> {
     private final int singleLottoNumber;
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
 
     public SingleLottoNumber(int singleLottoNumber) {
         if (singleLottoNumber < MIN_LOTTO_NUMBER || singleLottoNumber > MAX_LOTTO_NUMBER) {
@@ -26,5 +26,19 @@ public class SingleLottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(singleLottoNumber);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d", this.singleLottoNumber);
+    }
+
+    @Override
+    public int compareTo(SingleLottoNumber o) {
+        return this.singleLottoNumber - o.getSingleLottoNumber();
+    }
+
+    public int getSingleLottoNumber() {
+        return singleLottoNumber;
     }
 }
