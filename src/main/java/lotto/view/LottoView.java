@@ -9,17 +9,14 @@ import lotto.domain.WinningLotto;
 import lotto.dto.GameResultDto;
 
 public class LottoView {
-    static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final String REQUEST_RECEIVE_PURCHASE_INPUT = "구매금액을 입력해 주세요.";
+    private static final String REQUEST_RECEIVE_WINNING_LOTTO_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String REQUEST_RECEIVE_BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
 
-
-
-    static public int inputInit() {
-        printInit();
+    static public int receivePurchasePrice() {
+        System.out.println(REQUEST_RECEIVE_PURCHASE_INPUT);
         return Integer.parseInt(scanner.nextLine());
-    }
-
-    static private void printInit() {
-        System.out.println("구매금액을 입력해 주세요.");
     }
 
     static public void printLottoList(List<Lotto> lottos) {
@@ -28,29 +25,21 @@ public class LottoView {
         System.out.println();
     }
 
-    static private void printWinningLottoNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    static public WinningLotto inputWinningLotto() {
+        return new WinningLotto(receiveWinningLottoNumbers(), receiveBonusNumber());
     }
 
-    static private void printBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-    }
-
-    static private List<Integer> inputWinningLottoNumbers() {
-        printWinningLottoNumbers();
+    static private List<Integer> receiveWinningLottoNumbers() {
+        System.out.println(REQUEST_RECEIVE_WINNING_LOTTO_NUMBERS);
         return Arrays.stream(scanner.nextLine()
-                .split(", "))
+                        .split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    static private int inputBonusNumber() {
-        printBonusNumber();
+    static private int receiveBonusNumber() {
+        System.out.println(REQUEST_RECEIVE_BONUS_NUMBER);
         return scanner.nextInt();
-    }
-
-    static public WinningLotto inputWinningLotto() {
-        return new WinningLotto(inputWinningLottoNumbers(), inputBonusNumber());
     }
 
     static public void printResult(GameResultDto gameResultDto) {
