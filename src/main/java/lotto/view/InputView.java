@@ -22,7 +22,7 @@ public class InputView {
         String money;
         do {
             money = sc.nextLine();
-        } while (validateMoneyInput(money)) ;
+        } while (validateMoneyInput(money));
         return Integer.parseInt(money);
     }
 
@@ -45,6 +45,7 @@ public class InputView {
     }
 
     public String getWinningNumbers() {
+        System.out.println();
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return sc.nextLine();
     }
