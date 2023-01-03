@@ -1,3 +1,6 @@
+package domain;
+
+import dto.WinningLotto;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -7,7 +10,7 @@ public class Lotto {
     private static final Integer LOTTO_SIZE = 6;
     private final List<LottoNumber> numbers;
 
-    Lotto() {
+    public Lotto() {
         this.numbers = LottoGenerator.run();
     }
 
@@ -18,13 +21,18 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public LottoStatus getPlace(Lotto winningNumbers, LottoNumber bonusNumber) {
+    public LottoPlace getPlace(WinningLotto winningLotto) {
         Integer correctWinningNumberCount = 0;
         for(LottoNumber number : numbers) {
-            if (winningNumbers.numbers.contains(number))
+            if (winningLotto.getLotto().isIn(number)) {
                 correctWinningNumberCount++;
+            }
         }
-        return LottoStatus.getStatus(correctWinningNumberCount, numbers.contains(bonusNumber));
+        return LottoPlace.getStatus(correctWinningNumberCount, numbers.contains(winningLotto.getBonusNumber()));
+    }
+
+    public Boolean isIn(LottoNumber lottoNumber) {
+        return numbers.contains(lottoNumber);
     }
 
     static public Lotto ofNumbers(List<Integer> numbers) {
@@ -40,5 +48,10 @@ public class Lotto {
         if (uniqueNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 숫자는 중복이 불가합니다.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }

@@ -1,3 +1,7 @@
+package domain;
+
+import dto.LottoResult;
+import dto.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -18,13 +22,14 @@ public class LottoBuyerTest {
 
         Lotto winningNumbers = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(45);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        LottoResult lottoResult = lottoBuyer.check(winningNumbers, bonusNumber);
-        assertThat(lottoResult.get(LottoStatus.FIRST_PLACE)).isEqualTo(1);
-        assertThat(lottoResult.get(LottoStatus.SECOND_PLACE)).isEqualTo(0);
-        assertThat(lottoResult.get(LottoStatus.THIRD_PLACE)).isEqualTo(0);
-        assertThat(lottoResult.get(LottoStatus.FOURTH_PLACE)).isEqualTo(1);
-        assertThat(lottoResult.get(LottoStatus.FIFTH_PLACE)).isEqualTo(0);
+        LottoResult lottoResult = lottoBuyer.calculateResult(winningLotto);
+        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.FIRST_PLACE)).isEqualTo(1);
+        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.SECOND_PLACE)).isEqualTo(0);
+        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.THIRD_PLACE)).isEqualTo(0);
+        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.FOURTH_PLACE)).isEqualTo(1);
+        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.FIFTH_PLACE)).isEqualTo(0);
     }
 
     @Test
@@ -35,12 +40,13 @@ public class LottoBuyerTest {
                 Lotto.ofNumbers(List.of(3,4,5,6,7,8)),
                 Lotto.ofNumbers(List.of(5,6,7,8,9,10))
         );
-        Lotto winningNumbers = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusNumber = new LottoNumber(45);
-
         LottoBuyer lottoBuyer = new LottoBuyer(price, (money)->lottos);
 
-        lottoBuyer.check(winningNumbers, bonusNumber);
-        assertThat(lottoBuyer.calculateEarningRate()).isEqualTo(666683.33);
+        Lotto winningNumbers = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = new LottoNumber(45);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        LottoResult lottoResult = lottoBuyer.calculateResult(winningLotto);
+
+        assertThat(lottoBuyer.calculateEarningRate(lottoResult.getLottoPlaces())).isEqualTo(666683.33);
     }
 }

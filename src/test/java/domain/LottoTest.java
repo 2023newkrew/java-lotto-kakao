@@ -1,3 +1,6 @@
+package domain;
+
+import dto.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -27,11 +30,10 @@ public class LottoTest {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
         Lotto lotto = Lotto.ofNumbers(numbers);
-        Lotto winningNumbers = Lotto.ofNumbers(numbers);
-        LottoNumber bonusNumber = new LottoNumber(7);
-        LottoStatus place = lotto.getPlace(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(Lotto.ofNumbers(numbers), new LottoNumber(7));
+        LottoPlace place = lotto.getPlace(winningLotto);
 
-        assertThat(place).isEqualTo(LottoStatus.FIRST_PLACE);
+        assertThat(place).isEqualTo(LottoPlace.FIRST_PLACE);
     }
 
     @Test
@@ -39,10 +41,9 @@ public class LottoTest {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 7);
 
         Lotto lotto = Lotto.ofNumbers(numbers);
-        Lotto winningNumbers = Lotto.ofNumbers(numbers);
-        LottoNumber bonusNumber = new LottoNumber(7);
-        LottoStatus place = lotto.getPlace(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(Lotto.ofNumbers(numbers), new LottoNumber(7));
+        LottoPlace place = lotto.getPlace(winningLotto);
 
-        assertThat(place).isEqualTo(LottoStatus.SECOND_PLACE);
+        assertThat(place).isEqualTo(LottoPlace.SECOND_PLACE);
     }
 }
