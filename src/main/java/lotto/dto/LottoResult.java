@@ -3,7 +3,6 @@ package lotto.dto;
 import lotto.constant.LottoGradeEnum;
 
 public class LottoResult implements Comparable<LottoResult> {
-
     private final LottoGradeEnum lottoGrade;
     private final int gradeCount;
 

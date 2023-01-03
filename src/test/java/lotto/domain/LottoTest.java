@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;

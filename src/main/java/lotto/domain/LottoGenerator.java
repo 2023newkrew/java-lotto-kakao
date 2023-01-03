@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoGenerator {
-
     static final int LOTTO_PRICE = 1000;
     private static final List<Integer> fullNumbers = IntStream.range(1, 46)
             .boxed()

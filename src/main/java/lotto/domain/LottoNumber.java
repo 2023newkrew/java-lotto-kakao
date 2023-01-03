@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
-
     static final int MIN_LOTTO_NUMBER = 1;
     static final int MAX_LOTTO_NUMBER = 45;
 

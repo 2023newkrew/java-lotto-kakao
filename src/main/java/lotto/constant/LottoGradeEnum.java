@@ -5,7 +5,6 @@ import static lotto.constant.MessageConstant.INVALID_MATCH_COUNT_RANGE;
 import java.util.Arrays;
 
 public enum LottoGradeEnum {
-
     FIRST(6, 2_000_000_000),
     SECOND(5, 300_000_000),
     THIRD(5, 1_500_000),

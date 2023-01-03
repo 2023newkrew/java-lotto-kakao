@@ -4,6 +4,7 @@ import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
 
 import java.util.HashSet;
 import java.util.List;
+
 import lotto.constant.LottoGradeEnum;
 
 public class WinningLotto {

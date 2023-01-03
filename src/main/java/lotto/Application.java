@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoGenerator;

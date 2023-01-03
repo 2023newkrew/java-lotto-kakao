@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+
 import lotto.constant.LottoGradeEnum;
 import lotto.dto.GameResultDto;
 import lotto.dto.LottoResult;
 
 public class LottoGame {
-
     private final List<Lotto> lottos;
     private final WinningLotto winningLotto;
 
@@ -46,8 +46,7 @@ public class LottoGame {
         return lottoResultCounter;
     }
 
-    private static void putGrade(HashMap<LottoGradeEnum, Integer> lottoResultCounter,
-            LottoGradeEnum grade) {
+    private static void putGrade(HashMap<LottoGradeEnum, Integer> lottoResultCounter, LottoGradeEnum grade) {
         if (lottoResultCounter.containsKey(grade)) {
             lottoResultCounter.put(grade, lottoResultCounter.get(grade) + 1);
         }

@@ -4,14 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import lotto.dto.GameResultDto;
 
 public class LottoView {
     static Scanner scanner = new Scanner(System.in);
-
-
 
     static public int inputInit() {
         printInit();
@@ -39,7 +38,7 @@ public class LottoView {
     static private List<Integer> inputWinningLottoNumbers() {
         printWinningLottoNumbers();
         return Arrays.stream(scanner.nextLine()
-                .split(", "))
+                        .split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
