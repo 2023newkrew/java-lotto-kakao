@@ -47,8 +47,10 @@ public class LottoController {
 
     public void execute(int payment, List<LottoNumbers> lottoNumbersList) {
         LottoNumbers winLottoNumbers = new LottoNumbers(Arrays.stream(inputView.getUserInputLottoNumbers().split(LOTTO_NUMBER_DELIMITER))
-                .map(number -> new LottoNumber(Integer.parseInt(number)))
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList()));
+
         LottoNumber bonusBall = new LottoNumber(Integer.parseInt(inputView.getUserInputBonusBallNumbers()));
 
         Lotto lotto = new Lotto(lottoNumbersList);
