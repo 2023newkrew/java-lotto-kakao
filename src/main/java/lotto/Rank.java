@@ -20,7 +20,7 @@ public enum Rank {
 
     public static Rank getRank(LotteryMatch match) {
         return Arrays.stream(values())
-                .filter(Rank -> Rank.match.equals(match))
+                .filter(rank -> rank.match.equals(match))
                 .findFirst()
                 .orElse(NONE);
     }

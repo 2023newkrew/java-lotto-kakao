@@ -27,12 +27,7 @@ public class BuyerResult {
     }
 
     public void matches(Rank matchResult) {
-        if (result.get(matchResult) == null) {
-            result.put(matchResult, 1);
-
-            return;
-        }
-        result.put(matchResult, result.get(matchResult) + 1);
+        result.put(matchResult, result.getOrDefault(matchResult, 0) + 1);
     }
 
     public EnumMap<Rank, Integer> getResult() {
@@ -44,7 +39,7 @@ public class BuyerResult {
                 .mapToInt(e -> result.getOrDefault(e, 0) * e.prize)
                 .sum();
         int count = Arrays.stream(Rank.values()).mapToInt(e -> result.getOrDefault(e, 0)).sum();
-        
+
         return new BuyerProfit((double) profit / (count * LotteryGenerator.LOTTERY_PRICE));
     }
 }
