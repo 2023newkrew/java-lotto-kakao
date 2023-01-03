@@ -2,6 +2,7 @@ package lotto.dto;
 
 import lotto.constant.LottoGradeEnum;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class GameResultDto {
@@ -14,7 +15,7 @@ public class GameResultDto {
     }
 
     public Map<LottoGradeEnum, Integer> getLottoResultCounter() {
-        return lottoResultCounter;
+        return new HashMap<>(lottoResultCounter);
     }
 
     public float getRate() {
