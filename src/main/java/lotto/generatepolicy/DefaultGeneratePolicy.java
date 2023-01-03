@@ -10,6 +10,7 @@ public class DefaultGeneratePolicy implements GeneratePolicy {
     private static final Random random = new Random();
 
     public int generate() {
-        return LOTTO_NUMBER_LOWER_BOUND + random.nextInt(LOTTO_NUMBER_UPPER_BOUND - LOTTO_NUMBER_LOWER_BOUND + 1);
+        return LOTTO_NUMBER_LOWER_BOUND.getValue() + random.nextInt(
+                LOTTO_NUMBER_UPPER_BOUND.getValue() - LOTTO_NUMBER_LOWER_BOUND.getValue() + 1);
     }
 }

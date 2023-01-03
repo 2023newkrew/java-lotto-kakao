@@ -45,7 +45,7 @@ public class LottoController {
     }
 
     private int calucateLottoCount() {
-        return inputView.readPrice() / (int) LOTTO_PRICE;
+        return inputView.readPrice() / (int) LOTTO_PRICE.getValue();
     }
 
 

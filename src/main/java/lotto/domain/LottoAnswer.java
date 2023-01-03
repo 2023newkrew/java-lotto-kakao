@@ -27,7 +27,7 @@ public class LottoAnswer {
     }
 
     private void validateRange(int bonusNumber) {
-        if (bonusNumber < LOTTO_NUMBER_LOWER_BOUND || bonusNumber > LOTTO_NUMBER_UPPER_BOUND) {
+        if (bonusNumber < LOTTO_NUMBER_LOWER_BOUND.getValue() || bonusNumber > LOTTO_NUMBER_UPPER_BOUND.getValue()) {
             throw new IllegalArgumentException(OUT_OF_BOUNDS_EXCEPTION_MESSAGE);
         }
     }

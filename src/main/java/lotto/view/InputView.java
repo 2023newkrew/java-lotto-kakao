@@ -49,14 +49,14 @@ public class InputView {
     }
 
     private void validateRange(int price) {
-        if (price < LOTTO_PRICE) {
+        if (price < LOTTO_PRICE.getValue()) {
             throw new IllegalArgumentException("1000원 이상이 주어져야합니다.");
         }
 
     }
 
     private void validateIsValid(int price) {
-        if (price % LOTTO_PRICE != 0) {
+        if (price % LOTTO_PRICE.getValue() != 0) {
             throw new IllegalArgumentException("1000의 배수가 주어져야합니다.");
         }
     }

@@ -29,13 +29,13 @@ public class LottoNumbers {
     }
 
     private void validateUniqueness(List<Integer> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() != LOTTO_NUMBER_COUNT) {
+        if (lottoNumbers.stream().distinct().count() != LOTTO_NUMBER_COUNT.getValue()) {
             throw new IllegalArgumentException(NOT_UNIQUE_EXCEPTION_MESSAGE);
         }
     }
 
     private void validateCount(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT.getValue()) {
             throw new IllegalArgumentException(INVALID_COUNT_EXCEPTION_MESSAGE);
         }
     }
@@ -45,7 +45,7 @@ public class LottoNumbers {
     }
 
     private void validateSingleRange(int number) {
-        if (number < LOTTO_NUMBER_LOWER_BOUND || number > LOTTO_NUMBER_UPPER_BOUND) {
+        if (number < LOTTO_NUMBER_LOWER_BOUND.getValue() || number > LOTTO_NUMBER_UPPER_BOUND.getValue()) {
             throw new IllegalArgumentException(OUT_OF_BOUNDS_EXCEPTION_MESSAGE);
         }
     }
