@@ -39,10 +39,10 @@ public class ResultView {
     }
 
     private void printEachTicket(ArrayList<Integer> numbers){
-        System.out.print("[");
-        for(int number : numbers) {
-            System.out.print(number);
-        }
-        System.out.println("]");
+        System.out.printf("[%d, %d, %d, %d, %d, %d]",
+                numbers.get(0), numbers.get(1),
+                numbers.get(2), numbers.get(3),
+                numbers.get(4) ,numbers.get(5)
+        );
     }
 }
