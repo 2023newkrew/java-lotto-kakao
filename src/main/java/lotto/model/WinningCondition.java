@@ -1,4 +1,8 @@
-package lotto;
+package lotto.model;
+
+import lotto.model.Cash;
+import lotto.model.LottoConstants;
+import lotto.model.LottoResult;
 
 public enum WinningCondition {
     FIRST_PRIZE(new LottoResult(LottoConstants.BALLCOUNT_LIMIT, false),

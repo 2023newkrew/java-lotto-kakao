@@ -1,6 +1,7 @@
-package lotto;
+package lotto.model;
 
 import lotto.exception.InvalidCashValue;
+import lotto.model.Cash;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

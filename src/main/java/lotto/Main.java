@@ -1,60 +1,59 @@
 package lotto;
 
+import lotto.View.Input;
+import lotto.View.Output;
+import lotto.model.*;
+
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static Scanner sc = new Scanner(System.in);
     public static Cash cash;
     public static LottoCount lottoCount;
     public static LottoTrials lottoTrials = new LottoTrials();
     public static WinNumber winNumber;
     public static TotalResult totalResult = new TotalResult();
 
-    public static void main(String[] args) {
-        try {
-            inputCash();
-            createLotto(lottoCount);
-            inputWinningLotto();
-            processLotto();
-        }
-        catch(Exception e){
-            System.out.println(e.getClass() + " : " + e.getMessage());
-        }
+    public static void main(String[] args) throws IOException {
+        inputCash();
+        createLotto();
+        inputWinningLotto();
+        processLotto();
+        Output.totalResultOutput(totalResult);
     }
 
-    private static void inputCash() {
-        System.out.println("구입금액을 입력해 주세요.");
+    private static void inputCash() throws IOException {
+        Output.startCashOutput();
 
-        cash = new Cash(Long.parseLong(sc.nextLine()));
+        cash = new Cash(Input.startCashInput());
 
         lottoCount = new LottoCount(cash);
 
-        System.out.println(lottoCount + "를 구매했습니다.");
+        Output.lottoCountOutput(lottoCount);
     }
 
-    private static void createLotto(LottoCount lottoCount) {
+    private static void createLotto() {
         for (int i = 0; i < lottoCount.getCount(); i++){
             LottoTrial lottoTrial = new LottoTrialRandom(new LottoPickerRandom());
 
-            System.out.println(lottoTrial);
+            Output.lottoTrialOutput(lottoTrial);
 
             lottoTrials.add(lottoTrial);
         }
     }
 
-    private static void inputWinningLotto() {
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+    private static void inputWinningLotto() throws IOException {
+        Output.winNumOutput();
 
-        List<LottoBallNumber> winNum = Arrays.stream(sc.nextLine().split(","))
+        List<LottoBallNumber> winNum = Arrays.stream(Input.winNumInput())
                 .map(v -> new LottoBallNumber(Integer.parseInt(v.trim())))
                 .collect(Collectors.toList());
 
-        System.out.println("보너스 볼을 입력해 주세요.");
+        Output.bonusNumOutput();
 
-        winNumber = new WinNumber(new LottoTrialManual(winNum), new LottoBallNumber(sc.nextInt()));
+        winNumber = new WinNumber(new LottoTrialManual(winNum), new LottoBallNumber(Input.bonusNumInput()));
 
         System.out.println();
     }
@@ -63,7 +62,5 @@ public class Main {
         for (int i = 0; i < lottoCount.getCount(); i++){
             totalResult.addResult(winNumber.compareLotto(lottoTrials.get(i)));
         }
-
-        System.out.println(totalResult);
     }
 }

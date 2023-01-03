@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 public class LottoTrialRandom extends LottoTrial {
     public LottoTrialRandom(LottoPicker lottoPicker) {

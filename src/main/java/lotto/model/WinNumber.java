@@ -1,6 +1,9 @@
-package lotto;
+package lotto.model;
 
 import lotto.exception.DuplicatedBallNumber;
+import lotto.model.LottoBallNumber;
+import lotto.model.LottoResult;
+import lotto.model.LottoTrial;
 
 public class WinNumber {
     private final LottoTrial winNumber;
