@@ -14,14 +14,6 @@ public class WinNumber {
         }
     }
 
-    public LottoTrial getWinNumber() {
-        return winNumber;
-    }
-
-    public LottoBallNumber getBonusNumber() {
-        return bonusNumber;
-    }
-
     public LottoResult compareLotto(LottoTrial trial){
         int matchCount = 0;
         boolean matchBonus = false;

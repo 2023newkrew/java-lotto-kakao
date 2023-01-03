@@ -33,14 +33,6 @@ public class LottoResult {
         return Objects.hash(matchCount, matchBonus);
     }
 
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public boolean isMatchBonus() {
-        return matchBonus;
-    }
-
     @Override
     public String toString() {
         String result = matchCount + "개 일치";
