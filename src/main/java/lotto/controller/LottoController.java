@@ -1,27 +1,41 @@
 package lotto.controller;
 
-import lotto.model.LottoService;
-import lotto.model.PriceResult;
+import lotto.model.*;
+import lotto.view.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
+    public void start() {
+        Exchange exchange = new Exchange();
 
-    public void run() {
-        // 로또 생성
-        long purchaseCost = InputView.inputPurchaseCost();
-        LottoService lottoService = new LottoService(purchaseCost);
-        lottoService.createLottos();
-        OutputView.printLottos(lottoService.getLottos());
+        long purchaseAmount = 0;
+        while(!Exchange.isEnough(purchaseAmount)) {
+            purchaseAmount = InputView.getPurchaseAmount();
+        }
 
-        // 로또 당첨 번호 매칭
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
-        lottoService.createWinningNumbers(winningNumbers, bonusNumber);
+        Lotto lotto = exchange.purchaseLotto(purchaseAmount);
+        OutputView.sendPurchasedLotto(lotto);
 
-        // 결과 출력
-        PriceResult result = lottoService.getResult();
-        OutputView.printResult(result);
-        OutputView.printEarningRate(lottoService.calculateEarningsRate());
+        List<Integer> winningNumbers = new ArrayList<>();
+        while(!WinningNumbers.isValidWinningNumbers(winningNumbers)) {
+            winningNumbers = InputView.getWinningNumbers();
+        }
+
+        int bonusNumber = 0;
+        while(!WinningNumbers.isValidBonusNumber(winningNumbers, bonusNumber)) {
+            bonusNumber = InputView.getBonusNumber();
+        }
+
+        PrizeJudge prizeJudge = new PrizeJudge(new WinningNumbers(winningNumbers, bonusNumber));
+        PrizeRecord prizeRecord = new PrizeRecord();
+
+        for (Ticket ticket : lotto.getTickets()) {
+            prizeRecord.addCountOf(prizeJudge.getPrizeOf(ticket));
+        }
+
+        OutputView.sendStatics(prizeRecord);
+        OutputView.sendYield(exchange.calculateYield(prizeRecord));
     }
 }

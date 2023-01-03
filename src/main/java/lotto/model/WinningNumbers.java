@@ -11,9 +11,12 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public static boolean isValidWinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
-        return Ticket.isValidNumbers(winningNumbers)
-                && Ticket.isValidNumber(bonusNumber)
+    public static boolean isValidWinningNumbers(List<Integer> winningNumbers) {
+        return Ticket.isValidNumbers(winningNumbers);
+    }
+
+    public static boolean isValidBonusNumber(List<Integer> winningNumbers, int bonusNumber) {
+        return Ticket.isValidNumber(bonusNumber)
                 && !winningNumbers.contains(bonusNumber);
     }
 
