@@ -5,17 +5,9 @@ import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.LottoNumbers;
-import lotto.generatepolicy.DefaultGeneratePolicy;
 import lotto.generatepolicy.GeneratePolicy;
 
 public class LottoNumbersFactory {
-
-    private static final GeneratePolicy defaultGeneratePolicy = new DefaultGeneratePolicy();
-
-    public static LottoNumbers create() {
-        return create(defaultGeneratePolicy);
-    }
-
     public static LottoNumbers create(GeneratePolicy generatePolicy) {
         List<Integer> numbers = new ArrayList<>();
         while (isNotFull(numbers)) {

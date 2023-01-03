@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class DefaultRankingPolicy implements RankingPolicy {
 
-    Map<LottoResult, LottoRank> lottoResultLottoRankMap;
+    private Map<LottoResult, LottoRank> lottoResultLottoRankMap;
 
     public DefaultRankingPolicy() {
         lottoResultLottoRankMap.put(new LottoResult(6, false), LottoRank.FIRST);
