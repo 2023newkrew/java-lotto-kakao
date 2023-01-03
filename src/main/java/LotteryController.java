@@ -1,4 +1,5 @@
 import buyer.Buyer;
+import buyer.BuyerResult;
 import lotto.LotteryGenerator;
 import lotto.LotteryResult;
 import util.StringParser;
@@ -8,19 +9,12 @@ import view.OutputView;
 import java.util.List;
 
 public class LotteryController {
-    private final InputView inputView;
-    private final OutputView outputView;
-
-    public LotteryController(InputView inputView, OutputView outputView) {
-        this.inputView = inputView;
-        this.outputView = outputView;
-    }
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
+    private final LotteryGenerator lotteryGenerator = new LotteryGenerator();
 
     public void run() {
-        LotteryGenerator lotteryGenerator = new LotteryGenerator();
-
-        int budget = inputView.getBudgetInput();
-        Buyer buyer = new Buyer(budget);
+        Buyer buyer = new Buyer(inputView.getBudgetInput());
         lotteryGenerator.generate(buyer);
 
         outputView.printLotteries(buyer.getLotteries());
@@ -28,9 +22,10 @@ public class LotteryController {
         int bonusNumber = inputView.getBonusNumberInput();
 
         LotteryResult lotteryResult = new LotteryResult(winningNumber, bonusNumber);
+        BuyerResult buyerResult = lotteryResult.getResult(buyer.getLotteries());
 
-        outputView.printResult(lotteryResult.getResult(buyer.getLotteries()));
-        outputView.printProfit(lotteryResult.getResult(buyer.getLotteries()).getProfit());
+        outputView.printResult(buyerResult);
+        outputView.printProfit(buyerResult.getProfit());
     }
 
 }
