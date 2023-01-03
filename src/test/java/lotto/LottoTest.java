@@ -11,8 +11,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -137,6 +139,16 @@ public class LottoTest {
                 .isThrownBy(() -> new LottoWinnerTicket(lottoTicket, bonus));
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"2,0,1,0"})
+    @DisplayName("당첨금액의 합을 알 수 있어야 한다.")
+    void lottoWinningAmountTest(String userInput){
+        LottoCalculator lottoCalculator = new LottoCalculator(new LottoWinnerTicket(
+                new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
+        long summary = lottoCalculator.getWinAmount();
+        Assertions.assertThat(summary).isEqualTo(1510000L);
+    }
+
     private Integer[] changeToArray(String userInput){
         return Stream.of(userInput
                         .replace(" ", "")
@@ -145,5 +157,6 @@ public class LottoTest {
                         .boxed()
                         .toArray(Integer[]::new);
     }
+
 
 }
