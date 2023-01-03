@@ -1,4 +1,6 @@
-package lotto.models;
+package lotto.model.number;
+
+import lotto.common.LottoResult;
 
 import static lotto.common.LottoConfiguration.*;
 
@@ -6,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Goal extends Lotto{
+public final class Goal extends Lotto {
     private final Integer bonusBall;
 
     public Goal(List<Integer> goal, Integer bonusBall) {
@@ -20,19 +22,11 @@ public class Goal extends Lotto{
     }
 
     private Integer getMatchCount(Lotto lotto) {
-        Set<Integer> sum = new HashSet<>(lotto.getNumbers());
-        sum.addAll(getNumbers());
-        return LOTTO_COUNT * 2 - sum.size();
-    }
+        Set<Integer> set = new HashSet<>(lotto.getNumbers());
+        set.addAll(getNumbers());
 
-//    private Prize compareLottoo(Lotto lotto) {
-//        Integer matchCount = Math.toIntExact(lotto.getNumbers().stream()
-//                .filter(i -> getNumbers().contains(i))
-//                .count());
-//        boolean matchBonus = lotto.getNumbers().contains(bonusBall);
-//
-//        return new Prize(matchCount, matchBonus);
-//    }
+        return LOTTO_COUNT * 2 - set.size();
+    }
 
     private void validateBonusBall(Integer bonusBall) {
         if (getNumbers().contains(bonusBall)) {

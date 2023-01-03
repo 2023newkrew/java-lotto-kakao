@@ -1,4 +1,4 @@
-package lotto.models;
+package lotto.model.number;
 
 import static lotto.common.LottoConfiguration.*;
 
@@ -13,7 +13,9 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers.stream().sorted().collect(Collectors.toList());
+        this.numbers = numbers.stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     public List<Integer> getNumbers() {
@@ -22,9 +24,7 @@ public class Lotto {
 
     private void validateNumbers(List<Integer> numbers) {
         validateLottoCount(numbers);
-        for (Integer number : numbers) {
-            validateLottoNumberRange(number);
-        }
+        numbers.forEach(this::validateLottoNumberRange);
         validateLottoNumberIsNotDuplicated(numbers);
     }
 

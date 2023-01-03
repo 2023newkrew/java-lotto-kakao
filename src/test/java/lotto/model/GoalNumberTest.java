@@ -1,9 +1,13 @@
-package lotto.models;
+package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+
+import lotto.common.LottoResult;
+import lotto.model.number.Goal;
+import lotto.model.number.Lotto;
 import org.junit.jupiter.api.Test;
 
 class GoalTest {
