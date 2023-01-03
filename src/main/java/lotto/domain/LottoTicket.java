@@ -8,19 +8,19 @@ public class LottoTicket {
 
     public static final int LOTTO_TICKET_PRICE = 1000;
 
-    private final LottoNumbers lottoNumbers;
+    private final LottoNumberList lottoNumberList;
 
     public LottoTicket(List<Integer> numbers) {
-        lottoNumbers = new LottoNumbers(numbers);
+        lottoNumberList = new LottoNumberList(numbers);
     }
 
     public String getString() {
-        return lottoNumbers.getString();
+        return lottoNumberList.getString();
     }
 
-    public LottoResult getResult(LottoWinningNumbers lottoWinningNumbers) {
-        int equalNumber = lottoWinningNumbers.getAmountOfNumbersInWinningNumbers(lottoNumbers);
-        boolean bonusNumber = lottoWinningNumbers.checkBonusNumberInNumbers(lottoNumbers);
+    public LottoResult getResult(Lotto lotto) {
+        int equalNumber = lotto.getAmountOfNumbersInWinningNumbers(lottoNumberList);
+        boolean bonusNumber = lotto.checkBonusNumberInNumbers(lottoNumberList);
         return LottoResult.getLottoResultOf(equalNumber, bonusNumber);
     }
 }

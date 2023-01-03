@@ -3,7 +3,7 @@ package lotto;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.LottoDispenser;
-import lotto.domain.LottoTickets;
+import lotto.domain.LottoTicketsManager;
 import lotto.strategy.NumberSelectStrategy;
 import lotto.strategy.RandomNumberSelectStrategy;
 import org.assertj.core.api.Assertions;
@@ -35,8 +35,8 @@ public class LottoDispenserTest {
     @MethodSource("getIssueLottoTicketByNumberSelectStrategyData")
     public void issue_lotto_ticket_by_price(List<List<Integer>> randomNumbers, int price, String expected) {
         LottoDispenser lottoDispenser = new LottoDispenser(createNumberSelectStrategy(randomNumbers));
-        LottoTickets lottoTickets = lottoDispenser.getLottoTicket(price);
-        Assertions.assertThat(lottoTickets.getLottoNumbersString()).isEqualTo(expected);
+        LottoTicketsManager lottoTicketsManager = lottoDispenser.getLottoTicket(price);
+        Assertions.assertThat(lottoTicketsManager.getLottoNumbersString()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> getIssueLottoTicketByNumberSelectStrategyData() {

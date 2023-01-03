@@ -5,25 +5,25 @@ import lotto.strategy.NumberSelectStrategy;
 public class LottoGame {
 
     private final LottoDispenser lottoDispenser;
-    private LottoTickets lottoTickets;
+    private LottoTicketsManager lottoTicketsManager;
 
     public LottoGame(NumberSelectStrategy numberSelectStrategy) {
         this.lottoDispenser = new LottoDispenser(numberSelectStrategy);
     }
 
     public void buy(int money) {
-        lottoTickets = lottoDispenser.getLottoTicket(money);
+        lottoTicketsManager = lottoDispenser.getLottoTicket(money);
     }
 
     public String getLottoTicketsString() {
-        return lottoTickets.getLottoNumbersString();
+        return lottoTicketsManager.getLottoNumbersString();
     }
 
     public int getCountOfLottoTickets() {
-        return lottoTickets.getCount();
+        return lottoTicketsManager.getCount();
     }
 
-    public String getWinningString(LottoWinningNumbers lottoWinningNumbers) {
-        return lottoTickets.getStatistics(lottoWinningNumbers).getString();
+    public String getWinningString(Lotto lotto) {
+        return lottoTicketsManager.getStatistics(lotto).getString();
     }
 }
