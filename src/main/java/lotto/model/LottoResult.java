@@ -25,10 +25,10 @@ public enum LottoResult {
         return prizeMoney;
     }
 
-    public static LottoResult match(Integer mainMatched, Boolean bonusMatched) {
+    public static LottoResult match(MatchedResult matchedResult) {
         return Arrays.stream(LottoResult.values())
-                .filter(lottoResult -> lottoResult.mainMatchCountCase.contains(mainMatched))
-                .filter(lottoResult -> lottoResult.bonusMatched.contains(bonusMatched))
+                .filter(lottoResult -> lottoResult.mainMatchCountCase.contains(matchedResult.getMatchedCount()))
+                .filter(lottoResult -> lottoResult.bonusMatched.contains(matchedResult.getBonusNumberMatched()))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new)
                 ;
