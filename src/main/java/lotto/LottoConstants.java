@@ -11,5 +11,4 @@ public class LottoConstants {
     public static final long THIRD_PRIZE_CASH = 1_500_000L;
     public static final long FOURTH_PRIZE_CASH = 50_000L;
     public static final long FIFTH_PRIZE_CASH = 5_000L;
-
 }
