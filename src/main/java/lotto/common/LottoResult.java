@@ -1,4 +1,4 @@
-package lotto.models;
+package lotto.common;
 
 import java.util.Arrays;
 
@@ -10,8 +10,18 @@ public enum LottoResult {
     FIFTH(5_000, 3),
     NONE(0, 0);
 
-    private final long prize;
+    static public LottoResult findLottoResult(Integer matchCount, boolean includeBonus) {
+        if (matchCount == 5 && !includeBonus) {
+            return LottoResult.THIRD;
+        }
 
+        return Arrays.stream(values())
+                .filter(lottoResult -> lottoResult.matchCount == matchCount)
+                .findFirst()
+                .orElse(LottoResult.NONE);
+    }
+
+    private final long prize;
     private final int matchCount;
 
     LottoResult(long prize, int matchCount) {
@@ -23,14 +33,7 @@ public enum LottoResult {
         return prize;
     }
 
-    static public LottoResult findLottoResult(Integer matchCount, boolean includeBonus) {
-        if (matchCount == 5 && !includeBonus) {
-            return LottoResult.THIRD;
-        }
-
-        return Arrays.stream(values())
-                .filter(lottoResult -> lottoResult.matchCount == matchCount)
-                .findFirst()
-                .orElse(LottoResult.NONE);
+    public int getMatchCount() {
+        return matchCount;
     }
 }
