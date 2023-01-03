@@ -6,11 +6,13 @@ import java.util.List;
 
 public class LotteryResult {
     private final LotteryNumbers winningNumbers;
-    private final int bonusNumber;
+    private final LotteryNumber bonusNumber;
 
     public LotteryResult(List<Integer> winningNumbers, int bonusNumber) {
+        if (winningNumbers.contains(bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
+
         this.winningNumbers = new LotteryNumbers(winningNumbers);
-        this.bonusNumber = bonusNumber;
+        this.bonusNumber = new LotteryNumber(bonusNumber);
     }
 
     @Override
@@ -19,7 +21,7 @@ public class LotteryResult {
 
         LotteryResult cp = (LotteryResult) obj;
 
-        return this.winningNumbers.equals(cp.winningNumbers) && this.bonusNumber == cp.bonusNumber;
+        return this.winningNumbers.equals(cp.winningNumbers) && this.bonusNumber.equals(cp.bonusNumber);
     }
 
     public Rank getRank(Lottery lottery) {
@@ -34,7 +36,7 @@ public class LotteryResult {
     }
 
     private boolean isBonusMatch(Lottery lottery) {
-        return lottery.getLotteryNumber().contains(new LotteryNumber(bonusNumber));
+        return lottery.getLotteryNumber().contains(bonusNumber);
     }
 
     public BuyerResult getResult(Lotteries lotteries) {

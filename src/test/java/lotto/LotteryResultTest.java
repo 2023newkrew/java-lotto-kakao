@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LotteryResultTest {
     @DisplayName("당첨 번호 입력 테스트")
@@ -17,6 +18,12 @@ public class LotteryResultTest {
         LotteryResult lotteryResult = new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 7);
 
         assertThat(lotteryResult).isEqualTo(new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 7));
+    }
+
+    @DisplayName("중복된 당첨 번호 입력 테스트")
+    @Test
+    void duplicateTest() {
+        assertThatIllegalArgumentException().isThrownBy(() -> new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 6));
     }
 
     @DisplayName("로또 하나 받아서 통계 확인")
@@ -34,7 +41,7 @@ public class LotteryResultTest {
         LotteryResult lotteryResult = new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 7);
         Lotteries lotteries = new Lotteries();
         lotteries.addLottery(new Lottery(List.of(1, 2, 3, 12, 13, 14)));
-        
+
         BuyerResult buyerResult = lotteryResult.getResult(lotteries);
         EnumMap<Rank, Integer> cpMap = new EnumMap<>(Map.of(Rank.FIFTH, 1));
 

@@ -18,10 +18,6 @@ public class LotteryMatch {
         return matchCount;
     }
 
-    public Boolean getIsBonusMatch() {
-        return isBonusMatch;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof LotteryMatch)) return false;
