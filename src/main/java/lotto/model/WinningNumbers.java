@@ -11,7 +11,7 @@ public class WinningNumbers {
 
     private final Integer bonusNumber;
 
-    public WinningNumbers(MainNumbers mainNumbers, Integer bonusNumber) {
+    private WinningNumbers(MainNumbers mainNumbers, Integer bonusNumber) {
         this.mainNumbers = mainNumbers;
         this.bonusNumber = bonusNumber;
         validateBonusNumber();
