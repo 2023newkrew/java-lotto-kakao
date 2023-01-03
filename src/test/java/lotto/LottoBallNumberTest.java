@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class LottoBallNumberTest {
     @ParameterizedTest
-    @ValueSource(ints={1, 2, 3, 4, 5, 45, 24, 25})
+    @ValueSource(ints = {1, 2, 3, 4, 5, 45, 24, 25})
     void 정상_실행_1에서_45_사이일_때는(int num) {
         assertThatCode(() -> {
             LottoBallNumber lottoBallNumber = new LottoBallNumber(num);
@@ -19,7 +19,7 @@ class LottoBallNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints={0, 46, 4999, -1, -122})
+    @ValueSource(ints = {0, 46, 4999, -1, -122})
     void 예외_던짐_1에서_45_사이가_아닐때(int num) {
         assertThatThrownBy(() -> {
             LottoBallNumber lottoBallNumber = new LottoBallNumber(num);
@@ -35,7 +35,7 @@ class LottoBallNumberTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints={1, 2, 3, 4, 5, 45, 24, 25})
+    @ValueSource(ints = {1, 2, 3, 4, 5, 45, 24, 25})
     void toString_정상작동(int val) {
         LottoBallNumber ballNum1 = new LottoBallNumber(val);
         Assertions.assertThat(ballNum1.toString()).isEqualTo("" + val);
