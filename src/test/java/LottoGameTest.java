@@ -1,9 +1,13 @@
+import domain.lotto.LottoGame;
+import domain.lotto.WinningNumbers;
+import domain.lotto.result.LottoResultType;
+import domain.lotto.result.LottoResults;
+import domain.lotto.ticket.LottoTicket;
+import domain.lotto.ticket.LottoTickets;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 

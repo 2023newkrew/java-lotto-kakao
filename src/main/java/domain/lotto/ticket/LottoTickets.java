@@ -1,3 +1,5 @@
+package domain.lotto.ticket;
+
 import java.util.List;
 
 public class LottoTickets {

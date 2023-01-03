@@ -1,3 +1,8 @@
+package domain.lotto;
+
+import domain.lotto.result.LottoResultType;
+import domain.lotto.ticket.LottoTicket;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

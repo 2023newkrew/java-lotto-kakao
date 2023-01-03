@@ -1,5 +1,8 @@
-import java.util.HashMap;
-import java.util.Map;
+package domain.lotto;
+
+import domain.lotto.result.LottoResults;
+import domain.lotto.ticket.LottoTicket;
+import domain.lotto.ticket.LottoTickets;
 
 public class LottoGame {
 

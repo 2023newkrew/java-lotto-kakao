@@ -1,3 +1,7 @@
+package domain.lotto;
+
+import domain.lotto.LottoMetaData;
+
 import java.util.HashSet;
 import java.util.List;
 

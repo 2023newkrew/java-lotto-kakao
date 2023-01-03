@@ -1,3 +1,7 @@
+import domain.lotto.LottoChecker;
+import domain.lotto.WinningNumbers;
+import domain.lotto.result.LottoResultType;
+import domain.lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

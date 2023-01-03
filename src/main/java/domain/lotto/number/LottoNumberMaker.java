@@ -1,3 +1,5 @@
+package domain.lotto.number;
+
 import java.util.List;
 
 public class LottoNumberMaker {

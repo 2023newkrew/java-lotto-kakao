@@ -1,3 +1,7 @@
+package domain.lotto.ticket;
+
+import domain.lotto.LottoMetaData;
+
 import java.util.*;
 
 public class LottoTicket {
