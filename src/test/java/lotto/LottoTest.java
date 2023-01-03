@@ -140,13 +140,14 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"2,0,1,0"})
+    @ValueSource(strings = {"0,0,0,0,5"})
     @DisplayName("당첨금액의 합을 알 수 있어야 한다.")
     void lottoWinningAmountTest(String userInput){
         LottoCalculator lottoCalculator = new LottoCalculator(new LottoWinnerTicket(
                 new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
-        long summary = lottoCalculator.getWinAmount();
-        Assertions.assertThat(summary).isEqualTo(1510000L);
+        ArrayList<Integer> winScore = new ArrayList<>(List.of(changeToArray(userInput)));
+        long summary = lottoCalculator.getWinAmount(winScore);
+        Assertions.assertThat(summary).isEqualTo(10000000000L);
     }
 
     private Integer[] changeToArray(String userInput){
