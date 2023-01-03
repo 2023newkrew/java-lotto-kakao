@@ -1,5 +1,7 @@
 package lotto.model.vo;
 
+import java.math.BigDecimal;
+
 public class Money {
 
     private final long value;
@@ -18,6 +20,10 @@ public class Money {
 
     public long longValue() {
         return value;
+    }
+
+    public BigDecimal bigDecimal() {
+        return BigDecimal.valueOf(value);
     }
 
     public long getPurchasableCount(Money price) {

@@ -1,21 +1,18 @@
 package lotto.model.prize;
 
+import lotto.model.vo.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PrizeMapTest {
 
@@ -55,25 +52,27 @@ class PrizeMapTest {
 
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
-    class getTotalProfit {
+    class getProfitRate {
 
-        @DisplayName("총 상금의 합산 반환")
+        @DisplayName("총 수익률 계산")
         @ParameterizedTest
         @MethodSource
-        void should_returnTotalProfit_when_givenPrizes(List<Prize> prizes, BigDecimal expected) {
-            PrizeMap prizeMap = PrizeMap.from(prizes);
+        void should_returnProfitRate_when_givenPrizes(Prize prize, BigDecimal expected) {
+            Money money = Money.valueOf(1000L);
 
-            Assertions.assertThat(prizeMap.getTotalProfit()).isEqualTo(expected);
+            PrizeMap prizeMap = PrizeMap.from(List.of(prize));
+
+            Assertions.assertThat(prizeMap.getProfitRate(money, money)).isEqualByComparingTo(expected);
         }
 
-        List<Arguments> should_returnTotalProfit_when_givenPrizes() {
+        List<Arguments> should_returnProfitRate_when_givenPrizes() {
             return List.of(
-                    Arguments.of(createPrizes(Prize.FIRST, 1), BigDecimal.valueOf(2_000_000_000L)),
-                    Arguments.of(createPrizes(Prize.SECOND, 2), BigDecimal.valueOf(60_000_000L)),
-                    Arguments.of(createPrizes(Prize.THIRD, 3), BigDecimal.valueOf(450_000L)),
-                    Arguments.of(createPrizes(Prize.FOURTH, 4), BigDecimal.valueOf(200_000L)),
-                    Arguments.of(createPrizes(Prize.FIFTH, 5), BigDecimal.valueOf(25_000L)),
-                    Arguments.of(createPrizes(Prize.NOTHING, 6), BigDecimal.valueOf(0L))
+                    Arguments.of(Prize.FIRST, BigDecimal.valueOf(2_000_000L)),
+                    Arguments.of(Prize.SECOND, BigDecimal.valueOf(30_000L)),
+                    Arguments.of(Prize.THIRD, BigDecimal.valueOf(150L)),
+                    Arguments.of(Prize.FOURTH, BigDecimal.valueOf(50L)),
+                    Arguments.of(Prize.FIFTH, BigDecimal.valueOf(5L)),
+                    Arguments.of(Prize.NOTHING, BigDecimal.valueOf(0L))
             );
         }
 

@@ -1,6 +1,9 @@
 package lotto.model.prize;
 
+import lotto.model.vo.Money;
+
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -26,7 +29,14 @@ public class PrizeMap {
         return prizeMap.getOrDefault(prize, 0L);
     }
 
-    public BigDecimal getTotalProfit() {
+    public BigDecimal getProfitRate(Money paidMoney, Money totalPrice) {
+        BigDecimal baseMoney = paidMoney.bigDecimal();
+        BigDecimal remainMoney = baseMoney.subtract(totalPrice.bigDecimal());
+        BigDecimal totalProfit = getTotalProfit();
+        return totalProfit.add(remainMoney).divide(baseMoney, 2, RoundingMode.DOWN);
+    }
+
+    private BigDecimal getTotalProfit() {
         return Arrays.stream(Prize.values())
                 .map(this::sumEachProfit)
                 .reduce(BigDecimal::add)
