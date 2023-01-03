@@ -140,14 +140,14 @@ public class LottoTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"0,0,0,0,5"})
+    @ValueSource(strings = {"0,0,0,5,0"})
     @DisplayName("당첨금액의 합을 알 수 있어야 한다.")
     void lottoWinningAmountTest(String userInput){
         LottoCalculator lottoCalculator = new LottoCalculator(new LottoWinnerTicket(
                 new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
 
         ArrayList<Integer> winScore = new ArrayList<>(List.of(changeToArray(userInput)));
-        long summary = lottoCalculator.getWinAmount(winScore);
+        long summary = lottoCalculator.getWinSummary(winScore);
         assertThat(summary).isEqualTo(10000000000L);
     }
 
@@ -158,8 +158,8 @@ public class LottoTest {
         LottoCalculator lottoCalculator = new LottoCalculator(new LottoWinnerTicket(
                 new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
 
-        long summary = 10000000000L;
-        assertThat(lottoCalculator.calcRateOfReturn(amount, summary)).isEqualTo(1000000);
+        lottoCalculator.getScore(new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 7))));
+        assertThat(lottoCalculator.calcRateOfReturn(amount)).isEqualTo(3000);
     }
 
 

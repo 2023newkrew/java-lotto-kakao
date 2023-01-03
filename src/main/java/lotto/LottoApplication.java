@@ -34,7 +34,8 @@ public class LottoApplication {
         ArrayList<Integer> result = lottoCalculator.getResult(lottoController.getLottoTickets());
 
         // 당첨 통계 출력
-        resultView.printWinningStatics(result);
+        double rate = lottoCalculator.calcRateOfReturn(amount);
+        resultView.printWinningStatics(result, rate);
     }
 
     private static LottoWinnerTicket getLottoWinnerTicket(InputView inputView, ChangeInput changeInput) {

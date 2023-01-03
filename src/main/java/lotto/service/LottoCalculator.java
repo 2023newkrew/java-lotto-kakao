@@ -16,8 +16,8 @@ public class LottoCalculator {
 
     public LottoCalculator(LottoWinnerTicket winTicket) {
         this.winTicket = winTicket;
-        this.winValue = new ArrayList<>(List.of(5000, 50000, 1500000, 2000000000, 30000000));
-        this.winScore = new ArrayList<>(List.of(0, 0, 0, 0, 0, 0));
+        this.winValue = new ArrayList<>(Arrays.asList(5000, 50000, 1500000, 2000000000, 30000000));
+        this.winScore = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
     }
 
     public int checkSameCount(LottoTicket userTicket) {
@@ -39,17 +39,19 @@ public class LottoCalculator {
         return 0;
     }
 
-    public long getWinAmount(ArrayList<Integer> obtainScore) {
-        long summary = 0;
-        for (int i=0; i < obtainScore.size(); i++) {
-            summary += (long) obtainScore.get(i) * this.winValue.get(i);
-        }
-        return summary;
-    }
 
-    public double calcRateOfReturn(int amount, long summary) {
+    public double calcRateOfReturn(int amount) {
+        long summary = getWinSummary(this.winScore);
         amount -= amount % 1000;
         return summary / amount;
+    }
+
+    public long getWinSummary(ArrayList<Integer> score) {
+        long summary = 0;
+        for (int i=0; i < score.size(); i++) {
+            summary += (long) score.get(i) * this.winValue.get(i);
+        }
+        return summary;
     }
 
     public ArrayList<Integer> getResult(LottoTickets lottoTickets) {
@@ -62,12 +64,12 @@ public class LottoCalculator {
     }
 
 
-    private void getScore (LottoTicket ticket) {
+    public void getScore (LottoTicket ticket) {
         int sameCount = checkSameCount(ticket);
         if(sameCount < MIN_WIN_NUM) return;
         sameCount -= MIN_WIN_NUM;
         if(sameCount == 5 - MIN_WIN_NUM && isBonusNumber(ticket)) {
-            this.winScore.set(sameCount, this.winScore.get(sameCount) + 1);
+            this.winScore.set(4, this.winScore.get(sameCount) + 1);
             return;
         }
         this.winScore.set(sameCount, this.winScore.get(sameCount) + 1);

@@ -13,7 +13,7 @@ public class ResultView {
         System.out.println(amount + RESULT_PURCHASE_COUNT.getMessage());
     }
 
-    public void printWinningStatics(ArrayList<Integer> result){
+    public void printWinningStatics(ArrayList<Integer> result, double rate){
         System.out.println(RESULT_WINNING_STAT.getMessage());
         System.out.println(RESULT_LINE.getMessage());
         System.out.println(RESULT_THREE_MATCHING.getMessage() + result.get(0));
@@ -21,6 +21,7 @@ public class ResultView {
         System.out.println(RESULT_FIVE_MATCHING.getMessage() + result.get(2));
         System.out.println(RESULT_FIVE_BONUS_MATCHING.getMessage() + result.get(4));
         System.out.println(RESULT_SIX_MATCHING.getMessage() + result.get(3));
+        printRateOfReturn(rate);
     }
 
     private void printRateOfReturn(double rate){
