@@ -8,13 +8,12 @@ import static org.assertj.core.api.Assertions.*;
 public class WinningNumbersTest {
 
     @Test
-    @DisplayName("로또 용지를 생성하는 기능")
-    void createLottoTicketTest(){
+    @DisplayName("당첨 번호를 생성하는 기능")
+    void createWinningNumbersTest(){
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,6), 7);
 
         assertThat(winningNumbers.getLottoNumber()).containsExactly(1, 2, 3, 4, 5, 6);
         assertThat(winningNumbers.getBonusNumber()).isEqualTo(7);
-
     }
 
     @Test
@@ -23,5 +22,21 @@ public class WinningNumbersTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new WinningNumbers(List.of(1,2,3,4,5,6), 5)
                 );
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new WinningNumbers(List.of(1,2,3,4,5,5), 5)
+                );
+    }
+
+    @Test
+    @DisplayName("당첨 번호, 보너스 번호 숫자 범위 예외 테스트")
+    void checkWinningNumbersDomainTest(){
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new WinningNumbers(List.of(0,2,3,4,5,6), 7));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new WinningNumbers(List.of(1,2,3,4,5,46), 7));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new WinningNumbers(List.of(1,2,3,4,5,6), 0));
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new WinningNumbers(List.of(1,2,3,4,5,6), 46));
     }
 }

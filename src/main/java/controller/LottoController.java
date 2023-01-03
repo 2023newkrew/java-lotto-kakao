@@ -4,6 +4,7 @@ import domain.dto.WinningNumbersDto;
 import domain.lotto.LottoGame;
 import domain.lotto.WinningNumbers;
 import domain.lotto.number.LottoNumberMaker;
+import domain.lotto.number.NumberGeneratable;
 import domain.lotto.number.RandomNumberGenerator;
 import domain.lotto.result.LottoResults;
 import domain.lotto.ticket.LottoTicket;
@@ -17,26 +18,37 @@ import java.util.List;
 public class LottoController {
 
     public void start() {
-        LottoTickets lottoTickets = createLottoTickets();
+        LottoTickets lottoTickets = createLottoTickets(InputView.inputPurchaseAmount(), new RandomNumberGenerator());
         OutputView.printLottoTickets(lottoTickets);
         LottoGame lottoGame = new LottoGame(lottoTickets, createWinningNumbers());
         LottoResults lottoResults = lottoGame.getLottoTicketsResult();
         OutputView.printLottoResults(lottoResults);
     }
 
-    private LottoTickets createLottoTickets() {
-        Integer purchaseAmount = InputView.inputPurchaseAmount();
+    private LottoTickets createLottoTickets(final Integer purchaseAmount, final NumberGeneratable numberGenerator) {
         LottoNumberMaker lottoNumberMaker = new LottoNumberMaker();
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
         for (int i = 0; i < purchaseAmount; i++) {
-            lottoTicketList.add(new LottoTicket(lottoNumberMaker.makeNumbers(randomNumberGenerator)));
+            lottoTicketList.add(new LottoTicket(lottoNumberMaker.makeNumbers(numberGenerator)));
         }
         return new LottoTickets(lottoTicketList);
     }
 
     private WinningNumbers createWinningNumbers() {
-        WinningNumbersDto winningNumbersDto = InputView.inputWinningNumbers();
-        return new WinningNumbers(winningNumbersDto.getLottoNumbers(), winningNumbersDto.getBonusNumber());
+        WinningNumbers winningNumbers = null;
+        while (winningNumbers == null) {
+            winningNumbers = tryCreateWinningNumbers();
+        }
+        return winningNumbers;
+    }
+
+    private WinningNumbers tryCreateWinningNumbers() {
+        try {
+            WinningNumbersDto winningNumbersDto = InputView.inputWinningNumbers();
+            return new WinningNumbers(winningNumbersDto.getLottoNumbers(), winningNumbersDto.getBonusNumber());
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return null;
+        }
     }
 }

@@ -1,41 +1,25 @@
 package domain.lotto.ticket;
 
 import domain.lotto.LottoMetaData;
+import domain.lotto.number.LottoNumbers;
 
 import java.util.*;
 
 public class LottoTicket {
 
-    private final List<Integer> lottoNumbers;
+    private final LottoNumbers lottoNumbers;
 
-    @Override
-    public String toString() {
-        return lottoNumbers.toString();
-    }
-
-    public LottoTicket(List<Integer> lottoNumbers) {
-        if (lottoNumbers == null || lottoNumbers.isEmpty())
-            throw new NullPointerException();
-
-        validateNumberDuplication(lottoNumbers);
-        validateNumberRange(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(new TreeSet<>(lottoNumbers));
+    public LottoTicket(final List<Integer> lottoNumbers) {
+        if (lottoNumbers == null) throw new NullPointerException();
+        this.lottoNumbers = new LottoNumbers(new ArrayList<>(new TreeSet<>(lottoNumbers)));
     }
 
     public List<Integer> getLottoNumbers() {
-        return lottoNumbers;
+        return lottoNumbers.getNumbers();
     }
 
-    private void validateNumberDuplication(List<Integer> lottoNumbers) {
-        HashSet<Integer> hs = new HashSet<>(lottoNumbers);
-        if (hs.size() != LottoMetaData.LOTTO_NUMBER_SIZE) throw new IllegalArgumentException();
-    }
-
-    private void validateNumberRange(List<Integer> lottoNumbers) {
-        lottoNumbers
-                .forEach((number) -> {
-                    if (number < LottoMetaData.MIN_LOTTO_NUMBER || number > LottoMetaData.MAX_LOTTO_NUMBER)
-                        throw new IllegalArgumentException();
-                });
+    @Override
+    public String toString() {
+        return lottoNumbers.getNumbers().toString();
     }
 }
