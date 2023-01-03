@@ -38,4 +38,6 @@ public enum LottoRank {
         this.matchCount = matchCount;
         this.requiredBonus = requiredBonus;
     }
+
+
 }
