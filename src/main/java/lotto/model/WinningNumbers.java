@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.enums.LottoSettings;
+
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -46,7 +48,7 @@ public class WinningNumbers {
         return lotto.getNumbers().contains(bonusNumber);
     }
 
-    public static class MainNumbers {
+    private static class MainNumbers {
 
         private final List<Integer> numbers;
 
@@ -66,8 +68,9 @@ public class WinningNumbers {
         }
 
         private Boolean checkRange(Integer number) {
-            return number >= LottoSettings.MIN_RANGE.getValue() &&
-                    number <= LottoSettings.MAX_RANGE.getValue();
+            return number != null
+                    && number >= LottoSettings.MIN_RANGE.getValue()
+                    && number <= LottoSettings.MAX_RANGE.getValue();
         }
 
         private Boolean checkLength() {

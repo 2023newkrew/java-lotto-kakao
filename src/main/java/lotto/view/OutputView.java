@@ -1,10 +1,11 @@
 package lotto.view;
 
 import lotto.model.LottoList;
-import lotto.model.LottoResult;
 import lotto.model.LottoStatistics;
+import lotto.model.enums.LottoResult;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class OutputView {
 
@@ -21,6 +22,7 @@ public class OutputView {
         System.out.println("---------");
         Arrays.stream(LottoResult.values())
                 .filter(lottoResult -> lottoResult != LottoResult.LOSE)
+                .sorted(Comparator.reverseOrder())
                 .forEach(lottoResult ->
                         System.out.printf("%s - %d개\n", lottoResult, lottoStatistics.get(lottoResult))
                 );

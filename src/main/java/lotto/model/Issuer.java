@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.enums.LottoSettings;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +14,10 @@ public class Issuer {
         for (int i = LottoSettings.MIN_RANGE.getValue(); i <= LottoSettings.MAX_RANGE.getValue(); i++) {
             numberPool.add(i);
         }
+    }
+
+    private Issuer() {
+        throw new UnsupportedOperationException();
     }
 
     private static Lotto issue() {

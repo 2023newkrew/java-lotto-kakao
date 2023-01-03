@@ -3,7 +3,7 @@ package lotto;
 import lotto.model.Issuer;
 import lotto.model.Lotto;
 import lotto.model.LottoList;
-import lotto.model.LottoSettings;
+import lotto.model.enums.LottoSettings;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

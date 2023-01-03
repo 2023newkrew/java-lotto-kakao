@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.enums.LottoSettings;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,8 +26,9 @@ public class Lotto {
     }
 
     private Boolean checkRange(Integer number) {
-        return number >= LottoSettings.MIN_RANGE.getValue() &&
-                number <= LottoSettings.MAX_RANGE.getValue();
+        return number != null
+                && number >= LottoSettings.MIN_RANGE.getValue()
+                && number <= LottoSettings.MAX_RANGE.getValue();
     }
 
     private Boolean checkLength() {

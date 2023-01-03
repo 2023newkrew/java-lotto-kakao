@@ -1,6 +1,11 @@
 package lotto.controller;
 
-import lotto.model.*;
+import lotto.model.Issuer;
+import lotto.model.LottoList;
+import lotto.model.LottoStatistics;
+import lotto.model.WinningNumbers;
+import lotto.model.enums.LottoResult;
+import lotto.model.enums.LottoSettings;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -23,11 +28,10 @@ public class LottoController {
         List<Integer> mainNumbers = inputView.inputMainNumbers();
         Integer bonusNumber = inputView.inputBonusBall();
 
-        getResult(mainNumbers, bonusNumber, lottoList, price);
+        getResult(new WinningNumbers(mainNumbers, bonusNumber), lottoList, price);
     }
 
-    public void getResult(List<Integer> mainNumbers, Integer bonusNumber, LottoList lottoList, Integer price) {
-        WinningNumbers winningNumbers = new WinningNumbers(mainNumbers, bonusNumber);
+    public void getResult(WinningNumbers winningNumbers, LottoList lottoList, Integer price) {
         LottoStatistics lottoStatistics = new LottoStatistics();
 
         for (int i = 0; i < lottoList.length(); i++) {
