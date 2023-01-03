@@ -11,17 +11,25 @@ import lotto.constant.LottoGradeEnum;
 import lotto.dto.GameResultDto;
 import lotto.dto.LottoResult;
 
+import static lotto.constant.MessageConstant.INVALID_PRICE_AMOUNT;
+
 public class LottoGame {
     private final List<Lotto> lottos;
     private final WinningLotto winningLotto;
 
     public LottoGame(List<Lotto> lottos, WinningLotto winningLotto) {
+        validateLottos(lottos);
         this.lottos = lottos;
         this.winningLotto = winningLotto;
     }
 
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
+    }
+
+    private void validateLottos(List<Lotto> lottos) {
+        if (lottos == null || lottos.size() == 0)
+            throw new IllegalArgumentException(INVALID_PRICE_AMOUNT);
     }
 
     public GameResultDto getResult() {

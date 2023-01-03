@@ -5,5 +5,6 @@ public class MessageConstant {
     public static final String INVALID_NUMBER_RANGE = "로또 숫자는 1이상 45이하의 범위를 가져야 합니다.";
     public static final String INVALID_LOTTO_SIZE = "로또 숫자는 6개여야 합니다.";
     public static final String INVALID_MATCH_COUNT_RANGE = "맞은 갯수는 0이상 6이하의 범위를 가져야 합니다.";
+    public static final String INVALID_PRICE_AMOUNT = "1000원 이상의 구매금액이 필요합니다.";
 
 }
