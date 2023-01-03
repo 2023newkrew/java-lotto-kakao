@@ -12,16 +12,11 @@ import lotto.rankingpolicy.RankingPolicy;
 public class LottoHandler {
 
     private RankingPolicy rankingPolicy;
-    private int lottoCount;
 
     private final List<Lotto> lottos;
 
-    public LottoHandler(int lottoCount, RankingPolicy rankingPolicy) {
-        this(lottoCount, rankingPolicy, new DefaultGeneratePolicy());
-    }
 
     public LottoHandler(int lottoCount, RankingPolicy rankingPolicy, GeneratePolicy generatePolicy) {
-        this.lottoCount = lottoCount;
         this.rankingPolicy = rankingPolicy;
         lottos = createLottos(generatePolicy, lottoCount);
     }
@@ -41,7 +36,7 @@ public class LottoHandler {
         return rankCounts;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         lottos.forEach(lotto -> stringBuilder.append(lotto.toString()).append('\n'));
         return stringBuilder.toString();

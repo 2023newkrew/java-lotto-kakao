@@ -5,9 +5,6 @@ import java.util.Objects;
 public class StringUtils {
 
     public static boolean isNullOrBlank(String line) {
-        if (Objects.isNull(line) || line.isBlank()) {
-            return true;
-        }
-        return false;
+        return Objects.isNull(line) || line.isBlank();
     }
 }

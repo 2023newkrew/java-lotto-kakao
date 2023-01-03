@@ -7,11 +7,11 @@ import lotto.generatepolicy.GeneratePolicy;
 import lotto.rankingpolicy.RankingPolicy;
 
 public class LottoGame {
-    private RankingPolicy rankingPolicy;
-    private LottoHandler lottoHandler;
+    private final RankingPolicy rankingPolicy;
+    private final GeneratePolicy generatePolicy;
     private int lottoCount;
+    private LottoHandler lottoHandler;
 
-    private GeneratePolicy generatePolicy;
     private LottoAnswer lottoAnswer;
     private List<Integer> rankCounts;
 

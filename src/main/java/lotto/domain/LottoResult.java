@@ -17,7 +17,7 @@ public class LottoResult {
     }
 
     private void validate(int matchCount, boolean hasBonus) {
-        if ( matchCount < LOTTO_MIN_COUNT || getSum(matchCount, hasBonus) > LOTTO_NUMBER_COUNT) {
+        if (matchCount < LOTTO_MIN_COUNT || getSum(matchCount, hasBonus) > LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(INVALID_LOTTO_RESULT_INPUT_EXCEPTION);
         }
     }
@@ -27,14 +27,6 @@ public class LottoResult {
             return matchCount + 1;
         }
         return matchCount;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public boolean isHasBonus() {
-        return hasBonus;
     }
 
     @Override
