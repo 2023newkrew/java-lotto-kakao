@@ -10,10 +10,12 @@ public class TotalResult {
 
     public TotalResult() {
         totalResult = new HashMap<>();
+        Arrays.stream(Result.values()).forEach(result -> totalResult.put(result, 0));
     }
 
     public TotalResult(Map<Result, Integer> totalResult) {
-        this.totalResult = totalResult;
+        this();
+        this.totalResult.putAll(totalResult);
     }
 
     @Override
@@ -22,7 +24,7 @@ public class TotalResult {
         if (o == null || getClass() != o.getClass()) return false;
         TotalResult that = (TotalResult) o;
         return Arrays.stream(Result.values())
-                .allMatch(result -> this.totalResult.getOrDefault(result, 0) == that.totalResult.getOrDefault(result, 0));
+                .allMatch(result -> this.totalResult.get(result) == that.totalResult.get(result));
     }
 
     @Override
@@ -36,7 +38,7 @@ public class TotalResult {
     }
 
     public int getValueOfResult(Result result) {
-        return totalResult.getOrDefault(result, 0);
+        return totalResult.get(result);
     }
 
     private int getWinningsOfResult(Result result) {
@@ -62,9 +64,9 @@ public class TotalResult {
     public String getProfitMessage(double profit) {
         String message = String.format("총 수익률은 %f입니다.", profit);
         if (profit <= 1) {
-            return message += "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+            return message + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
-        return message += "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+        return message + "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
     }
 
 }
