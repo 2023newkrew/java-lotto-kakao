@@ -25,10 +25,10 @@ class LottoStatisticsTest {
                     .collect(Collectors.toList())));
         }
         Goal goal = new Goal(IntStream
-                .rangeClosed(1, LOTTO_COUNT)
+                .rangeClosed(2, LOTTO_COUNT + 1)
                 .boxed()
                 .collect(Collectors.toList()),
-                LOTTO_COUNT + 1);
+                1);
         LottoStatistics statistics = new LottoStatistics(goal, lottos, budget);
         for (LottoResult rank : LottoResult.values()) {
             if (rank == LottoResult.NONE) {
@@ -38,6 +38,6 @@ class LottoStatisticsTest {
             assertThat(statistics.getCountOf(rank)).isEqualTo(1);
         }
         long totalPrize = Arrays.stream(LottoResult.values()).mapToLong(LottoResult::getPrize).reduce(Long::sum).orElse(0);
-        assertThat(statistics.getEarningRate()).isEqualTo((double) totalPrize / budget);
+        assertThat(statistics.getEarningsRate()).isEqualTo((double) totalPrize / budget);
     }
 }
