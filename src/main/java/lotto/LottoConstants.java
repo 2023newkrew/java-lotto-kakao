@@ -1,7 +1,7 @@
 package lotto;
 
-public class LottoConstants {
-    public final static int LOTTO_PRICE = 1000;
+public final class LottoConstants {
+    public final static long LOTTO_PRICE = 1000L;
     public static final int BALLNUMBER_MIN_VALUE = 1;
     public static final int BALLNUMBER_MAX_VALUE = 45;
     public static final int BALLCOUNT_LIMIT = 6;
