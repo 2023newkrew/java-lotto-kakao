@@ -11,7 +11,7 @@ import lotto.rankingpolicy.RankingPolicy;
 
 public class LottoHandler {
 
-    private RankingPolicy rankingPolicy;
+    private final RankingPolicy rankingPolicy;
 
     private final List<Lotto> lottos;
 
