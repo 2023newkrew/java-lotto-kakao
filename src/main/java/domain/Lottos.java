@@ -1,10 +1,7 @@
 package domain;
 
-import common.constant.Constants;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -15,15 +12,13 @@ public class Lottos {
 
     public Lottos(int count) {
         for (int i = 0; i < count; i++) {
-            Lotto lotto = new Lotto();
-            lottos.add(lotto);
+            lottos.add(new Lotto());
         }
     }
 
     public void add(String input) {
         lottos.add(new Lotto(input));
     }
-
 
     public int getSize() {
         return lottos.size();
