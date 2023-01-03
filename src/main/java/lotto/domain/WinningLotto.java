@@ -32,14 +32,10 @@ public class WinningLotto {
     }
 
     public LottoGradeEnum getGrade(Lotto lotto) {
-
         HashSet<LottoNumber> winningLottoNumberSet = new HashSet<>(this.lotto.getNumbers());
-        int matchCount = 0;
-        for (LottoNumber lottoNumber : lotto.getNumbers()) {
-            if (winningLottoNumberSet.contains(lottoNumber)) {
-                matchCount++;
-            }
-        }
+        int matchCount = (int) lotto.getNumbers().stream()
+                .filter(winningLottoNumberSet::contains)
+                .count();
         return LottoGradeEnum.getGrade(matchCount, winningLottoNumberSet.contains(bonusNumber));
     }
 }
