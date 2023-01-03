@@ -68,11 +68,8 @@
 - `LottoNumbers`
     - `List<SingleLottoNumber> nums`
 
-- `UserLotto`
-    - `LottoNumbers lottoNumbers`
-
 - `UserLottos`
-    - `List<UserLotto> lottos`
+    - `List<LottoNumbers> userLottos`
     - `Money userMoney`
     - `ResultMap resultMap`
 
@@ -121,3 +118,13 @@
 - [x] 보너스 번호를 받아서 포함되어 있으면 true를 반환한다
 - [x] 보너스 번호를 받아서 포함되어 있지 않으면 false를 반환한다
 - [x] 사용자의 로또 번호들을 받아서 일치하는 번호의 개수를 반환한다
+
+### Lotto
+
+- [x] 정답과 보너스 볼이 있어야 한다
+- [x] 정답과 6개가 모두 일치하면 1등상을 받아야 한다
+- [x] 정답과 5개가 일치하고 보너스 숫자와 일치하면 2등상을 받아야 한다
+- [x] 정답과 5개가 일치하면 3등상을 받아야 한다
+- [x] 정답과 4개가 일치하면 4등상을 받아야 한다
+- [x] 정답과 3개가 일치하면 5등상을 받아야 한다
+- [x] 정답과 3개 미만이 일치하면 아무것도 받지 못한다
