@@ -6,32 +6,26 @@ import java.util.stream.Collectors;
 
 public class LottoCompany {
 
-    private static final long LOTTO_PRICE = 1000L;
-
     private final WinningNumbers winningNumbers;
 
-    private final LottoGenerator lottoGenerator;
+    private final LottosGenerator lottosGenerator;
 
-    public LottoCompany(WinningNumbers winningNumbers, LottoGenerator lottoGenerator) {
+    public LottoCompany(WinningNumbers winningNumbers, LottosGenerator lottosGenerator) {
         this.winningNumbers = winningNumbers;
-        this.lottoGenerator = lottoGenerator;
+        this.lottosGenerator = lottosGenerator;
     }
 
-    public WinningStatistics play(long money) {
-        if (money <= 0) {
-            throw new IllegalArgumentException("구매 금액은 0원을 초과해야 합니다.");
-        }
-        long lottoCount = money / LOTTO_PRICE;
-        List<Lotto> lottos = lottoGenerator.generate(lottoCount);
-
-        return judge(lottos);
+    public WinningStatistics play(Money money) {
+        long lottoCount = money.getLottoCount();
+        List<Lotto> lottos = lottosGenerator.generate(lottoCount);
+        return judge(lottos, money);
     }
 
-    private WinningStatistics judge(List<Lotto> lottos) {
+    private WinningStatistics judge(List<Lotto> lottos, Money money) {
         Map<Prize, Long> prizeMap = lottos.stream()
                 .map(winningNumbers::judge)
                 .collect(Collectors.toMap(p -> p, p -> 1L, Long::sum));
 
-        return new WinningStatistics(prizeMap);
+        return new WinningStatistics(money, prizeMap);
     }
 }

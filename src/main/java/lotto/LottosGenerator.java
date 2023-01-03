@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 
-public interface LottoGenerator {
+public interface LottosGenerator {
 
     List<Lotto> generate(long count);
 }
