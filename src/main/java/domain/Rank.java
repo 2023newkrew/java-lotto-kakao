@@ -31,7 +31,6 @@ public enum Rank {
         return Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .reduce((second, third) -> third)
-                .stream().findFirst()
                 .orElse(null);
     }
 
