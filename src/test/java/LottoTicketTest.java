@@ -7,19 +7,21 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoTicketTest {
 
-    @Test
-    @DisplayName("로또 용지를 생성하는 기능")
-    void createLottoTicketTest(){
-        LottoTicket lottoTicket = new LottoTicket((List.of(1,2,3,4,5,6)));
-
-    }
 
     @Test
-    @DisplayName("로또 번호는 숫자 중복 없음")
+    @DisplayName("로또 번호는 중복 없는 숫자 6자리")
     void checkDuplicateLottoTicketTest(){
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() ->
                     new LottoTicket(List.of(1,2,3,4,5,5))
+                );
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() ->
+                        new LottoTicket(List.of(1,2,3,4,5))
+                );
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() ->
+                        new LottoTicket(List.of(1,2,3,4,5,6,7))
                 );
     }
 
@@ -28,7 +30,7 @@ public class LottoTicketTest {
     void checkLottoNumberDomainTest(){
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() ->
-                        new LottoTicket(List.of(1,2,3,4,5,-1))
+                        new LottoTicket(List.of(0,1,2,3,4,5))
                 );
 
         assertThatExceptionOfType(IllegalArgumentException.class)
