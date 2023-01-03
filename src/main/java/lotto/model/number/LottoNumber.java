@@ -4,16 +4,37 @@ import lotto.common.exception.InvalidInputException;
 
 import static lotto.common.LottoConfiguration.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
+
+    private static final List<Integer> lottoPreset = initializeLottoPreset();
+
+    public static LottoNumber create() {
+        Collections.shuffle(lottoPreset);
+        List<Integer> numbers = lottoPreset.subList(0, LOTTO_COUNT.getValue()).stream()
+                .sorted()
+                .collect(Collectors.toList());
+
+        return new LottoNumber(numbers);
+    }
+
+    public static LottoNumber create(List<Integer> numbers) {
+        return new LottoNumber(numbers);
+    }
+
+    private static List<Integer> initializeLottoPreset() {
+        return IntStream
+                .rangeClosed(MIN_VALUE.getValue(), MAX_VALUE.getValue())
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
     private final List<Integer> numbers;
 
-    public LottoNumber(List<Integer> numbers) {
+    LottoNumber(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers.stream()
                 .sorted()

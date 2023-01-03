@@ -3,10 +3,8 @@ package lotto.controller;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import lotto.model.generator.LottoGenerator;
 import lotto.model.number.GoalNumber;
 import lotto.model.number.LottoNumber;
-import lotto.model.generator.AutoLottoGenerator;
 import lotto.model.statistic.LottoStatistic;
 import lotto.view.console.Console;
 import lotto.view.input.InputView;
@@ -17,7 +15,6 @@ public class LottoController {
     private static final Integer LOTTO_PRICE = 1000;
     private final OutputView outputView;
     private final InputView inputView;
-    private final LottoGenerator lottoGenerator = new AutoLottoGenerator();
     private final LottoStatistic statistics = new LottoStatistic();
 
     private List<LottoNumber> lottoNumberList;
@@ -74,7 +71,7 @@ public class LottoController {
     private List<LottoNumber> createLottoList(int numberOfLotto) {
         List<LottoNumber> list = new ArrayList<>();
         for (int i = 0; i < numberOfLotto; i++) {
-            list.add(lottoGenerator.createLotto());
+            list.add(LottoNumber.create());
         }
         return list;
     }
