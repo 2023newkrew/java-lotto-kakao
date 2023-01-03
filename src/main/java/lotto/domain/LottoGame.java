@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import lotto.dto.GameResultDto;
 import lotto.generatepolicy.DefaultGeneratePolicy;
 import lotto.generatepolicy.GeneratePolicy;
 import lotto.rankingpolicy.RankingPolicy;
@@ -36,8 +37,8 @@ public class LottoGame {
         rankCounts = lottoHandler.grade(lottoAnswer);
     }
 
-    public GameResult getGameResult() {
-        return new GameResult(rankCounts, lottoCount);
+    public GameResultDto getGameResultDto() {
+        return new GameResultDto(rankCounts, lottoCount);
     }
 
     public LottoHandler getLottoHandler() {

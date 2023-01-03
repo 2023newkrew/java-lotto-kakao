@@ -2,9 +2,7 @@ package lotto.controller;
 
 import static lotto.domain.LottoConstants.*;
 
-import lotto.AppConfig;
 import lotto.domain.LottoAnswer;
-import lotto.domain.LottoConstants;
 import lotto.domain.LottoGame;
 import lotto.domain.LottoNumbers;
 import lotto.view.InputView;
@@ -35,7 +33,7 @@ public class LottoController {
         outputView.printReadBonusBall();
         lottoGame.setLottoAnswer(new LottoAnswer(lottoAnswerNumbers, inputView.readBonusBall()));
         lottoGame.grade();
-        outputView.printGameResult(lottoGame.getGameResult().getResult());
+        outputView.printGameResult(lottoGame.getGameResultDto());
     }
 
 
