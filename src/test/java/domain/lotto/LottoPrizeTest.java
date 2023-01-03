@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 class LottoPrizeTest {
 
@@ -42,7 +43,8 @@ class LottoPrizeTest {
                 new LottoNumber(6)
         ));
 
-        LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber);
+        LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber)
+                .get();
         Assertions.assertThat(prize)
                 .isEqualTo(LottoPrize.FIRST_PRIZE);
     }
@@ -59,7 +61,8 @@ class LottoPrizeTest {
                 new LottoNumber(10)
         ));
 
-        LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber);
+        LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber)
+                .get();
         Assertions.assertThat(prize)
                 .isEqualTo(LottoPrize.SECOND_PRIZE);
     }
@@ -76,7 +79,8 @@ class LottoPrizeTest {
                 new LottoNumber(41)
         ));
 
-        LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber);
+        LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber)
+                .get();
         Assertions.assertThat(prize)
                 .isEqualTo(LottoPrize.THIRD_PRIZE);
     }
@@ -93,7 +97,8 @@ class LottoPrizeTest {
                 new LottoNumber(42)
         ));
 
-        LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber);
+        LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber)
+                .get();
         Assertions.assertThat(prize)
                 .isEqualTo(LottoPrize.FOURTH_PRIZE);
     }
@@ -110,7 +115,8 @@ class LottoPrizeTest {
                 new LottoNumber(43)
         ));
 
-        LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber);
+        LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber)
+                .get();
         Assertions.assertThat(prize)
                 .isEqualTo(LottoPrize.FIFTH_PRIZE);
     }
@@ -127,9 +133,9 @@ class LottoPrizeTest {
                 new LottoNumber(43)
         ));
 
-        LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber);
+        Optional<LottoPrize> prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber);
         Assertions.assertThat(prize)
-                .isEqualTo(LottoPrize.NONE_PRIZE);
+                .isEmpty();
     }
 
 }

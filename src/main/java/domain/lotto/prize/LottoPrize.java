@@ -6,6 +6,7 @@ import domain.lotto.prize.judgment.impl.*;
 import domain.lotto.ticket.LottoTicket;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum LottoPrize {
 
@@ -13,8 +14,7 @@ public enum LottoPrize {
     SECOND_PRIZE(30_000_000, new SecondLottoPrizeJudgment()),
     THIRD_PRIZE(1_500_000, new ThirdLottoPrizeJudgment()),
     FOURTH_PRIZE(50_000, new FourthLottoPrizeJudgment()),
-    FIFTH_PRIZE(5_000, new FifthLottoPrizeJudgment()),
-    NONE_PRIZE(0, new NoneLottoPrizeJudgment());
+    FIFTH_PRIZE(5_000, new FifthLottoPrizeJudgment());
 
     LottoPrize(int prizeMoney, LottoPrizeJudgment prizeJudgment) {
         this.prizeMoney = prizeMoney;
@@ -29,11 +29,10 @@ public enum LottoPrize {
         return prizeMoney;
     }
 
-    public static LottoPrize findPrize(LottoTicket lottoTicket, LottoWinningNumber lottoWinningNumber) {
+    public static Optional<LottoPrize> findPrize(LottoTicket lottoTicket, LottoWinningNumber lottoWinningNumber) {
         return Arrays.stream(values())
                 .filter(e -> e.prizeJudgment.judge(lottoTicket, lottoWinningNumber))
-                .findFirst()
-                .orElseThrow(IllegalStateException::new);
+                .findFirst();
     }
 
 }

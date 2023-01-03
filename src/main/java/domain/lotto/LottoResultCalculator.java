@@ -3,10 +3,7 @@ package domain.lotto;
 import domain.lotto.prize.LottoPrize;
 import domain.lotto.ticket.LottoTicket;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoResultCalculator {
 
@@ -32,6 +29,8 @@ public class LottoResultCalculator {
 
         lottoTickets.stream()
                 .map(lottoTicket -> LottoPrize.findPrize(lottoTicket, lottoWinningNumber))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .forEach(lottoPrize -> prizeCounts.computeIfPresent(lottoPrize, (key, value) -> value + 1));
 
         return prizeCounts;
@@ -41,6 +40,8 @@ public class LottoResultCalculator {
         double lottoCost = lottoTickets.size() * LottoShop.LOTTO_PRICE;
         int prizeMoneySum = lottoTickets.stream()
                 .map(lottoTicket -> LottoPrize.findPrize(lottoTicket, lottoWinningNumber))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .mapToInt(LottoPrize::getPrizeMoney)
                 .sum();
 
