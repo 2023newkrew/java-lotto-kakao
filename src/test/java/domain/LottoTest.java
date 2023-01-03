@@ -11,39 +11,51 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoTest {
     @Test
     void 당첨번호는_숫자_6개이어야_한다() {
+        // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
 
+        // when, then
         assertThatThrownBy(()-> Lotto.ofNumbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 당첨번호는_중복_불가하다() {
+        // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 6, 6);
 
+        // when, then
         assertThatThrownBy(()-> Lotto.ofNumbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 로또는_자신의_당첨등수를_알_수_있다() {
+    void 로또는_자신의_당첨등수를_알_수_있다_1등() {
+        // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
         Lotto lotto = Lotto.ofNumbers(numbers);
         WinningLotto winningLotto = new WinningLotto(Lotto.ofNumbers(numbers), new LottoNumber(7));
-        LottoPlace place = lotto.getPlace(winningLotto);
 
-        assertThat(place).isEqualTo(LottoPlace.FIRST_PLACE);
+        // when
+        LottoRank place = lotto.getRank(winningLotto);
+
+        // then
+        assertThat(place).isEqualTo(LottoRank.FIRST_RANK);
     }
 
     @Test
     void 로또는_자신의_당첨등수를_알_수_있다_2등() {
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 7);
+        // given
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 11);
 
-        Lotto lotto = Lotto.ofNumbers(numbers);
+        Lotto lotto = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 7));
         WinningLotto winningLotto = new WinningLotto(Lotto.ofNumbers(numbers), new LottoNumber(7));
-        LottoPlace place = lotto.getPlace(winningLotto);
 
-        assertThat(place).isEqualTo(LottoPlace.SECOND_PLACE);
+        // when
+        LottoRank place = lotto.getRank(winningLotto);
+
+        // then
+        assertThat(place).isEqualTo(LottoRank.SECOND_RANK);
     }
 }

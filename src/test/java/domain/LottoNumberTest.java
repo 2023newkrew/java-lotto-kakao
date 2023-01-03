@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LottoNumberTest {
     @Test
     void 로또숫자는_1_이상_45_이하의_숫자이다(){
-        // when
+        // given, when
         LottoNumber lottoNumber = new LottoNumber(40);
 
         // then

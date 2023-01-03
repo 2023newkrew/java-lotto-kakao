@@ -12,6 +12,7 @@ public class LottoBuyerTest {
 
     @Test
     void 로또_당첨_등수를_확인한다() {
+        // given
         int price = 3500;
         List<Lotto> lottos = List.of(
                 Lotto.ofNumbers(List.of(1,2,3,4,5,6)),
@@ -24,16 +25,20 @@ public class LottoBuyerTest {
         LottoNumber bonusNumber = new LottoNumber(45);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
+        // when
         LottoResult lottoResult = lottoBuyer.calculateResult(winningLotto);
-        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.FIRST_PLACE)).isEqualTo(1);
-        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.SECOND_PLACE)).isEqualTo(0);
-        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.THIRD_PLACE)).isEqualTo(0);
-        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.FOURTH_PLACE)).isEqualTo(1);
-        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.FIFTH_PLACE)).isEqualTo(0);
+
+        // then
+        assertThat(lottoResult.getLottoRanks().get(LottoRank.FIRST_RANK)).isEqualTo(1);
+        assertThat(lottoResult.getLottoRanks().get(LottoRank.SECOND_RANK)).isEqualTo(0);
+        assertThat(lottoResult.getLottoRanks().get(LottoRank.THIRD_RANK)).isEqualTo(0);
+        assertThat(lottoResult.getLottoRanks().get(LottoRank.FOURTH_RANK)).isEqualTo(1);
+        assertThat(lottoResult.getLottoRanks().get(LottoRank.FIFTH_RANK)).isEqualTo(0);
     }
 
     @Test
     void 로또_수익률을_계산한다() {
+        // given
         int price = 3500;
         List<Lotto> lottos = List.of(
                 Lotto.ofNumbers(List.of(1,2,3,4,5,6)),
@@ -47,6 +52,7 @@ public class LottoBuyerTest {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         LottoResult lottoResult = lottoBuyer.calculateResult(winningLotto);
 
-        assertThat(lottoBuyer.calculateEarningRate(lottoResult.getLottoPlaces())).isEqualTo(666683.33);
+        // when, then
+        assertThat(lottoBuyer.calculateEarningRate(lottoResult.getLottoRanks())).isEqualTo(666683.33);
     }
 }
