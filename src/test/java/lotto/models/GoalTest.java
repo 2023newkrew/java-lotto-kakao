@@ -112,16 +112,16 @@ class GoalTest {
         @Test
         @DisplayName("Bonus Ball이 로또 번호와 겹치는 Goal 생성 테스트")
         public void testDuplicatedBonusBall() {
-            assertThatExceptionOfType(RuntimeException.class).isThrownBy(
-                            () -> new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), 6))
+            assertThatExceptionOfType(RuntimeException.class)
+                    .isThrownBy(() -> new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), 6))
                     .withMessage("보너스 볼이 당첨 번호와 겹쳐서는 안됩니다.");
         }
 
         @Test
         @DisplayName("잘못된 범위의 Bonus Ball 테스트")
         public void testInvalidRangeBonusBall() {
-            assertThatExceptionOfType(RuntimeException.class).isThrownBy(
-                            () -> new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), -3))
+            assertThatExceptionOfType(RuntimeException.class)
+                    .isThrownBy(() -> new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), -3))
                     .withMessage("보너스 볼은 " + MIN_VALUE + "부터" + MAX_VALUE + "사이의 수 이어야 합니다.");
         }
     }
