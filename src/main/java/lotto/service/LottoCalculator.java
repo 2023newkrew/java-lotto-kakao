@@ -1,12 +1,13 @@
 package lotto.service;
 
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoWinnerTicket;
 
 public class LottoCalculator {
 
-    private final LottoTicket winTicket;
+    private final LottoWinnerTicket winTicket;
 
-    public LottoCalculator(LottoTicket winTicket) {
+    public LottoCalculator(LottoWinnerTicket winTicket) {
         this.winTicket = winTicket;
     }
 
@@ -21,5 +22,9 @@ public class LottoCalculator {
     private int checkContains(int number){
         if(winTicket.getLottoNumbers().contains(number)) return 1;
         return 0;
+    }
+
+    public boolean calcBonusNumber(LottoTicket lottoTicket) {
+        return true;
     }
 }

@@ -4,6 +4,7 @@ import lotto.controller.LottoController;
 import lotto.domain.LottoRandom;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
+import lotto.domain.LottoWinnerTicket;
 import lotto.service.LottoCalculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -69,7 +70,8 @@ public class LottoTest {
     @DisplayName("당첨 번호와 일치하는 개수를 계산해야 한다.")
     void lottoCorrectNumberTest(){
         // 당첨 번호
-        LottoTicket winTicket = new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+        LottoWinnerTicket winTicket = new LottoWinnerTicket(
+                new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7);
 
         // 사용자가 뽑은 로또 번호들
         LottoTicket userTicket1 = new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 9, 10, 11)));
@@ -81,5 +83,19 @@ public class LottoTest {
         assertThat(lottoCalculator.checkSameCount(userTicket1)).isEqualTo(3);
         assertThat(lottoCalculator.checkSameCount(userTicket2)).isEqualTo(4);
         assertThat(lottoCalculator.checkSameCount(userTicket3)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("보너스 볼과 일치하는 볼이 있는지 확인할 수 있어야 한다.")
+    void lottoBonusCheckTest(){
+        LottoWinnerTicket winTicket = new LottoWinnerTicket(
+                new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 22);
+        LottoCalculator lottoCalculator = new LottoCalculator(winTicket);
+
+        LottoTicket userTicket1 = new LottoTicket(new ArrayList<>(List.of(1, 3, 4, 5, 6, 22)));
+        Assertions.assertThat(lottoCalculator.calcBonusNumber(userTicket1)).isTrue();
+
+        LottoTicket userTicket2 = new LottoTicket(new ArrayList<>(List.of(1, 3, 4, 5, 6, 23)));
+        Assertions.assertThat(lottoCalculator.calcBonusNumber(userTicket2)).isFalse();
     }
 }
