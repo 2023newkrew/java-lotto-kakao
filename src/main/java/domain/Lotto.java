@@ -33,6 +33,7 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
+    // 꼭 고치겠습니다 :(
     public Result getResult(WinningLotto winningLotto, BonusNumber bonusNumber) {
         List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
         int count = (int)numbers.stream()
@@ -44,6 +45,9 @@ public class Lotto {
         }
         if (count == 4) {
             return Result.FOUR;
+        }
+        if (count == 5 && isBonus(bonusNumber)) {
+            return Result.FIVEBONUS;
         }
         if (count == 5) {
             return Result.FIVE;
