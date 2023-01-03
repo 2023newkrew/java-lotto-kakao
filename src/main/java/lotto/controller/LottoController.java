@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.model.Lottos;
-import lotto.model.Ranking;
+import lotto.model.enums.Ranking;
 import lotto.model.Winner;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoController {
-    InputView inputView = new InputView();
-    OutputView outputView = new OutputView();
-    Winner winner = new Winner();
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
+    private final Winner winner = new Winner();
     public void start(){
         int money = inputView.receiveMoneyUserInput();
         int numberOfLotto = money / 1000;
