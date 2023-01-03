@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 @FunctionalInterface
 public interface WinnerCompareRule {

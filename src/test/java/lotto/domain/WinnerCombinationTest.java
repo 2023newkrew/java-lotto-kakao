@@ -1,7 +1,5 @@
-import domain.LottoBall;
-import domain.LottoResult;
-import domain.LottoTicket;
-import domain.WinnerCombination;
+package lotto.domain;
+
 import org.junit.Before;
 import org.junit.Test;
 
