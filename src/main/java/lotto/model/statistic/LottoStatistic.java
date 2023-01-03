@@ -1,12 +1,12 @@
 package lotto.model.statistic;
 
-import lotto.common.LottoResult;
+import lotto.model.enums.LottoResultType;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class LottoStatistic {
-    private final Map<LottoResult, Integer> statisticMap;
+    private final Map<LottoResultType, Integer> statisticMap;
 
     public LottoStatistic() {
         this.statisticMap = initializeStatisticsMap();
@@ -19,18 +19,18 @@ public class LottoStatistic {
                 .orElse(0L);
     }
 
-    public void raiseCount(LottoResult key) {
+    public void raiseCount(LottoResultType key) {
         statisticMap.put(key, statisticMap.get(key) + 1);
     }
 
-    public Integer getCount(LottoResult key) {
+    public Integer getCount(LottoResultType key) {
         return statisticMap.get(key);
     }
 
-    private Map<LottoResult, Integer> initializeStatisticsMap() {
-        Map<LottoResult, Integer> statistics = new HashMap<>();
-        for (LottoResult lottoResult: LottoResult.values()) {
-            statistics.put(lottoResult, 0);
+    private Map<LottoResultType, Integer> initializeStatisticsMap() {
+        Map<LottoResultType, Integer> statistics = new HashMap<>();
+        for (LottoResultType lottoResultType : LottoResultType.values()) {
+            statistics.put(lottoResultType, 0);
         }
 
         return statistics;

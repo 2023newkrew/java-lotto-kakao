@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 
-import lotto.common.LottoResult;
+import lotto.model.enums.LottoResultType;
 import lotto.model.number.GoalNumber;
 import lotto.model.number.LottoNumber;
 import org.junit.jupiter.api.Test;
@@ -17,8 +17,8 @@ class GoalNumberTest {
         Integer bonusBall = 7;
         GoalNumber goalNumber = new GoalNumber(testNumbers, bonusBall);
         LottoNumber lottoNumber = new LottoNumber(testNumbers);
-        LottoResult lottoResult = goalNumber.getLottoResultByCompareLotto(lottoNumber);
+        LottoResultType lottoResultType = goalNumber.getLottoResultByCompareLotto(lottoNumber);
 
-        assertThat(lottoResult).isEqualTo(LottoResult.FIRST);
+        assertThat(lottoResultType).isEqualTo(LottoResultType.FIRST);
     }
 }

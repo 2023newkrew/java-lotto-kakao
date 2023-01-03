@@ -10,8 +10,8 @@ import static lotto.common.LottoConfiguration.MAX_VALUE;
 import static lotto.common.LottoConfiguration.MIN_VALUE;
 
 public interface LottoGenerator {
-    static public List<Integer> lottoPreset = initializeLottoPreset();
-    public LottoNumber createLotto();
+    List<Integer> lottoPreset = initializeLottoPreset();
+    LottoNumber createLotto();
 
     static private List<Integer> initializeLottoPreset() {
         return IntStream

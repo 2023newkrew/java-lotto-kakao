@@ -1,6 +1,6 @@
 package lotto.model.number;
 
-import lotto.common.LottoResult;
+import lotto.model.enums.LottoResultType;
 import lotto.common.exception.InvalidInputException;
 
 import static lotto.common.LottoConfiguration.*;
@@ -18,8 +18,8 @@ public final class GoalNumber extends LottoNumber {
         this.bonusBall = bonusBall;
     }
 
-    public LottoResult getLottoResultByCompareLotto(LottoNumber lottoNumber) {
-        return LottoResult.findLottoResult(getMatchCount(lottoNumber), lottoNumber.getNumbers().contains(bonusBall));
+    public LottoResultType getLottoResultByCompareLotto(LottoNumber lottoNumber) {
+        return LottoResultType.findLottoResult(getMatchCount(lottoNumber), lottoNumber.getNumbers().contains(bonusBall));
     }
 
     public Integer getMatchCount(LottoNumber lottoNumber) {

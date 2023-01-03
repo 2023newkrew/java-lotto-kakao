@@ -3,9 +3,9 @@ package lotto.view.output;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+
 import lotto.model.number.LottoNumber;
-import lotto.common.LottoResult;
+import lotto.model.enums.LottoResultType;
 import lotto.model.statistic.LottoStatistic;
 import lotto.view.console.Console;
 
@@ -41,27 +41,27 @@ public class OutputView {
 
     public void printStatistics(LottoStatistic statistics, Double rate) {
         String rateString = String.format("%.2f", rate);
-        List<LottoResult> lottoResults = Arrays.asList(LottoResult.values());
-        Collections.reverse(lottoResults);
+        List<LottoResultType> lottoResultTypes = Arrays.asList(LottoResultType.values());
+        Collections.reverse(lottoResultTypes);
 
         console.printOutput("당첨 통계\n----------\n");
-        lottoResults.forEach((result) -> console.printOutput(getStatisticsFormat(statistics, result)));
+        lottoResultTypes.forEach((result) -> console.printOutput(getStatisticsFormat(statistics, result)));
         console.printOutput("총 수익률은 " + rateString + "입니다.\n");
     }
 
-    private String getStatisticsFormat(LottoStatistic statistics, LottoResult lottoResult) {
-        Integer numberOfMatchedLotto = statistics.getCount(lottoResult);
-        String bonusMatchString = getBonusMatchString(lottoResult);
+    private String getStatisticsFormat(LottoStatistic statistics, LottoResultType lottoResultType) {
+        Integer numberOfMatchedLotto = statistics.getCount(lottoResultType);
+        String bonusMatchString = getBonusMatchString(lottoResultType);
 
-        if (lottoResult == LottoResult.NONE) {
+        if (lottoResultType == LottoResultType.NONE) {
             return "";
         }
 
-        return String.format("%d개 일치%s (%d)원-%d개", lottoResult.getMatchCount(), bonusMatchString, lottoResult.getPrize(), numberOfMatchedLotto);
+        return String.format("%d개 일치%s (%d)원-%d개", lottoResultType.getMatchCount(), bonusMatchString, lottoResultType.getPrize(), numberOfMatchedLotto);
     }
 
-    private String getBonusMatchString(LottoResult lottoResult) {
-        if (lottoResult == LottoResult.SECOND) {
+    private String getBonusMatchString(LottoResultType lottoResultType) {
+        if (lottoResultType == LottoResultType.SECOND) {
             return ", 보너스 볼 일치";
         }
         return "";
