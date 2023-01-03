@@ -5,31 +5,24 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RandomGeneratorTest {
-
     @Test
-    @DisplayName("로또의 숫자는 랜덤으로 생성된다.")
-    void createNumbersWithDefaultRangeTest() {
-        RandomGenerator randomGenerator = new RandomGenerator();
-        List<Integer> numbers = randomGenerator.createNumbers(6);
+    @DisplayName("can get ordered numbers of given size in the range")
+    void can_get_ordered_numbers_of_given_size_in_the_range() {
+        List<Integer> generationRange = List.of(1, 3, 5, 7, 9, 11, 13, 15, 17, 19);
+        RandomGenerator randomGenerator = new RandomGenerator(generationRange);
 
-        for (Integer number : numbers) {
-            assertThat(number).isGreaterThan(0)
-                    .isLessThan(46);
-        }
-    }
-
-    @Test
-    @DisplayName("로또의 숫자는 랜덤으로 생성된다.")
-    void createNumbersWithCustomRangeTest() {
-        RandomGenerator randomGenerator = new RandomGenerator();
-        List<Integer> numbers = randomGenerator.createNumbers(6, -5, 99);
-
-        for (Integer number : numbers) {
-            assertThat(number).isGreaterThan(-6)
-                    .isLessThan(100);
+        int cycle = 1000;
+        int size = 6;
+        List<Integer> numbers;
+        for (int i = 0; i < cycle; i++) {
+            numbers = randomGenerator.getOrderedNumbers(size);
+            assertEquals(size, numbers.size());
+            for (int j = 1; j < size; j++) {
+                assertTrue(numbers.get(j) > numbers.get(j-1));
+            }
         }
     }
 }
