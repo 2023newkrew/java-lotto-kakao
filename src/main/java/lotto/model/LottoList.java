@@ -16,10 +16,10 @@ public class LottoList {
         return lottoList.get(index);
     }
 
-    public List<Lotto> merge(LottoList other) {
-        ArrayList<Lotto> extendedLottoList = new ArrayList<>(lottoList);
-        extendedLottoList.addAll(other.lottoList);
-        return extendedLottoList;
+    public LottoList merge(LottoList other) {
+        ArrayList<Lotto> mergedLottoList = new ArrayList<>(lottoList);
+        mergedLottoList.addAll(other.lottoList);
+        return new LottoList(mergedLottoList);
     }
 
     public Integer length() {

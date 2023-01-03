@@ -2,9 +2,9 @@ package lotto.model;
 
 import lotto.model.enums.LottoSettings;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class WinningNumbers {
@@ -39,8 +39,8 @@ public class WinningNumbers {
     }
 
     private Integer checkMainNumbers(Lotto lotto) {
-        Set<Integer> standard = new TreeSet<>(mainNumbers.numbers);
-        standard.retainAll(new TreeSet<>(lotto.getNumbers()));
+        Set<Integer> standard = new HashSet<>(mainNumbers.numbers);
+        standard.retainAll(new HashSet<>(lotto.getNumbers()));
         return standard.size();
     }
 

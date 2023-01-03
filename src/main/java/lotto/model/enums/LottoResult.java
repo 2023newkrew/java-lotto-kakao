@@ -10,37 +10,48 @@ import java.util.stream.Collectors;
 
 public enum LottoResult {
 
-    SIX_NUMBERS_MATCHED(List.of(6), false, 2_000_000_000),
+    // 6
+    SIX_NUMBERS_MATCHED_AND_BONUS_NOT_MATCHED(List.of(6), false, 2_000_000_000),
 
     FIVE_NUMBERS_MATCHED_AND_BONUS_MATCHED(List.of(5), true, 30_000_000),
 
+    // 5
     FIVE_NUMBERS_MATCHED_AND_BONUS_NOT_MATCHED(List.of(5), false, 1_500_000),
 
-    FOUR_NUMBERS_MATCHED(List.of(4), null, 50_000),
+    FOUR_NUMBERS_MATCHED_AND_BONUS_MATCHED(List.of(4), true, 1_500_000),
 
-    THREE_NUMBERS_MATCHED(List.of(3), null, 5_000),
+    // 4
+    FOUR_NUMBERS_MATCHED_AND_BONUS_NOT_MATCHED(List.of(4), false, 50_000),
 
-    LOSE(List.of(0, 1, 2), null, 0),
+    THREE_NUMBERS_MATCHED_AND_BONUS_MATCHED(List.of(3), true, 50_000),
+
+    // 3
+    THREE_NUMBERS_MATCHED_AND_BONUS_NOT_MATCHED(List.of(3), false, 5_000),
+
+    TWO_NUMBERS_MATCHED_AND_BONUS_MATCHED(List.of(2), true, 5_000),
+
+    // etc
+    LOSE(List.of(), null, 0),
     ;
 
-    private final List<Integer> mainMatchCountCase;
+    private final List<Integer> matchedMainNumberCount;
 
     private final Boolean bonusMatched;
 
     private final Integer prizeMoney;
 
-    LottoResult(List<Integer> mainMatchCountCase, Boolean bonusMatched, Integer prizeMoney) {
-        this.mainMatchCountCase = mainMatchCountCase;
+    LottoResult(List<Integer> matchedMainNumberCount, Boolean bonusMatched, Integer prizeMoney) {
+        this.matchedMainNumberCount = matchedMainNumberCount;
         this.bonusMatched = bonusMatched;
         this.prizeMoney = prizeMoney;
     }
 
     public static LottoResult match(MatchedResult matchedResult) {
         return Arrays.stream(LottoResult.values())
-                .filter(lottoResult -> lottoResult.mainMatchCountCase.contains(matchedResult.getMatchedCount())
+                .filter(lottoResult -> lottoResult.matchedMainNumberCount.contains(matchedResult.getMatchedCount())
                         && Optional.ofNullable(lottoResult.bonusMatched).orElseGet(matchedResult::getBonusNumberMatched) == matchedResult.getBonusNumberMatched())
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new)
+                .orElse(LottoResult.LOSE)
                 ;
     }
 
@@ -49,7 +60,7 @@ public enum LottoResult {
     }
 
     private String[] convertToString() {
-        return mainMatchCountCase.stream()
+        return matchedMainNumberCount.stream()
                 .map(String::valueOf)
                 .collect(Collectors.toList())
                 .toArray(String[]::new)
@@ -58,6 +69,10 @@ public enum LottoResult {
 
     @Override
     public String toString() {
+        if (this == LottoResult.LOSE) {
+            return String.format("꽝 (%d원)", prizeMoney);
+        }
+
         StringJoiner stringJoiner = new StringJoiner(" ");
         stringJoiner
                 .add(String.format("%s개 일치", String.join(", ", convertToString())))
