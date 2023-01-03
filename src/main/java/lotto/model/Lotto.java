@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.model.enums.RankingType;
 import lotto.utils.RandomNumbersGenerator;
 
 import java.util.Collections;
@@ -22,15 +23,15 @@ public class Lotto {
         return lotto;
     }
 
-    public Ranking checkWin(List<Integer> winNumbers, int bonus) {
+    public RankingType checkWin(List<Integer> winNumbers, int bonus) {
         int matchedNum = lotto.stream()
                 .filter(winNumbers::contains)
                 .collect(Collectors.toSet())
                 .size();
         if(matchedNum == 5) {
-            return Ranking.findRanking(matchedNum, checkBonus(bonus));
+            return RankingType.findRanking(matchedNum, checkBonus(bonus));
         }
-        return Ranking.findRanking(matchedNum, false);
+        return RankingType.findRanking(matchedNum, false);
     }
 
     private boolean checkBonus(int bonus){

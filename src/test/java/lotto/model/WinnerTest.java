@@ -1,28 +1,27 @@
 package lotto.model;
 
+import lotto.model.enums.RankingType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class WinnerTest {
     @Test
     void checkRankingCount() {
         Winner winner = new Winner();
-        Ranking Rank1 = Ranking.FIRST;
-        Ranking Rank2 = Ranking.THIRD;
-        Ranking Rank3 = Ranking.DEFAULT;
-        List<Ranking> input = Arrays.asList(Rank1, Rank2, Rank3);
+        RankingType Rank1 = RankingType.FIRST;
+        RankingType Rank2 = RankingType.THIRD;
+        RankingType Rank3 = RankingType.DEFAULT;
+        List<RankingType> input = Arrays.asList(Rank1, Rank2, Rank3);
 
-        Map<Ranking, Integer> rankingResult  = new EnumMap<>(Ranking.class) {{
-            put(Ranking.FIRST, 1);
-            put(Ranking.SECOND, 0);
-            put(Ranking.THIRD, 1);
-            put(Ranking.FOURTH, 0);
-            put(Ranking.FIFTH, 0);
-            put(Ranking.DEFAULT, 1);
+        Map<RankingType, Integer> rankingResult  = new EnumMap<>(RankingType.class) {{
+            put(RankingType.FIRST, 1);
+            put(RankingType.SECOND, 0);
+            put(RankingType.THIRD, 1);
+            put(RankingType.FOURTH, 0);
+            put(RankingType.FIFTH, 0);
+            put(RankingType.DEFAULT, 1);
         }};
 
         Assertions.assertEquals(winner.rankingCount(input), rankingResult);
@@ -33,13 +32,13 @@ class WinnerTest {
         Winner winner = new Winner();
 
         int money = 3000;
-        Map<Ranking, Integer> rankingResult  = new EnumMap<>(Ranking.class) {{
-            put(Ranking.FIRST, 1);
-            put(Ranking.SECOND, 0);
-            put(Ranking.THIRD, 1);
-            put(Ranking.FOURTH, 0);
-            put(Ranking.FIFTH, 0);
-            put(Ranking.DEFAULT, 1);
+        Map<RankingType, Integer> rankingResult  = new EnumMap<>(RankingType.class) {{
+            put(RankingType.FIRST, 1);
+            put(RankingType.SECOND, 0);
+            put(RankingType.THIRD, 1);
+            put(RankingType.FOURTH, 0);
+            put(RankingType.FIFTH, 0);
+            put(RankingType.DEFAULT, 1);
         }};
 
 

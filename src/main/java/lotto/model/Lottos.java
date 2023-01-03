@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.model.enums.RankingType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +23,11 @@ public class Lottos {
         return lottos;
     }
 
-    public List<Ranking> getRankings(List<Integer> winNumbers, int bonus) {
-        List<Ranking> rankings = new ArrayList<>();
+    public List<RankingType> getRankings(List<Integer> winNumbers, int bonus) {
+        List<RankingType> rankingTypes = new ArrayList<>();
         for(Lotto lotto: lottos){
-            rankings.add(lotto.checkWin(winNumbers, bonus));
+            rankingTypes.add(lotto.checkWin(winNumbers, bonus));
         }
-        return rankings;
+        return rankingTypes;
     }
 }

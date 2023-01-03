@@ -1,8 +1,8 @@
-package lotto.model;
+package lotto.model.enums;
 
 import java.util.Arrays;
 
-public enum Ranking {
+public enum RankingType {
     FIRST(2000000000, 6, false, "6개 일치 (2000000000원)"),
     SECOND(30000000, 5, true, "5개 일치, 보너스 볼 일치(30000000원)"),
     THIRD(1500000, 5, false, "5개 일치 (1500000원)"),
@@ -16,15 +16,15 @@ public enum Ranking {
 
     private final String howManyMatches;
 
-    Ranking(int prize, int count, boolean hasBonusNumber, String howManyMatches) {
+    RankingType(int prize, int count, boolean hasBonusNumber, String howManyMatches) {
         this.prize = prize;
         this.count = count;
         this.hasBonusNumber = hasBonusNumber;
         this.howManyMatches = howManyMatches;
     }
 
-    public static Ranking findRanking(int cnt, boolean hasBonusNumber) {
-        return Arrays.stream(Ranking.values())
+    public static RankingType findRanking(int cnt, boolean hasBonusNumber) {
+        return Arrays.stream(RankingType.values())
                 .filter(ranking -> ranking.count == cnt && ranking.hasBonusNumber == hasBonusNumber)
                 .findAny()
                 .orElse(DEFAULT);

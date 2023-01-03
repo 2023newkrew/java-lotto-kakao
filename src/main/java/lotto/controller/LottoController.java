@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.model.Lottos;
-import lotto.model.enums.Ranking;
+import lotto.model.enums.RankingType;
 import lotto.model.Winner;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -23,8 +23,8 @@ public class LottoController {
         List<Integer> winNumbers = inputView.receiveLastLottoNumbers();
         int bonusNumber = inputView.receiveLastLottoBonusNumber(winNumbers);
 
-        List<Ranking> rankings = lottos.getRankings(winNumbers, bonusNumber);
-        Map<Ranking, Integer> rankingResult = winner.rankingCount(rankings);
+        List<RankingType> rankingTypes = lottos.getRankings(winNumbers, bonusNumber);
+        Map<RankingType, Integer> rankingResult = winner.rankingCount(rankingTypes);
 
         outputView.printStatistic(rankingResult);
         outputView.printRevenue(winner.revenue(rankingResult, money));
