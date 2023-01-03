@@ -1,5 +1,6 @@
 package util.validator;
 
+import common.constant.Constants;
 import exception.DuplicateNumberException;
 import exception.IllegalLengthException;
 
@@ -8,11 +9,9 @@ import java.util.stream.Collectors;
 
 public class WinningLottoValidator {
 
-    public static final String DELIMITER = ", ";
-    public static final int VALID_LENGTH = 6;
 
     public static void validate(String input) {
-        String[] splitInput = input.split(DELIMITER);
+        String[] splitInput = input.split(Constants.DELIMITER);
         validateLength(splitInput);
         Arrays.stream(splitInput).forEach(SingleNumberValidator::validate);
         List<Integer> numbers = Arrays.stream(splitInput)
@@ -22,7 +21,7 @@ public class WinningLottoValidator {
     }
 
     private static void validateLength(String[] inputs) {
-        if (inputs.length != VALID_LENGTH) {
+        if (inputs.length != Constants.LENGTH) {
             throw new IllegalLengthException("길이");
         }
     }
@@ -30,7 +29,7 @@ public class WinningLottoValidator {
     private static void validDuplicate(List<Integer> inputs) {
         Set<Integer> distinctNumbers = new HashSet<>();
         inputs.stream().forEach(input -> distinctNumbers.add(input));
-        if (distinctNumbers.size() != VALID_LENGTH) {
+        if (distinctNumbers.size() != Constants.LENGTH) {
             throw new DuplicateNumberException("");
         }
     }

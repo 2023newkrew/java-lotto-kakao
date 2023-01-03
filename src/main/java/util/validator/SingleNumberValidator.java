@@ -1,8 +1,8 @@
 package util.validator;
 
+import common.constant.Constants;
+
 public class SingleNumberValidator {
-    private static final int LOWER_BOUND = 0;
-    private static final int UPPER_BOUND = 45;
 
     public static void validate(String input) {
         int number;
@@ -20,7 +20,7 @@ public class SingleNumberValidator {
     }
 
     private static void validateInRange(int inputNumber) {
-        if (LOWER_BOUND >= inputNumber || inputNumber > UPPER_BOUND) {
+        if (!(Constants.MINIMUM <= inputNumber && inputNumber <= Constants.MAXIMUM)) {
             throw new IllegalArgumentException("1 이상 45 이하의 범위를 벗어났습니다.");
         }
     }
