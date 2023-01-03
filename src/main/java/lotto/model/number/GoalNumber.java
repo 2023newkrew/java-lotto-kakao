@@ -26,7 +26,7 @@ public final class GoalNumber extends LottoNumber {
         Set<Integer> set = new HashSet<>(lottoNumber.getNumbers());
         set.addAll(getNumbers());
 
-        return LOTTO_COUNT * 2 - set.size();
+        return LOTTO_COUNT.getValue() * 2 - set.size();
     }
 
     private void validateBonusBall(Integer bonusBall) {

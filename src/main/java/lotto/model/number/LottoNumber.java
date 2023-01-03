@@ -31,13 +31,13 @@ public class LottoNumber {
     }
 
     private void validateLottoNumberRange(Integer number) {
-        if (number < MIN_VALUE || number > MAX_VALUE) {
+        if (number < MIN_VALUE.getValue() || number > MAX_VALUE.getValue()) {
             throw new InvalidInputException("로또는 " + MIN_VALUE + "부터" + MAX_VALUE + "사이의 수 이어야 합니다.");
         }
     }
 
     private void validateLottoCount(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_COUNT) {
+        if (numbers.size() != LOTTO_COUNT.getValue()) {
             throw new InvalidInputException("로또는" + LOTTO_COUNT + "개의 숫자로 이루어져야 합니다.");
         }
     }
