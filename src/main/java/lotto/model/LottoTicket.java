@@ -13,14 +13,14 @@ public class LottoTicket {
         this.lottoValues = new ArrayList<>(lottoValues);
     }
 
-    private static void validateValuesCount(List<LottoValue> lottoValues) {
+    private void validateValuesCount(List<LottoValue> lottoValues) {
         if (lottoValues.size() != VALUES_COUNT) {
             throw new IllegalArgumentException();
         }
     }
 
-    private static void validateDistinction(List<LottoValue> lottoValues) {
-        if (lottoValues.stream().distinct().count() != 6) {
+    private void validateDistinction(List<LottoValue> lottoValues) {
+        if (lottoValues.stream().distinct().count() != VALUES_COUNT) {
             throw new IllegalArgumentException();
         }
     }
@@ -29,7 +29,7 @@ public class LottoTicket {
         return lottoValues.contains(bonusNumber);
     }
 
-    public List<LottoValue> getLottoValues(){
+    public List<LottoValue> getLottoValues() {
         return new ArrayList<>(lottoValues);
     }
 }

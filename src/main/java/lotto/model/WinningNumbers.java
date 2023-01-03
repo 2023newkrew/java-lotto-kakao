@@ -32,7 +32,7 @@ public class WinningNumbers {
                 .collect(Collectors.toList()));
     }
 
-    public int matchValues(LottoTicket lottoTicket) {
+    public Grade matchValues(LottoTicket lottoTicket) {
         int sixCount = (int) lottoTicket.getLottoValues()
                 .stream()
                 .filter(sixNumbers::contains)
@@ -43,6 +43,6 @@ public class WinningNumbers {
             bonusCount++;
         }
 
-        return sixCount + 10 * bonusCount;
+        return Grade.getGrade(sixCount + 10 * bonusCount);
     }
 }

@@ -7,7 +7,7 @@ public class LottoValue {
 
     public LottoValue(int value) {
         if (isOutOfRange(value)) {
-            throw new IllegalArgumentException("LottoValue는 1~45의 정수 값이어야 한다.");
+            throw new IllegalArgumentException("LottoValue 는 1~45의 정수 값이어야 한다.");
         }
         this.value = value;
     }

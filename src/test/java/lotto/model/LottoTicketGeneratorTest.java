@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
 class LottoTicketGeneratorTest {
     @Test
-    void 난수_값_6개_생성(){
+    void 난수_값_6개_생성() {
         assertThatCode(() -> LottoTicketGenerator.getInstance().generate()).doesNotThrowAnyException();
     }
 }
