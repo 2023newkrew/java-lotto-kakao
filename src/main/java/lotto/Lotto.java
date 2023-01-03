@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,12 @@ public class Lotto {
     private static final int SIZE = 6;
 
     private final List<LottoNumber> numbers;
+
+    public static Lotto createRandomLotto() {
+        List<LottoNumber> numberPool = LottoNumber.createPool();
+        Collections.shuffle(numberPool);
+        return create(numberPool.subList(0, SIZE));
+    }
 
     public static Lotto create(int... numbers) {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
@@ -24,7 +31,7 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    private static boolean hasDuplicated(List<LottoNumber> numbers){
+    private static boolean hasDuplicated(List<LottoNumber> numbers) {
         return numbers.stream().distinct().count() != SIZE;
     }
 

@@ -1,6 +1,9 @@
 package lotto;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
 
@@ -10,7 +13,13 @@ public class LottoNumber {
 
     private final int number;
 
-    public LottoNumber(int number){
+    public static List<LottoNumber> createPool() {
+        return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
+    public LottoNumber(int number) {
         validateRange(number);
         this.number = number;
     }
