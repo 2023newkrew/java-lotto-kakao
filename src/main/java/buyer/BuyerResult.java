@@ -22,7 +22,7 @@ public class BuyerResult {
     public BuyerResult(EnumMap<Rank, Integer> result) {
         this.result = result;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof BuyerResult)) return false;
@@ -36,8 +36,8 @@ public class BuyerResult {
         result.put(matchResult, result.getOrDefault(matchResult, 0) + 1);
     }
 
-    public EnumMap<Rank, Integer> getResult() {
-        return result;
+    public Integer getRankCount(Rank rank) {
+        return result.getOrDefault(rank, 0);
     }
 
     public BuyerProfit getProfit() {

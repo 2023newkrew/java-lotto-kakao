@@ -21,8 +21,7 @@ public class OutputView {
         Arrays.stream(Rank.values()).forEach((e) -> {
             if (e != Rank.NONE) {
                 printRankInfo(e);
-                System.out.println(
-                        (result.getResult().getOrDefault(e, 0)) + "개");
+                System.out.println(result.getRankCount(e) + "개");
             }
         });
     }
