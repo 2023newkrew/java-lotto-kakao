@@ -8,5 +8,6 @@ public class LottoTrialRandom extends LottoTrial {
             super.ballNumbers.add(picker.pickOne());
         }
         super.check(this);
+        super.sort(this);
     }
 }

@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.exception.DuplicatedBallNumber;
 import lotto.exception.InvalidLottoNumberValue;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -26,6 +27,11 @@ class LottoTrialTest {
                 LottoTrial lottoTrial = new LottoTrialRandom(new LottoPickerRandom());
             }
         }).doesNotThrowAnyException();
+    }
+    @Test
+    void toString_잘_되는가(){
+        Assertions.assertThat(new LottoTrialManual(new ArrayList<>(List.of(6,2,3,4,5,1))).toString())
+                .isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 
 }
