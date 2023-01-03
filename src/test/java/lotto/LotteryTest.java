@@ -13,21 +13,8 @@ public class LotteryTest {
         //given
         Lottery lottery = new Lottery();
         //when
-        List<Integer> lotteryNumbers = lottery.getLotteryNumber();
+        List<LotteryNumber> lotteryNumbers = lottery.getLotteryNumber();
         //then
         Assertions.assertThat(lotteryNumbers).hasSize(6);
-    }
-
-    @DisplayName("모든 로또 숫자가 1부터 45 사이인지 확인")
-    @Test
-    void lotteryNumberTest() {
-        //given
-        Lottery lottery = new Lottery();
-        //when
-        List<Integer> lotteryNumbers = lottery.getLotteryNumber();
-        //then
-        for (Integer lotteryNumber : lotteryNumbers) {
-            Assertions.assertThat(lotteryNumber).isBetween(1, 45);
-        }
     }
 }

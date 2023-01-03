@@ -1,21 +1,14 @@
 package lotto;
 
-import java.util.Collections;
-import java.util.List;
-
 public class LotteryNumber {
-    private final List<Integer> numbers;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
-    public LotteryNumber(List<Integer> numbers){
-        for(final Integer number : numbers) validateNumber(number);
+    private final int number;
 
-        this.numbers = numbers;
-    }
-
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public LotteryNumber(int number) {
+        validateNumber(number);
+        this.number = number;
     }
 
     private void validateNumber(int number) {
@@ -26,10 +19,10 @@ public class LotteryNumber {
 
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof LotteryNumber)) return false;
+        if (!(obj instanceof LotteryNumber)) return false;
 
         LotteryNumber cp = (LotteryNumber) obj;
 
-        return this.numbers.equals(cp.numbers);
+        return this.number == cp.number;
     }
 }
