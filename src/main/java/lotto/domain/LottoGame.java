@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.List;
 import lotto.dto.GameResultDto;
-import lotto.generatepolicy.DefaultGeneratePolicy;
 import lotto.generatepolicy.GeneratePolicy;
 import lotto.rankingpolicy.RankingPolicy;
 
@@ -14,10 +13,6 @@ public class LottoGame {
 
     private LottoAnswer lottoAnswer;
     private List<Integer> rankCounts;
-
-    public LottoGame(RankingPolicy rankingPolicy) {
-        this(rankingPolicy, new DefaultGeneratePolicy());
-    }
 
     public LottoGame(RankingPolicy rankingPolicy, GeneratePolicy generatePolicy) {
         this.rankingPolicy = rankingPolicy;
