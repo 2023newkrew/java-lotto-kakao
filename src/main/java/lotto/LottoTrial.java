@@ -21,7 +21,7 @@ public abstract class LottoTrial {
 
     protected void check(LottoTrial lottoTrial){
         Set<LottoBallNumber> lottoSet = new HashSet<>();
-        for (LottoBallNumber bn : ballNumbers){
+        for (LottoBallNumber bn : lottoTrial.ballNumbers){
             lottoSet.add(bn);
         }
         if (lottoSet.size()!=LottoConstants.BALLCOUNT_LIMIT) {

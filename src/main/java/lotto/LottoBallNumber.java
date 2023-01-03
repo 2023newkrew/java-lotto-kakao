@@ -18,11 +18,11 @@ public class LottoBallNumber implements Comparable{
 
     @Override
     public int compareTo(Object o) {
+        if (o == null || (getClass() != o.getClass() && o.getClass() != Integer.class)){
+            throw new RuntimeException();
+        }
         if (o.getClass() == Integer.class){
             return num-(Integer)o;
-        }
-        if (o == null || getClass() != o.getClass()){
-            throw new RuntimeException();
         }
         return num - ((LottoBallNumber)o).num;
     }

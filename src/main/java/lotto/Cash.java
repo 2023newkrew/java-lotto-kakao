@@ -27,11 +27,11 @@ public class Cash implements Comparable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
-            return true;
+        if (o == null || (getClass() != o.getClass() && o.getClass()!=Long.class)){
+            throw new RuntimeException();
         }
-        if (o == null || getClass() != o.getClass()){
-            return false;
+        if (Long.class == o.getClass()){
+            return cash == ((Long)o);
         }
         Cash cash1 = (Cash)o;
         return cash == cash1.cash;
@@ -49,11 +49,11 @@ public class Cash implements Comparable {
 
     @Override
     public int compareTo(Object o) {
+        if (o == null || (getClass() != o.getClass() && o.getClass()!=Long.class)){
+            throw new RuntimeException();
+        }
         if (Long.class == o.getClass()){
             return cash > ((Long)o) ? 1 : (cash == (Long)o ? 0 : -1);
-        }
-        if (o == null || getClass() != o.getClass()){
-            throw new RuntimeException();
         }
         long otherCash = ((Cash)o).cash;
         return cash > otherCash ? 1 : (cash == otherCash ? 0 : -1);
