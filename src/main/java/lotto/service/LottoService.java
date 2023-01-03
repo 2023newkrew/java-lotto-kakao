@@ -1,10 +1,11 @@
 package lotto.service;
 
-import lotto.model.LottoTicket;
-import lotto.model.LottoTickets;
+import lotto.model.*;
 import lotto.repository.LottoRepository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LottoService {
     private static final Integer LOTTO_PRICE = 1000;
@@ -26,5 +27,30 @@ public class LottoService {
         return lottoTickets.toStringList();
     }
 
+    public Map<LottoRank, Integer> getLottoResult(List<Integer> inputWinningNumber, Integer inputBonusBall) {
+        LottoTickets lottoTickets = lottoRepository.getAllLottoTicket();
+        for(Integer tmp : inputWinningNumber) {
+            System.out.println(tmp);
+        }
+        System.out.println(inputBonusBall);
+        List<LottoNumber> lottoNumbers =
+                inputWinningNumber.stream()
+                        .map(LottoNumber::new)
+                        .collect(Collectors.toList());
 
+        return lottoTickets.getLottoResult(
+                new LottoWinningNumber(
+                        new LottoTicket(lottoNumbers),
+                        new LottoNumber(inputBonusBall)
+                )
+        ).getRankCountMap();
+    }
+
+    public Double getRateOfReturn(Integer inputPurchaseAmount, Map<LottoRank, Integer> lottoResult) {
+        int totalRevenue = 0;
+        for(LottoRank lottoRank : lottoResult.keySet()){
+            totalRevenue += lottoRank.getReward() * lottoResult.get(lottoRank);
+        }
+        return (double) totalRevenue / inputPurchaseAmount;
+    }
 }
