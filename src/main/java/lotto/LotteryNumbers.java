@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,8 @@ public class LotteryNumbers {
         }
 
         validateNumbers();
+
+        Collections.sort(numbers);
     }
 
     private void validateNumbers() {
