@@ -14,7 +14,7 @@ public class LottoCount {
         this.count = number;
     }
 
-    public LottoCount(Cash cash){
+    public LottoCount(Cash cash) {
         this.count = (int)(cash.getCash() / LottoConstants.LOTTO_PRICE);
 
         if (this.count <= 0){
