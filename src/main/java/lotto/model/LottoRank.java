@@ -1,25 +1,34 @@
 package lotto.model;
 
-public enum LottoRank {
-    RANK1(5000),
-    RANK2(50000),
-    RANK3(1500000),
-    RANK4(30000000),
-    RANK5(2000000000),
-    RANK6(0);
+import java.util.Arrays;
 
+public enum LottoRank {
+    RANK1(6, false,2000000000),
+    RANK2(5, true, 30000000),
+    RANK3(5, false, 1500000),
+    RANK4(4, false, 50000),
+    RANK5(3, false, 5000),
+    RANK6(2, false, 0);
+
+    private final Integer matchedCount;
+    private final boolean bonusBall;
     private final Integer reward;
 
-    LottoRank(Integer reward){
+    LottoRank(Integer matchedCount, boolean bonusBall, Integer reward){
+        this.matchedCount = matchedCount;
+        this.bonusBall = bonusBall;
         this.reward = reward;
     }
 
     public static LottoRank fromCountAndBonus(Integer count, boolean bonus){
-        if(count == 6) return RANK1;
-        if(count == 5 && bonus) return RANK2;
-        if(count == 5) return RANK3;
-        if(count == 4) return RANK4;
-        if(count == 3) return RANK5;
-        return RANK6;
+        return Arrays.stream(values())
+                .filter(value -> {
+                    if(value.matchedCount != 5){
+                        return value.matchedCount.equals(count);
+                    }
+                    return value.bonusBall == bonus && value.matchedCount.equals(count);
+                })
+                .findAny()
+                .orElse(null);
     }
 }
