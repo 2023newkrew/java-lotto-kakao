@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicketGenerator {
-    private final List<LottoValue> lottoDomain;
+    private final List<LottoNumber> numberDomain;
     private static LottoTicketGenerator instance;
 
     private LottoTicketGenerator() {
-        lottoDomain = new ArrayList<>();
+        numberDomain = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
-            lottoDomain.add(new LottoValue(i));
+            numberDomain.add(new LottoNumber(i));
         }
     }
 
@@ -23,7 +23,9 @@ public class LottoTicketGenerator {
     }
 
     public LottoTicket generate() {
-        Collections.shuffle(lottoDomain);
-        return new LottoTicket(lottoDomain.subList(0, LottoTicket.VALUES_COUNT));
+        Collections.shuffle(numberDomain);
+        return new LottoTicket(
+                numberDomain.subList(0, LottoTicket.NUMBERS_SIZE)
+        );
     }
 }

@@ -1,12 +1,18 @@
 package lotto.model;
 
 public enum Grade {
-    ZERO,
-    THREE,
-    FOUR,
-    FIVE,
-    FIVE_BONUS,
-    SIX;
+    ZERO(0),
+    THREE(5000),
+    FOUR(50000),
+    FIVE(1500000),
+    FIVE_BONUS(30000000),
+    SIX(2000000000);
+
+    final int reward;
+
+    Grade(int reward) {
+        this.reward = reward;
+    }
 
     public static Grade getGrade(int count) {
         if (count == 3) return THREE;
@@ -15,5 +21,9 @@ public enum Grade {
         if (count == 6) return SIX;
         if (count == 15) return FIVE_BONUS;
         return ZERO;
+    }
+
+    public int getReward() {
+        return this.reward;
     }
 }

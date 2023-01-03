@@ -22,7 +22,7 @@ public class InputView {
         String money;
         do {
             money = sc.nextLine();
-        } while (validateMoneyInput(money)) ;
+        } while (validateMoneyInput(money));
         return Integer.parseInt(money);
     }
 

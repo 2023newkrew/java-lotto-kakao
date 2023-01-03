@@ -30,17 +30,15 @@ public class ResultTest {
     @Test
     void 자료_추가(){
         Result result = new Result();
-        assertThat(result.put(Grade.FIVE, 1)).isEqualTo(1);
+        assertThat(result.addUp(Grade.FIVE)).isEqualTo(1);
     }
 
     @Test
     void 값_추출(){
         Result result = new Result(){{
-            put(Grade.THREE, 3);
-            put(Grade.FOUR, 1);
+            addUp(Grade.THREE);
         }};
-        assertThat(result.get(Grade.THREE)).isEqualTo(3);
-        assertThat(result.get(Grade.FOUR)).isEqualTo(1);
+        assertThat(result.get(Grade.THREE)).isEqualTo(1);
         assertThat(result.get(Grade.SIX)).isEqualTo(0);
     }
 }

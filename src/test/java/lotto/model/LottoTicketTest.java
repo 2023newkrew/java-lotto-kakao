@@ -11,12 +11,12 @@ class LottoTicketTest {
     void 여섯개의_다른_숫자를_가진_티켓_생성() {
         assertThatCode(() -> new LottoTicket(
                 Arrays.asList(
-                        new LottoValue(1),
-                        new LottoValue(2),
-                        new LottoValue(3),
-                        new LottoValue(4),
-                        new LottoValue(5),
-                        new LottoValue(6)
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5),
+                        new LottoNumber(6)
                 ))).doesNotThrowAnyException();
     }
 
@@ -24,12 +24,12 @@ class LottoTicketTest {
     void 중복된_숫자가_있는_경우_예외_발생() {
         assertThatCode(() -> new LottoTicket(
                 Arrays.asList(
-                        new LottoValue(1),
-                        new LottoValue(2),
-                        new LottoValue(3),
-                        new LottoValue(4),
-                        new LottoValue(3),
-                        new LottoValue(6)
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(3),
+                        new LottoNumber(6)
                 ))).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -37,11 +37,11 @@ class LottoTicketTest {
     void 개수가_6개가_아니면_예외_발생() {
         assertThatCode(() -> new LottoTicket(
                 Arrays.asList(
-                        new LottoValue(1),
-                        new LottoValue(2),
-                        new LottoValue(3),
-                        new LottoValue(4),
-                        new LottoValue(5)
+                        new LottoNumber(1),
+                        new LottoNumber(2),
+                        new LottoNumber(3),
+                        new LottoNumber(4),
+                        new LottoNumber(5)
                 ))).isInstanceOf(IllegalArgumentException.class);
     }
 }

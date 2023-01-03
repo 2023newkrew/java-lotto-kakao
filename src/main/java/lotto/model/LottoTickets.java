@@ -7,10 +7,10 @@ public class LottoTickets {
     List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
-        this.tickets = tickets;
+        this.tickets = new ArrayList<>(tickets);
     }
 
-    public static LottoTickets countOf(int count) {
+    public static LottoTickets of(int count) {
         List<LottoTicket> tickets = new ArrayList<>();
         LottoTicketGenerator lottoTicketGenerator = LottoTicketGenerator.getInstance();
         for (int i = 0; i < count; i++) {
@@ -24,12 +24,12 @@ public class LottoTickets {
         Grade key;
         for (LottoTicket ticket : tickets) {
             key = winningNumbers.matchValues(ticket);
-            result.put(key, result.get(key) + 1);
+            result.addUp(key);
         }
         return result;
     }
 
-    public List<LottoTicket> getTicket(){
+    public List<LottoTicket> getTicket() {
         return new ArrayList<>(tickets);
     }
 

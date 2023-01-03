@@ -44,12 +44,12 @@ class WinningNumbersTest {
     void 당첨_확인(String sixNumbers, String bonusNumber, Grade result) {
         WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
-                new LottoValue(1),
-                new LottoValue(2),
-                new LottoValue(3),
-                new LottoValue(4),
-                new LottoValue(5),
-                new LottoValue(6)
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
         ));
         assertThat(winningNumbers.matchValues(lottoTicket)).isEqualTo(result);
     }

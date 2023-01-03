@@ -1,43 +1,45 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LottoTicket {
-    public static final int VALUES_COUNT = 6;
-    private final List<LottoValue> lottoValues;
+    public static final int NUMBERS_SIZE = 6;
+    private final List<LottoNumber> numbers;
 
-    public LottoTicket(List<LottoValue> lottoValues) {
-        validateValuesCount(lottoValues);
-        validateDistinction(lottoValues);
-        this.lottoValues = new ArrayList<>(lottoValues);
+    public LottoTicket(List<LottoNumber> numbers) {
+        validateValuesCount(numbers);
+        validateDistinction(numbers);
+        this.numbers = new ArrayList<>(numbers);
     }
 
-    private void validateValuesCount(List<LottoValue> lottoValues) {
-        if (lottoValues.size() != VALUES_COUNT) {
+    private void validateValuesCount(List<LottoNumber> numbers) {
+        if (numbers.size() != NUMBERS_SIZE) {
             throw new IllegalArgumentException();
         }
     }
 
-    private void validateDistinction(List<LottoValue> lottoValues) {
-        if (lottoValues.stream().distinct().count() != VALUES_COUNT) {
+    private void validateDistinction(List<LottoNumber> numbers) {
+        if (numbers.stream().distinct().count() != NUMBERS_SIZE) {
             throw new IllegalArgumentException();
         }
     }
 
-    public boolean contains(LottoValue bonusNumber) {
-        return lottoValues.contains(bonusNumber);
+    public boolean contains(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
     }
 
-    public List<LottoValue> getLottoValues() {
-        return new ArrayList<>(lottoValues);
+    public List<LottoNumber> getNumbers() {
+        return new ArrayList<>(numbers);
     }
 
-    public String toString() {
-        List<String> st = new ArrayList<>();
-        for (LottoValue lv : lottoValues) {
-            st.add(Integer.toString(lv.getValue()));
+    public List<Integer> toIntegerList() {
+        List<Integer> values = new ArrayList<>();
+        for (LottoNumber number : numbers) {
+            values.add((number.getValue()));
         }
-        return "[" + String.join(", ", st) + "]";
+        Collections.sort(values);
+        return values;
     }
 }

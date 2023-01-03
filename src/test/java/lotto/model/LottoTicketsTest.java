@@ -7,29 +7,29 @@ import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoTicketsTest {
+class LottoTicketsTest {
     @Test
     void 여러장의_복권_당첨_결과_확인() {
         LottoTickets lottoTickets = new LottoTickets(
                 Arrays.asList(
                         new LottoTicket(
                                 Arrays.asList(
-                                        new LottoValue(1),
-                                        new LottoValue(2),
-                                        new LottoValue(3),
-                                        new LottoValue(4),
-                                        new LottoValue(5),
-                                        new LottoValue(6)
+                                        new LottoNumber(1),
+                                        new LottoNumber(2),
+                                        new LottoNumber(3),
+                                        new LottoNumber(4),
+                                        new LottoNumber(5),
+                                        new LottoNumber(6)
                                 )
                         ),
                         new LottoTicket(
                                 Arrays.asList(
-                                        new LottoValue(1),
-                                        new LottoValue(2),
-                                        new LottoValue(3),
-                                        new LottoValue(4),
-                                        new LottoValue(5),
-                                        new LottoValue(7)
+                                        new LottoNumber(1),
+                                        new LottoNumber(2),
+                                        new LottoNumber(3),
+                                        new LottoNumber(4),
+                                        new LottoNumber(5),
+                                        new LottoNumber(7)
                                 )
                         )
                 )

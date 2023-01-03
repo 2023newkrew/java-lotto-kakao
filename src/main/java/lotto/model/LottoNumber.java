@@ -2,10 +2,10 @@ package lotto.model;
 
 import java.util.Objects;
 
-public class LottoValue {
+public class LottoNumber {
     private final int value;
 
-    public LottoValue(int value) {
+    public LottoNumber(int value) {
         if (isOutOfRange(value)) {
             throw new IllegalArgumentException("LottoValue 는 1~45의 정수 값이어야 한다.");
         }
@@ -20,7 +20,7 @@ public class LottoValue {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoValue that = (LottoValue) o;
+        LottoNumber that = (LottoNumber) o;
         return value == that.value;
     }
 
@@ -29,7 +29,7 @@ public class LottoValue {
         return Objects.hash(value);
     }
 
-    public int getValue(){
+    public int getValue() {
         return value;
     }
 }
