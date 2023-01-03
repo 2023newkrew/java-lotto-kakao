@@ -2,7 +2,6 @@ package lotto.controllers;
 
 import static lotto.common.LottoConfiguration.LOTTO_PRICE;
 
-import java.util.ArrayList;
 import java.util.List;
 import lotto.models.Goal;
 import lotto.models.Lotto;
@@ -27,8 +26,7 @@ public class LottoController {
         Integer numberOfLottos = parseNumberOfLottos(budget);
         List<Lotto> lottos = createLottoList(numberOfLottos);
         Goal goal = getGoal();
-        LottoStatistics statistics = new LottoStatistics(goal, lottos, budget);
-        outputView.printStatistics(statistics);
+        showStatistics(goal, lottos, budget);
     }
 
     private Integer getBudget() {
@@ -47,12 +45,9 @@ public class LottoController {
     }
 
     private List<Lotto> createLottoList(int numberOfLotto) {
-        List<Lotto> list = new ArrayList<>();
-        for (int i = 0; i < numberOfLotto; i++) {
-            list.add(lottoGenerator.createLotto());
-        }
-        outputView.printLottos(list);
-        return list;
+        List<Lotto> lottos = lottoGenerator.createLottos(numberOfLotto);
+        outputView.printLottos(lottos);
+        return lottos;
     }
 
     private Goal getGoal() {
@@ -81,5 +76,10 @@ public class LottoController {
     private Integer getBonusBallLogic() {
         outputView.askForBonusBall();
         return inputView.getInteger();
+    }
+
+    private void showStatistics(Goal goal, List<Lotto> lottos, Integer budget) {
+        LottoStatistics statistics = new LottoStatistics(goal, lottos, budget);
+        outputView.printStatistics(statistics);
     }
 }
