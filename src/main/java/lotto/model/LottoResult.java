@@ -27,7 +27,11 @@ public class LottoResult {
     }
 
     public void addLottoRank(LottoRank lottoRank) {
-        rankCountMap.replace(lottoRank, rankCountMap.get(lottoRank)+1);
+        rankCountMap.put(lottoRank, rankCountMap.get(lottoRank)+1);
+    }
+
+    public Map<LottoRank, Integer> getRankCountMap(){
+        return rankCountMap;
     }
 
     @Override
