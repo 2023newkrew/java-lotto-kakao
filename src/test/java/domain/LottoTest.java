@@ -31,9 +31,9 @@ public class LottoTest {
 
         Lotto lotto = Lotto.ofNumbers(numbers);
         WinningLotto winningLotto = new WinningLotto(Lotto.ofNumbers(numbers), new LottoNumber(7));
-        LottoPlace place = lotto.getPlace(winningLotto);
+        LottoRank place = lotto.getRank(winningLotto);
 
-        assertThat(place).isEqualTo(LottoPlace.FIRST_PLACE);
+        assertThat(place).isEqualTo(LottoRank.FIRST_RANK);
     }
 
     @Test
@@ -42,8 +42,8 @@ public class LottoTest {
 
         Lotto lotto = Lotto.ofNumbers(numbers);
         WinningLotto winningLotto = new WinningLotto(Lotto.ofNumbers(numbers), new LottoNumber(7));
-        LottoPlace place = lotto.getPlace(winningLotto);
+        LottoRank place = lotto.getRank(winningLotto);
 
-        assertThat(place).isEqualTo(LottoPlace.SECOND_PLACE);
+        assertThat(place).isEqualTo(LottoRank.SECOND_RANK);
     }
 }

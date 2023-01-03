@@ -25,11 +25,11 @@ public class LottoBuyerTest {
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
         LottoResult lottoResult = lottoBuyer.calculateResult(winningLotto);
-        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.FIRST_PLACE)).isEqualTo(1);
-        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.SECOND_PLACE)).isEqualTo(0);
-        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.THIRD_PLACE)).isEqualTo(0);
-        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.FOURTH_PLACE)).isEqualTo(1);
-        assertThat(lottoResult.getLottoPlaces().get(LottoPlace.FIFTH_PLACE)).isEqualTo(0);
+        assertThat(lottoResult.getLottoPlaces().get(LottoRank.FIRST_RANK)).isEqualTo(1);
+        assertThat(lottoResult.getLottoPlaces().get(LottoRank.SECOND_RANK)).isEqualTo(0);
+        assertThat(lottoResult.getLottoPlaces().get(LottoRank.THIRD_RANK)).isEqualTo(0);
+        assertThat(lottoResult.getLottoPlaces().get(LottoRank.FOURTH_RANK)).isEqualTo(1);
+        assertThat(lottoResult.getLottoPlaces().get(LottoRank.FIFTH_RANK)).isEqualTo(0);
     }
 
     @Test

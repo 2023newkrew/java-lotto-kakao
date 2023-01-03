@@ -21,14 +21,14 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public LottoPlace getPlace(WinningLotto winningLotto) {
+    public LottoRank getRank(WinningLotto winningLotto) {
         Integer correctWinningNumberCount = 0;
         for(LottoNumber number : numbers) {
             if (winningLotto.getLotto().isIn(number)) {
                 correctWinningNumberCount++;
             }
         }
-        return LottoPlace.getStatus(correctWinningNumberCount, numbers.contains(winningLotto.getBonusNumber()));
+        return LottoRank.getLottoRank(correctWinningNumberCount, numbers.contains(winningLotto.getBonusNumber()));
     }
 
     public Boolean isIn(LottoNumber lottoNumber) {
