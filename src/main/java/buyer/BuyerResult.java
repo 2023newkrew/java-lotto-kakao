@@ -1,7 +1,9 @@
 package buyer;
 
+import lotto.LotteryGenerator;
 import lotto.Rank;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 
 public class BuyerResult {
@@ -35,5 +37,14 @@ public class BuyerResult {
 
     public EnumMap<Rank, Integer> getResult() {
         return result;
+    }
+
+    public BuyerProfit getProfit() {
+        int profit = Arrays.stream(Rank.values())
+                .mapToInt(e -> result.getOrDefault(e, 0) * e.prize)
+                .sum();
+        int count = Arrays.stream(Rank.values()).mapToInt(e -> result.getOrDefault(e, 0)).sum();
+        System.out.println(count);
+        return new BuyerProfit((double) profit / (count * LotteryGenerator.LOTTERY_PRICE));
     }
 }

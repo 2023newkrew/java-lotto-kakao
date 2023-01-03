@@ -37,9 +37,9 @@ public class LotteryResult {
         return lottery.getLotteryNumber().contains(new LotteryNumber(bonusNumber));
     }
 
-    public BuyerResult getResult(List<Lottery> lotteries) {
+    public BuyerResult getResult(Lotteries lotteries) {
         BuyerResult buyerResult = new BuyerResult();
-        for (Lottery lottery : lotteries) {
+        for (Lottery lottery : lotteries.getLotteries()) {
             buyerResult.matches(getRank(lottery));
         }
         return buyerResult;

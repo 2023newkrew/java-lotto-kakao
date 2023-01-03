@@ -30,6 +30,7 @@ public class LotteryController {
         LotteryResult lotteryResult = new LotteryResult(winningNumber, bonusNumber);
 
         outputView.printResult(lotteryResult.getResult(buyer.getLotteries()));
+        outputView.printProfit(lotteryResult.getResult(buyer.getLotteries()).getProfit());
     }
 
 }

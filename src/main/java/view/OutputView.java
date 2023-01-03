@@ -1,23 +1,24 @@
 package view;
 
+import buyer.BuyerProfit;
 import buyer.BuyerResult;
+import lotto.Lotteries;
 import lotto.Lottery;
 import lotto.Rank;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public void printLotteries(List<Lottery> lotteries) {
-        lotteries.forEach(this::printLottery);
+    public void printLotteries(Lotteries lotteries) {
+        lotteries.getLotteries().forEach(this::printLottery);
     }
 
     private void printLottery(Lottery lottery) {
         System.out.println(
                 lottery.getLotteryNumber()
                         .stream()
-                        .map(Object::toString)
+                        .map(lotteryNumber -> Integer.toString(lotteryNumber.getNumber()))
                         .collect(Collectors.joining(","))
         );
     }
@@ -35,5 +36,9 @@ public class OutputView {
     private void printRankInfo(Rank rank) {
         System.out.print(rank.match.getMatchCount() + "개 일치");
         System.out.print("(" + rank.prize + ")- ");
+    }
+
+    public void printProfit(BuyerProfit buyerProfit) {
+        System.out.println("총 수익률은 " + buyerProfit.getProfit() + "입니다");
     }
 }

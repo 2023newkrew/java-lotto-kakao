@@ -17,6 +17,10 @@ public class LotteryNumber {
         }
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof LotteryNumber)) return false;

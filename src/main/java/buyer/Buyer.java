@@ -2,7 +2,6 @@ package buyer;
 
 import lotto.Lotteries;
 import lotto.Lottery;
-import java.util.List;
 
 public class Buyer {
     private final Lotteries lotteries = new Lotteries();
@@ -12,7 +11,7 @@ public class Buyer {
         this.budget = new Budget(budget);
     }
 
-    public boolean hasMoreBudgetThan(int price){
+    public boolean hasMoreBudgetThan(int price) {
         return budget.hasMoreThan(price);
     }
 
@@ -24,7 +23,7 @@ public class Buyer {
         lotteries.addLottery(lottery);
     }
 
-    public List<Lottery> getLotteries() {
-        return lotteries.getLotteries();
+    public Lotteries getLotteries() {
+        return lotteries;
     }
 }
