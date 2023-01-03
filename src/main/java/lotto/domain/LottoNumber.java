@@ -24,4 +24,13 @@ public class LottoNumber {
         if (!(obj instanceof LottoNumber)) return false;
         return this.number == ((LottoNumber) obj).number;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(number);
+    }
+
+    public int compare(LottoNumber other) {
+        return number - other.number;
+    }
 }

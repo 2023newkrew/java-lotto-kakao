@@ -14,6 +14,7 @@ public class Lotto {
         if (numbers.stream().distinct().count() != FIXED_SIZE) {
             throw new RuntimeException("로또 수에 중복된 수가 있습니다.");
         }
+        numbers.sort(LottoNumber::compare);
         this.numbers = numbers;
     }
 
@@ -27,5 +28,10 @@ public class Lotto {
 
     public boolean hasBonus(LottoNumber other) {
         return numbers.contains(other);
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
     }
 }
