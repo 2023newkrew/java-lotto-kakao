@@ -15,11 +15,9 @@ public class Buyer {
         return budget.hasMoreThan(price);
     }
 
-    public void decreaseBudgetByPrice(int price) {
+    public void buyLottery(int price, Lottery lottery) {
         this.budget.decreaseBudget(price);
-    }
 
-    public void addLottery(Lottery lottery) {
         lotteries.addLottery(lottery);
     }
 
