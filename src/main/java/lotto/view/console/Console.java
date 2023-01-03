@@ -1,4 +1,4 @@
-package lotto.views;
+package lotto.view.console;
 
 public interface Console {
     void printOutput(String message);

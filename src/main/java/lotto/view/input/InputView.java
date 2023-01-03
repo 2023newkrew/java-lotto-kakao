@@ -1,4 +1,6 @@
-package lotto.views;
+package lotto.view.input;
+
+import lotto.view.console.Console;
 
 public class InputView {
     Console console;

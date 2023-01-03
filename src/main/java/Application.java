@@ -1,6 +1,6 @@
-import lotto.controllers.LottoController;
-import lotto.views.Console;
-import lotto.views.StandardConsole;
+import lotto.controller.LottoController;
+import lotto.view.console.Console;
+import lotto.view.console.StandardConsole;
 
 public class Application {
     public static void main(String[] args) {

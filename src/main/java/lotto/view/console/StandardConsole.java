@@ -1,4 +1,6 @@
-package lotto.views;
+package lotto.view.console;
+
+import lotto.view.console.Console;
 
 import java.util.Scanner;
 
