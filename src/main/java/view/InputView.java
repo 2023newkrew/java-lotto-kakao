@@ -23,5 +23,4 @@ public class InputView {
         if (purchaseBudget % LottoMetaData.LOTTO_TICKET_PRICE != 0)
             throw new IllegalArgumentException("로또 가격으로 나누어 떨어지는 금액을 입력해주세요.(" + LottoMetaData.LOTTO_TICKET_PRICE + "원)");
     }
-
 }
