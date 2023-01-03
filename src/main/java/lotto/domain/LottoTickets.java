@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class LottoTickets {
     private final ArrayList<LottoTicket> tickets;
+    private final LottoRandom lottoRandom;
 
     public LottoTickets(int amount) {
         if(!checkAmountUpperThan1000(amount)){
@@ -12,9 +13,9 @@ public class LottoTickets {
 
         int count = amount / 1000;
         this.tickets = new ArrayList<>(count);
-
+        this.lottoRandom = new LottoRandom();
         for (int i=0; i<count;i++){  // stream 으로 변경 필요
-            tickets.add(new LottoTicket());
+            tickets.add(new LottoTicket(lottoRandom.createRandomNumbers()));
         }
     }
 

@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoController;
+import lotto.domain.LottoRandom;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import org.assertj.core.api.Assertions;
@@ -23,8 +24,8 @@ public class LottoTest {
     @Test
     @DisplayName("6개의 숫자에 중복이 없어야 한다.")
     void lottoNumberDupTest() {
-        LottoTicket lottoTicket = new LottoTicket(); // 자동으로 생성되는 로또 번호들
-        ArrayList<Integer> lottoNumbers = lottoTicket.createRandomNumbers();
+        LottoRandom lottoRandom = new LottoRandom();
+        ArrayList<Integer> lottoNumbers = lottoRandom.createRandomNumbers(); // 자동으로 생성되는 로또 번호들
 
         // 숫자 중복이 없는지 확인
         Set<Integer> dupCheck = new HashSet<Integer>();
@@ -37,8 +38,8 @@ public class LottoTest {
     @RepeatedTest(20)
     @DisplayName("랜덤 숫자가 1~45 사이에 존재해야만 한다.")
     void lottoNumberRangeTest() {
-        LottoTicket lottoTicket = new LottoTicket();
-        lottoTicket.createRandomNumbers();
+        LottoRandom lottoRandom = new LottoRandom();
+        LottoTicket lottoTicket = new LottoTicket(lottoRandom.createRandomNumbers());
         for (int i = 0; i < 6; i++) { // stream 으로 수정 필요
             Assertions.assertThat(lottoTicket.getLottoNumbers().get(i)).
                     isGreaterThanOrEqualTo(1).
