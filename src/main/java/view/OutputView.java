@@ -7,7 +7,6 @@ import lotto.Lottery;
 import lotto.Rank;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class OutputView {
     public void printLotteries(Lotteries lotteries) {
@@ -15,12 +14,7 @@ public class OutputView {
     }
 
     private void printLottery(Lottery lottery) {
-        System.out.println(
-                lottery.getLotteryNumber()
-                        .stream()
-                        .map(lotteryNumber -> Integer.toString(lotteryNumber.getNumber()))
-                        .collect(Collectors.joining(","))
-        );
+        System.out.println(lottery);
     }
 
     public void printResult(BuyerResult result) {

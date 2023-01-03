@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottery {
     private final LotteryNumbers lotteryNumbers;
@@ -9,16 +10,21 @@ public class Lottery {
         this.lotteryNumbers = new LotteryNumbers(numbers);
     }
 
-    public LotteryNumbers getLotteryNumber() {
-        return lotteryNumbers;
-    }
-
     public boolean contains(LotteryNumber lotteryNumber) {
         return lotteryNumbers.contains(lotteryNumber);
     }
 
     public int getMatchCount(Lottery lottery) {
         return (int) lottery.lotteryNumbers.stream().filter(this::contains).count();
+    }
+
+    @Override
+    public String toString() {
+        return "[" +
+                this.lotteryNumbers.stream()
+                        .map(lotteryNumber -> Integer.toString(lotteryNumber.getNumber()))
+                        .collect(Collectors.joining(",")) +
+                "]";
     }
 
     @Override
