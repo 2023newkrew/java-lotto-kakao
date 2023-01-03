@@ -1,27 +1,16 @@
 # java-lotto-kakao
-
-## 문제정의
-- 로또 구입 금액을 입력하면 구입 금액에 해당하는 로또를 발급해야 한다.
-- 로또 1장의 가격은 1000원이다.
-
----
-
-## 구현할 기능 목록
-
-
 ---
 
 ## 도메인
-- GeneralNumber (숫자 클래스)
-  - 검증
-    - 최소 최대값 범위 확인
-    - 숫자가 맞는지
-- WinningLotto (당첨 번호 숫자 리스트 일급 컬렉션) extend Lotto
-  - 입력된 친구
-  - 검증
-    - 사이즈 6개
-    - 모두 다른 숫자
-- Lotto (로또 번호 숫자 리스트)
+#### GeneralNumber (숫자 클래스)
+  - 검증(GeneralNumberValidator.validate())
+    - 최소 최대값 범위 확인(1~45)
+    - 숫자 형식이 맞는지 확인
+#### BonusNumber (보너스 숫자) extends GeneralNumber
+  - GeneralNumber 클래스 상속
+  - 당첨 번호와 다른 숫자
+#### Lotto (로또 번호 숫자 리스트)
+  - List<Integer> numbers를 멤버 변수로 갖는 __일급 컬렉션__
   - [1, ... , 45] 변수로 가지고 있음
   - 생성자에서 Collections.shuffle() -> 앞의 6개 뽑아서 저장
   - getResult(WinningLotto, BonusNumber)
@@ -29,31 +18,58 @@
     - contains 합
     - 보너스볼 일치여부
     - Result Enum 타입 마다 테스트 구현
-- BonusNumber (보너스)
-  - GeneralNumber 클래스 상속
-  - 당첨 번호와 다른 숫자
-- Lottos (List<Lotto>)
-  - 생성자(금액) -> List<Lotto> 생성
-  - checkWin(WinningLotto, Bonus) 당첨 확인 기능
-    - Map<Result, Integer> return
-  - WinningLotto, Bonus를 가지고 있음 생성할 때
-- Profit (일치 결과 맵 일급 컬렉션)
-  - Map<Result, Integer>
-  - 수익률 계산
-- Result (로또 일치 여부 Enum)
-  - Result.[THREE, FOUR, FIVE, FIVEBONUS, SIX]
-- Constants (공통 상수 모음)
+  - IsBonus(BonusNumber)
+    - 보너스 숫자와 일치하는 숫자가 있는지 확인
+  - getLottoNumbers()
+    - 로또 숫자들을 toString() 메서드를 통해 리스트 형식 문자열로 반환
+#### WinningLotto (당첨 번호 숫자 리스트 일급 컬렉션) extends Lotto
+  - 사용자에게 입력되는 당첨 로또 번호
+  - 검증(WinningLottoValidator)
+    - 사이즈 6개
+    - 모두 다른 숫자
+
+#### Lottos (List<Lotto>)
+  - List<Lotto> lottos를 멤버 변수로 갖는 __일급 컬렉션__ 
+  - 생성자(count) -> List<Lotto> 생성
+  - getTotalReslut(WinningLotto, Bonus)
+    - 당첨 결과확인 기능
+    - TotalResult 반환
+  - getPurchasedLottosNumbers()
+    - 구매한 로또 번호들을 List<String>로 반환하는 메서드
+#### TotalResult (일치 결과)
+  - Map<Result, Integer> 를 갖는 __일급 컬렉션__
+  - getValueOfResult
+    - Result 값을 key로 하여 value를 얻는다.
+  - getWinningsOfResult
+    - Result 에 대한 당첨금을 얻는다.
+  - getProfit
+    - 수익률을 얻는다.
+#### Result (로또 일치 여부 Enum)
+  - Result.[NONE, THREE, FOUR, FIVE, FIVEBONUS, SIX]
+  - int winnings, String description을 멤버 변수로 갖는다.
+#### Constants (공통 상수 모음)
   - 로또 범위 최소/최대, 로또 번호 길이, 구분자 등
 
 ---
 
 ## 입출력
-
+#### InputView
+- 구입 금액 입력 (In)
+- 당첨 번호 입력 (In)
+- 보너스볼 번호 입력 (In)
+#### OutputView
+- 구입 금액 입력 요구 (Out)
+- 로또 개수 출력 (Out)
+- 로또 번호 목록 출력 (Out)
+- 당첨 번호 입력 요구 (Out)
+- 보너스볼 번호 입력 요구 (Out)
+- 번호 일치 여부 출력 (Out)
+- 수익률 출력 (Out)
 ---
 
 ## 컨트롤러
 
-- 컨트롤러 (Controller)
+- LottoMain (Controller)
   - 구입 금액 입력 요구 (Out)
   - 구입 금액 입력 (In)
   - 로또 개수 출력 (Out)
@@ -103,11 +119,14 @@
 6개 일치 (2000000000원)- 0개
 총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
 
----
 
+---
+## 질문
 1. 일급컬렉션에 static 변수가 있어도 되는가?
-2. Map 변수 이름,,,
-3. 메서드 파라미터에 왜 final?
-4. 생성자 바디에서 this()는 왜,,,맨 위로 가야되나요ㅠ
-5. test코드에서 특정 예외가 발생하지 않는다는 것은 어떻게 테스트하나요?
-6. 
+   - Lotto 클래스 내에 1부터 45까지의 정수를 갖는 static 변수를 두어, 이를 shuffle 한 뒤 6자리를 뽑아 사용하려 하였습니다.(현재는 생성자 내에 매번 생성. 이 또한 바람직하지 않아 수정 예정입니다..)
+   - Lotto 클래스는 List<Integer> numbers를 위한 일급 컬렉션인데, 스태틱 변수 추가가 일급 컬렉션에 본질을 해치지 않는다고 생각되는데 맞는 생각일까요..?
+2. Map 변수 이름을 짓는 방식이 있을까요?
+3. validate 기능 메서드를 따로 분리하여 다루다보니 중복되는 로직이 많이 발생합니다.
+   - ex) parseInt() 중복, split 중복
+4. 메서드 파라미터에 final을 쓰는 것이 좋은가?
+5. 예외 관련 테스트 메서드에서 특정 예외가 발생하는 것을 확인하는 기능은 제공되지만, 특정 예외만이 발생하지 않는 경우를 테스트 하는 기능은 제공되지 않습니다. 혹시 어떤 방법이 많이 이용되나요?
