@@ -37,4 +37,10 @@ public class LottoNumbers {
                 .map(LottoNumber::getString)
                 .collect(Collectors.joining(", ")) + "]";
     }
+
+    public int getAmountOfNumbersInNumbers(LottoNumbers lottoNumbers) {
+        return this.lottoNumbers.stream()
+                .map(lottoNumbers::hasNumber)
+                .mapToInt(it -> it.compareTo(false)).sum();
+    }
 }

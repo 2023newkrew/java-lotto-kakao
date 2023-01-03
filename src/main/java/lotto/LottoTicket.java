@@ -12,4 +12,10 @@ public class LottoTicket {
     public String getString() {
         return lottoNumbers.getString();
     }
+
+    public LottoResult getResult(LottoWinningNumbers lottoWinningNumbers) {
+        int equalNumber = lottoWinningNumbers.getAmountOfNumbersInWinningNumbers(lottoNumbers);
+        boolean bonusNumber = lottoWinningNumbers.checkBonusNumberInNumbers(lottoNumbers);
+        return LottoResult.getLottoResultOf(equalNumber, bonusNumber);
+    }
 }
