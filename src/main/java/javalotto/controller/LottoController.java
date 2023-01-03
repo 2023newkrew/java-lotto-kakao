@@ -27,7 +27,7 @@ public class LottoController {
         LottoCount lottoCount = LottoCount.of(purchaseAmount, PURCHASE_AMOUNT_UNIT_PRICE);
         outputView.printLottoCount(lottoCount);
 
-        Lottos lottos = lottoGenerator.getLottos(lottoCount);
+        Lottos lottos = lottoGenerator.generateLottos(lottoCount);
         outputView.printLottos(lottos);
 
         WinningLotto winningLotto = inputView.getWinningLottoInput();

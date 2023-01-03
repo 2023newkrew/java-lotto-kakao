@@ -1,7 +1,7 @@
 package javalotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static javalotto.domain.Lotto.*;
@@ -18,17 +18,15 @@ public class LottoGenerator {
         return new LottoGenerator(numberGenerator);
     }
 
-    public Lottos getLottos(LottoCount lottoCount) {
-        List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < lottoCount.getCount(); i++) {
-            lottos.add(getLotto());
-        }
+    public Lottos generateLottos(LottoCount lottoCount) {
+        List<Lotto> lottos = Stream.generate(this::generateLotto)
+                .limit(lottoCount.getCount())
+                .collect(Collectors.toList());
 
         return Lottos.from(lottos);
     }
 
-    private Lotto getLotto() {
+    private Lotto generateLotto() {
         return Lotto.from(numberGenerator.generateNumbers(
                 LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE + 1, LOTTO_NUMBERS_COUNT));
     }

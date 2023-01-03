@@ -12,7 +12,7 @@ class LottoNumberGeneratorTest {
     void should_generateLottoSuccessfully_when_validCount() {
         LottoCount lottoCount = LottoCount.withCount(10);
         LottoGenerator lottoGenerator = LottoGenerator.from((minInclusive, maxExclusive, count) -> List.of(1, 2, 3, 4, 5, 6));
-        Lottos lottos = lottoGenerator.getLottos(lottoCount);
+        Lottos lottos = lottoGenerator.generateLottos(lottoCount);
         assertThat(lottos.size()).isEqualTo(lottoCount.getCount());
     }
 }
