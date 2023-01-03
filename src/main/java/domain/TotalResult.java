@@ -2,10 +2,8 @@ package domain;
 
 import common.state.Result;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TotalResult {
     private final Map<Result, Integer> totalResult;
@@ -50,5 +48,23 @@ public class TotalResult {
         return Math.floor((double) winnings * 100.0 / (double) paidPrice) / 100.0;
     }
 
+    public List<String> getTotalResultMessage() {
+        return Arrays.stream(Result.values())
+                .filter(result -> result != Result.NONE)
+                .map(result ->
+                        String.format("%s (%d원)- %d개",
+                                result.getDescription(),
+                                result.getWinnings(),
+                                this.getValueOfResult(result)))
+                .collect(Collectors.toList());
+    }
+
+    public String getProfitMessage(double profit) {
+        String message = String.format("총 수익률은 %f입니다.", profit);
+        if (profit <= 1) {
+            return message += "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+        }
+        return message += "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+    }
 
 }
