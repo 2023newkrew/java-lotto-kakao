@@ -5,7 +5,6 @@ import java.util.Scanner;
 import static lotto.utils.LottoMessage.*;
 
 public class InputView {
-
     private final Scanner scanner;
 
     public InputView() {

@@ -5,12 +5,13 @@ import lotto.domain.LottoTickets;
 
 import java.util.ArrayList;
 
+import static lotto.domain.LottoTickets.MIN_PURCHASE_PRICE;
 import static lotto.utils.LottoMessage.*;
 
 public class ResultView {
 
     public void printPurchaseCount(int amount){
-        System.out.println(amount + RESULT_PURCHASE_COUNT.getMessage());
+        System.out.println(amount/MIN_PURCHASE_PRICE + RESULT_PURCHASE_COUNT.getMessage());
     }
 
     public void printWinningStatics(ArrayList<Integer> result, double rate){
@@ -35,15 +36,7 @@ public class ResultView {
     public void printLottoTickets(LottoTickets lottoTickets) {
         ArrayList<LottoTicket> tickets = lottoTickets.getTickets();
         for(LottoTicket ticket : tickets){
-            printEachTicket(ticket.getLottoNumbers());
+            System.out.println(ticket.getLottoNumbers().toString());
         }
-    }
-
-    private void printEachTicket(ArrayList<Integer> numbers){
-        System.out.printf("[%d, %d, %d, %d, %d, %d]\n",
-                numbers.get(0), numbers.get(1),
-                numbers.get(2), numbers.get(3),
-                numbers.get(4) ,numbers.get(5)
-        );
     }
 }

@@ -10,13 +10,11 @@ public class LottoWinnerTicket {
     private final LottoTicket lottoTicket;
     private final int bonusBall;
 
-
     public LottoWinnerTicket(LottoTicket lottoTicket, int bonusBall) {
         this.lottoTicket = lottoTicket;
         this.bonusBall = bonusBall;
         bonusRangeCheck();
     }
-
 
     public ArrayList<Integer> getLottoNumbers() {
         return lottoTicket.getLottoNumbers();

@@ -7,16 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ChangeInput {
+public class StringConversion {
 
-    public LottoWinnerTicket changeToWinnerTicket(String userInput, int bonus){
-        Integer[] numbers = stringToArray(userInput);
+    public LottoWinnerTicket changeToWinnerTicket(String userNumbers, int bonus){
+        Integer[] numbers = convertToArray(userNumbers);
         return new LottoWinnerTicket(
                 new LottoTicket(new ArrayList<>(List.of(numbers))), bonus);
     }
 
-
-    private Integer[] stringToArray(String userInput){
+    public Integer[] convertToArray(String userInput){
         return Stream.of(userInput
                         .replace(" ", "")
                         .split(","))
@@ -24,5 +23,4 @@ public class ChangeInput {
                 .boxed()
                 .toArray(Integer[]::new);
     }
-
 }
