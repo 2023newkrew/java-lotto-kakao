@@ -1,5 +1,9 @@
 package lotto.model;
 
+import lotto.model.lotto.Lotto;
+import lotto.model.vo.LottoNumber;
+import lotto.model.prize.Prize;
+
 public class WinningNumbers {
 
     private final Lotto lotto;

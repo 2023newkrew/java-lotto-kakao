@@ -1,6 +1,6 @@
-package lotto;
+package lotto.model.vo;
 
-import lotto.model.Money;
+import lotto.model.vo.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

@@ -1,7 +1,6 @@
-package lotto;
+package lotto.model.lotto;
 
-import lotto.model.Lotto;
-import lotto.model.LottoNumber;
+import lotto.model.vo.LottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -13,7 +12,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static lotto.TestUtil.toLottoNumbers;
 

@@ -1,6 +1,14 @@
-package lotto;
+package lotto.model;
 
-import lotto.model.*;
+import lotto.TestUtil;
+import lotto.model.LottoCompany;
+import lotto.model.WinningNumbers;
+import lotto.model.lotto.Lotto;
+import lotto.model.lotto.LottoBundle;
+import lotto.model.vo.LottoNumber;
+import lotto.model.vo.Money;
+import lotto.model.prize.Prize;
+import lotto.model.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

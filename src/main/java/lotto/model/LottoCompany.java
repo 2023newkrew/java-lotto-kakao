@@ -1,5 +1,11 @@
 package lotto.model;
 
+import lotto.model.WinningNumbers;
+import lotto.model.lotto.LottoBundle;
+import lotto.model.vo.Money;
+import lotto.model.prize.Prize;
+import lotto.model.WinningStatistics;
+
 import java.util.Map;
 import java.util.stream.Collectors;
 

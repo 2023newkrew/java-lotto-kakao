@@ -1,6 +1,7 @@
-package lotto.model;
+package lotto.model.lotto;
 
-import java.util.Collections;
+import lotto.model.vo.LottoNumber;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;

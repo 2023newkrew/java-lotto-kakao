@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.vo;
 
 public class Money {
 

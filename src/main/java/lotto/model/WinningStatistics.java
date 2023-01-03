@@ -1,5 +1,8 @@
 package lotto.model;
 
+import lotto.model.prize.Prize;
+import lotto.model.vo.Money;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;

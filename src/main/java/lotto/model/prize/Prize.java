@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.prize;
 
 import java.util.function.BiPredicate;
 import java.util.stream.Stream;
