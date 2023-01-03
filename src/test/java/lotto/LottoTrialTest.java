@@ -1,7 +1,6 @@
 package lotto;
 
 import lotto.exception.DuplicatedBallNumber;
-import lotto.exception.InvalidLottoNumberValue;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +9,6 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoTrialTest {
     @Test

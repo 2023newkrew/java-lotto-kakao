@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.exception.InvalidLottoNumberValue;
+import lotto.exception.InvalidLottoCountValue;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -13,7 +13,7 @@ class LottoCountTest {
     void 음수가_되면_안됨(int val){
         assertThatThrownBy(()->{
             LottoCount lottoCount = new LottoCount(val);
-        }).isInstanceOf(InvalidLottoNumberValue.class);
+        }).isInstanceOf(InvalidLottoCountValue.class);
     }
     @ParameterizedTest
     @ValueSource(ints={1,100,0})
