@@ -6,38 +6,34 @@
 
 ---
 
-## 구현할 기능 목록
-
-
----
-
 ## 도메인
-- GeneralNumber (숫자 클래스)
-  - 검증
-    - 최소 최대값 범위 확인
+- GeneralNumber (숫자)
+  - 검증 (SingleNumberValidator)
     - 숫자가 맞는지
-- WinningLotto (당첨 번호 숫자 리스트 일급 컬렉션) extend Lotto
-  - 입력된 친구
-  - 검증
-    - 사이즈 6개
-    - 모두 다른 숫자
+    - 최소 최대값 범위 확인
+- BonusNumber (보너스 번호)
+  - GeneralNumber 클래스 상속 (-> SingleNumberValidator를 거치고 검증 시작)
+  - 검증 (BonusNumberValidator)
+    - 당첨 번호와 다른 숫자
 - Lotto (로또 번호 숫자 리스트)
-  - [1, ... , 45] 변수로 가지고 있음
   - 생성자에서 Collections.shuffle() -> 앞의 6개 뽑아서 저장
   - getResult(WinningLotto, BonusNumber)
     - 알맞은 Result를 계산하는 로직
     - contains 합
     - 보너스볼 일치여부
     - Result Enum 타입 마다 테스트 구현
-- BonusNumber (보너스)
-  - GeneralNumber 클래스 상속
-  - 당첨 번호와 다른 숫자
-- Lottos (List<Lotto>)
+- WinningLotto (당첨 번호 숫자 리스트 일급 컬렉션)
+  - 검증 (WinningLottoValidator)
+    - 사이즈 6개 
+    - SingleNumberValidator
+      - 숫자가 맞는지
+      - 최소 최대값 범위 확인
+    - 모두 다른 숫자
+- Lottos (List<Lotto> 일급 컬렉션)
   - 생성자(금액) -> List<Lotto> 생성
-  - checkWin(WinningLotto, Bonus) 당첨 확인 기능
-    - Map<Result, Integer> return
-  - WinningLotto, Bonus를 가지고 있음 생성할 때
-- Profit (일치 결과 맵 일급 컬렉션)
+  - getTotalResult(WinningLotto, Bonus) 당첨 확인 기능
+    - TotalResult 반환
+- TotalResult (일치 결과 맵 일급 컬렉션)
   - Map<Result, Integer>
   - 수익률 계산
 - Result (로또 일치 여부 Enum)
@@ -47,13 +43,9 @@
 
 ---
 
-## 입출력
-
----
-
 ## 컨트롤러
 
-- 컨트롤러 (Controller)
+- 컨트롤러 (LottoGame)
   - 구입 금액 입력 요구 (Out)
   - 구입 금액 입력 (In)
   - 로또 개수 출력 (Out)
@@ -61,16 +53,19 @@
   - 로또 번호 목록 출력 (Out)
   - 당첨 번호 입력 요구 (Out)
   - 당첨 번호 입력 (In)
-  - WinningNumbers 생성 (WinningNumbers)
+  - WinningNumbers 생성 (WinningLotto)
   - 보너스볼 번호 입력 요구 (Out)
   - 보너스볼 번호 입력 (In)
-  - Bonus 생성 (Bonus)
-  - 번호 일치 여부 판단 (Check)
+  - Bonus 생성 (BonusNumber)
+  - 번호 일치 여부 판단 (TotalResult)
   - 번호 일치 여부 출력 (Out)
-  - 수익률 계산 (Profit)
+  - 수익률 계산 (TotalResult)
   - 수익률 출력 (Out)
 
+---
 
+## 예시
+```
 구입금액을 입력해 주세요.
 14000
 14개를 구매했습니다.
@@ -104,10 +99,23 @@
 총 수익률은 0.35입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)
 
 ---
+```
+---
 
-1. 일급컬렉션에 static 변수가 있어도 되는가?
-2. Map 변수 이름,,,
-3. 메서드 파라미터에 왜 final?
-4. 생성자 바디에서 this()는 왜,,,맨 위로 가야되나요ㅠ
-5. test코드에서 특정 예외가 발생하지 않는다는 것은 어떻게 테스트하나요?
-6. 
+## 질문
+
+1. 일급컬렉션에 static final 변수가 있어도 되는지
+2. 변수 이름 꿀팁
+3. 메서드 파라미터에 final을 적는 이유
+4. 생성자 바디에서 this()를 맨 위에 적을 수 없는 상황은 어떻게 해결하면 좋을까요?
+   ```java
+   public ChildClass(boolean flag) {
+       if (flag) {
+           super();
+       } else {
+           this();
+       }
+   }
+   ```
+   생성자에서 이러한 로직을 세우는 건 바람직하지 않은 건가요?
+5. test 코드에서 특정 예외가 발생하지 않는다는 것은 어떻게 테스트하나요? 예를 들면, AException은 발생하지만 BException은 발생하지 않는 상황에서 BException이 발생하지 않음을 테스트하고 싶습니다.
