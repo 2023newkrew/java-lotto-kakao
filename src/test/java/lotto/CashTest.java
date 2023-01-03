@@ -17,6 +17,7 @@ public class CashTest {
             Cash cash = new Cash(value);
         }).isInstanceOf(InvalidCashValue.class);
     }
+
     @ParameterizedTest
     @ValueSource(longs = {1, 1000, 40000000})
     void 정상_금액인_경우_정상실행(long value) {
@@ -24,6 +25,7 @@ public class CashTest {
             Cash cash = new Cash(value);
         }).doesNotThrowAnyException();
     }
+
     @Test
     void 금액끼리_더할_수_있어야_한다() {
         long val1 = 1000;
