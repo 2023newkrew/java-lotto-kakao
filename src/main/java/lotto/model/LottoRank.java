@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum LottoRank {
-    RANK1(6, false,2000000000),
+    RANK1(6, false, 2000000000),
     RANK2(5, true, 30000000),
     RANK3(5, false, 1500000),
     RANK4(4, false, 50000),
@@ -29,6 +29,15 @@ public enum LottoRank {
                     return value.bonusBall == bonus && value.matchedCount.equals(count);
                 })
                 .findAny()
-                .orElse(null);
+                .orElse(RANK6);
     }
+
+    public Integer getMatchedCount() {
+        return matchedCount;
+    }
+
+    public Integer getReward(){
+        return reward;
+    }
+
 }
