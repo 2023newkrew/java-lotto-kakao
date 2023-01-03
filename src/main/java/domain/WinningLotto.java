@@ -19,7 +19,7 @@ public class WinningLotto extends Lotto {
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getWinningLottoNumbers(){
+    public List<Integer> getWinningLottoNumbers() {
         return new ArrayList<>(winningLottoNumbers);
     }
 

@@ -14,13 +14,12 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     public static final int START_INDEX = 0;
-
     private final List<Integer> numbers;
 
     public Lotto() {
         List<Integer> WHOLE_NUMBERS = IntStream.rangeClosed(Constants.MINIMUM, Constants.MAXIMUM)
-            .boxed()
-            .collect(Collectors.toList());
+                .boxed()
+                .collect(Collectors.toList());
         Collections.shuffle(WHOLE_NUMBERS);
         List<Integer> numbersIn = WHOLE_NUMBERS.subList(START_INDEX, START_INDEX + Constants.LENGTH);
         Collections.sort(numbersIn);
@@ -36,7 +35,7 @@ public class Lotto {
     // 꼭 고치겠습니다 :(
     public Result getResult(WinningLotto winningLotto, BonusNumber bonusNumber) {
         List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
-        int count = (int)numbers.stream()
+        int count = (int) numbers.stream()
                 .filter(number -> winningLottoNumbers.contains(number))
                 .count();
 

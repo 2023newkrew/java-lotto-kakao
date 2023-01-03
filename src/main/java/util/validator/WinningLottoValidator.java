@@ -13,7 +13,8 @@ public class WinningLottoValidator {
     public static void validate(String input) {
         String[] splitInput = input.split(Constants.DELIMITER);
         validateLength(splitInput);
-        Arrays.stream(splitInput).forEach(SingleNumberValidator::validate);
+        Arrays.stream(splitInput)
+                .forEach(SingleNumberValidator::validate);
         List<Integer> numbers = Arrays.stream(splitInput)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -28,7 +29,8 @@ public class WinningLottoValidator {
 
     private static void validDuplicate(List<Integer> inputs) {
         Set<Integer> distinctNumbers = new HashSet<>();
-        inputs.stream().forEach(input -> distinctNumbers.add(input));
+        inputs.stream()
+                .forEach(input -> distinctNumbers.add(input));
         if (distinctNumbers.size() != Constants.LENGTH) {
             throw new DuplicateNumberException("");
         }

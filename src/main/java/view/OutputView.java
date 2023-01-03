@@ -14,7 +14,8 @@ public class OutputView {
     }
 
     public static void printLottos(List<String> lottosNumbers) {
-        lottosNumbers.stream().forEach(System.out::println);
+        lottosNumbers.stream()
+                .forEach(System.out::println);
         System.out.println();
     }
 
@@ -27,7 +28,8 @@ public class OutputView {
     }
 
     public static void printTotalResult(List<String> lottosNumbers) {
-        lottosNumbers.stream().forEach(System.out::println);
+        lottosNumbers.stream()
+                .forEach(System.out::println);
         System.out.println();
     }
 
