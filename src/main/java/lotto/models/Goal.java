@@ -25,16 +25,18 @@ public class Goal extends Lotto{
         return LOTTO_COUNT * 2 - sum.size();
     }
 
-//    private Prize compareLottoo(Lotto lotto) {
-//        Integer matchCount = Math.toIntExact(lotto.getNumbers().stream()
-//                .filter(i -> getNumbers().contains(i))
-//                .count());
-//        boolean matchBonus = lotto.getNumbers().contains(bonusBall);
-//
-//        return new Prize(matchCount, matchBonus);
-//    }
-
     private void validateBonusBall(Integer bonusBall) {
+        validateBonusBallIsNotDuplicated(bonusBall);
+        validateBonusBallRange(bonusBall);
+    }
+
+    private void validateBonusBallRange(Integer bonusBall) {
+        if (bonusBall < 1 || bonusBall > 45) {
+            throw new RuntimeException("보너스 볼은 " + MIN_VALUE + "부터" + MAX_VALUE + "사이의 수 이어야 합니다.");
+        }
+    }
+
+    private void validateBonusBallIsNotDuplicated(Integer bonusBall) {
         if (getNumbers().contains(bonusBall)) {
             throw new RuntimeException("보너스 볼이 당첨 번호와 겹쳐서는 안됩니다.");
         }
