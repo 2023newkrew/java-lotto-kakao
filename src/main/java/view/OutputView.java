@@ -8,7 +8,7 @@ public class OutputView {
 
 
     public void printNumberOfLotto(int num) {
-        System.out.println(String.format(NUMBER_OF_LOTTO_MESSAGE, num));
+        System.out.printf((NUMBER_OF_LOTTO_MESSAGE) + "%n", num);
     }
 
     public void printLotto(String str) {
