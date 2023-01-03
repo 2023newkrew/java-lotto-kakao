@@ -13,10 +13,10 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public LottoMatchStatus match(LottoNumber other) {
+    public MatchStatus match(LottoNumber other) {
         if(this.location == other.location && this.number == other.number){
-            return LottoMatchStatus.MATCH;
+            return MatchStatus.MATCH;
         }
-        return LottoMatchStatus.NON_MATCH;
+        return MatchStatus.NON_MATCH;
     }
 }
