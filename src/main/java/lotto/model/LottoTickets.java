@@ -9,6 +9,15 @@ public class LottoTickets {
         this.tickets = tickets;
     }
 
+    public static LottoTickets countOf(int count) {
+        List<LottoTicket> tickets = new ArrayList<>();
+        LottoTicketGenerator lottoTicketGenerator = LottoTicketGenerator.getInstance();
+        for (int i = 0; i < count; i++) {
+            tickets.add(lottoTicketGenerator.generate());
+        }
+        return new LottoTickets(tickets);
+    }
+
     public Result getResults(WinningNumbers winningNumbers) {
         Result result = new Result();
         Grade key;
