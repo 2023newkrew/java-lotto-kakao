@@ -6,12 +6,12 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Main {
-    static Scanner sc = new Scanner(System.in);
-    static Cash cash;
-    static LottoCount lottoCount;
-    static LottoTrials lottoTrials = new LottoTrials();
-    static WinNumber winNumber;
-    static TotalResult totalResult = new TotalResult();
+    private static Scanner sc = new Scanner(System.in);
+    private static Cash cash;
+    private static LottoCount lottoCount;
+    private static LottoTrials lottoTrials = new LottoTrials();
+    private static WinNumber winNumber;
+    private static TotalResult totalResult = new TotalResult();
     public static void main(String[] args) {
         try {
             input();
@@ -20,7 +20,7 @@ public class Main {
             processLotto();
         }
         catch(Exception e){
-            System.out.println(e.getClass() + " : " + e.getMessage());
+            e.printStackTrace();
         }
     }
     private static void input(){
@@ -47,7 +47,6 @@ public class Main {
     }
 
     private static void processLotto(){
-        System.out.println("processLotto 들어옴");
         for (int i=0; i<lottoTrials.size();i++){
             totalResult.add(winNumber.compareLotto(lottoTrials.get(i)));
         }
