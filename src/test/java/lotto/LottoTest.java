@@ -145,10 +145,23 @@ public class LottoTest {
     void lottoWinningAmountTest(String userInput){
         LottoCalculator lottoCalculator = new LottoCalculator(new LottoWinnerTicket(
                 new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
+
         ArrayList<Integer> winScore = new ArrayList<>(List.of(changeToArray(userInput)));
         long summary = lottoCalculator.getWinAmount(winScore);
-        Assertions.assertThat(summary).isEqualTo(10000000000L);
+        assertThat(summary).isEqualTo(10000000000L);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {10000, 10500, 10900})
+    @DisplayName("수익률을 계산해야 한다.")
+    void lottoRateOfReturnTest(int amount){
+        LottoCalculator lottoCalculator = new LottoCalculator(new LottoWinnerTicket(
+                new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
+
+        long summary = 10000000000L;
+        assertThat(lottoCalculator.calcRateOfReturn(amount, summary)).isEqualTo(1000000);
+    }
+
 
     private Integer[] changeToArray(String userInput){
         return Stream.of(userInput
@@ -158,6 +171,4 @@ public class LottoTest {
                         .boxed()
                         .toArray(Integer[]::new);
     }
-
-
 }
