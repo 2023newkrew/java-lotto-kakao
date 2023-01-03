@@ -16,10 +16,9 @@ public class MainUI {
     private Price income = null;
 
     public MainUI(InputStream inputStream, OutputStream outputStream) {
-        Random random = new Random();
         this.scanner = new Scanner(inputStream);
         this.printer = new PrintStream(outputStream);
-        this.lottoTicketGenerator = new LottoTicketGenerator(() -> new LottoBall(random.nextInt(45) + 1));
+        this.lottoTicketGenerator = new LottoTicketGenerator();
     }
 
     public void initPurchasePrice() {
@@ -45,7 +44,8 @@ public class MainUI {
                 Arrays.stream(lottoNumberStrings)
                         .map(v -> new LottoBall(Integer.parseInt(v)))
                         .collect(Collectors.toList())
-                , new LottoBall(bonusNumber));
+                , new LottoBall(bonusNumber)
+        );
     }
 
     public void printTickets() {
