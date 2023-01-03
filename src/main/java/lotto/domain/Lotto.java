@@ -1,10 +1,12 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Lotto {
+
     private final LottoNumbers lottoNumbers;
     private final SingleLottoNumber bonusNumber;
 
@@ -28,6 +30,9 @@ public class Lotto {
         int matchNumberCount = this.lottoNumbers.countMatchNumber(userLotto);
         boolean hasBonusNumber = userLotto.containsLottoNumber(bonusNumber);
 
-        return LottoRule.getPrize(matchNumberCount, hasBonusNumber);
+        return Arrays.stream(LottoPrize.values())
+                .filter(prize -> prize.isWon(matchNumberCount, hasBonusNumber))
+                .findFirst()
+                .orElse(LottoPrize.NONE);
     }
 }
