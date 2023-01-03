@@ -22,11 +22,6 @@ public class LottoResult implements Comparable<LottoResult> {
 
     @Override
     public int compareTo(LottoResult o) {
-        if (this.lottoGrade.price > o.lottoGrade.price) {
-            return 1;
-        } else if (this.lottoGrade.price < o.lottoGrade.price) {
-            return -1;
-        }
-        return 0;
+        return Integer.compare(this.lottoGrade.price, o.lottoGrade.price);
     }
 }
