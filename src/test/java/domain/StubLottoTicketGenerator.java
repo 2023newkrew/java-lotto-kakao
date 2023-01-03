@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StubLottoTicketGenerator implements LottoTicketGenerator{
+public class StubLottoTicketGenerator{
 
     private final int[] values;
     public StubLottoTicketGenerator(int ... values){
@@ -11,7 +11,6 @@ public class StubLottoTicketGenerator implements LottoTicketGenerator{
 
     }
 
-    @Override
     public LottoTicket generate() {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
 
