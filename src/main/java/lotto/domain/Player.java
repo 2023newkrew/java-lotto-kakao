@@ -25,4 +25,8 @@ public class Player {
         }
         return playerLottoResult;
     }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
 }

@@ -34,4 +34,8 @@ public class LottoTicket {
                 .filter(lottoBall -> lottoTicket.contains(lottoBall))
                 .count();
     }
+
+    public List<LottoBall> getLottoBalls() {
+        return lottoBalls;
+    }
 }

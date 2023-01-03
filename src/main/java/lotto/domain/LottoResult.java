@@ -38,6 +38,14 @@ public enum LottoResult {
         return FIVE_MATCH;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isBonusBallMatch() {
+        return bonusBallMatch;
+    }
+
     public Money getMoney() {
         return money;
     }

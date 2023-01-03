@@ -38,4 +38,8 @@ public class PlayerLottoResult {
         }
         return totalMoney;
     }
+
+    public int getValue(LottoResult lottoResult) {
+        return lottoResults.get(lottoResult);
+    }
 }
