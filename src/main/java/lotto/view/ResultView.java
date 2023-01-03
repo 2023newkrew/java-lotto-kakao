@@ -7,7 +7,9 @@ import lotto.model.Result;
 
 public class ResultView {
     private static ResultView instance;
-    private ResultView() {}
+
+    private ResultView() {
+    }
 
     public static ResultView getInstance() {
         if (instance == null) {
@@ -15,13 +17,13 @@ public class ResultView {
         }
         return instance;
     }
+
     public void printCountOfLottoTickets(int count) {
-        System.out.printf("%d개 구매했습니다.", count);
+        System.out.printf("%d개 구매했습니다.\n", count);
     }
 
     public void printLottoTickets(LottoTickets tickets) {
-//        정렬 추가 필요
-        for(LottoTicket ticket : tickets.getTicket()){
+        for (LottoTicket ticket : tickets.getTicket()) {
             System.out.println(ticket);
         }
     }

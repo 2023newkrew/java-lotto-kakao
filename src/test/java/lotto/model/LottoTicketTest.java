@@ -1,10 +1,11 @@
 package lotto.model;
 
-import static org.assertj.core.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 class LottoTicketTest {
     @Test
@@ -43,5 +44,17 @@ class LottoTicketTest {
                         new LottoValue(4),
                         new LottoValue(5)
                 ))).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void toString_에서_정렬된_값_반환() {
+        LottoTicket lt = new LottoTicket(Arrays.asList(
+                new LottoValue(5),
+                new LottoValue(4),
+                new LottoValue(3),
+                new LottoValue(7),
+                new LottoValue(2),
+                new LottoValue(9)));
+        assertThat(lt.toString()).isEqualTo("[2, 3, 4, 5, 7, 9]");
     }
 }

@@ -25,6 +25,13 @@ public class LottoTicket {
         }
     }
 
+    private List<LottoValue> getSortedLottoValues() {
+        LottoValue lv = new LottoValue();
+        ArrayList<LottoValue> sortedLottoValues = new ArrayList<>(lottoValues);
+        sortedLottoValues.sort(lv);
+        return sortedLottoValues;
+    }
+
     public boolean contains(LottoValue bonusNumber) {
         return lottoValues.contains(bonusNumber);
     }
@@ -35,7 +42,7 @@ public class LottoTicket {
 
     public String toString() {
         List<String> st = new ArrayList<>();
-        for (LottoValue lv : lottoValues) {
+        for (LottoValue lv : getSortedLottoValues()) {
             st.add(Integer.toString(lv.getValue()));
         }
         return "[" + String.join(", ", st) + "]";

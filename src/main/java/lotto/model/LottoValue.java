@@ -1,9 +1,14 @@
 package lotto.model;
 
+import java.util.Comparator;
 import java.util.Objects;
 
-public class LottoValue {
+public class LottoValue implements Comparator<LottoValue> {
     private final int value;
+
+    public LottoValue() {
+        value = 1;
+    }
 
     public LottoValue(int value) {
         if (isOutOfRange(value)) {
@@ -14,6 +19,11 @@ public class LottoValue {
 
     private boolean isOutOfRange(int value) {
         return value < 1 || value > 45;
+    }
+
+    @Override
+    public int compare(LottoValue o1, LottoValue o2) {
+        return o1.value - o2.value;
     }
 
     @Override
@@ -29,7 +39,7 @@ public class LottoValue {
         return Objects.hash(value);
     }
 
-    public int getValue(){
+    public int getValue() {
         return value;
     }
 }
