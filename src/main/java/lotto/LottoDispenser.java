@@ -11,16 +11,16 @@ public class LottoDispenser {
         this.numberSelectStrategy = numberSelectStrategy;
     }
 
-    public List<LottoTicket> getLottoTicket(int money) {
+    public LottoTickets getLottoTicket(int money) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        int ticketQuantity = calculateTicketQuantity(money, LottoTicket.LOTTO_TICKET_PRICE);
+        int ticketQuantity = calculateTicketQuantity(money);
         for (int i = 0; i < ticketQuantity; i++) {
             lottoTickets.add(new LottoTicket(numberSelectStrategy.select()));
         }
-        return lottoTickets;
+        return new LottoTickets(lottoTickets);
     }
 
-    private int calculateTicketQuantity(int money, int price) {
-        return money / price;
+    private int calculateTicketQuantity(int money) {
+        return money / LottoTicket.LOTTO_TICKET_PRICE;
     }
 }

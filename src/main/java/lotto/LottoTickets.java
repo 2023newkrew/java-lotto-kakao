@@ -23,4 +23,8 @@ public class LottoTickets {
                 .collect(Collectors.toList());
         return new LottoStatistics(lottoResults);
     }
+
+    public int getCount() {
+        return lottoTickets.size();
+    }
 }
