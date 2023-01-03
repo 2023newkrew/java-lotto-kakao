@@ -2,17 +2,17 @@ package lotto;
 
 public class LotteryMatch {
     private static final int MATCH_FIVE = 5;
-    
-    private final int matchCount;
-    private final Boolean isBonusMatch;
 
-    public LotteryMatch(int matchCount, Boolean isBonusMatch) {
+    private final int matchCount;
+    private final Boolean bonusMatch;
+
+    public LotteryMatch(int matchCount, Boolean bonusMatch) {
         this.matchCount = matchCount;
         if (this.matchCount != MATCH_FIVE) {
-            this.isBonusMatch = false;
+            this.bonusMatch = false;
             return;
         }
-        this.isBonusMatch = isBonusMatch;
+        this.bonusMatch = bonusMatch;
     }
 
     public int getMatchCount() {
@@ -25,6 +25,6 @@ public class LotteryMatch {
 
         LotteryMatch cp = (LotteryMatch) obj;
 
-        return (this.matchCount == cp.matchCount && this.isBonusMatch == cp.isBonusMatch);
+        return (this.matchCount == cp.matchCount && this.bonusMatch == cp.bonusMatch);
     }
 }
