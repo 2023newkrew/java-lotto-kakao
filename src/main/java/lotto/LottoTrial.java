@@ -2,10 +2,7 @@ package lotto;
 
 import lotto.exception.DuplicatedBallNumber;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public abstract class LottoTrial {
     protected final List<LottoBallNumber> ballNumbers = new ArrayList<>();
@@ -18,8 +15,21 @@ public abstract class LottoTrial {
             throw new DuplicatedBallNumber();
         }
     }
+    void sort(LottoTrial lottoTrial){
+        Collections.sort(lottoTrial.ballNumbers);
+    }
     public List<LottoBallNumber> getBallNumbers(){
         return ballNumbers;
+    }
+
+    @Override
+    public String toString() {
+        String result = "[";
+        for (int i=0;i<5;i++){
+            result += ballNumbers.get(i) + ", ";
+        }
+        result += ballNumbers.get(5) + "]";
+        return result;
     }
 }
 
