@@ -2,11 +2,10 @@ import java.util.*;
 
 public class LottoTicket {
 
-
     private final List<Integer> lottoNumbers;
 
     public LottoTicket(List<Integer> lottoNumbers) {
-        if(lottoNumbers==null || lottoNumbers.isEmpty())
+        if (lottoNumbers == null || lottoNumbers.isEmpty())
             throw new NullPointerException();
 
         validateNumberDuplication(lottoNumbers);
@@ -31,5 +30,4 @@ public class LottoTicket {
                         throw new IllegalArgumentException();
                 });
     }
-
 }
