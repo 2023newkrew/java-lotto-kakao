@@ -2,6 +2,8 @@ package javalotto.domain;
 
 import java.util.Objects;
 
+import static javalotto.domain.PurchaseAmount.PURCHASE_AMOUNT_UNIT_PRICE;
+
 public class LottoCount {
     private final int count;
 
@@ -9,8 +11,8 @@ public class LottoCount {
         this.count = count;
     }
 
-    public static LottoCount of(PurchaseAmount purchaseAmount, int unitPrice) {
-        return new LottoCount(purchaseAmount.getPurchaseAmount() / unitPrice);
+    public static LottoCount of(PurchaseAmount purchaseAmount) {
+        return new LottoCount(purchaseAmount.getPurchaseAmount() / PURCHASE_AMOUNT_UNIT_PRICE);
     }
 
     public static LottoCount withCount(int count) {

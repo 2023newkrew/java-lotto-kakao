@@ -4,8 +4,6 @@ import javalotto.domain.*;
 import javalotto.view.InputView;
 import javalotto.view.OutputView;
 
-import static javalotto.domain.PurchaseAmount.PURCHASE_AMOUNT_UNIT_PRICE;
-
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
@@ -24,7 +22,7 @@ public class LottoController {
     public void simulate() {
         PurchaseAmount purchaseAmount = inputView.getPurchaseAmountInput();
 
-        LottoCount lottoCount = LottoCount.of(purchaseAmount, PURCHASE_AMOUNT_UNIT_PRICE);
+        LottoCount lottoCount = LottoCount.of(purchaseAmount);
         outputView.printLottoCount(lottoCount);
 
         Lottos lottos = lottoGenerator.generateLottos(lottoCount);
