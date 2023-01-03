@@ -35,7 +35,7 @@ public class LottoInputView {
                 .map(Integer::valueOf)
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-        return Lotto.create(lottoNumbers);
+        return Lotto.from(lottoNumbers);
     }
 
     public LottoNumber inputBonusNumber() {

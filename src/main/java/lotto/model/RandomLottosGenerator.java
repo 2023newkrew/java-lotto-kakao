@@ -13,7 +13,8 @@ public class RandomLottosGenerator implements LottosGenerator {
         }
 
         return LongStream.range(0, count)
-                .mapToObj(i -> Lotto.createRandomLotto())
+                .mapToObj(ignore -> LottoNumber.generateRandomNumbers(Lotto.SIZE))
+                .map(Lotto::from)
                 .collect(Collectors.toList());
     }
 }

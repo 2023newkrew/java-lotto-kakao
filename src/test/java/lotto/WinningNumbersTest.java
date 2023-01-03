@@ -18,7 +18,7 @@ class WinningNumbersTest {
     @DisplayName("당첨 번호는 중복이 없다.")
     @Test
     void duplicatedWinningNumbers() {
-        Lotto lotto = Lotto.create(1, 2, 3, 4, 5, 6);
+        Lotto lotto = Lotto.from(TestUtil.toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
         LottoNumber bonus = LottoNumber.valueOf(1);
 
         Assertions.assertThatThrownBy(() -> new WinningNumbers(lotto, bonus))
@@ -36,15 +36,15 @@ class WinningNumbersTest {
     }
 
     static List<Arguments> judge() {
-        WinningNumbers winningNumbers = new WinningNumbers(Lotto.create(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7));
+        WinningNumbers winningNumbers = new WinningNumbers(Lotto.from(TestUtil.toLottoNumbers(List.of(1, 2, 3, 4, 5, 6))), LottoNumber.valueOf(7));
 
         return List.of(
-                Arguments.of(winningNumbers, Lotto.create(8, 9, 10, 11, 12, 13), Prize.NOTHING),
-                Arguments.of(winningNumbers, Lotto.create(4, 5, 6, 7, 8, 9), Prize.FIFTH),
-                Arguments.of(winningNumbers, Lotto.create(3, 4, 5, 6, 7, 8), Prize.FOURTH),
-                Arguments.of(winningNumbers, Lotto.create(3, 4, 5, 6, 8, 2), Prize.THIRD),
-                Arguments.of(winningNumbers, Lotto.create(3, 4, 5, 6, 7, 2), Prize.SECOND),
-                Arguments.of(winningNumbers, Lotto.create(1, 2, 3, 4, 5, 6), Prize.FIRST)
+                Arguments.of(winningNumbers, Lotto.from(TestUtil.toLottoNumbers(List.of(8, 9, 10, 11, 12, 13))), Prize.NOTHING),
+                Arguments.of(winningNumbers, Lotto.from(TestUtil.toLottoNumbers(List.of(4, 5, 6, 7, 8, 9))), Prize.FIFTH),
+                Arguments.of(winningNumbers, Lotto.from(TestUtil.toLottoNumbers(List.of(3, 4, 5, 6, 7, 8))), Prize.FOURTH),
+                Arguments.of(winningNumbers, Lotto.from(TestUtil.toLottoNumbers(List.of(3, 4, 5, 6, 8, 2))), Prize.THIRD),
+                Arguments.of(winningNumbers, Lotto.from(TestUtil.toLottoNumbers(List.of(3, 4, 5, 6, 7, 2))), Prize.SECOND),
+                Arguments.of(winningNumbers, Lotto.from(TestUtil.toLottoNumbers(List.of(1, 2, 3, 4, 5, 6))), Prize.FIRST)
         );
     }
 }

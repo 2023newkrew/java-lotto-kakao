@@ -13,9 +13,9 @@ class LottoCompanyTest {
     @DisplayName("당첨 결과를 집계한다.")
     @Test
     void judgeLotto() {
-        Lotto firstPrizeLotto = Lotto.create(1, 2, 3, 4, 5, 6);
-        Lotto thirdPrizeLotto = Lotto.create(1, 2, 3, 4, 5, 8);
-        Lotto fifthPrizeLotto = Lotto.create(1, 2, 3, 7, 8, 9);
+        Lotto firstPrizeLotto = Lotto.from(TestUtil.toLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        Lotto thirdPrizeLotto = Lotto.from(TestUtil.toLottoNumbers(List.of(1, 2, 3, 4, 5, 8)));
+        Lotto fifthPrizeLotto = Lotto.from(TestUtil.toLottoNumbers(List.of(1, 2, 3, 7, 8, 9)));
         List<Lotto> lottos = List.of(firstPrizeLotto,
                                      thirdPrizeLotto, thirdPrizeLotto,
                                      fifthPrizeLotto, fifthPrizeLotto, fifthPrizeLotto);
