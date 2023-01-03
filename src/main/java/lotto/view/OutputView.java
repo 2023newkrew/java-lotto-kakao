@@ -8,11 +8,12 @@ import java.util.Map;
 
 public class OutputView {
 
-    public void printNumberOfLottos(Lottos lottos){
-        System.out.println(String.format("%d개를 구매했습니다.", lottos.getLottos().size()));
+    public void printNumberOfLottos(Integer numberOfLotto){
+        System.out.printf("%d개를 구매했습니다.%n", numberOfLotto);
     }
 
     public void printLottos(Lottos lottos) {
+        printNumberOfLottos(lottos.getLottos().size());
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.getLotto());
         }
@@ -23,11 +24,11 @@ public class OutputView {
                 "---------");
         for (int i = Ranking.values().length -2 ; i >= 0  ; i--){
             System.out.print(Ranking.values()[i].getHowManyMatches());
-            System.out.println(String.format("- %d개", rankingResult.get(Ranking.values()[i])));
+            System.out.printf(" - %d개%n", rankingResult.get(Ranking.values()[i]));
         }
     }
 
     public void printRevenue(double revenue){
-        System.out.println(String.format("총 수익률은 %.2f입니다.", revenue));
+        System.out.printf("총 수익률은 %.2f입니다.%n", revenue);
     }
 }

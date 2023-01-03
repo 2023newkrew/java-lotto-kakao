@@ -15,8 +15,9 @@ public class LottoController {
     Winner winner = new Winner();
     public void start(){
         int money = inputView.receiveMoneyUserInput();
-        Lottos lottos = new Lottos(money / 1000);
-        outputView.printNumberOfLottos(lottos);
+        int numberOfLotto = money / 1000;
+        Lottos lottos = new Lottos(numberOfLotto);
+
         outputView.printLottos(lottos);
 
         List<Integer> winNumbers = inputView.receiveLastLottoNumbers();
