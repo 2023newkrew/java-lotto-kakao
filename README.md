@@ -17,8 +17,19 @@
 
 
 ---------
+controller
+  - aa
+
 domain
   - lotto
     - ticket
     - result
     - number
+    LottoGame
+      로또 티켓스도 만들고
+      위닝 넘버스도 만들고
+      지금 있는 생성자에 넣음
+    LottoMetaData
+    LottoChecker
+    WinningNumbers
+    

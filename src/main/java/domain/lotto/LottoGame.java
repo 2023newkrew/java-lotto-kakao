@@ -4,6 +4,8 @@ import domain.lotto.result.LottoResults;
 import domain.lotto.ticket.LottoTicket;
 import domain.lotto.ticket.LottoTickets;
 
+import java.util.List;
+
 public class LottoGame {
 
     private final LottoTickets lottoTickets;

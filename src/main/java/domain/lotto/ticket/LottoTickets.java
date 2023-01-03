@@ -1,5 +1,7 @@
 package domain.lotto.ticket;
 
+import domain.lotto.number.NumberGeneratable;
+
 import java.util.List;
 
 public class LottoTickets {
