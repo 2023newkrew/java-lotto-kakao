@@ -33,4 +33,16 @@ public class LottoNumbers {
                 .filter(other::containsLottoNumber)
                 .count();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder message = new StringBuilder();
+
+        message.append("[");
+        this.singleLottoNumbers.forEach(e -> message.append(e.toString()).append(","));
+        message.append("]");
+
+        return message.toString();
+    }
+
 }
