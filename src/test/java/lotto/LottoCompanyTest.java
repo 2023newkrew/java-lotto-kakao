@@ -23,7 +23,7 @@ class LottoCompanyTest {
         LottoCompany lottoCompany = new LottoCompany(winningNumbers);
         Money money = Money.valueOf(6000);
 
-        WinningStatistics actual = lottoCompany.judge(lottos, money);
+        WinningStatistics actual = lottoCompany.judge(LottoBundle.from(lottos), money);
 
         assertThat(actual.countBy(Prize.FIRST)).isEqualTo(1L);
         assertThat(actual.countBy(Prize.SECOND)).isEqualTo(0L);

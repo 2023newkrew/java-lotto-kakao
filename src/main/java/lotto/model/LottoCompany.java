@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -12,8 +11,8 @@ public class LottoCompany {
         this.winningNumbers = winningNumbers;
     }
 
-    public WinningStatistics judge(List<Lotto> lottos, Money money) {
-        Map<Prize, Long> prizeMap = lottos.stream()
+    public WinningStatistics judge(LottoBundle lottoBundle, Money money) {
+        Map<Prize, Long> prizeMap = lottoBundle.stream()
                 .map(winningNumbers::judge)
                 .collect(Collectors.toMap(p -> p, p -> 1L, Long::sum));
 

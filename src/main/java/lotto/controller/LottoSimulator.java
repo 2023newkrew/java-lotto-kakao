@@ -21,7 +21,7 @@ public class LottoSimulator {
         outputView.printLottos(lottos);
         WinningNumbers winningNumbers = inputWinningNumbers();
         LottoCompany lottoCompany = new LottoCompany(winningNumbers);
-        WinningStatistics winningStatistics = lottoCompany.judge(lottos, money);
+        WinningStatistics winningStatistics = lottoCompany.judge(LottoBundle.from(lottos), money);
         outputView.printWinningStatistics(winningStatistics);
     }
 
