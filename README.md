@@ -131,7 +131,7 @@
 
 ### PrizeCountMapTest
 
-- [x] 로또의 당첨 정보를 넣으면 총 당첨 금액을 반환한다
+- [x] 로또의 당첨 정보를 넣으면 결과 정보를 반환한다
 
 ### UserLottosTest
 

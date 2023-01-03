@@ -1,28 +1,28 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.HashMap;
 import org.junit.jupiter.api.Test;
 
 public class PrizeCountMapTest {
 
     @Test
-    void 로또의_당첨_정보를_넣으면_총_당첨_금액을_반환한다() {
+    void 로또의_당첨_정보를_넣으면_결과_정보를_반환한다() {
         PrizeCountMap prizeCountMap = new PrizeCountMap(
                 new HashMap<>() {{
-                    put(LottoPrize.FIRST_PRIZE, 1);
-                    put(LottoPrize.SECOND_PRIZE, 2);
-                    put(LottoPrize.THIRD_PRIZE, 3);
-                    put(LottoPrize.FOURTH_PRIZE, 4);
-                    put(LottoPrize.FIFTH_PRIZE, 5);
+                    put(LottoPrize.FIFTH_PRIZE, 1);
+                    put(LottoPrize.NONE, 13);
                 }}
         );
+        String expected = "6개 일치 (2000000000원) - 0개\n"
+                + "5개 일치, 보너스 볼 일치 (30000000원) - 0개\n"
+                + "5개 일치 (1500000원) - 0개\n"
+                + "4개 일치 (50000원) - 0개\n"
+                + "3개 일치 (5000원) - 1개\n"
+                + "0개 일치 (0원) - 13개\n"
+                + "총 수익률은 0.36입니다.\n";
 
-        final long expectedPrizeMoney = LottoPrize.FIRST_PRIZE.getPrizeMoney() * 1L +
-                LottoPrize.SECOND_PRIZE.getPrizeMoney() * 2L +
-                LottoPrize.THIRD_PRIZE.getPrizeMoney() * 3L +
-                LottoPrize.FOURTH_PRIZE.getPrizeMoney() * 4L +
-                LottoPrize.FIFTH_PRIZE.getPrizeMoney() * 5L;
-
-        //        assertThat(prizeCountMap.getTotalPrizeMoney()).isEqualTo(expectedPrizeMoney);
+        assertThat(prizeCountMap.toString()).isEqualTo(expected);
     }
 }
