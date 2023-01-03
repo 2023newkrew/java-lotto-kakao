@@ -19,10 +19,17 @@ public class Lotto {
         this.randomGenerator = new RandomGenerator(generationRange);
     }
 
-    public List<Ticket> purchaseRandomLotto(long quantity) {
+    public List<Ticket> getTickets() {
+        return this.tickets;
+    }
+
+    public int getQuantity() {
+        return this.tickets.size();
+    }
+
+    public void purchaseRandomLotto(long quantity) {
         for (int i = 0; i < quantity; i++) {
             this.tickets.add(new Ticket(this.randomGenerator.getOrderedNumbers(Ticket.NUMBERS_LENGTH)));
         }
-        return this.tickets;
     }
 }
