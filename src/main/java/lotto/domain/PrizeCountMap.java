@@ -25,7 +25,9 @@ public class PrizeCountMap {
     }
 
     private int getLottoCount() {
-        return prizeCountMap.values().stream().mapToInt(Integer::intValue).sum();
+        return prizeCountMap.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     private double getProfit() {
@@ -34,8 +36,10 @@ public class PrizeCountMap {
     }
 
     private long getTotalPrizeMoney() {
-        return prizeCountMap.entrySet().stream()
-                .mapToLong(e -> e.getKey().getPrizeMoney() * e.getValue())
+        return Arrays.stream(LottoPrize.values())
+                .mapToLong(e ->
+                        e.getPrizeMoney() * this.prizeCountMap.getOrDefault(e, 0)
+                )
                 .sum();
     }
 
