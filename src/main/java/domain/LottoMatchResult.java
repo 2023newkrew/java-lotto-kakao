@@ -6,6 +6,14 @@ public class LottoMatchResult {
     private final int matchCount;
     private final boolean isBonusNumberMatched;
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isBonusNumberMatched() {
+        return isBonusNumberMatched;
+    }
+
     public LottoMatchResult(int matchCount, boolean isBonusNumberMatched) {
         this.matchCount = matchCount;
         this.isBonusNumberMatched = isBonusNumberMatched;
