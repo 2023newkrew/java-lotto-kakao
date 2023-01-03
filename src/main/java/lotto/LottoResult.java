@@ -8,7 +8,8 @@ public class LottoResult {
     private final int matchCount;
     private final boolean matchBonus;
     public LottoResult(int matchCount, boolean matchBonus){
-        if (matchCount < 0 || matchCount > 6 || (matchCount==6 && matchBonus)){
+        if (matchCount < 0 || matchCount > LottoConstants.BALLCOUNT_LIMIT ||
+                (matchCount==LottoConstants.BALLCOUNT_LIMIT && matchBonus)){
             throw new InvalidLottoResult();
         }
         this.matchBonus = matchBonus;
@@ -40,12 +41,12 @@ public class LottoResult {
         return matchBonus;
     }
 
-/*    @Override
+    @Override
     public String toString() {
         String result = matchCount + "개 일치";
         if (matchBonus){
             result += ", 보너스 볼 일치";
         }
         return result;
-    }*/
+    }
 }

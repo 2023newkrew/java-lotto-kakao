@@ -11,7 +11,7 @@ public abstract class LottoTrial {
         for (LottoBallNumber bn : ballNumbers){
             lottoSet.add(bn);
         }
-        if (lottoSet.size()!=6) {
+        if (lottoSet.size()!=LottoConstants.BALLCOUNT_LIMIT) {
             throw new DuplicatedBallNumber();
         }
     }
@@ -25,10 +25,10 @@ public abstract class LottoTrial {
     @Override
     public String toString() {
         String result = "[";
-        for (int i=0;i<5;i++){
+        for (int i=0;i<LottoConstants.BALLCOUNT_LIMIT-1;i++){
             result += ballNumbers.get(i) + ", ";
         }
-        result += ballNumbers.get(5) + "]";
+        result += ballNumbers.get(LottoConstants.BALLCOUNT_LIMIT-1) + "]";
         return result;
     }
 }

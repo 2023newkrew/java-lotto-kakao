@@ -5,12 +5,22 @@ import lotto.exception.InvalidLottoNumberValue;
 import java.util.Objects;
 
 public class LottoCount {
-    private int number;
+    public int getCount() {
+        return count;
+    }
+
+    private int count;
     public LottoCount(int number) {
-        if (number<0){
+        if (number<=0){
             throw new InvalidLottoNumberValue();
         }
-        this.number = number;
+        this.count = number;
+    }
+    public LottoCount(Cash cash){
+        this.count = (int)(cash.getCash() / LottoConstants.LOTTO_PRICE);
+        if (this.count <= 0){
+            throw new InvalidLottoNumberValue();
+        }
     }
 
     @Override
@@ -22,16 +32,16 @@ public class LottoCount {
             return false;
         }
         LottoCount that = (LottoCount) o;
-        return number == that.number;
+        return count == that.count;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number);
+        return Objects.hash(count);
     }
 
     @Override
     public String toString() {
-        return number+"개";
+        return count+"개";
     }
 }

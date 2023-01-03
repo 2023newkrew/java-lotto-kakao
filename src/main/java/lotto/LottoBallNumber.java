@@ -3,14 +3,14 @@ package lotto;
 import lotto.exception.InvalidLottoBallNumber;
 
 import java.util.Objects;
+import java.util.function.LongToDoubleFunction;
 
 public class LottoBallNumber implements Comparable{
     private final int num;
-    private static final int MIN_VALUE = 1;
-    private static final int MAX_VALUE = 45;
 
     public LottoBallNumber(int num) {
-        if (num < MIN_VALUE || num>MAX_VALUE){
+        if (num < LottoConstants.BALLNUMBER_MIN_VALUE ||
+                num> LottoConstants.BALLNUMBER_MAX_VALUE){
             throw new InvalidLottoBallNumber();
         }
         this.num = num;
