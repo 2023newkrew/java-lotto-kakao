@@ -1,11 +1,10 @@
 package lotto;
 
 import lotto.domain.*;
-import lotto.util.Statistics;
+import lotto.domain.Statistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
