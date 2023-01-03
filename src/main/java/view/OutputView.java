@@ -35,6 +35,8 @@ public class OutputView {
 
     private void printRankInfo(Rank rank) {
         System.out.print(rank.match.getMatchCount() + "개 일치");
+        if (rank.equals(Rank.SECOND))
+            System.out.print(", 보너스볼 일치");
         System.out.print("(" + rank.prize + ")- ");
     }
 
