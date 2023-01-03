@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class MoneyTest {
@@ -16,9 +15,11 @@ public class MoneyTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"14000,14", "2000,2", "1000,1", "1100,1"})
-    void 구매금액만큼_살_수_있는_로또의_개수를_반환한다(int inputMoney, int amount) {
+    @ValueSource(ints = {14000, 2000, 1000, 1100})
+    void 구매금액만큼_살_수_있는_로또의_개수를_반환한다(int inputMoney) {
         Money money = new Money(inputMoney);
-        assertThat(money.getLottoAmount()).isEqualTo(amount);
+        int expectedAmount = inputMoney / Money.LOTTO_PRICE;
+
+        assertThat(money.getLottoAmount()).isEqualTo(expectedAmount);
     }
 }
