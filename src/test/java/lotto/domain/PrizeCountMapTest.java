@@ -11,11 +11,11 @@ public class PrizeCountMapTest {
     void 로또의_당첨_정보를_넣으면_총_당첨_금액을_반환한다() {
         PrizeCountMap prizeCountMap = new PrizeCountMap(
                 new HashMap<>() {{
-                    put(LottoPrize.FIRST_PRIZE, 1L);
-                    put(LottoPrize.SECOND_PRIZE, 2L);
-                    put(LottoPrize.THIRD_PRIZE, 3L);
-                    put(LottoPrize.FOURTH_PRIZE, 4L);
-                    put(LottoPrize.FIFTH_PRIZE, 5L);
+                    put(LottoPrize.FIRST_PRIZE, 1);
+                    put(LottoPrize.SECOND_PRIZE, 2);
+                    put(LottoPrize.THIRD_PRIZE, 3);
+                    put(LottoPrize.FOURTH_PRIZE, 4);
+                    put(LottoPrize.FIFTH_PRIZE, 5);
                 }}
         );
 

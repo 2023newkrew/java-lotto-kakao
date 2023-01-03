@@ -12,6 +12,6 @@ public class Money {
     }
 
     public int getLottoAmount() {
-        return this.money / 1000;
+        return this.money / LOTTO_PRICE;
     }
 }
