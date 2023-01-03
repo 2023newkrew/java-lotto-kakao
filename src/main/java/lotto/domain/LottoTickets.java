@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTickets {
     private final ArrayList<LottoTicket> tickets;
@@ -13,11 +15,10 @@ public class LottoTickets {
         }
 
         int count = amount / 1000;
-        this.tickets = new ArrayList<>(count);
         this.lottoRandom = new LottoRandom();
-        for (int i=0; i<count; i++){  // stream 으로 변경 필요
-            tickets.add(new LottoTicket(lottoRandom.createRandomNumbers()));
-        }
+        this.tickets = IntStream.range(0, count)
+                .mapToObj(i -> new LottoTicket(lottoRandom.createRandomNumbers()))
+                .collect(Collectors.toCollection(() -> new ArrayList<>(count)));
     }
 
     // 사용자가 입력한 금액이 1000원 이상인지 확인

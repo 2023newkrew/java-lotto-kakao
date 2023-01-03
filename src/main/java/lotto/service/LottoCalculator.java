@@ -58,10 +58,7 @@ public class LottoCalculator {
     // 로또 통계 배열 생성
     public ArrayList<Integer> getResult(LottoTickets lottoTickets) {
         ArrayList<LottoTicket> tickets = lottoTickets.getTickets();
-        // result
-        for (LottoTicket ticket : tickets) {
-            getScore(ticket);
-        }
+        tickets.forEach(this::getScore);
         return this.winScore;
     }
 

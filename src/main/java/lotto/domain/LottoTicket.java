@@ -26,9 +26,7 @@ public class LottoTicket {
     }
 
     private void lottoNumberRangeCheck(){
-        for(int number : lottoNumbers){
-            rangeCheck(number);
-        }
+        this.lottoNumbers.forEach(this::rangeCheck);
     }
 
     private void rangeCheck(int number){
