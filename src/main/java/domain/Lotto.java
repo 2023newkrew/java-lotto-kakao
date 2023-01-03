@@ -3,7 +3,6 @@ package domain;
 import common.constant.Constants;
 import common.state.Result;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -36,7 +35,7 @@ public class Lotto {
     public Result getResult(WinningLotto winningLotto, BonusNumber bonusNumber) {
         List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
         int count = (int)numbers.stream()
-                .filter(number -> winningLottoNumbers.contains(number))
+                .filter(winningLottoNumbers::contains)
                 .count();
         if (count == 5 && isBonus(bonusNumber)) {
             return Result.FIVEBONUS;
