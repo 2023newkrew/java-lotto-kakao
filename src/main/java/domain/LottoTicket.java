@@ -19,7 +19,6 @@ public class LottoTicket {
         if (lottoBalls.size() != LOTTO_TICKET_BALL_COUNT) {
             throw new IllegalArgumentException("로또 티켓 한 장은 6개의 로또볼이 필요합니다.");
         }
-        //TODO: 중복되는 LottoBall이 있는지 확인 테스트
         Set<LottoBall> duplicateCheck = new HashSet<>(lottoBalls);
         if (duplicateCheck.size() != LOTTO_TICKET_BALL_COUNT) {
             throw new IllegalArgumentException("로또 티켓에 중복되는 로또볼이 있습니다.");

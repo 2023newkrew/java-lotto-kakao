@@ -1,6 +1,6 @@
 package domain;
 
-public class WinnerCombination {
+public class WinnerCombination implements WinnerCompareRule {
 
     private final LottoTicket winnerTicket;
     private final LottoBall bonusBall;
@@ -18,13 +18,8 @@ public class WinnerCombination {
     }
 
     public LottoResult compare(LottoTicket lottoTicket) {
-        if (lottoTicket.equals(winnerTicket)) {
-            return LottoResult.SIX_MATCH;
-        }
-
         int matchCount = lottoTicket.countMatch(winnerTicket);
         boolean bonusBallMatch = lottoTicket.contains(bonusBall);
-
         return LottoResult.findResult(matchCount, bonusBallMatch);
     }
 }

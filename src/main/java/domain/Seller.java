@@ -28,4 +28,8 @@ public class Seller {
             throw new IllegalArgumentException("최소 1,000원 이상을 지불해야 합니다.");
         }
     }
+
+    public Money calculateTotalPrice(List<LottoTicket> lottoTickets) {
+        return SINGLE_LOTTO_TICKET_PRICE.multiply(lottoTickets.size());
+    }
 }

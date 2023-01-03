@@ -1,10 +1,9 @@
 import domain.Money;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 
 public class MoneyTest {
@@ -50,5 +49,16 @@ public class MoneyTest {
         Money multiplyResultMoney = money.multiply(multiplyNumber);
         //then
         assertThat(multiplyResultMoney).isEqualTo(new Money(amount * multiplyNumber));
+    }
+
+    @Test
+    void 돈에서_돈을_뺄_수_있다() {
+        //given
+        Money money1 = new Money(1_500);
+        Money money2 = new Money(1_000);
+        //when
+        Money subtract = money1.subtract(money2);
+        //then
+        assertThat(subtract).isEqualTo(new Money(500));
     }
 }

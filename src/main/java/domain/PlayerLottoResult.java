@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class PlayerLottoResult {
 
-    private final Money initialMoney;
+    private final Money spentMoney;
     private final Map<LottoResult, Integer> lottoResults;
 
-    public PlayerLottoResult(Money initialMoney) {
-        this.initialMoney = initialMoney;
+    public PlayerLottoResult(Money spentMoney) {
+        this.spentMoney = spentMoney;
         this.lottoResults = initializeLottoResults();
     }
 
@@ -26,7 +26,7 @@ public class PlayerLottoResult {
     }
 
     public double calculateProfitRate() {
-        return calculateTotalPrizeMoney().divideBy(initialMoney);
+        return calculateTotalPrizeMoney().divideBy(spentMoney);
     }
 
     private Money calculateTotalPrizeMoney() {
