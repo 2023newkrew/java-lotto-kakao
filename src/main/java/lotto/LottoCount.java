@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.exception.InvalidLottoNumberValue;
+import lotto.exception.InvalidLottoCountValue;
 
 import java.util.Objects;
 
@@ -9,18 +9,19 @@ public class LottoCount {
         return count;
     }
 
-    private int count;
+    private final int count;
     public LottoCount(int number) {
-        if (number<=0){
-            throw new InvalidLottoNumberValue();
+        if (number<0){
+            throw new InvalidLottoCountValue();
         }
         this.count = number;
     }
     public LottoCount(Cash cash){
-        this.count = (int)(cash.getCash() / LottoConstants.LOTTO_PRICE);
-        if (this.count <= 0){
-            throw new InvalidLottoNumberValue();
-        }
+        this((int)(cash.getCash() / LottoConstants.LOTTO_PRICE));
+    }
+
+    public LottoCount add(int val){
+        return new LottoCount(count+val);
     }
 
     @Override
