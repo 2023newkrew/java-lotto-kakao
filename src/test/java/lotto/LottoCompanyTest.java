@@ -19,7 +19,7 @@ class LottoCompanyTest {
         List<Lotto> lottos = List.of(firstPrizeLotto,
                                      thirdPrizeLotto, thirdPrizeLotto,
                                      fifthPrizeLotto, fifthPrizeLotto, fifthPrizeLotto);
-        WinningNumbers winningNumbers = new WinningNumbers(firstPrizeLotto, new LottoNumber(7));
+        WinningNumbers winningNumbers = new WinningNumbers(firstPrizeLotto, LottoNumber.valueOf(7));
         LottoCompany lottoCompany = new LottoCompany(winningNumbers);
         Money money = Money.valueOf(6000);
 

@@ -19,7 +19,7 @@ class WinningNumbersTest {
     @Test
     void duplicatedWinningNumbers() {
         Lotto lotto = Lotto.create(1, 2, 3, 4, 5, 6);
-        LottoNumber bonus = new LottoNumber(1);
+        LottoNumber bonus = LottoNumber.valueOf(1);
 
         Assertions.assertThatThrownBy(() -> new WinningNumbers(lotto, bonus))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -36,7 +36,7 @@ class WinningNumbersTest {
     }
 
     static List<Arguments> judge() {
-        WinningNumbers winningNumbers = new WinningNumbers(Lotto.create(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+        WinningNumbers winningNumbers = new WinningNumbers(Lotto.create(1, 2, 3, 4, 5, 6), LottoNumber.valueOf(7));
 
         return List.of(
                 Arguments.of(winningNumbers, Lotto.create(8, 9, 10, 11, 12, 13), Prize.NOTHING),

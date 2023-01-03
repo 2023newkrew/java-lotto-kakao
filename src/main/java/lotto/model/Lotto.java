@@ -12,14 +12,14 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     public static Lotto createRandomLotto() {
-        List<LottoNumber> numberPool = LottoNumber.createPool();
+        List<LottoNumber> numberPool = LottoNumber.createNumberPool();
         Collections.shuffle(numberPool);
         return create(numberPool.subList(0, SIZE));
     }
 
     public static Lotto create(int... numbers) {
         List<LottoNumber> lottoNumbers = Arrays.stream(numbers)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         return create(lottoNumbers);
     }
@@ -51,7 +51,7 @@ public class Lotto {
 
     public List<Integer> getLottoNumbers() {
         return numbers.stream()
-                .map(LottoNumber::getNumber)
+                .map(LottoNumber::intValue)
                 .collect(Collectors.toList());
     }
 }
