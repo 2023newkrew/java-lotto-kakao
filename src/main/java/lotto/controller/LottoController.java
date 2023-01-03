@@ -10,12 +10,11 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    InputView inputView;
-    OutputView outputView;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final LottoGame lottoGame;
 
-    LottoGame lottoGame;
-
-    public LottoController(InputView inputView, OutputView outputView, LottoGame lottoGame){
+    public LottoController(InputView inputView, OutputView outputView, LottoGame lottoGame) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoGame = lottoGame;
@@ -23,20 +22,31 @@ public class LottoController {
 
 
     public void run() {
-        outputView.printReadPrice();
-        int lottoCount = inputView.readPrice()/(int) LOTTO_PRICE;
-        outputView.printCount(lottoCount);
+        int lottoCount = getLottoCount();
         lottoGame.createLotto(lottoCount);
         outputView.printAllLotto(lottoGame.getLottoHandler());
-        outputView.printReadLottoAnswerNumbers();
-        LottoNumbers lottoAnswerNumbers = new LottoNumbers(inputView.readLottoAnswerNumbers());
-        outputView.printReadBonusBall();
-        lottoGame.setLottoAnswer(new LottoAnswer(lottoAnswerNumbers, inputView.readBonusBall()));
+        setLottoAnswer();
         lottoGame.grade();
         outputView.printGameResult(lottoGame.getGameResultDto());
     }
 
+    private void setLottoAnswer() {
+        outputView.printReadLottoAnswerNumbers();
+        LottoNumbers lottoAnswerNumbers = new LottoNumbers(inputView.readLottoAnswerNumbers());
+        outputView.printReadBonusBall();
+        lottoGame.setLottoAnswer(new LottoAnswer(lottoAnswerNumbers, inputView.readBonusBall()));
+    }
 
+    private int getLottoCount() {
+        outputView.printReadPrice();
+        int lottoCount = calucateLottoCount();
+        outputView.printCount(lottoCount);
+        return lottoCount;
+    }
+
+    private int calucateLottoCount() {
+        return inputView.readPrice() / (int) LOTTO_PRICE;
+    }
 
 
 }
