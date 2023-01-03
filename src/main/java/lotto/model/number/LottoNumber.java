@@ -2,19 +2,20 @@ package lotto.model.number;
 
 import lotto.common.exception.InvalidInputException;
 
-import static lotto.common.LottoConfiguration.*;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
 
+    public static final Integer MIN_VALUE = 1;
+    public static final Integer MAX_VALUE = 45;
+    public static final Integer LOTTO_COUNT = 6;
     private static final List<Integer> lottoPreset = initializeLottoPreset();
 
     public static LottoNumber create() {
         Collections.shuffle(lottoPreset);
-        List<Integer> numbers = lottoPreset.subList(0, LOTTO_COUNT.getValue()).stream()
+        List<Integer> numbers = lottoPreset.subList(0, LOTTO_COUNT).stream()
                 .sorted()
                 .collect(Collectors.toList());
 
@@ -27,7 +28,7 @@ public class LottoNumber {
 
     private static List<Integer> initializeLottoPreset() {
         return IntStream
-                .rangeClosed(MIN_VALUE.getValue(), MAX_VALUE.getValue())
+                .rangeClosed(MIN_VALUE, MAX_VALUE)
                 .boxed()
                 .collect(Collectors.toList());
     }
@@ -52,13 +53,13 @@ public class LottoNumber {
     }
 
     private void validateLottoNumberRange(Integer number) {
-        if (number < MIN_VALUE.getValue() || number > MAX_VALUE.getValue()) {
+        if (number < MIN_VALUE || number > MAX_VALUE) {
             throw new InvalidInputException("로또는 " + MIN_VALUE + "부터" + MAX_VALUE + "사이의 수 이어야 합니다.");
         }
     }
 
     private void validateLottoCount(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_COUNT.getValue()) {
+        if (numbers.size() != LOTTO_COUNT) {
             throw new InvalidInputException("로또는" + LOTTO_COUNT + "개의 숫자로 이루어져야 합니다.");
         }
     }

@@ -3,8 +3,6 @@ package lotto.model.number;
 import lotto.model.enums.LottoResultType;
 import lotto.common.exception.InvalidInputException;
 
-import static lotto.common.LottoConfiguration.*;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +24,7 @@ public final class GoalNumber extends LottoNumber {
         Set<Integer> set = new HashSet<>(lottoNumber.getNumbers());
         set.addAll(getNumbers());
 
-        return LOTTO_COUNT.getValue() * 2 - set.size();
+        return LOTTO_COUNT * 2 - set.size();
     }
 
     private void validateBonusBall(Integer bonusBall) {
