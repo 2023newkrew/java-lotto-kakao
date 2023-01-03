@@ -21,14 +21,9 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public LottoRank getRank(WinningLotto winningLotto) {
-        Integer correctWinningNumberCount = 0;
-        for(LottoNumber number : numbers) {
-            if (winningLotto.getLotto().isIn(number)) {
-                correctWinningNumberCount++;
-            }
-        }
-        return LottoRank.getLottoRank(correctWinningNumberCount, numbers.contains(winningLotto.getBonusNumber()));
+    public Rank getRank(WinningLotto winningLotto) {
+        Long correctWinningNumberCount = numbers.stream().filter(winningLotto.getLotto()::isIn).count();
+        return Rank.getLottoRank(correctWinningNumberCount.intValue(), numbers.contains(winningLotto.getBonusNumber()));
     }
 
     public Boolean isIn(LottoNumber lottoNumber) {
