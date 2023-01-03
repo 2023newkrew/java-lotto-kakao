@@ -15,5 +15,4 @@ class LottoGameTest {
         );
         assertThat(lottoGame.getLottos().size()).isEqualTo(30);
     }
-
 }

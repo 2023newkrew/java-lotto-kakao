@@ -9,7 +9,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class WinningLottoTest {
-
     @Test
     void 당첨로또를_생성할_수_있다() {
         assertDoesNotThrow(() -> new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7));

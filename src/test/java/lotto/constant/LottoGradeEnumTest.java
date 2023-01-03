@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoGradeEnumTest {
     @Test
-    void 로또의_일치하는_갯수와_보너스_일치_여부를_보내면_등수가_반환된다() {
+    void 로또_일치수와_보너스_일치여부를_보내면_등수가_반환된다() {
         assertThat(LottoGradeEnum.getGrade(6, false))
                 .isSameAs(LottoGradeEnum.FIRST);
     }
@@ -23,7 +23,7 @@ public class LottoGradeEnumTest {
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 7})
-    void 맞은_갯수는_0이상_6이하이어야_한다(int matchCount) {
+    void 같은_숫자_필요_개수는_0이상_6이하이어야_한다(int matchCount) {
         assertThatThrownBy(() -> LottoGradeEnum.getGrade(matchCount, true))
                 .hasMessage(INVALID_MATCH_COUNT_RANGE);
     }
