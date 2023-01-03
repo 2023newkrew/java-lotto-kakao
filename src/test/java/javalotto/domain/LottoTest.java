@@ -30,7 +30,7 @@ class LottoTest {
 
         Lotto lotto = Lotto.from(numbers);
 
-        assertThat(lotto.containsExactly(sortedNumbers)).isTrue();
+        assertThat(lotto.toString()).isEqualTo(sortedNumbers.toString());
     }
 
     @ParameterizedTest
