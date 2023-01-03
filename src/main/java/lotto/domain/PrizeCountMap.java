@@ -9,8 +9,6 @@ public class PrizeCountMap {
 
     public PrizeCountMap(Map<LottoPrize, Integer> prizeCountMap) {
         this.prizeCountMap = prizeCountMap;
-        Arrays.stream(LottoPrize.values())
-                .forEachOrdered(e -> prizeCountMap.put(e, prizeCountMap.getOrDefault(e, 0)));
     }
 
     @Override
@@ -47,7 +45,8 @@ public class PrizeCountMap {
 
         Arrays.stream(LottoPrize.values())
                 .forEachOrdered((e) ->
-                        message.append(String.format("%s (%d원) - %d개\n", e.getDescription(), e.getPrizeMoney(), prizeCountMap.get(e)))
+                        message.append(String.format("%s (%d원) - %d개\n",
+                                e.getDescription(), e.getPrizeMoney(), prizeCountMap.getOrDefault(e, 0)))
                 );
 
         message.append(String.format("총 수익률은 %.2f입니다.\n", getProfit()));
