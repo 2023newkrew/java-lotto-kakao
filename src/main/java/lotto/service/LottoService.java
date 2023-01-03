@@ -23,10 +23,6 @@ public class LottoService {
 
     public Map<LottoRank, Integer> getLottoResult(List<Integer> inputWinningNumber, Integer inputBonusBall) {
         LottoTickets lottoTickets = LottoRepository.getAllLottoTicket();
-        for(Integer tmp : inputWinningNumber) {
-            System.out.println(tmp);
-        }
-        System.out.println(inputBonusBall);
         List<LottoNumber> lottoNumbers =
                 inputWinningNumber.stream()
                         .map(LottoNumber::new)
