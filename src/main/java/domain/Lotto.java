@@ -14,6 +14,22 @@ public class Lotto {
         this.numbers = LottoGenerator.run();
     }
 
+    static public Lotto ofNumbers(List<Integer> numbers) {
+        validateLotto(numbers);
+        return new Lotto(numbers);
+    }
+
+    static private void validateLotto(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 숫자는 6개이어야 합니다.");
+        }
+
+        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
+        if (uniqueNumbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 숫자는 중복이 불가합니다.");
+        }
+    }
+
     private Lotto(List<Integer> numbers) {
         this.numbers = numbers
                 .stream()
@@ -21,33 +37,18 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public LottoPlace getPlace(WinningLotto winningLotto) {
-        Integer correctWinningNumberCount = 0;
+    public LottoRank getRank(WinningLotto winningLotto) {
+        Integer matchCount = 0;
         for(LottoNumber number : numbers) {
-            if (winningLotto.getLotto().isIn(number)) {
-                correctWinningNumberCount++;
+            if (winningLotto.getLotto().has(number)) {
+                matchCount++;
             }
         }
-        return LottoPlace.getStatus(correctWinningNumberCount, numbers.contains(winningLotto.getBonusNumber()));
+        return LottoRank.getRank(matchCount, numbers.contains(winningLotto.getBonusNumber()));
     }
 
-    public Boolean isIn(LottoNumber lottoNumber) {
+    public Boolean has(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
-    }
-
-    static public Lotto ofNumbers(List<Integer> numbers) {
-        validateLottoNumbers(numbers);
-        return new Lotto(numbers);
-    }
-
-    static private void validateLottoNumbers(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 숫자는 6개이어야 합니다.");
-        }
-        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
-        if (uniqueNumbers.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 숫자는 중복이 불가합니다.");
-        }
     }
 
     @Override

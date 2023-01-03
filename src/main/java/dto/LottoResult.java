@@ -1,20 +1,20 @@
 package dto;
 
-import domain.LottoPlace;
+import domain.LottoRank;
 
 import java.util.Map;
 
 public class LottoResult {
-    private final Map<LottoPlace, Integer> lottoPlaces;
+    private final Map<LottoRank, Integer> lottoRanks;
     private final Double earningRate;
 
-    public LottoResult(Map<LottoPlace, Integer> lottosStatus, Double earningRate) {
-        this.lottoPlaces = lottosStatus;
+    public LottoResult(Map<LottoRank, Integer> lottosStatus, Double earningRate) {
+        this.lottoRanks = lottosStatus;
         this.earningRate = earningRate;
     }
 
-    public Map<LottoPlace, Integer> getLottoPlaces() {
-        return lottoPlaces;
+    public Map<LottoRank, Integer> getLottoRanks() {
+        return lottoRanks;
     }
 
     public Double getEarningRate() {

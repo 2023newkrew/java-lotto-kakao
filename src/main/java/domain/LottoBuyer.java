@@ -13,9 +13,9 @@ public class LottoBuyer {
     private Integer money;
     private List<Lotto> lottos;
 
-    public LottoBuyer(Integer money, LottoObtainPlace place) {
+    public LottoBuyer(Integer money, LottoObtainPlace means) {
         this.money = money;
-        this.lottos = place.buy(money);
+        this.lottos = means.obtain(money);
     }
 
     public List<Lotto> getLottos() {
@@ -23,13 +23,13 @@ public class LottoBuyer {
     }
 
     public LottoResult calculateResult(WinningLotto winningLotto) {
-        List<LottoPlace> statuses = lottos.stream()
-                .map(lotto -> lotto.getPlace(winningLotto))
+        List<LottoRank> statuses = lottos.stream()
+                .map(lotto -> lotto.getRank(winningLotto))
                 .collect(Collectors.toList());
 
-        Map<LottoPlace, Integer> map = new EnumMap<>(LottoPlace.class);
-        for (LottoPlace lottoPlace : LottoPlace.values()) {
-            map.put(lottoPlace, Collections.frequency(statuses, lottoPlace));
+        Map<LottoRank, Integer> map = new EnumMap<>(LottoRank.class);
+        for (LottoRank lottoRank : LottoRank.values()) {
+            map.put(lottoRank, Collections.frequency(statuses, lottoRank));
         }
 
         Double earningRate =  calculateEarningRate(map);
@@ -37,11 +37,11 @@ public class LottoBuyer {
         return new LottoResult(map, earningRate);
     }
 
-    public Double calculateEarningRate(Map<LottoPlace, Integer> map) {
+    public Double calculateEarningRate(Map<LottoRank, Integer> map) {
         Integer investMoney = (money / 1000) * 1000;
         Long earningMoney = 0L;
-        for (LottoPlace lottoPlace : LottoPlace.values()) {
-            earningMoney +=  (map.get(lottoPlace) * lottoPlace.getReward());
+        for (LottoRank lottoRank : LottoRank.values()) {
+            earningMoney +=  (map.get(lottoRank) * lottoRank.getReward());
         }
         if (earningMoney == 0L) {
             return 0.00d;

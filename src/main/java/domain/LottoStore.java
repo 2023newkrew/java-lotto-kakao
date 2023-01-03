@@ -8,8 +8,8 @@ public class LottoStore implements LottoObtainPlace {
     private static final Integer COST = 1000;
 
     @Override
-    public List<Lotto> buy(Integer money) {
-        Integer amount = getLottoAmount(money);
+    public List<Lotto> obtain(Integer money) {
+        Integer amount = getAmount(money);
 
         return IntStream
                 .range(0, amount)
@@ -17,7 +17,7 @@ public class LottoStore implements LottoObtainPlace {
                 .collect(Collectors.toList());
     }
 
-    private Integer getLottoAmount(Integer money) {
+    private Integer getAmount(Integer money) {
         if (money < COST) {
             throw new IllegalArgumentException("로또를 구매하기 위한 최소 금액이 부족합니다.");
         }

@@ -3,5 +3,5 @@ package domain;
 import java.util.List;
 
 public interface LottoObtainPlace {
-    List<Lotto> buy(Integer money);
+    List<Lotto> obtain(Integer money);
 }
