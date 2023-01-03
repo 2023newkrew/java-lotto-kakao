@@ -1,6 +1,8 @@
 package buyer;
 
-import lotto.*;
+import lotto.Lottery;
+import lotto.LotteryResult;
+import lotto.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,14 +15,14 @@ public class BuyerProfitTest {
     @Test
     void profitTest() {
         //given
-        Lotteries lotteries = new Lotteries();
-        lotteries.addLottery(new Lottery(List.of(1, 2, 3, 4, 5, 6)));
+        Buyer buyer = new Buyer(1000);
+        buyer.buyLottery(1000, new Lottery(List.of(1, 2, 3, 4, 5, 6)));
         LotteryResult lotteryResult = new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 8);
         //when
-        BuyerResult buyerResult = lotteryResult.getResult(lotteries);
+        BuyerResult buyerResult = buyer.getBuyerResult(lotteryResult);
         //then
-
         assertThat(buyerResult.getProfit()).isEqualTo(new BuyerProfit((double) Rank.FIRST.prize / 1000));
-
     }
+
+
 }

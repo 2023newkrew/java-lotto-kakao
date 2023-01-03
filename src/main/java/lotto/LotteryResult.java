@@ -1,6 +1,5 @@
 package lotto;
 
-import buyer.BuyerResult;
 import util.StringParser;
 
 import java.util.List;
@@ -42,13 +41,5 @@ public class LotteryResult {
 
     private boolean isBonusMatch(Lottery lottery) {
         return lottery.getLotteryNumber().contains(bonusNumber);
-    }
-
-    public BuyerResult getResult(Lotteries lotteries) {
-        BuyerResult buyerResult = new BuyerResult();
-        for (Lottery lottery : lotteries.getLotteries()) {
-            buyerResult.matches(getRank(lottery));
-        }
-        return buyerResult;
     }
 }

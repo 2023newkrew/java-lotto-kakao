@@ -1,7 +1,6 @@
 package buyer;
 
-import lotto.LotteryGenerator;
-import lotto.Rank;
+import lotto.*;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -13,10 +12,17 @@ public class BuyerResult {
         result = new EnumMap<>(Rank.class);
     }
 
+    public BuyerResult(Lotteries lotteries, LotteryResult lotteryResult) {
+        result = new EnumMap<>(Rank.class);
+        for (Lottery lottery : lotteries.getLotteries()) {
+            result.put(lotteryResult.getRank(lottery), result.getOrDefault(lotteryResult.getRank(lottery), 0) + 1);
+        }
+    }
+
     public BuyerResult(EnumMap<Rank, Integer> result) {
         this.result = result;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof BuyerResult)) return false;

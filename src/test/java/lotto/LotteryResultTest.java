@@ -1,12 +1,9 @@
 package lotto;
 
-import buyer.BuyerResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -33,34 +30,5 @@ public class LotteryResultTest {
         Lottery lottery = new Lottery(List.of(1, 2, 3, 9, 10, 11));
 
         assertThat(lotteryResult.getRank(lottery)).isEqualTo(Rank.FIFTH);
-    }
-
-    @DisplayName("로또 하나에 대한 결과 객체 확인")
-    @Test
-    void lotteryResult() {
-        LotteryResult lotteryResult = new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 7);
-        Lotteries lotteries = new Lotteries();
-        lotteries.addLottery(new Lottery(List.of(1, 2, 3, 12, 13, 14)));
-
-        BuyerResult buyerResult = lotteryResult.getResult(lotteries);
-        EnumMap<Rank, Integer> cpMap = new EnumMap<>(Map.of(Rank.FIFTH, 1));
-
-        assertThat(buyerResult).isEqualTo(new BuyerResult(cpMap));
-    }
-
-    @DisplayName("로또 뭉치에 대한 결과 객체 확인")
-    @Test
-    void lotteryListResult() {
-        LotteryResult lotteryResult = new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 7);
-        Lotteries lotteries = new Lotteries();
-        lotteries.addLottery(new Lottery(List.of(1, 2, 3, 12, 13, 14)));
-        lotteries.addLottery(new Lottery(List.of(1, 2, 3, 4, 12, 14)));
-
-        BuyerResult buyerResult = lotteryResult.getResult(lotteries);
-
-        EnumMap<Rank, Integer> cpMap =
-                new EnumMap<>(Map.ofEntries(Map.entry(Rank.FIFTH, 1), Map.entry(Rank.FOURTH, 1)));
-
-        assertThat(buyerResult).isEqualTo(new BuyerResult(cpMap));
     }
 }

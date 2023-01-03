@@ -2,6 +2,7 @@ package buyer;
 
 import lotto.Lotteries;
 import lotto.Lottery;
+import lotto.LotteryResult;
 
 public class Buyer {
     private final Lotteries lotteries = new Lotteries();
@@ -23,5 +24,9 @@ public class Buyer {
 
     public Lotteries getLotteries() {
         return lotteries;
+    }
+
+    public BuyerResult getBuyerResult(LotteryResult lotteryResult) {
+        return new BuyerResult(lotteries, lotteryResult);
     }
 }

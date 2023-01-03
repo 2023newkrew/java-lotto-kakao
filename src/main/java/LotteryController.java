@@ -17,7 +17,7 @@ public class LotteryController {
 
         LotteryResult lotteryResult =
                 new LotteryResult(inputView.getWinningNumbersInput(), inputView.getBonusNumberInput());
-        BuyerResult buyerResult = lotteryResult.getResult(buyer.getLotteries());
+        BuyerResult buyerResult = buyer.getBuyerResult(lotteryResult);
 
         outputView.printResult(buyerResult);
         outputView.printProfit(buyerResult.getProfit());
