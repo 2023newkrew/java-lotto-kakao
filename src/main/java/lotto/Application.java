@@ -10,11 +10,12 @@ import lotto.view.LottoView;
 public class Application {
 
     public static void main(String[] args) {
-        List<Lotto> lottos = LottoGenerator.generate(LottoView.inputInit());
+
+        List<Lotto> lottos = LottoGenerator.generateLottos(LottoView.receivePurchasePrice());
         LottoView.printLottoList(lottos);
-        WinningLotto winningLotto = LottoView.inputWinningLotto();
+        WinningLotto winningLotto = LottoView.receiveWinningLotto();
         LottoGame lottoGame = new LottoGame(lottos, winningLotto);
-        LottoView.printLottoList(lottoGame.getLottos());
         LottoView.printResult(lottoGame.getResult());
+
     }
 }

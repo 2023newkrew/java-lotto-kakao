@@ -13,14 +13,14 @@ public class LottoGenerator {
             .boxed()
             .collect(Collectors.toList());
 
-    static public List<Lotto> generate(int price) {
+    static public List<Lotto> generateLottos(int price) {
         List<Lotto> lottos = new ArrayList<>();
         int lottoCount = price / LOTTO_PRICE;
-        IntStream.range(0, lottoCount).forEach((i) -> lottos.add(generate()));
+        IntStream.range(0, lottoCount).forEach((i) -> lottos.add(generateLotto()));
         return lottos;
     }
 
-    private static Lotto generate() {
+    private static Lotto generateLotto() {
         Collections.shuffle(fullNumbers);
         return new Lotto(fullNumbers.subList(0, 6));
     }

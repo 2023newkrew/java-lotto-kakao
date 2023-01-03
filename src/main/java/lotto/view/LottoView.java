@@ -25,7 +25,7 @@ public class LottoView {
         System.out.println();
     }
 
-    static public WinningLotto inputWinningLotto() {
+    static public WinningLotto receiveWinningLotto() {
         return new WinningLotto(receiveWinningLottoNumbers(), receiveBonusNumber());
     }
 
