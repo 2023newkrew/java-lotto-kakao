@@ -15,7 +15,7 @@ public class LotteryController {
 
     public void run() {
         Buyer buyer = new Buyer(inputView.getBudgetInput());
-        lotteryGenerator.generate(buyer);
+        lotteryGenerator.autoGenerate(buyer);
 
         outputView.printLotteries(buyer.getLotteries());
         List<Integer> winningNumber = StringParser.parse(inputView.getWinningNumbersInput());
