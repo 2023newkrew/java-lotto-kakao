@@ -13,7 +13,9 @@ public class LottoTickets {
     public LottoResult getLottoResult(LottoWinningNumber lottoWinningNumber) {
         LottoResult lottoResult = new LottoResult();
         for (LottoTicket lottoTicket : lottoTickets) {
-            lottoResult.addLottoRank(lottoWinningNumber.checkRank(lottoTicket));
+            lottoResult.addLottoRankCount(
+                    lottoWinningNumber.checkLottoRank(lottoTicket)
+            );
         }
         return lottoResult;
     }

@@ -21,6 +21,7 @@ public class LottoInputTemplate {
         validateInputPurchaseAmount(purchaseAmount);
         return purchaseAmount;
     }
+
     private void validateInputPurchaseAmount(Integer purchaseAmount){
         if(purchaseAmount <= 0){
             throw new LottoException(ErrorCode.INVALID_PURCHASE_AMOUNT);

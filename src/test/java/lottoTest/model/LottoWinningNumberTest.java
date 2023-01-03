@@ -6,6 +6,7 @@ import lotto.model.LottoNumber;
 import lotto.model.LottoRank;
 import lotto.model.LottoTicket;
 import lotto.model.LottoWinningNumber;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +21,9 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class LottoWinningNumberTest {
     private final List<LottoNumber> input = createLottoNumberList(List.of(1,2,3,4,5,6));
+
     @Test
+    @DisplayName("보너스 번호가 winningNumber에 포함되어 있지 않은 경우")
     public void correctBonusBall() {
         //given
         LottoTicket lottoTicket = new LottoTicket(input);
@@ -30,6 +33,7 @@ public class LottoWinningNumberTest {
     }
 
     @Test
+    @DisplayName("보너스 번호가 winningNumber에 포함되어 있는 경우")
     public void wrongBonusBall() {
         //given
         LottoTicket lottoTicket = new LottoTicket(input);
@@ -42,12 +46,13 @@ public class LottoWinningNumberTest {
 
     @ParameterizedTest
     @MethodSource("checkRankTestGenerator")
+    @DisplayName("로또 티켓의 등수 구하기")
     public void checkRankTest(LottoWinningNumber lottoWinningNumber, LottoRank expected){
         //given
         LottoTicket lottoTicket = new LottoTicket(input);
 
         //when & then
-        assertThat(lottoWinningNumber.checkRank(lottoTicket)).isEqualTo(expected);
+        assertThat(lottoWinningNumber.checkLottoRank(lottoTicket)).isEqualTo(expected);
     }
     private static Stream<Arguments> checkRankTestGenerator(){
         return Stream.of(

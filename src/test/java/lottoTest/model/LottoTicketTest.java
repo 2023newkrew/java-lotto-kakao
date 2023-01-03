@@ -33,9 +33,11 @@ public class LottoTicketTest {
         //when & then
         assertDoesNotThrow(() -> new LottoTicket(input));
     }
+
     @ParameterizedTest
     @MethodSource("validateInvalidLottoNumberTestGenerator")
-    public void validateInvalidLottoNumberTest(List<LottoNumber> input, ErrorCode expected){
+    @DisplayName("길이가 잘못된 로또 번호의 리스트가 주어지면 예외반환")
+    public void validateWrongLottoTicketLengthTest(List<LottoNumber> input, ErrorCode expected){
         //given
 
         //when & then
@@ -72,15 +74,16 @@ public class LottoTicketTest {
     }
 
     @ParameterizedTest
-    @MethodSource("countIncludedNumberTestGenerator")
-    public void countIncludedNumberTest(LottoTicket other, Integer count) {
+    @MethodSource("countOverlappingNumberTestGenerator")
+    @DisplayName("로또 티켓끼리 겹치는 번호의 개수 반환")
+    public void countOverlappingNumberTest(LottoTicket other, Integer count) {
         // given
         LottoTicket lottoTicket = new LottoTicket(input);
 
         // when & then
-        assertThat(lottoTicket.countIncludedNumber(other)).isEqualTo(count);
+        assertThat(lottoTicket.countOverlappingNumber(other)).isEqualTo(count);
     }
-    private static Stream<Arguments> countIncludedNumberTestGenerator(){
+    private static Stream<Arguments> countOverlappingNumberTestGenerator(){
         return Stream.of(
                 Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))), 6),
                 Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 7))), 5),

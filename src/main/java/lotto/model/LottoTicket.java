@@ -21,22 +21,22 @@ public class LottoTicket {
         Collections.sort(lotto);
     }
 
-    public LottoTicket(List<LottoNumber> input){
-        validateLottoNumber(input);
-        lotto = input;
-    }
-
     private List<LottoNumber> createRandomLottoTicket(){
         List<LottoNumber> list = new ArrayList<>();
-        for(int i = LOTTO_NUMBER_LOWER_BOUNDARY; i <= LOTTO_NUMBER_UPPER_BOUNDARY; i++){
-            list.add(new LottoNumber(i));
+        for(int number = LOTTO_NUMBER_LOWER_BOUNDARY; number <= LOTTO_NUMBER_UPPER_BOUNDARY; number++){
+            list.add(new LottoNumber(number));
         }
 
         Collections.shuffle(list);
-        return list.subList(0, 6);
+        return list.subList(0, LOTTO_TICKET_LENGTH);
     }
 
-    private void validateLottoNumber(List<LottoNumber> input){
+    public LottoTicket(List<LottoNumber> input){
+        validateLottoTicketLength(input);
+        lotto = input;
+    }
+
+    private void validateLottoTicketLength(List<LottoNumber> input){
         if(input == null || input.size() != LOTTO_TICKET_LENGTH){
             throw new LottoException(ErrorCode.INVALID_LOTTO_NUMBER_LENGTH);
         }
@@ -46,14 +46,20 @@ public class LottoTicket {
         return lotto.contains(number);
     }
 
-    public Integer countIncludedNumber(LottoTicket lottoTicket) {
-        return Math.toIntExact(lotto.stream()
+    public Integer countOverlappingNumber(LottoTicket lottoTicket) {
+        return Math.toIntExact(
+                lotto.stream()
                 .filter(lottoTicket::contains)
-                .count());
+                .count()
+        );
     }
 
     @Override
     public String toString() {
-        return "[" + lotto.stream().map(LottoNumber::getLottoNumberString).collect(Collectors.joining(", ")) +"]";
+        return "[" +
+                lotto.stream()
+                .map(LottoNumber::getLottoNumberString)
+                .collect(Collectors.joining(", ")) +
+                "]";
     }
 }

@@ -26,7 +26,7 @@ public class LottoResult {
         );
     }
 
-    public void addLottoRank(LottoRank lottoRank) {
+    public void addLottoRankCount(LottoRank lottoRank) {
         rankCountMap.put(lottoRank, rankCountMap.get(lottoRank)+1);
     }
 

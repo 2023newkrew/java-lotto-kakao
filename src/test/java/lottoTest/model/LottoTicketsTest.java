@@ -1,6 +1,7 @@
 package lottoTest.model;
 
 import lotto.model.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTicketsTest {
     @ParameterizedTest
     @MethodSource("getLottoResultTestGenerator")
+    @DisplayName("로또 티켓목록에서 결과를 잘 추출하는지 테스트")
     public void getLottoResultTest(LottoWinningNumber lottoWinningNumber, LottoResult expected) {
         //given
         LottoTickets lottoTickets = new LottoTickets();

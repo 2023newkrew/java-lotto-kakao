@@ -1,6 +1,7 @@
 package lottoTest.model;
 
 import lotto.model.LottoRank;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -13,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoRankTest {
     @ParameterizedTest
     @MethodSource("fromCountAndBonusTestGenerator")
+    @DisplayName("맞춘 로또 번호와 보너스 번호가 주어지면 등수 반환")
     public void fromCountAndBonusTest(Integer count, boolean bonusBall, LottoRank expected) {
         //given
 

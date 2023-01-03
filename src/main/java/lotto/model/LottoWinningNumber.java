@@ -19,8 +19,8 @@ public class LottoWinningNumber {
         }
     }
 
-    public LottoRank checkRank(LottoTicket lottoTicket){
-        Integer sameCount = winningNumber.countIncludedNumber(lottoTicket);
+    public LottoRank checkLottoRank(LottoTicket lottoTicket){
+        Integer sameCount = winningNumber.countOverlappingNumber(lottoTicket);
         boolean isBonus = lottoTicket.contains(bonusBall);
 
         return LottoRank.fromCountAndBonus(sameCount, isBonus);
