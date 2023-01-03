@@ -1,4 +1,4 @@
-package lotto;
+package lotto.constant;
 
 import static lotto.constant.MessageConstant.INVALID_MATCH_COUNT_RANGE;
 

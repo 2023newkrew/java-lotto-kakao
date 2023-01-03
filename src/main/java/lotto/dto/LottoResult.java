@@ -1,6 +1,6 @@
 package lotto.dto;
 
-import lotto.LottoGradeEnum;
+import lotto.constant.LottoGradeEnum;
 
 public class LottoResult implements Comparable<LottoResult> {
 
