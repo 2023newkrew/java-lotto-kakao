@@ -23,7 +23,7 @@ public class InputView {
     public PurchaseAmount getPurchaseAmountInput() {
         System.out.println("구입금액을 입력해 주세요.");
 
-        return PurchaseAmount.from(scanner.nextInt());
+        return PurchaseAmount.from(Integer.parseInt(scanner.nextLine()));
     }
 
     public WinningLotto getWinningLottoInput() {
