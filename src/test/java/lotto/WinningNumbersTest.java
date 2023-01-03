@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 public class WinningNumbersTest {
 
@@ -31,5 +32,37 @@ public class WinningNumbersTest {
         assertEquals(matchedResult, new MatchedResult(
                 3, false
         ));
+    }
+
+    @Test
+    @DisplayName("당첨 번호 길이 테스트")
+    void lotto_length_test() {
+        assertThrowsExactly(IllegalArgumentException.class, () -> new WinningNumbers(
+                List.of(1, 2, 3, 4, 5, 6, 7),
+                8));
+    }
+
+    @Test
+    @DisplayName("당첨 번호 범위 테스트")
+    void lotto_range_test() {
+        assertThrowsExactly(IllegalArgumentException.class, () -> new WinningNumbers(
+                List.of(1, 2, 3, 4, 5, 46),
+                8));
+
+        assertThrowsExactly(IllegalArgumentException.class, () -> new WinningNumbers(
+                List.of(1, 2, 3, 4, 5, 6),
+                46));
+    }
+
+    @Test
+    @DisplayName("당첨 번호 중복 테스트")
+    void lotto_duplicate_test() {
+        assertThrowsExactly(IllegalArgumentException.class, () -> new WinningNumbers(
+                List.of(1, 2, 3, 4, 5, 5),
+                8));
+
+        assertThrowsExactly(IllegalArgumentException.class, () -> new WinningNumbers(
+                List.of(1, 2, 3, 4, 5, 6),
+                3));
     }
 }

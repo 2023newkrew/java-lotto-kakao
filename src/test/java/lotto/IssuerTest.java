@@ -23,7 +23,7 @@ public class IssuerTest {
     }
 
     @Test
-    @DisplayName("로또 숫자 범위 테스트")
+    @DisplayName("로또 번호 범위 테스트")
     void lotto_range_test() {
         LottoList lottoList = Issuer.issue(1);
         Lotto lotto = lottoList.get(0);
@@ -34,7 +34,7 @@ public class IssuerTest {
     }
 
     @Test
-    @DisplayName("로또 숫자 중복 테스트")
+    @DisplayName("로또 번호 중복 테스트")
     void lotto_duplicate_test() {
         LottoList lottoList = Issuer.issue(1);
         Lotto lotto = lottoList.get(0);
