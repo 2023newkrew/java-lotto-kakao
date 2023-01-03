@@ -1,8 +1,10 @@
+package domain;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoStore implements LottoObtainPlace{
+public class LottoStore implements LottoObtainPlace {
     private static final Integer COST = 1000;
 
     @Override
