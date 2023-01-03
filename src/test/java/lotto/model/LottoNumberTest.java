@@ -2,23 +2,21 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberTest {
-    @Test
-    void 값이_1_45_사이에_있으면_객체가_생성되어야함() {
-        assertThat(new LottoNumber(6)).isEqualTo(new LottoNumber(6));
+    @ParameterizedTest
+    @ValueSource(ints = {1, 45})
+    void 숫자가_1_45_사이에_있으면_숫자_객체가_정상적으로_생성됨(int number) {
+        assertThatCode(() -> new LottoNumber(number))
+                .doesNotThrowAnyException();
     }
 
-    @Test
-    void 숫자가_1_45_사이에_있지_않으면_예외_발생() {
-        assertThatCode(() -> new LottoNumber(60))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void 숫자가_음수이면_예외_발생() {
-        assertThatCode(() -> new LottoNumber(-1))
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0, 46})
+    void 숫자가_1_45_사이에_있지_않으면_예외가_발생함(int number) {
+        assertThatCode(() -> new LottoNumber(number))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class WinningNumbersTest {
     @Test
-    void 담첨_번호_생성() {
+    void 정상적인_입력의_경우_예외없이_생성되어야함() {
         assertThatCode(() -> new WinningNumbers(
                         "1, 2, 3, 4, 5, 6",
                         "7"
@@ -25,7 +25,7 @@ class WinningNumbersTest {
             "-1, 1, 2, 3, 4, 5:9",
             "a, 1, 2, 3, 4, 5:6"
     }, delimiter = ':')
-    void 담첨_번호_생성_실패(String sixNumbers, String bonusNumber) {
+    void 개수나_문자나_음수인_비정상적인_입력시_예외가_발생해야함(String sixNumbers, String bonusNumber) {
         assertThatCode(() -> new WinningNumbers(
                         sixNumbers,
                         bonusNumber
@@ -37,11 +37,12 @@ class WinningNumbersTest {
     @ParameterizedTest
     @CsvSource(value = {
             "1, 2, 3, 4, 5, 6:7:SIX",
-            "1, 2, 3, 4, 5, 7:8:FIVE",
             "1, 2, 3, 4, 5, 7:6:FIVE_BONUS",
-            "6, 5, 4, 3, 2, 1:7:SIX"
+            "1, 2, 3, 4, 5, 7:8:FIVE",
+            "1, 2, 3, 4, 7, 8:5:FOUR",
+            "1, 2, 3, 7, 8, 9:4:THREE"
     }, delimiter = ':')
-    void 당첨_확인(String sixNumbers, String bonusNumber, Grade result) {
+    void 한장의_티켓에_대해_결과가_정상적으로_반환되어야함(String sixNumbers, String bonusNumber, Grade result) {
         WinningNumbers winningNumbers = new WinningNumbers(sixNumbers, bonusNumber);
         LottoTicket lottoTicket = new LottoTicket(Arrays.asList(
                 new LottoNumber(1),

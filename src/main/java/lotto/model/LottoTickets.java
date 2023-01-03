@@ -10,11 +10,11 @@ public class LottoTickets {
         this.tickets = new ArrayList<>(tickets);
     }
 
-    public static LottoTickets of(int count) {
+    public static LottoTickets automaticallyOf(int count) {
         List<LottoTicket> tickets = new ArrayList<>();
-        LottoTicketGenerator lottoTicketGenerator = LottoTicketGenerator.getInstance();
+        LottoTicketAutoGenerator lottoTicketAutoGenerator = LottoTicketAutoGenerator.getInstance();
         for (int i = 0; i < count; i++) {
-            tickets.add(lottoTicketGenerator.generate());
+            tickets.add(lottoTicketAutoGenerator.generate());
         }
         return new LottoTickets(tickets);
     }

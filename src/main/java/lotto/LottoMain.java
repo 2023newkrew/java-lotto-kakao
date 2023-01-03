@@ -13,7 +13,7 @@ public class LottoMain {
         int count = money / 1000;
         money = count * 1000;
 
-        LottoTickets tickets = LottoTickets.of(count);
+        LottoTickets tickets = LottoTickets.automaticallyOf(count);
         resultView.printLottoTickets(tickets);
 
         WinningNumbers winningNumbers = new WinningNumbers(

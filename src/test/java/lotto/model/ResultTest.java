@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class ResultTest {
     @Test
-    void 결과_객체_생성() {
+    void Result_객체가_정상적으로_생성되어야함() {
         Map<Grade, Integer> sample = new HashMap<>(){{
             put(Grade.SIX, 3);
             put(Grade.FOUR, 1);
@@ -22,23 +22,22 @@ public class ResultTest {
     }
 
     @Test
-    void 결과_초기화() {
+    void 값의_추가_또는_증가가_횟수만큼_되어야함(){
         Result result = new Result();
-        assertThat(result).isEqualTo(new Result());
+        result.addUp(Grade.FIVE);
+        assertThat(result.addUp(Grade.FIVE)).isEqualTo(2);
     }
 
     @Test
-    void 자료_추가(){
-        Result result = new Result();
-        assertThat(result.addUp(Grade.FIVE)).isEqualTo(1);
-    }
-
-    @Test
-    void 값_추출(){
-        Result result = new Result(){{
-            addUp(Grade.THREE);
-        }};
+    void 값을_설정된대로_획득할_수_있어야함(){
+        Result result = new Result(new HashMap<>(){{
+            put(Grade.THREE, 1);
+            put(Grade.FOUR, 2);
+            put(Grade.FIVE, 3);
+        }});
         assertThat(result.get(Grade.THREE)).isEqualTo(1);
-        assertThat(result.get(Grade.SIX)).isEqualTo(0);
+        assertThat(result.get(Grade.FOUR)).isEqualTo(2);
+        assertThat(result.get(Grade.FIVE)).isEqualTo(3);
+        assertThat(result.get(Grade.FIVE_BONUS)).isEqualTo(0);
     }
 }

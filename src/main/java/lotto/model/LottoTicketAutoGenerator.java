@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoTicketGenerator {
+public class LottoTicketAutoGenerator {
     private final List<LottoNumber> numberDomain;
-    private static LottoTicketGenerator instance;
+    private static LottoTicketAutoGenerator instance;
 
-    private LottoTicketGenerator() {
+    private LottoTicketAutoGenerator() {
         numberDomain = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
             numberDomain.add(new LottoNumber(i));
         }
     }
 
-    public static LottoTicketGenerator getInstance() {
+    public static LottoTicketAutoGenerator getInstance() {
         if (instance == null) {
-            instance = new LottoTicketGenerator();
+            instance = new LottoTicketAutoGenerator();
         }
         return instance;
     }
