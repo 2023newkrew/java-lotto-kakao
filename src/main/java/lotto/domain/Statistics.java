@@ -1,6 +1,4 @@
-package lotto.util;
-
-import lotto.domain.LottoRank;
+package lotto.domain;
 
 public class Statistics {
     private int FIRST;
@@ -16,6 +14,13 @@ public class Statistics {
         THIRD = 0;
         FOURTH = 0;
         FIFTH = 0;
+    }
+
+    public void build(Lottos lottos, Lotto winLotto, LottoNumber bonusNumber) {
+        for (Lotto lotto : lottos) {
+            LottoResult result = new LottoResult(lotto, winLotto, bonusNumber);
+            add(result.getRank());
+        }
     }
 
     public void add(LottoRank rank) {
