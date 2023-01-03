@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
+
     private final Scanner sc = new Scanner(System.in);
 
     public int getExpenseInput() {
@@ -19,7 +20,6 @@ public class InputView {
         return Arrays.stream(answerNumbers.split("[\\s,]+"))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-
     }
 
     public int getBonusBallInput() {

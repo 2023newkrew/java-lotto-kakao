@@ -1,9 +1,8 @@
 package lotto.view;
 
+import java.util.List;
 import lotto.domain.LottoNumbers;
 import lotto.domain.PrizeCountMap;
-
-import java.util.List;
 
 public class OutputView {
 

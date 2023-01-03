@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.List;
 
 public class LottoNumbers {
+
     public static final int LOTTO_NUMBER_LENGTH = 6;
     private final List<SingleLottoNumber> singleLottoNumbers;
 
@@ -44,5 +45,4 @@ public class LottoNumbers {
 
         return message.toString();
     }
-
 }

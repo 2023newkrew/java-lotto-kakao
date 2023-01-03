@@ -1,15 +1,15 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
+import org.junit.jupiter.api.Test;
 
 public class LottoTest {
+
     LottoNumbers answerlottoNumbers = new LottoNumbers(
             Arrays.asList(
                     new SingleLottoNumber(1),

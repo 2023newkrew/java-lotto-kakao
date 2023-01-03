@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Objects;
 
 public class SingleLottoNumber implements Comparable<SingleLottoNumber> {
+
     private final int singleLottoNumber;
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
@@ -17,8 +18,12 @@ public class SingleLottoNumber implements Comparable<SingleLottoNumber> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SingleLottoNumber that = (SingleLottoNumber) o;
         return singleLottoNumber == that.singleLottoNumber;
     }

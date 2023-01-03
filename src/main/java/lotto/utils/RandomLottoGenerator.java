@@ -1,15 +1,15 @@
 package lotto.utils;
 
-import lotto.domain.LottoNumbers;
-import lotto.domain.SingleLottoNumber;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.LottoNumbers;
+import lotto.domain.SingleLottoNumber;
 
 public class RandomLottoGenerator {
+
     private RandomLottoGenerator() {
     }
 

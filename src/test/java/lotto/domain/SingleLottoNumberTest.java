@@ -1,12 +1,12 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class SingleLottoNumberTest {
 
@@ -22,5 +22,4 @@ public class SingleLottoNumberTest {
     void 로또_번호는_1_에서_45_사이가_아니면_예외가_발생한다(int singleLottoNumber) {
         assertThatThrownBy(() -> new SingleLottoNumber(singleLottoNumber)).isInstanceOf(IllegalArgumentException.class);
     }
-
 }

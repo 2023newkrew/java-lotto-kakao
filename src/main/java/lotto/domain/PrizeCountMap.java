@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class PrizeCountMap {
+
     private final Map<LottoPrize, Integer> prizeCountMap;
 
     public PrizeCountMap(Map<LottoPrize, Integer> prizeCountMap) {
@@ -13,8 +14,10 @@ public class PrizeCountMap {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         PrizeCountMap that = (PrizeCountMap) o;
         return Objects.equals(prizeCountMap, that.prizeCountMap);
     }
