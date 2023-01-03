@@ -20,11 +20,9 @@
     - [x] DTO
         - [x] GameResult → 1등 ~ 5등까지 몇개씩 가지고 있는지에 대한 Count
             - Map(등수, 갯수), (2, 0), (3, 0) (4, 0), (5, 1))
-        - [x] LottoResult → 로또를 컴퓨터로또에 넣었을 때 나오는 결과값
-            - 등수 (1~5 or 꽝)
     - [x] Enum
         - 1등 ~ 5등 + 꽝
-            - GRADE (MATCH_COUNT, PRICE)
+            - GRADE (MATCH_COUNT, BONUS_MATCH, PRICE)
 
 - [x] View
 
