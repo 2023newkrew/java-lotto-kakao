@@ -26,9 +26,7 @@ public class LottoApplication {
         ChangeInput changeInput = new ChangeInput();
 
         // 보너스볼 입력
-        LottoWinnerTicket lottoWinnerTicket = changeInput.changeToWinnerTicket(
-                inputView.inputWinNumber(),
-                inputView.inputBonusNumber());
+        LottoWinnerTicket lottoWinnerTicket = getLottoWinnerTicket(inputView, changeInput);
 
         LottoCalculator lottoCalculator = new LottoCalculator(lottoWinnerTicket);
 
@@ -37,5 +35,12 @@ public class LottoApplication {
 
         // 당첨 통계 출력
         resultView.printWinningStatics(result);
+    }
+
+    private static LottoWinnerTicket getLottoWinnerTicket(InputView inputView, ChangeInput changeInput) {
+        String winNumber = inputView.inputWinNumber();
+        int bonus = inputView.inputBonusNumber();
+        return changeInput.changeToWinnerTicket(
+                winNumber, bonus);
     }
 }

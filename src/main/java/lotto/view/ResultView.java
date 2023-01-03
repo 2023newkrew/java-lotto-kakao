@@ -39,7 +39,7 @@ public class ResultView {
     }
 
     private void printEachTicket(ArrayList<Integer> numbers){
-        System.out.printf("[%d, %d, %d, %d, %d, %d]",
+        System.out.printf("[%d, %d, %d, %d, %d, %d]\n",
                 numbers.get(0), numbers.get(1),
                 numbers.get(2), numbers.get(3),
                 numbers.get(4) ,numbers.get(5)

@@ -14,7 +14,7 @@ public class InputView {
 
     public int inputUserAmount(){
         System.out.println(INPUT_AMOUNT.getMessage());
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public String inputWinNumber(){
@@ -24,6 +24,6 @@ public class InputView {
 
     public int inputBonusNumber(){
         System.out.println(INPUT_BONUS_BALL.getMessage());
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 }

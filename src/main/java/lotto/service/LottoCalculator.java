@@ -5,6 +5,7 @@ import lotto.domain.LottoTickets;
 import lotto.domain.LottoWinnerTicket;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoCalculator {
@@ -16,7 +17,7 @@ public class LottoCalculator {
     public LottoCalculator(LottoWinnerTicket winTicket) {
         this.winTicket = winTicket;
         this.winValue = new ArrayList<>(List.of(5000, 50000, 1500000, 2000000000, 30000000));
-        this.winScore = new ArrayList<>(6);
+        this.winScore = new ArrayList<>(List.of(0, 0, 0, 0, 0, 0));
     }
 
     public int checkSameCount(LottoTicket userTicket) {
