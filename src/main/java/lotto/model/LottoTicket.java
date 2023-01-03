@@ -7,44 +7,42 @@ import lotto.exception.LottoException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final Integer LOTTO_TICKET_LENGTH = 6;
     private static final Integer LOTTO_NUMBER_LOWER_BOUNDARY = 1;
     private static final Integer LOTTO_NUMBER_UPPER_BOUNDARY = 45;
 
-    private final List<Integer> lotto;
+    private final List<LottoNumber> lotto;
 
     public LottoTicket(){
-        lotto = createRandomList();
+        lotto = createRandomLottoTicket();
+        Collections.sort(lotto);
     }
-    public LottoTicket(List<Integer> input){
+
+    public LottoTicket(List<LottoNumber> input){
         validateLottoNumber(input);
         lotto = input;
     }
-    private List<Integer> createRandomList(){
-        List<Integer> list = new ArrayList<>();
+
+    private List<LottoNumber> createRandomLottoTicket(){
+        List<LottoNumber> list = new ArrayList<>();
         for(int i = LOTTO_NUMBER_LOWER_BOUNDARY; i <= LOTTO_NUMBER_UPPER_BOUNDARY; i++){
-            list.add(i);
+            list.add(new LottoNumber(i));
         }
 
         Collections.shuffle(list);
         return list.subList(0, 6);
     }
 
-    private void validateLottoNumber(List<Integer> input){
+    private void validateLottoNumber(List<LottoNumber> input){
         if(input == null || input.size() != LOTTO_TICKET_LENGTH){
             throw new LottoException(ErrorCode.INVALID_LOTTO_NUMBER_LENGTH);
         }
-
-        input.forEach(number -> {
-            if(number < LOTTO_NUMBER_LOWER_BOUNDARY || number > LOTTO_NUMBER_UPPER_BOUNDARY){
-                throw new LottoException(ErrorCode.INVALID_LOTTO_NUMBER_RANGE);
-            }
-        });
     }
 
-    public boolean contains(Integer number) {
+    public boolean contains(LottoNumber number) {
         return lotto.contains(number);
     }
 
@@ -52,5 +50,10 @@ public class LottoTicket {
         return Math.toIntExact(lotto.stream()
                 .filter(lottoTicket::contains)
                 .count());
+    }
+
+    @Override
+    public String toString() {
+        return "[" + lotto.stream().map(LottoNumber::getLottoNumberString).collect(Collectors.joining(", ")) +"]";
     }
 }

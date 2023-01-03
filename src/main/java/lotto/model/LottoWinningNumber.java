@@ -5,15 +5,15 @@ import lotto.exception.LottoException;
 
 public class LottoWinningNumber {
     private final LottoTicket winningNumber;
-    private final Integer bonusBall;
+    private final LottoNumber bonusBall;
 
-    public LottoWinningNumber(LottoTicket lottoTicket, Integer bonusBall) {
+    public LottoWinningNumber(LottoTicket lottoTicket, LottoNumber bonusBall) {
         this.winningNumber = lottoTicket;
         validateBonusBall(bonusBall);
         this.bonusBall = bonusBall;
     }
 
-    private void validateBonusBall(Integer bonusBall) {
+    private void validateBonusBall(LottoNumber bonusBall) {
         if(winningNumber.contains(bonusBall)) {
             throw new LottoException(ErrorCode.INVALID_BONUS_BALL);
         }
