@@ -14,6 +14,8 @@ public class LotteryNumbers {
         for (Integer number : numbers) {
             this.numbers.add(new LotteryNumber(number));
         }
+        
+        Collections.sort(this.numbers);
     }
 
     private void validateNumbers(List<Integer> numbers) {
