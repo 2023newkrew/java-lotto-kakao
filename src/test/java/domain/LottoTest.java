@@ -22,11 +22,11 @@ public class LottoTest {
 
     }
 
+    @DisplayName("로또 생성 시 예외 통과 테스트")
     @Test
     void createLottoTest() {
-        String input = "8, 21, 23, 41, 42, 43";
-        Lotto lotto = new Lotto(input);
-        Assertions.assertDoesNotThrow(() -> lotto);
+        String properInput = "8, 21, 23, 41, 42, 43";
+        Assertions.assertDoesNotThrow(() -> new Lotto(properInput));
     }
 
     @DisplayName("로또 번호와 당첨 번호가 세 개 이하 일치할 경우 테스트")
@@ -76,14 +76,17 @@ public class LottoTest {
         assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.SIX);
     }
 
+    @DisplayName("보너스 번호 일치하는 경우 참 반환 테스트")
     @Test
     void isBonusTest(){
-        Lotto lotto = new Lotto("7, 8, 9, 10, 11, 12");
-        assertThat(lotto.isBonus( bonusNumber)).isTrue();
+        Lotto lottoWithBonusNumber = new Lotto("7, 8, 9, 10, 11, 12");
+        assertThat(lottoWithBonusNumber.isBonus(bonusNumber)).isTrue();
     }
+
+    @DisplayName("보너스 번호 일치하지 않는 경우 거짓 반환 테스트")
     @Test
     void isNotBonusTest(){
-        Lotto lotto = new Lotto("8, 9, 10, 11, 12, 13");
-        assertThat(lotto.isBonus( bonusNumber)).isFalse();
+        Lotto lottoWithoutBonusNumber = new Lotto("8, 9, 10, 11, 12, 13");
+        assertThat(lottoWithoutBonusNumber.isBonus(bonusNumber)).isFalse();
     }
 }
