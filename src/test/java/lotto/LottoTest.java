@@ -117,7 +117,18 @@ public class LottoTest {
                 .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
     }
 
-    public Integer[] changeToArray(String userInput){
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,2,3,4,5", "1,3,4,5,10,10"})
+    @DisplayName("당첨 번호가 중복된 수가 아니어야 한다.")
+    void lottoDuplicatedNumberTest(String userInput){
+        Integer[] splitNumbers = changeToArray(userInput);
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
+    }    
+
+
+    private Integer[] changeToArray(String userInput){
         return Stream.of(userInput
                         .replace(" ", "")
                         .split(","))
@@ -125,4 +136,5 @@ public class LottoTest {
                         .boxed()
                         .toArray(Integer[]::new);
     }
+
 }
