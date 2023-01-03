@@ -14,8 +14,8 @@ public class LottoGenerator {
 
     static public List<Lotto> generate(int price) {
         List<Lotto> lottos = new ArrayList<>();
-        int lottoCount = price / LOTTO_PRICE;
-        IntStream.range(0, lottoCount).forEach((i) -> lottos.add(generate()));
+        int amount = price / LOTTO_PRICE;
+        IntStream.range(0, amount).forEach((i) -> lottos.add(generate()));
         return lottos;
     }
 
