@@ -32,4 +32,12 @@ public class LottoTicket {
     public List<LottoValue> getLottoValues() {
         return new ArrayList<>(lottoValues);
     }
+
+    public String toString() {
+        List<String> st = new ArrayList<>();
+        for (LottoValue lv : lottoValues) {
+            st.add(Integer.toString(lv.getValue()));
+        }
+        return "[" + String.join(", ", st) + "]";
+    }
 }

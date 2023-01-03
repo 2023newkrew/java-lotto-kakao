@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
@@ -27,4 +28,9 @@ public class LottoTickets {
         }
         return result;
     }
+
+    public List<LottoTicket> getTicket(){
+        return new ArrayList<>(tickets);
+    }
+
 }

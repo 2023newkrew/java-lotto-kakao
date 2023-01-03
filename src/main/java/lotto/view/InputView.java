@@ -19,7 +19,29 @@ public class InputView {
 
     public int getMoneyInput() {
         System.out.println("구입금액을 입력해 주세요.");
-        return sc.nextInt();
+        String money;
+        do {
+            money = sc.nextLine();
+        } while (validateMoneyInput(money)) ;
+        return Integer.parseInt(money);
+    }
+
+    private boolean validateMoneyInput(String moneyStr) {
+        try {
+            int money = Integer.parseInt(moneyStr);
+            return validateMoneyRange(money);
+        } catch (Exception e) {
+            System.out.println("금액은 숫자여야합니다.");
+            return true;
+        }
+    }
+
+    private boolean validateMoneyRange(int money) {
+        if (money < 0) {
+            System.out.println("금액은 0보다 크거나 같은 숫자여야 합니다");
+            return true;
+        }
+        return false;
     }
 
     public String getWinningNumbers() {

@@ -39,6 +39,6 @@ public class ResultView {
         float rate = (float) (
                 result.get(Grade.THREE) * 5000 + result.get(Grade.FOUR) * 50000 + result.get(Grade.FIVE) * 1500000 + result.get(Grade.FIVE_BONUS) * 300000000 + result.get(Grade.SIX)
         ) / (float) money;
-        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임", rate, rate > 1 ? "이익" : "손해");
+        System.out.printf("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", rate, rate > 1 ? "이익" : "손해");
     }
 }
