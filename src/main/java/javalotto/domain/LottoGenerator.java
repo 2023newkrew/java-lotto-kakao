@@ -2,9 +2,9 @@ package javalotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
-import static javalotto.domain.Lotto.LOTTO_NUMBER_MAX_VALUE;
-import static javalotto.domain.Lotto.LOTTO_NUMBER_MIN_VALUE;
+import static javalotto.domain.Lotto.*;
 
 public class LottoGenerator {
 
@@ -22,13 +22,14 @@ public class LottoGenerator {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount.getCount(); i++) {
-            lottos.add(getLotto(lottoCount));
+            lottos.add(getLotto());
         }
 
         return Lottos.from(lottos);
     }
 
-    private Lotto getLotto(LottoCount lottoCount) {
-        return Lotto.from(numberGenerator.generateNumbers(LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE + 1, lottoCount.getCount()));
+    private Lotto getLotto() {
+        return Lotto.from(numberGenerator.generateNumbers(
+                LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE + 1, LOTTO_NUMBERS_COUNT));
     }
 }
