@@ -10,25 +10,19 @@ import java.util.stream.Collectors;
 public class LottoService {
     private static final Integer LOTTO_PRICE = 1000;
 
-    private final LottoRepository lottoRepository;
-
-    public LottoService(){
-        lottoRepository = new LottoRepository();
-    }
-
     public void purchaseLotto(Integer purchaseAmount){
         for (int count = 0; count < purchaseAmount / LOTTO_PRICE; count++) {
-            lottoRepository.saveLottoTicket(new LottoTicket());
+            LottoRepository.saveLottoTicket(new LottoTicket());
         }
     }
 
     public List<String> getLottoTickets() {
-        LottoTickets lottoTickets = lottoRepository.getAllLottoTicket();
+        LottoTickets lottoTickets = LottoRepository.getAllLottoTicket();
         return lottoTickets.toStringList();
     }
 
     public Map<LottoRank, Integer> getLottoResult(List<Integer> inputWinningNumber, Integer inputBonusBall) {
-        LottoTickets lottoTickets = lottoRepository.getAllLottoTicket();
+        LottoTickets lottoTickets = LottoRepository.getAllLottoTicket();
         for(Integer tmp : inputWinningNumber) {
             System.out.println(tmp);
         }

@@ -6,11 +6,13 @@ import lotto.model.LottoTickets;
 public class LottoRepository {
     private static final LottoTickets lottoTickets = new LottoTickets();
 
-    public void saveLottoTicket(LottoTicket lottoTicket){
+    private LottoRepository(){}
+
+    public static void saveLottoTicket(LottoTicket lottoTicket){
         lottoTickets.addLottoTicket(lottoTicket);
     }
 
-    public LottoTickets getAllLottoTicket(){
+    public static LottoTickets getAllLottoTicket(){
         return lottoTickets;
     }
 }
