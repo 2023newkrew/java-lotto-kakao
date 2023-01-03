@@ -15,7 +15,7 @@ public class Seller {
 
     public List<LottoTicket> sellLottoTickets(Money payMoney) {
         validatePayMoney(payMoney);
-        int lottoTicketCount = payMoney.divideBy(SINGLE_LOTTO_TICKET_PRICE);
+        int lottoTicketCount = (int) payMoney.divideBy(SINGLE_LOTTO_TICKET_PRICE);
         List<LottoTicket> lottoTicketBought = new ArrayList<>();
         for (int i = 0; i < lottoTicketCount; i++) {
             lottoTicketBought.add(lottoNumberPicker.makeLottoTicket());

@@ -37,4 +37,8 @@ public enum LottoResult {
         }
         return FIVE_MATCH;
     }
+
+    public Money getMoney() {
+        return money;
+    }
 }

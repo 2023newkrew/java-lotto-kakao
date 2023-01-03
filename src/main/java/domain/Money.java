@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 public class Money {
 
     private final int amount;
@@ -19,7 +21,28 @@ public class Money {
         return this.amount < money.amount;
     }
 
-    public int divideBy(Money divider) {
-        return this.amount / divider.amount;
+    public double divideBy(Money divider) {
+        return this.amount / (double) divider.amount;
+    }
+
+    public Money multiply(int number) {
+        return new Money(amount * number);
+    }
+
+    public Money add(Money money) {
+        return new Money(amount + money.amount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money = (Money) o;
+        return amount == money.amount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount);
     }
 }
