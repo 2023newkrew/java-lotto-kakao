@@ -40,7 +40,7 @@ public class LottoTest {
 
         LottoNumbers userLotto = new LottoNumbers(singleLottoNumbers);
 
-        assertThat(answerLotto.getPrize(userLotto)).isEqualTo(LottoPrize.FIRST_PRIZE);
+        assertThat(answerLotto.getLottoPrize(userLotto)).isEqualTo(LottoPrize.FIRST_PRIZE);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class LottoTest {
 
         LottoNumbers userLotto = new LottoNumbers(singleLottoNumbers);
 
-        assertThat(answerLotto.getPrize(userLotto)).isEqualTo(LottoPrize.SECOND_PRIZE);
+        assertThat(answerLotto.getLottoPrize(userLotto)).isEqualTo(LottoPrize.SECOND_PRIZE);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class LottoTest {
 
         LottoNumbers userLotto = new LottoNumbers(singleLottoNumbers);
 
-        assertThat(answerLotto.getPrize(userLotto)).isEqualTo(LottoPrize.THIRD_PRIZE);
+        assertThat(answerLotto.getLottoPrize(userLotto)).isEqualTo(LottoPrize.THIRD_PRIZE);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class LottoTest {
 
         LottoNumbers userLotto = new LottoNumbers(singleLottoNumbers);
 
-        assertThat(answerLotto.getPrize(userLotto)).isEqualTo(LottoPrize.FOURTH_PRIZE);
+        assertThat(answerLotto.getLottoPrize(userLotto)).isEqualTo(LottoPrize.FOURTH_PRIZE);
     }
 
     @Test
@@ -104,7 +104,7 @@ public class LottoTest {
 
         LottoNumbers userLotto = new LottoNumbers(singleLottoNumbers);
 
-        assertThat(answerLotto.getPrize(userLotto)).isEqualTo(LottoPrize.FIFTH_PRIZE);
+        assertThat(answerLotto.getLottoPrize(userLotto)).isEqualTo(LottoPrize.FIFTH_PRIZE);
     }
 
     @Test
@@ -120,6 +120,6 @@ public class LottoTest {
 
         LottoNumbers userLotto = new LottoNumbers(singleLottoNumbers);
 
-        assertThat(answerLotto.getPrize(userLotto)).isEqualTo(LottoPrize.NONE);
+        assertThat(answerLotto.getLottoPrize(userLotto)).isEqualTo(LottoPrize.NONE);
     }
 }
