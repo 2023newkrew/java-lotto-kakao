@@ -24,7 +24,7 @@ public class LottoCalculator {
         return 0;
     }
 
-    public boolean calcBonusNumber(LottoTicket lottoTicket) {
-        return true;
+    public boolean calcBonusNumber(LottoTicket userTicket) {
+        return userTicket.getLottoNumbers().contains(winTicket.getBonusNumber());
     }
 }
