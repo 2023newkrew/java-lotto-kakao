@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class LottoTicket {
     private static final int LOTTO_TICKET_SIZE = 6;
-    private static final int LOTTO_LOWER_BOUND = 1;
-    private static final int LOTTO_UPPER_BOUND = 45;
+    public static final int LOTTO_LOWER_BOUND = 1;
+    public static final int LOTTO_UPPER_BOUND = 45;
     private final ArrayList<Integer> lottoNumbers;
 
     public LottoTicket(ArrayList<Integer> lottoNumbers) {
