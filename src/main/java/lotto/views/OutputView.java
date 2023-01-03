@@ -35,7 +35,9 @@ public class OutputView {
         console.printOutput("보너스 볼을 입력해 주세요.");
     }
 
-    public void printStatistics(Map<LottoResult, Integer> statistics, double rate) {
+    public void printStatistics(Map<LottoResult, Integer> statistics, Double rate) {
+        String rateString = String.format("%.2f", rate);
+
         console.printOutput("당첨 통계\n"
                 + "----------\n"
                 + "3개 일치 (" + LottoResult.FIFTH.getPrize() + "원)- " + statistics.get(LottoResult.FIFTH) + "개\n"
@@ -43,8 +45,6 @@ public class OutputView {
                 + "5개 일치 (" + LottoResult.THIRD.getPrize() + "원)- " + statistics.get(LottoResult.THIRD) + "개\n"
                 + "5개 일치, 보너스 볼 일치(" + LottoResult.SECOND.getPrize() + "원) - " + statistics.get(LottoResult.SECOND) + "개\n"
                 + "6개 일치 (" + LottoResult.FIRST.getPrize() + "원)- " + statistics.get(LottoResult.FIRST) + "개\n"
-                + "총 수익률은 " + rate + "입니다.\n");
+                + "총 수익률은 " + rateString + "입니다.\n");
     }
-
-
 }

@@ -13,7 +13,7 @@ class GoalTest {
         Integer bonusBall = 7;
         Goal goal = new Goal(testNumbers, bonusBall);
         Lotto lotto = new Lotto(testNumbers);
-        LottoResult lottoResult = goal.compareLotto(lotto, bonusBall);
+        LottoResult lottoResult = goal.compareLotto(lotto);
 
         assertThat(lottoResult).isEqualTo(LottoResult.FIRST);
     }

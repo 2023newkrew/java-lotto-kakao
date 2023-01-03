@@ -2,9 +2,9 @@ package lotto.views;
 
 import java.util.Scanner;
 
-class StandardConsole implements Console {
+public class StandardConsole implements Console {
 
-    Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     @Override
     public void printOutput(String message) {
@@ -18,6 +18,7 @@ class StandardConsole implements Console {
 
     @Override
     public String input() {
-        return scanner.nextLine();
+        String s = scanner.nextLine();
+        return s;
     }
 }
