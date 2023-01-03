@@ -9,7 +9,9 @@ import java.util.stream.IntStream;
 
 public class Lotto {
     public static final int LOTTO_SIZE = 6;
-    private static final List<Integer> fullNumbers = IntStream.range(1, 46)
+    public static final int LOTTO_NUMBER_MAX = 45;
+    public static final int LOTTO_NUMBER_MIN = 1;
+    private static final List<Integer> numberPool = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
             .boxed()
             .collect(Collectors.toList());
     private final List<LottoNumber> lottoNumbers;
@@ -22,8 +24,8 @@ public class Lotto {
     }
 
     public static Lotto autoGenerateLotto() {
-        Collections.shuffle(fullNumbers);
-        return new Lotto(fullNumbers.subList(0, 6));
+        Collections.shuffle(numberPool);
+        return new Lotto(numberPool.subList(0, 6));
     }
 
     public static List<Lotto> autoGenerateLottos(int amount) {
