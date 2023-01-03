@@ -1,2 +1,11 @@
-package lotto.common.exception;public class InvalidInputException {
+package lotto.common.exception;
+
+public final class InvalidInputException extends RuntimeException {
+
+    public InvalidInputException() {
+    }
+
+    public InvalidInputException(String message) {
+        super(message);
+    }
 }

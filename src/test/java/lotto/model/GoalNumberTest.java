@@ -6,18 +6,18 @@ import java.util.Arrays;
 import java.util.List;
 
 import lotto.common.LottoResult;
-import lotto.model.number.Goal;
-import lotto.model.number.Lotto;
+import lotto.model.number.GoalNumber;
+import lotto.model.number.LottoNumber;
 import org.junit.jupiter.api.Test;
 
-class GoalTest {
+class GoalNumberTest {
     @Test
     public void testCompareLotto() {
         List<Integer> testNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         Integer bonusBall = 7;
-        Goal goal = new Goal(testNumbers, bonusBall);
-        Lotto lotto = new Lotto(testNumbers);
-        LottoResult lottoResult = goal.compareLotto(lotto);
+        GoalNumber goalNumber = new GoalNumber(testNumbers, bonusBall);
+        LottoNumber lottoNumber = new LottoNumber(testNumbers);
+        LottoResult lottoResult = goalNumber.getLottoResultByCompareLotto(lottoNumber);
 
         assertThat(lottoResult).isEqualTo(LottoResult.FIRST);
     }
