@@ -21,9 +21,9 @@ import static constant.LottoSetting.LOTTO_PRICE;
 public class LottoController {
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    private InputView inputView;
-    private OutputView outputView;
-    private InputValidator inputValidator;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final InputValidator inputValidator;
 
     public LottoController() {
         inputView = new InputView();

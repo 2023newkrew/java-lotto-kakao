@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private List<LottoNumbers> lottoNumbersList;
+    private final List<LottoNumbers> lottoNumbersList;
 
     public Lotto(List<LottoNumbers> lottoNumbersList) {
         this.lottoNumbersList = lottoNumbersList;
