@@ -69,4 +69,14 @@ public class LottoTest {
         assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.SIX);
     }
 
+    @Test
+    void isBonusTest(){
+        Lotto lotto = new Lotto("7, 8, 9, 10, 11, 12");
+        assertThat(lotto.isBonus( bonusNumber)).isTrue();
+    }
+    @Test
+    void isNotBonusTest(){
+        Lotto lotto = new Lotto("8, 9, 10, 11, 12, 13");
+        assertThat(lotto.isBonus( bonusNumber)).isFalse();
+    }
 }

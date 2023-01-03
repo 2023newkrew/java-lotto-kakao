@@ -53,4 +53,8 @@ public class Lotto {
         }
         return Result.NONE;
     }
+
+    public boolean isBonus(BonusNumber bonusNumber) {
+        return numbers.contains(bonusNumber.number);
+    }
 }
