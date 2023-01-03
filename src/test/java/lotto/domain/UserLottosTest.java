@@ -43,19 +43,11 @@ public class UserLottosTest {
 
     List<LottoNumbers> userLottoList = Arrays.asList(userLotto1, userLotto2, userLotto3);
 
-    Money money = new Money(3000);
 
     @Test
-    void 사용자_로또의_리스트와_구입한_돈을_받아서_생성한다() {
-        assertThatCode(() -> new UserLottos(userLottoList, money))
+    void 사용자_로또의_리스트를_받아서_생성한다() {
+        assertThatCode(() -> new UserLottos(userLottoList))
                 .doesNotThrowAnyException();
     }
-
-    @Test
-    void 사용자_로또의_결과를_하나씩_받아서_저장한다() {
-        UserLottos userLottos = new UserLottos(userLottoList, money);
-
-    }
-
-
+    
 }

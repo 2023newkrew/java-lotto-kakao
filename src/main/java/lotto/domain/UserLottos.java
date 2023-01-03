@@ -4,11 +4,12 @@ import java.util.List;
 
 public class UserLottos {
     private final List<LottoNumbers> lottoNumbers;
-    private final Money money;
-    private PrizeCountMap prizeCountMap;
 
-    public UserLottos(List<LottoNumbers> lottoNumbers, Money money) {
+    public UserLottos(List<LottoNumbers> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
-        this.money = money;
+    }
+
+    public List<LottoNumbers> getLottoNumbers() {
+        return lottoNumbers;
     }
 }
