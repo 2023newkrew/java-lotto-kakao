@@ -13,11 +13,7 @@ public class Main {
                 OutputView.newInstance(),
                 LottoGenerator.from(RandomNumberGenerator.newInstance())
         );
-try {
-    lottoController.simulate();
 
-} catch (Exception e) {
-    e.printStackTrace();
-}
+        lottoController.simulate();
     }
 }
