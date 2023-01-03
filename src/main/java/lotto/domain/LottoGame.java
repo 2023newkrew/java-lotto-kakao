@@ -1,15 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
+import java.util.*;
 
 import lotto.constant.LottoGradeEnum;
 import lotto.dto.GameResultDto;
-import lotto.dto.LottoResult;
 
 import static lotto.constant.MessageConstant.INVALID_PRICE_AMOUNT;
 
@@ -33,31 +27,26 @@ public class LottoGame {
     }
 
     public GameResultDto getResult() {
-        List<LottoResult> lottoResults = new ArrayList<>();
-        HashMap<LottoGradeEnum, Integer> lottoResultCounter = getLottoResultCounter();
-        int totalPrice = 0;
-        for (Entry<LottoGradeEnum, Integer> entry : lottoResultCounter.entrySet()) {
-            lottoResults.add(new LottoResult(entry.getKey(), entry.getValue()));
-            totalPrice += entry.getKey().price * entry.getValue();
-        }
-        Collections.sort(lottoResults);
-        float rate = (float) totalPrice / (lottos.size() * 1000);
-        return new GameResultDto(lottoResults, rate);
+        Map<LottoGradeEnum, Integer> lottoResultCounter = new HashMap<>();
+        initiateCounter(lottoResultCounter);
+
+        lottos.forEach(lotto -> lottoResultCounter.put(
+                winningLotto.getGrade(lotto),
+                lottoResultCounter.get(winningLotto.getGrade(lotto)) + 1)
+        );
+
+        return new GameResultDto(lottoResultCounter, getEarningRate(lottoResultCounter));
     }
 
-    private HashMap<LottoGradeEnum, Integer> getLottoResultCounter() {
-        HashMap<LottoGradeEnum, Integer> lottoResultCounter = new HashMap<>();
+    private void initiateCounter(Map<LottoGradeEnum, Integer> counter) {
         Arrays.stream(LottoGradeEnum.values())
-                .forEach(lottoGradeEnum -> lottoResultCounter.put(lottoGradeEnum, 0));
-        lottoResultCounter.remove(LottoGradeEnum.NONE_GRADE);
-        lottos.forEach(lotto -> putGrade(lottoResultCounter, winningLotto.getGrade(lotto)));
-        return lottoResultCounter;
+                .forEach(lottoGradeEnum -> counter.put(lottoGradeEnum, 0));
     }
 
-    private static void putGrade(HashMap<LottoGradeEnum, Integer> lottoResultCounter, LottoGradeEnum grade) {
-        if (lottoResultCounter.containsKey(grade)) {
-            lottoResultCounter.put(grade, lottoResultCounter.get(grade) + 1);
-        }
+    private float getEarningRate(Map<LottoGradeEnum, Integer> lottoResultCounter) {
+        long totalPrice = lottoResultCounter.entrySet().stream()
+                .mapToInt((entry) -> entry.getKey().price * entry.getValue())
+                .sum();
+        return (float) totalPrice / (lottos.size() * 1000);
     }
-
 }
