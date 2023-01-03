@@ -17,6 +17,6 @@ public class WinningNumbers {
     public Prize judge(Lotto other) {
         long overlappedNumberCount = lotto.countOverlappedNumber(other);
         boolean hasBonus = other.hasNumber(bonus);
-        return Prize.valueOf(overlappedNumberCount, hasBonus);
+        return Prize.from(overlappedNumberCount, hasBonus);
     }
 }

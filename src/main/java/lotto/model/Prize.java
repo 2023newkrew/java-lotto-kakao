@@ -4,12 +4,12 @@ import java.util.function.BiPredicate;
 import java.util.stream.Stream;
 
 public enum Prize {
-    NOTHING(0L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount < 3),
-    FIFTH(5_000L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount == 3),
-    FOURTH(50_000L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount == 4),
-    THIRD(150_000L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount == 5 && !hasBonus),
-    SECOND(30_000_000L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount == 5 && hasBonus),
-    FIRST(2_000_000_000L,(overlappedNumberCount, hasBonus) -> overlappedNumberCount == 6);
+    NOTHING(0L,(commonCount, hasBonus) -> false),
+    FIFTH(5_000L,(commonCount, hasBonus) -> commonCount == 3),
+    FOURTH(50_000L,(commonCount, hasBonus) -> commonCount == 4),
+    THIRD(150_000L,(commonCount, hasBonus) -> commonCount == 5 && !hasBonus),
+    SECOND(30_000_000L,(commonCount, hasBonus) -> commonCount == 5 && hasBonus),
+    FIRST(2_000_000_000L,(commonCount, hasBonus) -> commonCount == 6);
 
     private final long amount;
     private final BiPredicate<Long, Boolean> isMatched;
@@ -19,9 +19,9 @@ public enum Prize {
         this.isMatched = isMatched;
     }
 
-    public static Prize valueOf(long overlappedNumberCount, boolean hasBonus) {
+    public static Prize from(long commonCount, boolean hasBonus) {
         return Stream.of(Prize.values())
-                .filter(p -> p.isMatched(overlappedNumberCount, hasBonus))
+                .filter(p -> p.isMatched(commonCount, hasBonus))
                 .findAny()
                 .orElse(Prize.NOTHING);
     }
@@ -30,7 +30,7 @@ public enum Prize {
         return amount;
     }
 
-    private boolean isMatched(long overlappedNumberCount, boolean hasBonus) {
-        return isMatched.test(overlappedNumberCount, hasBonus);
+    private boolean isMatched(long commonCount, boolean hasBonus) {
+        return isMatched.test(commonCount, hasBonus);
     }
 }
