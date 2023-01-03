@@ -36,6 +36,7 @@ public class LottoController {
 
         List<SingleLottoNumber> answerLottoNumbers = lottoNumbers.stream()
                 .map(SingleLottoNumber::new)
+                .sorted()
                 .collect(Collectors.toList());
 
         return new Lotto(new LottoNumbers(answerLottoNumbers), bonusNumber);
