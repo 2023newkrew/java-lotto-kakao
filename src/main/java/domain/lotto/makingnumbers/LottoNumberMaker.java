@@ -1,4 +1,4 @@
-package domain.lotto.number;
+package domain.lotto.makingnumbers;
 
 import java.util.List;
 
