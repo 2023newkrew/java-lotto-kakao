@@ -3,8 +3,8 @@ package lotto;
 import lotto.exception.InvalidLottoBallNumber;
 
 import java.util.Objects;
-import java.util.function.LongToDoubleFunction;
 
+@SuppressWarnings("rawtypes")
 public class LottoBallNumber implements Comparable{
     private final int num;
 
@@ -13,7 +13,12 @@ public class LottoBallNumber implements Comparable{
                 num> LottoConstants.BALLNUMBER_MAX_VALUE){
             throw new InvalidLottoBallNumber();
         }
+
         this.num = num;
+    }
+
+    public int getNum() {
+        return num;
     }
 
     @Override
@@ -21,10 +26,11 @@ public class LottoBallNumber implements Comparable{
         if (o.getClass() == Integer.class){
             return num-(Integer)o;
         }
-        if (o == null || getClass() != o.getClass()){
+        if (getClass() != o.getClass()){
             throw new RuntimeException();
         }
-        return num - ((LottoBallNumber)o).num;
+
+        return num - ((LottoBallNumber)o).getNum();
     }
 
     @Override
@@ -35,8 +41,9 @@ public class LottoBallNumber implements Comparable{
         if (o == null || getClass() != o.getClass()){
             return false;
         }
+
         LottoBallNumber that = (LottoBallNumber) o;
-        return num == that.num;
+        return num == that.getNum();
     }
 
     @Override
@@ -46,6 +53,6 @@ public class LottoBallNumber implements Comparable{
 
     @Override
     public String toString() {
-        return ""+num;
+        return "" + num;
     }
 }
