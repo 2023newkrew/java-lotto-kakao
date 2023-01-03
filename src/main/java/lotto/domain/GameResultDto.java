@@ -1,36 +1,25 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GameResultDto {
+    private final List<Integer> rankCount;
+    private final double yield;
 
-    private final String result;
-    private final Double yield;
-
-    public GameResultDto(List<Integer> rankCount, int lottoCount) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (LottoRank rank : LottoRank.values()) {
-            stringBuilder.insert(0, LottoConstants.getString(rank, rankCount.get(rank.index())));
-        }
-        result = stringBuilder.toString();
-        yield = calculateYield(rankCount, lottoCount);
+    private GameResultDto(List<Integer> rankCount, double yield) {
+        this.rankCount = rankCount;
+        this.yield = yield;
     }
 
-    public double calculateYield(List<Integer> rankCount, int lottoCount) {
-        return (double) calculateTotalWinning(rankCount) / (lottoCount * LottoConstants.LOTTO_PRICE);
+    public static GameResultDto of(GameResult gameResult) {
+        return new GameResultDto(gameResult.getRankCount(), gameResult.getYield());
     }
 
-    private long calculateTotalWinning(List<Integer> rankCount) {
-        return Arrays.stream(LottoRank.values()).mapToLong(rank -> rank.winning() * rankCount.get(rank.index())).sum();
+    public List<Integer> getRankCount() {
+        return rankCount;
     }
 
-    public String getResult() {
-        return result;
-    }
-
-    public Double getYield() {
+    public double getYield() {
         return yield;
     }
 }

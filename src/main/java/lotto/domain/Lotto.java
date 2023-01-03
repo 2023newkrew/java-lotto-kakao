@@ -1,13 +1,12 @@
 package lotto.domain;
 
 import lotto.factory.LottoNumbersFactory;
-import lotto.generatepolicy.DefaultGeneratePolicy;
 
 public class Lotto {
     private final LottoNumbers lottoNumbers;
 
     public Lotto(){
-        this(LottoNumbersFactory.create(new DefaultGeneratePolicy()));
+        this(LottoNumbersFactory.create());
     }
 
     public Lotto(LottoNumbers lottoNumbers) {
