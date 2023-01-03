@@ -30,3 +30,12 @@
 - Rank에 index 없애기
 - Lottery Match에서 bonusNumber 분리
 - 수익률!
+
+---
+
+## 1차 리뷰
+
+- 중복 검사 로직 말고 다른 Collection 고려
+- autoGenerator의 역할 분리
+- 객체 메시지 전달로 로직 개선
+- SRP 고려하여 리팩토링
