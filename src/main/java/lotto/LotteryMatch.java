@@ -19,6 +19,13 @@ public class LotteryMatch {
         return matchCount;
     }
 
+    public boolean isMatchWith(LotteryMatch cp) {
+        if (this.matchCount == 5)
+            return this.matchCount == cp.matchCount && this.bonusMatch == cp.bonusMatch;
+
+        return this.matchCount == cp.matchCount;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof LotteryMatch)) return false;

@@ -18,9 +18,9 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public static Rank getRank(LotteryMatch match) {
+    public static Rank getRank(LotteryMatch targetMatch) {
         return Arrays.stream(values())
-                .filter(rank -> rank.match.equals(match))
+                .filter(rank -> rank.match.isMatchWith(targetMatch))
                 .findFirst()
                 .orElse(NONE);
     }
