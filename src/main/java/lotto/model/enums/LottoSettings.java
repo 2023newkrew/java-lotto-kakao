@@ -2,7 +2,7 @@ package lotto.model.enums;
 
 public enum LottoSettings {
 
-    MAX_LENGTH(6),
+    NUMBER_LENGTH(6),
 
     MIN_RANGE(1),
 

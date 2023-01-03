@@ -16,23 +16,24 @@ public class Lotto {
     }
 
     private void validateNumbers() {
-        boolean result = numbers.stream()
-                .filter(number -> checkRange(number) && checkLength())
+        boolean hasInvalidNumber = numbers.stream()
+                .filter(number -> isOnRange(number) && hasValidLength())
                 .collect(Collectors.toSet())
-                .size() == numbers.size();
-        if (!result) {
+                .size() != numbers.size();
+
+        if (hasInvalidNumber) {
             throw new IllegalArgumentException();
         }
     }
 
-    private Boolean checkRange(Integer number) {
+    private Boolean isOnRange(Integer number) {
         return number != null
                 && number >= LottoSettings.MIN_RANGE.getValue()
                 && number <= LottoSettings.MAX_RANGE.getValue();
     }
 
-    private Boolean checkLength() {
-        return numbers.size() == LottoSettings.MAX_LENGTH.getValue();
+    private Boolean hasValidLength() {
+        return numbers.size() == LottoSettings.NUMBER_LENGTH.getValue();
     }
 
     public List<Integer> getNumbers() {

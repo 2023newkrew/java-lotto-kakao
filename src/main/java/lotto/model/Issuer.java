@@ -22,7 +22,7 @@ public class Issuer {
 
     private static Lotto issue() {
         Collections.shuffle(numberPool);
-        List<Integer> numbers = new ArrayList<>(numberPool.subList(0, LottoSettings.MAX_LENGTH.getValue()));
+        List<Integer> numbers = new ArrayList<>(numberPool.subList(0, LottoSettings.NUMBER_LENGTH.getValue()));
         Collections.sort(numbers);
         return new Lotto(numbers);
     }

@@ -19,7 +19,7 @@ public class IssuerTest {
     void lotto_length_test() {
         LottoList lottoList = Issuer.issue(1);
         Lotto lotto = lottoList.get(0);
-        assertEquals(lotto.length(), LottoSettings.MAX_LENGTH.getValue());
+        assertEquals(lotto.length(), LottoSettings.NUMBER_LENGTH.getValue());
     }
 
     @Test
