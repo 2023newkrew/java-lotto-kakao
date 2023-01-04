@@ -31,7 +31,7 @@ public class LottoController {
     }
 
     private void setLottoAnswer() {
-        outputView.printReadLottoAnswerNumbers();
+        outputView.printInputRequestOfWinningNumber();
         LottoNumbers lottoAnswerNumbers = new LottoNumbers(inputView.readLottoAnswerNumbers());
         outputView.printReadBonusBall();
         lottoGame.setLottoAnswer(new LottoAnswer(lottoAnswerNumbers, inputView.readBonusBall()));
