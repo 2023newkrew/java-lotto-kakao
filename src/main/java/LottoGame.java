@@ -5,40 +5,50 @@ import view.OutputView;
 import java.util.List;
 
 public class LottoGame {
-    public static void main(String[] args) {
+
+    public static Money getPaidPrice() {
         OutputView.printPaidPriceRequest();
-        Money paidPrice = new Money(InputView.getInput());
+        return new Money(InputView.getInput());
+    }
 
+    public static Count getManualLottoCount(Money paidPrice) {
         OutputView.printManualLottoCountRequest();
-        Count manualLottoCount = new Count(InputView.getInput(), paidPrice.getCount());
+        return new Count(InputView.getInput(), paidPrice.getCount());
+    }
 
+    public static Lottos getLottos(Count manualLottoCount) {
         Lottos lottos = new Lottos();
-
         if (!manualLottoCount.zero) {
             OutputView.printManualLottoRequest();
-            for (int i = 0; i < manualLottoCount.getCount(); i++) {
-                lottos.addManualLotto(InputView.getInput());
-            }
         }
-
+        for (int i = 0; i < manualLottoCount.getCount(); i++) {
+            lottos.addManualLotto(InputView.getInput());
+        }
         OutputView.printLottoCount(manualLottoCount.getCount(), manualLottoCount.remains);
-
         lottos.addAutoLottos(manualLottoCount.remains);
-
         OutputView.printLottos(lottos.getPurchasedLottosNumbers());
+        return lottos;
+    }
 
+    public static Lotto getWinningLotto() {
         OutputView.printWinningNumbersRequest();
-        Lotto winningLotto = Lotto.getManualLotto(InputView.getInput());
+        return Lotto.getManualLotto(InputView.getInput());
+    }
 
+    public static LottoNumber getBonusNumber(Lotto winningLotto) {
         OutputView.printBonusNumberRequest();
-        LottoNumber bonusNumber = new LottoNumber(winningLotto, InputView.getInput());
+        return new LottoNumber(winningLotto, InputView.getInput());
+    }
 
+    public static void main(String[] args) {
+        Money paidPrice = getPaidPrice();
+        Count manualLottoCount = getManualLottoCount(paidPrice);
+        Lottos lottos = getLottos(manualLottoCount);
+        Lotto winningLotto = getWinningLotto();
+        LottoNumber bonusNumber = getBonusNumber(winningLotto);
         WinningLottoWithBonus winningLottoWithBonus = new WinningLottoWithBonus(winningLotto, bonusNumber);
-
         TotalResult totalResult = lottos.getTotalResult(winningLottoWithBonus);
-        List<String> totalResultMessage = totalResult.getTotalResultMessage();
-        OutputView.printTotalResult(totalResultMessage);
-        double profit = totalResult.getProfit(paidPrice.getMoney());
-        OutputView.printProfit(totalResult.getProfitMessage(profit));
+        OutputView.printTotalResult(totalResult.getTotalResultMessage());
+        OutputView.printProfit(totalResult.getProfitMessage(paidPrice.getMoney()));
     }
 }
