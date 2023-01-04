@@ -1,5 +1,5 @@
 import common.constant.Constants;
-import domain.BonusNumber;
+import domain.LottoNumber;
 import domain.Lottos;
 import domain.TotalResult;
 import domain.WinningLotto;
@@ -28,9 +28,9 @@ public class LottoGame {
         return new WinningLotto(InputView.getWinningLottoNumbers());
     }
 
-    public static BonusNumber getBonusNumber(WinningLotto winningLotto) {
+    public static LottoNumber getBonusNumber(WinningLotto winningLotto) {
         OutputView.printBonusNumberRequest();
-        return new BonusNumber(winningLotto, InputView.getBonusNumber());
+        return new LottoNumber(winningLotto, InputView.getBonusNumber());
     }
 
     public static void main(String[] args) {
@@ -38,7 +38,7 @@ public class LottoGame {
         int count = paidPrice / Constants.PRICE;
         Lottos lottos = getLottos(count);
         WinningLotto winningLotto = getWinningLotto();
-        BonusNumber bonusNumber = getBonusNumber(winningLotto);
+        LottoNumber bonusNumber = getBonusNumber(winningLotto);
 
         TotalResult totalResult = lottos.getTotalResult(winningLotto, bonusNumber);
         List<String> totalResultMessage = totalResult.getTotalResultMessage();

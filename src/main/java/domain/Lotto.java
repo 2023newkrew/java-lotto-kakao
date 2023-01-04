@@ -33,7 +33,7 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public Result getResult(WinningLotto winningLotto, BonusNumber bonusNumber) {
+    public Result getResult(WinningLotto winningLotto, LottoNumber bonusNumber) {
         List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
         int count = (int)numbers.stream()
                 .filter(winningLottoNumbers::contains)
@@ -44,7 +44,7 @@ public class Lotto {
         return Result.of(count);
     }
 
-    public boolean isBonus(BonusNumber bonusNumber) {
+    public boolean isBonus(LottoNumber bonusNumber) {
         return numbers.contains(bonusNumber.number);
     }
 

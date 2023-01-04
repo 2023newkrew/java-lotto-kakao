@@ -13,12 +13,12 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoTest {
 
     private static WinningLotto winningLotto;
-    private static BonusNumber bonusNumber;
+    private static LottoNumber bonusNumber;
 
     @BeforeAll
     static void setUp() {
         winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
-        bonusNumber = new BonusNumber(winningLotto, "7");
+        bonusNumber = new LottoNumber(winningLotto, "7");
 
     }
 

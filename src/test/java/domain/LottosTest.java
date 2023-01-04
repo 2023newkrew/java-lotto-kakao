@@ -11,13 +11,13 @@ public class LottosTest {
 
     private static Lottos lottos;
     private static WinningLotto winningLotto;
-    private static BonusNumber bonusNumber;
+    private static LottoNumber bonusNumber;
 
     @BeforeAll
     static void setUp() {
         lottos = new Lottos();
         winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
-        bonusNumber = new BonusNumber(winningLotto, "7");
+        bonusNumber = new LottoNumber(winningLotto, "7");
 
     }
 

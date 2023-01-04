@@ -24,7 +24,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public TotalResult getTotalResult(WinningLotto winningLotto, BonusNumber bonusNumber) {
+    public TotalResult getTotalResult(WinningLotto winningLotto, LottoNumber bonusNumber) {
         TotalResult totalResult = new TotalResult();
         lottos.stream()
                 .forEach(lotto -> totalResult.increaseValueOfResult(lotto.getResult(winningLotto, bonusNumber)));
