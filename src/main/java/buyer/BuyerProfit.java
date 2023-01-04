@@ -9,10 +9,6 @@ public class BuyerProfit {
         profit = (double) totalPrize / (lotteryCount * Lottery.PRICE);
     }
 
-    public BuyerProfit(double profit) {
-        this.profit = profit;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof BuyerProfit)) return false;

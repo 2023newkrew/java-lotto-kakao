@@ -10,8 +10,6 @@ public class BuyerProfitTest {
     @Test
     void profitTest() {
         BuyerProfit buyerProfit = new BuyerProfit(10, 20000);
-        assertThat(buyerProfit).isEqualTo(new BuyerProfit((double) 20000 / 10000));
+        assertThat(buyerProfit.getProfit()).isEqualTo((double) 20000 / 10000);
     }
-
-
 }
