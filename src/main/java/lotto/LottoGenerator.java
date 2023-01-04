@@ -20,4 +20,8 @@ public class LottoGenerator {
             buyer.buyLottery(LOTTERY_PRICE, new Lotto(numberCollection.subList(0, 6)));
         }
     }
+
+    public void manuallyGenerateOne(Buyer buyer, String numbersAsString) {
+        buyer.buyLottery(LOTTERY_PRICE, new Lotto(numbersAsString));
+    }
 }

@@ -17,4 +17,16 @@ public class LottoGeneratorTest {
         //then
         Assertions.assertThat(buyer.getLotteries()).hasSize(2);
     }
+
+    @DisplayName("수동 로또 구매 후 동일한지 확인")
+    @Test
+    void manualGenerationTest() {
+        //given
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        Buyer buyer = new Buyer(1000);
+        //when
+        lottoGenerator.manuallyGenerateOne(buyer, "1,2,3,4,5,6");
+        //then
+        Assertions.assertThat(buyer.getLotteries()).containsExactly(new Lotto("1,2,3,4,5,6"));
+    }
 }
