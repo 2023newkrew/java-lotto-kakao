@@ -20,11 +20,12 @@ public class LottoApplication {
             String moneyInput = inputView.getMoneyInput();
             Integer money = NumberParser.parse(moneyInput);
 
-            LottoBuyer lottoBuyer = new LottoBuyer(money, new LottoStore());
-            outputView.printPurchasedLottos(lottoBuyer.getLottos());
+            LottoBuyer lottoBuyer = new LottoBuyer(money);
+            outputView.printPurchasedLottos(lottoBuyer.buyFrom(new LottoStore()));
 
             String winningLottoInput = inputView.getWinningLottoInput();
             Lotto winningLotto = Lotto.ofManual(NumberParser.splitAndParse(winningLottoInput));
+
             String bonusNumberInput = inputView.getBonusNumberInput();
             LottoNumber bonusNumber = new LottoNumber(NumberParser.parse(bonusNumberInput));
 

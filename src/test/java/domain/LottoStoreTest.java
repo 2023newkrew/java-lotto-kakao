@@ -10,28 +10,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoStoreTest {
+    private Integer LOTTO_COST = 1000;
 
-    @CsvSource({"2000,2", "3020,3","10432,10"})
+    @ValueSource(ints = {10000, 2000, 4000})
     @ParameterizedTest
-    void 구매금액만큼_로또를_구매한다(int money, int amount) {
+    void 구매금액만큼_로또를_구매한다(int money) {
         // given
         LottoStore lottoStore = new LottoStore();
 
         // when
-        List<Lotto> lottos = lottoStore.obtain(money);
+        List<Lotto> lottos = lottoStore.purchase(money);
 
         // then
-        assertThat(lottos.size()).isEqualTo(amount);
+        assertThat(lottos.size()).isEqualTo(money/LOTTO_COST);
     }
 
-    @ValueSource(ints = {100, 400, -100, -2000, 0})
+    @ValueSource(ints = {500, 0, -1, -100, -2000})
     @ParameterizedTest
-    void 구매금액은_1000원_이상이여야_한다(int money) {
+    void 구매금액이_부족할_경우_예외가_발생한다(int money) {
         // given
         LottoStore lottoStore = new LottoStore();
 
         // when, then
-        assertThatThrownBy(() -> lottoStore.obtain(money))
+        assertThatThrownBy(() -> lottoStore.purchase(money))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

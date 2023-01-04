@@ -3,10 +3,7 @@ package domain;
 import dto.LottoResult;
 import dto.WinningLotto;
 
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoBuyer {
@@ -14,15 +11,16 @@ public class LottoBuyer {
     private static final Integer DECIMAL_POINT = 100;
 
     private Integer money;
-    private List<Lotto> lottos;
+    private List<Lotto> lottos = new ArrayList<>();
 
-    public LottoBuyer(Integer money, LottoObtainPlace means) {
+    public LottoBuyer(Integer money) {
         this.money = money;
-        this.lottos = means.obtain(money);
     }
-
-    public List<Lotto> getLottos() {
-        return lottos;
+    
+    public List<Lotto> buyFrom(LottoPurchasePlace lottoPurchasePlace) {
+        List<Lotto> purchasedLottos = lottoPurchasePlace.purchase(money);
+        this.lottos.addAll(purchasedLottos);
+        return this.lottos;
     }
 
     public LottoResult calculateResult(WinningLotto winningLotto) {
@@ -51,5 +49,4 @@ public class LottoBuyer {
         Integer investMoney = (money / LOTTO_COST) * LOTTO_COST;
         return Math.floor(earningMoney / (double) investMoney * DECIMAL_POINT) / DECIMAL_POINT;
     }
-
 }
