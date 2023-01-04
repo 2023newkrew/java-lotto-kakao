@@ -13,9 +13,7 @@ public class LottoService {
 
     public void purchaseLotto(PurchaseAmount purchaseAmount) {
         IntStream.range(0, purchaseAmount.getLottoTicketCount(LOTTO_PRICE))
-                .forEach(index -> {
-                    LottoRepository.saveLottoTicket(new LottoTicket());
-                });
+                .forEach(index -> LottoRepository.saveLottoTicket(new LottoTicket()));
     }
 
     public LottoTickets getLottoTickets() {
