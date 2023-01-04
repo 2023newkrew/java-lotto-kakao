@@ -11,12 +11,12 @@ public class Buyer {
         this.budget = new Money(budget);
     }
 
-    public boolean hasMoreBudgetThan(int price) {
-        return budget.isMoreThan(price);
+    public boolean hasEqualOrMoreBudgetThan(int price) {
+        return budget.compareTo(new Money(price)) >= 0;
     }
 
     public void buyLottery(int lotteryPrice, Lotto lotto) {
-        this.budget.decreaseMoney(lotteryPrice);
+        this.budget.decreaseMoney(new Money(lotteryPrice));
         this.lotteries.addLottery(lotto);
     }
 

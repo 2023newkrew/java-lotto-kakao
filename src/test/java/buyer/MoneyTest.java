@@ -5,25 +5,25 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class MoneyTest {
-    @DisplayName("Budget 감소 메서드 확인")
+    @DisplayName("Money 감소 메서드 확인")
     @Test
     void decreaseBudget(){
         //given
-        Money budget = new Money(2000);
+        Money money = new Money(2000);
         //when
-        budget.decreaseMoney(100);
+        money.decreaseMoney(new Money(100));
         //then
-        Assertions.assertThat(budget.getMoney()).isEqualTo(1900);
+        Assertions.assertThat(money).isEqualTo(new Money(1900));
     }
 
     @DisplayName("충분한 budget 없을 때 decrease 시 RuntimeException")
     @Test
     void decreaseBudget_invalid(){
         //given
-        Money budget = new Money(2000);
+        Money money = new Money(2000);
         //when
         //then
-        Assertions.assertThatRuntimeException().isThrownBy(() -> budget.decreaseMoney(3000));
+        Assertions.assertThatRuntimeException().isThrownBy(() -> money.decreaseMoney(new Money(3000)));
     }
 
 }
