@@ -9,7 +9,14 @@ public class Player {
     private List<LottoTicket> lottoTickets;
 
     public Player(int money) {
+        validatePlayerMoney(money);
         this.money = money;
+    }
+
+    private void validatePlayerMoney(int money) {
+        if (money < 0) {
+            throw new IllegalArgumentException("플레이어는 최소 0원을 가져야합니다.");
+        }
     }
 
     public void buyLottoTickets(LottoTicketSeller seller) {
