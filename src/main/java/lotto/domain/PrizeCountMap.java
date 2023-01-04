@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ public class PrizeCountMap {
     private final Map<LottoPrize, Integer> prizeCountMap;
 
     public PrizeCountMap(Map<LottoPrize, Integer> prizeCountMap) {
-        this.prizeCountMap = prizeCountMap;
+        this.prizeCountMap = new HashMap<>(prizeCountMap);
     }
 
     @Override

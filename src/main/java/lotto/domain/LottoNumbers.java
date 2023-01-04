@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumbers {
@@ -10,7 +11,7 @@ public class LottoNumbers {
     public LottoNumbers(List<SingleLottoNumber> singleLottoNumbers) {
         validateLottoNumbers(singleLottoNumbers);
 
-        this.singleLottoNumbers = singleLottoNumbers;
+        this.singleLottoNumbers = new ArrayList<>(singleLottoNumbers);
     }
 
     private void validateLottoNumbers(List<SingleLottoNumber> singleLottoNumbers) {
