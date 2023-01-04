@@ -1,6 +1,5 @@
 package javalotto.domain;
 
-import java.util.Comparator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -27,13 +26,15 @@ public class LottoResult {
     }
 
     private static long getEachSumOfPrize(Map.Entry<Rank, Integer> entry) {
-        return (long) entry.getKey().prize * entry.getValue();
+        Rank rank = entry.getKey();
+        int count = entry.getValue();
+        return rank.getSumOfPrize(count);
     }
 
     @Override
     public String toString() {
         return lottoResultMap.entrySet().stream()
-                .sorted(Comparator.comparingInt(entry -> entry.getKey().prize))
+                .sorted(Map.Entry.<Rank, Integer>comparingByKey().reversed())
                 .map(LottoResult::entryToString)
                 .collect(Collectors.joining("\n"));
     }
