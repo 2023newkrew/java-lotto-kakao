@@ -12,20 +12,20 @@ public class LottoGradeEnumTest {
 
     @Test
     void 로또의_일치하는_갯수와_보너스_일치_여부를_보내면_등수가_반환된다() {
-        assertThat(LottoGradeEnum.getGrade(6, false))
+        assertThat(LottoGradeEnum.evaluate(6, false))
                 .isSameAs(LottoGradeEnum.FIRST);
     }
 
     @Test
     void 이등이_반환된다() {
-        assertThat(LottoGradeEnum.getGrade(5, true))
+        assertThat(LottoGradeEnum.evaluate(5, true))
                 .isSameAs(LottoGradeEnum.SECOND);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 7})
     void 맞은_갯수는_0이상_6이하이어야_한다(int matchCount) {
-        assertThatThrownBy(() -> LottoGradeEnum.getGrade(matchCount, true))
+        assertThatThrownBy(() -> LottoGradeEnum.evaluate(matchCount, true))
                 .hasMessage(INVALID_MATCH_COUNT_RANGE);
     }
 }
