@@ -47,4 +47,9 @@ public final class LottoNumber implements Comparator<LottoNumber> {
     public int compare(LottoNumber o1, LottoNumber o2) {
         return o1.number - o2.number;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }

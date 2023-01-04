@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.model.enums.LottoResult;
 import lotto.model.MatchedResult;
+import lotto.model.enums.LottoResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

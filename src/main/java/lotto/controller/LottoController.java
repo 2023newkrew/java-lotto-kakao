@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.model.*;
 import lotto.model.enums.LottoResult;
+import lotto.model.strategy.IssueByRandomAutomaticLottoStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -13,12 +14,14 @@ public class LottoController {
 
     private final OutputView outputView = new OutputView();
 
+    private final LottoIssuer lottoIssuer = new LottoIssuer(new IssueByRandomAutomaticLottoStrategy());
+
     public void start() {
         Integer price = inputView.inputPrice();
         Integer lottoCount = price / Lotto.PRICE;
         outputView.printLottoCount(lottoCount);
 
-        LottoList lottoList = Issuer.issue(lottoCount);
+        LottoList lottoList = lottoIssuer.issue(lottoCount);
         outputView.printLottoList(lottoList);
 
         List<Integer> mainNumbers = inputView.inputMainNumbers();
