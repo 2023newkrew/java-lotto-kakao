@@ -9,16 +9,19 @@ public class LottoMain {
         InputView inputView = InputView.getInstance();
         ResultView resultView = ResultView.getInstance();
 
-        int money = inputView.getMoneyInput();
+        int money = inputView.scanMoney();
         int count = money / 1000;
         money = count * 1000;
 
         LottoTickets tickets = LottoTickets.automaticallyOf(count);
         resultView.printLottoTickets(tickets);
 
+        LottoTicket winningTicket = LottoTicket.fromIntegerList(inputView.scanWinningTicket());
+        LottoNumber bonusNumber = LottoNumber.valueOf(inputView.scanBonusNumber());
+
         WinningNumbers winningNumbers = new WinningNumbers(
-                inputView.getWinningNumbers(),
-                inputView.getBonusNumber()
+                winningTicket,
+                bonusNumber
         );
 
         Result result = tickets.getResults(winningNumbers);

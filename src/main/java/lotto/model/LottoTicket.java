@@ -15,6 +15,14 @@ public class LottoTicket {
         this.numbers = new ArrayList<>(numbers);
     }
 
+    public static LottoTicket fromIntegerList(List<Integer> numbers) {
+        return new LottoTicket(
+                numbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList())
+        );
+    }
+
     private void validateValuesCount(List<LottoNumber> numbers) {
         if (numbers.size() != NUMBERS_SIZE) {
             throw new IllegalArgumentException();
