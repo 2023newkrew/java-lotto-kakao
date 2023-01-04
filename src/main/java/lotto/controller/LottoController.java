@@ -18,7 +18,9 @@ public class LottoController {
     public void start(){
         int money = inputView.receiveMoneyUserInput();
         int numberOfLotto = money / 1000;
-        Lottos lottos = lottosFactory.makeLottosAuto(numberOfLotto);
+        Lottos manualLottos = lottosFactory.makeLottosManual(inputView.receiveManualLottos(numberOfLotto));
+        Lottos autoLottos = lottosFactory.makeLottosAuto(numberOfLotto - manualLottos.getLottos().size());
+        Lottos lottos = lottosFactory.joinLottos(manualLottos, autoLottos);
 
         outputView.printLottos(lottos);
 
