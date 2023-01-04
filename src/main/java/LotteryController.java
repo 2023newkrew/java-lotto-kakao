@@ -1,4 +1,5 @@
 import buyer.Buyer;
+import buyer.BuyerProfit;
 import buyer.BuyerResult;
 import lotto.Lottery;
 import lotto.LotteryResult;
@@ -22,6 +23,6 @@ public class LotteryController {
         BuyerResult buyerResult = buyer.getBuyerResult(lotteryResult);
 
         outputView.printResult(buyerResult);
-        outputView.printProfit(buyerResult.getProfit());
+        outputView.printProfit(new BuyerProfit(buyer.getLotteriesCount(), buyerResult.getTotalPrize()));
     }
 }

@@ -25,6 +25,10 @@ public class Buyer {
         lotteries.addLottery(lottery);
     }
 
+    public int getLotteriesCount() {
+        return lotteries.getCount();
+    }
+
     public List<LotteryDTO> getLotteries() {
         return lotteries.getLotteryDTOs();
     }

@@ -16,6 +16,10 @@ public class Lotteries {
         return Collections.unmodifiableList(lotteries);
     }
 
+    public int getCount() {
+        return lotteries.size();
+    }
+
     public List<LotteryDTO> getLotteryDTOs() {
         return lotteries.stream().map(Lottery::toDTO).collect(Collectors.toList());
     }
