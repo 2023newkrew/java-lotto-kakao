@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.LottoPayment;
+
 import java.util.*;
 
 public class Statistics {
@@ -26,7 +28,7 @@ public class Statistics {
 
     public void add(LottoRank rank) {
         ranks.merge(rank, 1, Integer::sum);
-        purchase += 1000;
+        purchase += LottoPayment.LOTTO_COST;
     }
 
     public int getByRank(LottoRank rank) {
