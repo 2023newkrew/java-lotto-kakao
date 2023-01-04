@@ -15,8 +15,8 @@ public enum LottoGradeEnum {
     NONE_GRADE(0, 0);
 
 
-    public final int matchCount;
-    public final int price;
+    private final int matchCount;
+    private final int price;
 
     LottoGradeEnum(int matchCount, int price) {
         this.matchCount = matchCount;
@@ -45,5 +45,13 @@ public enum LottoGradeEnum {
             throw new IllegalArgumentException(INVALID_GRADE_NUMBER_RANGE);
         }
         return LottoGradeEnum.values()[gradeNumber - 1];
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

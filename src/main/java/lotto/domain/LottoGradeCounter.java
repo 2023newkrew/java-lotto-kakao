@@ -28,7 +28,7 @@ public class LottoGradeCounter {
     public int getTotalPrice() {
         return counter.entrySet()
                 .stream()
-                .mapToInt(entry -> entry.getKey().price * entry.getValue())
+                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
     }
 
