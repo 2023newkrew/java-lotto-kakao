@@ -4,6 +4,8 @@ import buyer.BuyerResult;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -56,9 +58,9 @@ public class WinningLottoTest {
         //given
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         EnumMap<Rank, Integer> cpMap = new EnumMap<>(Map.of(Rank.FIFTH, 1));
-        Lotteries lotteries = new Lotteries();
+        List<Lotto> lotteries = new ArrayList<>();
         //when
-        lotteries.addLottery(new Lotto(List.of(1, 2, 3, 12, 13, 14)));
+        lotteries.add(new Lotto(List.of(1, 2, 3, 12, 13, 14)));
         BuyerResult buyerResult = winningLotto.getResult(lotteries);
         //then
         Assertions.assertThat(buyerResult).isEqualTo(new BuyerResult(cpMap));
@@ -69,12 +71,12 @@ public class WinningLottoTest {
     void lotteryListResult() {
         //given
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-        Lotteries lotteries = new Lotteries();
+        List<Lotto> lotteries = new ArrayList<>();
         EnumMap<Rank, Integer> cpMap =
                 new EnumMap<>(Map.ofEntries(Map.entry(Rank.FIFTH, 1), Map.entry(Rank.FOURTH, 1)));
         //when
-        lotteries.addLottery(new Lotto(List.of(1, 2, 3, 12, 13, 14)));
-        lotteries.addLottery(new Lotto(List.of(1, 2, 3, 4, 12, 14)));
+        lotteries.add(new Lotto(List.of(1, 2, 3, 12, 13, 14)));
+        lotteries.add(new Lotto(List.of(1, 2, 3, 4, 12, 14)));
         BuyerResult buyerResult = winningLotto.getResult(lotteries);
         //then
         Assertions.assertThat(buyerResult).isEqualTo(new BuyerResult(cpMap));

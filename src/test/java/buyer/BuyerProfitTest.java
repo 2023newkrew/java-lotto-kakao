@@ -4,6 +4,8 @@ import lotto.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,8 +14,8 @@ public class BuyerProfitTest {
     @Test
     void profitTest() {
         //given
-        Lotteries lotteries = new Lotteries();
-        lotteries.addLottery(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        List<Lotto> lotteries = new ArrayList<>();
+        lotteries.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 8);
         //when
         BuyerResult buyerResult = winningLotto.getResult(lotteries);

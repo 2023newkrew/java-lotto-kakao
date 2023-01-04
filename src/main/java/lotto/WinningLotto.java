@@ -50,9 +50,9 @@ public class WinningLotto {
         return lotto.getLottoNumbers().contains(bonusNumber);
     }
 
-    public BuyerResult getResult(Lotteries lotteries) {
+    public BuyerResult getResult(List<Lotto> lotteries) {
         BuyerResult buyerResult = new BuyerResult();
-        for (Lotto lotto : lotteries.getLotteries()) {
+        for (Lotto lotto : lotteries) {
             buyerResult.matches(getRank(lotto));
         }
         return buyerResult;

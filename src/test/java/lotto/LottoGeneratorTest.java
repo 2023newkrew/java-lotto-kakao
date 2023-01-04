@@ -15,6 +15,6 @@ public class LottoGeneratorTest {
         //when
         lottoGenerator.generate(buyer);
         //then
-        Assertions.assertThat(buyer.getLotteries().getLotteries()).hasSize(2);
+        Assertions.assertThat(buyer.getLotteries()).hasSize(2);
     }
 }

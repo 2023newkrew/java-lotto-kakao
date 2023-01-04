@@ -1,10 +1,13 @@
 package buyer;
 
-import lotto.Lotteries;
 import lotto.Lotto;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Buyer {
-    private final Lotteries lotteries = new Lotteries();
+    private final List<Lotto> lotteries = new ArrayList<>();
     private Money budget;
 
     public Buyer(int budget) {
@@ -17,10 +20,10 @@ public class Buyer {
 
     public void buyLottery(int lotteryPrice, Lotto lotto) {
         this.budget = this.budget.decreaseMoney(Money.valueOf(lotteryPrice));
-        this.lotteries.addLottery(lotto);
+        this.lotteries.add(lotto);
     }
 
-    public Lotteries getLotteries() {
-        return lotteries;
+    public List<Lotto> getLotteries() {
+        return Collections.unmodifiableList(lotteries);
     }
 }

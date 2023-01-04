@@ -2,16 +2,16 @@ package view;
 
 import buyer.BuyerProfit;
 import buyer.BuyerResult;
-import lotto.Lotteries;
 import lotto.Lotto;
 import lotto.Rank;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public void printLotteries(Lotteries lotteries) {
-        lotteries.getLotteries().forEach(this::printLottery);
+    public void printLotteries(List<Lotto> lotteries) {
+        lotteries.forEach(this::printLottery);
     }
 
     private void printLottery(Lotto lottery) {
