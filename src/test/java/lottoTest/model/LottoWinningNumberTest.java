@@ -57,36 +57,12 @@ public class LottoWinningNumberTest {
 
     private static Stream<Arguments> checkRankTestGenerator() {
         return Stream.of(
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))),
-                                LottoNumber.from(7)),
-                        LottoRank.RANK1
-                ),
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 8))),
-                                LottoNumber.from(6)),
-                        LottoRank.RANK2)
-                ,
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 8))),
-                                LottoNumber.from(7)),
-                        LottoRank.RANK3
-                ),
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 8, 9))),
-                                LottoNumber.from(7)),
-                        LottoRank.RANK4
-                ),
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 8, 9, 10))),
-                                LottoNumber.from(7)),
-                        LottoRank.RANK5
-                ),
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 8, 9, 10, 11))),
-                                LottoNumber.from(7)),
-                        LottoRank.RANK6
-                )
+                Arguments.of(new LottoWinningNumber("1,2,3,4,5,6", "7"), LottoRank.RANK1),
+                Arguments.of(new LottoWinningNumber("1,2,3,4,5,8", "6"), LottoRank.RANK2),
+                Arguments.of(new LottoWinningNumber("1,2,3,4,5,8", "7"), LottoRank.RANK3),
+                Arguments.of(new LottoWinningNumber("1,2,3,4,8,9", "7"), LottoRank.RANK4),
+                Arguments.of(new LottoWinningNumber("1,2,3,8,9,10", "7"), LottoRank.RANK5),
+                Arguments.of(new LottoWinningNumber("1,2,8,9,10,11", "7"), LottoRank.RANK6)
         );
     }
 
