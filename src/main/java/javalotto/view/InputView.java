@@ -34,11 +34,10 @@ public class InputView {
         return WinningLotto.of(Lotto.from(winningNumbers), bonusNumber);
     }
 
-    public LottoCount getManualPurchaseQuantityInput() {
+    public LottoCount getManualPurchaseCountInput() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
 
-        int purchaseQuantity = Integer.parseInt(scanner.nextLine());
-        return LottoCount.withCount(purchaseQuantity);
+        return LottoCount.from(Integer.parseInt(scanner.nextLine()));
     }
 
     private List<Integer> getWinningNumbersInput() {

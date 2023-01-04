@@ -21,8 +21,9 @@ public class LottoController {
 
     public void simulate() {
         PurchaseAmount purchaseAmount = inputView.getPurchaseAmountInput();
+        LottoCount manualLottoCount = inputView.getManualPurchaseCountInput();
 
-        LottoCount lottoCount = LottoCount.of(purchaseAmount);
+        TotalLottoCount lottoCount = TotalLottoCount.of(manualLottoCount, purchaseAmount);
         outputView.printLottoCount(lottoCount);
 
         Lottos lottos = lottoGenerator.generateLottos(lottoCount);
