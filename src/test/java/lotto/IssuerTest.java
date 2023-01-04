@@ -3,7 +3,7 @@ package lotto;
 import lotto.model.Issuer;
 import lotto.model.Lotto;
 import lotto.model.LottoList;
-import lotto.model.enums.LottoSettings;
+import lotto.model.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ public class IssuerTest {
     void lotto_length_test() {
         LottoList lottoList = Issuer.issue(1);
         Lotto lotto = lottoList.get(0);
-        assertEquals(lotto.length(), LottoSettings.NUMBER_LENGTH.getValue());
+        assertEquals(lotto.length(), Lotto.NUMBER_LENGTH);
     }
 
     @Test
@@ -28,8 +28,8 @@ public class IssuerTest {
         LottoList lottoList = Issuer.issue(1);
         Lotto lotto = lottoList.get(0);
         for (int index = 0; index < lotto.length(); index++) {
-            assertTrue(lotto.get(index) <= LottoSettings.MAX_RANGE.getValue() &&
-                    lotto.get(index) >= LottoSettings.MIN_RANGE.getValue());
+            assertTrue(lotto.get(index) <= LottoNumber.MIN_RANGE &&
+                    lotto.get(index) >= LottoNumber.MAX_RANGE);
         }
     }
 

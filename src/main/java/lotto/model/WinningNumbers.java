@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.model.enums.LottoSettings;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,11 +22,6 @@ public class WinningNumbers {
     }
 
     private void validateBonusNumber() {
-        if (bonusNumber < LottoSettings.MIN_RANGE.getValue()
-                || bonusNumber > LottoSettings.MAX_RANGE.getValue()) {
-            throw new IllegalArgumentException();
-        }
-
         if (mainNumbers.numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException();
         }
@@ -59,7 +52,7 @@ public class WinningNumbers {
 
         private void validateNumbers() {
             boolean hasInvalidNumber = numbers.stream()
-                    .filter(number -> isOnRange(number) && hasValidLength())
+                    .filter(number -> hasValidLength())
                     .collect(Collectors.toSet())
                     .size() != numbers.size();
 
@@ -68,14 +61,8 @@ public class WinningNumbers {
             }
         }
 
-        private Boolean isOnRange(Integer number) {
-            return number != null
-                    && number >= LottoSettings.MIN_RANGE.getValue()
-                    && number <= LottoSettings.MAX_RANGE.getValue();
-        }
-
         private Boolean hasValidLength() {
-            return numbers.size() == LottoSettings.NUMBER_LENGTH.getValue();
+            return numbers.size() == Lotto.NUMBER_LENGTH;
         }
     }
 }

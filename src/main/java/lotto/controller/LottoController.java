@@ -1,11 +1,7 @@
 package lotto.controller;
 
-import lotto.model.Issuer;
-import lotto.model.LottoList;
-import lotto.model.LottoStatistics;
-import lotto.model.WinningNumbers;
+import lotto.model.*;
 import lotto.model.enums.LottoResult;
-import lotto.model.enums.LottoSettings;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -19,7 +15,7 @@ public class LottoController {
 
     public void start() {
         Integer price = inputView.inputPrice();
-        Integer lottoCount = price / LottoSettings.PRICE.getValue();
+        Integer lottoCount = price / Lotto.PRICE;
         outputView.printLottoCount(lottoCount);
 
         LottoList lottoList = Issuer.issue(lottoCount);
