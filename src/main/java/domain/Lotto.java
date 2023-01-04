@@ -18,12 +18,7 @@ public class Lotto {
     private static final List<LottoNumber> WHOLE_NUMBERS = IntStream.rangeClosed(MINIMUM, MAXIMUM)
             .boxed().map(number -> new LottoNumber(number))
             .collect(Collectors.toList());
-    private static final Comparator<LottoNumber> LOTTO_NUMBER_COMPARATOR = new Comparator<LottoNumber>() {
-        @Override
-        public int compare(LottoNumber o1, LottoNumber o2) {
-            return o1.number - o2.number;
-        }
-    };
+    private static final Comparator<LottoNumber> LOTTO_NUMBER_COMPARATOR = Comparator.comparingInt(o -> o.number);
 
     private final List<LottoNumber> numbers;
 
