@@ -19,9 +19,11 @@ public class LottoMain {
 
     private static void buyLotto(LottoGame lottoGame) {
         int money = InputView.getMoney();
+        List<List<Integer>> numbers = InputView.getManualNumbersList();
 
-        lottoGame.buyRandom(money);
-        ResultView.printQuantity(lottoGame.getCountOfLottoTickets());
+        int manual = lottoGame.buyManually(money, numbers);
+        int random = lottoGame.buyRandom(lottoGame.receiveLeftoverMoney());
+        ResultView.printQuantity(manual, random);
         ResultView.print(lottoGame.getLottoTicketsString());
     }
 
@@ -31,6 +33,6 @@ public class LottoMain {
         LottoWinningNumberList lottoWinningNumbers
                 = new LottoWinningNumberList(winningNumbers, bonusNumber);
 
-        ResultView.print(lottoGame.getWinningString(lottoWinningNumbers));
+        ResultView.printStatistics(lottoGame.getWinningString(lottoWinningNumbers));
     }
 }
