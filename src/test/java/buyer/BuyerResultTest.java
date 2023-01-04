@@ -1,5 +1,6 @@
 package buyer;
 
+import lotto.Lotteries;
 import lotto.Lottery;
 import lotto.LotteryResult;
 import lotto.Rank;
@@ -13,36 +14,22 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BuyerResultTest {
-    @DisplayName("로또 하나에 대한 결과 객체 확인")
+    @DisplayName("Lotteries와 LotteryResult를 받아 LotteryResult와 매칭되는 Lotteries의 Lottery 개수를 가진 BuyerResult를 생성한다")
     @Test
     void lotteryResult() {
         LotteryResult lotteryResult = new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 7);
-        Buyer buyer = new Buyer(1000);
-        buyer.buyLottery(new Lottery(List.of(1, 2, 3, 12, 13, 14)));
+        Lotteries lotteries = new Lotteries();
+        lotteries.addLottery(new Lottery(List.of(1, 2, 3, 12, 13, 14)));
+        lotteries.addLottery(new Lottery(List.of(1, 2, 3, 4, 13, 14)));
 
-        BuyerResult buyerResult = buyer.getBuyerResult(lotteryResult);
-        EnumMap<Rank, Integer> cpMap = new EnumMap<>(Map.of(Rank.FIFTH, 1));
+        BuyerResult buyerResult = new BuyerResult(lotteries, lotteryResult);
 
-        assertThat(buyerResult).isEqualTo(new BuyerResult(cpMap));
-    }
-
-    @DisplayName("로또 뭉치에 대한 결과 객체 확인")
-    @Test
-    void lotteryListResult() {
-        LotteryResult lotteryResult = new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 7);
-        Buyer buyer = new Buyer(2000);
-        buyer.buyLottery(new Lottery(List.of(1, 2, 3, 12, 13, 14)));
-        buyer.buyLottery(new Lottery(List.of(1, 2, 3, 4, 12, 14)));
-
-        BuyerResult buyerResult = buyer.getBuyerResult(lotteryResult);
-
-        EnumMap<Rank, Integer> cpMap =
-                new EnumMap<>(Map.ofEntries(Map.entry(Rank.FIFTH, 1), Map.entry(Rank.FOURTH, 1)));
+        EnumMap<Rank, Integer> cpMap = new EnumMap<>(Map.of(Rank.FIFTH, 1, Rank.FOURTH, 1));
 
         assertThat(buyerResult).isEqualTo(new BuyerResult(cpMap));
     }
 
-    @DisplayName("buyerResult의 결과의 총 상금 금액 확인")
+    @DisplayName("buyerResult의 당첨된 총 상금을 계산한다")
     @Test
     void totalPrize() {
         EnumMap<Rank, Integer> map =

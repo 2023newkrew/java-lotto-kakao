@@ -7,18 +7,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatRuntimeException;
 
 public class BudgetTest {
-    @DisplayName("Budget 감소 메서드 확인")
+    @DisplayName("Budget의 값을 number만큼 줄인다")
     @Test
-    void decreaseBudget(){
+    void decreaseBudget() {
         Budget budget = new Budget(2000);
 
         budget.decreaseBudget(100);
         assertThat(budget.getBudget()).isEqualTo(1900);
     }
 
-    @DisplayName("충분한 budget 없을 때 decrease 시 RuntimeException")
+    @DisplayName("Budget보다 큰 number을 줄일 때 예외를 발생한다")
     @Test
-    void decreaseBudget_invalid(){
+    void decreaseBudget_invalid() {
         Budget budget = new Budget(2000);
 
         assertThatRuntimeException().isThrownBy(() -> budget.decreaseBudget(3000));
