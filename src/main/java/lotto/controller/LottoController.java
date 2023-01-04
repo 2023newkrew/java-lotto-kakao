@@ -1,15 +1,11 @@
 package lotto.controller;
 
-import lotto.model.Lottos;
-import lotto.model.LottosFactory;
-import lotto.model.WinningNumbers;
+import lotto.model.*;
 import lotto.model.enums.RankingType;
-import lotto.model.Winner;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
-import java.util.Map;
 
 public class LottoController {
     private final InputView inputView = new InputView();
@@ -28,7 +24,7 @@ public class LottoController {
         WinningNumbers winningNumbers = inputView.receiveLastLottoNumbers();
 
         List<RankingType> rankingTypes = lottos.getRankings(winningNumbers);
-        Map<RankingType, Integer> rankingResult = winner.rankingCount(rankingTypes);
+        RankingResult rankingResult = winner.rankingCount(rankingTypes);
 
         outputView.printStatistic(rankingResult);
         outputView.printRevenue(winner.revenue(rankingResult, money));

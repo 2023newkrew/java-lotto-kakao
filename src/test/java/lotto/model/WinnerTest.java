@@ -24,7 +24,7 @@ class WinnerTest {
             put(RankingType.DEFAULT, 1);
         }};
 
-        Assertions.assertEquals(winner.rankingCount(input), rankingResult);
+        Assertions.assertEquals(winner.rankingCount(input).getRankingResult(), rankingResult);
     }
 
     @Test
@@ -42,6 +42,6 @@ class WinnerTest {
         }};
 
 
-        Assertions.assertEquals(winner.revenue(rankingResult, money), 667166.67);
+        Assertions.assertEquals(winner.revenue(new RankingResult(rankingResult), money), 667166.67);
     }
 }

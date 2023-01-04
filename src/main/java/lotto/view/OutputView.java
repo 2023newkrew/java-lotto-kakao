@@ -2,9 +2,8 @@ package lotto.view;
 
 import lotto.model.Lotto;
 import lotto.model.Lottos;
+import lotto.model.RankingResult;
 import lotto.model.enums.RankingType;
-
-import java.util.Map;
 
 public class OutputView {
 
@@ -19,12 +18,12 @@ public class OutputView {
         }
     }
 
-    public void printStatistic(Map<RankingType, Integer> rankingResult){
+    public void printStatistic(RankingResult rankingResult){
         System.out.println("당첨 통계\n" +
                 "---------");
         for (int i = RankingType.values().length -2; i >= 0  ; i--){
             System.out.print(RankingType.values()[i].getHowManyMatches());
-            System.out.printf(" - %d개%n", rankingResult.get(RankingType.values()[i]));
+            System.out.printf(" - %d개%n", rankingResult.getRankingResult().get(RankingType.values()[i]));
         }
     }
 
