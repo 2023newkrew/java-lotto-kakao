@@ -26,6 +26,7 @@ public class LottoTicketsTest {
         //when & then
         assertThat(lottoTickets.getLottoResult(lottoWinningNumber)).isEqualTo(expected);
     }
+
     private static Stream<Arguments> getLottoResultTestGenerator(){
         return Stream.of(
                 Arguments.of(

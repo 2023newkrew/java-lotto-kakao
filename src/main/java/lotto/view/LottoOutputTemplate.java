@@ -18,7 +18,7 @@ public class LottoOutputTemplate {
         System.out.println(RANK5.getMatchedCount() + "개 일치 (" + RANK5.getReward() + "원)- " + lottoResult.get(RANK5) + "개");
         System.out.println(RANK4.getMatchedCount() + "개 일치 (" + RANK4.getReward() + "원)- " + lottoResult.get(RANK4) + "개");
         System.out.println(RANK3.getMatchedCount() + "개 일치 (" + RANK3.getReward() + "원)- " + lottoResult.get(RANK3) + "개");
-        System.out.println(RANK2.getMatchedCount() + "개 일치, 보너스 볼 일치(" + RANK2.getReward() + "원)- " + lottoResult.get(RANK2) + "개");
+        System.out.println(RANK2.getMatchedCount() + "개 일치, 보너스 볼 일치 (" + RANK2.getReward() + "원)- " + lottoResult.get(RANK2) + "개");
         System.out.println(RANK1.getMatchedCount() + "개 일치 (" + RANK1.getReward() + "원)- " + lottoResult.get(RANK1) + "개");
     }
 

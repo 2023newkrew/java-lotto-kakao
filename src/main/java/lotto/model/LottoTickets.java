@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets = new ArrayList<>();
+    private final List<LottoTicket> lottoTickets;
+
+    public LottoTickets(){
+        lottoTickets = new ArrayList<>();
+    }
 
     public void addLottoTicket(LottoTicket lottoTicket) {
         lottoTickets.add(lottoTicket);
@@ -14,7 +18,7 @@ public class LottoTickets {
         LottoResult lottoResult = new LottoResult();
         for (LottoTicket lottoTicket : lottoTickets) {
             lottoResult.addLottoRankCount(
-                    lottoWinningNumber.checkLottoRank(lottoTicket)
+                   lottoTicket.checkLottoRank(lottoWinningNumber)
             );
         }
         return lottoResult;

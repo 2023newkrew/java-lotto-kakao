@@ -19,10 +19,11 @@ public class LottoWinningNumber {
         }
     }
 
-    public LottoRank checkLottoRank(LottoTicket lottoTicket){
-        Integer sameCount = winningNumber.countOverlappingNumber(lottoTicket);
-        boolean isBonus = lottoTicket.contains(bonusBall);
+    public LottoTicket getWinningNumber(){
+        return winningNumber;
+    }
 
-        return LottoRank.fromCountAndBonus(sameCount, isBonus);
+    public LottoNumber getBonusBall(){
+        return bonusBall;
     }
 }

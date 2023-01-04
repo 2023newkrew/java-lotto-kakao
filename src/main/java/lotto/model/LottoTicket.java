@@ -17,11 +17,11 @@ public class LottoTicket {
     private final List<LottoNumber> lotto;
 
     public LottoTicket(){
-        lotto = createRandomLottoTicket();
+        lotto = createRandomLottoNumbers();
         Collections.sort(lotto);
     }
 
-    private List<LottoNumber> createRandomLottoTicket(){
+    private List<LottoNumber> createRandomLottoNumbers(){
         List<LottoNumber> list = new ArrayList<>();
         for(int number = LOTTO_NUMBER_LOWER_BOUNDARY; number <= LOTTO_NUMBER_UPPER_BOUNDARY; number++){
             list.add(new LottoNumber(number));
@@ -42,8 +42,11 @@ public class LottoTicket {
         }
     }
 
-    public boolean contains(LottoNumber number) {
-        return lotto.contains(number);
+    public LottoRank checkLottoRank(LottoWinningNumber lottoWinningNumber){
+        Integer sameCount = countOverlappingNumber(lottoWinningNumber.getWinningNumber());
+        boolean isBonus = lotto.contains(lottoWinningNumber.getBonusBall());
+
+        return LottoRank.fromCountAndBonus(sameCount, isBonus);
     }
 
     public Integer countOverlappingNumber(LottoTicket lottoTicket) {
@@ -52,6 +55,10 @@ public class LottoTicket {
                 .filter(lottoTicket::contains)
                 .count()
         );
+    }
+
+    public boolean contains(LottoNumber number) {
+        return lotto.contains(number);
     }
 
     @Override
