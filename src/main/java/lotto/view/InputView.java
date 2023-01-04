@@ -1,6 +1,7 @@
 package lotto.view;
 
 import static lotto.domain.LottoConstants.LOTTO_PRICE;
+import static lotto.exception.ErrorMessageFormatter.makeErrorMessage;
 import static lotto.view.InputErrorMessage.BOUND_EXCEPTION_MESSAGE;
 import static lotto.view.InputErrorMessage.MODULAR_EXCEPTION_MESSAGE;
 import static lotto.view.InputErrorMessage.NULL_OR_BLANK_EXCEPTION_MESSAGE;
@@ -33,7 +34,10 @@ public class InputView {
 
     private void validateNPE(String line) {
         if (StringUtils.isNullOrBlank(line)) {
-            throw new IllegalArgumentException(NULL_OR_BLANK_EXCEPTION_MESSAGE.getMessage());
+            throw new IllegalArgumentException(
+                    makeErrorMessage(NULL_OR_BLANK_EXCEPTION_MESSAGE.getMessage(), line, "line")
+
+            );
         }
     }
 
@@ -42,7 +46,8 @@ public class InputView {
         try {
             return Integer.parseInt(num);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(REQUIRED_NUMBER_EXCEPTION_MESSAGE.getMessage());
+            throw new IllegalArgumentException(
+                    makeErrorMessage(REQUIRED_NUMBER_EXCEPTION_MESSAGE.getMessage(), num, "num"), e);
         }
 
     }
@@ -54,14 +59,15 @@ public class InputView {
 
     private void validateRange(int price) {
         if (price < LOTTO_PRICE) {
-            throw new IllegalArgumentException(BOUND_EXCEPTION_MESSAGE.getMessage());
+            throw new IllegalArgumentException(makeErrorMessage(BOUND_EXCEPTION_MESSAGE.getMessage(), price, "price"));
         }
 
     }
 
     private void validateIsValid(int price) {
         if (price % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException(MODULAR_EXCEPTION_MESSAGE.getMessage());
+            throw new IllegalArgumentException(
+                    makeErrorMessage(MODULAR_EXCEPTION_MESSAGE.getMessage(), price, "price"));
         }
 
     }

@@ -5,8 +5,9 @@ import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;
 import static lotto.exception.ExceptionMessage.INVALID_LOTTO_RESULT_INPUT_EXCEPTION;
 
 import java.util.Objects;
+import lotto.exception.ErrorMessageFormatter;
 
-public class DefaultLottoResult implements LottoResult{
+public class DefaultLottoResult implements LottoResult {
     private final int matchCount;
     private final boolean hasBonus;
 
@@ -18,8 +19,13 @@ public class DefaultLottoResult implements LottoResult{
 
     private void validate(int matchCount, boolean hasBonus) {
         if (matchCount < LOTTO_MIN_COUNT || getSum(matchCount, hasBonus) > LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(INVALID_LOTTO_RESULT_INPUT_EXCEPTION);
+            throw new IllegalArgumentException(
+                    ErrorMessageFormatter.makeErrorMessage(INVALID_LOTTO_RESULT_INPUT_EXCEPTION,
+                            String.format("matchCount: %d, hasBonus: %s ", matchCount, hasBonus),
+                            "matchCount, hasBonus")
+            );
         }
+
     }
 
     private int getSum(int matchCount, boolean hasBonus) {

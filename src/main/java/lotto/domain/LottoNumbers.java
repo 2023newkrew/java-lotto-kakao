@@ -3,6 +3,7 @@ package lotto.domain;
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_LOWER_BOUND;
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_UPPER_BOUND;
+import static lotto.exception.ErrorMessageFormatter.makeErrorMessage;
 import static lotto.exception.ExceptionMessage.INVALID_COUNT_EXCEPTION_MESSAGE;
 import static lotto.exception.ExceptionMessage.NOT_UNIQUE_EXCEPTION_MESSAGE;
 import static lotto.exception.ExceptionMessage.OUT_OF_BOUNDS_EXCEPTION_MESSAGE;
@@ -30,13 +31,16 @@ public class LottoNumbers {
 
     private void validateUniqueness(List<Integer> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(NOT_UNIQUE_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(
+                    makeErrorMessage(NOT_UNIQUE_EXCEPTION_MESSAGE, lottoNumbers, "lottoNumbers"));
         }
     }
 
     private void validateCount(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(INVALID_COUNT_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(
+                    makeErrorMessage(INVALID_COUNT_EXCEPTION_MESSAGE, lottoNumbers.toString(),
+                            "lottoNumbers"));
         }
     }
 
@@ -46,8 +50,10 @@ public class LottoNumbers {
 
     private void validateSingleRange(int number) {
         if (number < LOTTO_NUMBER_LOWER_BOUND || number > LOTTO_NUMBER_UPPER_BOUND) {
-            throw new IllegalArgumentException(OUT_OF_BOUNDS_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(
+                    makeErrorMessage(OUT_OF_BOUNDS_EXCEPTION_MESSAGE, number, "number"));
         }
+
     }
 
     public int getMatchCount(LottoNumbers otherLottoNumbers) {

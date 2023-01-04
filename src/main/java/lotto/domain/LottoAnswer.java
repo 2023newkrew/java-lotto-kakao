@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_LOWER_BOUND;
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_UPPER_BOUND;
+import static lotto.exception.ErrorMessageFormatter.makeErrorMessage;
 import static lotto.exception.ExceptionMessage.DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE;
 import static lotto.exception.ExceptionMessage.OUT_OF_BOUNDS_EXCEPTION_MESSAGE;
 
@@ -22,13 +23,18 @@ public class LottoAnswer {
 
     private void validateContains(LottoNumbers lottoNumbers, int bonusNumber) {
         if (lottoNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(
+                    makeErrorMessage(DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE, bonusNumber, "bonusNumber"));
+
         }
     }
 
     private void validateRange(int bonusNumber) {
+
         if (bonusNumber < LOTTO_NUMBER_LOWER_BOUND || bonusNumber > LOTTO_NUMBER_UPPER_BOUND) {
-            throw new IllegalArgumentException(OUT_OF_BOUNDS_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(
+                    makeErrorMessage(OUT_OF_BOUNDS_EXCEPTION_MESSAGE, bonusNumber,
+                            "bonusNumber"));
         }
     }
 
