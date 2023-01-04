@@ -91,4 +91,13 @@ public class NumberValidateTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoWinnerTicket(lottoTicket, bonus));
     }
+
+    @Test
+    @DisplayName("보너스 볼이 당첨번호에 포함된다면, 예외가 발생한다.")
+    void bonusAlreadyExistsInNumbersTest(){
+        LottoTicket lottoTicket = new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new LottoWinnerTicket(lottoTicket, 6));
+    }
 }
