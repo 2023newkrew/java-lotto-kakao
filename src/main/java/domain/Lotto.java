@@ -12,14 +12,11 @@ public class Lotto {
     }
 
     public Map<Rank, Integer> rankEachLotto(LottoNumbers winLottoNumbers, LottoNumber bonusBall) {
-        List<Rank> ranks = lottoNumbersList.stream()
+        return lottoNumbersList.stream()
                 .map(lottoNumbers -> lottoNumbers.compareWithWinLottoNumbers(winLottoNumbers, bonusBall))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
-                .collect(Collectors.toList());
-
-        return Arrays.stream(Rank.values())
-                        .collect(Collectors.toMap(rank -> rank, rank -> Collections.frequency(ranks, rank)));
+                .collect(Collectors.groupingBy(rank -> rank, Collectors.summingInt(value -> 1)));
     }
 
 }
