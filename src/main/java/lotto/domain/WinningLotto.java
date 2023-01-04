@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Lotto {
+public class WinningLotto {
     private final LottoNumbers lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    public Lotto(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
+    public WinningLotto(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }

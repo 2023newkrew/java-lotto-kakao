@@ -9,8 +9,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-public class LottoTest {
-    LottoNumbers answerlottoNumbers = new LottoNumbers(
+public class WinningLottoTest {
+    LottoNumbers winningLottoNumbers = new LottoNumbers(
             Arrays.asList(
                     new LottoNumber(1),
                     new LottoNumber(2),
@@ -21,11 +21,11 @@ public class LottoTest {
             )
     );
     LottoNumber bonusNumber = new LottoNumber(7);
-    Lotto answerLotto = new Lotto(answerlottoNumbers, bonusNumber);
+    WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, bonusNumber);
 
     @Test
     void 정답과_보너스_볼이_있어야_한다() {
-        assertThatCode(() -> new Lotto(answerlottoNumbers, bonusNumber)).doesNotThrowAnyException();
+        assertThatCode(() -> new WinningLotto(winningLottoNumbers, bonusNumber)).doesNotThrowAnyException();
     }
 
     @Test
@@ -45,7 +45,7 @@ public class LottoTest {
                     put(LottoPrize.FIRST_PRIZE, 1);
                 }}
         );
-        assertThat(answerLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
+        assertThat(winningLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class LottoTest {
                     put(LottoPrize.SECOND_PRIZE, 1);
                 }}
         );
-        assertThat(answerLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
+        assertThat(winningLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
     }
 
     @Test
@@ -85,7 +85,7 @@ public class LottoTest {
                     put(LottoPrize.THIRD_PRIZE, 1);
                 }}
         );
-        assertThat(answerLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
+        assertThat(winningLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class LottoTest {
                     put(LottoPrize.FOURTH_PRIZE, 1);
                 }}
         );
-        assertThat(answerLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
+        assertThat(winningLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
     }
 
     @Test
@@ -125,7 +125,7 @@ public class LottoTest {
                     put(LottoPrize.FIFTH_PRIZE, 1);
                 }}
         );
-        assertThat(answerLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
+        assertThat(winningLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
     }
 
     @Test
@@ -145,6 +145,6 @@ public class LottoTest {
                     put(LottoPrize.NONE, 1);
                 }}
         );
-        assertThat(answerLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
+        assertThat(winningLotto.getPrizeCountMap(List.of(userLotto))).isEqualTo(expected);
     }
 }

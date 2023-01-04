@@ -22,8 +22,8 @@ public class LottoController {
         List<LottoNumber> answerLottoNumbers = lottoNumbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
-        Lotto lotto = new Lotto(new LottoNumbers(answerLottoNumbers), bonusNumber);
-        outputView.printResult(lotto.getPrizeCountMap(userLottos.getLottoNumbers()));
+        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(answerLottoNumbers), bonusNumber);
+        outputView.printResult(winningLotto.getPrizeCountMap(userLottos.getLottoNumbers()));
     }
 
     private int getPurchaseAmount() {
