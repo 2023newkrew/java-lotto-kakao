@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.models.enums.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -23,9 +24,9 @@ class GoalTest {
             Integer bonusBall = 7;
             Goal goal = new Goal(testNumbers, bonusBall);
             Lotto lotto = new Lotto(testNumbers);
-            LottoResult lottoResult = goal.compareLotto(lotto);
+            Rank rank = goal.compareLotto(lotto);
 
-            assertThat(lottoResult).isEqualTo(LottoResult.FIRST);
+            assertThat(rank).isEqualTo(Rank.FIRST);
         }
 
         @Test
@@ -34,9 +35,9 @@ class GoalTest {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
             Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-            LottoResult lottoResult = goal.compareLotto(lotto);
+            Rank rank = goal.compareLotto(lotto);
 
-            assertThat(lottoResult).isEqualTo(LottoResult.SECOND);
+            assertThat(rank).isEqualTo(Rank.SECOND);
         }
 
         @Test
@@ -45,9 +46,9 @@ class GoalTest {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
             Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8));
-            LottoResult lottoResult = goal.compareLotto(lotto);
+            Rank rank = goal.compareLotto(lotto);
 
-            assertThat(lottoResult).isEqualTo(LottoResult.THIRD);
+            assertThat(rank).isEqualTo(Rank.THIRD);
         }
 
         @Test
@@ -56,9 +57,9 @@ class GoalTest {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
             Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9));
-            LottoResult lottoResult = goal.compareLotto(lotto);
+            Rank rank = goal.compareLotto(lotto);
 
-            assertThat(lottoResult).isEqualTo(LottoResult.FOURTH);
+            assertThat(rank).isEqualTo(Rank.FOURTH);
         }
 
         @Test
@@ -67,9 +68,9 @@ class GoalTest {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
             Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10));
-            LottoResult lottoResult = goal.compareLotto(lotto);
+            Rank rank = goal.compareLotto(lotto);
 
-            assertThat(lottoResult).isEqualTo(LottoResult.FIFTH);
+            assertThat(rank).isEqualTo(Rank.FIFTH);
         }
 
         @Test
@@ -78,9 +79,9 @@ class GoalTest {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
             Lotto lotto = new Lotto(Arrays.asList(1, 2, 14, 8, 9, 10));
-            LottoResult lottoResult = goal.compareLotto(lotto);
+            Rank rank = goal.compareLotto(lotto);
 
-            assertThat(lottoResult).isEqualTo(LottoResult.NONE);
+            assertThat(rank).isEqualTo(Rank.NONE);
         }
 
         @Test
@@ -89,9 +90,9 @@ class GoalTest {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
             Lotto lotto = new Lotto(Arrays.asList(1, 13, 14, 8, 9, 10));
-            LottoResult lottoResult = goal.compareLotto(lotto);
+            Rank rank = goal.compareLotto(lotto);
 
-            assertThat(lottoResult).isEqualTo(LottoResult.NONE);
+            assertThat(rank).isEqualTo(Rank.NONE);
         }
 
         @Test
@@ -100,9 +101,9 @@ class GoalTest {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
             Lotto lotto = new Lotto(Arrays.asList(12, 13, 14, 8, 9, 10));
-            LottoResult lottoResult = goal.compareLotto(lotto);
+            Rank rank = goal.compareLotto(lotto);
 
-            assertThat(lottoResult).isEqualTo(LottoResult.NONE);
+            assertThat(rank).isEqualTo(Rank.NONE);
         }
     }
 

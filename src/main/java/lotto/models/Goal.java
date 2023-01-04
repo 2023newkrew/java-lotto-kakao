@@ -5,6 +5,7 @@ import static lotto.common.LottoConfiguration.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.models.enums.Rank;
 
 public class Goal extends Lotto {
     private final Integer bonusBall;
@@ -15,8 +16,8 @@ public class Goal extends Lotto {
         this.bonusBall = bonusBall;
     }
 
-    public LottoResult compareLotto(Lotto lotto) {
-        return LottoResult.findLottoResult(getMatchCount(lotto), lotto.getNumbers().contains(bonusBall));
+    public Rank compareLotto(Lotto lotto) {
+        return Rank.findRank(getMatchCount(lotto), lotto.getNumbers().contains(bonusBall));
     }
 
     private Integer getMatchCount(Lotto lotto) {

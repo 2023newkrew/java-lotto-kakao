@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.models.enums.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,14 +31,14 @@ class LottoStatisticsTest {
                 .collect(Collectors.toList()),
                 1);
         LottoStatistics statistics = new LottoStatistics(goal, lottos, budget);
-        for (LottoResult rank : LottoResult.values()) {
-            if (rank == LottoResult.NONE) {
+        for (Rank rank : Rank.values()) {
+            if (rank == Rank.NONE) {
                 assertThat(statistics.getCountOf(rank)).isEqualTo(5);
                 continue;
             }
             assertThat(statistics.getCountOf(rank)).isEqualTo(1);
         }
-        long totalPrize = Arrays.stream(LottoResult.values()).mapToLong(LottoResult::getPrize).reduce(Long::sum).orElse(0);
+        long totalPrize = Arrays.stream(Rank.values()).mapToLong(Rank::getPrize).reduce(Long::sum).orElse(0);
         assertThat(statistics.getEarningsRate()).isEqualTo((double) totalPrize / budget);
     }
 }

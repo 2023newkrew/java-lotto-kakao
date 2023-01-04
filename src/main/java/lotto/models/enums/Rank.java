@@ -1,8 +1,8 @@
-package lotto.models;
+package lotto.models.enums;
 
 import java.util.Arrays;
 
-public enum LottoResult {
+public enum Rank {
     FIRST(2_000_000_000, 6),
     SECOND(30_000_000, 5),
     THIRD(1_500_000, 5),
@@ -14,7 +14,7 @@ public enum LottoResult {
 
     private final int matchCount;
 
-    LottoResult(long prize, int matchCount) {
+    Rank(long prize, int matchCount) {
         this.prize = prize;
         this.matchCount = matchCount;
     }
@@ -23,14 +23,14 @@ public enum LottoResult {
         return prize;
     }
 
-    static public LottoResult findLottoResult(Integer matchCount, boolean includeBonus) {
+    static public Rank findRank(Integer matchCount, boolean includeBonus) {
         if (matchCount == 5 && !includeBonus) {
-            return LottoResult.THIRD;
+            return Rank.THIRD;
         }
 
         return Arrays.stream(values())
-                .filter(lottoResult -> lottoResult.matchCount == matchCount)
+                .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
-                .orElse(LottoResult.NONE);
+                .orElse(Rank.NONE);
     }
 }

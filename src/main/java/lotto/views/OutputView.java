@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 import lotto.models.Lotto;
-import lotto.models.LottoResult;
+import lotto.models.enums.Rank;
 import lotto.models.LottoStatistics;
 
 public class OutputView {
@@ -42,12 +42,12 @@ public class OutputView {
 
         console.printOutput("당첨 통계\n"
                 + "----------\n"
-                + "3개 일치 (" + LottoResult.FIFTH.getPrize() + "원)- " + statistics.getCountOf(LottoResult.FIFTH) + "개\n"
-                + "4개 일치 (" + LottoResult.FOURTH.getPrize() + "원)- " + statistics.getCountOf(LottoResult.FOURTH) + "개\n"
-                + "5개 일치 (" + LottoResult.THIRD.getPrize() + "원)- " + statistics.getCountOf(LottoResult.THIRD) + "개\n"
-                + "5개 일치, 보너스 볼 일치(" + LottoResult.SECOND.getPrize() + "원) - " + statistics.getCountOf(
-                LottoResult.SECOND) + "개\n"
-                + "6개 일치 (" + LottoResult.FIRST.getPrize() + "원)- " + statistics.getCountOf(LottoResult.FIRST) + "개\n"
+                + "3개 일치 (" + Rank.FIFTH.getPrize() + "원)- " + statistics.getCountOf(Rank.FIFTH) + "개\n"
+                + "4개 일치 (" + Rank.FOURTH.getPrize() + "원)- " + statistics.getCountOf(Rank.FOURTH) + "개\n"
+                + "5개 일치 (" + Rank.THIRD.getPrize() + "원)- " + statistics.getCountOf(Rank.THIRD) + "개\n"
+                + "5개 일치, 보너스 볼 일치(" + Rank.SECOND.getPrize() + "원) - " + statistics.getCountOf(
+                Rank.SECOND) + "개\n"
+                + "6개 일치 (" + Rank.FIRST.getPrize() + "원)- " + statistics.getCountOf(Rank.FIRST) + "개\n"
                 + "총 수익률은 " + rateString + "입니다.\n");
     }
 
