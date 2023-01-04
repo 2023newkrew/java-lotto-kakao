@@ -4,19 +4,19 @@ import java.util.List;
 
 public class Player {
 
-    private Money money;
+    private int money;
     private PlayerLottoResult playerLottoResult;
     private List<LottoTicket> lottoTickets;
 
-    public Player(Money money) {
+    public Player(int money) {
         this.money = money;
     }
 
-    public void buyLottoTickets(Seller seller) {
+    public void buyLottoTickets(LottoTicketSeller seller) {
         this.lottoTickets = seller.sellLottoTickets(money);
-        Money spentMoney = seller.calculateTotalPrice(lottoTickets);
+        int spentMoney = seller.calculateTotalPrice(lottoTickets);
         playerLottoResult = new PlayerLottoResult(spentMoney);
-        this.money = money.subtract(spentMoney);
+        this.money = money - spentMoney;
     }
 
     public PlayerLottoResult findResult(WinnerCompareRule winnerCompareRule) {

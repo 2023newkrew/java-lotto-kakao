@@ -8,7 +8,7 @@ public class PlayerLottoResultTest {
     @Test
     void 로또_당첨_결과를_추가할_수_있다() {
         //given
-        PlayerLottoResult playerLottoResult = new PlayerLottoResult(new Money(1_000));
+        PlayerLottoResult playerLottoResult = new PlayerLottoResult(1_000);
 
         //when
         playerLottoResult.addResult(LottoResult.NO_MATCH);
@@ -21,7 +21,7 @@ public class PlayerLottoResultTest {
     @Test
     void 로또_당첨_결과를_통해_수익률을_계산할_수_있다() {
         //given
-        PlayerLottoResult playerLottoResult = new PlayerLottoResult(new Money(1_000));
+        PlayerLottoResult playerLottoResult = new PlayerLottoResult(1_000);
 
         //when
         playerLottoResult.addResult(LottoResult.NO_MATCH);

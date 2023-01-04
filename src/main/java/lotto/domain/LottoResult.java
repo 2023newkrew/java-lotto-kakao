@@ -3,21 +3,21 @@ package lotto.domain;
 import java.util.Arrays;
 
 public enum LottoResult {
-    NO_MATCH(0, false, new Money(0)),
-    THREE_MATCH(3, false, new Money(5_000)),
-    FOUR_MATCH(4, false, new Money(50_000)),
-    FIVE_MATCH(5, false, new Money(1_500_000)),
-    FIVE_MATCH_WITH_BONUS(5, true, new Money(30_000_000)),
-    SIX_MATCH(6, false, new Money(2_000_000_000));
+    NO_MATCH(0, false, 0),
+    THREE_MATCH(3, false, 5_000),
+    FOUR_MATCH(4, false, 50_000),
+    FIVE_MATCH(5, false, 1_500_000),
+    FIVE_MATCH_WITH_BONUS(5, true, 30_000_000),
+    SIX_MATCH(6, false, 2_000_000_000);
 
     private final int matchCount;
     private final boolean bonusBallMatch;
-    private final Money money;
+    private final int prizeMoney;
 
-    LottoResult(int matchCount, boolean bonusBallMatch, Money money) {
+    LottoResult(int matchCount, boolean bonusBallMatch, int prizeMoney) {
         this.matchCount = matchCount;
         this.bonusBallMatch = bonusBallMatch;
-        this.money = money;
+        this.prizeMoney = prizeMoney;
     }
 
     public static LottoResult findResult(int matchCount, boolean bonusBallMatch) {
@@ -46,7 +46,7 @@ public enum LottoResult {
         return bonusBallMatch;
     }
 
-    public Money getMoney() {
-        return money;
+    public int getPrizeMoney() {
+        return prizeMoney;
     }
 }
