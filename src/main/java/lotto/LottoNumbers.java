@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LotteryNumbers {
+public class LottoNumbers {
     private static final int LOTTERY_NUMBER_SIZE = 6;
-    private final List<LotteryNumber> numbers = new ArrayList<>();
+    private final List<LottoNumber> numbers = new ArrayList<>();
 
-    public LotteryNumbers(List<Integer> numbers) {
+    public LottoNumbers(List<Integer> numbers) {
         validateNumbers(numbers);
 
         for (Integer number : numbers) {
-            this.numbers.add(new LotteryNumber(number));
+            this.numbers.add(new LottoNumber(number));
         }
         
         Collections.sort(this.numbers);
@@ -31,15 +31,15 @@ public class LotteryNumbers {
         return numbers.size() != numbers.stream().distinct().count();
     }
 
-    public List<LotteryNumber> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return Collections.unmodifiableList(numbers);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof LotteryNumbers)) return false;
+        if (!(obj instanceof LottoNumbers)) return false;
 
-        LotteryNumbers cp = (LotteryNumbers) obj;
+        LottoNumbers cp = (LottoNumbers) obj;
 
         return this.numbers.equals(cp.numbers);
     }

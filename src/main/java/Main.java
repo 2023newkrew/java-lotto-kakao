@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        LotteryController lotteryController = new LotteryController();
+        LottoController lottoController = new LottoController();
 
-        lotteryController.run();
+        lottoController.run();
     }
 }

@@ -1,11 +1,11 @@
 package lotto;
 
-public class LotteryMatch {
+public class LottoMatch {
     private static final int MATCH_FIVE = 5;
     private final int matchCount;
     private final Boolean isBonusMatch;
 
-    public LotteryMatch(int matchCount, Boolean isBonusMatch) {
+    public LottoMatch(int matchCount, Boolean isBonusMatch) {
         this.matchCount = matchCount;
         if (this.matchCount != MATCH_FIVE) {
             this.isBonusMatch = false;
@@ -20,9 +20,9 @@ public class LotteryMatch {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof LotteryMatch)) return false;
+        if (!(obj instanceof LottoMatch)) return false;
 
-        LotteryMatch cp = (LotteryMatch) obj;
+        LottoMatch cp = (LottoMatch) obj;
 
         return (this.matchCount == cp.matchCount && this.isBonusMatch == cp.isBonusMatch);
     }

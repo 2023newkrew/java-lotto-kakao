@@ -3,7 +3,7 @@ package view;
 import buyer.BuyerProfit;
 import buyer.BuyerResult;
 import lotto.Lotteries;
-import lotto.Lottery;
+import lotto.Lotto;
 import lotto.Rank;
 
 import java.util.Arrays;
@@ -14,7 +14,7 @@ public class OutputView {
         lotteries.getLotteries().forEach(this::printLottery);
     }
 
-    private void printLottery(Lottery lottery) {
+    private void printLottery(Lotto lottery) {
         System.out.println(
                 lottery.getLotteryNumber()
                         .stream()

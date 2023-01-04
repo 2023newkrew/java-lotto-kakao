@@ -1,7 +1,7 @@
 package buyer;
 
 import lotto.Lotteries;
-import lotto.Lottery;
+import lotto.Lotto;
 
 public class Buyer {
     private final Lotteries lotteries = new Lotteries();
@@ -15,9 +15,9 @@ public class Buyer {
         return budget.hasMoreThan(price);
     }
 
-    public void buyLottery(int lotteryPrice, Lottery lottery) {
+    public void buyLottery(int lotteryPrice, Lotto lotto) {
         this.budget.decreaseBudget(lotteryPrice);
-        this.lotteries.addLottery(lottery);
+        this.lotteries.addLottery(lotto);
     }
 
     public Lotteries getLotteries() {

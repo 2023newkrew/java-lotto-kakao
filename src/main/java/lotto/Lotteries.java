@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotteries {
-    private final List<Lottery> lotteries = new ArrayList<>();
+    private final List<Lotto> lotteries = new ArrayList<>();
 
-    public void addLottery(Lottery lottery) {
-        lotteries.add(lottery);
+    public void addLottery(Lotto lotto) {
+        lotteries.add(lotto);
     }
 
-    public List<Lottery> getLotteries() { return Collections.unmodifiableList(lotteries); }
+    public List<Lotto> getLotteries() { return Collections.unmodifiableList(lotteries); }
 }

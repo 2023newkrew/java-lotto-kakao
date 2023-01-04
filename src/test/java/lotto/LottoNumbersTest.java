@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class LotteryNumbersTest {
+public class LottoNumbersTest {
     @DisplayName("중복된 숫자로 리스트 받으면 예외 발생")
     @Test
     void duplicateTest() {
         //given
         //when
         //then
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new LotteryNumbers(List.of(1, 1, 1, 1, 1, 1)));
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(List.of(1, 1, 1, 1, 1, 1)));
     }
 
     @DisplayName("입력 숫자가 6개가 아닌 리스트 받으면 예외 발생")
@@ -22,6 +22,6 @@ public class LotteryNumbersTest {
         //given
         //when
         //then
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new LotteryNumbers(List.of(1)));
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new LottoNumbers(List.of(1)));
     }
 }

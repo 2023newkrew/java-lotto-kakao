@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class LotteryNumberTest {
+public class LottoNumberTest {
     @DisplayName("1~45인 수로 생성 성공")
     @ParameterizedTest
     @ValueSource(ints = {1, 10, 25, 45})
@@ -13,7 +13,7 @@ public class LotteryNumberTest {
         //given
         //when
         //then
-        Assertions.assertThatNoException().isThrownBy(() -> new LotteryNumber(number));
+        Assertions.assertThatNoException().isThrownBy(() -> new LottoNumber(number));
     }
 
     @DisplayName("0, 45이상인 수로 생성시 예외 발생")
@@ -23,6 +23,6 @@ public class LotteryNumberTest {
         //given
         //when
         //then
-        Assertions.assertThatRuntimeException().isThrownBy(() -> new LotteryNumber(number));
+        Assertions.assertThatRuntimeException().isThrownBy(() -> new LottoNumber(number));
     }
 }

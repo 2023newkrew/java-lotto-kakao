@@ -1,12 +1,12 @@
 package lotto;
 
-public class LotteryNumber implements Comparable<LotteryNumber> {
+public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
     private final int number;
 
-    public LotteryNumber(int number) {
+    public LottoNumber(int number) {
         validateNumber(number);
         this.number = number;
     }
@@ -23,15 +23,15 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof LotteryNumber)) return false;
+        if (!(obj instanceof LottoNumber)) return false;
 
-        LotteryNumber cp = (LotteryNumber) obj;
+        LottoNumber cp = (LottoNumber) obj;
 
         return this.number == cp.number;
     }
 
     @Override
-    public int compareTo(LotteryNumber o) {
+    public int compareTo(LottoNumber o) {
         return Integer.compare(this.number, o.number);
     }
 }

@@ -13,10 +13,10 @@ public class BuyerProfitTest {
     void profitTest() {
         //given
         Lotteries lotteries = new Lotteries();
-        lotteries.addLottery(new Lottery(List.of(1, 2, 3, 4, 5, 6)));
-        LotteryResult lotteryResult = new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 8);
+        lotteries.addLottery(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        LottoResult lottoResult = new LottoResult(List.of(1, 2, 3, 4, 5, 6), 8);
         //when
-        BuyerResult buyerResult = lotteryResult.getResult(lotteries);
+        BuyerResult buyerResult = lottoResult.getResult(lotteries);
         //then
         Assertions.assertThat(buyerResult.getProfit()).isEqualTo(new BuyerProfit((double) Rank.FIRST.prize / 1000));
 

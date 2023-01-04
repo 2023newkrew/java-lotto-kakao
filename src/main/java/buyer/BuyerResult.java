@@ -1,6 +1,6 @@
 package buyer;
 
-import lotto.LotteryGenerator;
+import lotto.LottoGenerator;
 import lotto.Rank;
 
 import java.util.Arrays;
@@ -40,6 +40,6 @@ public class BuyerResult {
                 .sum();
         int count = Arrays.stream(Rank.values()).mapToInt(e -> result.getOrDefault(e, 0)).sum();
 
-        return new BuyerProfit((double) profit / (count * LotteryGenerator.LOTTERY_PRICE));
+        return new BuyerProfit((double) profit / (count * LottoGenerator.LOTTERY_PRICE));
     }
 }
