@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumberPicker {
 
@@ -22,10 +23,8 @@ public class LottoNumberPicker {
 
     public LottoTicket makeLottoTicket() {
         Collections.shuffle(lottoNumbers);
-        List<LottoBall> selectedNumbers = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            selectedNumbers.add((lottoNumbers.get(i)));
-        }
+        List<LottoBall> selectedNumbers = lottoNumbers.stream()
+                .limit(6).collect(Collectors.toList());
         return new LottoTicket(selectedNumbers);
     }
 }
