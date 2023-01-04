@@ -38,20 +38,14 @@ public class WinningLotto {
     }
 
     public Rank getRank(Lotto lotto) {
-        int count = 0;
         boolean bonusMatch = false;
-        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
-
-        for (final LottoNumber number : winningNumbers.getLottoNumbers()) {
-            count += lottoNumbers.contains(number) ? 1 : 0;
-        }
+        int count = winningNumbers.compareWith(lotto);
         if (count == MATCH_FIVE) bonusMatch = isBonusMatch(lotto);
-
         return Rank.getRank(new LottoMatch(count, bonusMatch));
     }
 
     private boolean isBonusMatch(Lotto lotto) {
-        return lotto.getLottoNumbers().contains(bonusNumber);
+        return lotto.containsLottoNumber(bonusNumber);
     }
 
     public BuyerResult getResult(List<Lotto> lotteries) {

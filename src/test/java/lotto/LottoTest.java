@@ -24,4 +24,38 @@ public class LottoTest {
         //then
         Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Lotto(List.of(1)));
     }
+
+    @DisplayName("다른 로또와 비교해 같은 번호의 수가 3이라 반환")
+    @Test
+    void compareTest() {
+        //given
+        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = new Lotto(List.of(1, 2, 3, 10, 11, 12));
+        //when
+        int count = lotto1.compareWith(lotto2);
+        //then
+        Assertions.assertThat(count).isEqualTo(3);
+    }
+
+    @DisplayName("로또 번호 3이 포함됨을 반환")
+    @Test
+    void containsTest_true() {
+        //given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber lottoNumber = new LottoNumber(3);
+        //when
+        //then
+        Assertions.assertThat(lotto.containsLottoNumber(lottoNumber)).isTrue();
+    }
+
+    @DisplayName("로또 번호 10이 포함되지 않음을 반환")
+    @Test
+    void containsTest_false() {
+        //given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber lottoNumber = new LottoNumber(10);
+        //when
+        //then
+        Assertions.assertThat(lotto.containsLottoNumber(lottoNumber)).isFalse();
+    }
 }

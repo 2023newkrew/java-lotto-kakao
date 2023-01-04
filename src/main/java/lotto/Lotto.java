@@ -20,6 +20,16 @@ public class Lotto {
         return Collections.unmodifiableList(numbers);
     }
 
+    public int compareWith(Lotto lotto) {
+        return (int) this.numbers.stream()
+                .filter(lotto.numbers::contains)
+                .count();
+    }
+
+    public boolean containsLottoNumber(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
     private void validateNumbers(List<Integer> numbers) {
         if (!isValidSize(numbers) || isDuplicateNumber(numbers))
             throw new IllegalArgumentException("잘못된 로또 번호 입력입니다");
