@@ -4,7 +4,6 @@ import lotto.controller.LottoController;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoWinnerTicket;
 import lotto.service.LottoCalculator;
-import lotto.utils.ChangeInput;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -26,25 +25,16 @@ public class LottoApplication {
         resultView.printLottoTickets(lottoTickets);
 
         // 지난주 당첨 번호 및 보너스볼 입력
-        ChangeInput changeInput = new ChangeInput();
-
-        // 보너스볼 입력
-        LottoWinnerTicket lottoWinnerTicket = getLottoWinnerTicket(inputView, changeInput);
-
-        LottoCalculator lottoCalculator = new LottoCalculator(lottoWinnerTicket);
+        String winNumber = inputView.inputWinNumber();
+        int bonus = inputView.inputBonusNumber();
 
         // Winner 뽑아내기
+        LottoWinnerTicket lottoWinnerTicket = inputView.changeToWinnerTicket(winNumber, bonus);
+        LottoCalculator lottoCalculator = new LottoCalculator(lottoWinnerTicket);
         ArrayList<Integer> result = lottoCalculator.getResult(lottoController.getLottoTickets());
 
         // 당첨 통계 출력
         double rate = lottoCalculator.calcRateOfReturn(amount);
         resultView.printWinningStatics(result, rate);
-    }
-
-    private static LottoWinnerTicket getLottoWinnerTicket(InputView inputView, ChangeInput changeInput) {
-        String winNumber = inputView.inputWinNumber();
-        int bonus = inputView.inputBonusNumber();
-        return changeInput.changeToWinnerTicket(
-                winNumber, bonus);
     }
 }
