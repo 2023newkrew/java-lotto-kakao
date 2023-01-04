@@ -3,7 +3,7 @@ package controller;
 import domain.dto.WinningNumbersDto;
 import domain.lotto.LottoGame;
 import domain.lotto.WinningNumbers;
-import domain.lotto.LottoNumberGenerator;
+import domain.lotto.generator.LottoNumberGenerator;
 import domain.lotto.generator.RandomNumberGenerator;
 import domain.lotto.result.LottoResults;
 import domain.lotto.ticket.LottoTicket;

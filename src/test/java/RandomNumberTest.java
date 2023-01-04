@@ -1,4 +1,4 @@
-import domain.lotto.LottoNumberGenerator;
+import domain.lotto.generator.LottoNumberGenerator;
 import domain.lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

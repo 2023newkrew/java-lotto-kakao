@@ -1,4 +1,4 @@
-package domain.lotto;
+package domain.lotto.generator;
 
 import domain.lotto.generator.NumberGeneratable;
 
