@@ -3,13 +3,17 @@ package lotto.model;
 import java.util.HashMap;
 
 public class PriceResult {
-    private HashMap<Price, Integer> result;
+    private final HashMap<Price, Integer> result;
 
     public PriceResult() {
         result = new HashMap<>();
         for (Price price : Price.values()) {
             result.put(price, 0);
         }
+    }
+
+    public HashMap<Price, Integer> getResult() {
+        return result;
     }
 
     public void saveResult(Price price) {
