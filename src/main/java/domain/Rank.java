@@ -13,9 +13,9 @@ public enum Rank {
     FIFTH_PLACE(3, NOT_APPLICABLE, 5_000),
     ;
 
-    private int matchCount;
-    private BonusBallMatchType bonusBallMatchType;
-    private long prize;
+    private final int matchCount;
+    private final BonusBallMatchType bonusBallMatchType;
+    private final long prize;
 
     Rank(int matchCount, BonusBallMatchType bonusBallMatchType, int prize) {
         this.matchCount = matchCount;

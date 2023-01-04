@@ -8,9 +8,9 @@ public class PurchasedLotto {
 
     private static final String NUMBER_OF_LOTTO_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
-    private int numberOfManualLotto;
-    private int numberOfAutomaticLotto;
-    private List<LottoNumbers> lottoNumbersList;
+    private final int numberOfManualLotto;
+    private final int numberOfAutomaticLotto;
+    private final List<LottoNumbers> lottoNumbersList;
 
     public PurchasedLotto(int numberOfManualLotto, int numberOfAutomaticLotto, List<LottoNumbers> lottoNumbersList) {
         this.numberOfManualLotto = numberOfManualLotto;

@@ -22,7 +22,7 @@ class InputValidatorTest {
         int numberOfManualLotto = LottoCalculator.calculateNumberOfLotto(payment) + 1;
 
         // when, then
-        assertThatThrownBy(() -> inputValidator.validateNumberOfLottoToBuyManually(payment, numberOfManualLotto))
+        assertThatThrownBy(() -> inputValidator.validateNumberOfManualLotto(payment, numberOfManualLotto))
                 .isInstanceOf(RuntimeException.class);
     }
 

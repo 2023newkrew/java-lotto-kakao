@@ -15,7 +15,7 @@ public class InputView {
     private static final String LOTTO_NUMBERS_INPUT_MESSAGE = "\n지난 주 당첨 번호를 입력해주세요";
     private static final String BONUS_BALL_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
 
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public InputView() {
         scanner = new Scanner(System.in);

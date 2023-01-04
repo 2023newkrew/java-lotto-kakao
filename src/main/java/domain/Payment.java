@@ -5,7 +5,7 @@ import static constant.LottoSetting.MIN_LOTTO_PAYMENT;
 
 public class Payment {
 
-    private int payment;
+    private final int payment;
 
     public Payment(int payment) {
         validatePayment(payment);
