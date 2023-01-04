@@ -4,11 +4,11 @@ import java.util.List;
 
 public class LottoWinningNumberList {
 
-    private final LottoNumberList lottoNumbers;
+    private final LottoNumberSet lottoNumbers;
     private final LottoNumber bonusNumber;
 
-    public LottoWinningNumberList(List<Integer> numbers, int bonusNumber) {
-        this.lottoNumbers = new LottoNumberList(numbers);
+    public LottoWinningNumberList(List<Integer> numberList, int bonusNumber) {
+        this.lottoNumbers = new LottoNumberSet(numberList);
         LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
         validateDuplicateBonusNumber(bonusLottoNumber);
         this.bonusNumber = LottoNumber.of(bonusNumber);
@@ -20,11 +20,11 @@ public class LottoWinningNumberList {
         }
     }
 
-    public int getAmountOfNumbersInWinningNumbers(LottoNumberList lottoNumbers) {
+    public int getAmountOfNumbersInWinningNumbers(LottoNumberSet lottoNumbers) {
         return this.lottoNumbers.getAmountOfNumbersInNumbers(lottoNumbers);
     }
 
-    public boolean checkBonusNumberInNumbers(LottoNumberList lottoNumbers) {
+    public boolean checkBonusNumberInNumbers(LottoNumberSet lottoNumbers) {
         return lottoNumbers.hasNumber(bonusNumber);
     }
 }

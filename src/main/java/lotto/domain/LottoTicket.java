@@ -6,10 +6,10 @@ public class LottoTicket {
 
     public static final int LOTTO_TICKET_PRICE = 1000;
 
-    private final LottoNumberList lottoNumbers;
+    private final LottoNumberSet lottoNumbers;
 
     public LottoTicket(List<Integer> numbers) {
-        lottoNumbers = new LottoNumberList(numbers);
+        lottoNumbers = new LottoNumberSet(numbers);
     }
 
     public String getString() {
