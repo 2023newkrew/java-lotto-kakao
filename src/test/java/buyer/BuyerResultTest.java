@@ -41,4 +41,15 @@ public class BuyerResultTest {
 
         assertThat(buyerResult).isEqualTo(new BuyerResult(cpMap));
     }
+
+    @DisplayName("buyerResult의 결과의 총 상금 금액 확인")
+    @Test
+    void totalPrize() {
+        EnumMap<Rank, Integer> map =
+                new EnumMap<>(Map.ofEntries(Map.entry(Rank.FIFTH, 1), Map.entry(Rank.FOURTH, 1)));
+
+        BuyerResult buyerResult = new BuyerResult(map);
+
+        assertThat(buyerResult.getTotalPrize()).isEqualTo(Rank.FIFTH.prize + Rank.FOURTH.prize);
+    }
 }
