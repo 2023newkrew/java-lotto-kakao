@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LottoTicket {
     private static final int LOTTO_TICKET_SIZE = 6;
@@ -15,8 +17,8 @@ public class LottoTicket {
         lottoNumberDuplicateCheck();
     }
 
-    public ArrayList<Integer> getLottoNumbers() {
-        return this.lottoNumbers;
+    public List<Integer> getLottoNumbers() {
+        return Collections.unmodifiableList(this.lottoNumbers);
     }
 
     private void lottoNumberCountCheck() {

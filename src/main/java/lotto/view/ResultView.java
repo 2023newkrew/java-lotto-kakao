@@ -4,6 +4,7 @@ import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static lotto.utils.LottoMessage.*;
 
@@ -39,7 +40,7 @@ public class ResultView {
         }
     }
 
-    private void printEachTicket(ArrayList<Integer> numbers){
+    private void printEachTicket(List<Integer> numbers){
         System.out.printf("[%d, %d, %d, %d, %d, %d]\n",
                 numbers.get(0), numbers.get(1),
                 numbers.get(2), numbers.get(3),
