@@ -39,6 +39,6 @@ public class WinningLotto {
                 matchCount++;
             }
         }
-        return LottoGradeEnum.getGrade(matchCount, winningLottoNumberSet.contains(bonusNumber));
+        return LottoGradeEnum.evaluate(matchCount, winningLottoNumberSet.contains(bonusNumber));
     }
 }

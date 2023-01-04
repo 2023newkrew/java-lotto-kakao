@@ -3,19 +3,19 @@ package lotto.dto;
 import java.util.List;
 
 public class GameResultDto {
-    private final List<LottoResult> lottoResults;
-    private final float rate;
+    private final List<LottoGradeCountResult> lottoGradeCountResults;
+    private final float rateOfReturn;
 
-    public GameResultDto(List<LottoResult> lottoResults, float rate) {
-        this.lottoResults = lottoResults;
-        this.rate = rate;
+    public GameResultDto(List<LottoGradeCountResult> lottoGradeCountResults, float rateOfReturn) {
+        this.lottoGradeCountResults = lottoGradeCountResults;
+        this.rateOfReturn = rateOfReturn;
     }
 
-    public List<LottoResult> getLottoResults() {
-        return lottoResults;
+    public List<LottoGradeCountResult> getLottoResults() {
+        return lottoGradeCountResults;
     }
 
-    public float getRate() {
-        return rate;
+    public float getRateOfReturn() {
+        return rateOfReturn;
     }
 }

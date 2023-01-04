@@ -12,7 +12,7 @@ public class Application {
     public static void main(String[] args) {
 
         List<Lotto> lottos = LottoGenerator.generateLottos(LottoView.receivePurchasePrice());
-        LottoView.printLottoList(lottos);
+        LottoView.printLottos(lottos);
         WinningLotto winningLotto = LottoView.receiveWinningLotto();
         LottoGame lottoGame = new LottoGame(lottos, winningLotto);
         LottoView.printResult(lottoGame.getResult());

@@ -19,7 +19,7 @@ public class LottoView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    static public void printLottoList(List<Lotto> lottos) {
+    static public void printLottos(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
         lottos.forEach((lotto) -> System.out.println(lotto.toString()));
         System.out.println();
@@ -46,12 +46,8 @@ public class LottoView {
         System.out.println("당첨 통계");
         System.out.println("-----------");
         gameResultDto.getLottoResults()
-                .forEach((lottoResult) -> System.out.printf(
-                        "%d개 일치 (%d원)- %d개\n",
-                        lottoResult.getGrade().matchCount,
-                        lottoResult.getGrade().price,
-                        lottoResult.getGradeCount()
-                ));
-        System.out.printf("총 수익률은 %.2f\n", gameResultDto.getRate());
+                .forEach(System.out::println);
+        System.out.printf("총 수익률은 %.2f\n", gameResultDto.getRateOfReturn());
     }
+
 }
