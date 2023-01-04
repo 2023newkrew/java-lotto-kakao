@@ -3,7 +3,6 @@ package lotto.models;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import lotto.models.enums.Rank;
 
 public class LotteryStatistics {
@@ -14,16 +13,24 @@ public class LotteryStatistics {
     }
 
     public Integer getCountOf(Rank rank) {
-        return Objects.nonNull(rankCounts.get(rank)) ? rankCounts.get(rank) : 0;
+        return rankCounts.getOrDefault(rank, 0);
     }
 
     private Map<Rank, Integer> collectRankCounts(WinningLottery winningLottery, List<Lottery> lotteries) {
-        Map<Rank, Integer> rankCounts = new HashMap<>();
+        Map<Rank, Integer> rankCounts = initializeRankCounts();
         lotteries.forEach((lottery) -> {
             Rank currentKey = winningLottery.compareLottery(lottery);
-            int currentCount = getCountOf(currentKey);
+            int currentCount = rankCounts.getOrDefault(currentKey, 0);
             rankCounts.put(currentKey, currentCount + 1);
         });
+        return rankCounts;
+    }
+
+    private Map<Rank, Integer> initializeRankCounts() {
+        Map<Rank, Integer> rankCounts = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            rankCounts.put(rank, 0);
+        }
         return rankCounts;
     }
 }
