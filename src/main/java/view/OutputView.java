@@ -16,7 +16,7 @@ public class OutputView {
 
     private void printLottery(Lotto lottery) {
         System.out.println(
-                lottery.getLotteryNumber()
+                lottery.getLottoNumbers()
                         .stream()
                         .map(lotteryNumber -> Integer.toString(lotteryNumber.getNumber()))
                         .collect(Collectors.joining(","))

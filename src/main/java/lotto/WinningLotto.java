@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
-    private final LottoNumbers winningNumbers;
+    private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String winningNumbersAsString, int bonusNumber) {
@@ -17,7 +17,7 @@ public class WinningLotto {
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
 
-        this.winningNumbers = new LottoNumbers(winningNumbers);
+        this.winningNumbers = new Lotto(winningNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
@@ -37,9 +37,9 @@ public class WinningLotto {
 
     public Rank getRank(Lotto lotto) {
         int count = 0;
-        List<LottoNumber> lottoNumbers = lotto.getLotteryNumber();
+        List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
-        for (final LottoNumber number : winningNumbers.getNumbers()) {
+        for (final LottoNumber number : winningNumbers.getLottoNumbers()) {
             count += lottoNumbers.contains(number) ? 1 : 0;
         }
 
@@ -47,7 +47,7 @@ public class WinningLotto {
     }
 
     private boolean isBonusMatch(Lotto lotto) {
-        return lotto.getLotteryNumber().contains(bonusNumber);
+        return lotto.getLottoNumbers().contains(bonusNumber);
     }
 
     public BuyerResult getResult(Lotteries lotteries) {
