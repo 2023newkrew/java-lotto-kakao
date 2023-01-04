@@ -19,16 +19,6 @@ public class LottoGame {
         return lottos;
     }
 
-//    public static WinningLottoWithBonus getWinningLotto() {
-//        OutputView.printWinningNumbersRequest();
-//        return new WinningLottoWithBonus(InputView.getWinningLottoNumbers());
-//    }
-
-//    public static LottoNumber getBonusNumber(WinningLottoWithBonus winningLottoWithBonus) {
-//        OutputView.printBonusNumberRequest();
-//        return new LottoNumber(winningLottoWithBonus, InputView.getBonusNumber());
-//    }
-
     public static void main(String[] args) {
         Money paidPrice = getPaidPrice();
         Lottos lottos = getLottos(paidPrice.getCount());

@@ -1,12 +1,8 @@
 package util.validator;
 
-import common.constant.Constants;
 import domain.Lotto;
 import domain.LottoNumber;
-import domain.WinningLottoWithBonus;
 import exception.DuplicateNumberException;
-
-import java.util.List;
 
 public class LottoNumberValidator {
 
@@ -33,7 +29,7 @@ public class LottoNumberValidator {
     }
 
     private static void validateInRange(int inputNumber) {
-        if (!(Constants.MINIMUM <= inputNumber && inputNumber <= Constants.MAXIMUM)) {
+        if (!(Lotto.MINIMUM <= inputNumber && inputNumber <= Lotto.MAXIMUM)) {
             throw new IllegalArgumentException("1 이상 45 이하의 범위를 벗어났습니다.");
         }
     }

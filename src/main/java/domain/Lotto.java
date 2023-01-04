@@ -1,6 +1,5 @@
 package domain;
 
-import common.constant.Constants;
 import common.state.Result;
 import util.validator.LottoValidator;
 
@@ -12,7 +11,11 @@ import java.util.stream.IntStream;
 public class Lotto {
 
     private static final int START_INDEX = 0;
-    private static final List<LottoNumber> WHOLE_NUMBERS = IntStream.rangeClosed(Constants.MINIMUM, Constants.MAXIMUM)
+    public static final int MINIMUM = 1;
+    public static final int MAXIMUM = 45;
+    public static final int LENGTH = 6;
+    public static final String DELIMITER = ", ";
+    private static final List<LottoNumber> WHOLE_NUMBERS = IntStream.rangeClosed(MINIMUM, MAXIMUM)
             .boxed().map(number -> new LottoNumber(number))
             .collect(Collectors.toList());
 
@@ -24,7 +27,7 @@ public class Lotto {
 
     public static Lotto getAutoLotto() {
         Collections.shuffle(WHOLE_NUMBERS);
-        List<LottoNumber> numbers = new ArrayList<>(WHOLE_NUMBERS.subList(START_INDEX, START_INDEX + Constants.LENGTH));
+        List<LottoNumber> numbers = new ArrayList<>(WHOLE_NUMBERS.subList(START_INDEX, START_INDEX + LENGTH));
         numbers.sort(new Comparator<LottoNumber>() {
             @Override
             public int compare(LottoNumber o1, LottoNumber o2) {
@@ -36,7 +39,7 @@ public class Lotto {
 
     public static Lotto getManualLotto(String input) {
         LottoValidator.validate(input);
-        List<LottoNumber> numbers = Arrays.stream(input.split(Constants.DELIMITER))
+        List<LottoNumber> numbers = Arrays.stream(input.split(DELIMITER))
                 .map(inputString -> new LottoNumber(inputString))
                 .collect(Collectors.toList());
         return new Lotto(numbers);
@@ -55,6 +58,9 @@ public class Lotto {
     }
 
     public String lottoToString() {
-        return numbers.toString();
+        return numbers.stream()
+                .map(number -> number.number)
+                .collect(Collectors.toList())
+                .toString();
     }
 }

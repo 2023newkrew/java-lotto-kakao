@@ -1,6 +1,6 @@
 package util.validator;
 
-import common.constant.Constants;
+import domain.Lotto;
 
 public class SingleNumberValidator {
 
@@ -20,7 +20,7 @@ public class SingleNumberValidator {
     }
 
     private static void validateInRange(int inputNumber) {
-        if (!(Constants.MINIMUM <= inputNumber && inputNumber <= Constants.MAXIMUM)) {
+        if (!(Lotto.MINIMUM <= inputNumber && inputNumber <= Lotto.MAXIMUM)) {
             throw new IllegalArgumentException("1 이상 45 이하의 범위를 벗어났습니다.");
         }
     }

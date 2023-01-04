@@ -1,6 +1,6 @@
 package util.validator;
 
-import common.constant.Constants;
+import domain.Lotto;
 import exception.DuplicateNumberException;
 import exception.IllegalLengthException;
 
@@ -11,7 +11,7 @@ public class LottoValidator {
 
 
     public static void validate(String input) {
-        String[] splitInput = input.split(Constants.DELIMITER);
+        String[] splitInput = input.split(Lotto.DELIMITER);
         validateLength(splitInput);
         Arrays.stream(splitInput).forEach(LottoNumberValidator::validate);
         List<Integer> numbers = Arrays.stream(splitInput)
@@ -21,7 +21,7 @@ public class LottoValidator {
     }
 
     private static void validateLength(String[] inputs) {
-        if (inputs.length != Constants.LENGTH) {
+        if (inputs.length != Lotto.LENGTH) {
             throw new IllegalLengthException("총 여섯 개의 숫자로 이루어져 있어야 합니다.");
         }
     }
@@ -29,7 +29,7 @@ public class LottoValidator {
     private static void validDuplicate(List<Integer> inputs) {
         Set<Integer> distinctNumbers = new HashSet<>();
         inputs.stream().forEach(input -> distinctNumbers.add(input));
-        if (distinctNumbers.size() != Constants.LENGTH) {
+        if (distinctNumbers.size() != Lotto.LENGTH) {
             throw new DuplicateNumberException("중복된 숫자가 있습니다.");
         }
     }

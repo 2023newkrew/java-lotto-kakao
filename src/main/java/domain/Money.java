@@ -1,9 +1,8 @@
 package domain;
 
-import common.constant.Constants;
-
 public class Money {
 
+    private final int PRICE = 1000;
     private final int money;
 
     public Money(String paidPrice) {
@@ -21,13 +20,13 @@ public class Money {
         if (money < 0) {
             throw new IllegalArgumentException("금액은 항상 양수입니다.");
         }
-        if (money % Constants.PRICE != 0) {
-            throw new IllegalArgumentException("로또는 " + Constants.PRICE + "원 단위로 판매합니다.");
+        if (money % PRICE != 0) {
+            throw new IllegalArgumentException("로또는 " + PRICE + "원 단위로 판매합니다.");
         }
     }
 
     public int getCount() {
-        return money / Constants.PRICE;
+        return money / PRICE;
     }
 
     public int getMoney() {
