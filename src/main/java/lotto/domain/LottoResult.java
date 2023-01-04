@@ -1,48 +1,29 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.function.BiPredicate;
 
 public enum LottoResult {
-    NO_MATCH(0, false, 0),
-    FIFTH_PLACE(3, false, 5_000),
-    FOURTH_PLACE(4, false, 50_000),
-    THIRD_PLACE(5, false, 1_500_000),
-    SECOND_PLACE(5, true, 30_000_000),
-    FIRST_PLACE(6, false, 2_000_000_000);
+    NO_MATCH(((matchCount, bonusBallMatch) -> matchCount < 3), 0),
+    FIFTH_PLACE(((matchCount, bonusBallMatch) -> matchCount == 3), 5_000),
+    FOURTH_PLACE(((matchCount, bonusBallMatch) -> matchCount == 4), 50_000),
+    THIRD_PLACE(((matchCount, bonusBallMatch) -> matchCount == 5 && !bonusBallMatch), 1_500_000),
+    SECOND_PLACE(((matchCount, bonusBallMatch) -> matchCount == 5 && bonusBallMatch), 30_000_000),
+    FIRST_PLACE(((matchCount, bonusBallMatch) -> matchCount == 6), 2_000_000_000);
 
-    private final int matchCount;
-    private final boolean bonusBallMatch;
+    private final BiPredicate<Integer, Boolean> matchCondition;
     private final int prizeMoney;
 
-    LottoResult(int matchCount, boolean bonusBallMatch, int prizeMoney) {
-        this.matchCount = matchCount;
-        this.bonusBallMatch = bonusBallMatch;
+    LottoResult(BiPredicate<Integer, Boolean> matchCondition, int prizeMoney) {
+        this.matchCondition = matchCondition;
         this.prizeMoney = prizeMoney;
     }
 
     public static LottoResult findResult(int matchCount, boolean bonusBallMatch) {
-        if (matchCount == 5) {
-            return decideFiveMatchResult(bonusBallMatch);
-        }
         return Arrays.stream(values())
-                .filter(lottoResult -> lottoResult.matchCount == matchCount)
+                .filter(lottoResult -> lottoResult.matchCondition.test(matchCount, bonusBallMatch))
                 .findFirst()
                 .orElse(NO_MATCH);
-    }
-
-    private static LottoResult decideFiveMatchResult(boolean bonusBallMatch) {
-        if (bonusBallMatch) {
-            return SECOND_PLACE;
-        }
-        return THIRD_PLACE;
-    }
-
-    public int getMatchCount() {
-        return matchCount;
-    }
-
-    public boolean isBonusBallMatch() {
-        return bonusBallMatch;
     }
 
     public int getPrizeMoney() {
