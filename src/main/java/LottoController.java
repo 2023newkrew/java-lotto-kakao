@@ -2,11 +2,8 @@ import buyer.Buyer;
 import buyer.BuyerResult;
 import lotto.LottoGenerator;
 import lotto.WinningLotto;
-import util.StringParser;
 import view.InputView;
 import view.OutputView;
-
-import java.util.List;
 
 public class LottoController {
     private final InputView inputView = new InputView();
@@ -18,10 +15,10 @@ public class LottoController {
         lottoGenerator.generate(buyer);
 
         outputView.printLotteries(buyer.getLotteries());
-        List<Integer> winningNumber = StringParser.parse(inputView.getWinningNumbersInput());
+        String winningNumbersAsString = inputView.getWinningNumbersInput();
         int bonusNumber = inputView.getBonusNumberInput();
 
-        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumbersAsString, bonusNumber);
         BuyerResult buyerResult = winningLotto.getResult(buyer.getLotteries());
 
         outputView.printResult(buyerResult);

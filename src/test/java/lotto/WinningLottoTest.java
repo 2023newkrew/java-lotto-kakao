@@ -9,6 +9,17 @@ import java.util.List;
 import java.util.Map;
 
 public class WinningLottoTest {
+    @DisplayName("생성자 문자열 입력과 리스트 입력이 동일한 결과 반환")
+    @Test
+    void constructorInputTest() {
+        //given
+        WinningLotto winningLotto1 = new WinningLotto("1,2,3,4,5,6", 7);
+        WinningLotto winningLotto2 = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
+        //when
+        //then
+        Assertions.assertThat(winningLotto1).isEqualTo(winningLotto2);
+    }
+
     @DisplayName("당첨 번호 입력 테스트")
     @Test
     void matchTest() {

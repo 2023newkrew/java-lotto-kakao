@@ -2,17 +2,28 @@ package lotto;
 
 import buyer.BuyerResult;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WinningLotto {
     private final LottoNumbers winningNumbers;
     private final LottoNumber bonusNumber;
+
+    public WinningLotto(String winningNumbersAsString, int bonusNumber) {
+        this(parseStringToIntList(winningNumbersAsString), bonusNumber);
+    }
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
 
         this.winningNumbers = new LottoNumbers(winningNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
+    }
+
+    private static List<Integer> parseStringToIntList(String text){
+        String[] texts = text.split(",");
+        return Arrays.stream(texts).map(t -> Integer.parseInt(t.strip())).collect(Collectors.toList());
     }
 
     @Override
