@@ -1,5 +1,6 @@
 package view;
 
+import buyer.Buyer;
 import buyer.BuyerProfit;
 import buyer.BuyerResult;
 import lotto.LotteryDTO;
@@ -9,8 +10,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
+    public void printLotteriesInfo(Buyer buyer) {
+        System.out.print("수동으로 " + buyer.getManualCount() + "장, ");
+        System.out.println("자동으로 " + buyer.getAutoCount() + "장을 구매했습니다.");
+    }
+
     public void printLotteries(List<LotteryDTO> lotteries) {
         lotteries.forEach(this::printLottery);
+        System.out.println();
     }
 
     private void printLottery(LotteryDTO lottery) {
@@ -18,6 +25,8 @@ public class OutputView {
     }
 
     public void printResult(BuyerResult result) {
+        System.out.println("당첨 통계");
+        System.out.println("-------");
         Arrays.stream(Rank.values()).forEach((e) -> {
             if (e != Rank.NONE) {
                 printRankInfo(e);

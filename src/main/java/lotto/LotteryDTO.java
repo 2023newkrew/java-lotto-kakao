@@ -12,6 +12,8 @@ public class LotteryDTO {
 
     @Override
     public String toString() {
-        return numbers.stream().map(number -> number.toString()).collect(Collectors.joining(","));
+        return "[" +
+                numbers.stream().map(Object::toString).collect(Collectors.joining(",")) +
+                "]";
     }
 }
