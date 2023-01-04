@@ -7,9 +7,8 @@ public class LottoNumber {
     private final int number;
 
     public LottoNumber(int number) {
-        if (number < MINIMUM_BOUNDARY || number > MAXIMUM_BOUNDARY) {
-            throw new RuntimeException();
-        }
+        if (number < MINIMUM_BOUNDARY || number > MAXIMUM_BOUNDARY)
+            throw new IllegalArgumentException("로또 번호가 이상합니다.");
         this.number = number;
     }
 

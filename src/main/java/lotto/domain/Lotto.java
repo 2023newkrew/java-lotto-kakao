@@ -1,37 +1,33 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Lotto {
-    public static final int FIXED_SIZE = 6;
+    LottoNumbers lotto;
 
-    private final List<LottoNumber> numbers;
-
-    public Lotto(List<LottoNumber> numbers) {
-        if(numbers.size() != FIXED_SIZE){
-            throw new RuntimeException("로또 수의 개수가 잘못되었습니다.");
-        }
-        if (numbers.stream().distinct().count() != FIXED_SIZE) {
-            throw new RuntimeException("로또 수에 중복된 수가 있습니다.");
-        }
-        numbers.sort(LottoNumber::compare);
-        this.numbers = numbers;
+    public Lotto(int... args) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for(int arg:args)
+            lottoNumbers.add(new LottoNumber(arg));
+        lotto = new LottoNumbers(lottoNumbers);
     }
 
-    public List<LottoNumber> getNumbers() {
-        return numbers;
+    public Lotto(LottoNumbers lottoNumbers){
+        lotto = lottoNumbers;
     }
 
-    public int compare(Lotto other) {
-        return (int) numbers.stream().filter(other.numbers::contains).count();
+    public int compare(Lotto other){
+        return lotto.matchCount(other.lotto);
     }
 
     public boolean hasBonus(LottoNumber other) {
-        return numbers.contains(other);
+        return lotto.contains(other);
     }
 
     @Override
     public String toString() {
-        return numbers.toString();
+        return lotto.toString();
     }
 }
