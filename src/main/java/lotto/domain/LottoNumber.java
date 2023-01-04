@@ -15,7 +15,7 @@ public class LottoNumber {
 
     @Override
     public int hashCode() {
-        return this.number;
+        return Integer.hashCode(number);
     }
 
     @Override
