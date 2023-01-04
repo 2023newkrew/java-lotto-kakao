@@ -34,8 +34,10 @@ public class CashTest {
         Cash cash1 = new Cash(val1);
         Cash cash2 = new Cash(val2);
         Cash cash3 = cash1.plus(cash2);
+        Cash cash4 = cash3.plus(val2);
 
         Assertions.assertThat(cash3.getCash()).isEqualTo(3000);
+        Assertions.assertThat(cash4.getCash()).isEqualTo(5000);
     }
 
     @Test
