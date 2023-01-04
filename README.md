@@ -67,7 +67,8 @@
 - [ ] 중복된 LottoNumber를 판별하는 기능을 가진다.
 
 #### LottoNumber
-- [ ] 1 ~ 45 숫자를 가진다.
+- [x] 1 ~ 45 숫자를 가진다.
+- [x] 1 ~ 45 외의 값이 주어지면 IllegalArgumentException이 발생한다.
 
 #### LottoAnswer
 - [ ] LottoNumbers와 BonusBall을 가진 객체이다.
