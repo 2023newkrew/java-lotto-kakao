@@ -10,11 +10,11 @@ public class TotalResult {
     private int trial = 0;
 
     public TotalResult(){
-        for (int i=0;i<BALLCOUNT_LIMIT;i++){
+        for (int i = 0; i< ONE_TRIAL_BALL_COUNT; i++){
             lottoResultCount.put(LottoResult.get(i, false), new LottoCount(0));
             lottoResultCount.put(LottoResult.get(i, true), new LottoCount(0));
         }
-        lottoResultCount.put(LottoResult.get(BALLCOUNT_LIMIT, false), new LottoCount(0));
+        lottoResultCount.put(LottoResult.get(ONE_TRIAL_BALL_COUNT, false), new LottoCount(0));
     }
     public void add(LottoResult lottoResult) {
         trial++;

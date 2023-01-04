@@ -14,8 +14,8 @@ public class LottoResult {
     private final static Map<Integer, LottoResult> cache = new HashMap<>();
 
     private LottoResult(int matchCount, boolean matchBonus){
-        if (matchCount < 0 || matchCount > BALLCOUNT_LIMIT ||
-                (matchCount==BALLCOUNT_LIMIT && matchBonus)){
+        if (matchCount < 0 || matchCount > ONE_TRIAL_BALL_COUNT ||
+                (matchCount == ONE_TRIAL_BALL_COUNT && matchBonus)){
             throw new InvalidLottoResult();
         }
         this.matchBonus = matchBonus;
@@ -25,6 +25,13 @@ public class LottoResult {
     private static int mapCode(int matchCount, boolean matchBonus){
         return matchCount*2 + (matchBonus?1:0);
     }
+
+    /**
+     * @param matchCount represents how many matches between WinNumber and LottoTrial
+     * @param matchBonus represents whether LottoTrial contains bonus number.
+     * @throws InvalidLottoResult when impossible LottoResult is given.
+     * @return LottoResult object corresponding to given params.
+     */
     public static LottoResult get(int matchCount, boolean matchBonus){
         if (!cache.containsKey(mapCode(matchCount, matchBonus))){
             cache.put(mapCode(matchCount, matchBonus), new LottoResult(matchCount, matchBonus));

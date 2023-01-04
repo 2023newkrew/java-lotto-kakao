@@ -14,10 +14,10 @@ public abstract class LottoTrial {
     @Override
     public String toString() {
         String result = "[";
-        for (int i=0;i<BALLCOUNT_LIMIT-1;i++){
+        for (int i = 0; i< ONE_TRIAL_BALL_COUNT -1; i++){
             result += ballNumbers.get(i) + ", ";
         }
-        result += ballNumbers.get(BALLCOUNT_LIMIT-1) + "]";
+        result += ballNumbers.get(ONE_TRIAL_BALL_COUNT -1) + "]";
         return result;
     }
 
@@ -26,7 +26,7 @@ public abstract class LottoTrial {
         validateDuplication(lottoTrial);
     }
     private void validateLottoCount(LottoTrial lottoTrial){
-        if (lottoTrial.getBallNumbers().size()!=BALLCOUNT_LIMIT){
+        if (lottoTrial.getBallNumbers().size()!= ONE_TRIAL_BALL_COUNT){
             throw new InvalidLottoTrial();
         }
     }
@@ -34,7 +34,7 @@ public abstract class LottoTrial {
     private void validateDuplication(LottoTrial lottoTrial){
         Set<LottoBallNumber> lottoSet = new HashSet<>();
         lottoSet.addAll(lottoTrial.ballNumbers);
-        if (lottoSet.size()!=BALLCOUNT_LIMIT) {
+        if (lottoSet.size()!= ONE_TRIAL_BALL_COUNT) {
             throw new DuplicatedBallNumber();
         }
     }

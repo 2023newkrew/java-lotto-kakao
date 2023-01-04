@@ -9,11 +9,20 @@ import java.util.Map;
 import java.util.Objects;
 import static lotto.domain.LottoConstants.*;
 
+/**
+ * An object that contains number which represent one lotto ball.<br>
+ * Assert that number is between {@code BALLNUMBER_MIN_VALUE} and {@code BALLNUMBER_MAX_VALUE}<br>
+ */
 public class LottoBallNumber implements Comparable{
 
     private final int num;
+
     private static final Map<Integer, LottoBallNumber> cache = new HashMap<>();
 
+    /**
+     * Cannot call constructor at outer class.
+     * <br>Call LottoBallNumber.get(num) instead.
+     */
     private LottoBallNumber(int num) {
         if (num < BALLNUMBER_MIN_VALUE ||
                 num> BALLNUMBER_MAX_VALUE){
@@ -22,6 +31,11 @@ public class LottoBallNumber implements Comparable{
         this.num = num;
     }
 
+    /**
+     * @param num num whose LottoBallNumber
+     * @throws InvalidLottoBallNumber if given parameter is not between
+     * {@code BALLNUMBER_MIN_VALUE} and {@code BALLNUMBER_MAX_VALUE}
+     */
     public static LottoBallNumber get(int num){
         if (!cache.containsKey(num)){
             cache.put(num, new LottoBallNumber(num));
@@ -29,6 +43,12 @@ public class LottoBallNumber implements Comparable{
         return cache.get(num);
     }
 
+    /**
+     *
+     * @param o the object to be compared.
+     * @throws TypeMismatchException if o is neither Integer nor LottoBallNumber
+     * @return positive number if num is bigger, 0 when same, negative when smaller.
+     */
     @Override
     public int compareTo(Object o) {
         if (o == null || (getClass() != o.getClass() && o.getClass() != Integer.class)){

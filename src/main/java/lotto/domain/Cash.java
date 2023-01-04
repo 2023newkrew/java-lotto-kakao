@@ -5,8 +5,19 @@ import lotto.domain.exception.TypeMismatchException;
 
 import java.util.Objects;
 
+/**
+ * @author Daniel.tomi
+*/
+
 public class Cash implements Comparable {
     private final long cash;
+
+    /**
+     * makes Cash instance which have {@code (cash)} won.
+     * @param cash
+     *
+     * @author Daniel.kim
+     */
     public Cash(long cash){
         if (cash < 0) {
             throw new InvalidCashValue();
@@ -14,9 +25,22 @@ public class Cash implements Comparable {
         this.cash = cash;
     }
 
+    /**
+     * returns new Cash of addition of this.cash, val2.cash
+     * if given Cash type instance.
+     * @param val2
+     * @return new cash
+     */
     public Cash plus(Cash val2) {
         return new Cash(this.cash+val2.getCash());
     }
+
+    /**
+     * returns new Cash of addition of this.cash and val2(long)
+     * if given long type variable.
+     * @param val2
+     * @return
+     */
     public Cash plus(long val2) {
         return new Cash(this.cash+val2);
     }
@@ -47,6 +71,12 @@ public class Cash implements Comparable {
         return cash+"원";
     }
 
+    /**
+     * compare this.cash and o.cash or o if o is type of Cash or Long, .
+     * @param o the object to be compared.
+     * @throws TypeMismatchException if o is not instance of Long or Cash.
+     * @return positive integer value if this.cash is bigger, 0 if same, negative value if smaller.
+     */
     @Override
     public int compareTo(Object o) {
         if (o == null || (getClass() != o.getClass() && o.getClass()!=Long.class)){

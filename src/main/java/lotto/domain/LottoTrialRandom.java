@@ -5,7 +5,7 @@ public class LottoTrialRandom extends LottoTrial {
     private final LottoPicker picker;
     public LottoTrialRandom(LottoPicker lottoPicker){
         this.picker = lottoPicker;
-        for (int i=1;i<=BALLCOUNT_LIMIT;i++){
+        for (int i = 1; i<= ONE_TRIAL_BALL_COUNT; i++){
             super.ballNumbers.add(picker.pickOne());
         }
         super.validate(this);

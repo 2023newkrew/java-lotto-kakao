@@ -7,12 +7,18 @@ import java.util.Objects;
 public class LottoCount {
 
     private final int count;
+
     public LottoCount(int number) {
         if (number<0){
             throw new InvalidLottoCountValue();
         }
         this.count = number;
     }
+
+    /**
+     * convert cash into count of buyable lotto.
+     * @param cash
+     */
     public LottoCount(Cash cash){
         this((int)(cash.getCash() / LOTTO_PRICE));
     }
@@ -20,6 +26,11 @@ public class LottoCount {
     public int getCount() {
         return count;
     }
+
+    /**
+     * @param val
+     * @return new LottoCount instance which have added value.
+     */
     public LottoCount add(int val){
         return new LottoCount(count+val);
     }

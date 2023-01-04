@@ -8,6 +8,9 @@ import static lotto.domain.LottoConstants.*;
 
 public class LottoPickerRandom implements LottoPicker{
     private final List<LottoBallNumber> picker = new ArrayList<>();
+    /**
+     * put picker all available LottoBallNumber and shuffle it.
+     */
     public LottoPickerRandom(){
         for (int i=BALLNUMBER_MIN_VALUE;i<=BALLNUMBER_MAX_VALUE;i++){
             picker.add(LottoBallNumber.get(i));
@@ -15,6 +18,11 @@ public class LottoPickerRandom implements LottoPicker{
         Collections.shuffle(picker);
     }
 
+    /**
+     * get random unpicked LottoBallNumber, and remove it.
+     * @throws IndexOutOfBoundsException if picker does not have any LottoBallNumber
+     * @return random unpicked LottoBallNumber
+     */
     @Override
     public LottoBallNumber pickOne(){
         LottoBallNumber result = picker.get(0);
