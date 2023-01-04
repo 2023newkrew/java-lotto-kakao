@@ -16,7 +16,7 @@ public class LottoGeneratorTest {
         Payment payment = new Payment(14000);
 
         // when
-        List<LottoNumbers> lottoNumbers = LottoGenerator.generateLotto(payment);
+        List<LottoNumbers> lottoNumbers = LottoGenerator.generateLotto(LottoCalculator.calculateNumberOfLotto(payment));
 
         // then
         assertThat(lottoNumbers.size()).isEqualTo(LottoCalculator.calculateNumberOfLotto(payment));
