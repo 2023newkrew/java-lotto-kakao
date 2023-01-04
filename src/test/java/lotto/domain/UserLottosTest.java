@@ -10,34 +10,34 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 public class UserLottosTest {
     LottoNumbers userLotto1 = new LottoNumbers(
             Arrays.asList(
-                    new SingleLottoNumber(1),
-                    new SingleLottoNumber(2),
-                    new SingleLottoNumber(3),
-                    new SingleLottoNumber(4),
-                    new SingleLottoNumber(5),
-                    new SingleLottoNumber(6)
+                    new LottoNumber(1),
+                    new LottoNumber(2),
+                    new LottoNumber(3),
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(6)
             )
     );
 
     LottoNumbers userLotto2 = new LottoNumbers(
             Arrays.asList(
-                    new SingleLottoNumber(4),
-                    new SingleLottoNumber(5),
-                    new SingleLottoNumber(6),
-                    new SingleLottoNumber(7),
-                    new SingleLottoNumber(8),
-                    new SingleLottoNumber(9)
+                    new LottoNumber(4),
+                    new LottoNumber(5),
+                    new LottoNumber(6),
+                    new LottoNumber(7),
+                    new LottoNumber(8),
+                    new LottoNumber(9)
             )
     );
 
     LottoNumbers userLotto3 = new LottoNumbers(
             Arrays.asList(
-                    new SingleLottoNumber(7),
-                    new SingleLottoNumber(8),
-                    new SingleLottoNumber(9),
-                    new SingleLottoNumber(10),
-                    new SingleLottoNumber(11),
-                    new SingleLottoNumber(12)
+                    new LottoNumber(7),
+                    new LottoNumber(8),
+                    new LottoNumber(9),
+                    new LottoNumber(10),
+                    new LottoNumber(11),
+                    new LottoNumber(12)
             )
     );
 
@@ -49,5 +49,5 @@ public class UserLottosTest {
         assertThatCode(() -> new UserLottos(userLottoList))
                 .doesNotThrowAnyException();
     }
-    
+
 }

@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class Lotto {
     private final LottoNumbers lottoNumbers;
-    private final SingleLottoNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public Lotto(LottoNumbers lottoNumbers, SingleLottoNumber bonusNumber) {
+    public Lotto(LottoNumbers lottoNumbers, LottoNumber bonusNumber) {
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }

@@ -17,10 +17,10 @@ public class LottoController {
         UserLottos userLottos = new UserLottos(RandomLottoGenerator.generateLottos(amount));
         outputView.printUserLottos(userLottos.getLottoNumbers());
         List<Integer> lottoNumbers = inputView.getAnswerLottoInput();
-        SingleLottoNumber bonusNumber = new SingleLottoNumber(inputView.getBonusBallInput());
+        LottoNumber bonusNumber = new LottoNumber(inputView.getBonusBallInput());
 
-        List<SingleLottoNumber> answerLottoNumbers = lottoNumbers.stream()
-                .map(SingleLottoNumber::new)
+        List<LottoNumber> answerLottoNumbers = lottoNumbers.stream()
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
         Lotto lotto = new Lotto(new LottoNumbers(answerLottoNumbers), bonusNumber);
         outputView.printResult(lotto.getPrizeCountMap(userLottos.getLottoNumbers()));
