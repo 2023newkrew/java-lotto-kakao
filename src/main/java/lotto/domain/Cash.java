@@ -35,7 +35,7 @@ public class Cash implements Comparable {
      * @return new cash
      */
     public Cash plus(Cash val2) {
-        return new Cash(this.cash+val2.getCash());
+        return plus(this.cash+val2.getCash());
     }
 
     /**
@@ -46,6 +46,19 @@ public class Cash implements Comparable {
      */
     public Cash plus(long val2) {
         return new Cash(this.cash+val2);
+    }
+
+    /**
+     * returns new Cash of addition of this.cash and val2(long)
+     * if given long type variable.
+     * @param val2
+     * @return
+     */
+    public Cash minus(Cash val2) {
+        return minus(this.cash-val2.cash);
+    }
+    public Cash minus(long val2) {
+        return new Cash(this.cash-val2);
     }
 
     public long getCash() {
