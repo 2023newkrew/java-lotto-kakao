@@ -4,36 +4,31 @@ package lotto.model;
 import lotto.exception.ErrorCode;
 import lotto.exception.LottoException;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.util.ListUtil;
 
 public class LottoTicket {
     private static final Integer LOTTO_TICKET_LENGTH = 6;
     private static final Integer LOTTO_NUMBER_LOWER_BOUNDARY = 1;
     private static final Integer LOTTO_NUMBER_UPPER_BOUNDARY = 45;
 
-    private final List<LottoNumber> lotto;
+    private final List<LottoNumber> lottoTicket;
 
     public LottoTicket() {
-        lotto = createRandomLottoTicket();
-        Collections.sort(lotto);
+        List<Integer> numbers = ListUtil.getFrontSubListAndSort(
+                ListUtil.createShuffledNumbers(LOTTO_NUMBER_LOWER_BOUNDARY, LOTTO_NUMBER_UPPER_BOUNDARY), LOTTO_TICKET_LENGTH
+        );
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::numberOf)
+                .collect(Collectors.toList());
+        validateLottoTicketLength(lottoNumbers);
+        lottoTicket = lottoNumbers;
     }
 
-    private List<LottoNumber> createRandomLottoTicket() {
-        List<LottoNumber> list = new ArrayList<>();
-        for (int number = LOTTO_NUMBER_LOWER_BOUNDARY; number <= LOTTO_NUMBER_UPPER_BOUNDARY; number++) {
-            list.add(new LottoNumber(number));
-        }
-
-        Collections.shuffle(list);
-        return list.subList(0, LOTTO_TICKET_LENGTH);
-    }
-
-    public LottoTicket(List<LottoNumber> input) {
-        validateLottoTicketLength(input);
-        lotto = input;
+    public LottoTicket(List<LottoNumber> lottoTicket) {
+        validateLottoTicketLength(lottoTicket);
+        this.lottoTicket = lottoTicket;
     }
 
     private void validateLottoTicketLength(List<LottoNumber> input) {
@@ -43,23 +38,14 @@ public class LottoTicket {
     }
 
     public boolean contains(LottoNumber number) {
-        return lotto.contains(number);
+        return lottoTicket.contains(number);
     }
 
     public Integer countOverlappingNumber(LottoTicket lottoTicket) {
         return Math.toIntExact(
-                lotto.stream()
+                this.lottoTicket.stream()
                         .filter(lottoTicket::contains)
                         .count()
         );
-    }
-
-    @Override
-    public String toString() {
-        return "[" +
-                lotto.stream()
-                        .map(LottoNumber::getLottoNumberString)
-                        .collect(Collectors.joining(", ")) +
-                "]";
     }
 }
