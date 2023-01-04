@@ -19,10 +19,10 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    public List<RankingType> getRankings(List<Integer> winNumbers, int bonus) {
+    public List<RankingType> getRankings(WinningNumbers winningNumbers) {
         List<RankingType> rankingTypes = new ArrayList<>();
         for(Lotto lotto: lottos){
-            rankingTypes.add(lotto.checkWin(winNumbers, bonus));
+            rankingTypes.add(lotto.checkWin(winningNumbers));
         }
         return rankingTypes;
     }

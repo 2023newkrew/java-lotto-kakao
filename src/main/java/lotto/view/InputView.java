@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.WinningNumbers;
 import lotto.utils.Validator;
 
 import java.util.*;
@@ -13,14 +14,6 @@ public class InputView {
         validator.isThousandUnit(money);
         return money;
     }
-
-    public List<Integer> receiveLastLottoNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> lottoNumbers = receiveLottoNumbers();
-
-        return lottoNumbers;
-    }
-
     public List<Integer> receiveLottoNumbers() {
         Scanner scanner = new Scanner(System.in);
         List<Integer> lottoNumbers;
@@ -37,12 +30,21 @@ public class InputView {
         return number;
     }
 
+    public WinningNumbers receiveLastLottoNumbers() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        List<Integer> lottoNumbers = receiveLottoNumbers();
 
-    public int receiveLastLottoBonusNumber(List<Integer> lottoNumbers) {
         System.out.println("보너스 볼을 입력해 주세요.");
+        int bonusNumber = receiveLastLottoBonusNumber(lottoNumbers);
+
+        return new WinningNumbers(lottoNumbers, bonusNumber);
+    }
+
+    public int receiveLastLottoBonusNumber(List<Integer> lottoNumbers){
         int bonusNumber = receiveNumber();
         validator.checkInRange(bonusNumber);
         validator.checkDuplicateLottoNumberWithBonusNumber(lottoNumbers, bonusNumber);
+
         return bonusNumber;
     }
 
