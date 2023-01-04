@@ -24,6 +24,12 @@ public class LottoGenerator {
         return quantity;
     }
 
+    public void manuallyGenerate(Buyer buyer, List<String> numberStrings) {
+        for (String numbersAsString : numberStrings) {
+            manuallyGenerateOne(buyer, numbersAsString);
+        }
+    }
+
     public void manuallyGenerateOne(Buyer buyer, String numbersAsString) {
         buyer.buyLottery(LOTTERY_PRICE, new Lotto(numbersAsString));
     }
