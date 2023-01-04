@@ -15,12 +15,12 @@ public class WinningLotto {
     }
 
     public static WinningLotto of(Lotto lotto, int bonusNumber) {
-        validBonusNumber(lotto, bonusNumber);
+        validateBonusNumber(lotto, bonusNumber);
 
         return new WinningLotto(lotto, bonusNumber);
     }
 
-    private static void validBonusNumber(Lotto lotto, int bonusNumber) {
+    private static void validateBonusNumber(Lotto lotto, int bonusNumber) {
         if (lotto.contains(bonusNumber)) {
             throw new BonusNumberDuplicateException(bonusNumber);
         }
