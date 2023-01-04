@@ -12,7 +12,7 @@ public class LottoController {
 
     public void run() {
         Buyer buyer = new Buyer(inputView.getBudgetInput());
-        lottoGenerator.autoGenerateRemaining(buyer);
+        int autoQuantity = lottoGenerator.autoGenerateRemaining(buyer);
 
         outputView.printLotteries(buyer.getLotteries());
         String winningNumbersAsString = inputView.getWinningNumbersInput();
