@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class LottoValidator {
 
-
     public static void validate(String input) {
         String[] splitInput = input.split(Lotto.DELIMITER);
         validateLength(splitInput);

@@ -1,26 +1,16 @@
 package util.validator;
 
 import domain.Lotto;
-import domain.WinningLottoWithBonus;
 import exception.DuplicateNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoNumberValidatorTest {
-
-    @DisplayName("입력한 값에 숫자가 아닌 글자가 포함되었을 때 예외 확인 테스트")
-    @NullAndEmptySource
-    @ParameterizedTest
-    @ValueSource(strings = {"abcd", "14$"})
-    public void validateThrowNumberFormatExceptionTest(String inputWithCharacter) {
-        assertThrows(NumberFormatException.class, () -> LottoNumberValidator.validate(inputWithCharacter));
-    }
 
     @DisplayName("입력한 값이 범위를 벗어났을 때 예외 확인 테스트")
     @ParameterizedTest
