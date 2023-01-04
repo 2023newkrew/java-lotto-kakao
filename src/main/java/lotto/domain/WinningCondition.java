@@ -10,7 +10,11 @@ public enum WinningCondition {
             new Cash(THIRD_PRIZE_CASH), 2),
     FOURTH_PRIZE(new LottoResult(BALLCOUNT_LIMIT-2,false),
             new Cash(FOURTH_PRIZE_CASH), 1),
+    FOURTH_PRIZE_BONUS(new LottoResult(BALLCOUNT_LIMIT-2,true),
+            new Cash(FOURTH_PRIZE_CASH), 1),
     FIFTH_PRIZE(new LottoResult(BALLCOUNT_LIMIT-3,false),
+            new Cash(FIFTH_PRIZE_CASH), 0),
+    FIFTH_PRIZE_BONUS(new LottoResult(BALLCOUNT_LIMIT-3,true),
             new Cash(FIFTH_PRIZE_CASH), 0);
 
     private final LottoResult lottoResult;
