@@ -7,7 +7,6 @@ import javalotto.util.LottoConstants;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -64,10 +63,6 @@ public class Lotto {
 
     public boolean contains(int number) {
         return numbers.contains(number);
-    }
-
-    public boolean containsExactly(List<Integer> numbers) {
-        return Objects.equals(this.numbers, numbers);
     }
 
     public int getMatchCount(Lotto other) {

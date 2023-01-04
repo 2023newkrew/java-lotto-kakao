@@ -26,11 +26,11 @@ class LottoTest {
     @Test
     void should_storeNumbersInSortedOrder() {
         List<Integer> numbers = List.of(2, 1, 3, 4, 5, 6);
-        List<Integer> sortedNumbers = List.of(1, 2, 3, 4, 5, 6);
+        String sortedNumbersLottoString = "[1, 2, 3, 4, 5, 6]";
 
         Lotto lotto = Lotto.from(numbers);
 
-        assertThat(lotto.containsExactly(sortedNumbers)).isTrue();
+        assertThat(lotto.toString()).isEqualTo(sortedNumbersLottoString);
     }
 
     @ParameterizedTest
