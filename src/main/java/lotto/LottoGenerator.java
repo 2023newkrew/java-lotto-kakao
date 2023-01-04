@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 public class LottoGenerator {
     public final static int LOTTERY_PRICE = 1000;
 
-    public void generate(Buyer buyer) {
+    public void autoGenerateRemaining(Buyer buyer) {
         List<Integer> numberCollection = IntStream.range(LottoNumber.MIN_NUMBER, LottoNumber.MAX_NUMBER + 1)
                 .boxed()
                 .collect(Collectors.toList());
