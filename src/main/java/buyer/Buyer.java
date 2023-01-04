@@ -5,18 +5,18 @@ import lotto.Lotto;
 
 public class Buyer {
     private final Lotteries lotteries = new Lotteries();
-    private final Budget budget;
+    private final Money budget;
 
     public Buyer(int budget) {
-        this.budget = new Budget(budget);
+        this.budget = new Money(budget);
     }
 
     public boolean hasMoreBudgetThan(int price) {
-        return budget.hasMoreThan(price);
+        return budget.isMoreThan(price);
     }
 
     public void buyLottery(int lotteryPrice, Lotto lotto) {
-        this.budget.decreaseBudget(lotteryPrice);
+        this.budget.decreaseMoney(lotteryPrice);
         this.lotteries.addLottery(lotto);
     }
 
