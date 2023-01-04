@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class Statistics {
     private int FIRST;
     private int SECOND;
@@ -16,7 +18,7 @@ public class Statistics {
         FIFTH = 0;
     }
 
-    public void build(Lottos lottos, Lotto winLotto, LottoNumber bonusNumber) {
+    public void build(List<Lotto> lottos, Lotto winLotto, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos) {
             LottoResult result = new LottoResult(lotto, winLotto, bonusNumber);
             add(result.getRank());

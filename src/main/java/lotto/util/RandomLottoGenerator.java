@@ -3,13 +3,12 @@ package lotto.util;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
-import lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RandomLottoGenerator {
-    public Lotto generateLotto() {
+    public static Lotto generateLotto() {
         return new Lotto(RandomNumberGenerator.getRandomNumbers(
                 LottoNumbers.SIZE,
                 LottoNumber.MINIMUM_BOUNDARY,
@@ -17,11 +16,11 @@ public class RandomLottoGenerator {
         ));
     }
 
-    public Lottos generateLottos(int amount) {
-        List<Lotto> lottoList = new ArrayList<>();
+    public static List<Lotto> generateLottos(int amount) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
-            lottoList.add(generateLotto());
+            lottos.add(generateLotto());
         }
-        return new Lottos(lottoList);
+        return lottos;
     }
 }

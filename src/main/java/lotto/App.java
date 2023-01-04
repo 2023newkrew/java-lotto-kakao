@@ -2,18 +2,19 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
 import lotto.util.LottoPayment;
 import lotto.util.RandomLottoGenerator;
 import lotto.domain.Statistics;
 import lotto.view.LottoView;
+
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
         LottoView lottoView = new LottoView();
         RandomLottoGenerator generator = new RandomLottoGenerator();
         int amount = LottoPayment.getAmount(lottoView.inputPurchase());
-        Lottos lottos = generator.generateLottos(amount);
+        List<Lotto> lottos = generator.generateLottos(amount);
 
         lottoView.printAmount(amount);
         lottoView.printLottos(lottos);

@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,7 @@ public class LottoView {
         System.out.println(lotto);
     }
 
-    public void printLottos(Lottos lottos) {
+    public void printLottos(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             printLotto(lotto);
         }
