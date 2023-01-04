@@ -89,3 +89,5 @@
 - [x] LottoNumberPicker와 Seller 통합
 - [ ] 알맞지 않은 인풋에 대해 재입력 받을 수 있도록 변경
 - [ ] View단 리팩터링 진행
+- [ ] LottoResult Enum 네이밍 재고
+- [x] Controller 도입
