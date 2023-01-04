@@ -7,8 +7,9 @@ import lotto.domain.LottoGame;
 import lotto.domain.WinningLotto;
 import lotto.view.LottoView;
 
+import static lotto.domain.Lotto.LOTTO_PRICE;
+
 public class Application {
-    public static final int LOTTO_PRICE = 1000;
 
     public static void main(String[] args) {
         List<Lotto> lottos = Lotto.autoGenerateLottos(LottoView.inputInit() / LOTTO_PRICE);
