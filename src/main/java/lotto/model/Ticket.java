@@ -1,36 +1,33 @@
 package lotto.model;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class Ticket {
     public static final int NUMBERS_LENGTH = 6;
-    public static final int NUMBERS_RANGE = 45;
 
-    private final List<Integer> numbers;
+    private final HashSet<LottoNumber> numbers;
 
-    public Ticket(List<Integer> numbers) {
-        this.numbers = numbers;
+    public Ticket(List<LottoNumber> numbers) {
+        this.numbers = this.getValidNumbers(numbers);
     }
 
-    public static boolean isValidNumber(int number) {
-        return number > 0 && number <= Ticket.NUMBERS_RANGE;
-    }
-
-    public static boolean isValidNumbers(List<Integer> numbers) {
+    private HashSet<LottoNumber> getValidNumbers(List<LottoNumber> numbers) {
         if (numbers.size() != Ticket.NUMBERS_LENGTH) {
-            return false;
+            throw new IllegalArgumentException("로또는 6개의 번호를 가져야 합니다.");
         }
         boolean isValid = true;
-        for (int number : numbers) {
-            isValid = isValid && Ticket.isValidNumber(number);
+        HashSet<LottoNumber> validNumbers = new HashSet<>();
+        for (LottoNumber number : numbers) {
+            isValid = isValid && validNumbers.add(number);
         }
-        for (int idx = 1; idx < numbers.size(); idx++) {
-            isValid = isValid && numbers.get(idx - 1) < numbers.get(idx);
+        if (!isValid) {
+            throw new IllegalArgumentException("로또는 중복된 번호를 가질 수 없습니다.");
         }
-        return isValid;
+        return validNumbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public boolean contains(LottoNumber number) {
+        return this.numbers.contains(number);
     }
 }

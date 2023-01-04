@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.util.RandomGenerator;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,7 @@ public class Lotto {
         this.tickets = new ArrayList<>();
 
         List<Integer> generationRange = new ArrayList<>();
-        for (int i = 1; i <= Ticket.NUMBERS_RANGE; i++) {
+        for (int i = 1; i <= LottoNumber.NUMBER_RANGE; i++) {
             generationRange.add(i);
         }
         this.randomGenerator = new RandomGenerator(generationRange);
