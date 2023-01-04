@@ -6,8 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.*;
 
 public class WinningLottoTest {
     LottoNumbers winningLottoNumbers = new LottoNumbers(
@@ -26,6 +25,12 @@ public class WinningLottoTest {
     @Test
     void 정답과_보너스_볼이_있어야_한다() {
         assertThatCode(() -> new WinningLotto(winningLottoNumbers, bonusNumber)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void 정답과_보너스_볼이_중첩되면_예외가_발생한다() {
+        assertThatThrownBy(() -> new WinningLotto(winningLottoNumbers, new LottoNumber(6)))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
