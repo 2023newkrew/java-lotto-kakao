@@ -29,7 +29,10 @@ public enum Result {
         return description;
     }
 
-    public static Result of(int match) {
+    public static Result of(int match, boolean isBonus) {
+        if (match == 5 && isBonus) {
+            return Result.SECOND_PLACE;
+        }
         return Arrays.stream(values())
                 .filter(v -> match == v.match)
                 .findFirst()

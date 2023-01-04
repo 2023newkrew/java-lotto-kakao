@@ -43,10 +43,7 @@ public class Lotto {
         int count = (int) numbers.stream()
                 .filter(winningLottoNumbers::contains)
                 .count();
-        if (count == 5 && isBonus(bonusNumber)) {
-            return Result.SECOND_PLACE;
-        }
-        return Result.of(count);
+        return Result.of(count, isBonus(bonusNumber));
     }
 
     public boolean isBonus(LottoNumber bonusNumber) {
