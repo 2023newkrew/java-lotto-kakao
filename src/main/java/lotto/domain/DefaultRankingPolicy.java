@@ -8,7 +8,7 @@ public class DefaultRankingPolicy implements RankingPolicy {
     @Override
     public LottoRank grade(LottoResult lottoResult) {
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> rank.rankCritera().isSatisfiedBy(lottoResult))
+                .filter(rank -> rank.getRankCritera().isSatisfiedBy(lottoResult))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INCOMPLETE_RANK_EXCEPTION_MESSAGE));
     }

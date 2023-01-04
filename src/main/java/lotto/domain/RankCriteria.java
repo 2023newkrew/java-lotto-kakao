@@ -1,15 +1,10 @@
 package lotto.domain;
 
-import static lotto.domain.LottoConstants.LOTTO_NUMBERS_LENGTH;
-
 public class RankCriteria {
     private final int minMatchCount;
     private final int maxMatchCount;
     private final boolean isRequiresBonus;
 
-    public RankCriteria(int minMatchCount, boolean isRequiresBonus) {
-        this(minMatchCount, LOTTO_NUMBERS_LENGTH, isRequiresBonus);
-    }
     public RankCriteria(int minMatchCount, int maxMatchCount, boolean isRequiresBonus) {
         this.minMatchCount = minMatchCount;
         this.maxMatchCount = maxMatchCount;

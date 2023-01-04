@@ -17,7 +17,9 @@ public class GameResult {
     }
 
     private long calculateTotalWinning(List<Integer> rankCount) {
-        return Arrays.stream(LottoRank.values()).mapToLong(rank -> rank.winning() * rankCount.get(rank.index())).sum();
+        return Arrays.stream(LottoRank.values())
+                .mapToLong(rank -> rank.getWinning() * rankCount.get(rank.getIndex()))
+                .sum();
     }
 
     public List<Integer> getRankCount() {

@@ -24,7 +24,7 @@ public class InputView {
             validatePrice(price);
             return price;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(PRICE_TYPE_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(PRICE_TYPE_EXCEPTION_MESSAGE, e);
         }
     }
 
@@ -35,7 +35,7 @@ public class InputView {
                     .map(x -> Integer.parseInt(x.trim()))
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(LOTTO_ANSWER_NUMBERS_TYPE_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(LOTTO_ANSWER_NUMBERS_TYPE_EXCEPTION_MESSAGE, e);
         }
     }
 

@@ -25,7 +25,7 @@ public class LottoHandler {
     public List<Integer> grade(LottoAnswer lottoAnswer) {
         List<Integer> rankCounts = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 0));
         for (Lotto lotto : lottos) {
-            int index = rankingPolicy.grade(lotto.createLottoResult(lottoAnswer)).index();
+            int index = rankingPolicy.grade(lotto.createLottoResult(lottoAnswer)).getIndex();
             rankCounts.set(index, rankCounts.get(index) + 1);
         }
         return rankCounts;

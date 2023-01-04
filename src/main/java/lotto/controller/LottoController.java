@@ -18,8 +18,8 @@ public class LottoController {
 
     public void run() {
         initialize();
-        setLottoAnswerNumber();
-        setLottoAnswer();
+        injectLottoAnswerNumber();
+        injectLottoAnswer();
         lottoGame.grade();
         printResult();
     }
@@ -41,23 +41,23 @@ public class LottoController {
         outputView.printCount(lottoCount);
     }
 
-    private void setLottoAnswerNumber() {
+    private void injectLottoAnswerNumber() {
         try {
             outputView.printReadLottoAnswerNumbers();
             lottoAnswerNumbers = new LottoNumbers(inputView.readLottoAnswerNumbers());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            setLottoAnswerNumber();
+            injectLottoAnswerNumber();
         }
     }
 
-    private void setLottoAnswer() {
+    private void injectLottoAnswer() {
         try {
             outputView.printReadBonusBall();
             lottoGame.setLottoAnswer(new LottoAnswer(lottoAnswerNumbers, inputView.readBonusBall()));
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            setLottoAnswer();
+            injectLottoAnswer();
         }
     }
 

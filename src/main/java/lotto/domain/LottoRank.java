@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static lotto.domain.LottoConstants.LOTTO_MIN_MATCH_COUNT;
+import static lotto.domain.LottoConstants.LOTTO_NUMBERS_LENGTH;
 
 public enum LottoRank {
     FIRST(0, 2_000_000_000, 6, false),
@@ -12,15 +13,16 @@ public enum LottoRank {
 
     private final int index;
     private final int minMatchCount;
+    private final int maxMatchCount;
     private final boolean isRequiresBonus;
     private final RankCriteria rankCriteria;
     private final long winning;
 
-    public int index() {
+    public int getIndex() {
         return index;
     }
 
-    public int minMatchCount() {
+    public int getMinMatchCount() {
         return minMatchCount;
     }
 
@@ -28,19 +30,24 @@ public enum LottoRank {
         return isRequiresBonus;
     }
 
-    public RankCriteria rankCritera() {
+    public RankCriteria getRankCritera() {
         return rankCriteria;
     }
 
-    public long winning() {
+    public long getWinning() {
         return winning;
     }
 
     LottoRank(int index, long winning, int minMatchCount, boolean isRequiresBonus) {
+        this(index, winning, minMatchCount, LOTTO_NUMBERS_LENGTH, isRequiresBonus);
+    }
+
+    LottoRank(int index, long winning, int minMatchCount, int maxMatchCount, boolean isRequiresBonus) {
         this.index = index;
         this.winning = winning;
         this.minMatchCount = minMatchCount;
+        this.maxMatchCount = maxMatchCount;
         this.isRequiresBonus = isRequiresBonus;
-        this.rankCriteria = new RankCriteria(minMatchCount, isRequiresBonus);
+        this.rankCriteria = new RankCriteria(minMatchCount, maxMatchCount, isRequiresBonus);
     }
 }

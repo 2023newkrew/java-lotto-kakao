@@ -42,17 +42,17 @@ public class OutputView {
         List<Integer> rankCount = gameResultDto.getRankCount();
         System.out.println(PRINT_GAME_RESULT_MESSAGE);
         Arrays.stream(LottoRank.values())
-                .sorted((rank1, rank2) -> Integer.compare(rank2.index(), rank1.index()))
-                .filter(rank -> rank.winning() > ZERO_WINNING)
-                .forEach(rank -> printSingleRankResult(rank, rankCount.get(rank.index())));
+                .sorted((rank1, rank2) -> Integer.compare(rank2.getIndex(), rank1.getIndex()))
+                .filter(rank -> rank.getWinning() > ZERO_WINNING)
+                .forEach(rank -> printSingleRankResult(rank, rankCount.get(rank.getIndex())));
         System.out.printf(PRINT_YIELD_MESSAGE_FORMAT, gameResultDto.getYield());
     }
 
     private void printSingleRankResult(LottoRank rank, int count) {
-        System.out.printf(MATCH_COUNT_STRING_FORMAT, rank.minMatchCount());
+        System.out.printf(MATCH_COUNT_STRING_FORMAT, rank.getMinMatchCount());
         if (rank.isRequiresBonus()) {
             System.out.print(BONUS_BALL_STRING);
         }
-        System.out.printf(PRINT_RANK_REMAINING_MESSAGE_FORMAT, rank.winning(), count);
+        System.out.printf(PRINT_RANK_REMAINING_MESSAGE_FORMAT, rank.getWinning(), count);
     }
 }
