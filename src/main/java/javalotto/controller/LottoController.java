@@ -4,6 +4,8 @@ import javalotto.domain.*;
 import javalotto.view.InputView;
 import javalotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
@@ -22,11 +24,13 @@ public class LottoController {
     public void simulate() {
         PurchaseAmount purchaseAmount = inputView.getPurchaseAmountInput();
         LottoCount manualLottoCount = inputView.getManualPurchaseCountInput();
-
         TotalLottoCount lottoCount = TotalLottoCount.of(manualLottoCount, purchaseAmount);
+
+        List<List<Integer>> manualLottoNumbers = inputView.getManualLottoNumbersInput(lottoCount.getManualLottoCount());
         outputView.printLottoCount(lottoCount);
 
-        Lottos lottos = lottoGenerator.generateLottos(lottoCount);
+        Lottos lottos = Lottos.fromNumbers(manualLottoNumbers);
+        lottos.addAll(lottoGenerator.generateLottos(lottoCount.getAutoLottoCount()));
         outputView.printLottos(lottos);
 
         WinningLotto winningLotto = inputView.getWinningLottoInput();

@@ -18,9 +18,9 @@ public class LottoGenerator {
         return new LottoGenerator(numberGenerator);
     }
 
-    public Lottos generateLottos(TotalLottoCount lottoCount) {
+    public Lottos generateLottos(int count) {
         List<Lotto> lottos = Stream.generate(this::generateLotto)
-                .limit(lottoCount.getTotalCount())
+                .limit(count)
                 .collect(Collectors.toList());
 
         return Lottos.from(lottos);

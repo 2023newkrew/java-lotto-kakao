@@ -12,7 +12,8 @@ class LottoNumberGeneratorTest {
     void should_generateLottoSuccessfully_when_validCount() {
         TotalLottoCount lottoCount = TotalLottoCount.of(LottoCount.from(0), PurchaseAmount.from((10000)));
         LottoGenerator lottoGenerator = LottoGenerator.from((minInclusive, maxExclusive, count) -> List.of(1, 2, 3, 4, 5, 6));
-        Lottos lottos = lottoGenerator.generateLottos(lottoCount);
-        assertThat(lottos.size()).isEqualTo(lottoCount.getTotalCount());
+        Lottos lottos = lottoGenerator.generateLottos(lottoCount.getAutoLottoCount());
+
+        assertThat(lottos.size()).isEqualTo(lottoCount.getAutoLottoCount());
     }
 }

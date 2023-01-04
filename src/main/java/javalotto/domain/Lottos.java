@@ -14,6 +14,14 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public static Lottos fromNumbers(List<List<Integer>> lottoNumbers) {
+        List<Lotto> lottos = lottoNumbers.stream()
+                .map(Lotto::from)
+                .collect(Collectors.toList());
+
+        return new Lottos(lottos);
+    }
+
     public int size() {
         return lottos.size();
     }
@@ -41,10 +49,16 @@ public class Lottos {
                 .forEach(rank -> rankCountMap.replace(rank, rankCountMap.get(rank) + 1));
     }
 
+    public void addAll(Lottos other) {
+        this.lottos.addAll(other.lottos);
+    }
+
     @Override
     public String toString() {
         return lottos.stream()
                 .map(Lotto::toString)
                 .collect(Collectors.joining("\n"));
     }
+
+
 }
