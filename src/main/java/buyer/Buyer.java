@@ -25,6 +25,10 @@ public class Buyer {
         lotteries.addLottery(lottery);
     }
 
+    public int getAbleLotteryCount() {
+        return budget.getBudget() / Lottery.PRICE;
+    }
+
     public int getLotteriesCount() {
         return lotteries.getCount();
     }
