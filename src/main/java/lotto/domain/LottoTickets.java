@@ -27,7 +27,7 @@ public class LottoTickets {
         return amount >= 1000;
     }
 
-    public int getLottoTicketCount(){
+    public int getLottoTicketSize(){
         return tickets.size();
     }
 

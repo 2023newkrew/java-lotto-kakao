@@ -4,19 +4,14 @@ import lotto.controller.LottoController;
 import lotto.domain.LottoRandom;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
-import lotto.domain.LottoWinnerTicket;
-import lotto.service.LottoCalculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
@@ -55,7 +50,7 @@ public class LottoTest {
     @DisplayName("입력된 금액에 맞게 로또 티켓이 생성되어야 한다.")
     void lottoBuyTest(int cost){
         LottoController lottoController = new LottoController(cost);
-        assertThat(lottoController.getLottoTickets().getLottoTicketCount()).isEqualTo(cost/1000);
+        assertThat(lottoController.getLottoTickets().getLottoTicketSize()).isEqualTo(cost/1000);
     }
 
     @ParameterizedTest
