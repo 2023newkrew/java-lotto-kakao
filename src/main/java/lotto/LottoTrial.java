@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.exception.DuplicatedBallNumber;
+import lotto.exception.InvalidLottoTrial;
 
 import java.util.*;
 
@@ -19,7 +20,17 @@ public abstract class LottoTrial {
         return result;
     }
 
-    protected void check(LottoTrial lottoTrial){
+    protected void validate(LottoTrial lottoTrial){
+        validateLottoCount(lottoTrial);
+        validateDuplication(lottoTrial);
+    }
+    private void validateLottoCount(LottoTrial lottoTrial){
+        if (lottoTrial.getBallNumbers().size()!=LottoConstants.BALLCOUNT_LIMIT){
+            throw new InvalidLottoTrial();
+        }
+    }
+
+    private void validateDuplication(LottoTrial lottoTrial){
         Set<LottoBallNumber> lottoSet = new HashSet<>();
         for (LottoBallNumber bn : lottoTrial.ballNumbers){
             lottoSet.add(bn);
