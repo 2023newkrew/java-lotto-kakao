@@ -4,6 +4,7 @@ import static lotto.constant.MessageConstant.INVALID_PRICE;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -26,7 +27,7 @@ public class LottoGenerator {
     }
 
     private Lotto generateLotto() {
-        Collections.shuffle(fullNumbers);
+        Collections.shuffle(fullNumbers, ThreadLocalRandom.current());
         return new Lotto(fullNumbers.subList(0, LOTTO_SIZE));
     }
 
