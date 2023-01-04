@@ -2,6 +2,8 @@ package lotto.controller;
 
 import lotto.model.LottoService;
 import lotto.model.PriceResult;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class LottoController {
 
         // 로또 당첨 번호 매칭
         List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
+        int bonusNumber = InputView.inputBonusBall();
         lottoService.createWinningNumbers(winningNumbers, bonusNumber);
 
         // 결과 출력
