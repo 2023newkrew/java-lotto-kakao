@@ -17,7 +17,7 @@ public class Money {
 
     public Money buyLottoTicketsAsManyAs(int count) {
         int used = LOTTO_PRICE * count;
-        return new Money (leftOver - used, this.used + used);
+        return new Money(leftOver - used, this.used + used);
     }
 
     public Money buyLottoTicketsConsumingAllLeftOver() {

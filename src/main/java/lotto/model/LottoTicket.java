@@ -15,8 +15,8 @@ public class LottoTicket {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public LottoTicket(LottoTicketDto lottoTicketDto) {
-        List<LottoNumber> numbers = lottoTicketDto.getTicket()
+    public LottoTicket(LottoTicketDto ticketDto) {
+        List<LottoNumber> numbers = ticketDto.getTicket()
                 .stream().map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         validateValuesCount(numbers);
@@ -26,13 +26,13 @@ public class LottoTicket {
 
     private void validateValuesCount(List<LottoNumber> numbers) {
         if (numbers.size() != NUMBERS_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다");
         }
     }
 
     private void validateDistinction(List<LottoNumber> numbers) {
         if (numbers.stream().distinct().count() != NUMBERS_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다");
         }
     }
 

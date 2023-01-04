@@ -1,6 +1,7 @@
 package lotto.model;
 
 public class WinningNumbers {
+    private static final int WEIGHT = 10;
     private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
@@ -24,6 +25,6 @@ public class WinningNumbers {
             bonusCount++;
         }
 
-        return Grade.getGrade(matchedCount + 10 * bonusCount);
+        return Grade.getGrade(matchedCount + WEIGHT * bonusCount);
     }
 }

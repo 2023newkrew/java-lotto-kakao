@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicketsDto {
     private final List<LottoTicketDto> tickets;
+
     public LottoTicketsDto(LottoTickets tickets) {
         this.tickets = tickets.stream().map(
                 LottoTicketDto::new

@@ -28,13 +28,13 @@ public class Result {
         return Objects.hash(values);
     }
 
+    public int getValue(Grade grade) {
+        return values.getOrDefault(grade, 0);
+    }
+
     public int addUp(Grade grade) {
         values.put(grade, getValue(grade) + 1);
         return values.get(grade);
-    }
-
-    public int getValue(Grade grade) {
-        return values.getOrDefault(grade, 0);
     }
 
     public double getProfitRate(int money) {

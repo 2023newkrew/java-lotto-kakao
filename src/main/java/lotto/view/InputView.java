@@ -83,12 +83,12 @@ public class InputView {
 
     public List<List<Integer>> scanManualLottoTickets(int ticketCount) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요. (구분자는 , 입니다)");
-        List<List<Integer>> manualLottoTickets = new ArrayList<>();
+        List<List<Integer>> manualTickets = new ArrayList<>();
         while (ticketCount > 0) {
-            manualLottoTickets.add(scanLottoTicket());
+            manualTickets.add(scanLottoTicket());
             ticketCount--;
         }
-        return manualLottoTickets;
+        return manualTickets;
     }
 
     private List<Integer> scanLottoTicket() {
@@ -102,19 +102,15 @@ public class InputView {
         }
     }
 
-    private List<Integer> parseLottoTicket(String lottoTicketInput) {
-        try {
-            return Arrays.stream(lottoTicketInput.split(","))
-                    .map(String::trim)
-                    .map(number -> {
-                        validateIsInteger(number);
-                        validateLottoNumberRange(number);
-                        return Integer.parseInt(number);
-                    })
-                    .collect(Collectors.toList());
-        } catch (Exception e) {
-            throw new IllegalArgumentException(e.getMessage());
-        }
+    private List<Integer> parseLottoTicket(String lottoTicketInput) throws IllegalArgumentException {
+        return Arrays.stream(lottoTicketInput.split(","))
+                .map(String::trim)
+                .map(number -> {
+                    validateIsInteger(number);
+                    validateIsInLottoNumberRange(number);
+                    return Integer.parseInt(number);
+                })
+                .collect(Collectors.toList());
     }
 
     private void validateTicketSize(List<Integer> ticket) {
@@ -138,14 +134,14 @@ public class InputView {
 
     private int parseBonusNumber(String bonusNumberInput) {
         validateIsInteger(bonusNumberInput);
-        validateLottoNumberRange(bonusNumberInput);
+        validateIsInLottoNumberRange(bonusNumberInput);
         return Integer.parseInt(bonusNumberInput);
     }
 
-    private void validateLottoNumberRange(String bonusNumberInput) {
+    private void validateIsInLottoNumberRange(String bonusNumberInput) {
         int bonusNumber = Integer.parseInt(bonusNumberInput);
         if (bonusNumber < LottoNumber.MIN_NUMBER || bonusNumber > LottoNumber.MAX_NUMBER) {
-            throw new IllegalArgumentException("로또 숫자는 1-45 사이의 숫자여야 합니다");
+            throw new IllegalArgumentException("로또 번호는 1-45 사이의 숫자여야 합니다");
         }
     }
 }

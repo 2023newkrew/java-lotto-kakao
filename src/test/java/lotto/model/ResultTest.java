@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 public class ResultTest {
     @Test
     void Result_객체가_정상적으로_생성되어야함() {
-        Map<Grade, Integer> sample = new HashMap<>(){{
+        Map<Grade, Integer> sample = new HashMap<>() {{
             put(Grade.SIX, 3);
             put(Grade.FOUR, 1);
             put(Grade.THREE, 2);
@@ -22,15 +22,15 @@ public class ResultTest {
     }
 
     @Test
-    void 값의_추가_또는_증가가_횟수만큼_되어야함(){
+    void 값의_추가_또는_증가가_횟수만큼_되어야함() {
         Result result = new Result();
         result.addUp(Grade.FIVE);
         assertThat(result.addUp(Grade.FIVE)).isEqualTo(2);
     }
 
     @Test
-    void 값을_설정된대로_획득할_수_있어야함(){
-        Result result = new Result(new HashMap<>(){{
+    void 값을_설정된대로_획득할_수_있어야함() {
+        Result result = new Result(new HashMap<>() {{
             put(Grade.THREE, 1);
             put(Grade.FOUR, 2);
             put(Grade.FIVE, 3);
