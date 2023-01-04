@@ -1,7 +1,6 @@
 package lotto;
 
 import static lotto.constant.MessageConstant.INVALID_GRADE_NUMBER_RANGE;
-import static lotto.constant.MessageConstant.INVALID_MATCH_COUNT_RANGE;
 
 import java.util.Arrays;
 
@@ -14,7 +13,8 @@ public enum LottoGradeEnum {
     FIFTH(3, 5000),
     NONE_GRADE(0, 0);
 
-
+    private static final int MIN_MATCH_COUNT = 0;
+    private static final int MAX_MATCH_COUNT = 6;
     private final int matchCount;
     private final int price;
 
@@ -35,8 +35,14 @@ public enum LottoGradeEnum {
     }
 
     private static void validateMatchCount(int matchCount) {
-        if (matchCount < 0 || matchCount > 6) {
-            throw new IllegalArgumentException(INVALID_MATCH_COUNT_RANGE);
+        if (matchCount < MIN_MATCH_COUNT || matchCount > MAX_MATCH_COUNT) {
+            throw new IllegalArgumentException(
+                    String.format("로또의 갯수가 %d개이기 때문에 match count는 %d이상 %d이하의 값을 가져야 합니다.",
+                            MAX_MATCH_COUNT,
+                            MIN_MATCH_COUNT,
+                            MAX_MATCH_COUNT
+                    )
+            );
         }
     }
 
