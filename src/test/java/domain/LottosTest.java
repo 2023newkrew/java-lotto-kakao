@@ -3,7 +3,6 @@ package domain;
 import common.state.Result;
 import org.junit.jupiter.api.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -33,8 +32,6 @@ public class LottosTest {
         assertThat(afterSize).isEqualTo(beforeSize + 1);
     }
 
-
-
     @DisplayName("당첨 통계 확인 테스트")
     @Test
     void getTotalResultTest() {
@@ -50,9 +47,8 @@ public class LottosTest {
         lottos.add(matchThree);
         lottos.add(matchFiveBonus);
         lottos.add(matchSix);
-        Map<Result, Integer> expected = Map.of(Result.NONE, 3, Result.THREE, 1, Result.FIVEBONUS, 1, Result.SIX, 1);
+        Map<Result, Integer> expected = Map.of(Result.NONE, 3, Result.FIFTH, 1, Result.SECOND, 1, Result.FIRST, 1);
         assertThat(lottos.getTotalResult(winningLotto, bonusNumber)).isEqualTo(new TotalResult(expected));
-
     }
 
 }
