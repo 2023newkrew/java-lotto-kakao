@@ -13,19 +13,15 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(String winningNumbersAsString, int bonusNumber) {
-        this(parseStringToIntList(winningNumbersAsString), bonusNumber);
+        this.winningNumbers = new Lotto(winningNumbersAsString);
+        this.bonusNumber = new LottoNumber(bonusNumber);
+        if (this.winningNumbers.containsLottoNumber(this.bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
     }
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
-
         this.winningNumbers = new Lotto(winningNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
-    }
-
-    private static List<Integer> parseStringToIntList(String text){
-        String[] texts = text.split(",");
-        return Arrays.stream(texts).map(t -> Integer.parseInt(t.strip())).collect(Collectors.toList());
     }
 
     public Rank getRank(Lotto lotto) {

@@ -1,13 +1,19 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int LOTTERY_NUMBER_SIZE = 6;
 
     private final List<LottoNumber> numbers = new ArrayList<>();
+
+    public Lotto(String numbersAsString) {
+        this(parseStringToIntList(numbersAsString));
+    }
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
@@ -29,6 +35,11 @@ public class Lotto {
 
     public boolean containsLottoNumber(LottoNumber number) {
         return numbers.contains(number);
+    }
+
+    private static List<Integer> parseStringToIntList(String text){
+        String[] texts = text.split(",");
+        return Arrays.stream(texts).map(t -> Integer.parseInt(t.strip())).collect(Collectors.toList());
     }
 
     private void validateNumbers(List<Integer> numbers) {

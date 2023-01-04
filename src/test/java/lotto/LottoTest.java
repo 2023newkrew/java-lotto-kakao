@@ -7,6 +7,17 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class LottoTest {
+    @DisplayName("생성자 문자열 입력과 리스트 입력이 동일한 결과 반환")
+    @Test
+    void constructorInputTest() {
+        //given
+        Lotto lotto1 = new Lotto("1,2,3,4,5,6");
+        Lotto lotto2 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        //when
+        //then
+        Assertions.assertThat(lotto1).isEqualTo(lotto2);
+    }
+
     @DisplayName("중복된 숫자로 리스트 받으면 예외 발생")
     @Test
     void duplicateTest() {
