@@ -9,6 +9,7 @@ public class LottoTrials implements Iterator<LottoTrial> {
     private Iterator<LottoTrial> lottoTrialIterator = lottoTrials.iterator();
     public void add(LottoTrial lottoTrial){
         lottoTrials.add(lottoTrial);
+        lottoTrialIterator = lottoTrials.iterator();
     }
 
     public int size(){
