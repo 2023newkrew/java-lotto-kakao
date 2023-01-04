@@ -1,5 +1,6 @@
 package buyer;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +8,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatRuntimeException;
 
 public class BudgetTest {
+    @DisplayName("Budget 생성자에서 음수를 받으면 예외를 발생한다")
+    @Test
+    void minus() {
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Budget(-1));
+
+    }
+
     @DisplayName("Budget의 값을 number만큼 줄인다")
     @Test
     void decreaseBudget() {

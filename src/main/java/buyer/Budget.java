@@ -4,6 +4,8 @@ public class Budget {
     private int budget;
 
     public Budget(int budget) {
+        if (budget < 0) throw new IllegalArgumentException();
+        
         this.budget = budget;
     }
 
