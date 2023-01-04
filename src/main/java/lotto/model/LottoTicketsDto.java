@@ -5,8 +5,14 @@ import java.util.stream.Collectors;
 
 public class LottoTicketsDto {
     private final List<LottoTicketDto> tickets;
-    public LottoTicketsDto(LottoTickets lottoTickets) {
-        tickets = lottoTickets.stream().map(
+    public LottoTicketsDto(LottoTickets tickets) {
+        this.tickets = tickets.stream().map(
+                LottoTicketDto::new
+        ).collect(Collectors.toList());
+    }
+
+    public LottoTicketsDto(List<List<Integer>> tickets) {
+        this.tickets = tickets.stream().map(
                 LottoTicketDto::new
         ).collect(Collectors.toList());
     }

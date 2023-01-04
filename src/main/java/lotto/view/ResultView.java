@@ -17,8 +17,8 @@ public class ResultView {
         return instance;
     }
 
-    public void printLottoTickets(LottoTicketsDto tickets) {
-        System.out.printf("%d개 구매했습니다.\n", tickets.size());
+    public void printLottoTickets(LottoTicketsDto tickets, int manualCount) {
+        System.out.printf("\n수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualCount, tickets.size() - manualCount);
         for (LottoTicketDto ticket : tickets.getTickets()) {
             printLottoTicket(ticket);
         }

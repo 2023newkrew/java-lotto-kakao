@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.model.LottoNumber;
 import lotto.model.LottoTicket;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -24,7 +25,7 @@ public class InputView {
     }
 
     public int scanMoney() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.print("\n구입금액을 입력해 주세요.\n");
         try {
             return parseMoney(sc.nextLine().trim());
         } catch (Exception e) {
@@ -53,21 +54,57 @@ public class InputView {
         }
     }
 
+    private void validateIsNotNegative(String input) {
+        if (Integer.parseInt(input) < 0) {
+            throw new IllegalArgumentException("0보다 크거나 같은 수여야 합니다");
+        }
+    }
+
+    public int scanManualLottoTicketCount() {
+        System.out.print("\n수동으로 구매할 로또 수를 입력해 주세요.\n");
+        try {
+            return parseCount(sc.nextLine().trim());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return scanManualLottoTicketCount();
+        }
+    }
+
+    private int parseCount(String input) {
+        validateIsInteger(input);
+        validateIsNotNegative(input);
+        return Integer.parseInt(input);
+    }
+
     public List<Integer> scanWinningTicket() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요. (구분자는 , 입니다)");
+        return scanLottoTicket();
+    }
+
+    public List<List<Integer>> scanManualLottoTickets(int ticketCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요. (구분자는 , 입니다)");
+        List<List<Integer>> manualLottoTickets = new ArrayList<>();
+        while (ticketCount > 0) {
+            manualLottoTickets.add(scanLottoTicket());
+            ticketCount--;
+        }
+        return manualLottoTickets;
+    }
+
+    private List<Integer> scanLottoTicket() {
         try {
-            List<Integer> ticket = parseWinningTicket(sc.nextLine());
+            List<Integer> ticket = parseLottoTicket(sc.nextLine());
             validateTicketSize(ticket);
             return ticket;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return scanWinningTicket();
+            return scanLottoTicket();
         }
     }
 
-    private List<Integer> parseWinningTicket(String winningTicketInput) {
+    private List<Integer> parseLottoTicket(String lottoTicketInput) {
         try {
-            return Arrays.stream(winningTicketInput.split(","))
+            return Arrays.stream(lottoTicketInput.split(","))
                     .map(String::trim)
                     .map(number -> {
                         validateIsInteger(number);
@@ -76,7 +113,7 @@ public class InputView {
                     })
                     .collect(Collectors.toList());
         } catch (Exception e) {
-            throw new IllegalArgumentException("로또 티켓은 ',' 구분자로 입력되어야 하며 정수여야 합니다");
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
