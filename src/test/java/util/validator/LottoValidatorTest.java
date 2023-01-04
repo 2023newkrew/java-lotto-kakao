@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class WinningLottoWithBonusValidatorTest {
+public class LottoValidatorTest {
     @DisplayName("입력된 당첨 숫자의 개수가 알맞지 않은지 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
