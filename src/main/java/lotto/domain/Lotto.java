@@ -4,6 +4,7 @@ import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
 import static lotto.constant.MessageConstant.INVALID_LOTTO_SIZE;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,13 +12,13 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {
         validateLotto(numbers);
         this.lottoNumbers = numbers.stream()
                 .map(LottoNumber::from)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     private void validateLotto(List<Integer> numbers) {
@@ -38,7 +39,7 @@ public class Lotto {
         }
     }
 
-    public List<LottoNumber> getNumbers() {
+    public Set<LottoNumber> getNumbers() {
         return lottoNumbers;
     }
 
