@@ -3,6 +3,8 @@ package lotto.model;
 import java.util.Objects;
 
 public class LottoNumber {
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     private final int value;
 
     public LottoNumber(int value) {
@@ -13,7 +15,7 @@ public class LottoNumber {
     }
 
     private boolean isOutOfRange(int value) {
-        return value < 1 || value > 45;
+        return value < MIN_NUMBER || value > MAX_NUMBER;
     }
 
     @Override

@@ -1,8 +1,9 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTicket {
     public static final int NUMBERS_SIZE = 6;
@@ -30,17 +31,14 @@ public class LottoTicket {
         return numbers.contains(bonusNumber);
     }
 
-    public List<LottoNumber> getNumbers() {
-        return new ArrayList<>(numbers);
+    public Stream<LottoNumber> stream() {
+        return numbers.stream();
     }
 
     public List<Integer> toIntegerList() {
-        List<Integer> values = new ArrayList<>();
-        for (LottoNumber number : numbers) {
-            values.add((number.getValue()));
-        }
-        Collections.sort(values);
-        return values;
+        return numbers.stream()
+                .mapToInt(LottoNumber::getValue).sorted()
+                .boxed().collect(Collectors.toList());
     }
 
     @Override

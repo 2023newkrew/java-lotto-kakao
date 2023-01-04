@@ -52,6 +52,6 @@ class WinningNumbersTest {
                 new LottoNumber(5),
                 new LottoNumber(6)
         ));
-        assertThat(winningNumbers.matchValues(lottoTicket)).isEqualTo(result);
+        assertThat(winningNumbers.match(lottoTicket)).isEqualTo(result);
     }
 }

@@ -22,7 +22,7 @@ public class LottoTickets {
     public Result getResults(WinningNumbers winningNumbers) {
         Result result = new Result();
         for (LottoTicket ticket : tickets) {
-            result.addUp(winningNumbers.matchValues(ticket));
+            result.addUp(winningNumbers.match(ticket));
         }
         return result;
     }

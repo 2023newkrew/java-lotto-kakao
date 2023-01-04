@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningNumbers {
-    private final LottoTicket sixNumbers;
+    private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
     public WinningNumbers(String sixNumbersString, String bonusNumberString) {
         List<String> sixNumbersList = new ArrayList<>(List.of(sixNumbersString.split(", ")));
-        sixNumbers = parseSixNumbers(sixNumbersList);
+        winningTicket = parseSixNumbers(sixNumbersList);
         bonusNumber = parseBonusNumber(bonusNumberString);
     }
 
@@ -21,7 +21,7 @@ public class WinningNumbers {
     }
 
     private void validateBonusNumber(LottoNumber bonusNumber) {
-        if (sixNumbers.contains(bonusNumber)) {
+        if (winningTicket.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 넘버는 여섯 개의 숫자와 중복되어서는 안됩니다.");
         }
     }
@@ -32,17 +32,16 @@ public class WinningNumbers {
                 .collect(Collectors.toList()));
     }
 
-    public Grade matchValues(LottoTicket lottoTicket) {
-        int sixCount = (int) lottoTicket.getNumbers()
-                .stream()
-                .filter(sixNumbers::contains)
+    public Grade match(LottoTicket lottoTicket) {
+        int matchedCount = (int) winningTicket.stream()
+                .filter(lottoTicket::contains)
                 .count();
 
         int bonusCount = 0;
-        if (sixCount == 5 && lottoTicket.contains(bonusNumber)) {
+        if (matchedCount == 5 && lottoTicket.contains(bonusNumber)) {
             bonusCount++;
         }
 
-        return Grade.getGrade(sixCount + 10 * bonusCount);
+        return Grade.getGrade(matchedCount + 10 * bonusCount);
     }
 }
