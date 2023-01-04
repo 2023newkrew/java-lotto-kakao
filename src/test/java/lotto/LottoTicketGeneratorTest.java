@@ -31,7 +31,7 @@ public class LottoTicketGeneratorTest {
         ;
     }
 
-    private static class MockBallGenerator implements LottoTicketGenerator.LottoBallGenerator {
+    private static class MockBallGenerator implements Generator<LottoBall> {
         private final LinkedList<Integer> expectedResult;
 
         private MockBallGenerator(Collection<Integer> expectedResult) {
@@ -39,7 +39,7 @@ public class LottoTicketGeneratorTest {
         }
 
         @Override
-        public LottoBall generateBall() {
+        public LottoBall generate() {
             Integer result = expectedResult.poll();
             if (Objects.isNull(result)) {
                 throw new RuntimeException("더이상 꺼낼 값이 없습니다.");

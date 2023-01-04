@@ -18,7 +18,7 @@ public class MainUI {
     public MainUI(InputStream inputStream, OutputStream outputStream) {
         this.scanner = new Scanner(inputStream);
         this.printer = new PrintStream(outputStream);
-        this.lottoTicketGenerator = new LottoTicketGenerator();
+        this.lottoTicketGenerator = new LottoTicketGenerator(new LottoBallGenerator());
     }
 
     public void initPurchasePrice() {
