@@ -8,7 +8,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         LottoMachine lottoMachine = new LottoMachine();
-        InputView inputView = new InputView();
+        InputView inputView = new InputView(new Scanner(System.in));
         OutputView outputView = new OutputView();
 
         int purchaseAmount = inputView.scanPurchaseAmount();

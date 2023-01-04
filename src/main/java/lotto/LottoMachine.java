@@ -7,6 +7,8 @@ public class LottoMachine {
     private LottoWinningNumber lottoWinningNumber = null;
 
     public List<LottoTicket> purchaseLottoTickets(int purchaseAmount) {
+        validatePurchaseAmount(purchaseAmount);
+
         int ticketNumber = purchaseAmount / 1000;
         System.out.println(ticketNumber + "개를 구매했습니다.");
 
@@ -32,5 +34,11 @@ public class LottoMachine {
                 .map(lottoTicket -> lottoWinningNumber.calculateRanking(lottoTicket))
                 .collect(Collectors.groupingBy(r -> r, Collectors.counting()));
         return new MatchResult(rankingCount);
+    }
+
+    private void validatePurchaseAmount(int purchaseAmount) {
+        if (purchaseAmount % 1000 != 0) {
+            throw new IllegalArgumentException("로또 가격은 1000원입니다. 1000의 배수를 입력해야 합니다.");
+        }
     }
 }
