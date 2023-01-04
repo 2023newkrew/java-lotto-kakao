@@ -1,6 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import static lotto.constant.MessageConstant.INVALID_PRICE;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,14 +16,16 @@ public class LottoGenerator {
             .boxed()
             .collect(Collectors.toList());
 
-    static public List<Lotto> generateLottos(int price) {
-        List<Lotto> lottos = new ArrayList<>();
-        int lottoCount = price / LOTTO_PRICE;
-        IntStream.range(0, lottoCount).forEach((i) -> lottos.add(generateLotto()));
-        return lottos;
+    public List<Lotto> generateLottos(int price) {
+        if (price < LOTTO_PRICE) {
+            throw new IllegalArgumentException(INVALID_PRICE);
+        }
+        return IntStream.range(0, price / LOTTO_PRICE)
+                .mapToObj(i -> this.generateLotto())
+                .collect(Collectors.toList());
     }
 
-    private static Lotto generateLotto() {
+    private Lotto generateLotto() {
         Collections.shuffle(fullNumbers);
         return new Lotto(fullNumbers.subList(0, LOTTO_SIZE));
     }
