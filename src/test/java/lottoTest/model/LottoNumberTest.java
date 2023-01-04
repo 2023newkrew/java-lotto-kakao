@@ -19,7 +19,7 @@ public class LottoNumberTest {
         //given
 
         //when & then
-        assertThatThrownBy(() -> LottoNumber.numberOf(input))
+        assertThatThrownBy(() -> LottoNumber.from(input))
                 .isInstanceOf(LottoException.class)
                 .hasMessage(expected.getMessage());
 

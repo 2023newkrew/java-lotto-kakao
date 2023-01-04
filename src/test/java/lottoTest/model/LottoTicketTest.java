@@ -60,8 +60,8 @@ public class LottoTicketTest {
         LottoTicket lottoTicket = new LottoTicket(input);
 
         // when & then
-        assertThat(lottoTicket.contains(LottoNumber.numberOf(1))).isEqualTo(true);
-        assertThat(lottoTicket.contains(LottoNumber.numberOf(7))).isEqualTo(false);
+        assertThat(lottoTicket.contains(LottoNumber.from(1))).isEqualTo(true);
+        assertThat(lottoTicket.contains(LottoNumber.from(7))).isEqualTo(false);
     }
 
     @ParameterizedTest
@@ -89,7 +89,7 @@ public class LottoTicketTest {
 
     private static List<LottoNumber> createLottoNumberList(List<Integer> integerList) {
         return integerList.stream()
-                .map(LottoNumber::numberOf)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 

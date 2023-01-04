@@ -25,13 +25,13 @@ public class LottoService {
         LottoTickets lottoTickets = LottoRepository.getAllLottoTicket();
         List<LottoNumber> lottoNumbers =
                 inputWinningNumber.stream()
-                        .map(number -> LottoNumber.numberOf(number))
+                        .map(number -> LottoNumber.from(number))
                         .collect(Collectors.toList());
 
         return lottoTickets.getLottoResult(
                 new LottoWinningNumber(
                         new LottoTicket(lottoNumbers),
-                        LottoNumber.numberOf(inputBonusBall)
+                        LottoNumber.from(inputBonusBall)
                 )
         ).getRankCountMap();
     }

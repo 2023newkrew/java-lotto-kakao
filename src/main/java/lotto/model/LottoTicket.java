@@ -20,7 +20,7 @@ public class LottoTicket {
                 ListUtil.createShuffledNumbers(LOTTO_NUMBER_LOWER_BOUNDARY, LOTTO_NUMBER_UPPER_BOUNDARY), LOTTO_TICKET_LENGTH
         );
         List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::numberOf)
+                .map(LottoNumber::from)
                 .collect(Collectors.toList());
         validateLottoTicketLength(lottoNumbers);
         lottoTicket = lottoNumbers;

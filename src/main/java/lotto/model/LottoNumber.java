@@ -26,15 +26,15 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
-    public static LottoNumber numberOf(Integer lottoNumber) {
+    public static LottoNumber from(Integer lottoNumber) {
         return Optional.ofNullable(lottoNumbers.get(lottoNumber))
                 .orElseThrow(() -> new LottoException(ErrorCode.INVALID_LOTTO_NUMBER_RANGE));
     }
 
-    public static LottoNumber numberStringOf(String lottoNumberString) {
+    public static LottoNumber from(String lottoNumberString) {
         int lottoNumber = Optional.of(Integer.parseInt(lottoNumberString))
                 .orElseThrow(() -> new LottoException(ErrorCode.INVALID_INPUT_TYPE_NOT_INTEGER));
-        return numberOf(lottoNumber);
+        return from(lottoNumber);
     }
 
 
