@@ -11,7 +11,7 @@ import lotto.domain.LottoResult;
 
 public class DefaultRankingPolicy implements RankingPolicy {
 
-    private final Map<DefaultLottoResult, LottoRank> lottoResultLottoRankMap = new HashMap<>();
+    private final Map<LottoResult, LottoRank> lottoResultLottoRankMap = new HashMap<>();
 
     public DefaultRankingPolicy() {
         lottoResultLottoRankMap.put(new DefaultLottoResult(FIRST.getMatchCount(), FIRST.isRequiredBonus()), FIRST);
