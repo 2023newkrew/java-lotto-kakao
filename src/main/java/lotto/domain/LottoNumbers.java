@@ -12,9 +12,10 @@ import lotto.utils.ErrorMessageFormatter;
 
 public class LottoNumbers {
 
-    private List<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers() {
+    public static LottoNumbers makeLottoNumbers(List<Integer> integers) {
+        return new LottoNumbers(integers.stream().map(LottoNumber::from).collect(Collectors.toList()));
     }
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -44,8 +45,12 @@ public class LottoNumbers {
         }
     }
 
-
     public boolean contains(int input) {
         return this.lottoNumbers.contains(from(input));
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }

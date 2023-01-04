@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    private final int num;
+    private final Integer num;
 
     private static final Map<Integer, LottoNumber> CACHED_LOTTO_NUMBERS;
 
