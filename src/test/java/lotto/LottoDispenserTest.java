@@ -105,14 +105,14 @@ public class LottoDispenserTest {
 
     @DisplayName("남은 금액 표시 기능")
     @ParameterizedTest
-    @MethodSource("getGetLeftoverMoneyData")
-    public void getLeftoverMoney(List<List<Integer>> numbers, int money, int expected) {
+    @MethodSource("getReceiveLeftoverMoneyData")
+    public void receiveLeftoverMoney(List<List<Integer>> numbers, int money, int expected) {
         LottoDispenser lottoDispenser = new LottoDispenser(new LottoSetting(), new ManualNumberSelectStrategy(numbers));
         lottoDispenser.getLottoTicketList(money);
         Assertions.assertThat(lottoDispenser.receiveLeftoverMoney()).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> getGetLeftoverMoneyData() {
+    private static Stream<Arguments> getReceiveLeftoverMoneyData() {
         return Stream.of(
                 Arguments.of(List.of(
                                 List.of(1, 2, 3, 4, 5, 6)

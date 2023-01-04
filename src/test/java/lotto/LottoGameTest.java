@@ -30,17 +30,17 @@ public class LottoGameTest {
         );
     }
 
-    @DisplayName("수동으로 티켓 발급")
+    @DisplayName("수동으로 티켓 구매")
     @ParameterizedTest
-    @MethodSource("getIssueLottoTicketManuallyData")
-    public void issueLottoTicketManually(List<List<Integer>> numbers, int money, String expected) {
+    @MethodSource("getBuyLottoTicketManuallyData")
+    public void buyLottoTicketManually(List<List<Integer>> numbers, int money, String expected) {
         LottoSetting lottoSetting = new LottoSetting();
         LottoGame lottoGame = new LottoGame(lottoSetting);
         lottoGame.buyManually(money, numbers);
         Assertions.assertThat(lottoGame.getLottoTicketsString()).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> getIssueLottoTicketManuallyData() {
+    private static Stream<Arguments> getBuyLottoTicketManuallyData() {
         return Stream.of(
                 Arguments.of(List.of(
                                 List.of(1, 2, 3, 4, 5, 6)
