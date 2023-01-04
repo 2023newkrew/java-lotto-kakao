@@ -48,6 +48,6 @@ public class LottoGame {
         long totalPrice = lottoResultCounter.entrySet().stream()
                 .mapToLong((entry) -> (long) entry.getKey().price * entry.getValue())
                 .sum();
-        return (float) totalPrice / (lottos.size() * 1000);
+        return (float) totalPrice / (lottos.size() * Lotto.LOTTO_PRICE);
     }
 }
