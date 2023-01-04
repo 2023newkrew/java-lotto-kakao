@@ -28,15 +28,6 @@ public class WinningLotto {
         return Arrays.stream(texts).map(t -> Integer.parseInt(t.strip())).collect(Collectors.toList());
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof WinningLotto)) return false;
-
-        WinningLotto cp = (WinningLotto) obj;
-
-        return this.winningNumbers.equals(cp.winningNumbers) && this.bonusNumber.equals(cp.bonusNumber);
-    }
-
     public Rank getRank(Lotto lotto) {
         boolean bonusMatch = false;
         int count = winningNumbers.compareWith(lotto);
@@ -54,5 +45,14 @@ public class WinningLotto {
             buyerResult.matches(getRank(lotto));
         }
         return buyerResult;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof WinningLotto)) return false;
+
+        WinningLotto cp = (WinningLotto) obj;
+
+        return this.winningNumbers.equals(cp.winningNumbers) && this.bonusNumber.equals(cp.bonusNumber);
     }
 }
