@@ -11,10 +11,11 @@ public class Application {
 
     public static void main(String[] args) {
         LottoGenerator lottoGenerator = new LottoGenerator();
-        List<Lotto> lottos = lottoGenerator.generateLottos(LottoView.receivePurchasePrice());
-        LottoView.printLottos(lottos);
-        WinningLotto winningLotto = LottoView.receiveWinningLotto();
+        LottoView lottoView = new LottoView();
+        List<Lotto> lottos = lottoGenerator.generateLottos(lottoView.receivePurchasePrice());
+        lottoView.printLottos(lottos);
+        WinningLotto winningLotto = lottoView.receiveWinningLotto();
         LottoGame lottoGame = new LottoGame(lottos, winningLotto);
-        LottoView.printResult(lottoGame.getResult());
+        lottoView.printResult(lottoGame.getResult());
     }
 }
