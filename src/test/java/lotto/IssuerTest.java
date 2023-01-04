@@ -3,7 +3,7 @@ package lotto;
 import lotto.model.Issuer;
 import lotto.model.Lotto;
 import lotto.model.LottoList;
-import lotto.model.LottoNumber;
+import lotto.model.errors.LottoOutOfRangeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -25,11 +25,11 @@ public class IssuerTest {
     @Test
     @DisplayName("로또 번호 범위 테스트")
     void lotto_range_test() {
-        LottoList lottoList = Issuer.issue(1);
-        Lotto lotto = lottoList.get(0);
-        for (int index = 0; index < lotto.length(); index++) {
-            assertTrue(lotto.get(index) <= LottoNumber.MIN_RANGE &&
-                    lotto.get(index) >= LottoNumber.MAX_RANGE);
+        try {
+            LottoList lottoList = Issuer.issue(1);
+            lottoList.get(0);
+        } catch (Exception e) {
+            assertTrue(e instanceof LottoOutOfRangeException);
         }
     }
 

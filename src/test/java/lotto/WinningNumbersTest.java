@@ -3,6 +3,8 @@ package lotto;
 import lotto.model.Lotto;
 import lotto.model.MatchedResult;
 import lotto.model.WinningNumbers;
+import lotto.model.errors.LottoDuplicatedNumberException;
+import lotto.model.errors.LottoOutOfRangeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +29,7 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("당첨 번호와 로또 번호 비교 결과")
     void matched_result_test() {
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.of(1, 2, 3, 4, 5, 6);
         MatchedResult matchedResult = winningNumbers.check(lotto);
         assertEquals(matchedResult, new MatchedResult(
                 3, false
@@ -37,7 +39,7 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("당첨 번호 길이 테스트")
     void lotto_length_test() {
-        assertThrowsExactly(IllegalArgumentException.class, () -> new WinningNumbers(
+        assertThrowsExactly(LottoOutOfRangeException.class, () -> new WinningNumbers(
                 List.of(1, 2, 3, 4, 5, 6, 7),
                 8));
     }
@@ -45,11 +47,11 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("당첨 번호 범위 테스트")
     void lotto_range_test() {
-        assertThrowsExactly(IllegalArgumentException.class, () -> new WinningNumbers(
+        assertThrowsExactly(LottoOutOfRangeException.class, () -> new WinningNumbers(
                 List.of(1, 2, 3, 4, 5, 46),
                 8));
 
-        assertThrowsExactly(IllegalArgumentException.class, () -> new WinningNumbers(
+        assertThrowsExactly(LottoOutOfRangeException.class, () -> new WinningNumbers(
                 List.of(1, 2, 3, 4, 5, 6),
                 46));
     }
@@ -57,11 +59,11 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("당첨 번호 중복 테스트")
     void lotto_duplicate_test() {
-        assertThrowsExactly(IllegalArgumentException.class, () -> new WinningNumbers(
+        assertThrowsExactly(LottoDuplicatedNumberException.class, () -> new WinningNumbers(
                 List.of(1, 2, 3, 4, 5, 5),
                 8));
 
-        assertThrowsExactly(IllegalArgumentException.class, () -> new WinningNumbers(
+        assertThrowsExactly(LottoDuplicatedNumberException.class, () -> new WinningNumbers(
                 List.of(1, 2, 3, 4, 5, 6),
                 3));
     }

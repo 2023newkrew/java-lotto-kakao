@@ -1,30 +1,54 @@
 package lotto.model;
 
+import lotto.model.errors.LottoDuplicatedNumberException;
+import lotto.model.errors.LottoOutOfRangeException;
+
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
-
     public static final Integer NUMBER_LENGTH = 6;
-
     public static final Integer PRICE = 1000;
+    private final Set<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    private Lotto(Set<LottoNumber> numbers) {
         this.numbers = numbers;
-        validateNumbers();
+        validateAfterDistinct();
     }
 
-    private void validateNumbers() {
-        boolean hasInvalidNumber = numbers.stream()
-                .filter(number -> hasValidLength())
-                .collect(Collectors.toSet())
-                .size() != numbers.size();
+    public static Lotto of(Integer... numbers) {
+        validateNumberLength(numbers);
+        return new Lotto(Arrays.stream(numbers)
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet()));
+    }
 
-        if (hasInvalidNumber) {
-            throw new IllegalArgumentException();
+    public static Lotto of(List<Integer> numbers) {
+        validateNumberLength(numbers);
+        return new Lotto(numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toSet()));
+    }
+
+    private static void validateNumberLength(Integer[] numbers) {
+        if (numbers.length != NUMBER_LENGTH) {
+            throw new LottoOutOfRangeException(String.format("로또 숫자는 %d개여야 합니다.", Lotto.NUMBER_LENGTH));
+        }
+    }
+
+    private static void validateNumberLength(List<Integer> numbers) {
+        if (numbers.size() != NUMBER_LENGTH) {
+            throw new LottoOutOfRangeException(String.format("로또 숫자는 %d개여야 합니다.", Lotto.NUMBER_LENGTH));
+        }
+    }
+
+    private void validateAfterDistinct() {
+        if (!hasValidLength()) {
+            throw new LottoDuplicatedNumberException("로또 번호는 중복될 수 없습니다.");
         }
     }
 
@@ -32,16 +56,12 @@ public class Lotto {
         return numbers.size() == NUMBER_LENGTH;
     }
 
-    public List<Integer> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+    public Set<LottoNumber> getNumbers() {
+        return Collections.unmodifiableSet(numbers);
     }
 
     public Integer length() {
         return numbers.size();
-    }
-
-    public Integer get(int index) {
-        return numbers.get(index);
     }
 
     @Override
