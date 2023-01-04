@@ -3,11 +3,11 @@ package lotto.model;
 import java.util.Arrays;
 
 public enum LottoRank {
-    RANK1(6, false, 2000000000),
-    RANK2(5, true, 30000000),
-    RANK3(5, false, 1500000),
-    RANK4(4, false, 50000),
-    RANK5(3, false, 5000),
+    RANK1(6, false, 2_000_000_000),
+    RANK2(5, true, 30_000_000),
+    RANK3(5, false, 1_500_000),
+    RANK4(4, false, 50_000),
+    RANK5(3, false, 5_000),
     RANK6(2, false, 0);
 
     private final Integer matchedCount;
