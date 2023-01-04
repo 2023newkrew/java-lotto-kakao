@@ -9,7 +9,7 @@ public class LottoIncomeRate {
     }
 
     public LottoIncomeRate(float incomeRate) {
-        this.incomeRate = incomeRate;
+        this.incomeRate = toFiniteIncomeRate(incomeRate);
     }
 
     public String getString() {
@@ -19,5 +19,12 @@ public class LottoIncomeRate {
     private static float getLottoIncomeRate(LottoStatistics lottoStatistics, int lottoTicketPrice) {
         return lottoStatistics.getIncome()
                 / (float) (lottoTicketPrice * lottoStatistics.getTotal());
+    }
+
+    private static float toFiniteIncomeRate(float incomeRate) {
+        if(Float.isFinite(incomeRate)) {
+            return incomeRate;
+        }
+        return 0;
     }
 }
