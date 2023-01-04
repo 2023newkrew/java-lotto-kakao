@@ -4,10 +4,10 @@ import static lotto.common.LotteryConfiguration.LOTTERY_PRICE;
 
 import java.util.List;
 import lotto.common.LotteryGenerator;
-import lotto.models.LotteryEarningsRate;
-import lotto.models.WinningLottery;
 import lotto.models.Lottery;
+import lotto.models.LotteryEarningsRate;
 import lotto.models.LotteryStatistics;
+import lotto.models.WinningLottery;
 import lotto.views.Console;
 import lotto.views.InputView;
 import lotto.views.OutputView;
