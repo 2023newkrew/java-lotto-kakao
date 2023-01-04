@@ -2,7 +2,6 @@ package lotto.repository;
 
 import lotto.model.LottoTicket;
 import lotto.model.LottoTickets;
-
 public class LottoRepository {
     private static final LottoTickets lottoTickets = new LottoTickets();
 

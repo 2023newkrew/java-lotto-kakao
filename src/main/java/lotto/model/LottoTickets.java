@@ -26,4 +26,8 @@ public class LottoTickets {
                 .map(LottoTicket::toString)
                 .collect(Collectors.toList());
     }
+
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
+    }
 }

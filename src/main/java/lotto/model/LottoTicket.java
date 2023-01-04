@@ -1,6 +1,5 @@
 package lotto.model;
 
-
 import lotto.exception.ErrorCode;
 import lotto.exception.LottoException;
 
@@ -47,5 +46,9 @@ public class LottoTicket {
                         .filter(lottoTicket::contains)
                         .count()
         );
+    }
+
+    public List<LottoNumber> getLottoTicket() {
+        return lottoTicket;
     }
 }

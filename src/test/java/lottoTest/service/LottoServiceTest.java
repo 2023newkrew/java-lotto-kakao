@@ -19,7 +19,7 @@ public class LottoServiceTest {
         LottoResult lottoResult = new LottoResult(List.of(0, 0, 0, 0, 1, 0));
         //when
         LottoService lottoService = new LottoService();
-        Double rateOfReturn = lottoService.getRateOfReturn(new PurchaseAmount("20000"), lottoResult.getRankCountMap());
+        Double rateOfReturn = lottoService.getRateOfReturn(new PurchaseAmount("20000"), lottoResult);
         //then
         assertThat(rateOfReturn).isEqualTo(0.25);
     }

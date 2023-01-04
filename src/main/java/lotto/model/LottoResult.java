@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoResult {
     private final Map<LottoRank, Integer> rankCountMap;
@@ -30,6 +31,14 @@ public class LottoResult {
         rankCountMap.put(lottoRank, rankCountMap.get(lottoRank) + 1);
     }
 
+    public Integer getTotalRevenue() {
+        int[] totalRevenue = {0};
+        rankCountMap.entrySet().stream()
+                .iterator().forEachRemaining((rankAndCount) -> {
+                    totalRevenue[0] += rankAndCount.getKey().getReward() * rankAndCount.getValue();
+                });
+        return totalRevenue[0];
+    }
     public Map<LottoRank, Integer> getRankCountMap() {
         return rankCountMap;
     }

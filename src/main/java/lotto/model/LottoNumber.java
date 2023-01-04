@@ -37,11 +37,14 @@ public class LottoNumber {
         return from(lottoNumber);
     }
 
-
     private void validateLottoNumber(int lottoNumber) {
         if (lottoNumber < LOTTO_NUMBER_LOWER_BOUNDARY || lottoNumber > LOTTO_NUMBER_UPPER_BOUNDARY) {
             throw new LottoException(ErrorCode.INVALID_LOTTO_NUMBER_RANGE);
         }
+    }
+
+    public Integer getLottoNumber() {
+        return lottoNumber;
     }
 
     @Override

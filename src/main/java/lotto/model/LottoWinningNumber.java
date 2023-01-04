@@ -1,11 +1,21 @@
 package lotto.model;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import lotto.exception.ErrorCode;
 import lotto.exception.LottoException;
 
 public class LottoWinningNumber {
     private final LottoTicket winningNumber;
     private final LottoNumber bonusBall;
+
+    public LottoWinningNumber(String[] lottoWinningNumbers, String bonusBall) {
+        this(new LottoTicket(Arrays.asList(lottoWinningNumbers)
+                        .stream()
+                        .map(lottoWinningNumber -> LottoNumber.from(lottoWinningNumber))
+                        .collect(Collectors.toList())),
+                LottoNumber.from(bonusBall));
+    }
 
     public LottoWinningNumber(LottoTicket lottoTicket, LottoNumber bonusBall) {
         this.winningNumber = lottoTicket;

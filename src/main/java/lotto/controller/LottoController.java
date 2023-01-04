@@ -1,13 +1,10 @@
 package lotto.controller;
 
-import lotto.model.LottoRank;
+import lotto.model.LottoResult;
 import lotto.model.PurchaseAmount;
 import lotto.service.LottoService;
 import lotto.view.LottoInputTemplate;
 import lotto.view.LottoOutputTemplate;
-
-import java.util.List;
-import java.util.Map;
 
 public class LottoController {
     private final LottoInputTemplate lottoInputTemplate;
@@ -26,9 +23,9 @@ public class LottoController {
         lottoService.purchaseLotto(purchaseAmount);
         lottoOutputTemplate.printLottoTickets(lottoService.getLottoTickets());
 
-        List<Integer> inputWinningNumber = lottoInputTemplate.inputLottoNumber();
-        Integer inputBonusBall = lottoInputTemplate.inputBonusBall();
-        Map<LottoRank, Integer> lottoResult = lottoService.getLottoResult(inputWinningNumber, inputBonusBall);
+        String[] inputWinningNumbers = lottoInputTemplate.inputLottoWinningNumbers().split(",");
+        String inputBonusBall = lottoInputTemplate.inputBonusBall();
+        LottoResult lottoResult = lottoService.getLottoResult(inputWinningNumbers, inputBonusBall);
         lottoOutputTemplate.printLottoResult(lottoResult);
         lottoOutputTemplate.printRateOfReturn(lottoService.getRateOfReturn(purchaseAmount, lottoResult));
     }

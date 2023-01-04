@@ -22,27 +22,15 @@ public class LottoService {
         return LottoRepository.getAllLottoTicket();
     }
 
-    public Map<LottoRank, Integer> getLottoResult(List<Integer> inputWinningNumber, Integer inputBonusBall) {
+    public LottoResult getLottoResult(String[] inputWinningNumber, String inputBonusBall) {
         LottoTickets lottoTickets = LottoRepository.getAllLottoTicket();
-        List<LottoNumber> lottoNumbers =
-                inputWinningNumber.stream()
-                        .map(number -> LottoNumber.from(number))
-                        .collect(Collectors.toList());
+        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(inputWinningNumber, inputBonusBall);
 
-        return lottoTickets.getLottoResult(
-                new LottoWinningNumber(
-                        new LottoTicket(lottoNumbers),
-                        LottoNumber.from(inputBonusBall)
-                )
-        ).getRankCountMap();
+        return lottoTickets.getLottoResult(lottoWinningNumber);
     }
 
-    public Double getRateOfReturn(PurchaseAmount purchaseAmount, Map<LottoRank, Integer> lottoResult) {
-        int totalRevenue = 0;
-        for (LottoRank lottoRank : lottoResult.keySet()) {
-            totalRevenue += lottoRank.getReward() * lottoResult.get(lottoRank);
-        }
-        return purchaseAmount.calculateRateOfReturn(totalRevenue);
+    public Double getRateOfReturn(PurchaseAmount purchaseAmount, LottoResult lottoResult) {
+        return purchaseAmount.calculateRateOfReturn(lottoResult.getTotalRevenue());
     }
 
     public static Integer getLottoPrice() {
