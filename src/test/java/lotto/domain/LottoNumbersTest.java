@@ -1,16 +1,14 @@
 package lotto.domain;
 
 import static lotto.domain.LottoConstants.SIZE;
-import static lotto.domain.LottoNumber.from;
+import static lotto.domain.LottoNumbers.makeLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,20 +16,19 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumbersTest {
-    static List<LottoNumber> lottoNumberList;
+    static List<Integer> oneToSixList;
 
     @BeforeAll
     static void init() {
-        lottoNumberList = IntStream.rangeClosed(1, SIZE).boxed().map(LottoNumber::from)
-                .collect(Collectors.toList());
+        oneToSixList = IntStream.rangeClosed(1, SIZE).boxed().collect(Collectors.toList());
     }
 
 
     @Test
     @DisplayName("여섯개의_LottoNumber로_생성가능하다")
-    void 여섯개의_LottoNumberList로_생성가능하다() {
+    void 여섯개의_IntegerList로_생성가능하다() {
         //expected
-        assertThatCode(() -> new LottoNumbers(lottoNumberList)).doesNotThrowAnyException();
+        assertThatCode(() -> makeLottoNumbers(oneToSixList)).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
@@ -39,10 +36,10 @@ class LottoNumbersTest {
     @DisplayName("여섯개가_아닌_LottoNumber로_생성하면_에러가_발생한다")
     void 여섯개가_아닌_LottoNumber로_생성하면_에러가_발생한다(int input) {
         //given
-        List<LottoNumber> sizeIsNotSixlottoNumberList = IntStream.rangeClosed(1, input).boxed().map(LottoNumber::from)
+        List<Integer> sizeIsNotSixlottoNumberList = IntStream.rangeClosed(1, input).boxed()
                 .collect(Collectors.toList());
         //expected
-        assertThatThrownBy(() -> new LottoNumbers(sizeIsNotSixlottoNumberList)).isInstanceOf(
+        assertThatThrownBy(() -> makeLottoNumbers(sizeIsNotSixlottoNumberList)).isInstanceOf(
                 IllegalArgumentException.class);
     }
 
@@ -51,11 +48,11 @@ class LottoNumbersTest {
     @DisplayName("중복된_수로_생성하면_에러가_발생한다")
     void 중복된_수로_생성하면_에러가_발생한다(int input) {
         //given
-        List<LottoNumber> duplicateLottoNumberList = IntStream.rangeClosed(1, 6).boxed().map(i -> from(input))
+        List<Integer> duplicateLottoNumberList = IntStream.rangeClosed(1, 6).boxed().map(i -> input)
                 .collect(Collectors.toList());
 
         //expected
-        assertThatThrownBy(() -> new LottoNumbers(duplicateLottoNumberList)).isInstanceOf(
+        assertThatThrownBy(() -> makeLottoNumbers(duplicateLottoNumberList)).isInstanceOf(
                 IllegalArgumentException.class);
     }
 
@@ -64,7 +61,7 @@ class LottoNumbersTest {
     @DisplayName("숫자가_존재하면_트루를_리턴한다")
     void 숫자가_존재하면_True를_리턴한다(int input) {
         //when
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        LottoNumbers lottoNumbers = makeLottoNumbers(oneToSixList);
         boolean result = lottoNumbers.contains(input);
 
         //then
@@ -76,8 +73,7 @@ class LottoNumbersTest {
     @DisplayName("숫자가_존재하면_트루를_리턴한다")
     void 숫자가_존재하지않으면_False를_리턴한다(int input) {
         //when
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
-        boolean result = lottoNumbers.contains(input);
+        boolean result = makeLottoNumbers(oneToSixList).contains(input);
 
         //then
         assertThat(result).isFalse();

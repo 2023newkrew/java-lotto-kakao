@@ -69,10 +69,10 @@
 - [x] 1 ~ 45 외의 값이 주어지면 IllegalArgumentException이 발생한다.
 
 #### LottoAnswer
-- [ ] LottoNumbers와 BonusBall을 가진 객체이다.
+- [x] LottoNumbers와 BonusBall을 가진 객체이다.
 
 #### BonusBall
-- [ ] 2등 판별을 위한 BonusBall 객체이다
+- [x] 2등 판별을 위한 BonusBall 객체이다
 
 
 

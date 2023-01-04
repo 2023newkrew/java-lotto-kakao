@@ -1,13 +1,12 @@
 package lotto.domain;
 
-import static lotto.domain.LottoConstants.*;
-import static lotto.domain.LottoNumber.*;
-import static lotto.exception.ExceptionMessage.*;
+import static lotto.domain.LottoConstants.SIZE;
+import static lotto.domain.LottoNumber.from;
+import static lotto.exception.ExceptionMessage.SIZE_EXCEPTION_MESSAGE;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.exception.ExceptionMessage;
 import lotto.utils.ErrorMessageFormatter;
 
 public class LottoNumbers {
@@ -18,7 +17,7 @@ public class LottoNumbers {
         return new LottoNumbers(integers.stream().map(LottoNumber::from).collect(Collectors.toList()));
     }
 
-    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+    private LottoNumbers(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
@@ -47,6 +46,10 @@ public class LottoNumbers {
 
     public boolean contains(int input) {
         return this.lottoNumbers.contains(from(input));
+    }
+
+    public boolean contains(LottoNumber input) {
+        return this.lottoNumbers.contains(input);
     }
 
     @Override
