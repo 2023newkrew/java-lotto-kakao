@@ -3,7 +3,7 @@ package lotto.domain.constants;
 public class LottoStringForm {
     public static class Korean{
         public static final String CASH_UNIT = "원";
-        public static final String COUNT_UNIT = "개";
+        public static final String COUNT_UNIT = "장";
 
         /**
          * form : (number of MATCHES)개 일치
