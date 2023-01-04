@@ -18,6 +18,12 @@ public class Lotto {
     private static final List<LottoNumber> WHOLE_NUMBERS = IntStream.rangeClosed(MINIMUM, MAXIMUM)
             .boxed().map(number -> new LottoNumber(number))
             .collect(Collectors.toList());
+    private static final Comparator<LottoNumber> LOTTO_NUMBER_COMPARATOR = new Comparator<LottoNumber>() {
+        @Override
+        public int compare(LottoNumber o1, LottoNumber o2) {
+            return o1.number - o2.number;
+        }
+    };
 
     private final List<LottoNumber> numbers;
 
@@ -28,12 +34,7 @@ public class Lotto {
     public static Lotto getAutoLotto() {
         Collections.shuffle(WHOLE_NUMBERS);
         List<LottoNumber> numbers = new ArrayList<>(WHOLE_NUMBERS.subList(START_INDEX, START_INDEX + LENGTH));
-        numbers.sort(new Comparator<LottoNumber>() {
-            @Override
-            public int compare(LottoNumber o1, LottoNumber o2) {
-                return o1.number - o2.number;
-            }
-        });
+        numbers.sort(LOTTO_NUMBER_COMPARATOR);
         return new Lotto(numbers);
     }
 
@@ -41,12 +42,7 @@ public class Lotto {
         LottoValidator.validate(input);
         List<LottoNumber> numbers = Arrays.stream(input.split(DELIMITER))
                 .map(inputString -> new LottoNumber(inputString))
-                .sorted(new Comparator<LottoNumber>() {
-                    @Override
-                    public int compare(LottoNumber o1, LottoNumber o2) {
-                        return o1.number - o2.number;
-                    }
-                })
+                .sorted(LOTTO_NUMBER_COMPARATOR)
                 .collect(Collectors.toList());
         return new Lotto(numbers);
     }
