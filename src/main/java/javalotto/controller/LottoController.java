@@ -25,11 +25,13 @@ public class LottoController {
         PurchaseAmount purchaseAmount = inputView.getPurchaseAmountInput();
         LottoCount totalLottoCount = LottoCount.of(purchaseAmount, PURCHASE_AMOUNT_UNIT_PRICE);
         LottoCount manuallyLottoCount = inputView.getManuallyLottoCountInput();
+        Lottos manuallyLottos = inputView.getManuallyLottosInput(manuallyLottoCount);
         LottoCount automaticallyLottoCount = totalLottoCount.getRemainExceptFor(manuallyLottoCount);
-        outputView.printLottoCount(totalLottoCount);
-        Lottos lottos = lottoGenerator.getLottos(totalLottoCount);
-        outputView.printLottos(lottos);
+        outputView.printLottoCount(manuallyLottoCount, automaticallyLottoCount);
+        Lottos automaticallyLottos = lottoGenerator.getLottos(automaticallyLottoCount);
+        Lottos totalLottos = manuallyLottos.addAll(automaticallyLottos);
+        outputView.printLottos(totalLottos);
         WinningLotto winningLotto = inputView.getWinningLottoInput();
-        outputView.printResult(winningLotto, lottos, purchaseAmount);
+        outputView.printResult(winningLotto, totalLottos, purchaseAmount);
     }
 }
