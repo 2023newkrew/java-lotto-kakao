@@ -22,7 +22,7 @@ public enum LottoResult {
         this.stringFormat = stringFormat;
     }
 
-    public static LottoResult getLottoResultOf(int numberCount, boolean bonusNumber) {
+    public static LottoResult of(int numberCount, boolean bonusNumber) {
         return Arrays.stream(values())
                 .filter(it -> it.numberCount == numberCount)
                 .filter(it -> it.bonusNumber == bonusNumber)

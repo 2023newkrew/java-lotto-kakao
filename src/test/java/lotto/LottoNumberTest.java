@@ -11,14 +11,14 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints={1, 2, 44, 45})
     void createNumberBetween1And45(int value) {
-        Assertions.assertThatCode(() -> LottoNumber.of(value)).doesNotThrowAnyException();
+        Assertions.assertThatCode(() -> LottoNumber.from(value)).doesNotThrowAnyException();
     }
 
     @DisplayName("1~45 사이의 이외의 숫자 생성시 실패")
     @ParameterizedTest
     @ValueSource(ints={0, 46})
     void failToCreateNumberOtherThanBetween1And45(int value) {
-        Assertions.assertThatThrownBy(() -> LottoNumber.of(value))
+        Assertions.assertThatThrownBy(() -> LottoNumber.from(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

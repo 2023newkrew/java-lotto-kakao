@@ -29,6 +29,6 @@ public class LottoTicket {
     public LottoResult getResult(LottoWinningNumberList lottoWinningNumbers) {
         int equalNumber = lottoWinningNumbers.getAmountOfNumbersInWinningNumbers(lottoNumberSet);
         boolean bonusNumber = lottoWinningNumbers.checkBonusNumberInNumbers(lottoNumberSet);
-        return LottoResult.getLottoResultOf(equalNumber, bonusNumber);
+        return LottoResult.of(equalNumber, bonusNumber);
     }
 }

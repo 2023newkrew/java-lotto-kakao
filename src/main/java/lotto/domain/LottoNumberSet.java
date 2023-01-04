@@ -18,7 +18,7 @@ public class LottoNumberSet {
     public LottoNumberSet(Set<Integer> numberSet) {
         validateNumbersSize(numberSet);
         lottoNumbers = numberSet.stream()
-                .map(LottoNumber::of)
+                .map(LottoNumber::from)
                 .collect(Collectors.toSet());
     }
 

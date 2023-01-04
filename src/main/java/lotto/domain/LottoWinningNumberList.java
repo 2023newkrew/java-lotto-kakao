@@ -9,9 +9,9 @@ public class LottoWinningNumberList {
 
     public LottoWinningNumberList(List<Integer> numberList, int bonusNumber) {
         this.lottoNumbers = new LottoNumberSet(numberList);
-        LottoNumber bonusLottoNumber = LottoNumber.of(bonusNumber);
+        LottoNumber bonusLottoNumber = LottoNumber.from(bonusNumber);
         validateDuplicateBonusNumber(bonusLottoNumber);
-        this.bonusNumber = LottoNumber.of(bonusNumber);
+        this.bonusNumber = LottoNumber.from(bonusNumber);
     }
 
     private void validateDuplicateBonusNumber(LottoNumber bonusLottoNumber) {
