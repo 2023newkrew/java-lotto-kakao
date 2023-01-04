@@ -1,6 +1,6 @@
 import buyer.Buyer;
 import buyer.BuyerResult;
-import lotto.LotteryGenerator;
+import lotto.Lottery;
 import lotto.LotteryResult;
 import view.InputView;
 import view.OutputView;
@@ -8,11 +8,13 @@ import view.OutputView;
 public class LotteryController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
-    private final LotteryGenerator lotteryGenerator = new LotteryGenerator();
 
     public void run() {
         Buyer buyer = new Buyer(inputView.getBudgetInput());
-        lotteryGenerator.autoGenerate(buyer);
+
+        while (buyer.hasMoreBudgetThan(Lottery.PRICE)) {
+            buyer.buyLottery(new Lottery());
+        }
         outputView.printLotteries(buyer.getLotteries());
 
         LotteryResult lotteryResult =
@@ -22,5 +24,4 @@ public class LotteryController {
         outputView.printResult(buyerResult);
         outputView.printProfit(buyerResult.getProfit());
     }
-
 }

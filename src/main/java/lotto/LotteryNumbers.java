@@ -27,7 +27,7 @@ public class LotteryNumbers {
         return numbers.contains(number);
     }
 
-    public Stream<LotteryNumber> stream() {
+    protected Stream<LotteryNumber> stream() {
         return numbers.stream();
     }
 

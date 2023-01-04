@@ -2,18 +2,18 @@ package view;
 
 import buyer.BuyerProfit;
 import buyer.BuyerResult;
-import lotto.Lotteries;
-import lotto.Lottery;
+import lotto.LotteryDTO;
 import lotto.Rank;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class OutputView {
-    public void printLotteries(Lotteries lotteries) {
-        lotteries.getLotteries().forEach(this::printLottery);
+    public void printLotteries(List<LotteryDTO> lotteries) {
+        lotteries.forEach(this::printLottery);
     }
 
-    private void printLottery(Lottery lottery) {
+    private void printLottery(LotteryDTO lottery) {
         System.out.println(lottery);
     }
 
