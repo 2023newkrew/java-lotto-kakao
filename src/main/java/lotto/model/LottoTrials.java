@@ -9,11 +9,7 @@ public class LottoTrials {
     public void add(LottoTrial lottoTrial){
         lottoTrials.add(lottoTrial);
     }
-
-    public int size(){
-        return lottoTrials.size();
-    }
-
+    
     public LottoTrial get(int index){
         return lottoTrials.get(index);
     }
