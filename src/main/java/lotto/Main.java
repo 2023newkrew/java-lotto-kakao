@@ -1,7 +1,7 @@
 package lotto;
 
-import lotto.View.Input;
-import lotto.View.Output;
+import lotto.view.Input;
+import lotto.view.Output;
 import lotto.model.*;
 
 import java.io.IOException;
