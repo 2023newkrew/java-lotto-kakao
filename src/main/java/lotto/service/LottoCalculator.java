@@ -6,31 +6,32 @@ import lotto.domain.LottoWinnerTicket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+
+import static lotto.utils.Constants.MIN_PURCHASE_PRICE;
 
 public class LottoCalculator {
     private static final Integer MIN_WIN_NUM = 3;
     private final LottoWinnerTicket winTicket;
     private final ArrayList<Integer> winValue;
-    private final ArrayList<Integer> winScore;
 
     public LottoCalculator(LottoWinnerTicket winTicket) {
         this.winTicket = winTicket;
         this.winValue = new ArrayList<>(Arrays.asList(5000, 50000, 1500000, 2000000000, 30000000));
-        this.winScore = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
     }
 
-    public double calcRateOfReturn(int amount) {
-        double summary = getWinSummary(this.winScore);
-        amount -= amount % 1000;
-        return summary / amount;
-    }
-
-    public ArrayList<Integer> getResult(LottoTickets lottoTickets) {
+    public ArrayList<Integer> getWinScore(LottoTickets lottoTickets) {
         ArrayList<LottoTicket> tickets = lottoTickets.getTickets();
+
+        ArrayList<Integer> winScore = new ArrayList<>(Collections.nCopies(5,0));
         for (LottoTicket ticket : tickets) {
-            getScore(ticket);
+            int index = getScore(ticket);
+            if (index != -1){
+                int value = winScore.get(index);
+                winScore.set(index, value + 1);
+            }
         }
-        return this.winScore;
+        return winScore;
     }
 
     public long getWinSummary(ArrayList<Integer> score) {
@@ -41,15 +42,20 @@ public class LottoCalculator {
         return summary;
     }
 
-    public void getScore (LottoTicket ticket) {
+    public double calcRateOfReturn(ArrayList<Integer> winScore, int amount) {
+        double summary = getWinSummary(winScore);
+        amount -= amount % MIN_PURCHASE_PRICE;
+        return summary / amount;
+    }
+
+    private int getScore (LottoTicket ticket) {
         int sameCount = checkSameCount(ticket);
-        if(sameCount < MIN_WIN_NUM) return;
+        if(sameCount < MIN_WIN_NUM) return -1;
         sameCount -= MIN_WIN_NUM;
         if(sameCount == 5 - MIN_WIN_NUM && isBonusNumber(ticket)) {
-            this.winScore.set(4, this.winScore.get(sameCount) + 1);
-            return;
+            return 4;
         }
-        this.winScore.set(sameCount, this.winScore.get(sameCount) + 1);
+        return sameCount;
     }
 
     public int checkSameCount(LottoTicket userTicket) {
@@ -68,4 +74,5 @@ public class LottoCalculator {
         if(winTicket.getLottoNumbers().contains(number)) return 1;
         return 0;
     }
+
 }

@@ -32,12 +32,12 @@ public class LottoApplication {
 
         LottoCalculator lottoCalculator = new LottoCalculator(lottoWinnerTicket);
 
-        // Winner 뽑아내기
-        ArrayList<Integer> result = lottoCalculator.getResult(lottoController.getLottoTickets());
+        // Winner Score 뽑아내기
+        ArrayList<Integer> winScore = lottoCalculator.getWinScore(lottoController.getLottoTickets());
 
-        // 당첨 통계 출력
-        double rate = lottoCalculator.calcRateOfReturn(amount);
-        resultView.printWinningStatics(result, rate);
+        double rate = lottoCalculator.calcRateOfReturn(winScore, amount);
+        resultView.printWinningStatics(winScore, rate);
+
     }
 
     private static LottoWinnerTicket getLottoWinnerTicket(InputView inputView, StringConversion stringConversion) {

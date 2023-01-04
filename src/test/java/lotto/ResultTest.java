@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.domain.LottoWinnerTicket;
 import lotto.service.LottoCalculator;
 import lotto.utils.StringConversion;
@@ -71,7 +72,10 @@ public class ResultTest {
         LottoCalculator lottoCalculator = new LottoCalculator(new LottoWinnerTicket(
                 new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
 
-        lottoCalculator.getScore(new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 7))));
-        assertThat(lottoCalculator.calcRateOfReturn(amount)).isEqualTo(3000);
+        LottoTickets lottoTickets = new LottoTickets(amount);
+        lottoTickets.createManualTicket(new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 7))));
+
+        ArrayList<Integer> winScore = lottoCalculator.getWinScore(lottoTickets);
+        assertThat(lottoCalculator.calcRateOfReturn(winScore,amount)).isEqualTo(3000);
     }
 }

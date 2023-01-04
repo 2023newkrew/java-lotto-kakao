@@ -33,6 +33,7 @@ public class ResultView {
         }
         System.out.println(RESULT_GOOD.getMessage());
     }
+
     public void printLottoTickets(LottoTickets lottoTickets) {
         ArrayList<LottoTicket> tickets = lottoTickets.getTickets();
         for(LottoTicket ticket : tickets){
