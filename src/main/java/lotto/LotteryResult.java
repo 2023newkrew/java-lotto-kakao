@@ -5,7 +5,6 @@ import util.StringParser;
 import java.util.List;
 
 public class LotteryResult {
-    //    private final LotteryNumbers winningNumbers;
     private final Lottery winningLottery;
     private final LotteryNumber bonusNumber;
 
@@ -16,7 +15,6 @@ public class LotteryResult {
     public LotteryResult(List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
 
-//        this.winningNumbers = new LotteryNumbers(winningNumbers);
         this.winningLottery = new Lottery(winningNumbers);
         this.bonusNumber = new LotteryNumber(bonusNumber);
     }
