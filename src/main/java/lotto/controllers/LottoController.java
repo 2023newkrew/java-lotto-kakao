@@ -5,7 +5,7 @@ import static lotto.common.LottoConfiguration.LOTTO_PRICE;
 import java.util.List;
 import lotto.models.Goal;
 import lotto.models.Lotto;
-import lotto.models.LottoGenerator;
+import lotto.common.LottoGenerator;
 import lotto.models.LottoStatistics;
 import lotto.views.Console;
 import lotto.views.InputView;
@@ -14,7 +14,6 @@ import lotto.views.OutputView;
 public class LottoController {
     private final OutputView outputView;
     private final InputView inputView;
-    private final LottoGenerator lottoGenerator = new LottoGenerator();
 
     public LottoController(Console console) {
         outputView = new OutputView(console);
@@ -45,7 +44,7 @@ public class LottoController {
     }
 
     private List<Lotto> createLottoList(int numberOfLotto) {
-        List<Lotto> lottos = lottoGenerator.createLottos(numberOfLotto);
+        List<Lotto> lottos = LottoGenerator.createLottos(numberOfLotto);
         outputView.printLottos(lottos);
         return lottos;
     }
