@@ -9,14 +9,20 @@ import lotto.domain.WinningLotto;
 import lotto.dto.GameResultDto;
 
 public class LottoView {
-    static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public static int inputInit() {
-        printInit();
+    private static List<Integer> inputLottoNumbers() {
+        return Arrays.stream(scanner.nextLine().trim().replace(" ", "").split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    public static int inputTotalMoney() {
+        printTotalMoneyMessage();
         return Integer.parseInt(scanner.nextLine());
     }
 
-    private static void printInit() {
+    private static void printTotalMoneyMessage() {
         System.out.println("구매금액을 입력해 주세요.");
     }
 
@@ -26,23 +32,21 @@ public class LottoView {
         System.out.println();
     }
 
-    private static void printWinningLottoNumbers() {
+    private static void printWinningLottoNumbersMessage() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    private static void printBonusNumber() {
+    private static void printBonusNumberMessage() {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
     private static List<Integer> inputWinningLottoNumbers() {
-        printWinningLottoNumbers();
-        return Arrays.stream(scanner.nextLine().trim().replace(" ", "").split(","))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+        printWinningLottoNumbersMessage();
+        return inputLottoNumbers();
     }
 
     private static int inputBonusNumber() {
-        printBonusNumber();
+        printBonusNumberMessage();
         return scanner.nextInt();
     }
 
@@ -67,5 +71,27 @@ public class LottoView {
                         lottoResultCounter.get(lottoGradeEnum)
                 ));
         System.out.printf("총 수익률은 %.2f 입니다.\n", gameResultDto.getRate());
+    }
+
+    public static int inputManualLottoAmount() {
+        printManualLottoAmountMessage();
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private static void printManualLottoAmountMessage() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static List<List<Integer>> inputManualLottoNumbers(int manualLottoAmount) {
+        List<List<Integer>> lottoNumbersList = new ArrayList<>();
+
+        printManualLottoNumbersMessage();
+        for (int i = 0; i < manualLottoAmount; i++)
+            lottoNumbersList.add(inputLottoNumbers());
+        return lottoNumbersList;
+    }
+
+    private static void printManualLottoNumbersMessage() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 }

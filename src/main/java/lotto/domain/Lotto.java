@@ -23,8 +23,14 @@ public class Lotto {
                 .collect(Collectors.toList());
     }
 
-    public static Lotto of(List<Integer> numbers) {
+    public static Lotto manualGenerate(List<Integer> numbers) {
         return new Lotto(numbers);
+    }
+
+    public static List<Lotto> manualGenerateByNumbersList(List<List<Integer>> numbersList) {
+        return numbersList.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
     }
 
     public static Lotto autoGenerate() {

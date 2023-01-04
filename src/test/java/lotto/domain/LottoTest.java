@@ -13,24 +13,24 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 public class LottoTest {
     @Test
     void 리스트를_넣어서_로또를_생성할_수_있다() {
-        assertDoesNotThrow(() -> Lotto.of(List.of(1, 2, 3, 4, 5, 6)));
+        assertDoesNotThrow(() -> Lotto.manualGenerate(List.of(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
     void 숫자_리스트_크기가_6개가_아니면_예외가_발생한다() {
-        assertThatThrownBy(() -> Lotto.of(List.of(1, 2, 3)))
+        assertThatThrownBy(() -> Lotto.manualGenerate(List.of(1, 2, 3)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 로또에_저장되는_숫자는_LottoNumber_객체이다() {
-        Lotto lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.manualGenerate(List.of(1, 2, 3, 4, 5, 6));
         assertThat(lotto.getNumbers().toArray()[0]).isInstanceOf(LottoNumber.class);
     }
 
     @Test
     void 로또에_중복된_숫자가_저장될_수_없다() {
-        assertThatThrownBy(() -> Lotto.of(List.of(1, 2, 3, 4, 5, 1)))
+        assertThatThrownBy(() -> Lotto.manualGenerate(List.of(1, 2, 3, 4, 5, 1)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(INVALID_DUPLICATED_LOTTO_NUMBER);
     }
