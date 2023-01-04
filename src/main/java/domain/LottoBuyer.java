@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class LottoBuyer {
     private static final Integer LOTTO_COST = 1000;
-    private static final Integer DECIMAL_POINT = 100;
+    private static final Integer RATE_DECIMAL_POINT = 100;
 
     private Integer money;
     private List<Lotto> lottos = new ArrayList<>();
@@ -34,19 +34,24 @@ public class LottoBuyer {
         }
 
         Double earningRate =  calculateEarningRate(map);
-
         return new LottoResult(map, earningRate);
     }
 
     public Double calculateEarningRate(Map<LottoRank, Integer> map) {
-        Long earningMoney = 0L;
-        for (LottoRank lottoRank : LottoRank.values()) {
-            earningMoney +=  (map.get(lottoRank) * lottoRank.getReward());
-        }
-        if (earningMoney == 0L) {
+        Long earningMoney = map.entrySet()
+            .stream()
+            .mapToLong(entry -> entry.getValue() * entry.getKey().getReward())
+            .reduce(0, Long::sum);
+
+        if (money == 0) {
             return 0.00d;
         }
         Integer investMoney = (money / LOTTO_COST) * LOTTO_COST;
-        return Math.floor(earningMoney / (double) investMoney * DECIMAL_POINT) / DECIMAL_POINT;
+
+        if ((earningMoney - investMoney) == 0) {
+            return 0.00d;
+        }
+        Double rate = (earningMoney - investMoney) / (double) investMoney * 100;
+        return Math.floor(rate * RATE_DECIMAL_POINT) / RATE_DECIMAL_POINT;
     }
 }

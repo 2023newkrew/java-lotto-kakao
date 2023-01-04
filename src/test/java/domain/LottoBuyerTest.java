@@ -66,6 +66,6 @@ public class LottoBuyerTest {
         LottoResult lottoResult = lottoBuyer.calculateResult(winningLotto);
 
         // when, then
-        assertThat(lottoBuyer.calculateEarningRate(lottoResult.getLottoRanks())).isEqualTo(666683.33);
+        assertThat(lottoBuyer.calculateEarningRate(lottoResult.getLottoRanks())).isEqualTo(66668233.33);
     }
 }

@@ -22,9 +22,6 @@ public class OutputView {
             System.out.print(lottoResult.getLottoRanks().get(place));
             System.out.println("개");
         }
-        System.out.print("총 수익률은 " + lottoResult.getEarningRate() + "입니다.");
-        System.out.print("(기준이 1이기 때문에 결과적으로 ");
-        String result = lottoResult.getEarningRate() >= 1.0d ? "이익이" : "손해";
-        System.out.print(result + "라는 의미임)");
+        System.out.print("총 수익률은 " + String.format("%.2f", lottoResult.getEarningRate()) + "%입니다.");
     }
 }

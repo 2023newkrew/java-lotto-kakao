@@ -28,12 +28,13 @@ public class LottoApplication {
 
             String bonusNumberInput = inputView.getBonusNumberInput();
             LottoNumber bonusNumber = new LottoNumber(NumberParser.parse(bonusNumberInput));
+            inputView.close();
 
             LottoResult lottoResult = lottoBuyer.calculateResult(new WinningLotto(winningLotto, bonusNumber));
             outputView.printLottoStatistics(lottoResult);
         }
         catch (Exception exception) {
-            System.out.println(exception);
+            exception.printStackTrace();
         }
     }
 }
