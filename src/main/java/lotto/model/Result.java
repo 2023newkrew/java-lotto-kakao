@@ -38,12 +38,10 @@ public class Result {
     }
 
     public double getProfitRate(int money) {
-        return (double) (
-                getValue(Grade.THREE) * Grade.THREE.getReward()
-                        + getValue(Grade.FOUR) * Grade.FOUR.getReward()
-                        + getValue(Grade.FIVE) * Grade.FIVE.getReward()
-                        + getValue(Grade.FIVE_BONUS) * Grade.FIVE_BONUS.getReward()
-                        + getValue(Grade.SIX) * Grade.SIX.getReward()
-        ) / (double) money;
+        return (double) (getValue(Grade.THREE) * Grade.THREE.getReward()
+                + getValue(Grade.FOUR) * Grade.FOUR.getReward()
+                + getValue(Grade.FIVE) * Grade.FIVE.getReward()
+                + getValue(Grade.FIVE_BONUS) * Grade.FIVE_BONUS.getReward()
+                + getValue(Grade.SIX) * Grade.SIX.getReward()) / (double) money;
     }
 }

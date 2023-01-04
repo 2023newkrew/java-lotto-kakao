@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LottoTickets {
-    List<LottoTicket> tickets;
+    private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
         this.tickets = new ArrayList<>(tickets);
@@ -38,6 +38,10 @@ public class LottoTickets {
             result.addUp(winningNumbers.match(ticket));
         }
         return result;
+    }
+
+    public boolean contains(LottoTicket ticket) {
+        return tickets.contains(ticket);
     }
 
     public Stream<LottoTicket> stream() {

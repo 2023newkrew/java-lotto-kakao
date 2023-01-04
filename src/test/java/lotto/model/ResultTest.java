@@ -40,4 +40,16 @@ public class ResultTest {
         assertThat(result.getValue(Grade.FIVE)).isEqualTo(3);
         assertThat(result.getValue(Grade.FIVE_BONUS)).isEqualTo(0);
     }
+
+    @Test
+    void 수익률이_정확히_계산되어야_함() {
+        Result result = new Result(new HashMap<>() {{
+            put(Grade.THREE, 1);
+            put(Grade.FOUR, 1);
+            put(Grade.FIVE, 1);
+            put(Grade.FIVE_BONUS, 1);
+            put(Grade.SIX, 1);
+        }});
+        assertThat(result.getProfitRate(5000)).isEqualTo((double) 2031555000 / (double) 5000);
+    }
 }

@@ -2,6 +2,8 @@ package lotto.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -11,6 +13,12 @@ class MoneyTest {
     @BeforeEach
     void setUp() {
         money = new Money(10500);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1})
+    void 금액이_유효하지_않은_경우_예외가_발생해야_함(int money) {
+        assertThatCode(() -> new Money(money)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

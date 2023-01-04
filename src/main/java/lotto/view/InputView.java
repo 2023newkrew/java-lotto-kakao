@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.model.LottoNumber;
 import lotto.model.LottoTicket;
+import lotto.model.Money;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,13 +37,13 @@ public class InputView {
 
     private int parseMoney(String moneyInput) {
         validateIsInteger(moneyInput);
-        validateIsPositive(moneyInput);
+        validateMoreThanOneTicket(moneyInput);
         return Integer.parseInt(moneyInput);
     }
 
-    private void validateIsPositive(String input) {
-        if (Integer.parseInt(input) <= 0) {
-            throw new IllegalArgumentException("0보다 큰 숫자여야 합니다");
+    private void validateMoreThanOneTicket(String input) {
+        if (Integer.parseInt(input) < Money.LOTTO_PRICE) {
+            throw new IllegalArgumentException("로또 한장의 가격보다 크거나 같은 금액이어야 합니다");
         }
     }
 
@@ -103,14 +104,12 @@ public class InputView {
     }
 
     private List<Integer> parseLottoTicket(String lottoTicketInput) throws IllegalArgumentException {
-        return Arrays.stream(lottoTicketInput.split(","))
-                .map(String::trim)
+        return Arrays.stream(lottoTicketInput.split(",")).map(String::trim)
                 .map(number -> {
                     validateIsInteger(number);
                     validateIsInLottoNumberRange(number);
                     return Integer.parseInt(number);
-                })
-                .collect(Collectors.toList());
+                }).collect(Collectors.toList());
     }
 
     private void validateTicketSize(List<Integer> ticket) {
@@ -138,8 +137,8 @@ public class InputView {
         return Integer.parseInt(bonusNumberInput);
     }
 
-    private void validateIsInLottoNumberRange(String bonusNumberInput) {
-        int bonusNumber = Integer.parseInt(bonusNumberInput);
+    private void validateIsInLottoNumberRange(String input) {
+        int bonusNumber = Integer.parseInt(input);
         if (bonusNumber < LottoNumber.MIN_NUMBER || bonusNumber > LottoNumber.MAX_NUMBER) {
             throw new IllegalArgumentException("로또 번호는 1-45 사이의 숫자여야 합니다");
         }

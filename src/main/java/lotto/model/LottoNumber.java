@@ -18,9 +18,7 @@ public class LottoNumber {
         if (isOutOfRange(value)) {
             throw new IllegalArgumentException("LottoValue 는 1~45의 정수 값이어야 한다.");
         }
-        if (!CACHE.containsKey(value)) {
-            CACHE.put(value, new LottoNumber(value));
-        }
+        if (!CACHE.containsKey(value)) CACHE.put(value, new LottoNumber(value));
         return CACHE.get(value);
     }
 

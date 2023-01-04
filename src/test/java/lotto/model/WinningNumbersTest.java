@@ -36,16 +36,7 @@ class WinningNumbersTest {
     @Test
     void 모두_맞춘_경우() {
         WinningNumbers winningNumbers = new WinningNumbers(
-                new LottoTicket(
-                        Arrays.asList(
-                                LottoNumber.valueOf(1),
-                                LottoNumber.valueOf(2),
-                                LottoNumber.valueOf(3),
-                                LottoNumber.valueOf(4),
-                                LottoNumber.valueOf(5),
-                                LottoNumber.valueOf(6)
-                        )
-                ),
+                lottoTicket,
                 LottoNumber.valueOf(7)
         );
         assertThat(winningNumbers.match(lottoTicket)).isEqualTo(Grade.SIX);

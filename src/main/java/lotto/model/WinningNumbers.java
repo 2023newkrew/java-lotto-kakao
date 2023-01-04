@@ -16,15 +16,11 @@ public class WinningNumbers {
     }
 
     public Grade match(LottoTicket lottoTicket) {
-        int matchedCount = (int) winningTicket.stream()
-                .filter(lottoTicket::contains)
-                .count();
-
+        int matchedCount = (int) winningTicket.stream().filter(lottoTicket::contains).count();
         int bonusCount = 0;
         if (matchedCount == 5 && lottoTicket.contains(bonusNumber)) {
             bonusCount++;
         }
-
         return Grade.getGrade(matchedCount + WEIGHT * bonusCount);
     }
 }
