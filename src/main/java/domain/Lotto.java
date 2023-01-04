@@ -13,15 +13,15 @@ import java.util.stream.IntStream;
 
 public class Lotto {
 
+    public static final List<Integer> WHOLE_NUMBERS = IntStream.rangeClosed(Constants.MINIMUM, Constants.MAXIMUM)
+            .boxed()
+            .collect(Collectors.toList());
     public static final int START_INDEX = 0;
     private final List<Integer> numbers;
 
     public Lotto() {
-        List<Integer> WHOLE_NUMBERS = IntStream.rangeClosed(Constants.MINIMUM, Constants.MAXIMUM)
-                .boxed()
-                .collect(Collectors.toList());
         Collections.shuffle(WHOLE_NUMBERS);
-        List<Integer> numbersIn = WHOLE_NUMBERS.subList(START_INDEX, START_INDEX + Constants.LENGTH);
+        List<Integer> numbersIn = new ArrayList<>(WHOLE_NUMBERS.subList(START_INDEX, START_INDEX + Constants.LENGTH));
         Collections.sort(numbersIn);
         this.numbers = Collections.unmodifiableList(numbersIn);
     }
