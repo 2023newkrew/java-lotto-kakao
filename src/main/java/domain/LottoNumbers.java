@@ -20,10 +20,6 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public boolean hasSize(int size) {
-        return lottoNumbers.size() == size;
-    }
-
     public Optional<Rank> compareWithWinLottoNumbers(LottoNumbers winLottoNumbers, LottoNumber bonusBall) {
         List<LottoNumber> matchedLottoNumbers = new ArrayList<>(lottoNumbers);
         matchedLottoNumbers.retainAll(winLottoNumbers.lottoNumbers);
