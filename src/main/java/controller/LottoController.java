@@ -3,7 +3,7 @@ package controller;
 import domain.dto.WinningNumbersDto;
 import domain.lotto.LottoGame;
 import domain.lotto.WinningNumbers;
-import domain.lotto.number.LottoNumber;
+import domain.lotto.LottoNumberGenerator;
 import domain.lotto.generator.RandomNumberGenerator;
 import domain.lotto.result.LottoResults;
 import domain.lotto.ticket.LottoTicket;
@@ -26,7 +26,7 @@ public class LottoController {
 
     private LottoTicketList createLottoTickets() {
         Integer purchaseAmount = InputView.inputPurchaseAmount();
-        LottoNumber lottoNumber = new LottoNumber();
+        LottoNumberGenerator lottoNumber = new LottoNumberGenerator();
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
         for (int i = 0; i < purchaseAmount; i++) {
