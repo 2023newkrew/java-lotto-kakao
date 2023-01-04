@@ -13,7 +13,7 @@ public class LottoTicketList {
         this.lottoTicketList = lottoTicketList;
     }
 
-    public String getLottoNumbersString() {
+    public String getString() {
         return lottoTicketList.stream()
                 .map(LottoTicket::getString)
                 .collect(Collectors.joining(DELIMITER));

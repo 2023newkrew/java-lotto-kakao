@@ -6,8 +6,6 @@ import java.util.Set;
 
 public class LottoTicket {
 
-    public static final int LOTTO_TICKET_PRICE = 1000;
-
     private final LottoNumberSet lottoNumberSet;
 
     public LottoTicket(List<Integer> numberList) {

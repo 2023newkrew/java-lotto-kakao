@@ -10,12 +10,11 @@ public class LottoGame {
     }
 
     public void buy(int money) {
-        lottoTickets = LottoDispenser.from(lottoSetting.getNumberSelectStrategy())
-                .getLottoTicket(money);
+        lottoTickets = LottoDispenser.from(lottoSetting).getLottoTicket(money);
     }
 
     public String getLottoTicketsString() {
-        return lottoTickets.getLottoNumbersString();
+        return lottoTickets.getString();
     }
 
     public int getCountOfLottoTickets() {
@@ -23,6 +22,10 @@ public class LottoGame {
     }
 
     public String getWinningString(LottoWinningNumberList lottoWinningNumbers) {
-        return lottoTickets.getStatistics(lottoWinningNumbers).getString();
+        LottoStatistics lottoStatistics = lottoTickets.getStatistics(lottoWinningNumbers);
+        LottoIncomeRate lottoIncomeRate = new LottoIncomeRate(lottoStatistics,
+                lottoSetting.getLottoTicketPrice());
+        return lottoStatistics.getString() + "\n"
+                + lottoIncomeRate.getString();
     }
 }

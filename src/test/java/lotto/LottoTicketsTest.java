@@ -18,7 +18,7 @@ public class LottoTicketsTest {
                 new LottoTicket(Arrays.asList(1,2,3,4,5,6)),
                 new LottoTicket(Arrays.asList(3,6,15,21,38,41))
         ));
-        Assertions.assertThat(lottoTickets.getLottoNumbersString())
+        Assertions.assertThat(lottoTickets.getString())
                 .isEqualTo("[1, 2, 3, 4, 5, 6]\n[3, 6, 15, 21, 38, 41]");
     }
 
@@ -38,8 +38,8 @@ public class LottoTicketsTest {
                         + "4개 일치 (50000원) - 1개\n"
                         + "5개 일치 (1500000원) - 0개\n"
                         + "5개 일치, 보너스 볼 일치(30000000원) - 0개\n"
-                        + "6개 일치 (2000000000원) - 1개\n"
-                        + "총 수익률은 666685.00입니다.");
+                        + "6개 일치 (2000000000원) - 1개"
+                );
     }
 
     private LottoTicket createCustomTicket(LottoResult lottoResult) {

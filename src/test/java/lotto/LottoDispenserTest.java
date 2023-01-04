@@ -3,9 +3,9 @@ package lotto;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.LottoDispenser;
+import lotto.domain.LottoSetting;
 import lotto.domain.LottoTicketList;
 import lotto.domain.strategy.NumberSelectStrategy;
-import lotto.domain.strategy.RandomNumberSelectStrategy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,8 +18,7 @@ public class LottoDispenserTest {
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketByPriceData")
     public void issueLottoTicketByPrice(int price, int number) {
-        LottoDispenser lottoDispenser = LottoDispenser.from(
-                RandomNumberSelectStrategy.getInstance());
+        LottoDispenser lottoDispenser = LottoDispenser.from(new LottoSetting());
         Assertions.assertThat(lottoDispenser.getLottoTicket(price).getCount()).isEqualTo(number);
     }
 
@@ -35,9 +34,11 @@ public class LottoDispenserTest {
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketByNumberSelectStrategyData")
     public void issueLottoTicketByPrice(List<List<Integer>> randomNumbers, int price, String expected) {
-        LottoDispenser lottoDispenser = LottoDispenser.from(createNumberSelectStrategy(randomNumbers));
+        LottoSetting lottoSetting = new LottoSetting();
+        lottoSetting.setNumberSelectStrategy(createNumberSelectStrategy(randomNumbers));
+        LottoDispenser lottoDispenser = LottoDispenser.from(lottoSetting);
         LottoTicketList lottoTickets = lottoDispenser.getLottoTicket(price);
-        Assertions.assertThat(lottoTickets.getLottoNumbersString()).isEqualTo(expected);
+        Assertions.assertThat(lottoTickets.getString()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> getIssueLottoTicketByNumberSelectStrategyData() {
