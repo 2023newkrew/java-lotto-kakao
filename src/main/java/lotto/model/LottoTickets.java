@@ -21,10 +21,8 @@ public class LottoTickets {
         return lottoResult;
     }
 
-    public List<String> toStringList() {
-        return lottoTickets.stream()
-                .map(LottoTicket::toString)
-                .collect(Collectors.toList());
+    public void resetLottoTickets() {
+        lottoTickets.clear();
     }
 
     public List<LottoTicket> getLottoTickets() {

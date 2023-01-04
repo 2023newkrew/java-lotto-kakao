@@ -15,4 +15,8 @@ public class LottoRepository {
     public static LottoTickets getAllLottoTicket() {
         return lottoTickets;
     }
+
+    public static void resetLottoTickets() {
+        lottoTickets.resetLottoTickets();
+    }
 }

@@ -12,6 +12,7 @@ public class LottoService {
     private static final Integer LOTTO_PRICE = 1000;
 
     public void purchaseLotto(PurchaseAmount purchaseAmount) {
+        LottoRepository.resetLottoTickets();
         IntStream.range(0, purchaseAmount.getLottoTicketCount(LOTTO_PRICE))
                 .forEach(index -> LottoRepository.saveLottoTicket(new LottoTicket()));
     }
