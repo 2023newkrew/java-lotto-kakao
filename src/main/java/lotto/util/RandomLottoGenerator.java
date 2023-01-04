@@ -10,7 +10,7 @@ import java.util.List;
 public class RandomLottoGenerator {
     public Lotto generateLotto() {
         return new Lotto(
-                RandomNumberGenerator.getRandomNumbers(
+                RandomNumberGenerator.get(
                         Lotto.FIXED_SIZE,
                         LottoNumber.MIN_NUMBER,
                         LottoNumber.MAX_NUMBER
