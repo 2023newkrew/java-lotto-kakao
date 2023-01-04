@@ -1,42 +1,48 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Lotto {
 
-    private final LottoNumbers lottoNumbers;
-    private final SingleLottoNumber bonusNumber;
+    public static final int LOTTO_NUMBER_LENGTH = 6;
+    private final List<SingleLottoNumber> singleLottoNumberList;
 
-    public Lotto(LottoNumbers lottoNumbers, SingleLottoNumber bonusNumber) {
-        if (lottoNumbers.containsLottoNumber(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 볼 번호가 정답 로또와 중복됩니다.");
+    public Lotto(List<SingleLottoNumber> singleLottoNumberList) {
+        validateLottoNumbers(singleLottoNumberList);
+
+        this.singleLottoNumberList = new ArrayList<>(singleLottoNumberList);
+    }
+
+    private void validateLottoNumbers(List<SingleLottoNumber> singleLottoNumbers) {
+        if (singleLottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
+            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
         }
 
-        this.lottoNumbers = lottoNumbers;
-        this.bonusNumber = bonusNumber;
+        long uniqueNumberSize = singleLottoNumbers.stream().distinct().count();
+        if (singleLottoNumbers.size() != uniqueNumberSize) {
+            throw new IllegalArgumentException("중복된 로또 번호가 있으면 안됩니다.");
+        }
     }
 
-    public PrizeCountMap getPrizeCountMap(List<LottoNumbers> userLottos) {
-        Map<LottoPrize, Integer> prizeCount = new HashMap<>();
-
-        userLottos.forEach(userLotto -> {
-            LottoPrize prize = getLottoPrize(userLotto);
-            prizeCount.put(prize, prizeCount.getOrDefault(prize, 0) + 1);
-        });
-
-        return new PrizeCountMap(prizeCount);
+    public boolean containsLottoNumber(SingleLottoNumber singleLottoNumber) {
+        return this.singleLottoNumberList.contains(singleLottoNumber);
     }
 
-    private LottoPrize getLottoPrize(LottoNumbers userLotto) {
-        int matchNumberCount = this.lottoNumbers.countMatchNumber(userLotto);
-        boolean hasBonusNumber = userLotto.containsLottoNumber(bonusNumber);
+    public int countMatchNumber(Lotto other) {
+        return (int) this.singleLottoNumberList.stream()
+                .filter(other::containsLottoNumber)
+                .count();
+    }
 
-        return Arrays.stream(LottoPrize.values())
-                .filter(prize -> prize.isWon(matchNumberCount, hasBonusNumber))
-                .findFirst()
-                .orElse(LottoPrize.NONE);
+    @Override
+    public String toString() {
+        StringBuilder message = new StringBuilder();
+
+        message.append("[");
+        this.singleLottoNumberList.forEach(e -> message.append(e.toString()).append(","));
+        message.append("]");
+
+        return message.toString();
     }
 }

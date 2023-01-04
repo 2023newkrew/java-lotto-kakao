@@ -2,8 +2,8 @@ package lotto.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.AnswerLotto;
 import lotto.domain.Lotto;
-import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import lotto.domain.SingleLottoNumber;
 import lotto.domain.Store;
@@ -27,12 +27,12 @@ public class LottoController {
 
     public void play() {
         int amount = purchase();
-        List<LottoNumbers> userLottos = getRandomLottoNumbers(amount);
-        Lotto lotto = getAnwerLotto();
-        outputView.printResult(lotto.getPrizeCountMap(userLottos));
+        List<Lotto> userLottos = getRandomLottoNumbers(amount);
+        AnswerLotto answerLotto = getAnwerLotto();
+        outputView.printResult(answerLotto.getPrizeCountMap(userLottos));
     }
 
-    private Lotto getAnwerLotto() {
+    private AnswerLotto getAnwerLotto() {
         List<Integer> lottoNumbers = inputView.getAnswerLottoInput();
         SingleLottoNumber bonusNumber = new SingleLottoNumber(inputView.getBonusBallInput());
 
@@ -41,11 +41,11 @@ public class LottoController {
                 .sorted()
                 .collect(Collectors.toList());
 
-        return new Lotto(new LottoNumbers(answerLottoNumbers), bonusNumber);
+        return new AnswerLotto(new Lotto(answerLottoNumbers), bonusNumber);
     }
 
-    private List<LottoNumbers> getRandomLottoNumbers(int amount) {
-        List<LottoNumbers> userLottos = RandomLottoGenerator.generateLottos(amount);
+    private List<Lotto> getRandomLottoNumbers(int amount) {
+        List<Lotto> userLottos = RandomLottoGenerator.generateLottoList(amount);
         outputView.printUserLottos(userLottos);
         return userLottos;
     }

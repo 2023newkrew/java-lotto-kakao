@@ -1,4 +1,4 @@
-# java-lotto-kakao
+# java-answerLotto-kakao
 
 ## 요구사항
 

@@ -1,7 +1,7 @@
 package lotto.view;
 
 import java.util.List;
-import lotto.domain.LottoNumbers;
+import lotto.domain.Lotto;
 import lotto.domain.PrizeCountMap;
 
 public class OutputView {
@@ -10,8 +10,8 @@ public class OutputView {
         System.out.printf("%d개를 구매했습니다.%n", amount);
     }
 
-    public void printUserLottos(List<LottoNumbers> lottoNumbers) {
-        lottoNumbers.forEach(System.out::println);
+    public void printUserLottos(List<Lotto> lottoList) {
+        lottoList.forEach(System.out::println);
     }
 
     public void printResult(PrizeCountMap result) {

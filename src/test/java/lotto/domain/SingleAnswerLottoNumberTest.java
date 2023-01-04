@@ -8,7 +8,7 @@ import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class SingleLottoNumberTest {
+public class SingleAnswerLottoNumberTest {
 
     @RepeatedTest(45)
     void 로또_번호는_1_에서_45_사이여야_한다(RepetitionInfo repetitionInfo) {
