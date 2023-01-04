@@ -1,20 +1,30 @@
 package lotto.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
     private final int value;
 
-    public LottoNumber(int value) {
-        if (isOutOfRange(value)) {
-            throw new IllegalArgumentException("LottoValue 는 1~45의 정수 값이어야 한다.");
-        }
+    private LottoNumber(int value) {
         this.value = value;
     }
 
-    private boolean isOutOfRange(int value) {
+    public static LottoNumber valueOf(int value) {
+        if (isOutOfRange(value)) {
+            throw new IllegalArgumentException("LottoValue 는 1~45의 정수 값이어야 한다.");
+        }
+        if (!CACHE.containsKey(value)) {
+            CACHE.put(value, new LottoNumber(value));
+        }
+        return CACHE.get(value);
+    }
+
+    private static boolean isOutOfRange(int value) {
         return value < MIN_NUMBER || value > MAX_NUMBER;
     }
 

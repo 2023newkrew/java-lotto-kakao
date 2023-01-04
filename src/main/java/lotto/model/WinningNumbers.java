@@ -15,7 +15,7 @@ public class WinningNumbers {
     }
 
     private LottoNumber parseBonusNumber(String bonusNumberString) {
-        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(bonusNumberString));
+        LottoNumber bonusNumber = LottoNumber.valueOf(Integer.parseInt(bonusNumberString));
         validateBonusNumber(bonusNumber);
         return bonusNumber;
     }
@@ -28,7 +28,7 @@ public class WinningNumbers {
 
     private LottoTicket parseSixNumbers(List<String> sixNumbersList) {
         return new LottoTicket(sixNumbersList.stream().map(
-                        numberString -> new LottoNumber(Integer.parseInt(numberString)))
+                        numberString -> LottoNumber.valueOf(Integer.parseInt(numberString)))
                 .collect(Collectors.toList()));
     }
 
