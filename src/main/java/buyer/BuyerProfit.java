@@ -6,6 +6,11 @@ public class BuyerProfit {
     private final double profit;
 
     public BuyerProfit(int lotteryCount, int totalPrize) {
+        if (lotteryCount == 0) {
+            profit = 0;
+            return;
+        }
+
         profit = (double) totalPrize / (lotteryCount * Lottery.PRICE);
     }
 

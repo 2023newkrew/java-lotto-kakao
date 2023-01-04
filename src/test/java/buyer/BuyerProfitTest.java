@@ -12,4 +12,12 @@ public class BuyerProfitTest {
         BuyerProfit buyerProfit = new BuyerProfit(10, 20000);
         assertThat(buyerProfit.getProfit()).isEqualTo((double) 20000 / 10000);
     }
+
+    @DisplayName("lotteryCount가 0이면 총 수익을 0으로 한다")
+    @Test
+    void zeroCount() {
+        BuyerProfit buyerProfit = new BuyerProfit(0, 0);
+
+        assertThat(buyerProfit.getProfit()).isZero();
+    }
 }
