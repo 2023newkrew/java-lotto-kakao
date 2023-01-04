@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class LottoBall {
 
-    public static final int MINIMUM_VALUE = 1;
-    public static final int MAXIMUM_VALUE = 45;
+    private static final int MINIMUM_VALUE = 1;
+    private static final int MAXIMUM_VALUE = 45;
 
     private final int number;
 
