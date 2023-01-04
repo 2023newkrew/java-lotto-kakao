@@ -8,12 +8,14 @@ import java.util.*;
 public class InputView {
 
     private final Validator validator = new Validator();
+
     public int receiveMoneyUserInput() {
         System.out.println("구입금액을 입력해 주세요.");
         int money = receiveNumber();
         validator.isThousandUnit(money);
         return money;
     }
+
     public List<Integer> receiveLottoNumbers() {
         Scanner scanner = new Scanner(System.in);
         List<Integer> lottoNumbers;
@@ -24,7 +26,7 @@ public class InputView {
         return lottoNumbers;
     }
 
-    public int receiveNumber(){
+    public int receiveNumber() {
         Scanner scanner = new Scanner(System.in);
         int number = validator.stringToInteger(scanner.nextLine());
         return number;
@@ -40,7 +42,7 @@ public class InputView {
         return new WinningNumbers(lottoNumbers, bonusNumber);
     }
 
-    public int receiveLastLottoBonusNumber(List<Integer> lottoNumbers){
+    public int receiveLastLottoBonusNumber(List<Integer> lottoNumbers) {
         int bonusNumber = receiveNumber();
         validator.checkInRange(bonusNumber);
         validator.checkDuplicateLottoNumberWithBonusNumber(lottoNumbers, bonusNumber);
@@ -48,7 +50,7 @@ public class InputView {
         return bonusNumber;
     }
 
-    public List<List<Integer>> receiveManualLottos(int numberOfLotto){
+    public List<List<Integer>> receiveManualLottos(int numberOfLotto) {
         System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         int numberOfManualLottos = receiveNumber();
         validator.checkNumbersSize(numberOfManualLottos, numberOfLotto);
@@ -56,7 +58,7 @@ public class InputView {
         return receiveManualLottosNumbers(numberOfManualLottos);
     }
 
-    public List<List<Integer>> receiveManualLottosNumbers(int numberOfManualLottos){
+    public List<List<Integer>> receiveManualLottosNumbers(int numberOfManualLottos) {
         List<List<Integer>> manualLottosNumbers = new ArrayList<>();
         if (numberOfManualLottos > 0) {
             System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");

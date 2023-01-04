@@ -8,12 +8,11 @@ import java.util.List;
 
 public class Lottos {
 
-    List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
-
 
     public List<Lotto> getLottos() {
         return Collections.unmodifiableList(lottos);
@@ -21,7 +20,7 @@ public class Lottos {
 
     public List<RankingType> getRankings(WinningNumbers winningNumbers) {
         List<RankingType> rankingTypes = new ArrayList<>();
-        for(Lotto lotto: lottos){
+        for (Lotto lotto : lottos) {
             rankingTypes.add(lotto.checkWin(winningNumbers));
         }
         return rankingTypes;

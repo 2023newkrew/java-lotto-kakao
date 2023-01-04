@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottosFactory {
-    public Lottos makeLottosAuto(int numberOfLotto){
+    public Lottos makeLottosAuto(int numberOfLotto) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < numberOfLotto; i++) {
             lottos.add(new Lotto());
@@ -12,7 +12,7 @@ public class LottosFactory {
         return new Lottos(lottos);
     }
 
-    public Lottos makeLottosManual(List<List<Integer>> manualLottosNumbers){
+    public Lottos makeLottosManual(List<List<Integer>> manualLottosNumbers) {
         List<Lotto> lottos = new ArrayList<>();
         for (List<Integer> manualLottoNumbers : manualLottosNumbers) {
             lottos.add(new Lotto(manualLottoNumbers));
@@ -20,7 +20,7 @@ public class LottosFactory {
         return new Lottos(lottos);
     }
 
-    public Lottos joinLottos(Lottos manualLottos, Lottos autoLottos){
+    public Lottos joinLottos(Lottos manualLottos, Lottos autoLottos) {
         List<Lotto> joinLottos = new ArrayList<>();
         joinLottos.addAll(manualLottos.getLottos());
         joinLottos.addAll(autoLottos.getLottos());

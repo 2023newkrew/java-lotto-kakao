@@ -9,7 +9,8 @@ public class LottoController {
     private final OutputView outputView = new OutputView();
     private final Winner winner = new Winner();
     private final LottosFactory lottosFactory = new LottosFactory();
-    public void start(){
+
+    public void start() {
         int money = inputView.receiveMoneyUserInput();
         int numberOfLotto = money / 1000;
         Lottos manualLottos = lottosFactory.makeLottosManual(inputView.receiveManualLottos(numberOfLotto));

@@ -34,7 +34,7 @@ public enum RankingType {
         return prize;
     }
 
-    public String getHowManyMatches(){
+    public String getHowManyMatches() {
         return howManyMatches;
     }
 }
