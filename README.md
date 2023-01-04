@@ -83,11 +83,11 @@
   - [x] 하나의 로또와 당첨 번호를 비교하여 일치하는 번호의 갯수를 계산한다
 
 ## 리팩터링 중점 사안
-- [ ] LottoBall 캐싱
+- [ ] , 기점으로 들어온 인풋이 6개인지 검사
 - [ ] 객체 생성 로직을 풍성하게 가져가보기
 - [x] 불필요한 Money 래핑 제거
 - [x] LottoNumberPicker와 Seller 통합
 - [ ] 알맞지 않은 인풋에 대해 재입력 받을 수 있도록 변경
-- [ ] View단 리팩터링 진행
-- [ ] LottoResult Enum 네이밍 재고
+- [x] View단 리팩터링 진행
+- [x] LottoResult Enum 네이밍 순위로 변경
 - [x] Controller 도입
