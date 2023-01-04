@@ -5,8 +5,15 @@ import java.math.BigDecimal;
 public class Money implements Comparable<Money>{
     private BigDecimal money;
 
-    public Money(int money) {
-        this.money = new BigDecimal(money);
+    public Money(int number) {
+        validateNumber(number);
+        this.money = new BigDecimal(number);
+    }
+
+    private void validateNumber(int number) {
+        if (number < 0) {
+            throw new IllegalArgumentException("금액은 항상 0 이상이어야 합니다");
+        }
     }
 
     public void decreaseMoney(Money price) {
