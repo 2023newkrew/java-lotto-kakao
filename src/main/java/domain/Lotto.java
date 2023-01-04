@@ -20,22 +20,27 @@ public class Lotto {
 
     private final List<Integer> numbers;
 
-    public Lotto() {
-        Collections.shuffle(WHOLE_NUMBERS);
-        List<Integer> numbersIn = new ArrayList<>(WHOLE_NUMBERS.subList(START_INDEX, START_INDEX + Constants.LENGTH));
-        Collections.sort(numbersIn);
-        this.numbers = Collections.unmodifiableList(numbersIn);
+    public Lotto(List<Integer> numbers) {
+        this.numbers = numbers;
     }
 
-    public Lotto(String input) {
-        this.numbers = Arrays.stream(input.split(Constants.DELIMITER))
+    public static Lotto getAutoLotto() {
+        Collections.shuffle(WHOLE_NUMBERS);
+        List<Integer> numbers = new ArrayList<>(WHOLE_NUMBERS.subList(START_INDEX, START_INDEX + Constants.LENGTH));
+        Collections.sort(numbers);
+        return new Lotto(numbers);
+    }
+
+    public static Lotto getManualLotto(String input) {
+        List<Integer> numbers = Arrays.stream(input.split(Constants.DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+        return new Lotto(numbers);
     }
 
     public Result getResult(WinningLotto winningLotto, LottoNumber bonusNumber) {
         List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
-        int count = (int)numbers.stream()
+        int count = (int) numbers.stream()
                 .filter(winningLottoNumbers::contains)
                 .count();
         if (count == 5 && isBonus(bonusNumber)) {

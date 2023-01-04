@@ -12,12 +12,12 @@ public class Lottos {
 
     public Lottos(int count) {
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.getAutoLotto());
         }
     }
 
     public void add(String input) {
-        lottos.add(new Lotto(input));
+        lottos.add(Lotto.getManualLotto(input));
     }
 
     public int getSize() {
