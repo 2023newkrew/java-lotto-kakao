@@ -22,17 +22,25 @@ public class LottosTest {
         winningLottoWithBonus = new WinningLottoWithBonus(winningLotto, bonusNumber);
     }
 
-    @DisplayName("로또 번호 추가 시 사이즈 증가 확인 테스트")
+    @DisplayName("수동 로또 번호 추가 시 사이즈 증가 확인 테스트")
     @Test
-    void addTest() {
+    void addManualLottoTest() {
         int beforeSize = lottos.getSize();
         String newLottoNumbers = "8, 21, 23, 41, 42, 43";
-        lottos.add(newLottoNumbers);
+        lottos.addManualLotto(newLottoNumbers);
         int afterSize = lottos.getSize();
         assertThat(afterSize).isEqualTo(beforeSize + 1);
     }
 
-
+    @DisplayName("자동 로또 번호 생성 시 사이즈 증가 확인 테스트")
+    @Test
+    void addAutoLottosTest() {
+        int beforeSize = lottos.getSize();
+        int autoLottoCount = 3;
+        lottos.addAutoLottos(autoLottoCount);
+        int afterSize = lottos.getSize();
+        assertThat(afterSize).isEqualTo(beforeSize + autoLottoCount);
+    }
 
     @DisplayName("당첨 통계 확인 테스트")
     @Test
@@ -43,12 +51,12 @@ public class LottosTest {
         String matchThree = "1, 2, 3, 7, 8, 9";
         String matchFiveBonus = "1, 2, 3, 4, 5, 7";
         String matchSix = "1, 2, 3, 4, 5, 6";
-        lottos.add(matchZero);
-        lottos.add(matchOne);
-        lottos.add(matchTwo);
-        lottos.add(matchThree);
-        lottos.add(matchFiveBonus);
-        lottos.add(matchSix);
+        lottos.addManualLotto(matchZero);
+        lottos.addManualLotto(matchOne);
+        lottos.addManualLotto(matchTwo);
+        lottos.addManualLotto(matchThree);
+        lottos.addManualLotto(matchFiveBonus);
+        lottos.addManualLotto(matchSix);
         Map<Result, Integer> expected = Map.of(Result.NONE, 3, Result.FIFTH_PLACE, 1, Result.SECOND_PLACE, 1, Result.FIRST_PLACE, 1);
         assertThat(lottos.getTotalResult(winningLottoWithBonus)).isEqualTo(new TotalResult(expected));
     }
