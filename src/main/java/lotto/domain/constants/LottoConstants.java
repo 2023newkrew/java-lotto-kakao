@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.constants;
 
 public final class LottoConstants {
     /**
@@ -42,4 +42,5 @@ public final class LottoConstants {
      */
     public static final long FIFTH_PRIZE_CASH = 5_000L;
 
+    private LottoConstants(){} // 객체 생성 용도가 아님을 명시
 }

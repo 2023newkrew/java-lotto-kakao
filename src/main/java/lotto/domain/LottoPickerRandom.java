@@ -3,7 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import static lotto.domain.LottoConstants.*;
+import static lotto.domain.constants.LottoConstants.*;
 
 
 public class LottoPickerRandom implements LottoPicker{

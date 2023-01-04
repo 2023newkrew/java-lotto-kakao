@@ -3,11 +3,10 @@ package lotto.domain;
 import lotto.domain.exception.InvalidLottoBallNumber;
 import lotto.domain.exception.TypeMismatchException;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import static lotto.domain.LottoConstants.*;
+import static lotto.domain.constants.LottoConstants.*;
 
 /**
  * An object that contains number which represent one lotto ball.<br>

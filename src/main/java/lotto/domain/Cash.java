@@ -5,6 +5,9 @@ import lotto.domain.exception.TypeMismatchException;
 
 import java.util.Objects;
 
+import static lotto.domain.constants.LottoStringForm.Korean.CASH_UNIT;
+
+
 /**
  * @author Daniel.tomi
 */
@@ -68,7 +71,7 @@ public class Cash implements Comparable {
 
     @Override
     public String toString() {
-        return cash+"원";
+        return cash+CASH_UNIT;
     }
 
     /**

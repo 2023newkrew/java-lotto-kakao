@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.domain.exception.DuplicatedBallNumber;
 import lotto.domain.exception.InvalidLottoTrial;
-import static lotto.domain.LottoConstants.*;
+import static lotto.domain.constants.LottoConstants.*;
 
 import java.util.*;
 

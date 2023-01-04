@@ -1,7 +1,8 @@
 package lotto.domain;
 
+import static lotto.domain.constants.LottoStringForm.Korean.*;
 import lotto.domain.exception.InvalidLottoResult;
-import static lotto.domain.LottoConstants.*;
+import static lotto.domain.constants.LottoConstants.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,9 +59,9 @@ public class LottoResult {
 
     @Override
     public String toString() {
-        String result = matchCount + "개 일치";
+        String result = String.format(LOTTO_RESULT_FORM, matchCount);
         if (matchBonus){
-            result += ", 보너스 볼 일치";
+            result += LOTTO_RESULT_BONUS_FORM;
         }
         return result;
     }

@@ -1,8 +1,10 @@
 package lotto.domain;
 
+
 import java.util.*;
 import java.util.stream.Collectors;
-import static lotto.domain.LottoConstants.*;
+import static lotto.domain.constants.LottoConstants.*;
+import static lotto.domain.constants.LottoStringForm.Korean.*;
 
 public class TotalResult {
     private final Map<LottoResult, LottoCount> lottoResultCount = new HashMap<>();
@@ -54,7 +56,7 @@ public class TotalResult {
 
     @Override
     public String toString(){
-        String startString = "당첨 통계\n-----------\n";
+        String startString = TOTAL_RESULT_STARTING;
         return startString + statisticsString() + surplusRatioString();
     }
 
@@ -70,7 +72,7 @@ public class TotalResult {
 
     private String surplusRatioString(){
         double surplusRatio = getSurplusRatio();
-        return String.format("총 수익률은 %.2f 입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)\n",
-                surplusRatio, (surplusRatio>1 ? "이득이":"손해"));
+        return String.format(TOTAL_RESULT_RATIO,
+                surplusRatio, (surplusRatio>1 ? TOTAL_RESULT_BENEFIT:TOTAL_RESULT_LOSS));
     }
 }

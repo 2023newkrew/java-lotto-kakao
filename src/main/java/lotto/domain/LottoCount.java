@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoCountValue;
-import static lotto.domain.LottoConstants.*;
+import static lotto.domain.constants.LottoConstants.*;
+import static lotto.domain.constants.LottoStringForm.Korean.*;
+
 import java.util.Objects;
 
 public class LottoCount {
@@ -57,6 +59,6 @@ public class LottoCount {
 
     @Override
     public String toString() {
-        return count+"개";
+        return count+COUNT_UNIT;
     }
 }

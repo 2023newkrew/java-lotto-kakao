@@ -1,5 +1,5 @@
 package lotto.domain;
-import static lotto.domain.LottoConstants.*;
+import static lotto.domain.constants.LottoConstants.*;
 
 public class LottoTrialRandom extends LottoTrial {
     private final LottoPicker picker;

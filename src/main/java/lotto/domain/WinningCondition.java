@@ -1,5 +1,5 @@
 package lotto.domain;
-import static lotto.domain.LottoConstants.*;
+import static lotto.domain.constants.LottoConstants.*;
 
 public enum WinningCondition {
     FIRST_PRIZE(new LottoResults()
