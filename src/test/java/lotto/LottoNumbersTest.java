@@ -67,8 +67,8 @@ public class LottoNumbersTest {
 
     private static Stream<Arguments> getCheckLottoNumberIncludedInLottoNumbersData() {
         return Stream.of(
-                Arguments.of(new LottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(3), true),
-                Arguments.of(new LottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(33), false)
+                Arguments.of(new LottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(3), true),
+                Arguments.of(new LottoNumberList(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(33), false)
         );
     }
 }

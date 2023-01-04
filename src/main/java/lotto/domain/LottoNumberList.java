@@ -10,7 +10,7 @@ public class LottoNumberList {
     public LottoNumberList(List<Integer> numbers) {
         validateNumbersSize(numbers);
         for (Integer number : numbers) {
-            LottoNumber lottoNumber = new LottoNumber(number);
+            LottoNumber lottoNumber = LottoNumber.of(number);
             validateLottoNumber(lottoNumber);
             lottoNumbers.add(lottoNumber);
         }

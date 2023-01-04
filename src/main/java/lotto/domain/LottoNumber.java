@@ -1,19 +1,41 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
+
+    private static final int MINIMUM_NUMBER = 1;
+    private static final int MAXIMUM_NUMBER = 45;
+    private static final Map<Integer, LottoNumber> LOTTO_NUMBER_MAP = new HashMap<>();
+
     private final int number;
 
-    public LottoNumber(int number) {
-        validateNumber(number);
+    static {
+        IntStream.rangeClosed(MINIMUM_NUMBER, MAXIMUM_NUMBER)
+                .forEach(number -> LOTTO_NUMBER_MAP.put(number, new LottoNumber(number)));
+    }
+
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void validateNumber(int number) {
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("1부터 45 사이의 숫자를 입력해주세요.");
+    public static LottoNumber of(int number) {
+        validateNumber(number);
+        return LOTTO_NUMBER_MAP.get(number);
+    }
+
+    private static void validateNumber(int number) {
+        if (number < MINIMUM_NUMBER || number > MAXIMUM_NUMBER) {
+            throw new IllegalArgumentException(
+                    String.format("%d부터 %d 사이의 숫자를 입력해주세요.", MINIMUM_NUMBER, MAXIMUM_NUMBER));
         }
+    }
+
+    public String getString() {
+        return String.valueOf(number);
     }
 
     @Override
@@ -31,9 +53,5 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    public String getString() {
-        return String.valueOf(number);
     }
 }
