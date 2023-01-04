@@ -22,8 +22,16 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printLottoCount(int count) {
-        System.out.println(String.format("%d개를 구매했습니다.", count));
+    public static void printManualLottoCountRequest() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public static void printManualLottoRequest() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printLottoCount(int manualCount, int autoCount) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualCount, autoCount));
     }
 
     public static void printLottos(List<String> lottosNumbers) {
