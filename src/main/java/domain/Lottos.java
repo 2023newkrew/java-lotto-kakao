@@ -12,19 +12,19 @@ public class Lottos {
 
     public Lottos(int count) {
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.getAutoLotto());
         }
     }
 
     public void add(String input) {
-        lottos.add(new Lotto(input));
+        lottos.add(Lotto.getManualLotto(input));
     }
 
     public int getSize() {
         return lottos.size();
     }
 
-    public TotalResult getTotalResult(WinningLotto winningLotto, BonusNumber bonusNumber) {
+    public TotalResult getTotalResult(WinningLotto winningLotto, LottoNumber bonusNumber) {
         TotalResult totalResult = new TotalResult();
         lottos.stream()
                 .forEach(lotto -> totalResult.increaseValueOfResult(lotto.getResult(winningLotto, bonusNumber)));
