@@ -1,4 +1,3 @@
-import common.constant.Constants;
 import domain.*;
 import view.InputView;
 import view.OutputView;

@@ -1,6 +1,7 @@
 package util.validator;
 
 import common.constant.Constants;
+import domain.LottoNumber;
 import domain.WinningLotto;
 import exception.DuplicateNumberException;
 
@@ -16,8 +17,8 @@ public class LottoNumberValidator {
 
     public static void validate(WinningLotto winningLotto, String bonusInput) {
         validate(bonusInput);
-        int bonusNumber = Integer.parseInt(bonusInput);
-        List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
+        LottoNumber bonusNumber = new LottoNumber(bonusInput);
+        List<LottoNumber> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
         if(winningLottoNumbers.contains(bonusNumber)){
             throw new DuplicateNumberException("보너스 숫자가 당첨 번호 중 하나와 중복됩니다.");
         }

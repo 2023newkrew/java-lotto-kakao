@@ -9,17 +9,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
-    private final List<Integer> winningLottoNumbers;
+    private final List<LottoNumber> winningLottoNumbers;
 
     public WinningLotto(String input) {
         WinningLottoValidator.validate(input);
         String[] splitInput = input.split(Constants.DELIMITER);
-        this.winningLottoNumbers = Arrays.stream(splitInput)
-                .map(Integer::parseInt)
+        winningLottoNumbers = Arrays.stream(splitInput)
+                .map(inputString -> new LottoNumber(inputString))
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getWinningLottoNumbers(){
+    public List<LottoNumber> getWinningLottoNumbers(){
         return new ArrayList<>(winningLottoNumbers);
     }
 
