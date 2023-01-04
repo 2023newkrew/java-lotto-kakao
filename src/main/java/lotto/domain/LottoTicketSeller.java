@@ -44,7 +44,8 @@ public class LottoTicketSeller {
 
     private LottoTicket generateLottoTicket() {
         Collections.shuffle(lottoBalls);
-        return new LottoTicket(lottoBalls.subList(0, LOTTO_TICKET_BALL_COUNT));
+        List<LottoBall> selectedLottoBalls = new ArrayList<>(lottoBalls.subList(0, LOTTO_TICKET_BALL_COUNT));
+        return new LottoTicket(selectedLottoBalls);
     }
 
     public int calculateTotalPrice(List<LottoTicket> lottoTickets) {

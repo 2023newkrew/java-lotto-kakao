@@ -31,7 +31,8 @@ public class LottoBallTest {
     @ValueSource(ints = {46, -1, 0})
     void LottoBall의_number값은_1부터_45_사이이다_실패(final int number) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoBall(number));
+                .isThrownBy(() -> new LottoBall(number))
+                .withMessageContaining("사이의 숫자만을 허용합니다.");
     }
 
     @Test
