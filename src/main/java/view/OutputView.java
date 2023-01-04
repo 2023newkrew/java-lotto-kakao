@@ -9,6 +9,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
+    public void printQuantity(int manualQuantity, int autoQuantity) {
+        System.out.println(
+                "수동으로 " +
+                Integer.toString(manualQuantity) +
+                "장, 자동으로 " +
+                Integer.toString(autoQuantity) +
+                "개를 구매했습니다."
+        );
+    }
+
     public void printLotteries(List<Lotto> lotteries) {
         lotteries.forEach(this::printLottery);
     }
@@ -18,7 +28,7 @@ public class OutputView {
                 lottery.getLottoNumbers()
                         .stream()
                         .map(lotteryNumber -> Integer.toString(lotteryNumber.getNumber()))
-                        .collect(Collectors.joining(","))
+                        .collect(Collectors.joining(", "))
         );
     }
 
