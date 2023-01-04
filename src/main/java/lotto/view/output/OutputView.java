@@ -45,7 +45,7 @@ public class OutputView {
         List<LottoResultType> lottoResultTypes = Arrays.asList(LottoResultType.values());
         Collections.reverse(lottoResultTypes);
 
-        console.printOutput("당첨 통계\n----------\n");
+        console.printOutput("당첨 통계\n----------");
         lottoResultTypes.forEach((result) -> console.printOutput(getStatisticsFormat(statistics, result)));
         console.printOutput("총 수익률은 " + rateString + "입니다.\n");
     }

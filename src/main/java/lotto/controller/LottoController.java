@@ -1,8 +1,11 @@
 package lotto.controller;
 
+import java.sql.SQLOutput;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import lotto.common.exception.InvalidInputException;
 import lotto.model.number.GoalNumber;
 import lotto.model.number.LottoNumber;
 import lotto.model.statistic.LottoStatistic;
@@ -38,7 +41,9 @@ public class LottoController {
     private double getRate() {
         Long sumOfPrize = statistics.getSumOfPrize();
         int sumOfLottoPrice = LOTTO_PRICE * numberOfLotto;
-
+        if(sumOfLottoPrice < 0) {
+            return 0;
+        }
         return (double) sumOfPrize / sumOfLottoPrice;
     }
 
@@ -49,7 +54,12 @@ public class LottoController {
     }
 
     private void setLottoNumberListFromUser() {
-        outputView.askForMoneyToBuyLotto();
+        try {
+            outputView.askForMoneyToBuyLotto();
+        } catch(Error e) {
+            System.out.println(e.getLocalizedMessage());
+            return;
+        }
         numberOfLotto = parseNumberOfLotto(inputView.getInteger());
         outputView.askForNumberOfLottoWithManual();
         Integer numberOfLottoWithManual = parseNumberOfLottoWithManual(inputView.getInteger());
@@ -74,7 +84,7 @@ public class LottoController {
     }
 
     private Integer parseNumberOfLottoWithManual(Integer input) {
-        return input;
+        return Math.min(input, numberOfLotto);
     }
 
     private List<LottoNumber> createLottoList(int numberOfLotto, int numberOfLottoWithManual) {
