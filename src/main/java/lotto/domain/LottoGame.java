@@ -17,16 +17,20 @@ public class LottoGame {
         this.lottoRandomDispenser = new LottoDispenser(lottoSetting, RandomNumberSelectStrategy.getInstance());
     }
 
-    public void buyRandom(int money) {
-        lottoTickets.addAll(lottoRandomDispenser.getLottoTicketList(money));
+    public int buyRandom(int money) {
+        LottoTicketList lottoTicketList = lottoRandomDispenser.getLottoTicketList(money);
+        lottoTickets.addAll(lottoTicketList);
         saveLeftoverMoney(lottoRandomDispenser.receiveLeftoverMoney());
+        return lottoTicketList.getCount();
     }
 
-    public void buyManually(int money, List<List<Integer>> numbers) {
+    public int buyManually(int money, List<List<Integer>> numbers) {
         NumberSelectStrategy numberSelectStrategy = new ManualNumberSelectStrategy(numbers);
         LottoDispenser lottoDispenser = new LottoDispenser(lottoSetting, numberSelectStrategy);
-        lottoTickets.addAll(lottoDispenser.getLottoTicketList(money));
+        LottoTicketList lottoTicketList = lottoDispenser.getLottoTicketList(money);
+        lottoTickets.addAll(lottoTicketList);
         saveLeftoverMoney(lottoDispenser.receiveLeftoverMoney());
+        return lottoTicketList.getCount();
     }
 
     private void saveLeftoverMoney(int leftoverMoney) {
@@ -41,10 +45,6 @@ public class LottoGame {
 
     public String getLottoTicketsString() {
         return lottoTickets.getString();
-    }
-
-    public int getCountOfLottoTickets() {
-        return lottoTickets.getCount();
     }
 
     public String getWinningString(LottoWinningNumberList lottoWinningNumbers) {

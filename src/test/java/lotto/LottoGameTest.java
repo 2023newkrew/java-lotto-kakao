@@ -18,8 +18,8 @@ public class LottoGameTest {
     public void buyLottoTicket(int money, int number) {
         LottoSetting lottoSetting = new LottoSetting();
         LottoGame lottoGame = new LottoGame(lottoSetting);
-        lottoGame.buyRandom(money);
-        Assertions.assertThat(lottoGame.getCountOfLottoTickets()).isEqualTo(number);
+        int random = lottoGame.buyRandom(money);
+        Assertions.assertThat(random).isEqualTo(number);
     }
 
     private static Stream<Arguments> getBuyLottoTicketData() {
@@ -58,6 +58,37 @@ public class LottoGameTest {
                         ),
                         1500, "[1, 2, 3, 4, 5, 6]"
                 )
+        );
+    }
+
+    @DisplayName("발급 수량 확인")
+    @ParameterizedTest
+    @MethodSource("getCheckCountData")
+    public void checkCount(List<List<Integer>> numbers, int money, int manualExpected, int randomExpected) {
+        LottoSetting lottoSetting = new LottoSetting();
+        LottoGame lottoGame = new LottoGame(lottoSetting);
+        int manual = lottoGame.buyManually(money, numbers);
+        int random = lottoGame.buyRandom(lottoGame.receiveLeftoverMoney());
+        Assertions.assertThat(manual).isEqualTo(manualExpected);
+        Assertions.assertThat(random).isEqualTo(randomExpected);
+    }
+
+    private static Stream<Arguments> getCheckCountData() {
+        return Stream.of(
+                Arguments.of(List.of(
+                                List.of(1, 2, 3, 4, 5, 6)
+                        ),
+                        1000, 1, 0),
+                Arguments.of(List.of(
+                                List.of(1, 2, 3, 4, 5, 6),
+                                List.of(5, 6, 20, 23, 40, 41)
+                        ),
+                        5000, 2, 3),
+                Arguments.of(List.of(
+                                List.of(1, 2, 3, 4, 5, 6),
+                                List.of(5, 6, 20, 23, 40, 41)
+                        ),
+                        3500, 2, 1)
         );
     }
 
