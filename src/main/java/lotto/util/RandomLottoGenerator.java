@@ -6,7 +6,6 @@ import lotto.domain.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RandomLottoGenerator {
     public Lotto generateLotto() {
@@ -15,7 +14,7 @@ public class RandomLottoGenerator {
                         Lotto.FIXED_SIZE,
                         LottoNumber.MINIMUM_BOUNDARY,
                         LottoNumber.MAXIMUM_BOUNDARY
-                ).stream().map(LottoNumber::new).collect(Collectors.toList())
+                )
         );
     }
 

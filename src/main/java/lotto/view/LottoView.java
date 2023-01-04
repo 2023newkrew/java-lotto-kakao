@@ -39,7 +39,6 @@ public class LottoView {
         return new Lotto(
                 Arrays.stream(scanner.nextLine().replace(" ", "").split(","))
                         .map(Integer::parseInt)
-                        .map(LottoNumber::new)
                         .collect(Collectors.toList())
         );
     }
