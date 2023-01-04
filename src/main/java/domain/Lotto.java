@@ -35,7 +35,6 @@ public class Lotto {
     }
 
     public static Lotto getManualLotto(String input) {
-        // 여기에 검증 단계 필요
         LottoValidator.validate(input);
         List<LottoNumber> numbers = Arrays.stream(input.split(Constants.DELIMITER))
                 .map(inputString -> new LottoNumber(inputString))
@@ -48,11 +47,7 @@ public class Lotto {
         int count = (int) numbers.stream()
                 .filter(winningLottoNumbers::containsNumber)
                 .count();
-        return Result.of(count, isBonus(bonusNumber));
-    }
-
-    public boolean isBonus(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
+        return Result.of(count, winningLottoWithBonus.isBonus(this));
     }
 
     public boolean containsNumber(LottoNumber number) {
