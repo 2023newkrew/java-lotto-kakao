@@ -2,18 +2,29 @@ package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoBallNumber;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import static lotto.domain.LottoConstants.*;
 
 public class LottoBallNumber implements Comparable{
-    private final int num;
 
-    public LottoBallNumber(int num) {
+    private final int num;
+    private static final Map<Integer, LottoBallNumber> cache = new HashMap<>();
+
+    private LottoBallNumber(int num) {
         if (num < BALLNUMBER_MIN_VALUE ||
                 num> BALLNUMBER_MAX_VALUE){
             throw new InvalidLottoBallNumber();
         }
         this.num = num;
+    }
+
+    public static LottoBallNumber get(int num){
+        if (!cache.containsKey(num)){
+            cache.put(num, new LottoBallNumber(num));
+        }
+        return cache.get(num);
     }
 
     @Override
