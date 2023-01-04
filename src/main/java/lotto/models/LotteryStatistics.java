@@ -9,15 +9,8 @@ import lotto.models.enums.Rank;
 public class LotteryStatistics {
     private final Map<Rank, Integer> rankCounts;
 
-    private final Double earningsRate;
-
-    public LotteryStatistics(WinningLottery winningLottery, List<Lottery> lotteries, Integer budget) {
+    public LotteryStatistics(WinningLottery winningLottery, List<Lottery> lotteries) {
         rankCounts = collectRankCounts(winningLottery, lotteries);
-        earningsRate = calculateEarningsRate(budget);
-    }
-
-    public Double getEarningsRate() {
-        return earningsRate;
     }
 
     public Integer getCountOf(Rank rank) {
@@ -25,29 +18,12 @@ public class LotteryStatistics {
     }
 
     private Map<Rank, Integer> collectRankCounts(WinningLottery winningLottery, List<Lottery> lotteries) {
-        Map<Rank, Integer> rankCounts = initializeRankCounts();
+        Map<Rank, Integer> rankCounts = new HashMap<>();
         lotteries.forEach((lottery) -> {
             Rank currentKey = winningLottery.compareLottery(lottery);
-            rankCounts.put(currentKey, rankCounts.get(currentKey) + 1);
+            int currentCount = getCountOf(currentKey);
+            rankCounts.put(currentKey, currentCount + 1);
         });
-        return rankCounts;
-    }
-
-    private Double calculateEarningsRate(Integer budget) {
-        long sumOfPrize = 0;
-        for (Rank key : rankCounts.keySet()) {
-            long numberOfPrize = rankCounts.get(key);
-            sumOfPrize += key.getPrize() * numberOfPrize;
-        }
-        return (double) sumOfPrize / budget;
-    }
-
-    private Map<Rank, Integer> initializeRankCounts() {
-        Map<Rank, Integer> rankCounts = new HashMap<>();
-        for (Rank rank : Rank.values()) {
-            rankCounts.put(rank, 0);
-        }
-
         return rankCounts;
     }
 }

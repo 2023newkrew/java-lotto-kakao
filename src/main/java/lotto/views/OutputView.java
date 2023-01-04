@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 import lotto.models.Lottery;
+import lotto.models.LotteryEarningsRate;
 import lotto.models.enums.Rank;
 import lotto.models.LotteryStatistics;
 
@@ -38,8 +39,6 @@ public class OutputView {
     }
 
     public void printStatistics(LotteryStatistics statistics) {
-        String rateString = String.format("%.2f", statistics.getEarningsRate());
-
         console.printOutput("당첨 통계\n"
                 + "----------\n"
                 + "3개 일치 (" + Rank.FIFTH.getPrize() + "원)- " + statistics.getCountOf(Rank.FIFTH) + "개\n"
@@ -47,8 +46,11 @@ public class OutputView {
                 + "5개 일치 (" + Rank.THIRD.getPrize() + "원)- " + statistics.getCountOf(Rank.THIRD) + "개\n"
                 + "5개 일치, 보너스 볼 일치(" + Rank.SECOND.getPrize() + "원) - " + statistics.getCountOf(
                 Rank.SECOND) + "개\n"
-                + "6개 일치 (" + Rank.FIRST.getPrize() + "원)- " + statistics.getCountOf(Rank.FIRST) + "개\n"
-                + "총 수익률은 " + rateString + "입니다.\n");
+                + "6개 일치 (" + Rank.FIRST.getPrize() + "원)- " + statistics.getCountOf(Rank.FIRST) + "개\n");
+    }
+
+    public void printEarningsRate(LotteryEarningsRate lotteryEarningsRate) {
+        console.printOutput("총 수익률은 " + lotteryEarningsRate.getStringUpToTwoDecimalPlaces() + "입니다.\n");
     }
 
     public <T> T requestUntilSuccess(Supplier<T> getT) {

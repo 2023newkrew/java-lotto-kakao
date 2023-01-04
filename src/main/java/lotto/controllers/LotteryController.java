@@ -4,6 +4,7 @@ import static lotto.common.LotteryConfiguration.LOTTERY_PRICE;
 
 import java.util.List;
 import lotto.common.LotteryGenerator;
+import lotto.models.LotteryEarningsRate;
 import lotto.models.WinningLottery;
 import lotto.models.Lottery;
 import lotto.models.LotteryStatistics;
@@ -25,7 +26,7 @@ public class LotteryController {
         Integer numberOfLotteries = parseNumberOfLotteries(budget);
         List<Lottery> lotteries = createLotteryList(numberOfLotteries);
         WinningLottery winningLottery = getGoal();
-        showStatistics(winningLottery, lotteries, budget);
+        showResult(winningLottery, lotteries, budget);
     }
 
     private Integer getBudget() {
@@ -77,8 +78,19 @@ public class LotteryController {
         return inputView.getInteger();
     }
 
-    private void showStatistics(WinningLottery winningLottery, List<Lottery> lotteries, Integer budget) {
-        LotteryStatistics statistics = new LotteryStatistics(winningLottery, lotteries, budget);
+    private void showResult(WinningLottery winningLottery, List<Lottery> lotteries, Integer budget) {
+        LotteryStatistics statistics = getStatistics(winningLottery, lotteries);
+        showEarningsRate(statistics, budget);
+    }
+
+    private LotteryStatistics getStatistics(WinningLottery winningLottery, List<Lottery> lotteries) {
+        LotteryStatistics statistics = new LotteryStatistics(winningLottery, lotteries);
         outputView.printStatistics(statistics);
+        return statistics;
+    }
+
+    private void showEarningsRate(LotteryStatistics lotteryStatistics, Integer budget) {
+        LotteryEarningsRate lotteryEarningsRate = new LotteryEarningsRate(lotteryStatistics, budget);
+        outputView.printEarningsRate(lotteryEarningsRate);
     }
 }
