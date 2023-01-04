@@ -29,7 +29,7 @@ public class LottoWinningNumberTest {
         LottoTicket lottoTicket = new LottoTicket(input);
 
         //when & then
-        assertDoesNotThrow(() -> new LottoWinningNumber(lottoTicket, new LottoNumber(7)));
+        assertDoesNotThrow(() -> new LottoWinningNumber(lottoTicket, LottoNumber.numberOf(7)));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class LottoWinningNumberTest {
         LottoTicket lottoTicket = new LottoTicket(input);
 
         //when & then
-        assertThatThrownBy(() -> new LottoWinningNumber(lottoTicket, new LottoNumber(1)))
+        assertThatThrownBy(() -> new LottoWinningNumber(lottoTicket, LottoNumber.numberOf(1)))
                 .isInstanceOf(LottoException.class)
                 .hasMessage(ErrorCode.INVALID_BONUS_BALL.getMessage());
     }
@@ -59,32 +59,32 @@ public class LottoWinningNumberTest {
         return Stream.of(
                 Arguments.of(
                         new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))),
-                                new LottoNumber(7)),
+                                LottoNumber.numberOf(7)),
                         LottoRank.RANK1
                 ),
                 Arguments.of(
                         new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 8))),
-                                new LottoNumber(6)),
+                                LottoNumber.numberOf(6)),
                         LottoRank.RANK2)
                 ,
                 Arguments.of(
                         new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 8))),
-                                new LottoNumber(7)),
+                                LottoNumber.numberOf(7)),
                         LottoRank.RANK3
                 ),
                 Arguments.of(
                         new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 8, 9))),
-                                new LottoNumber(7)),
+                                LottoNumber.numberOf(7)),
                         LottoRank.RANK4
                 ),
                 Arguments.of(
                         new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 8, 9, 10))),
-                                new LottoNumber(7)),
+                                LottoNumber.numberOf(7)),
                         LottoRank.RANK5
                 ),
                 Arguments.of(
                         new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 8, 9, 10, 11))),
-                                new LottoNumber(7)),
+                                LottoNumber.numberOf(7)),
                         LottoRank.RANK6
                 )
         );
@@ -92,7 +92,7 @@ public class LottoWinningNumberTest {
 
     private static List<LottoNumber> createLottoNumberList(List<Integer> integerList) {
         return integerList.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::numberOf)
                 .collect(Collectors.toList());
     }
 }

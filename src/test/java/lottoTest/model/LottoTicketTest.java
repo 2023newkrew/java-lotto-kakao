@@ -19,11 +19,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class LottoTicketTest {
-    private final List<LottoNumber> input = List.of(
-            new LottoNumber(1), new LottoNumber(2),
-            new LottoNumber(3), new LottoNumber(4),
-            new LottoNumber(5), new LottoNumber(6)
-    );
+    private final List<LottoNumber> input = createLottoNumberList(List.of(1, 2, 3, 4, 5, 6));
 
     @Test
     @DisplayName("정상 리스트가 인풋으로 들어왔을 때, 정상적으로 LottoTicket 생성")
@@ -49,29 +45,23 @@ public class LottoTicketTest {
 
     private static Stream<Arguments> validateInvalidLottoNumberTestGenerator() {
         return Stream.of(
-                Arguments.of(List.of(
-                        new LottoNumber(1), new LottoNumber(2),
-                        new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(6),
-                        new LottoNumber(7)
+                Arguments.of(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6, 7)
                 ), ErrorCode.INVALID_LOTTO_NUMBER_LENGTH),
-                Arguments.of(List.of(
-                        new LottoNumber(1), new LottoNumber(2),
-                        new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5)
+                Arguments.of(createLottoNumberList(List.of(1, 2, 3, 4, 5)
                 ), ErrorCode.INVALID_LOTTO_NUMBER_LENGTH),
                 Arguments.of(null, ErrorCode.INVALID_LOTTO_NUMBER_LENGTH)
         );
     }
 
     @Test
+    @DisplayName("로또 티켓에 특정 숫자가 포함되어 있는지 검사하는 메소드 테스트")
     public void includeNumberTest() {
         // given
         LottoTicket lottoTicket = new LottoTicket(input);
 
         // when & then
-        assertThat(lottoTicket.contains(new LottoNumber(1))).isEqualTo(true);
-        assertThat(lottoTicket.contains(new LottoNumber(7))).isEqualTo(false);
+        assertThat(lottoTicket.contains(LottoNumber.numberOf(1))).isEqualTo(true);
+        assertThat(lottoTicket.contains(LottoNumber.numberOf(7))).isEqualTo(false);
     }
 
     @ParameterizedTest
@@ -99,7 +89,7 @@ public class LottoTicketTest {
 
     private static List<LottoNumber> createLottoNumberList(List<Integer> integerList) {
         return integerList.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::numberOf)
                 .collect(Collectors.toList());
     }
 

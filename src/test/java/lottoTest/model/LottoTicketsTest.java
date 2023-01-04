@@ -31,17 +31,17 @@ public class LottoTicketsTest {
         return Stream.of(
                 Arguments.of(
                         new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 6))),
-                                new LottoNumber(7)),
+                                LottoNumber.numberOf(7)),
                         new LottoResult(List.of(1, 1, 0, 1, 0, 0))
                 ),
                 Arguments.of(
                         new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 3, 4, 5, 8))),
-                                new LottoNumber(6)),
+                                LottoNumber.numberOf(6)),
                         new LottoResult(List.of(0, 1, 2, 0, 0, 0))
                 ),
                 Arguments.of(
                         new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1, 2, 8, 9, 10, 11))),
-                                new LottoNumber(7)),
+                                LottoNumber.numberOf(7)),
                         new LottoResult(List.of(0, 0, 0, 0, 1, 2))
                 )
         );
@@ -49,7 +49,7 @@ public class LottoTicketsTest {
 
     private static List<LottoNumber> createLottoNumberList(List<Integer> integerList) {
         return integerList.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::numberOf)
                 .collect(Collectors.toList());
     }
 }
