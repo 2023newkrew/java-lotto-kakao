@@ -15,7 +15,7 @@ class LottoCountTest {
     @MethodSource
     public void should_calculateCorrectCount_when_purchaseAmountAndUnitPriceGiven(PurchaseAmount purchaseAmount, int unitPrice, int expectedResult) {
         LottoCount lottoCount = LottoCount.of(purchaseAmount, unitPrice);
-        Assertions.assertThat(lottoCount).isEqualTo(LottoCount.withCount(expectedResult));
+        Assertions.assertThat(lottoCount.getCount()).isEqualTo(expectedResult);
     }
 
     static Stream<Arguments> should_calculateCorrectCount_when_purchaseAmountAndUnitPriceGiven() {
