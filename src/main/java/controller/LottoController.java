@@ -26,10 +26,12 @@ public class LottoController {
 
     private LottoTicketList createLottoTickets() {
         Integer purchaseAmount = InputView.inputPurchaseAmount();
-        LottoNumberGenerator lottoNumber = new LottoNumberGenerator();
         List<LottoTicket> lottoTicketList = new ArrayList<>();
+        LottoNumberGenerator lottoNumber = new LottoNumberGenerator();
+        lottoTicketList.addAll(InputView.inputManualLottoNumbers(purchaseAmount));
+        int manualCount = lottoTicketList.size();
         RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-        for (int i = 0; i < purchaseAmount; i++) {
+        for (int i = 0; i < purchaseAmount - manualCount; i++) {
             lottoTicketList.add(new LottoTicket(lottoNumber.makeNumbers(randomNumberGenerator)));
         }
         return new LottoTicketList(lottoTicketList);
