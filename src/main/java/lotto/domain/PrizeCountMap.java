@@ -36,7 +36,7 @@ public class PrizeCountMap {
     }
 
     private double getProfit() {
-        double totalSpentMoney = getLottoCount() * Money.LOTTO_PRICE;
+        double totalSpentMoney = getLottoCount() * Store.LOTTO_PRICE;
         return getTotalPrizeMoney() / totalSpentMoney;
     }
 

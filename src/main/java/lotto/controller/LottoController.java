@@ -6,6 +6,7 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import lotto.domain.SingleLottoNumber;
+import lotto.domain.Store;
 import lotto.utils.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -18,7 +19,8 @@ public class LottoController {
     private int purchase() {
         int expenseInput = inputView.getExpenseInput();
         Money money = new Money(expenseInput);
-        int amount = money.getLottoAmount();
+        Store store = new Store(money);
+        int amount = store.getLottoAmount();
         outputView.printPurchaseResult(amount);
         return amount;
     }
