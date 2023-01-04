@@ -1,4 +1,4 @@
-# java-ticket-kakao
+# java-lotto-kakao
 
 ## 기능 요구사항
 - 사용자는 구입 금액을 입력할 수 있다.
