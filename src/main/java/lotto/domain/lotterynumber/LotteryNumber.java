@@ -1,8 +1,8 @@
 package lotto.domain.lotterynumber;
 
 import static lotto.constant.ExceptionMessage.LOTTERY_NUMBER_OUT_OF_RANGE;
-import static lotto.constant.LotteryConstant.LOTTO_NUMBER_MAXIMIM;
-import static lotto.constant.LotteryConstant.LOTTO_NUMBER_MINIMUM;
+import static lotto.constant.LotteryConstant.LOTTERY_NUMBER_MAXIMIM;
+import static lotto.constant.LotteryConstant.LOTTERY_NUMBER_MINIMUM;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class LotteryNumber {
     }
 
     private static void validate(int value) {
-        if (value < LOTTO_NUMBER_MINIMUM || value > LOTTO_NUMBER_MAXIMIM) {
+        if (value < LOTTERY_NUMBER_MINIMUM || value > LOTTERY_NUMBER_MAXIMIM) {
             throw new IllegalArgumentException(LOTTERY_NUMBER_OUT_OF_RANGE);
         }
     }
