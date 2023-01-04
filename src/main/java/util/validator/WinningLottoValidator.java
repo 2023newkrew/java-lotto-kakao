@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class WinningLottoValidator {
 
-
     public static void validate(String input) {
         String[] splitInput = input.split(Constants.DELIMITER);
         validateLength(splitInput);
@@ -32,9 +31,7 @@ public class WinningLottoValidator {
         inputs.stream()
                 .forEach(input -> distinctNumbers.add(input));
         if (distinctNumbers.size() != Constants.LENGTH) {
-            throw new DuplicateNumberException("");
+            throw new DuplicateNumberException("당첨 번호의 길이가 유효하지 않습니다.");
         }
     }
-
-
 }
