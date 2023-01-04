@@ -10,22 +10,22 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
     @Test
-    void 당첨번호는_숫자_6개이어야_한다() {
+    void 로또번호는_숫자_6개이어야_한다() {
         // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
 
         // when, then
-        assertThatThrownBy(()-> Lotto.ofNumbers(numbers))
+        assertThatThrownBy(()-> Lotto.ofManual(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 당첨번호는_중복_불가하다() {
+    void 로또번호는_중복_될_수_없다() {
         // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 6, 6);
 
         // when, then
-        assertThatThrownBy(()-> Lotto.ofNumbers(numbers))
+        assertThatThrownBy(()-> Lotto.ofManual(numbers))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -34,8 +34,8 @@ public class LottoTest {
         // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
 
-        Lotto lotto = Lotto.ofNumbers(numbers);
-        WinningLotto winningLotto = new WinningLotto(Lotto.ofNumbers(numbers), new LottoNumber(7));
+        Lotto lotto = Lotto.ofManual(numbers);
+        WinningLotto winningLotto = new WinningLotto(Lotto.ofManual(numbers), new LottoNumber(7));
 
         // when
         LottoRank place = lotto.getRank(winningLotto);
@@ -49,8 +49,8 @@ public class LottoTest {
         // given
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 11);
 
-        Lotto lotto = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 7));
-        WinningLotto winningLotto = new WinningLotto(Lotto.ofNumbers(numbers), new LottoNumber(7));
+        Lotto lotto = Lotto.ofManual(List.of(1, 2, 3, 4, 5, 7));
+        WinningLotto winningLotto = new WinningLotto(Lotto.ofManual(numbers), new LottoNumber(7));
 
         // when
         LottoRank place = lotto.getRank(winningLotto);

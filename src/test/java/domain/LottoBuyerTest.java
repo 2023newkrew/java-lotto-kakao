@@ -15,13 +15,13 @@ public class LottoBuyerTest {
         // given
         int price = 3500;
         List<Lotto> lottos = List.of(
-                Lotto.ofNumbers(List.of(1,2,3,4,5,6)),
-                Lotto.ofNumbers(List.of(3,4,5,6,7,8)),
-                Lotto.ofNumbers(List.of(5,6,7,8,9,10))
+                Lotto.ofManual(List.of(1,2,3,4,5,6)),
+                Lotto.ofManual(List.of(3,4,5,6,7,8)),
+                Lotto.ofManual(List.of(5,6,7,8,9,10))
         );
         LottoBuyer lottoBuyer = new LottoBuyer(price, (money)->lottos);
 
-        Lotto winningNumbers = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = Lotto.ofManual(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(45);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
@@ -41,13 +41,13 @@ public class LottoBuyerTest {
         // given
         int price = 3500;
         List<Lotto> lottos = List.of(
-                Lotto.ofNumbers(List.of(1,2,3,4,5,6)),
-                Lotto.ofNumbers(List.of(3,4,5,6,7,8)),
-                Lotto.ofNumbers(List.of(5,6,7,8,9,10))
+                Lotto.ofManual(List.of(1,2,3,4,5,6)),
+                Lotto.ofManual(List.of(3,4,5,6,7,8)),
+                Lotto.ofManual(List.of(5,6,7,8,9,10))
         );
         LottoBuyer lottoBuyer = new LottoBuyer(price, (money)->lottos);
 
-        Lotto winningNumbers = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = Lotto.ofManual(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(45);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         LottoResult lottoResult = lottoBuyer.calculateResult(winningLotto);

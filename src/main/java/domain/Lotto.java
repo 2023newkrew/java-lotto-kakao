@@ -1,42 +1,54 @@
 package domain;
 
 import dto.WinningLotto;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
     private static final Integer LOTTO_SIZE = 6;
     private static final String ERROR_LOTTO_SIZE = "로또 숫자는 6개이어야 합니다.";
     private static final String ERROR_LOTTO_DUPLICATE = "로또 숫자는 중복이 불가합니다.";
+    private static final List<LottoNumber> LOTTO_NUMBER_CANDIDATES = LottoNumber.getAll();
+
     private final List<LottoNumber> numbers;
 
-    public Lotto() {
-        this.numbers = LottoGenerator.run();
-    }
-
-    static public Lotto ofNumbers(List<Integer> numbers) {
+    private Lotto(List<LottoNumber> numbers) {
         validateLotto(numbers);
-        return new Lotto(numbers);
+        this.numbers = numbers;
     }
 
-    static private void validateLotto(List<Integer> numbers) {
+    static public Lotto ofManual(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers
+                .stream()
+                .map(LottoNumber::new)
+                .sorted()
+                .collect(Collectors.toList());
+        return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto ofAuto() {
+        List<LottoNumber> lottoNumbers = Lotto.generate();
+        validateLotto(lottoNumbers);
+        return new Lotto(lottoNumbers);
+    }
+
+    static private List<LottoNumber> generate() {
+        Collections.shuffle(LOTTO_NUMBER_CANDIDATES);
+        List<LottoNumber> lottoNumbers = new ArrayList<>(LOTTO_NUMBER_CANDIDATES.subList(0, LOTTO_SIZE));
+        Collections.sort(lottoNumbers);
+        return lottoNumbers;
+    }
+
+    static private void validateLotto(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
         }
 
-        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
+        Set<LottoNumber> uniqueNumbers = new HashSet<>(numbers);
         if (uniqueNumbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_LOTTO_DUPLICATE);
         }
-    }
-
-    private Lotto(List<Integer> numbers) {
-        this.numbers = numbers
-                .stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
     }
 
     public LottoRank getRank(WinningLotto winningLotto) {

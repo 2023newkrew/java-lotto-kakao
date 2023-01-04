@@ -24,7 +24,7 @@ public class LottoApplication {
             outputView.printPurchasedLottos(lottoBuyer.getLottos());
 
             String winningLottoInput = inputView.getWinningLottoInput();
-            Lotto winningLotto = Lotto.ofNumbers(NumberParser.splitAndParse(winningLottoInput));
+            Lotto winningLotto = Lotto.ofManual(NumberParser.splitAndParse(winningLottoInput));
             String bonusNumberInput = inputView.getBonusNumberInput();
             LottoNumber bonusNumber = new LottoNumber(NumberParser.parse(bonusNumberInput));
 
