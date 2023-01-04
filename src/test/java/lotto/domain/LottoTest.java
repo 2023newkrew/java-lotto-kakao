@@ -42,4 +42,11 @@ public class LottoTest {
 
         assertThat(lottos).hasSize(number);
     }
+
+    @Test
+    void 수동으로_로또를_생성할_수_있다() {
+        Lotto lotto = Lotto.manualGenerate(List.of(1, 2, 3, 4, 5, 6));
+
+        assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
+    }
 }

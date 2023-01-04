@@ -14,7 +14,7 @@
         - [x] Lotto
         - [x] bonusNumber (정적 팩토리 메서드)
             - 캐싱기능
-    - [x] LottoGame
+    - [x] Lottos
     - [x] Lotto
       - [x] LottoNumber
     - [x] DTO

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoGame;
+import lotto.domain.Lottos;
 import lotto.domain.WinningLotto;
 
 import static lotto.view.LottoView.*;
@@ -18,7 +18,7 @@ public class Application {
         lottos.addAll(Lotto.autoGenerateByAmounts(lottoAmount - lottos.size()));
         printLottoList(lottos);
         WinningLotto winningLotto = inputWinningLotto();
-        LottoGame lottoGame = new LottoGame(lottos, winningLotto);
+        Lottos lottoGame = new Lottos(lottos, winningLotto);
         printLottoList(lottoGame.getLottos());
         printResult(lottoGame.getResult());
     }

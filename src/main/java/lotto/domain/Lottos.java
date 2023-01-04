@@ -7,11 +7,11 @@ import lotto.dto.GameResultDto;
 
 import static lotto.constant.ExceptionMessages.INVALID_PRICE_AMOUNT;
 
-public class LottoGame {
+public class Lottos {
     private final List<Lotto> lottos;
     private final WinningLotto winningLotto;
 
-    public LottoGame(List<Lotto> lottos, WinningLotto winningLotto) {
+    public Lottos(List<Lotto> lottos, WinningLotto winningLotto) {
         validateLottos(lottos);
         this.lottos = lottos;
         this.winningLotto = winningLotto;
