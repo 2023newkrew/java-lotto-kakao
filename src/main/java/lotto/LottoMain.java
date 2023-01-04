@@ -2,15 +2,16 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.LottoGame;
+import lotto.domain.LottoSetting;
 import lotto.domain.LottoWinningNumberList;
-import lotto.domain.strategy.RandomNumberSelectStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoMain {
 
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame(new RandomNumberSelectStrategy());
+        LottoSetting lottoSetting = new LottoSetting();
+        LottoGame lottoGame = new LottoGame(lottoSetting);
 
         buyLotto(lottoGame);
         checkLotto(lottoGame);

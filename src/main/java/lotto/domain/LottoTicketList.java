@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 public class LottoTicketList {
 
+    public static final String DELIMITER = "\n";
+
     private final List<LottoTicket> lottoTicketList;
 
     public LottoTicketList(List<LottoTicket> lottoTicketList) {
@@ -14,7 +16,7 @@ public class LottoTicketList {
     public String getLottoNumbersString() {
         return lottoTicketList.stream()
                 .map(LottoTicket::getString)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(DELIMITER));
     }
 
     public LottoStatistics getStatistics(LottoWinningNumberList lottoWinningNumbers) {

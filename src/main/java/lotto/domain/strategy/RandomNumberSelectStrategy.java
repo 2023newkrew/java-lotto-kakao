@@ -11,6 +11,14 @@ public class RandomNumberSelectStrategy implements NumberSelectStrategy {
     private static final int NUMBER_MAX_BOUND = 45;
     private static final int NUMBER_LIMIT = 6;
 
+    private static final RandomNumberSelectStrategy instance = new RandomNumberSelectStrategy();
+
+    private RandomNumberSelectStrategy() {}
+
+    public static RandomNumberSelectStrategy getInstance() {
+        return instance;
+    }
+
     @Override
     public List<Integer> select() {
         List<Integer> numbers = Stream.iterate(NUMBER_MIN_BOUND, n -> n + 1)

@@ -1,18 +1,17 @@
 package lotto.domain;
 
-import lotto.domain.strategy.NumberSelectStrategy;
-
 public class LottoGame {
 
-    private final LottoDispenser lottoDispenser;
+    private final LottoSetting lottoSetting;
     private LottoTicketList lottoTickets;
 
-    public LottoGame(NumberSelectStrategy numberSelectStrategy) {
-        this.lottoDispenser = new LottoDispenser(numberSelectStrategy);
+    public LottoGame(LottoSetting lottoSetting) {
+        this.lottoSetting = lottoSetting;
     }
 
     public void buy(int money) {
-        lottoTickets = lottoDispenser.getLottoTicket(money);
+        lottoTickets = LottoDispenser.from(lottoSetting.getNumberSelectStrategy())
+                .getLottoTicket(money);
     }
 
     public String getLottoTicketsString() {

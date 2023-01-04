@@ -8,23 +8,27 @@ public class LottoWinningNumberList {
     private final LottoNumber bonusNumber;
 
     public LottoWinningNumberList(List<Integer> numberList, int bonusNumber) {
-        this.lottoNumbers = new LottoNumberSet(numberList);
-        LottoNumber bonusLottoNumber = LottoNumber.from(bonusNumber);
-        validateDuplicateBonusNumber(bonusLottoNumber);
-        this.bonusNumber = LottoNumber.from(bonusNumber);
+        this(new LottoNumberSet(numberList), LottoNumber.from(bonusNumber));
     }
 
-    private void validateDuplicateBonusNumber(LottoNumber bonusLottoNumber) {
-        if (lottoNumbers.hasNumber(bonusLottoNumber)) {
+    public LottoWinningNumberList(LottoNumberSet lottoNumberSet, LottoNumber bonusLottoNumber) {
+        validateDuplicateBonusNumber(lottoNumberSet, bonusLottoNumber);
+        this.lottoNumbers = lottoNumberSet;
+        this.bonusNumber = bonusLottoNumber;
+    }
+
+    private void validateDuplicateBonusNumber(LottoNumberSet lottoNumberSet,
+            LottoNumber bonusLottoNumber) {
+        if (lottoNumberSet.hasNumber(bonusLottoNumber)) {
             throw new IllegalArgumentException("보너스 번호는 다른 당첨번호와 중복될 수 없습니다.");
         }
     }
 
-    public int getAmountOfNumbersInWinningNumbers(LottoNumberSet lottoNumbers) {
-        return this.lottoNumbers.getAmountOfNumbersInNumbers(lottoNumbers);
+    public int matchBaseNumbers(LottoNumberSet lottoNumberSet) {
+        return this.lottoNumbers.getAmountOfNumbersInNumbers(lottoNumberSet);
     }
 
-    public boolean checkBonusNumberInNumbers(LottoNumberSet lottoNumbers) {
-        return lottoNumbers.hasNumber(bonusNumber);
+    public boolean matchBonusNumber(LottoNumberSet lottoNumberSet) {
+        return lottoNumberSet.hasNumber(bonusNumber);
     }
 }

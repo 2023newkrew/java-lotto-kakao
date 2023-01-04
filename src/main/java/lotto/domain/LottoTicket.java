@@ -27,8 +27,8 @@ public class LottoTicket {
     }
 
     public LottoResult getResult(LottoWinningNumberList lottoWinningNumbers) {
-        int equalNumber = lottoWinningNumbers.getAmountOfNumbersInWinningNumbers(lottoNumberSet);
-        boolean bonusNumber = lottoWinningNumbers.checkBonusNumberInNumbers(lottoNumberSet);
+        int equalNumber = lottoWinningNumbers.matchBaseNumbers(lottoNumberSet);
+        boolean bonusNumber = lottoWinningNumbers.matchBonusNumber(lottoNumberSet);
         return LottoResult.of(equalNumber, bonusNumber);
     }
 }

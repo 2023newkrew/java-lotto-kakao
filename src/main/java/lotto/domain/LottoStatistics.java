@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
+    public static final String DELIMITER = "\n";
+    public static final long DEFAULT_VALUE = 0L;
+
     private final Map<LottoResult, Long> lottoStatistics;
     private final int totalLottoResult;
 
@@ -24,13 +27,13 @@ public class LottoStatistics {
         return Arrays.stream(LottoResult.values())
                 .filter(it -> it != LottoResult.MISS)
                 .map(this::getLottoResultString)
-                .collect(Collectors.joining("\n"))
+                .collect(Collectors.joining(DELIMITER))
                 + "\n" + getLottoIncomeRateString();
     }
 
     private String getLottoResultString(LottoResult lottoResult) {
         return lottoResult.getString() + " - "
-                + lottoStatistics.getOrDefault(lottoResult, 0L) + "개";
+                + lottoStatistics.getOrDefault(lottoResult, DEFAULT_VALUE) + "개";
     }
 
     private String getLottoIncomeRateString() {

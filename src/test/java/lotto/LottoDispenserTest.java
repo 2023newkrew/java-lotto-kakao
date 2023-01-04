@@ -18,7 +18,8 @@ public class LottoDispenserTest {
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketByPriceData")
     public void issueLottoTicketByPrice(int price, int number) {
-        LottoDispenser lottoDispenser = new LottoDispenser(new RandomNumberSelectStrategy());
+        LottoDispenser lottoDispenser = LottoDispenser.from(
+                RandomNumberSelectStrategy.getInstance());
         Assertions.assertThat(lottoDispenser.getLottoTicket(price).getCount()).isEqualTo(number);
     }
 
@@ -34,7 +35,7 @@ public class LottoDispenserTest {
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketByNumberSelectStrategyData")
     public void issueLottoTicketByPrice(List<List<Integer>> randomNumbers, int price, String expected) {
-        LottoDispenser lottoDispenser = new LottoDispenser(createNumberSelectStrategy(randomNumbers));
+        LottoDispenser lottoDispenser = LottoDispenser.from(createNumberSelectStrategy(randomNumbers));
         LottoTicketList lottoTickets = lottoDispenser.getLottoTicket(price);
         Assertions.assertThat(lottoTickets.getLottoNumbersString()).isEqualTo(expected);
     }
