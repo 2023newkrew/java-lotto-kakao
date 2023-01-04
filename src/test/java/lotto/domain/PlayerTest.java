@@ -22,7 +22,7 @@ public class PlayerTest {
         LottoTicketSeller seller = new LottoTicketSeller();
         //when
         player.buyLottoTickets(seller);
-        PlayerLottoResult playerLottoResult = player.findResult(lottoTicket -> LottoResult.THREE_MATCH);
+        PlayerLottoResult playerLottoResult = player.findResult(lottoTicket -> LottoResult.FIFTH_PLACE);
         //then
         assertThat(playerLottoResult.calculateProfitRate()).isEqualTo(5.0);
     }

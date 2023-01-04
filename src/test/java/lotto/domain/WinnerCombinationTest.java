@@ -68,7 +68,7 @@ public class WinnerCombinationTest {
         LottoResult lottoResult = winnerCombination.compare(lottoTicket);
 
         // then
-        assertThat(lottoResult).isEqualTo(LottoResult.SIX_MATCH);
+        assertThat(lottoResult).isEqualTo(LottoResult.FIRST_PLACE);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class WinnerCombinationTest {
         LottoResult lottoResult = winnerCombination.compare(lottoTicket);
 
         // then
-        assertThat(lottoResult).isEqualTo(LottoResult.FIVE_MATCH_WITH_BONUS);
+        assertThat(lottoResult).isEqualTo(LottoResult.SECOND_PLACE);
     }
 
     @Test
@@ -116,7 +116,7 @@ public class WinnerCombinationTest {
         LottoResult lottoResult = winnerCombination.compare(lottoTicket);
 
         // then
-        assertThat(lottoResult).isEqualTo(LottoResult.FIVE_MATCH);
+        assertThat(lottoResult).isEqualTo(LottoResult.THIRD_PLACE);
     }
 
     @Test
@@ -140,7 +140,7 @@ public class WinnerCombinationTest {
         LottoResult lottoResult = winnerCombination.compare(lottoTicket);
 
         // then
-        assertThat(lottoResult).isEqualTo(LottoResult.FOUR_MATCH);
+        assertThat(lottoResult).isEqualTo(LottoResult.FOURTH_PLACE);
     }
 
     @Test
@@ -164,6 +164,6 @@ public class WinnerCombinationTest {
         LottoResult lottoResult = winnerCombination.compare(lottoTicket);
 
         // then
-        assertThat(lottoResult).isEqualTo(LottoResult.THREE_MATCH);
+        assertThat(lottoResult).isEqualTo(LottoResult.FIFTH_PLACE);
     }
 }

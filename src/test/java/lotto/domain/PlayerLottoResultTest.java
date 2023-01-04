@@ -25,7 +25,7 @@ public class PlayerLottoResultTest {
 
         //when
         playerLottoResult.addResult(LottoResult.NO_MATCH);
-        playerLottoResult.addResult(LottoResult.THREE_MATCH);
+        playerLottoResult.addResult(LottoResult.FIFTH_PLACE);
 
         // then
         double profitRate = playerLottoResult.calculateProfitRate();
