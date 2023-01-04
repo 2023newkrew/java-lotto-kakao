@@ -14,14 +14,13 @@ public class LottoMain {
         money = count * 1000;
 
         LottoTickets tickets = LottoTickets.automaticallyOf(count);
-        resultView.printLottoTickets(tickets);
-
-        LottoTicket winningTicket = LottoTicket.fromIntegerList(inputView.scanWinningTicket());
-        LottoNumber bonusNumber = LottoNumber.valueOf(inputView.scanBonusNumber());
+        resultView.printLottoTickets(new LottoTicketsDto(tickets));
 
         WinningNumbers winningNumbers = new WinningNumbers(
-                winningTicket,
-                bonusNumber
+                new WinningNumbersDto(
+                        new LottoTicketDto(inputView.scanWinningTicket()),
+                        inputView.scanBonusNumber()
+                )
         );
 
         Result result = tickets.getResults(winningNumbers);

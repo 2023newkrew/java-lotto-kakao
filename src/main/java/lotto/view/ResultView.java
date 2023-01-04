@@ -1,11 +1,7 @@
 package lotto.view;
 
-import lotto.model.Grade;
-import lotto.model.LottoTicket;
-import lotto.model.LottoTickets;
-import lotto.model.Result;
+import lotto.model.*;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -21,16 +17,20 @@ public class ResultView {
         return instance;
     }
 
-    public void printLottoTickets(LottoTickets tickets) {
-        System.out.printf("%d개 구매했습니다.\n", tickets.toTicketList().size());
-        for (LottoTicket ticket : tickets.toTicketList()) {
-            List<String> numbers = ticket.toIntegerList()
-                    .stream().map(
-                            number -> Integer.toString(number)
-                    ).collect(Collectors.toList());
-            System.out.println("[" + String.join(", ", numbers) + "]");
+    public void printLottoTickets(LottoTicketsDto tickets) {
+        System.out.printf("%d개 구매했습니다.\n", tickets.size());
+        for (LottoTicketDto ticket : tickets.getTickets()) {
+            printLottoTicket(ticket);
         }
         System.out.println();
+    }
+
+    private void printLottoTicket(LottoTicketDto ticketDto) {
+        String numbers = ticketDto.getTicket().stream()
+                .sorted().map(
+                number -> Integer.toString(number)
+        ).collect(Collectors.joining(", "));
+        System.out.println("[" + numbers + "]");
     }
 
     public void printResultStatistics(Result result, int money) {

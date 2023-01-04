@@ -35,9 +35,19 @@ class LottoTicketsTest {
                 )
         );
 
+
         WinningNumbers winningNumbers = new WinningNumbers(
-                "1, 2, 3, 4, 5, 6",
-                "7"
+                new LottoTicket(
+                        Arrays.asList(
+                                LottoNumber.valueOf(1),
+                                LottoNumber.valueOf(2),
+                                LottoNumber.valueOf(3),
+                                LottoNumber.valueOf(4),
+                                LottoNumber.valueOf(5),
+                                LottoNumber.valueOf(6)
+                        )
+                ),
+                LottoNumber.valueOf(7)
         );
 
         assertThat(lottoTickets.getResults(winningNumbers)).isEqualTo(new Result(

@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class LottoTickets {
     List<LottoTicket> tickets;
@@ -27,7 +28,7 @@ public class LottoTickets {
         return result;
     }
 
-    public List<LottoTicket> toTicketList() {
-        return new ArrayList<>(tickets);
+    public Stream<LottoTicket> stream() {
+        return tickets.stream();
     }
 }

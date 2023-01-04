@@ -15,12 +15,13 @@ public class LottoTicket {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public static LottoTicket fromIntegerList(List<Integer> numbers) {
-        return new LottoTicket(
-                numbers.stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList())
-        );
+    public LottoTicket(LottoTicketDto lottoTicketDto) {
+        List<LottoNumber> numbers = lottoTicketDto.getTicket()
+                .stream().map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+        validateValuesCount(numbers);
+        validateDistinction(numbers);
+        this.numbers = numbers;
     }
 
     private void validateValuesCount(List<LottoNumber> numbers) {
@@ -41,12 +42,6 @@ public class LottoTicket {
 
     public Stream<LottoNumber> stream() {
         return numbers.stream();
-    }
-
-    public List<Integer> toIntegerList() {
-        return numbers.stream()
-                .mapToInt(LottoNumber::getValue).sorted()
-                .boxed().collect(Collectors.toList());
     }
 
     @Override
