@@ -5,13 +5,12 @@ import common.constant.Constants;
 public class SingleNumberValidator {
 
     public static void validate(String input) {
-        int number;
         validateNumberFormat(input);
-        number = Integer.parseInt(input);
+        int number = Integer.parseInt(input);
         validateInRange(number);
     }
 
-    private static void validateNumberFormat(String input) {
+    protected static void validateNumberFormat(String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
