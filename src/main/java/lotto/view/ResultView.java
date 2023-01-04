@@ -34,7 +34,7 @@ public class ResultView {
     }
 
     public void printResultStatistics(Result result, int money) {
-        System.out.printf("당첨 통계\n" +
+        System.out.printf("\n당첨 통계\n" +
                         "--------\n" +
                         "3개 일치 (5000원) - %d개\n" +
                         "4개 일치 (50000원) - %d개\n" +
