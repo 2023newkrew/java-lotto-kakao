@@ -16,7 +16,7 @@ public class LottoController {
         Lottos autoLottos = lottosFactory.makeLottosAuto(numberOfLotto - manualLottos.getLottos().size());
         Lottos lottos = lottosFactory.joinLottos(manualLottos, autoLottos);
 
-        outputView.printLottos(lottos);
+        outputView.printLottos(lottos, manualLottos.getLottos().size(), autoLottos.getLottos().size());
 
         WinningNumbers winningNumbers = inputView.receiveLastLottoNumbers();
         RankingResult rankingResult = winner.rankingCount(lottos.getRankings(winningNumbers));
