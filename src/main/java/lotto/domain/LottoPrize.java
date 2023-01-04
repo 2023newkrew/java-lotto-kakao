@@ -7,7 +7,8 @@ public enum LottoPrize {
             (matchNumberCount, hasMagicNumber) -> matchNumberCount == LottoNumbers.LOTTO_NUMBER_LENGTH - 1
                     && hasMagicNumber),
     THIRD_PRIZE(1500000, "5개 일치",
-            (matchNumberCount, hasMagicNumber) -> matchNumberCount == LottoNumbers.LOTTO_NUMBER_LENGTH - 1),
+            (matchNumberCount, hasMagicNumber) -> matchNumberCount == LottoNumbers.LOTTO_NUMBER_LENGTH - 1
+                    && !hasMagicNumber),
     FOURTH_PRIZE(50000, "4개 일치",
             (matchNumberCount, hasMagicNumber) -> matchNumberCount == LottoNumbers.LOTTO_NUMBER_LENGTH - 2),
     FIFTH_PRIZE(5000, "3개 일치",
