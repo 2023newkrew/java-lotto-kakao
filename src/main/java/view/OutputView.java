@@ -2,26 +2,21 @@ package view;
 
 import domain.LottoNumbers;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private static final String NUMBER_OF_LOTTO_MESSAGE = "%d개를 구매했습니다.";
     private static final String RESULT_STATISTICS_MESSAGE = "\n당첨 통계\n---------";
     private static final String YIELD_MESSAGE = "총 수익률은 %.2f입니다.";
 
-
-    public void printNumberOfLotto(int num) {
-        System.out.println(String.format(NUMBER_OF_LOTTO_MESSAGE, num));
-    }
-
-    public void printPurchasedLotto(List<LottoNumbers> lottoNumbersList) {
-        String purchasedLotto = lottoNumbersList.stream()
+    public void printPurchasedLotto(PurchasedLotto purchasedLotto) {
+        System.out.println(purchasedLotto.toString());
+        String lottoNumbers = purchasedLotto.getLottoNumbersList()
+                .stream()
                 .map(LottoNumbers::toString)
                 .collect(Collectors.joining("\n"));
 
-        System.out.println(purchasedLotto + "\n");
+        System.out.println(lottoNumbers);
     }
 
     public void printStatistics(String str) {

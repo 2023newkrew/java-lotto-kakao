@@ -2,7 +2,6 @@ package utils;
 
 import domain.LottoNumber;
 import domain.LottoNumbers;
-import domain.Payment;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,14 +11,15 @@ import java.util.stream.IntStream;
 import static constant.LottoSetting.*;
 
 public class LottoGenerator {
+
     private static final List<Integer> LOTTO_NUMBER_LIST = IntStream
             .rangeClosed(MIN_VALUE, MAX_VALUE)
             .boxed()
             .collect(Collectors.toList());
 
 
-    public static List<LottoNumbers> generateLotto(Payment payment) {
-        return IntStream.range(0, LottoCalculator.calculateNumberOfLotto(payment))
+    public static List<LottoNumbers> generateLotto(int numberOfLotto) {
+        return IntStream.range(0, numberOfLotto)
                 .mapToObj(i -> generate())
                 .collect(Collectors.toList());
     }
