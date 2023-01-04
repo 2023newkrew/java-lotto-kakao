@@ -48,7 +48,8 @@ public class TotalResult {
                 .collect(Collectors.toList());
     }
 
-    public String getProfitMessage(double profit) {
+    public String getProfitMessage(int paidPrice) {
+        double profit = getProfit(paidPrice);
         String message = String.format(OutputView.PROFIT_MESSAGE, profit);
         if (profit <= 1) {
             return message + OutputView.PROFIT_NEGATIVE_MESSAGE;
