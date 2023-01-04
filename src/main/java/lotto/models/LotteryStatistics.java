@@ -6,13 +6,13 @@ import java.util.Map;
 import java.util.Objects;
 import lotto.models.enums.Rank;
 
-public class LottoStatistics {
+public class LotteryStatistics {
     private final Map<Rank, Integer> rankCounts;
 
     private final Double earningsRate;
 
-    public LottoStatistics(Goal goal, List<Lotto> lottos, Integer budget) {
-        rankCounts = collectRankCounts(goal, lottos);
+    public LotteryStatistics(Goal goal, List<Lottery> lotteries, Integer budget) {
+        rankCounts = collectRankCounts(goal, lotteries);
         earningsRate = calculateEarningsRate(budget);
     }
 
@@ -24,10 +24,10 @@ public class LottoStatistics {
         return Objects.nonNull(rankCounts.get(rank)) ? rankCounts.get(rank) : 0;
     }
 
-    private Map<Rank, Integer> collectRankCounts(Goal goal, List<Lotto> lottos) {
+    private Map<Rank, Integer> collectRankCounts(Goal goal, List<Lottery> lotteries) {
         Map<Rank, Integer> rankCounts = initializeRankCounts();
-        lottos.forEach((lotto) -> {
-            Rank currentKey = goal.compareLotto(lotto);
+        lotteries.forEach((lottery) -> {
+            Rank currentKey = goal.compareLottery(lottery);
             rankCounts.put(currentKey, rankCounts.get(currentKey) + 1);
         });
         return rankCounts;

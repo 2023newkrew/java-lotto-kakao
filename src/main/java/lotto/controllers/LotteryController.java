@@ -1,31 +1,31 @@
 package lotto.controllers;
 
-import static lotto.common.LottoConfiguration.LOTTO_PRICE;
+import static lotto.common.LotteryConfiguration.LOTTERY_PRICE;
 
 import java.util.List;
+import lotto.common.LotteryGenerator;
 import lotto.models.Goal;
-import lotto.models.Lotto;
-import lotto.common.LottoGenerator;
-import lotto.models.LottoStatistics;
+import lotto.models.Lottery;
+import lotto.models.LotteryStatistics;
 import lotto.views.Console;
 import lotto.views.InputView;
 import lotto.views.OutputView;
 
-public class LottoController {
+public class LotteryController {
     private final OutputView outputView;
     private final InputView inputView;
 
-    public LottoController(Console console) {
+    public LotteryController(Console console) {
         outputView = new OutputView(console);
         inputView = new InputView(console);
     }
 
     public void run() {
         Integer budget = getBudget();
-        Integer numberOfLottos = parseNumberOfLottos(budget);
-        List<Lotto> lottos = createLottoList(numberOfLottos);
+        Integer numberOfLotteries = parseNumberOfLotteries(budget);
+        List<Lottery> lotteries = createLotteryList(numberOfLotteries);
         Goal goal = getGoal();
-        showStatistics(goal, lottos, budget);
+        showStatistics(goal, lotteries, budget);
     }
 
     private Integer getBudget() {
@@ -33,20 +33,20 @@ public class LottoController {
     }
 
     private Integer getBudgetLogic() {
-        outputView.askForMoneyToBuyLotto();
+        outputView.askForMoneyToBuyLottery();
         return inputView.getInteger();
     }
 
-    private Integer parseNumberOfLottos(int budget) {
-        Integer numberOfLottos = budget / LOTTO_PRICE;
-        outputView.printNumberOfLotto(numberOfLottos);
-        return numberOfLottos;
+    private Integer parseNumberOfLotteries(int budget) {
+        Integer numberOfLotteries = budget / LOTTERY_PRICE;
+        outputView.printNumberOfLottery(numberOfLotteries);
+        return numberOfLotteries;
     }
 
-    private List<Lotto> createLottoList(int numberOfLotto) {
-        List<Lotto> lottos = LottoGenerator.createLottos(numberOfLotto);
-        outputView.printLottos(lottos);
-        return lottos;
+    private List<Lottery> createLotteryList(int numberOfLottery) {
+        List<Lottery> lotteries = LotteryGenerator.createLotteries(numberOfLottery);
+        outputView.printLotteries(lotteries);
+        return lotteries;
     }
 
     private Goal getGoal() {
@@ -77,8 +77,8 @@ public class LottoController {
         return inputView.getInteger();
     }
 
-    private void showStatistics(Goal goal, List<Lotto> lottos, Integer budget) {
-        LottoStatistics statistics = new LottoStatistics(goal, lottos, budget);
+    private void showStatistics(Goal goal, List<Lottery> lotteries, Integer budget) {
+        LotteryStatistics statistics = new LotteryStatistics(goal, lotteries, budget);
         outputView.printStatistics(statistics);
     }
 }

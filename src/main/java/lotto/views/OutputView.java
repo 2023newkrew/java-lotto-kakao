@@ -3,9 +3,9 @@ package lotto.views;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
-import lotto.models.Lotto;
+import lotto.models.Lottery;
 import lotto.models.enums.Rank;
-import lotto.models.LottoStatistics;
+import lotto.models.LotteryStatistics;
 
 public class OutputView {
     Console console;
@@ -14,18 +14,18 @@ public class OutputView {
         this.console = console;
     }
 
-    public void askForMoneyToBuyLotto() {
+    public void askForMoneyToBuyLottery() {
         console.printOutput("구입금액을 입력해 주세요.");
     }
 
-    public void printNumberOfLotto(Integer numberOfLotto) {
-        console.printOutput(numberOfLotto.toString() + "개를 구매했습니다.");
+    public void printNumberOfLottery(Integer numberOfLottery) {
+        console.printOutput(numberOfLottery.toString() + "개를 구매했습니다.");
     }
 
-    public void printLottos(List<Lotto> Lottos) {
-        for (Lotto lotto :
-                Lottos) {
-            console.printOutput(lotto.getNumbers().toString());
+    public void printLotteries(List<Lottery> lotteries) {
+        for (Lottery lottery :
+                lotteries) {
+            console.printOutput(lottery.getNumbers().toString());
         }
     }
 
@@ -37,7 +37,7 @@ public class OutputView {
         console.printOutput("보너스 볼을 입력해 주세요.");
     }
 
-    public void printStatistics(LottoStatistics statistics) {
+    public void printStatistics(LotteryStatistics statistics) {
         String rateString = String.format("%.2f", statistics.getEarningsRate());
 
         console.printOutput("당첨 통계\n"

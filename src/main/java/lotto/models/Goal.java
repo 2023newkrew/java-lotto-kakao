@@ -1,13 +1,13 @@
 package lotto.models;
 
-import static lotto.common.LottoConfiguration.*;
+import static lotto.common.LotteryConfiguration.*;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.models.enums.Rank;
 
-public class Goal extends Lotto {
+public class Goal extends Lottery {
     private final Integer bonusBall;
 
     public Goal(List<Integer> goal, Integer bonusBall) {
@@ -16,14 +16,14 @@ public class Goal extends Lotto {
         this.bonusBall = bonusBall;
     }
 
-    public Rank compareLotto(Lotto lotto) {
-        return Rank.findRank(getMatchCount(lotto), lotto.getNumbers().contains(bonusBall));
+    public Rank compareLottery(Lottery lottery) {
+        return Rank.findRank(getMatchCount(lottery), lottery.getNumbers().contains(bonusBall));
     }
 
-    private Integer getMatchCount(Lotto lotto) {
-        Set<Integer> sum = new HashSet<>(lotto.getNumbers());
+    private Integer getMatchCount(Lottery lottery) {
+        Set<Integer> sum = new HashSet<>(lottery.getNumbers());
         sum.addAll(getNumbers());
-        return LOTTO_COUNT * 2 - sum.size();
+        return LOTTERY_COUNT * 2 - sum.size();
     }
 
     private void validateBonusBall(Integer bonusBall) {

@@ -1,7 +1,7 @@
 package lotto.models;
 
-import static lotto.common.LottoConfiguration.MAX_VALUE;
-import static lotto.common.LottoConfiguration.MIN_VALUE;
+import static lotto.common.LotteryConfiguration.MAX_VALUE;
+import static lotto.common.LotteryConfiguration.MIN_VALUE;
 
 import java.util.HashMap;
 import java.util.Map;

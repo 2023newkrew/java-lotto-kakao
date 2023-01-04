@@ -1,7 +1,7 @@
 package lotto.models;
 
-import static lotto.common.LottoConfiguration.MAX_VALUE;
-import static lotto.common.LottoConfiguration.MIN_VALUE;
+import static lotto.common.LotteryConfiguration.MAX_VALUE;
+import static lotto.common.LotteryConfiguration.MIN_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -16,92 +16,92 @@ class GoalTest {
 
     @Nested
     @DisplayName("로또 등수 테스트")
-    public class LottoRankTest {
+    public class LotteryRankTest {
         @Test
         @DisplayName("1등 로또 테스트")
-        public void testFirstRankLotto() {
+        public void testFirstRankLottery() {
             List<Integer> testNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
             Integer bonusBall = 7;
             Goal goal = new Goal(testNumbers, bonusBall);
-            Lotto lotto = new Lotto(testNumbers);
-            Rank rank = goal.compareLotto(lotto);
+            Lottery lottery = new Lottery(testNumbers);
+            Rank rank = goal.compareLottery(lottery);
 
             assertThat(rank).isEqualTo(Rank.FIRST);
         }
 
         @Test
         @DisplayName("2등 로또 테스트")
-        public void testSecondRankLotto() {
+        public void testSecondRankLottery() {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
-            Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7));
-            Rank rank = goal.compareLotto(lotto);
+            Lottery lottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 7));
+            Rank rank = goal.compareLottery(lottery);
 
             assertThat(rank).isEqualTo(Rank.SECOND);
         }
 
         @Test
         @DisplayName("3등 로또 테스트")
-        public void testThirdRankLotto() {
+        public void testThirdRankLottery() {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
-            Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8));
-            Rank rank = goal.compareLotto(lotto);
+            Lottery lottery = new Lottery(Arrays.asList(1, 2, 3, 4, 5, 8));
+            Rank rank = goal.compareLottery(lottery);
 
             assertThat(rank).isEqualTo(Rank.THIRD);
         }
 
         @Test
         @DisplayName("4등 로또 테스트")
-        public void testFourthRankLotto() {
+        public void testFourthRankLottery() {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
-            Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 8, 9));
-            Rank rank = goal.compareLotto(lotto);
+            Lottery lottery = new Lottery(Arrays.asList(1, 2, 3, 4, 8, 9));
+            Rank rank = goal.compareLottery(lottery);
 
             assertThat(rank).isEqualTo(Rank.FOURTH);
         }
 
         @Test
         @DisplayName("5등 로또 테스트")
-        public void testFifthRankLotto() {
+        public void testFifthRankLottery() {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
-            Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 8, 9, 10));
-            Rank rank = goal.compareLotto(lotto);
+            Lottery lottery = new Lottery(Arrays.asList(1, 2, 3, 8, 9, 10));
+            Rank rank = goal.compareLottery(lottery);
 
             assertThat(rank).isEqualTo(Rank.FIFTH);
         }
 
         @Test
         @DisplayName("당첨 안된 로또 테스트 - 2개 일치")
-        public void testNoneRankLotto_2Match() {
+        public void testNoneRankLottery_2Match() {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
-            Lotto lotto = new Lotto(Arrays.asList(1, 2, 14, 8, 9, 10));
-            Rank rank = goal.compareLotto(lotto);
+            Lottery lottery = new Lottery(Arrays.asList(1, 2, 14, 8, 9, 10));
+            Rank rank = goal.compareLottery(lottery);
 
             assertThat(rank).isEqualTo(Rank.NONE);
         }
 
         @Test
         @DisplayName("당첨 안된 로또 테스트 - 1개 일치")
-        public void testNoneRankLotto_1Match() {
+        public void testNoneRankLottery_1Match() {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
-            Lotto lotto = new Lotto(Arrays.asList(1, 13, 14, 8, 9, 10));
-            Rank rank = goal.compareLotto(lotto);
+            Lottery lottery = new Lottery(Arrays.asList(1, 13, 14, 8, 9, 10));
+            Rank rank = goal.compareLottery(lottery);
 
             assertThat(rank).isEqualTo(Rank.NONE);
         }
 
         @Test
         @DisplayName("당첨 안된 로또 테스트 - 0개 일치")
-        public void testNoneRankLotto_0Match() {
+        public void testNoneRankLottery_0Match() {
             Integer bonusBall = 7;
             Goal goal = new Goal(Arrays.asList(1, 2, 3, 4, 5, 6), bonusBall);
-            Lotto lotto = new Lotto(Arrays.asList(12, 13, 14, 8, 9, 10));
-            Rank rank = goal.compareLotto(lotto);
+            Lottery lottery = new Lottery(Arrays.asList(12, 13, 14, 8, 9, 10));
+            Rank rank = goal.compareLottery(lottery);
 
             assertThat(rank).isEqualTo(Rank.NONE);
         }
