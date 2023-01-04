@@ -39,13 +39,14 @@ public class LottoGame {
     }
 
     private void initiateCounter(Map<LottoGrade, Integer> counter) {
-        Arrays.stream(LottoGrade.values())
-                .forEach(lottoGradeEnum -> counter.put(lottoGradeEnum, 0));
+        for (LottoGrade lottoGrade: LottoGrade.values()) {
+            counter.put(lottoGrade, 0);
+        }
     }
 
     private float getEarningRate(Map<LottoGrade, Integer> lottoResultCounter) {
         long totalPrice = lottoResultCounter.entrySet().stream()
-                .mapToInt((entry) -> entry.getKey().price * entry.getValue())
+                .mapToLong((entry) -> (long) entry.getKey().price * entry.getValue())
                 .sum();
         return (float) totalPrice / (lottos.size() * 1000);
     }
