@@ -28,4 +28,8 @@ public class LotteryNumber {
         }
         return numbers.get(number);
     }
+
+    public Integer getNumber() {
+        return number;
+    }
 }

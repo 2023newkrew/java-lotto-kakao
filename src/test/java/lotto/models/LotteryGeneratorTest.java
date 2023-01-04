@@ -3,6 +3,7 @@ package lotto.models;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import java.util.Objects;
 import lotto.common.LotteryGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,13 @@ class LotteryGeneratorTest {
     public void testCreateLottery() {
         Lottery lottery = LotteryGenerator.createLottery();
         assertThat(lottery.getNumbers()).hasSize(6);
-        assertThat(lottery.getNumbers()).isSorted();
+        assertThat(lottery.getNumbers()).isSortedAccordingTo((prev, next) -> {
+            if (Objects.equals(prev.getNumber(), next.getNumber()))
+                return 0;
+            if (prev.getNumber() > next.getNumber())
+                return 1;
+            return -1;
+        });
     }
 
     @ParameterizedTest
