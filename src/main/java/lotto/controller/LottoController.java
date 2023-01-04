@@ -29,7 +29,7 @@ public class LottoController {
 
     public void run() {
         setLottoNumberListFromUser();
-        outputView.printLottos(lottoNumberList);
+        outputView.printLotto(lottoNumberList);
         setLottoGoalNumberFromUser();
         setStatistics();
         outputView.printStatistics(statistics, getRate());
@@ -50,35 +50,51 @@ public class LottoController {
 
     private void setLottoNumberListFromUser() {
         outputView.askForMoneyToBuyLotto();
-        numberOfLotto = parseNumberOfLottos(inputView.getInteger());
-        outputView.printNumberOfLotto(numberOfLotto);
-        lottoNumberList = createLottoList(numberOfLotto);
+        numberOfLotto = parseNumberOfLotto(inputView.getInteger());
+        outputView.askForNumberOfLottoWithManual();
+        Integer numberOfLottoWithManual = parseNumberOfLottoWithManual(inputView.getInteger());
+        if(numberOfLottoWithManual > 0) {
+            outputView.askForLottoNumberWithManual();
+        }
+        lottoNumberList = createLottoList(numberOfLotto, numberOfLottoWithManual);
+        outputView.printNumberOfLotto(numberOfLotto, numberOfLottoWithManual);
     }
 
     private void setLottoGoalNumberFromUser() {
         outputView.askForLastGoalNumbers();
-        List<Integer> goalNumbers = getGoalNumbers();
+        List<Integer> goalNumbers = getLottoNumbersFromUser();
         outputView.askForBonusBall();
         Integer bonusBall = inputView.getInteger();
 
         goalNumber = new GoalNumber(goalNumbers, bonusBall);
     }
 
-    private Integer parseNumberOfLottos(Integer input) {
+    private Integer parseNumberOfLotto(Integer input) {
         return input / LOTTO_PRICE;
     }
 
-    private List<LottoNumber> createLottoList(int numberOfLotto) {
-        List<LottoNumber> list = new ArrayList<>();
-        for (int i = 0; i < numberOfLotto; i++) {
+    private Integer parseNumberOfLottoWithManual(Integer input) {
+        return input;
+    }
+
+    private List<LottoNumber> createLottoList(int numberOfLotto, int numberOfLottoWithManual) {
+        List<LottoNumber> list = createLottoListWithManual(numberOfLottoWithManual);
+        for (int i = 0; i < numberOfLotto - numberOfLottoWithManual; i++) {
             list.add(LottoNumber.create());
         }
         return list;
     }
 
-    private List<Integer> getGoalNumbers() {
-        String input = inputView.getString();
-        return Arrays.stream(input.split(","))
+    private List<LottoNumber> createLottoListWithManual(int numberOfLottoWithManual) {
+        List<LottoNumber> list = new ArrayList<>();
+        for (int i = 0; i < numberOfLottoWithManual; i++) {
+            list.add(LottoNumber.create(getLottoNumbersFromUser()));
+        }
+        return list;
+    }
+
+    private List<Integer> getLottoNumbersFromUser() {
+        return Arrays.stream(inputView.getString().split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());

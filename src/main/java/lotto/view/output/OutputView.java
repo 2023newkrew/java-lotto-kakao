@@ -20,11 +20,12 @@ public class OutputView {
         console.printOutput("구입금액을 입력해 주세요.");
     }
 
-    public void printNumberOfLotto(Integer numberOfLotto) {
-        console.printOutput(numberOfLotto.toString() + "개를 구매했습니다.");
+    public void printNumberOfLotto(Integer numberOfLotto, Integer numberOfLottoByManual) {
+        Integer numberOfLottoByAuto = numberOfLotto - numberOfLottoByManual;
+        console.printOutput(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", numberOfLottoByManual, numberOfLottoByAuto));
     }
 
-    public void printLottos(List<LottoNumber> lottoNumbers) {
+    public void printLotto(List<LottoNumber> lottoNumbers) {
         for (LottoNumber lottoNumber :
                 lottoNumbers) {
             console.printOutput(lottoNumber.getNumbers().toString());
@@ -65,5 +66,13 @@ public class OutputView {
             return ", 보너스 볼 일치";
         }
         return "";
+    }
+
+    public void askForNumberOfLottoWithManual() {
+        console.printOutput("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public void askForLottoNumberWithManual() {
+        console.printOutput("수동으로 구매할 번호를 입력해 주세요.");
     }
 }
