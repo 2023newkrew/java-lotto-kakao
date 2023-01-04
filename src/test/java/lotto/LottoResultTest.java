@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 
 public class LottoResultTest {
@@ -71,12 +72,14 @@ public class LottoResultTest {
     }
 
     @Test
-    @DisplayName("1등:1, 2등:1, 5등:1의 수익률은 676668.3333333334이다.")
-    void name() {
+    @DisplayName("1등:1, 2등:1, 5등:1의 수익률은 676668.33%이다.")
+    void profitRateTest() {
         Statistics stat = new Statistics();
         stat.add(LottoRank.FIRST);
         stat.add(LottoRank.SECOND);
         stat.add(LottoRank.FIFTH);
-        assertThat(stat.getProfitRate()).isEqualTo(676668.3333333334);
+        int totalPrize = (LottoRank.FIRST.PRIZE + LottoRank.SECOND.PRIZE + LottoRank.FIFTH.PRIZE);
+        double profitRate = totalPrize / (double) 3000;
+        assertThat(stat.getProfitRate()).isCloseTo(profitRate, within(0.0001));
     }
 }
