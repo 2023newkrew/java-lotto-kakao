@@ -1,9 +1,6 @@
 package lotto.model;
 
 import lotto.exception.DuplicatedBallNumber;
-import lotto.model.LottoBallNumber;
-import lotto.model.LottoResult;
-import lotto.model.LottoTrial;
 
 public class WinNumber {
     private final LottoTrial winNumber;
@@ -25,6 +22,10 @@ public class WinNumber {
         for (LottoBallNumber bn : trial.getBallNumbers()) {
             matchCount += winNumber.getBallNumbers().contains(bn) ? 1 : 0;
             matchBonus |= bn.equals(bonusNumber);
+        }
+
+        if (matchCount != LottoConstants.BALLCOUNT_LIMIT - 1) {
+            matchBonus = false;
         }
 
         return new LottoResult(matchCount, matchBonus);
