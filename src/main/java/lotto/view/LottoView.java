@@ -4,6 +4,7 @@ import lotto.domain.*;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoView {
@@ -11,6 +12,8 @@ public class LottoView {
     private static final String GET_PURCHASE_MONEY_AMOUNT_MESSAGE = "구입금액을 입력해주세요.";
     private static final String GET_WINNER_TICKET_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String GET_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
+
+    private static final String WRONG_TYPE_ERROR_MESSAGE = "잘못된 형식입니다.";
 
     private final Scanner scanner;
 
@@ -23,7 +26,7 @@ public class LottoView {
         try {
             return Integer.parseInt(scanner.nextLine().trim());
         } catch (NumberFormatException e) {
-            printErrorMessage(e.getMessage());
+            printErrorMessage(WRONG_TYPE_ERROR_MESSAGE);
             return getPurchaseMoneyAmount();
         }
     }
@@ -37,9 +40,10 @@ public class LottoView {
 
     private static void printLottoTicket(LottoTicket lottoTicket) {
         String message = "[";
-        List<LottoBall> lottoBalls = lottoTicket.getLottoBalls();
+        Set<LottoBall> lottoBalls = lottoTicket.getLottoBalls();
         List<String> lottoBallNumbers = lottoBalls.stream()
                 .map(lottoBall -> lottoBall.getNumber())
+                .sorted()
                 .map(lottoBallNumber -> lottoBallNumber.toString())
                 .collect(Collectors.toList());
         message += String.join(", ", lottoBallNumbers);
@@ -84,6 +88,6 @@ public class LottoView {
     }
 
     public void printErrorMessage(String message) {
-        System.err.println(message);
+        System.out.println(message);
     }
 }

@@ -3,7 +3,7 @@ package lotto.domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -16,7 +16,7 @@ public class WinnerCombinationTest {
     @Before
     public void setup() {
         winnerTicket = new LottoTicket(
-                List.of(
+                Set.of(
                         new LottoBall(1),
                         new LottoBall(2),
                         new LottoBall(3),
@@ -55,7 +55,7 @@ public class WinnerCombinationTest {
 
         //when
         LottoTicket lottoTicket = new LottoTicket(
-                List.of(
+                Set.of(
                         new LottoBall(1),
                         new LottoBall(2),
                         new LottoBall(3),
@@ -79,7 +79,7 @@ public class WinnerCombinationTest {
 
         //when
         LottoTicket lottoTicket = new LottoTicket(
-                List.of(
+                Set.of(
                         new LottoBall(1),
                         new LottoBall(2),
                         new LottoBall(3),
@@ -103,7 +103,7 @@ public class WinnerCombinationTest {
 
         //when
         LottoTicket lottoTicket = new LottoTicket(
-                List.of(
+                Set.of(
                         new LottoBall(1),
                         new LottoBall(2),
                         new LottoBall(3),
@@ -127,7 +127,7 @@ public class WinnerCombinationTest {
 
         //when
         LottoTicket lottoTicket = new LottoTicket(
-                List.of(
+                Set.of(
                         new LottoBall(1),
                         new LottoBall(2),
                         new LottoBall(3),
@@ -151,7 +151,7 @@ public class WinnerCombinationTest {
 
         //when
         LottoTicket lottoTicket = new LottoTicket(
-                List.of(
+                Set.of(
                         new LottoBall(1),
                         new LottoBall(2),
                         new LottoBall(3),

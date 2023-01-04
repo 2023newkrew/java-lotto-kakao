@@ -4,7 +4,7 @@ import lotto.domain.*;
 import lotto.view.LottoView;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -40,10 +40,10 @@ public class Main {
     private static LottoTicket getWinnerTicket() {
         try {
             String winnerTicketInput = lottoView.getWinnerTicket();
-            List<LottoBall> lottoBalls = Arrays.stream(winnerTicketInput.split(","))
+            Set<LottoBall> lottoBalls = Arrays.stream(winnerTicketInput.split(","))
                     .map(number -> Integer.parseInt(number.trim()))
                     .map(number -> new LottoBall(number))
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toSet());
             return new LottoTicket(lottoBalls);
         } catch (IllegalArgumentException e) {
             lottoView.printErrorMessage(e.getMessage());

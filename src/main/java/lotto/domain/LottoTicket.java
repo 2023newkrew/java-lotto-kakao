@@ -1,27 +1,21 @@
 package lotto.domain;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class LottoTicket {
 
     private static final int LOTTO_TICKET_BALL_COUNT = 6;
+    private final Set<LottoBall> lottoBalls;
 
-    private final List<LottoBall> lottoBalls;
-
-    public LottoTicket(List<LottoBall> lottoBalls) {
+    public LottoTicket(Set<LottoBall> lottoBalls) {
         validateLottoBalls(lottoBalls);
-        this.lottoBalls = lottoBalls;
+        this.lottoBalls = new HashSet<>(lottoBalls);
     }
 
-    private void validateLottoBalls(List<LottoBall> lottoBalls) {
+    private void validateLottoBalls(Set<LottoBall> lottoBalls) {
         if (lottoBalls.size() != LOTTO_TICKET_BALL_COUNT) {
-            throw new IllegalArgumentException("로또 티켓 한 장은 6개의 로또볼이 필요합니다.");
-        }
-        Set<LottoBall> duplicateCheck = new HashSet<>(lottoBalls);
-        if (duplicateCheck.size() != LOTTO_TICKET_BALL_COUNT) {
-            throw new IllegalArgumentException("로또 티켓에 중복되는 로또볼이 있습니다.");
+            throw new IllegalArgumentException("로또 티켓 한 장은 6개의 중복 없는 로또볼이 필요합니다.");
         }
     }
 
@@ -35,7 +29,7 @@ public class LottoTicket {
                 .count();
     }
 
-    public List<LottoBall> getLottoBalls() {
+    public Set<LottoBall> getLottoBalls() {
         return lottoBalls;
     }
 }
