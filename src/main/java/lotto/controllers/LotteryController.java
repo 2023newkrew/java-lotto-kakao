@@ -4,7 +4,7 @@ import static lotto.common.LotteryConfiguration.LOTTERY_PRICE;
 
 import java.util.List;
 import lotto.common.LotteryGenerator;
-import lotto.models.Goal;
+import lotto.models.WinningLottery;
 import lotto.models.Lottery;
 import lotto.models.LotteryStatistics;
 import lotto.views.Console;
@@ -24,8 +24,8 @@ public class LotteryController {
         Integer budget = getBudget();
         Integer numberOfLotteries = parseNumberOfLotteries(budget);
         List<Lottery> lotteries = createLotteryList(numberOfLotteries);
-        Goal goal = getGoal();
-        showStatistics(goal, lotteries, budget);
+        WinningLottery winningLottery = getGoal();
+        showStatistics(winningLottery, lotteries, budget);
     }
 
     private Integer getBudget() {
@@ -49,14 +49,14 @@ public class LotteryController {
         return lotteries;
     }
 
-    private Goal getGoal() {
+    private WinningLottery getGoal() {
         return outputView.requestUntilSuccess(this::getGoalLogic);
     }
 
-    private Goal getGoalLogic() {
+    private WinningLottery getGoalLogic() {
         List<Integer> goalNumbers = getGoalNumbers();
         Integer bonusBall = getBonusBall();
-        return new Goal(goalNumbers, bonusBall);
+        return new WinningLottery(goalNumbers, bonusBall);
     }
 
     private List<Integer> getGoalNumbers() {
@@ -77,8 +77,8 @@ public class LotteryController {
         return inputView.getInteger();
     }
 
-    private void showStatistics(Goal goal, List<Lottery> lotteries, Integer budget) {
-        LotteryStatistics statistics = new LotteryStatistics(goal, lotteries, budget);
+    private void showStatistics(WinningLottery winningLottery, List<Lottery> lotteries, Integer budget) {
+        LotteryStatistics statistics = new LotteryStatistics(winningLottery, lotteries, budget);
         outputView.printStatistics(statistics);
     }
 }

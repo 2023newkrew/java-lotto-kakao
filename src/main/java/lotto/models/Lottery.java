@@ -1,6 +1,6 @@
 package lotto.models;
 
-import static lotto.common.LotteryConfiguration.*;
+import static lotto.common.LotteryConfiguration.LOTTERY_COUNT;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,29 +9,35 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lottery {
-    private final List<Integer> numbers;
+    private final List<LotteryNumber> numbers;
 
     public Lottery(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers.stream().sorted().collect(Collectors.toList());
+        this.numbers = numbers.stream()
+                .sorted()
+                .map(LotteryNumber::from)
+                .collect(Collectors.toList());
     }
 
-    public List<Integer> getNumbers() {
+    public List<LotteryNumber> getNumbers() {
         return new ArrayList<>(numbers);
+    }
+
+    public boolean contains(LotteryNumber number) {
+        return numbers.contains(number);
+    }
+
+    public Integer compare(Lottery lottery) {
+        return (int) numbers.stream().filter(lottery::contains).count();
+    }
+
+    public String getNumbersString() {
+        return numbers.toString();
     }
 
     private void validateNumbers(List<Integer> numbers) {
         validateLotteryCount(numbers);
-        for (Integer number : numbers) {
-            validateLotteryNumberRange(number);
-        }
         validateLotteryNumberIsNotDuplicated(numbers);
-    }
-
-    private void validateLotteryNumberRange(Integer number) {
-        if (number < MIN_VALUE || number > MAX_VALUE) {
-            throw new RuntimeException("로또는 " + MIN_VALUE + "부터" + MAX_VALUE + "사이의 수 이어야 합니다.");
-        }
     }
 
     private void validateLotteryCount(List<Integer> numbers) {

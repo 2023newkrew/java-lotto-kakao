@@ -25,12 +25,12 @@ class LotteryStatisticsTest {
                     .boxed()
                     .collect(Collectors.toList())));
         }
-        Goal goal = new Goal(IntStream
+        WinningLottery winningLottery = new WinningLottery(IntStream
                 .rangeClosed(2, LOTTERY_COUNT + 1)
                 .boxed()
                 .collect(Collectors.toList()),
                 1);
-        LotteryStatistics statistics = new LotteryStatistics(goal, lotteries, budget);
+        LotteryStatistics statistics = new LotteryStatistics(winningLottery, lotteries, budget);
         for (Rank rank : Rank.values()) {
             if (rank == Rank.NONE) {
                 assertThat(statistics.getCountOf(rank)).isEqualTo(5);

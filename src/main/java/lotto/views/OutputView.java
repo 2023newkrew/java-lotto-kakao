@@ -25,7 +25,7 @@ public class OutputView {
     public void printLotteries(List<Lottery> lotteries) {
         for (Lottery lottery :
                 lotteries) {
-            console.printOutput(lottery.getNumbers().toString());
+            console.printOutput(lottery.getNumbersString());
         }
     }
 

@@ -11,8 +11,8 @@ public class LotteryStatistics {
 
     private final Double earningsRate;
 
-    public LotteryStatistics(Goal goal, List<Lottery> lotteries, Integer budget) {
-        rankCounts = collectRankCounts(goal, lotteries);
+    public LotteryStatistics(WinningLottery winningLottery, List<Lottery> lotteries, Integer budget) {
+        rankCounts = collectRankCounts(winningLottery, lotteries);
         earningsRate = calculateEarningsRate(budget);
     }
 
@@ -24,10 +24,10 @@ public class LotteryStatistics {
         return Objects.nonNull(rankCounts.get(rank)) ? rankCounts.get(rank) : 0;
     }
 
-    private Map<Rank, Integer> collectRankCounts(Goal goal, List<Lottery> lotteries) {
+    private Map<Rank, Integer> collectRankCounts(WinningLottery winningLottery, List<Lottery> lotteries) {
         Map<Rank, Integer> rankCounts = initializeRankCounts();
         lotteries.forEach((lottery) -> {
-            Rank currentKey = goal.compareLottery(lottery);
+            Rank currentKey = winningLottery.compareLottery(lottery);
             rankCounts.put(currentKey, rankCounts.get(currentKey) + 1);
         });
         return rankCounts;

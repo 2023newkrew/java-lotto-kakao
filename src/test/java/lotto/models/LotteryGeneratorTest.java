@@ -1,6 +1,5 @@
 package lotto.models;
 
-import static lotto.common.LotteryConfiguration.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -15,12 +14,9 @@ class LotteryGeneratorTest {
     @Test
     @DisplayName("자동으로 로또를 생성할 수 있다.")
     public void testCreateLottery() {
-        List<Integer> lottery = LotteryGenerator.createLottery().getNumbers();
-        assertThat(lottery).hasSize(6);
-        assertThat(lottery).isSorted();
-        for (Integer number : lottery) {
-            assertThat(number).isGreaterThanOrEqualTo(1).isLessThanOrEqualTo(45);
-        }
+        Lottery lottery = LotteryGenerator.createLottery();
+        assertThat(lottery.getNumbers()).hasSize(6);
+        assertThat(lottery.getNumbers()).isSorted();
     }
 
     @ParameterizedTest
@@ -29,6 +25,5 @@ class LotteryGeneratorTest {
     public void testCreateLotteries(Integer input) {
         List<Lottery> lotteries = LotteryGenerator.createLotteries(input);
         assertThat(lotteries).hasSize(input);
-        lotteries.forEach((lottery -> assertThat(lottery.getNumbers()).hasSize(LOTTERY_COUNT)));
     }
 }

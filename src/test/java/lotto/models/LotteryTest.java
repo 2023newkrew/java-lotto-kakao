@@ -19,7 +19,14 @@ class LotteryTest {
         @DisplayName("로또를 생성할 수 있다.")
         public void testCreateLottery() {
             Lottery lottery = new Lottery(Arrays.asList(4, 2, 3, 1, 5, 6));
-            assertThat(lottery.getNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+            assertThat(lottery.getNumbers()).containsExactly(
+                    LotteryNumber.from(1),
+                    LotteryNumber.from(2),
+                    LotteryNumber.from(3),
+                    LotteryNumber.from(4),
+                    LotteryNumber.from(5),
+                    LotteryNumber.from(6)
+            );
         }
     }
 
