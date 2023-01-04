@@ -2,6 +2,7 @@ package utils;
 
 import domain.LottoNumber;
 import domain.LottoNumbers;
+import domain.Payment;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,8 +18,8 @@ public class LottoGenerator {
             .collect(Collectors.toList());
 
 
-    public static List<LottoNumbers> generateLotto(int payment) {
-        return IntStream.range(0, payment / LOTTO_PRICE)
+    public static List<LottoNumbers> generateLotto(Payment payment) {
+        return IntStream.range(0, LottoCalculator.calculateNumberOfLotto(payment))
                 .mapToObj(i -> generate())
                 .collect(Collectors.toList());
     }

@@ -1,40 +1,31 @@
 package controller;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.LottoNumbers;
-import domain.Rank;
+import domain.*;
 import view.InputView;
 import view.OutputView;
 import view.WinningStatistics;
-import utils.YieldCalculator;
+import utils.LottoCalculator;
 import utils.LottoGenerator;
-import utils.InputValidator;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static constant.LottoSetting.LOTTO_PRICE;
-
 public class LottoController {
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
     private InputView inputView;
     private OutputView outputView;
-    private InputValidator inputValidator;
 
     public LottoController() {
         inputView = new InputView();
         outputView = new OutputView();
-        inputValidator = new InputValidator();
     }
 
     public void run() {
-        int payment = Integer.parseInt(inputView.getUserInputPayment());
-        inputValidator.validatePayment(payment);
-        outputView.printNumberOfLotto(payment / LOTTO_PRICE);
+        Payment payment = new Payment(Integer.parseInt(inputView.getUserInputPayment()));
+        outputView.printNumberOfLotto(LottoCalculator.calculateNumberOfLotto(payment));
 
         List<LottoNumbers> lottoNumbersList = LottoGenerator.generateLotto(payment);
         String purchasedLotto = lottoNumbersList.stream()
@@ -45,7 +36,7 @@ public class LottoController {
         execute(payment, lottoNumbersList);
     }
 
-    public void execute(int payment, List<LottoNumbers> lottoNumbersList) {
+    public void execute(Payment payment, List<LottoNumbers> lottoNumbersList) {
         LottoNumbers winLottoNumbers = new LottoNumbers(Arrays.stream(inputView.getUserInputLottoNumbers().split(LOTTO_NUMBER_DELIMITER))
                 .map(number -> new LottoNumber(Integer.parseInt(number)))
                 .collect(Collectors.toList()));
@@ -55,7 +46,7 @@ public class LottoController {
         Map<Rank, Integer> rankMap = lotto.rankEachLotto(winLottoNumbers, bonusBall);
 
         outputView.printStatistics(new WinningStatistics(rankMap).toString());
-        outputView.printYield(YieldCalculator.calculate(payment, rankMap));
+        outputView.printYield(LottoCalculator.calculateYield(payment, rankMap));
     }
 
 }

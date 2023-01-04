@@ -1,6 +1,7 @@
 package utils;
 
 import domain.LottoNumbers;
+import domain.Payment;
 import org.junit.jupiter.api.Test;
 import utils.LottoGenerator;
 
@@ -15,13 +16,13 @@ public class LottoGeneratorTest {
     @Test
     void generate() {
         // given
-        int payment = 14000;
+        Payment payment = new Payment(14000);
 
         // when
         List<LottoNumbers> lottoNumbers = LottoGenerator.generateLotto(payment);
 
         // then
-        IntStream.range(0, payment / LOTTO_PRICE)
+        IntStream.range(0, LottoCalculator.calculateNumberOfLotto(payment))
                 .forEach(idx -> assertThat(lottoNumbers.get(idx).hasSize(LOTTO_SIZE)).isTrue());
     }
 }
