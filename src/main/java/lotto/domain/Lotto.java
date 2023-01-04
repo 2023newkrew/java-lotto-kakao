@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Lotto {
@@ -16,6 +15,13 @@ public class Lotto {
 
     public Lotto(LottoNumbers lottoNumbers){
         lotto = lottoNumbers;
+    }
+
+    public Lotto(List<Integer> numbers){
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for(int number:numbers)
+            lottoNumbers.add(new LottoNumber(number));
+        lotto = new LottoNumbers(lottoNumbers);
     }
 
     public int compare(Lotto other){
