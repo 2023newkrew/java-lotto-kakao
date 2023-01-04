@@ -1,6 +1,7 @@
 package javalotto.view;
 
 import javalotto.domain.Lotto;
+import javalotto.domain.LottoCount;
 import javalotto.domain.PurchaseAmount;
 import javalotto.domain.WinningLotto;
 
@@ -31,6 +32,13 @@ public class InputView {
         int bonusNumber = getBonusNumberInput();
 
         return WinningLotto.of(Lotto.from(winningNumbers), bonusNumber);
+    }
+
+    public LottoCount getManualPurchaseQuantityInput() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        int purchaseQuantity = Integer.parseInt(scanner.nextLine());
+        return LottoCount.withCount(purchaseQuantity);
     }
 
     private List<Integer> getWinningNumbersInput() {
