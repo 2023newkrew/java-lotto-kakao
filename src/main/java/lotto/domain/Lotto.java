@@ -16,21 +16,25 @@ public class Lotto {
             .collect(Collectors.toList());
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
+    private Lotto(List<Integer> numbers) {
         validateLotto(numbers);
         this.lottoNumbers = numbers.stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 
-    public static Lotto autoGenerateLotto() {
+    public static Lotto of(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
+    public static Lotto autoGenerate() {
         Collections.shuffle(numberPool);
         return new Lotto(numberPool.subList(0, 6));
     }
 
-    public static List<Lotto> autoGenerateLottos(int amount) {
+    public static List<Lotto> autoGenerateByAmounts(int amount) {
         List<Lotto> lottos = new ArrayList<>();
-        IntStream.range(0, amount).forEach((i) -> lottos.add(autoGenerateLotto()));
+        IntStream.range(0, amount).forEach((i) -> lottos.add(autoGenerate()));
         return lottos;
     }
 

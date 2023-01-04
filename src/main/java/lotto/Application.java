@@ -12,7 +12,7 @@ import static lotto.domain.Lotto.LOTTO_PRICE;
 public class Application {
 
     public static void main(String[] args) {
-        List<Lotto> lottos = Lotto.autoGenerateLottos(LottoView.inputInit() / LOTTO_PRICE);
+        List<Lotto> lottos = Lotto.autoGenerateByAmounts(LottoView.inputInit() / LOTTO_PRICE);
         LottoView.printLottoList(lottos);
         WinningLotto winningLotto = LottoView.inputWinningLotto();
         LottoGame lottoGame = new LottoGame(lottos, winningLotto);
