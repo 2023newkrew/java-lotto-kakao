@@ -18,7 +18,7 @@ public class GameResultDto {
         return new HashMap<>(lottoResultCounter);
     }
 
-    public float getRate() {
+    public float getEarningRate() {
         return rate;
     }
 }

@@ -70,7 +70,7 @@ public class LottoView {
                         lottoGradeEnum.price,
                         lottoResultCounter.get(lottoGradeEnum)
                 ));
-        System.out.printf("총 수익률은 %.2f 입니다.\n", gameResultDto.getRate());
+        System.out.printf("총 수익률은 %.2f 입니다.\n", gameResultDto.getEarningRate());
     }
 
     public static int inputManualLottoAmount() {

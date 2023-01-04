@@ -13,7 +13,7 @@ public class WinningLotto {
 
     public WinningLotto(List<Integer> numbers, int bonusNumber) {
         validateDuplicated(numbers, bonusNumber);
-        this.lotto = Lotto.manualGenerate(numbers);
+        this.lotto = new Lotto(numbers);
         this.bonusNumber = LottoNumber.from(bonusNumber);
     }
 
