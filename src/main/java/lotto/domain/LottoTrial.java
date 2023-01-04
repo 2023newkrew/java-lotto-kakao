@@ -1,7 +1,8 @@
-package lotto;
+package lotto.domain;
 
-import lotto.exception.DuplicatedBallNumber;
-import lotto.exception.InvalidLottoTrial;
+import lotto.domain.exception.DuplicatedBallNumber;
+import lotto.domain.exception.InvalidLottoTrial;
+import static lotto.domain.LottoConstants.*;
 
 import java.util.*;
 
@@ -13,10 +14,10 @@ public abstract class LottoTrial {
     @Override
     public String toString() {
         String result = "[";
-        for (int i=0;i<LottoConstants.BALLCOUNT_LIMIT-1;i++){
+        for (int i=0;i<BALLCOUNT_LIMIT-1;i++){
             result += ballNumbers.get(i) + ", ";
         }
-        result += ballNumbers.get(LottoConstants.BALLCOUNT_LIMIT-1) + "]";
+        result += ballNumbers.get(BALLCOUNT_LIMIT-1) + "]";
         return result;
     }
 
@@ -25,17 +26,15 @@ public abstract class LottoTrial {
         validateDuplication(lottoTrial);
     }
     private void validateLottoCount(LottoTrial lottoTrial){
-        if (lottoTrial.getBallNumbers().size()!=LottoConstants.BALLCOUNT_LIMIT){
+        if (lottoTrial.getBallNumbers().size()!=BALLCOUNT_LIMIT){
             throw new InvalidLottoTrial();
         }
     }
 
     private void validateDuplication(LottoTrial lottoTrial){
         Set<LottoBallNumber> lottoSet = new HashSet<>();
-        for (LottoBallNumber bn : lottoTrial.ballNumbers){
-            lottoSet.add(bn);
-        }
-        if (lottoSet.size()!=LottoConstants.BALLCOUNT_LIMIT) {
+        lottoSet.addAll(lottoTrial.ballNumbers);
+        if (lottoSet.size()!=BALLCOUNT_LIMIT) {
             throw new DuplicatedBallNumber();
         }
     }

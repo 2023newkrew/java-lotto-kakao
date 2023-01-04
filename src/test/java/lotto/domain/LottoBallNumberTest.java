@@ -1,7 +1,6 @@
-package lotto;
+package lotto.domain;
 
-import lotto.LottoBallNumber;
-import lotto.exception.InvalidLottoBallNumber;
+import lotto.domain.exception.InvalidLottoBallNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

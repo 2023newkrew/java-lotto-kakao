@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
-import lotto.exception.DuplicatedBallNumber;
+import lotto.domain.exception.DuplicatedBallNumber;
 
 public class WinNumber {
-    private LottoTrial winNumber;
-    private LottoBallNumber bonusNumber;
+    private final LottoTrial winNumber;
+    private final LottoBallNumber bonusNumber;
 
     public WinNumber(LottoTrial winNumber, LottoBallNumber bonusNumber){
         this.winNumber = winNumber;

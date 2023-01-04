@@ -1,6 +1,6 @@
-package lotto;
+package lotto.domain;
 
-import lotto.exception.InvalidLottoCountValue;
+import lotto.domain.exception.InvalidLottoCountValue;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

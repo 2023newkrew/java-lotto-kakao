@@ -1,8 +1,7 @@
-package lotto;
+package lotto.domain;
 
-import lotto.exception.InvalidCashValue;
+import lotto.domain.exception.InvalidCashValue;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 public class Cash implements Comparable {
@@ -56,6 +55,6 @@ public class Cash implements Comparable {
             return cash > ((Long)o) ? 1 : (cash == (Long)o ? 0 : -1);
         }
         long otherCash = ((Cash)o).cash;
-        return cash > otherCash ? 1 : (cash == otherCash ? 0 : -1);
+        return Long.compare(cash, otherCash);
     }
 }

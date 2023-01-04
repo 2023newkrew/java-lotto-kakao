@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public final class LottoConstants {
     public final static long LOTTO_PRICE = 1000L;

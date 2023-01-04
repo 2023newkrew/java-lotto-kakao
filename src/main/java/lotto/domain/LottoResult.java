@@ -1,15 +1,15 @@
-package lotto;
+package lotto.domain;
 
-import lotto.exception.InvalidLottoResult;
-
+import lotto.domain.exception.InvalidLottoResult;
+import static lotto.domain.LottoConstants.*;
 import java.util.Objects;
 
 public class LottoResult {
     private final int matchCount;
     private final boolean matchBonus;
     public LottoResult(int matchCount, boolean matchBonus){
-        if (matchCount < 0 || matchCount > LottoConstants.BALLCOUNT_LIMIT ||
-                (matchCount==LottoConstants.BALLCOUNT_LIMIT && matchBonus)){
+        if (matchCount < 0 || matchCount > BALLCOUNT_LIMIT ||
+                (matchCount==BALLCOUNT_LIMIT && matchBonus)){
             throw new InvalidLottoResult();
         }
         this.matchBonus = matchBonus;

@@ -1,7 +1,8 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import static lotto.domain.LottoConstants.*;
 
 public class TotalResult {
     private final Map<LottoResult, LottoCount> lottoResultCount = new HashMap<>();
@@ -9,11 +10,11 @@ public class TotalResult {
     private int trial = 0;
 
     public TotalResult(){
-        for (int i=0;i<LottoConstants.BALLCOUNT_LIMIT;i++){
+        for (int i=0;i<BALLCOUNT_LIMIT;i++){
             lottoResultCount.put(new LottoResult(i, false), new LottoCount(0));
             lottoResultCount.put(new LottoResult(i, true), new LottoCount(0));
         }
-        lottoResultCount.put(new LottoResult(LottoConstants.BALLCOUNT_LIMIT, false), new LottoCount(0));
+        lottoResultCount.put(new LottoResult(BALLCOUNT_LIMIT, false), new LottoCount(0));
     }
     public void add(LottoResult lottoResult) {
         trial++;
@@ -39,7 +40,7 @@ public class TotalResult {
         if (trial == 0){
             throw new ArithmeticException();
         }
-        return (double)(totalPrize.getCash()) / (trial*LottoConstants.LOTTO_PRICE);
+        return (double)(totalPrize.getCash()) / (trial*LOTTO_PRICE);
     }
 
 
@@ -53,7 +54,7 @@ public class TotalResult {
     private String statisticsString(){
         String[] strings = new String[WinningCondition.values().length];
         for (WinningCondition con : WinningCondition.values()){
-            strings[con.getOrder()] = con.toString() + "- " +
+            strings[con.getOrder()] = con + "- " +
                     lottoResultCount.get(con.getLottoResult());
         }
         return String.join("\n", strings)+"\n";

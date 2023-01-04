@@ -1,15 +1,13 @@
-package lotto;
+package lotto.domain;
 
-import lotto.exception.DuplicatedBallNumber;
+import lotto.domain.exception.DuplicatedBallNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.text.DefaultTextUI;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class WinNumberTest {
     @Test

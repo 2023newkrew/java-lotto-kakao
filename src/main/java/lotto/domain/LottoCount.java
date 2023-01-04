@@ -1,7 +1,7 @@
-package lotto;
+package lotto.domain;
 
-import lotto.exception.InvalidLottoCountValue;
-
+import lotto.domain.exception.InvalidLottoCountValue;
+import static lotto.domain.LottoConstants.*;
 import java.util.Objects;
 
 public class LottoCount {
@@ -14,7 +14,7 @@ public class LottoCount {
         this.count = number;
     }
     public LottoCount(Cash cash){
-        this((int)(cash.getCash() / LottoConstants.LOTTO_PRICE));
+        this((int)(cash.getCash() / LOTTO_PRICE));
     }
 
     public int getCount() {

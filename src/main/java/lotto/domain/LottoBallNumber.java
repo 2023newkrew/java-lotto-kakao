@@ -1,16 +1,16 @@
-package lotto;
+package lotto.domain;
 
-import lotto.exception.InvalidLottoBallNumber;
+import lotto.domain.exception.InvalidLottoBallNumber;
 
 import java.util.Objects;
-import java.util.function.LongToDoubleFunction;
+import static lotto.domain.LottoConstants.*;
 
 public class LottoBallNumber implements Comparable{
     private final int num;
 
     public LottoBallNumber(int num) {
-        if (num < LottoConstants.BALLNUMBER_MIN_VALUE ||
-                num> LottoConstants.BALLNUMBER_MAX_VALUE){
+        if (num < BALLNUMBER_MIN_VALUE ||
+                num> BALLNUMBER_MAX_VALUE){
             throw new InvalidLottoBallNumber();
         }
         this.num = num;
