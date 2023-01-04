@@ -6,8 +6,8 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static int getPaidPrice() {
-        return Integer.parseInt(scanner.nextLine());
+    public static String getPaidPrice() {
+        return scanner.nextLine();
     }
 
     public static String getWinningLottoNumbers() {
