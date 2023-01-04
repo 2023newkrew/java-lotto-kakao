@@ -15,7 +15,7 @@ public class PlayerLottoResultTest {
 
         //then
         double profitRate = playerLottoResult.calculateProfitRate();
-        assertThat(profitRate).isEqualTo(0.0);
+        assertThat(profitRate).isEqualTo(-100.00);
     }
 
     @Test
@@ -29,6 +29,6 @@ public class PlayerLottoResultTest {
 
         // then
         double profitRate = playerLottoResult.calculateProfitRate();
-        assertThat(profitRate).isEqualTo(5.0);
+        assertThat(profitRate).isEqualTo(400.00);
     }
 }

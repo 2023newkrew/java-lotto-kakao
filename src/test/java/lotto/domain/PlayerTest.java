@@ -24,7 +24,7 @@ public class PlayerTest {
         player.buyLottoTickets(seller);
         PlayerLottoResult playerLottoResult = player.findResult(lottoTicket -> LottoResult.THREE_MATCH);
         //then
-        assertThat(playerLottoResult.calculateProfitRate()).isEqualTo(5.0);
+        assertThat(playerLottoResult.calculateProfitRate()).isEqualTo(400.00);
     }
 
 }
