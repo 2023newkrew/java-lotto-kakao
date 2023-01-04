@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -55,11 +56,10 @@ public class LottoView {
     }
 
     public void printStatistics(Statistics stat) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoRank.FIFTH.COUNT, LottoRank.FIFTH.PRIZE, stat.getByRank(LottoRank.FIFTH));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoRank.FOURTH.COUNT, LottoRank.FOURTH.PRIZE, stat.getByRank(LottoRank.FOURTH));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoRank.THIRD.COUNT, LottoRank.THIRD.PRIZE, stat.getByRank(LottoRank.THIRD));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoRank.SECOND.COUNT, LottoRank.SECOND.PRIZE, stat.getByRank(LottoRank.SECOND));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoRank.FIRST.COUNT, LottoRank.FIRST.PRIZE, stat.getByRank(LottoRank.FIRST));
+        List<LottoRank> rankList = List.of(LottoRank.FIFTH, LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
+        for (LottoRank rank : rankList) {
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.COUNT, rank.PRIZE, stat.getByRank(rank));
+        }
     }
 
     public void printTotalProfitRate(Statistics stat) {
