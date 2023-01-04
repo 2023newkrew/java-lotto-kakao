@@ -4,7 +4,7 @@ import static lotto.constant.MessageConstant.INVALID_MATCH_COUNT_RANGE;
 
 import java.util.Arrays;
 
-public enum LottoGradeEnum {
+public enum LottoGrade {
     FIRST(6, false, 2_000_000_000),
     SECOND(5, true, 300_000_000),
     THIRD(5, false, 1_500_000),
@@ -17,15 +17,15 @@ public enum LottoGradeEnum {
     public final boolean isBonusMatches;
     public final int price;
 
-    LottoGradeEnum(int matchCount, boolean isBonusMatches, int price) {
+    LottoGrade(int matchCount, boolean isBonusMatches, int price) {
         this.matchCount = matchCount;
         this.isBonusMatches = isBonusMatches;
         this.price = price;
     }
 
-    public static LottoGradeEnum getGrade(int matchCount, boolean isBonusMatches) {
+    public static LottoGrade getGrade(int matchCount, boolean isBonusMatches) {
         validateMatchCount(matchCount);
-        return Arrays.stream(LottoGradeEnum.values())
+        return Arrays.stream(LottoGrade.values())
                 .filter((lottoGrade) -> lottoGrade.matchCount == matchCount && lottoGrade.isBonusMatches == isBonusMatches)
                 .findFirst()
                 .orElse(NONE);

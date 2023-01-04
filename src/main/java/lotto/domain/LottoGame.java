@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 
-import lotto.constant.LottoGradeEnum;
+import lotto.constant.LottoGrade;
 import lotto.dto.GameResultDto;
 
 import static lotto.constant.MessageConstant.INVALID_PRICE_AMOUNT;
@@ -27,7 +27,7 @@ public class LottoGame {
     }
 
     public GameResultDto getResult() {
-        Map<LottoGradeEnum, Integer> lottoResultCounter = new HashMap<>();
+        Map<LottoGrade, Integer> lottoResultCounter = new HashMap<>();
         initiateCounter(lottoResultCounter);
 
         lottos.forEach(lotto -> lottoResultCounter.put(
@@ -38,12 +38,12 @@ public class LottoGame {
         return new GameResultDto(lottoResultCounter, getEarningRate(lottoResultCounter));
     }
 
-    private void initiateCounter(Map<LottoGradeEnum, Integer> counter) {
-        Arrays.stream(LottoGradeEnum.values())
+    private void initiateCounter(Map<LottoGrade, Integer> counter) {
+        Arrays.stream(LottoGrade.values())
                 .forEach(lottoGradeEnum -> counter.put(lottoGradeEnum, 0));
     }
 
-    private float getEarningRate(Map<LottoGradeEnum, Integer> lottoResultCounter) {
+    private float getEarningRate(Map<LottoGrade, Integer> lottoResultCounter) {
         long totalPrice = lottoResultCounter.entrySet().stream()
                 .mapToInt((entry) -> entry.getKey().price * entry.getValue())
                 .sum();

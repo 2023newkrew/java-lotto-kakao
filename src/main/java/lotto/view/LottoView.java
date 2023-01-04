@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import lotto.constant.LottoGradeEnum;
+import lotto.constant.LottoGrade;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import lotto.dto.GameResultDto;
@@ -52,11 +52,11 @@ public class LottoView {
 
     static public void printResult(GameResultDto gameResultDto) {
         final String bonusMatches = ", 보너스 볼 일치";
-        Map<LottoGradeEnum, Integer> lottoResultCounter = gameResultDto.getLottoResultCounter();
+        Map<LottoGrade, Integer> lottoResultCounter = gameResultDto.getLottoResultCounter();
 
         System.out.println("당첨 통계");
         System.out.println("-----------");
-        lottoResultCounter.remove(LottoGradeEnum.NONE);
+        lottoResultCounter.remove(LottoGrade.NONE);
         lottoResultCounter.keySet().stream()
                 .sorted(Comparator.comparingInt(o -> o.price))
                 .forEach((lottoGradeEnum) -> System.out.printf(

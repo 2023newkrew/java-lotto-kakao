@@ -5,7 +5,7 @@ import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
 import java.util.HashSet;
 import java.util.List;
 
-import lotto.constant.LottoGradeEnum;
+import lotto.constant.LottoGrade;
 
 public class WinningLotto {
     private final Lotto lotto;
@@ -31,11 +31,11 @@ public class WinningLotto {
         return bonusNumber;
     }
 
-    public LottoGradeEnum getGrade(Lotto lotto) {
+    public LottoGrade getGrade(Lotto lotto) {
         HashSet<LottoNumber> winningLottoNumberSet = new HashSet<>(this.lotto.getNumbers());
         int matchCount = (int) lotto.getNumbers().stream()
                 .filter(winningLottoNumberSet::contains)
                 .count();
-        return LottoGradeEnum.getGrade(matchCount, winningLottoNumberSet.contains(bonusNumber));
+        return LottoGrade.getGrade(matchCount, winningLottoNumberSet.contains(bonusNumber));
     }
 }

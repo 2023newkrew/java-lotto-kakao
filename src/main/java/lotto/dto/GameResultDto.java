@@ -1,20 +1,20 @@
 package lotto.dto;
 
-import lotto.constant.LottoGradeEnum;
+import lotto.constant.LottoGrade;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class GameResultDto {
-    private final Map<LottoGradeEnum, Integer> lottoResultCounter;
+    private final Map<LottoGrade, Integer> lottoResultCounter;
     private final float rate;
 
-    public GameResultDto(Map<LottoGradeEnum, Integer> lottoResultCounter, float rate) {
+    public GameResultDto(Map<LottoGrade, Integer> lottoResultCounter, float rate) {
         this.lottoResultCounter = lottoResultCounter;
         this.rate = rate;
     }
 
-    public Map<LottoGradeEnum, Integer> getLottoResultCounter() {
+    public Map<LottoGrade, Integer> getLottoResultCounter() {
         return new HashMap<>(lottoResultCounter);
     }
 
