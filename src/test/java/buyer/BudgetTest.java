@@ -1,11 +1,9 @@
 package buyer;
 
+import lotto.Lottery;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatRuntimeException;
 
 public class BudgetTest {
     @DisplayName("Budget 생성자에서 음수를 받으면 예외를 발생한다")
@@ -15,21 +13,11 @@ public class BudgetTest {
 
     }
 
-    @DisplayName("Budget의 값을 number만큼 줄인다")
+    @DisplayName("Budget으로 구매할 수 있는 개수 반환한다")
     @Test
-    void decreaseBudget() {
-        Budget budget = new Budget(2000);
+    void getAbleLotteryCount() {
+        Budget budget = new Budget(12000);
 
-        budget.decreaseBudget(100);
-        assertThat(budget.getBudget()).isEqualTo(1900);
+        Assertions.assertThat(budget.getAbleLotteryCount(Lottery.PRICE)).isEqualTo(12000 / Lottery.PRICE);
     }
-
-    @DisplayName("Budget보다 큰 number을 줄일 때 예외를 발생한다")
-    @Test
-    void decreaseBudget_invalid() {
-        Budget budget = new Budget(2000);
-
-        assertThatRuntimeException().isThrownBy(() -> budget.decreaseBudget(3000));
-    }
-
 }

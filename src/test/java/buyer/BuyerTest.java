@@ -1,15 +1,25 @@
 package buyer;
 
+import lotto.Lottery;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class BuyerTest {
-    @DisplayName("Buyer의 budget으로 구매할 수 있는 Lottery 개수 반환")
-    @Test
-    void getAbleLotteryCount() {
-        Buyer buyer = new Buyer(12000);
+import java.util.List;
 
-        Assertions.assertThat(buyer.getAbleLotteryCount()).isEqualTo(12);
+public class BuyerTest {
+    @DisplayName("Buyer가 구매할 수 있는 양보다 많은 buy를 수행하면 예외 발생")
+    @Test
+    void buy() {
+        Assertions.assertThatIllegalStateException().isThrownBy(this::buyOverPlan);
     }
+
+    private void buyOverPlan() {
+        Buyer buyer = new Buyer(2000, 0);
+
+        buyer.buyLottery(new Lottery(List.of(1, 2, 3, 4, 5, 6)));
+        buyer.buyLottery(new Lottery(List.of(1, 2, 3, 4, 5, 6)));
+        buyer.buyLottery(new Lottery(List.of(1, 2, 3, 4, 5, 6)));
+    }
+
 }

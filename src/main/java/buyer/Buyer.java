@@ -9,28 +9,29 @@ import java.util.List;
 
 public class Buyer {
     private final Lotteries lotteries = new Lotteries();
-    private final Budget budget;
+    private final BuyingPlan buyingPlan;
 
-    public Buyer(int budget) {
-        this.budget = new Budget(budget);
-    }
-
-    public boolean hasMoreBudgetThan(int price) {
-        return budget.hasMoreThan(price);
+    public Buyer(int budget, int manualCount) {
+        this.buyingPlan = new BuyingPlan(budget, manualCount);
     }
 
     public void buyLottery(Lottery lottery) {
-        this.budget.decreaseBudget(Lottery.PRICE);
+        if (buyingPlan.getTotalCount() <= lotteries.getCount())
+            throw new IllegalStateException("구매 개수를 초과했습니다");
 
         lotteries.addLottery(lottery);
     }
 
-    public int getAbleLotteryCount() {
-        return budget.getBudget() / Lottery.PRICE;
+    public int getManualCount() {
+        return buyingPlan.getManualCount();
     }
 
-    public int getLotteriesCount() {
-        return lotteries.getCount();
+    public int getAutoCount() {
+        return buyingPlan.getAutoCount();
+    }
+
+    public int getTotalLotteryCount() {
+        return buyingPlan.getTotalCount();
     }
 
     public List<LotteryDTO> getLotteries() {
