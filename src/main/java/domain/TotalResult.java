@@ -18,20 +18,6 @@ public class TotalResult {
         this.totalResult.putAll(totalResult);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TotalResult that = (TotalResult) o;
-        return Arrays.stream(Result.values())
-                .allMatch(result -> this.totalResult.get(result) == that.totalResult.get(result));
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(totalResult);
-    }
-
     public void increaseValueOfResult(Result result) {
         Integer previousValue = this.getValueOfResult(result);
         totalResult.put(result, previousValue + 1);
@@ -67,6 +53,20 @@ public class TotalResult {
             return message + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
         return message + "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TotalResult that = (TotalResult) o;
+        return Arrays.stream(Result.values())
+                .allMatch(result -> this.totalResult.get(result) == that.totalResult.get(result));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(totalResult);
     }
 
 }
