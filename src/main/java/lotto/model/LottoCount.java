@@ -7,19 +7,15 @@ import java.util.Objects;
 public class LottoCount {
     private final int count;
 
+    public LottoCount(Cash cash) {
+        this((int)(cash.getCash() / LottoConstants.LOTTO_PRICE));
+    }
+
     public LottoCount(int number) {
         if (number<=0){
             throw new InvalidLottoNumberValue();
         }
         this.count = number;
-    }
-
-    public LottoCount(Cash cash) {
-        this.count = (int)(cash.getCash() / LottoConstants.LOTTO_PRICE);
-
-        if (this.count <= 0){
-            throw new InvalidLottoNumberValue();
-        }
     }
 
     public int getCount() {
