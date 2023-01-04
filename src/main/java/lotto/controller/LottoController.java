@@ -23,7 +23,7 @@ public class LottoController {
         lottoService.purchaseLotto(purchaseAmount);
         lottoOutputTemplate.printLottoTickets(lottoService.getLottoTickets());
 
-        String[] inputWinningNumbers = lottoInputTemplate.inputLottoWinningNumbers().split(",");
+        String inputWinningNumbers = lottoInputTemplate.inputLottoWinningNumbers();
         String inputBonusBall = lottoInputTemplate.inputBonusBall();
         LottoResult lottoResult = lottoService.getLottoResult(inputWinningNumbers, inputBonusBall);
         lottoOutputTemplate.printLottoResult(lottoResult);

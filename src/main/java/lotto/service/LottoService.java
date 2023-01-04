@@ -22,7 +22,7 @@ public class LottoService {
         return LottoRepository.getAllLottoTicket();
     }
 
-    public LottoResult getLottoResult(String[] inputWinningNumber, String inputBonusBall) {
+    public LottoResult getLottoResult(String inputWinningNumber, String inputBonusBall) {
         LottoTickets lottoTickets = LottoRepository.getAllLottoTicket();
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(inputWinningNumber, inputBonusBall);
 
