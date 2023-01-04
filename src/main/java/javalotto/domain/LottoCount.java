@@ -13,6 +13,10 @@ public class LottoCount {
         return new LottoCount(purchaseAmount.getPurchaseAmount() / unitPrice);
     }
 
+    public static LottoCount withCount(int count) {
+        return new LottoCount(count);
+    }
+
     public int getCount() {
         return this.count;
     }
