@@ -1,13 +1,26 @@
 package util.validator;
 
 import common.constant.Constants;
+import domain.WinningLotto;
+import exception.DuplicateNumberException;
 
-public class SingleNumberValidator {
+import java.util.List;
+
+public class LottoNumberValidator {
 
     public static void validate(String input) {
         validateNumberFormat(input);
         int number = Integer.parseInt(input);
         validateInRange(number);
+    }
+
+    public static void validate(WinningLotto winningLotto, String bonusInput) {
+        validate(bonusInput);
+        int bonusNumber = Integer.parseInt(bonusInput);
+        List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
+        if(winningLottoNumbers.contains(bonusNumber)){
+            throw new DuplicateNumberException("보너스 숫자가 당첨 번호 중 하나와 중복됩니다.");
+        }
     }
 
     protected static void validateNumberFormat(String input) {

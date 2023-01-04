@@ -13,7 +13,7 @@ public class WinningLottoValidator {
     public static void validate(String input) {
         String[] splitInput = input.split(Constants.DELIMITER);
         validateLength(splitInput);
-        Arrays.stream(splitInput).forEach(SingleNumberValidator::validate);
+        Arrays.stream(splitInput).forEach(LottoNumberValidator::validate);
         List<Integer> numbers = Arrays.stream(splitInput)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
