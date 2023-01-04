@@ -1,5 +1,7 @@
 package javalotto.domain;
 
+import javalotto.exception.lottocount.LottoCountNegativeException;
+
 import java.util.Objects;
 
 public class LottoCount {
@@ -10,11 +12,20 @@ public class LottoCount {
     }
 
     public static LottoCount of(PurchaseAmount purchaseAmount, int unitPrice) {
-        return new LottoCount(purchaseAmount.getPurchaseAmount() / unitPrice);
+        int count = purchaseAmount.getPurchaseAmount() / unitPrice;
+        validateLottoCount(count);
+        return new LottoCount(count);
     }
 
     public static LottoCount withCount(int count) {
+        validateLottoCount(count);
         return new LottoCount(count);
+    }
+
+    private static void validateLottoCount(int count) {
+        if (count < 0) {
+            throw new LottoCountNegativeException(count);
+        }
     }
 
     public int getCount() {
@@ -36,5 +47,10 @@ public class LottoCount {
     @Override
     public int hashCode() {
         return Objects.hash(count);
+    }
+
+    public LottoCount getRemainExceptFor(LottoCount other) {
+        int remainedLottoCount = this.count - other.count;
+        return LottoCount.withCount(remainedLottoCount);
     }
 }

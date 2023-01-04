@@ -1,6 +1,8 @@
 package javalotto.domain;
 
+import javalotto.exception.lottocount.LottoCountNegativeException;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -25,4 +27,11 @@ class LottoCountTest {
         );
     }
 
+    @Test
+    public void should_throwException_when_getRemainExceptForResultIsNegative() {
+        LottoCount lottoCount1 = LottoCount.withCount(10);
+        LottoCount lottoCount2 = LottoCount.withCount(20);
+        Assertions.assertThatThrownBy(() -> lottoCount1.getRemainExceptFor(lottoCount2))
+                .isInstanceOf(LottoCountNegativeException.class);
+    }
 }
