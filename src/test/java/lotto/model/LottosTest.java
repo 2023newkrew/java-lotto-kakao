@@ -1,7 +1,6 @@
 package lotto.model;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,11 +10,12 @@ import java.util.List;
 class LottosTest {
     int input;
     Lottos lottos;
+    private final LottosFactory lottosFactory = new LottosFactory();
 
     @BeforeEach
     void setUp() {
         input = 10;
-        lottos = new Lottos(input);
+        lottos = lottosFactory.makeLottosAuto(input);
     }
     @Test
     void checkSizeOfLottos() {

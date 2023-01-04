@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.model.Lottos;
+import lotto.model.LottosFactory;
 import lotto.model.enums.RankingType;
 import lotto.model.Winner;
 import lotto.view.InputView;
@@ -13,10 +14,11 @@ public class LottoController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
     private final Winner winner = new Winner();
+    private final LottosFactory lottosFactory = new LottosFactory();
     public void start(){
         int money = inputView.receiveMoneyUserInput();
         int numberOfLotto = money / 1000;
-        Lottos lottos = new Lottos(numberOfLotto);
+        Lottos lottos = lottosFactory.makeLottosAuto(numberOfLotto);
 
         outputView.printLottos(lottos);
 

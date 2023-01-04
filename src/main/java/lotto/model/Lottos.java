@@ -7,17 +7,12 @@ import java.util.List;
 
 public class Lottos {
 
-    List<Lotto> lottos = new ArrayList<>();
+    List<Lotto> lottos;
 
-    public Lottos(int input) {
-        addRandom(input);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    private void addRandom(int input) {
-        for (int i = 0; i < input; i++) {
-            lottos.add(new Lotto());
-        }
-    }
 
     public List<Lotto> getLottos() {
         return lottos;
