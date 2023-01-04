@@ -21,6 +21,9 @@ public class LottoValidator {
     }
 
     private static void validateLength(String[] inputs) {
+        if (inputs.length == 1) {
+            throw new IllegalArgumentException("구분자는 `, ` 입니다.");
+        }
         if (inputs.length != Lotto.LENGTH) {
             throw new IllegalLengthException("총 여섯 개의 숫자로 이루어져 있어야 합니다.");
         }
