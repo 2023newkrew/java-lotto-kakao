@@ -19,23 +19,29 @@ public class LottoGame {
         return lottos;
     }
 
-    public static WinningLotto getWinningLotto() {
-        OutputView.printWinningNumbersRequest();
-        return new WinningLotto(InputView.getWinningLottoNumbers());
-    }
+//    public static WinningLottoWithBonus getWinningLotto() {
+//        OutputView.printWinningNumbersRequest();
+//        return new WinningLottoWithBonus(InputView.getWinningLottoNumbers());
+//    }
 
-    public static LottoNumber getBonusNumber(WinningLotto winningLotto) {
-        OutputView.printBonusNumberRequest();
-        return new LottoNumber(winningLotto, InputView.getBonusNumber());
-    }
+//    public static LottoNumber getBonusNumber(WinningLottoWithBonus winningLottoWithBonus) {
+//        OutputView.printBonusNumberRequest();
+//        return new LottoNumber(winningLottoWithBonus, InputView.getBonusNumber());
+//    }
 
     public static void main(String[] args) {
         Money paidPrice = getPaidPrice();
         Lottos lottos = getLottos(paidPrice.getCount());
-        WinningLotto winningLotto = getWinningLotto();
-        LottoNumber bonusNumber = getBonusNumber(winningLotto);
 
-        TotalResult totalResult = lottos.getTotalResult(winningLotto, bonusNumber);
+        OutputView.printWinningNumbersRequest();
+        Lotto winningLotto = Lotto.getManualLotto(InputView.getWinningLottoNumbers());
+
+        OutputView.printBonusNumberRequest();
+        LottoNumber bonusNumber = new LottoNumber(winningLotto, InputView.getBonusNumber());
+
+        WinningLottoWithBonus winningLottoWithBonus = new WinningLottoWithBonus(winningLotto, bonusNumber);
+
+        TotalResult totalResult = lottos.getTotalResult(winningLottoWithBonus);
         List<String> totalResultMessage = totalResult.getTotalResultMessage();
         OutputView.printTotalResult(totalResultMessage);
         double profit = totalResult.getProfit(paidPrice.getMoney());

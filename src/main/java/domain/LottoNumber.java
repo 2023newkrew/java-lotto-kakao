@@ -16,7 +16,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public LottoNumber(WinningLotto winningLotto, String input) {
+    public LottoNumber(Lotto winningLotto, String input) {
         LottoNumberValidator.validate(winningLotto, input);
         this.number = Integer.parseInt(input);
     }

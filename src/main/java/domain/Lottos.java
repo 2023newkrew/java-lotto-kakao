@@ -24,16 +24,16 @@ public class Lottos {
         return lottos.size();
     }
 
-    public TotalResult getTotalResult(WinningLotto winningLotto, LottoNumber bonusNumber) {
+    public TotalResult getTotalResult(WinningLottoWithBonus winningLottoWithBonus) {
         TotalResult totalResult = new TotalResult();
         lottos.stream()
-                .forEach(lotto -> totalResult.increaseValueOfResult(lotto.getResult(winningLotto, bonusNumber)));
+                .forEach(lotto -> totalResult.increaseValueOfResult(lotto.getResult(winningLottoWithBonus)));
         return totalResult;
     }
 
     public List<String> getPurchasedLottosNumbers() {
         return lottos.stream()
-                .map(Lotto::getLottoNumbers)
+                .map(Lotto::lottoToString)
                 .collect(Collectors.toList());
     }
 }

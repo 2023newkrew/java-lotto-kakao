@@ -2,6 +2,7 @@ package domain;
 
 import common.constant.Constants;
 import common.state.Result;
+import util.validator.LottoValidator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,16 +35,18 @@ public class Lotto {
     }
 
     public static Lotto getManualLotto(String input) {
+        // 여기에 검증 단계 필요
+        LottoValidator.validate(input);
         List<LottoNumber> numbers = Arrays.stream(input.split(Constants.DELIMITER))
                 .map(inputString -> new LottoNumber(inputString))
                 .collect(Collectors.toList());
         return new Lotto(numbers);
     }
 
-    public Result getResult(WinningLotto winningLotto, LottoNumber bonusNumber) {
-        List<LottoNumber> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
+    public Result getResult(WinningLottoWithBonus winningLottoWithBonus) {
+        Lotto winningLottoNumbers = winningLottoWithBonus.getWinningLotto();
         int count = (int) numbers.stream()
-                .filter(winningLottoNumbers::contains)
+                .filter(winningLottoNumbers::containsNumber)
                 .count();
         return Result.of(count, isBonus(bonusNumber));
     }
@@ -52,7 +55,11 @@ public class Lotto {
         return numbers.contains(bonusNumber);
     }
 
-    public String getLottoNumbers() {
+    public boolean containsNumber(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
+    public String lottoToString() {
         return numbers.toString();
     }
 }

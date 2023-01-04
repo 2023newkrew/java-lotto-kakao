@@ -10,14 +10,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
 
     private static Lottos lottos;
-    private static WinningLotto winningLotto;
+    private static WinningLottoWithBonus winningLottoWithBonus;
     private static LottoNumber bonusNumber;
 
     @BeforeAll
     static void setUp() {
         lottos = new Lottos();
-        winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
-        bonusNumber = new LottoNumber(winningLotto, "7");
+        winningLottoWithBonus = new WinningLottoWithBonus("1, 2, 3, 4, 5, 6");
+        bonusNumber = new LottoNumber(winningLottoWithBonus, "7");
 
     }
 
@@ -49,7 +49,7 @@ public class LottosTest {
         lottos.add(matchFiveBonus);
         lottos.add(matchSix);
         Map<Result, Integer> expected = Map.of(Result.NONE, 3, Result.FIFTH_PLACE, 1, Result.SECOND_PLACE, 1, Result.FIRST_PLACE, 1);
-        assertThat(lottos.getTotalResult(winningLotto, bonusNumber)).isEqualTo(new TotalResult(expected));
+        assertThat(lottos.getTotalResult(winningLottoWithBonus, bonusNumber)).isEqualTo(new TotalResult(expected));
     }
 
 }

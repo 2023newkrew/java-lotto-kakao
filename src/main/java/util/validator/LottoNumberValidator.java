@@ -1,8 +1,9 @@
 package util.validator;
 
 import common.constant.Constants;
+import domain.Lotto;
 import domain.LottoNumber;
-import domain.WinningLotto;
+import domain.WinningLottoWithBonus;
 import exception.DuplicateNumberException;
 
 import java.util.List;
@@ -15,11 +16,10 @@ public class LottoNumberValidator {
         validateInRange(number);
     }
 
-    public static void validate(WinningLotto winningLotto, String bonusInput) {
+    public static void validate(Lotto winningLotto, String bonusInput) {
         validate(bonusInput);
         LottoNumber bonusNumber = new LottoNumber(bonusInput);
-        List<LottoNumber> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
-        if(winningLottoNumbers.contains(bonusNumber)){
+        if (winningLotto.containsNumber(bonusNumber)) {
             throw new DuplicateNumberException("보너스 숫자가 당첨 번호 중 하나와 중복됩니다.");
         }
     }

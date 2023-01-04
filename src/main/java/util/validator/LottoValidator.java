@@ -7,7 +7,7 @@ import exception.IllegalLengthException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class WinningLottoValidator {
+public class LottoValidator {
 
 
     public static void validate(String input) {
