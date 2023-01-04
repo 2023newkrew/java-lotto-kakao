@@ -3,10 +3,12 @@ package lotto;
 import java.util.Objects;
 
 public class LottoBall implements Comparable<LottoBall> {
+    private static final int MIN_BALL = 1;
+    private static final int MAX_BALL = 45;
     private final int ball;
 
     public LottoBall(int ball) {
-        if (ball <= 0 || ball > 45) {
+        if (ball < MIN_BALL || ball > MAX_BALL) {
             throw new IllegalArgumentException("ball 은 1 ~ 45 사이의 숫자여야 합니다.");
         }
         this.ball = ball;

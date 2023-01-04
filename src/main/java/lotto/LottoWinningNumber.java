@@ -4,20 +4,42 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoWinningNumber extends LottoTicket {
-    private static final Map<Integer, Ranking> RANKING_TABLE = Map.ofEntries(
-            Map.entry(60, Ranking.FIRST),
-            Map.entry(55, Ranking.SECOND),
-            Map.entry(50, Ranking.THIRD),
-            Map.entry(45, Ranking.FOURTH),
-            Map.entry(40, Ranking.FOURTH),
-            Map.entry(35, Ranking.FIFTH),
-            Map.entry(30, Ranking.FIFTH),
-            Map.entry(25, Ranking.OTHER),
-            Map.entry(20, Ranking.OTHER),
-            Map.entry(15, Ranking.OTHER),
-            Map.entry(10, Ranking.OTHER),
-            Map.entry(5, Ranking.OTHER),
-            Map.entry(0, Ranking.OTHER)
+    /**
+     * 등수에 대한 검색 방법에 대해 사전 정의한 테이블
+     * 각 키의 의미는 다음과 같다.
+     * 첫번째 키 {@link Integer} : 몇개의 공을 맞췄는지에 대한 기록
+     * 두번째 키 {@link Boolean} : 보너스 공을 맞췄는지에 대한 기록
+     */
+    private static final Map<Integer, Map<Boolean, Ranking>> RANKING_TABLE = Map.ofEntries(
+            Map.entry(6, Map.of(
+                    true, Ranking.FIRST,
+                    false, Ranking.OTHER
+            )),
+            Map.entry(5, Map.of(
+                    true, Ranking.SECOND,
+                    false, Ranking.THIRD
+            )),
+            Map.entry(4, Map.of(
+                    true, Ranking.FOURTH,
+                    false, Ranking.FOURTH
+            )),
+            Map.entry(3, Map.of(
+                    true, Ranking.FIFTH,
+                    false, Ranking.FIFTH
+            )),
+            Map.entry(2, Map.of(
+                    true, Ranking.OTHER,
+                    false, Ranking.OTHER
+            )),
+            Map.entry(1, Map.of(
+                    true, Ranking.OTHER,
+                    false, Ranking.OTHER
+            )),
+            Map.entry(0, Map.of(
+                    true, Ranking.OTHER,
+                    false, Ranking.OTHER
+            ))
+
     );
     protected final LottoBall bonusBall;
 
@@ -30,13 +52,16 @@ public class LottoWinningNumber extends LottoTicket {
     }
 
     public Ranking calculateRanking(LottoTicket lottoTicket) {
-        int count = lottoTicket.lottoBalls
+        // 몇개의 로또 공을 맞췄는지 집계
+        int count = (int) lottoTicket.lottoBalls
                 .stream()
-                .mapToInt((curr) -> (this.lottoBalls.contains(curr) ? 10 : 0))
-                .sum();
-        if (lottoTicket.lottoBalls.contains(bonusBall)) {
-            count += 5;
-        }
-        return RANKING_TABLE.get(count);
+                .filter(lottoBalls::contains)
+                .count();
+        boolean isCorrectBonusBall = lottoTicket.lottoBalls
+                .stream()
+                .anyMatch(v -> v.equals(bonusBall));
+        return RANKING_TABLE
+                .get(count)
+                .get(isCorrectBonusBall);
     }
 }
