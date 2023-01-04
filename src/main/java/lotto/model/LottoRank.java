@@ -1,20 +1,21 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.List;
 
 public enum LottoRank {
-    RANK1(6, false, 2000000000),
-    RANK2(5, true, 30000000),
-    RANK3(5, false, 1500000),
-    RANK4(4, false, 50000),
-    RANK5(3, false, 5000),
-    RANK6(2, false, 0);
+    RANK1(List.of(6), List.of(false, true), 2000000000),
+    RANK2(List.of(5), List.of(true), 30000000),
+    RANK3(List.of(5), List.of(false), 1500000),
+    RANK4(List.of(4), List.of(false, true), 50000),
+    RANK5(List.of(3), List.of(false, true), 5000),
+    RANK6(List.of(0, 1, 2), List.of(false, true), 0);
 
-    private final Integer matchedCount;
-    private final boolean bonusBall;
+    private final List<Integer> matchedCount;
+    private final List<Boolean> bonusBall;
     private final Integer reward;
 
-    LottoRank(Integer matchedCount, boolean bonusBall, Integer reward) {
+    LottoRank(List<Integer> matchedCount, List<Boolean> bonusBall, Integer reward) {
         this.matchedCount = matchedCount;
         this.bonusBall = bonusBall;
         this.reward = reward;
@@ -23,16 +24,16 @@ public enum LottoRank {
     public static LottoRank fromCountAndBonus(Integer count, boolean bonus) {
         return Arrays.stream(values())
                 .filter(value -> {
-                    if (value.matchedCount != 5) {
-                        return value.matchedCount.equals(count);
+                    if (!value.matchedCount.contains(5)) {
+                        return value.matchedCount.contains(count);
                     }
-                    return value.bonusBall == bonus && value.matchedCount.equals(count);
+                    return value.bonusBall.contains(bonus) && value.matchedCount.contains(count);
                 })
                 .findAny()
                 .orElse(RANK6);
     }
 
-    public Integer getMatchedCount() {
+    public List<Integer> getMatchedCount() {
         return matchedCount;
     }
 
