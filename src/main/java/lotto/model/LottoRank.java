@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum LottoRank {
-    RANK1(List.of(6), List.of(false, true), 2000000000),
-    RANK2(List.of(5), List.of(true), 30000000),
-    RANK3(List.of(5), List.of(false), 1500000),
-    RANK4(List.of(4), List.of(false, true), 50000),
-    RANK5(List.of(3), List.of(false, true), 5000),
+    RANK1(List.of(6), List.of(false, true), 2_000_000_000),
+    RANK2(List.of(5), List.of(true), 30_000_000),
+    RANK3(List.of(5), List.of(false), 1_500_000),
+    RANK4(List.of(4), List.of(false, true), 50_000),
+    RANK5(List.of(3), List.of(false, true), 5_000),
     RANK6(List.of(0, 1, 2), List.of(false, true), 0);
 
     private final List<Integer> matchedCount;
