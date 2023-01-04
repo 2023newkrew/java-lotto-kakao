@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,8 +10,16 @@ public class LottoTicketList {
 
     private final List<LottoTicket> lottoTicketList;
 
+    public LottoTicketList() {
+        this(new ArrayList<>());
+    }
+
     public LottoTicketList(List<LottoTicket> lottoTicketList) {
         this.lottoTicketList = lottoTicketList;
+    }
+
+    public void addAll(LottoTicketList lottoTicketList) {
+        this.lottoTicketList.addAll(lottoTicketList.lottoTicketList);
     }
 
     public String getString() {

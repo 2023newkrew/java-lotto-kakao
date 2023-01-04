@@ -20,7 +20,7 @@ public class LottoMain {
     private static void buyLotto(LottoGame lottoGame) {
         int money = InputView.getMoney();
 
-        lottoGame.buy(money);
+        lottoGame.buyRandom(money);
         ResultView.printQuantity(lottoGame.getCountOfLottoTickets());
         ResultView.print(lottoGame.getLottoTicketsString());
     }
