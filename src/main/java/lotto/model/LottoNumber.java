@@ -39,6 +39,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(lottoNumber);
+    }
+
+    @Override
     public int compareTo(LottoNumber o) {
         return lottoNumber.compareTo(o.lottoNumber);
     }

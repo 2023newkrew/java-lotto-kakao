@@ -43,8 +43,11 @@ public class LottoResult {
             return false;
         }
         LottoResult that = (LottoResult) o;
-
         return Objects.equals(rankCountMap, that.rankCountMap);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(rankCountMap);
+    }
 }
