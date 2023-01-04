@@ -1,5 +1,10 @@
 package view;
 
+import domain.LottoNumbers;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class OutputView {
 
     private static final String NUMBER_OF_LOTTO_MESSAGE = "%d개를 구매했습니다.";
@@ -11,8 +16,12 @@ public class OutputView {
         System.out.println(String.format(NUMBER_OF_LOTTO_MESSAGE, num));
     }
 
-    public void printLotto(String str) {
-        System.out.println(str + "\n");
+    public void printPurchasedLotto(List<LottoNumbers> lottoNumbersList) {
+        String purchasedLotto = lottoNumbersList.stream()
+                .map(LottoNumbers::toString)
+                .collect(Collectors.joining("\n"));
+
+        System.out.println(purchasedLotto + "\n");
     }
 
     public void printStatistics(String str) {
