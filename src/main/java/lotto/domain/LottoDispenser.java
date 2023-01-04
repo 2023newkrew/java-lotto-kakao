@@ -28,7 +28,8 @@ public class LottoDispenser {
     private List<LottoTicket> getLottoTicketListByQuantity(int quantity) {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
 
-        for (int i = 0; i < quantity; i++) {
+        for (int i = 0; i < quantity
+                && !lottoDispenserSettingSetting.getNumberSelectStrategy().isEnd(); i++) {
             LottoTicket lottoTicket = new LottoTicket(
                     lottoDispenserSettingSetting.getNumberSelectStrategy().select());
             lottoTicketList.add(lottoTicket);

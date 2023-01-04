@@ -16,4 +16,9 @@ public class ManualNumberSelectStrategy implements  NumberSelectStrategy {
     public List<Integer> select() {
         return queue.remove();
     }
+
+    @Override
+    public boolean isEnd() {
+        return queue.isEmpty();
+    }
 }

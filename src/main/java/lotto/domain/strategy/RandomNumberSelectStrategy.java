@@ -28,4 +28,9 @@ public class RandomNumberSelectStrategy implements NumberSelectStrategy {
         return numbers.subList(0, NUMBER_LIMIT).stream()
                 .sorted().collect(Collectors.toList());
     }
+
+    @Override
+    public boolean isEnd() {
+        return false;
+    }
 }

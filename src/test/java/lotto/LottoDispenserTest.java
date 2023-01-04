@@ -65,6 +65,11 @@ public class LottoDispenserTest {
             public List<Integer> select() {
                 return randomNumbers.get(index++);
             }
+
+            @Override
+            public boolean isEnd() {
+                return false;
+            }
         };
     }
 
@@ -88,6 +93,12 @@ public class LottoDispenserTest {
                                 List.of(5, 6, 20, 23, 40, 41)
                         ),
                         2500, "[1, 2, 3, 4, 5, 6]\n[5, 6, 20, 23, 40, 41]"
+                ),
+                Arguments.of(List.of(
+                                List.of(1, 2, 3, 4, 5, 6),
+                                List.of(5, 6, 20, 23, 40, 41)
+                        ),
+                        3500, "[1, 2, 3, 4, 5, 6]\n[5, 6, 20, 23, 40, 41]"
                 )
         );
     }
