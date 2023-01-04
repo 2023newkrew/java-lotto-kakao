@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
+    private static final int MATCH_FIVE = 5;
+
     private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
@@ -37,13 +39,15 @@ public class WinningLotto {
 
     public Rank getRank(Lotto lotto) {
         int count = 0;
+        boolean bonusMatch = false;
         List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
 
         for (final LottoNumber number : winningNumbers.getLottoNumbers()) {
             count += lottoNumbers.contains(number) ? 1 : 0;
         }
+        if (count == MATCH_FIVE) bonusMatch = isBonusMatch(lotto);
 
-        return Rank.getRank(new LottoMatch(count, isBonusMatch(lotto)));
+        return Rank.getRank(new LottoMatch(count, bonusMatch));
     }
 
     private boolean isBonusMatch(Lotto lotto) {
