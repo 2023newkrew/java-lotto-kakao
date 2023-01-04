@@ -24,19 +24,24 @@ public class LottoController {
     public void simulate() {
         PurchaseAmount purchaseAmount = inputView.getPurchaseAmountInput();
         LottoCount manualLottoCount = inputView.getManualPurchaseCountInput();
-        TotalLottoCount lottoCount = TotalLottoCount.of(manualLottoCount, purchaseAmount);
+        TotalLottoCount totalLottoCount = TotalLottoCount.of(manualLottoCount, purchaseAmount);
 
-        List<List<Integer>> manualLottoNumbers = inputView.getManualLottoNumbersInput(lottoCount.getManualLottoCount());
-        outputView.printLottoCount(lottoCount);
-
-        Lottos lottos = Lottos.fromNumbers(manualLottoNumbers);
-        lottos.addAll(lottoGenerator.generateLottos(lottoCount.getAutoLottoCount()));
-        outputView.printLottos(lottos);
+        Lottos lottos = simulateAndPrintLottoPurchase(totalLottoCount);
 
         WinningLotto winningLotto = inputView.getWinningLottoInput();
 
         LottoResult lottoResult = lottos.getLottoResult(winningLotto);
         outputView.printLottoResult(lottoResult, purchaseAmount);
+    }
 
+    private Lottos simulateAndPrintLottoPurchase(TotalLottoCount totalLottoCount) {
+        Lottos manualLottos = inputView.getManualLottoNumbersInput(totalLottoCount.getManualLottoCount());
+        Lottos autoLottos = lottoGenerator.generateLottos(totalLottoCount.getAutoLottoCount());
+        Lottos totalLottos = Lottos.of(manualLottos, autoLottos);
+
+        outputView.printLottoCount(totalLottoCount);
+        outputView.printLottos(totalLottos);
+
+        return totalLottos;
     }
 }

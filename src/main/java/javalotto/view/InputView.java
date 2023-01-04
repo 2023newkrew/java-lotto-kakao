@@ -1,9 +1,6 @@
 package javalotto.view;
 
-import javalotto.domain.Lotto;
-import javalotto.domain.LottoCount;
-import javalotto.domain.PurchaseAmount;
-import javalotto.domain.WinningLotto;
+import javalotto.domain.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,12 +38,13 @@ public class InputView {
         return LottoCount.from(Integer.parseInt(scanner.nextLine()));
     }
 
-    public List<List<Integer> > getManualLottoNumbersInput(int count) {
+    public Lottos getManualLottoNumbersInput(int count) {
         System.out.println("수동으로 구매할 로또 번호를 입력해주세요.");
 
-        return Stream.generate(this::getLottoNumbersInput)
+        List<List<Integer>> manualLottoNumbers = Stream.generate(this::getLottoNumbersInput)
                 .limit(count)
                 .collect(Collectors.toList());
+        return Lottos.fromNumbers(manualLottoNumbers);
     }
 
 

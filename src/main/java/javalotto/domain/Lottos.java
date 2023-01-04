@@ -3,6 +3,8 @@ package javalotto.domain;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.Arrays.stream;
+
 public class Lottos {
     private final List<Lotto> lottos;
 
@@ -22,6 +24,15 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
+    public static Lottos of(Lottos...manyLottos) {
+        List<Lotto> allLottos = Arrays.stream(manyLottos)
+                .map(lottos -> lottos.lottos)
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+
+        return new Lottos(allLottos);
+    }
+
     public int size() {
         return lottos.size();
     }
@@ -36,7 +47,7 @@ public class Lottos {
     private Map<Rank, Integer> initRankCountMap() {
         Map<Rank, Integer> rankCountMap = new HashMap<>();
 
-        Arrays.stream(Rank.values())
+        stream(Rank.values())
                 .forEach(rank -> rankCountMap.put(rank, 0));
 
         return rankCountMap;
@@ -47,10 +58,6 @@ public class Lottos {
                 .map(winningLotto::getRank)
                 .flatMap(Optional::stream)
                 .forEach(rank -> rankCountMap.replace(rank, rankCountMap.get(rank) + 1));
-    }
-
-    public void addAll(Lottos other) {
-        this.lottos.addAll(other.lottos);
     }
 
     @Override
