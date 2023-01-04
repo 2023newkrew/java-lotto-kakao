@@ -55,7 +55,7 @@ public class LottoTest {
     @DisplayName("입력된 금액에 맞게 로또 티켓이 생성되어야 한다.")
     void lottoBuyTest(int cost){
         LottoController lottoController = new LottoController(cost);
-        assertThat(lottoController.getLottoTicketCount()).isEqualTo(cost/1000);
+        assertThat(lottoController.getLottoTickets().getLottoTicketCount()).isEqualTo(cost/1000);
     }
 
     @ParameterizedTest

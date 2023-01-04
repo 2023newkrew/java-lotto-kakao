@@ -9,10 +9,6 @@ public class LottoController {
         this.lottoTickets = new LottoTickets(amount);
     }
 
-    public int getLottoTicketCount() {
-        return lottoTickets.getLottoTicketCount();
-    }
-
     public LottoTickets getLottoTickets(){
         return this.lottoTickets;
     }
