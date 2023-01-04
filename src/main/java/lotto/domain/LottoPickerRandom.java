@@ -10,7 +10,7 @@ public class LottoPickerRandom implements LottoPicker{
     private final List<LottoBallNumber> picker = new ArrayList<>();
     public LottoPickerRandom(){
         for (int i=BALLNUMBER_MIN_VALUE;i<=BALLNUMBER_MAX_VALUE;i++){
-            picker.add(new LottoBallNumber(i));
+            picker.add(LottoBallNumber.get(i));
         }
         Collections.shuffle(picker);
     }

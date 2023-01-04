@@ -11,10 +11,10 @@ public class TotalResult {
 
     public TotalResult(){
         for (int i=0;i<BALLCOUNT_LIMIT;i++){
-            lottoResultCount.put(new LottoResult(i, false), new LottoCount(0));
-            lottoResultCount.put(new LottoResult(i, true), new LottoCount(0));
+            lottoResultCount.put(LottoResult.get(i, false), new LottoCount(0));
+            lottoResultCount.put(LottoResult.get(i, true), new LottoCount(0));
         }
-        lottoResultCount.put(new LottoResult(BALLCOUNT_LIMIT, false), new LottoCount(0));
+        lottoResultCount.put(LottoResult.get(BALLCOUNT_LIMIT, false), new LottoCount(0));
     }
     public void add(LottoResult lottoResult) {
         trial++;
@@ -36,6 +36,14 @@ public class TotalResult {
         return lottoResultCount.get(lottoResult);
     }
 
+    public LottoCount getLottoCountOfResults(LottoResults lottoResults){
+        LottoCount result = new LottoCount(0);
+        for (Iterator<LottoResult> it = lottoResults.getIterator(); it.hasNext(); ) {
+            result = result.add(getLottoCountOfResult(it.next()));
+        }
+        return result;
+    }
+
     public double getSurplusRatio() throws ArithmeticException{
         if (trial == 0){
             throw new ArithmeticException();
@@ -55,7 +63,7 @@ public class TotalResult {
         String[] strings = new String[WinningCondition.values().length];
         for (WinningCondition con : WinningCondition.values()){
             strings[con.getOrder()] = con + "- " +
-                    lottoResultCount.get(con.getLottoResult());
+                    getLottoCountOfResults(con.getLottoResults());
         }
         return String.join("\n", strings)+"\n";
     }

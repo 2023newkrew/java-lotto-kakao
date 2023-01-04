@@ -42,10 +42,11 @@ public class Main {
     private static void inputWinningLotto() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         List<LottoBallNumber> winNum = Arrays.stream(sc.nextLine().split(","))
-                .map(v -> new LottoBallNumber(Integer.parseInt(v.trim())))
+                .map(v -> LottoBallNumber.get(Integer.parseInt(v.trim())))
                 .collect(Collectors.toList());
         System.out.println("보너스 볼을 입력해 주세요.");
-        winNumber = new WinNumber(new LottoTrialManual(winNum), new LottoBallNumber(sc.nextInt()));
+        winNumber = new WinNumber(new LottoTrialManual(winNum), LottoBallNumber.get(
+                Integer.parseInt(sc.nextLine())));
     }
 
     private static void processLotto(){

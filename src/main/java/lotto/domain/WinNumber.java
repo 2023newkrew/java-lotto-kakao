@@ -21,6 +21,6 @@ public class WinNumber {
             matchCount += winNumber.getBallNumbers().contains(bn) ? 1:0;
             matchBonus |= bn.equals(bonusNumber);
         }
-        return new LottoResult(matchCount, matchBonus);
+        return LottoResult.get(matchCount, matchBonus);
     }
 }

@@ -23,6 +23,9 @@ public class LottoCount {
     public LottoCount add(int val){
         return new LottoCount(count+val);
     }
+    public LottoCount add(LottoCount val){
+        return new LottoCount(count+val.count);
+    }
 
     @Override
     public boolean equals(Object o) {

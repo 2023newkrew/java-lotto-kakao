@@ -2,33 +2,41 @@ package lotto.domain;
 import static lotto.domain.LottoConstants.*;
 
 public enum WinningCondition {
-    FIRST_PRIZE(new LottoResult(BALLCOUNT_LIMIT,false),
+    FIRST_PRIZE(new LottoResults()
+            .add(LottoResult.get(BALLCOUNT_LIMIT,false))
+            .setGroupString(LottoResult.get(BALLCOUNT_LIMIT,false).toString()),
             new Cash(FIRST_PRIZE_CASH), 4),
-    SECOND_PRIZE(new LottoResult(BALLCOUNT_LIMIT-1,true),
+    SECOND_PRIZE(new LottoResults()
+            .add(LottoResult.get(BALLCOUNT_LIMIT-1,true))
+            .setGroupString(LottoResult.get(BALLCOUNT_LIMIT-1,true).toString()),
             new Cash(SECOND_PRIZE_CASH), 3),
-    THIRD_PRIZE(new LottoResult(BALLCOUNT_LIMIT-1,false),
+    THIRD_PRIZE(new LottoResults()
+            .add(LottoResult.get(BALLCOUNT_LIMIT-1, false))
+            .setGroupString(LottoResult.get(BALLCOUNT_LIMIT-1, false).toString()),
             new Cash(THIRD_PRIZE_CASH), 2),
-    FOURTH_PRIZE(new LottoResult(BALLCOUNT_LIMIT-2,false),
+    FOURTH_PRIZE(new LottoResults()
+            .add(LottoResult.get(BALLCOUNT_LIMIT-2,true))
+            .add(LottoResult.get(BALLCOUNT_LIMIT-2,false))
+            .setGroupString(LottoResult.get(BALLCOUNT_LIMIT-2, false).toString()),
             new Cash(FOURTH_PRIZE_CASH), 1),
-    FOURTH_PRIZE_BONUS(new LottoResult(BALLCOUNT_LIMIT-2,true),
-            new Cash(FOURTH_PRIZE_CASH), 1),
-    FIFTH_PRIZE(new LottoResult(BALLCOUNT_LIMIT-3,false),
-            new Cash(FIFTH_PRIZE_CASH), 0),
-    FIFTH_PRIZE_BONUS(new LottoResult(BALLCOUNT_LIMIT-3,true),
+    FIFTH_PRIZE(new LottoResults()
+            .add(LottoResult.get(BALLCOUNT_LIMIT-3,false))
+            .add(LottoResult.get(BALLCOUNT_LIMIT-3,true))
+            .setGroupString(LottoResult.get(BALLCOUNT_LIMIT-3, false).toString()),
             new Cash(FIFTH_PRIZE_CASH), 0);
 
-    private final LottoResult lottoResult;
+    private final LottoResults lottoResults;
     private final Cash winningPrize;
     private final int printOrder;
 
-    WinningCondition(LottoResult lottoResult, Cash winningPrize, int printOrder){
-        this.lottoResult = lottoResult;
+    WinningCondition(LottoResults lottoResults, Cash winningPrize, int printOrder){
+        this.lottoResults = lottoResults;
         this.winningPrize = winningPrize;
         this.printOrder = printOrder;
     }
 
     public Cash getPrizeIfMatch(LottoResult lottoResult){
-        if (lottoResult.equals(this.lottoResult)){
+        if (lottoResults.contains(lottoResult)){
             return winningPrize;
         }
         return new Cash(0L);
@@ -36,14 +44,14 @@ public enum WinningCondition {
 
     @Override
     public String toString() {
-        return lottoResult + "(" + winningPrize + ")";
+        return lottoResults + " (" + winningPrize + ")";
     }
 
     public int getOrder() {
         return printOrder;
     }
 
-    public LottoResult getLottoResult() {
-        return lottoResult;
+    public LottoResults getLottoResults() {
+        return lottoResults;
     }
 }

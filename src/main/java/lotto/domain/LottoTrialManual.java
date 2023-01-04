@@ -12,7 +12,7 @@ public class LottoTrialManual extends LottoTrial{
 
     public LottoTrialManual(List<Integer> ballNumbers){
         for (int ball:ballNumbers){
-            super.ballNumbers.add(new LottoBallNumber(ball));
+            super.ballNumbers.add(LottoBallNumber.get(ball));
         }
         super.validate(this);
         super.sort(this);
