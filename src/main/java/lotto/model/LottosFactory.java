@@ -19,4 +19,12 @@ public class LottosFactory {
         }
         return new Lottos(lottos);
     }
+
+    public Lottos joinLottos(Lottos manualLottos, Lottos autoLottos){
+        List<Lotto> joinLottos = new ArrayList<>();
+        joinLottos.addAll(manualLottos.getLottos());
+        joinLottos.addAll(autoLottos.getLottos());
+
+        return new Lottos(joinLottos);
+    }
 }
