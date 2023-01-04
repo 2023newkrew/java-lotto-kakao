@@ -1,22 +1,23 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
-    private final Map<LottoResult, Integer> lottoStatistics = new HashMap<>();
-    private final int total;
+    private final Map<LottoResult, Long> lottoStatistics;
+    private final int totalLottoResult;
 
-    public LottoStatistics(List<LottoResult> lottoResults) {
-        initStatisticsMap();
-        for (LottoResult lottoResult : lottoResults) {
-            addCountOf(lottoResult);
-        }
-        total = lottoResults.size();
+    public LottoStatistics(List<LottoResult> lottoResultList) {
+        lottoStatistics = getCountingMap(lottoResultList);
+        totalLottoResult = lottoResultList.size();
+    }
+
+    private static Map<LottoResult, Long> getCountingMap(List<LottoResult> lottoResultList) {
+        return lottoResultList.stream()
+                .collect(Collectors.groupingBy((LottoResult x) -> x, Collectors.counting()));
     }
 
     public String getString() {
@@ -28,7 +29,8 @@ public class LottoStatistics {
     }
 
     private String getLottoResultString(LottoResult lottoResult) {
-        return lottoResult.getString() + " - " + lottoStatistics.get(lottoResult) + "개";
+        return lottoResult.getString() + " - "
+                + lottoStatistics.getOrDefault(lottoResult, 0L) + "개";
     }
 
     private String getLottoIncomeRateString() {
@@ -36,19 +38,8 @@ public class LottoStatistics {
     }
 
     private float getLottoIncomeRate() {
-        return Arrays.stream(LottoResult.values())
-                .mapToInt(it -> it.getPrize() * lottoStatistics.get(it))
-                .sum() / (float) (LottoTicket.LOTTO_TICKET_PRICE * total);
+        return lottoStatistics.keySet().stream()
+                .mapToLong(it -> it.getPrize() * lottoStatistics.get(it))
+                .sum() / (float) (LottoTicket.LOTTO_TICKET_PRICE * totalLottoResult);
     }
-
-    private void initStatisticsMap() {
-        for (LottoResult lottoResult : LottoResult.values()) {
-            lottoStatistics.put(lottoResult, 0);
-        }
-    }
-
-    private void addCountOf(LottoResult lottoResult) {
-        lottoStatistics.put(lottoResult, lottoStatistics.get(lottoResult)+1);
-    }
-
 }
