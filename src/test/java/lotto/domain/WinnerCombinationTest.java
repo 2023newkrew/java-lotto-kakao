@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ public class WinnerCombinationTest {
 
     LottoTicket winnerTicket;
 
-    @Before
-    public void setup() {
+    @BeforeEach
+    void setup() {
         winnerTicket = new LottoTicket(
                 List.of(
                         new LottoBall(1),
