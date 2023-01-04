@@ -27,7 +27,7 @@ public class GameResultDto {
     }
 
     public double calculateYield(List<Integer> rankCount, int lottoCount) {
-        return (double) calculateTotalWinning(rankCount) / (lottoCount * LottoConstants.LOTTO_PRICE.getValue());
+        return (double) calculateTotalWinning(rankCount) / (lottoCount * LottoConstants.LOTTO_PRICE);
     }
 
     private long calculateTotalWinning(List<Integer> rankCount) {

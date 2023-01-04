@@ -17,7 +17,7 @@ public class DefaultLottoResult implements LottoResult{
     }
 
     private void validate(int matchCount, boolean hasBonus) {
-        if (matchCount < LOTTO_MIN_COUNT.getValue() || getSum(matchCount, hasBonus) > LOTTO_NUMBER_COUNT.getValue()) {
+        if (matchCount < LOTTO_MIN_COUNT || getSum(matchCount, hasBonus) > LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(INVALID_LOTTO_RESULT_INPUT_EXCEPTION);
         }
     }

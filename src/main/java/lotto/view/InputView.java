@@ -53,14 +53,14 @@ public class InputView {
     }
 
     private void validateRange(int price) {
-        if (price < LOTTO_PRICE.getValue()) {
+        if (price < LOTTO_PRICE) {
             throw new IllegalArgumentException(BOUND_EXCEPTION_MESSAGE.getMessage());
         }
 
     }
 
     private void validateIsValid(int price) {
-        if (price % LOTTO_PRICE.getValue() != 0) {
+        if (price % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(MODULAR_EXCEPTION_MESSAGE.getMessage());
         }
 

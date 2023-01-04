@@ -23,7 +23,7 @@ public class LottoNumbersFactory {
     }
 
     private static boolean isNotFull(Set<Integer> numbers) {
-        return numbers.size() != LOTTO_NUMBER_COUNT.getValue();
+        return numbers.size() != LOTTO_NUMBER_COUNT;
     }
 
     private static void addNumbers(Set<Integer> numbers, int target) {
