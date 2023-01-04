@@ -12,13 +12,13 @@
 - Result (로또 일치 여부 Enum)
   - Result.[FIRST_PLACE, SECOND_PLACE, ..., FIFTH_PLACE]
 - Money (돈)
-  - 검증
+  - 검증 (MoneyValidator)
     - 숫자가 맞는지
     - 양수인지
     - 로또 한 장당 가격(1000원)으로 나누어떨어지는지
   - 살 수 있는 로또 장수 계산
 - Count (개수)
-  - 검증
+  - 검증 (CountValidator)
     - 숫자가 맞는지
     - 양수인지
     - 살 수 있는 로또 장수보다 작거나 같은지
@@ -41,6 +41,16 @@
 - TotalResult (당첨 등수와 당첨 로또 개수의 맵)
   - Result를 입력하면 TotalResult에 반영
   - 수익률 계산
+- NumberValidator (숫자 검증)
+  - 숫자가 맞는지
+- MoneyValidator (금액 검증)
+  - 숫자가 맞는지 (NumberValidator)
+  - 양수인지
+  - 로또 한 장당 가격(1000원)으로 나누어떨어지는지
+- CountValidator (개수 검증)
+  - 숫자가 맞는지
+  - 양수인지
+  - 살 수 있는 로또 장수보다 작거나 같은지
 - LottoNumberValidator (번호 검증)
   - 숫자가 맞는지
   - 1 이상 45 이하인지
