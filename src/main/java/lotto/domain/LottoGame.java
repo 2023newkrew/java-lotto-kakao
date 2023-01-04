@@ -5,7 +5,7 @@ import java.util.*;
 import lotto.constant.LottoGrade;
 import lotto.dto.GameResultDto;
 
-import static lotto.constant.MessageConstant.INVALID_PRICE_AMOUNT;
+import static lotto.constant.ExceptionMessages.INVALID_PRICE_AMOUNT;
 
 public class LottoGame {
     private final List<Lotto> lottos;

@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.constant.MessageConstant.INVALID_NUMBER_RANGE;
+import static lotto.constant.ExceptionMessages.INVALID_NUMBER_RANGE;
 
 import java.util.Objects;
 import java.util.stream.IntStream;

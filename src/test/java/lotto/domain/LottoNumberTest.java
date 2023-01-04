@@ -3,7 +3,7 @@ package lotto.domain;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static lotto.constant.MessageConstant.INVALID_NUMBER_RANGE;
+import static lotto.constant.ExceptionMessages.INVALID_NUMBER_RANGE;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

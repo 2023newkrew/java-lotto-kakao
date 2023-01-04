@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
+import static lotto.constant.ExceptionMessages.INVALID_DUPLICATED_LOTTO_NUMBER;
 
 import java.util.HashSet;
 import java.util.List;

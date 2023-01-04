@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
-import static lotto.constant.MessageConstant.INVALID_LOTTO_SIZE;
+import static lotto.constant.ExceptionMessages.INVALID_DUPLICATED_LOTTO_NUMBER;
+import static lotto.constant.ExceptionMessages.INVALID_LOTTO_SIZE;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -10,9 +10,8 @@ import java.util.stream.IntStream;
 public class Lotto {
     public static final int LOTTO_PRICE = 1000;
     public static final int LOTTO_SIZE = 6;
-    public static final int LOTTO_NUMBER_MAX = 45;
-    public static final int LOTTO_NUMBER_MIN = 1;
-    private static final List<Integer> numberPool = IntStream.rangeClosed(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX)
+    private static final List<Integer> numberPool =
+            IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
             .boxed()
             .collect(Collectors.toList());
     private final List<LottoNumber> lottoNumbers;

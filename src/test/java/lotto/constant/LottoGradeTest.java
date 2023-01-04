@@ -1,6 +1,6 @@
 package lotto.constant;
 
-import static lotto.constant.MessageConstant.INVALID_MATCH_COUNT_RANGE;
+import static lotto.constant.ExceptionMessages.INVALID_MATCH_COUNT_RANGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

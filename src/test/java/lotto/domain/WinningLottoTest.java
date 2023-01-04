@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
+import static lotto.constant.ExceptionMessages.INVALID_DUPLICATED_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
