@@ -12,8 +12,8 @@ public class RandomLottoGenerator {
         return new Lotto(
                 RandomNumberGenerator.getRandomNumbers(
                         Lotto.FIXED_SIZE,
-                        LottoNumber.MINIMUM_BOUNDARY,
-                        LottoNumber.MAXIMUM_BOUNDARY
+                        LottoNumber.MIN_NUMBER,
+                        LottoNumber.MAX_NUMBER
                 )
         );
     }

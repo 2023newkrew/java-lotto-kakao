@@ -9,6 +9,6 @@ public class RandomNumberGenerator {
 
     public static List<Integer> getRandomNumbers(int n, int start, int end) {
         if(end - start + 1 < n) throw new RuntimeException();
-        return random.ints(start, end).distinct().limit(n).boxed().collect(Collectors.toList());
+        return random.ints(start, end + 1).distinct().limit(n).boxed().collect(Collectors.toList());
     }
 }
