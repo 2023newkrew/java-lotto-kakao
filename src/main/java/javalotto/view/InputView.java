@@ -32,7 +32,7 @@ public class InputView {
     }
 
     public Lottos getManuallyLottosInput(LottoCount manuallyLottoCount) {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
         List<Lotto> manuallyPurchasedLottos = new ArrayList<>();
         for (int i = 0; i < manuallyLottoCount.getCount(); i++) {
