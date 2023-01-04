@@ -18,7 +18,7 @@ public class BuyerResultTest {
     void lotteryResult() {
         LotteryResult lotteryResult = new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 7);
         Buyer buyer = new Buyer(1000);
-        buyer.buyLottery(1000, new Lottery(List.of(1, 2, 3, 12, 13, 14)));
+        buyer.buyLottery(new Lottery(List.of(1, 2, 3, 12, 13, 14)));
 
         BuyerResult buyerResult = buyer.getBuyerResult(lotteryResult);
         EnumMap<Rank, Integer> cpMap = new EnumMap<>(Map.of(Rank.FIFTH, 1));
@@ -31,8 +31,8 @@ public class BuyerResultTest {
     void lotteryListResult() {
         LotteryResult lotteryResult = new LotteryResult(List.of(1, 2, 3, 4, 5, 6), 7);
         Buyer buyer = new Buyer(2000);
-        buyer.buyLottery(1000, new Lottery(List.of(1, 2, 3, 12, 13, 14)));
-        buyer.buyLottery(1000, new Lottery(List.of(1, 2, 3, 4, 12, 14)));
+        buyer.buyLottery(new Lottery(List.of(1, 2, 3, 12, 13, 14)));
+        buyer.buyLottery(new Lottery(List.of(1, 2, 3, 4, 12, 14)));
 
         BuyerResult buyerResult = buyer.getBuyerResult(lotteryResult);
 
