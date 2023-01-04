@@ -12,7 +12,9 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     public static final Integer NUMBER_LENGTH = 6;
+
     public static final Integer PRICE = 1000;
+
     private final Set<LottoNumber> numbers;
 
     private Lotto(Set<LottoNumber> numbers) {

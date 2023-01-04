@@ -8,7 +8,9 @@ import java.util.Objects;
 public final class LottoNumber implements Comparator<LottoNumber> {
 
     public static final Integer MIN_RANGE = 1;
+
     public static final Integer MAX_RANGE = 45;
+
     private final Integer number;
 
     public LottoNumber(Integer number) {

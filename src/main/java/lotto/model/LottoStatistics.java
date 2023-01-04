@@ -22,4 +22,8 @@ public class LottoStatistics {
     public Integer getProfit() {
         return profit;
     }
+
+    public Double getRateOfProfit(Integer price) {
+        return profit / Double.valueOf(price);
+    }
 }
