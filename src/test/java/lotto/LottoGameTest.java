@@ -60,4 +60,22 @@ public class LottoGameTest {
                 )
         );
     }
+
+    @DisplayName("게임에서 남은 금액 가져오기")
+    @ParameterizedTest
+    @MethodSource("getReceiveLeftoverMoneyData")
+    public void receiveLeftoverMoney(int money, int number) {
+        LottoSetting lottoSetting = new LottoSetting();
+        LottoGame lottoGame = new LottoGame(lottoSetting);
+        lottoGame.buyRandom(money);
+        Assertions.assertThat(lottoGame.receiveLeftoverMoney()).isEqualTo(number);
+    }
+
+    private static Stream<Arguments> getReceiveLeftoverMoneyData() {
+        return Stream.of(
+                Arguments.of(14000, 0),
+                Arguments.of(500, 500),
+                Arguments.of(1350, 350)
+        );
+    }
 }
