@@ -2,8 +2,8 @@ package lotto.domain;
 
 import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lotto.LottoGradeEnum;
 
 public class WinningLotto {
@@ -31,14 +31,11 @@ public class WinningLotto {
     }
 
     public LottoGradeEnum getGrade(Lotto lotto) {
-
-        HashSet<LottoNumber> winningLottoNumberSet = new HashSet<>(this.lotto.getNumbers());
-        int matchCount = 0;
-        for (LottoNumber lottoNumber : lotto.getNumbers()) {
-            if (winningLottoNumberSet.contains(lottoNumber)) {
-                matchCount++;
-            }
-        }
+        Set<LottoNumber> winningLottoNumberSet = this.lotto.getNumbers();
+        int matchCount = (int) lotto.getNumbers()
+                .stream()
+                .filter(winningLottoNumberSet::contains)
+                .count();
         return LottoGradeEnum.evaluate(matchCount, winningLottoNumberSet.contains(bonusNumber));
     }
 }
