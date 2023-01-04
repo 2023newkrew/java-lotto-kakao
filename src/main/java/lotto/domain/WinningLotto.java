@@ -22,14 +22,6 @@ public class WinningLotto {
         }
     }
 
-    public Lotto getLotto() {
-        return lotto;
-    }
-
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
-    }
-
     public LottoGradeEnum getGrade(Lotto lotto) {
         Set<LottoNumber> winningLottoNumberSet = this.lotto.getNumbers();
         int matchCount = (int) lotto.getNumbers()

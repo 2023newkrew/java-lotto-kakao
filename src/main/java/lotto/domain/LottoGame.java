@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import lotto.dto.GameResultDto;
 
@@ -15,7 +15,7 @@ public class LottoGame {
     }
 
     public List<Lotto> getLottos() {
-        return new ArrayList<>(lottos);
+        return Collections.unmodifiableList(lottos);
     }
 
     public GameResultDto getResult() {

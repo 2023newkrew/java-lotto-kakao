@@ -3,6 +3,7 @@ package lotto.domain;
 import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
 import static lotto.constant.MessageConstant.INVALID_LOTTO_SIZE;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -40,7 +41,7 @@ public class Lotto {
     }
 
     public Set<LottoNumber> getNumbers() {
-        return lottoNumbers;
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     @Override
