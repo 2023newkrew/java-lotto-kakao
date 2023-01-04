@@ -1,10 +1,6 @@
 package lotto.model;
 
 import lotto.exception.DuplicatedBallNumber;
-import lotto.model.LottoBallNumber;
-import lotto.model.LottoResult;
-import lotto.model.LottoTrialManual;
-import lotto.model.WinNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
