@@ -63,7 +63,8 @@ public class LottoView {
         for (LottoResult lottoResult : LottoResult.values()) {
             printLottoResult(playerLottoResult, lottoResult);
         }
-        System.out.println("총 수익률은 " + playerLottoResult.calculateProfitRate() + "입니다.");
+        String formattedProfitRate = String.format("%.2f", playerLottoResult.calculateProfitRate());
+        System.out.println("총 수익률은 " + formattedProfitRate + "% 입니다.");
     }
 
     private void printLottoResult(PlayerLottoResult playerLottoResult, LottoResult lottoResult) {
@@ -83,6 +84,6 @@ public class LottoView {
     }
 
     public void printErrorMessage(String message) {
-        System.out.println(message);
+        System.err.println(message);
     }
 }

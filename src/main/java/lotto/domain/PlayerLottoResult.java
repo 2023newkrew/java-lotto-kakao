@@ -26,7 +26,7 @@ public class PlayerLottoResult {
     }
 
     public double calculateProfitRate() {
-        return calculateTotalPrizeMoney().divideBy(spentMoney);
+        return calculateTotalPrizeMoney().divideBy(spentMoney) * 100;
     }
 
     private Money calculateTotalPrizeMoney() {
