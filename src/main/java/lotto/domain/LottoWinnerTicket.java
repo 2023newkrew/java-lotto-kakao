@@ -3,8 +3,9 @@ package lotto.domain;
 
 import java.util.ArrayList;
 
-import static lotto.domain.LottoTicket.LOTTO_LOWER_BOUND;
-import static lotto.domain.LottoTicket.LOTTO_UPPER_BOUND;
+import static lotto.utils.Constants.LOTTO_LOWER_BOUND;
+import static lotto.utils.Constants.LOTTO_UPPER_BOUND;
+
 
 public class LottoWinnerTicket {
     private final LottoTicket lottoTicket;

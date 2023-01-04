@@ -5,7 +5,7 @@ import lotto.domain.LottoTickets;
 
 import java.util.ArrayList;
 
-import static lotto.domain.LottoTickets.MIN_PURCHASE_PRICE;
+import static lotto.utils.Constants.MIN_PURCHASE_PRICE;
 import static lotto.utils.LottoMessage.*;
 
 public class ResultView {

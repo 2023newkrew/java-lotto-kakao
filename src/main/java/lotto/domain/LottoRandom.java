@@ -4,16 +4,17 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.utils.Constants.LOTTO_TICKET_SIZE;
+import static lotto.utils.Constants.LOTTO_UPPER_BOUND;
+
 public class LottoRandom {
-    private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final int LOTTO_MAX_NUMBER = 45;
 
     public ArrayList<Integer> createRandomNumbers(){
-        List<Integer> numList = IntStream.range(1, LOTTO_MAX_NUMBER + 1)
+        List<Integer> numList = IntStream.range(1, LOTTO_UPPER_BOUND + 1)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numList);
-        numList = numList.subList(0, LOTTO_NUMBER_COUNT);
+        numList = numList.subList(0, LOTTO_TICKET_SIZE);
         Collections.sort(numList);
         return new ArrayList<>(numList);
     }

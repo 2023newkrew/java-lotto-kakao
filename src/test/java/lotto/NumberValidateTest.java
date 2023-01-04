@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.*;
 
-import static lotto.domain.LottoTicket.LOTTO_TICKET_SIZE;
+import static lotto.utils.Constants.LOTTO_TICKET_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
@@ -23,7 +23,6 @@ public class NumberValidateTest {
     void lottoNumberDupTest() {
         LottoRandom lottoRandom = new LottoRandom();
         ArrayList<Integer> lottoNumbers = lottoRandom.createRandomNumbers(); // 자동으로 생성되는 로또 번호들
-
         // 숫자 중복이 없는지 확인
         Set<Integer> dupCheck = new HashSet<>();
         for (int num : lottoNumbers) {
