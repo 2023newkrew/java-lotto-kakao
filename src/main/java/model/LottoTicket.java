@@ -1,24 +1,30 @@
+/**
+ * 사용자의 로또들을 가지고 있다.. 그뿐이다..
+ *
+ */
+package model;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Lottos {
-    private final List<Lotto> lottoList;
+public class LottoTicket {
+    private final List<Lotto> lottoList; //복권들의 리스트를 가지고 있다.
 
     private final int count;
 
     private final int totalPay;
 
-    Lottos(List<Lotto> lottoList, int totalPay) {
-        this.lottoList = lottoList;
+    LottoTicket(List<Lotto> lottoList, int totalPay) {
+        this.lottoList = new ArrayList<>(lottoList); //끊어 줄 것..(인자가 변경되어도 값이 변경될 수 없도록..)
         this.count = lottoList.size();
         this.totalPay = totalPay;
     }
 
-    public List<Lotto> getLottoList() {
-        return lottoList;
-    }
+    //public List<Lotto> getLottoList() { 복사해서 리턴.. ->이렇게 해도.. 값을 변경할 수 있나..?
+    //    return ArrayList<>(lottoList);
+    //}
 
     public int getCount() {
         return count;
@@ -27,16 +33,16 @@ public class Lottos {
     public int getTotalPay() {
         return totalPay;
     }
-
-    public double getTotalLotteryAmount(final WinLottoNumbers winNumbers) {
-        double result = 0;
+/*
+    public long getTotalLotteryAmount(final LottoWinner winNumbers) {
+        long result = 0;
         for(Lotto lotto : lottoList) {
             result += lotto.getLotteryAmount((int)lotto.getMatchCount(winNumbers.getNumbers()), lotto.isMatchBonusNumber(winNumbers.getBonusNumber()));
         }
         return result;
     }
 
-    public Map<Integer, Integer> getTotalResult(final WinLottoNumbers winNumbers) {
+    public Map<Integer, Integer> getTotalResult(final LottoWinner winNumbers) {
         Map<Integer, Integer> result = new HashMap<>();
 
         for(Lotto lotto : lottoList) {
@@ -46,7 +52,8 @@ public class Lottos {
       return result;
     }
 
-    public double getTotalLotteryRate(final double amount, final double purchaseAmount) {
-        return amount/purchaseAmount;
+    public double getTotalLotteryRate(final long amount, final long purchaseAmount) {
+        return (double)amount/purchaseAmount;
     }
+ */
 }
