@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.model.Lotto;
 import lotto.utils.Validator;
 
 import java.util.*;
@@ -47,7 +46,7 @@ public class InputView {
         return bonusNumber;
     }
 
-    public List<Lotto> receiveManualLottos(int numberOfLotto){
+    public List<List<Integer>> receiveManualLottos(int numberOfLotto){
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int numberOfManualLottos = receiveNumber();
         validator.checkNumbersSize(numberOfManualLottos, numberOfLotto);
@@ -55,14 +54,14 @@ public class InputView {
         return receiveManualLottosNumbers(numberOfManualLottos);
     }
 
-    public List<Lotto> receiveManualLottosNumbers(int numberOfManualLottos){
-        List<Lotto> manualLottos = new ArrayList<>();
+    public List<List<Integer>> receiveManualLottosNumbers(int numberOfManualLottos){
+        List<List<Integer>> manualLottosNumbers = new ArrayList<>();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 
         for (int i = 0; i < numberOfManualLottos; i++) {
             List<Integer> lottoNumbers = receiveLottoNumbers();
-            manualLottos.add(new Lotto(lottoNumbers));
+            manualLottosNumbers.add(lottoNumbers);
         }
-        return manualLottos;
+        return manualLottosNumbers;
     }
 }

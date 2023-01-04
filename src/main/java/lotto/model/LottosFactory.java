@@ -11,4 +11,12 @@ public class LottosFactory {
         }
         return new Lottos(lottos);
     }
+
+    public Lottos makeLottosManual(List<List<Integer>> manualLottosNumbers){
+        List<Lotto> lottos = new ArrayList<>();
+        for (List<Integer> manualLottoNumbers : manualLottosNumbers) {
+            lottos.add(new Lotto(manualLottoNumbers));
+        }
+        return new Lottos(lottos);
+    }
 }
