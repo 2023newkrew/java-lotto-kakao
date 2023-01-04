@@ -14,13 +14,13 @@ public class LottoNumberTest {
     void 로또_번호는_1_에서_45_사이여야_한다(RepetitionInfo repetitionInfo) {
         int lottoNumber = repetitionInfo.getCurrentRepetition();
 
-        assertThatCode(() -> new LottoNumber(lottoNumber)).doesNotThrowAnyException();
+        assertThatCode(() -> LottoNumber.from(lottoNumber)).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1, -10, 0, 46, 100})
     void 로또_번호는_1_에서_45_사이가_아니면_예외가_발생한다(int lottoNumber) {
-        assertThatThrownBy(() -> new LottoNumber(lottoNumber)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> LottoNumber.from(lottoNumber)).isInstanceOf(IllegalArgumentException.class);
     }
 
 }

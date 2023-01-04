@@ -10,34 +10,34 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 public class UserLottosTest {
     LottoNumbers userLotto1 = new LottoNumbers(
             Arrays.asList(
-                    new LottoNumber(1),
-                    new LottoNumber(2),
-                    new LottoNumber(3),
-                    new LottoNumber(4),
-                    new LottoNumber(5),
-                    new LottoNumber(6)
+                    LottoNumber.from(1),
+                    LottoNumber.from(2),
+                    LottoNumber.from(3),
+                    LottoNumber.from(4),
+                    LottoNumber.from(5),
+                    LottoNumber.from(6)
             )
     );
 
     LottoNumbers userLotto2 = new LottoNumbers(
             Arrays.asList(
-                    new LottoNumber(4),
-                    new LottoNumber(5),
-                    new LottoNumber(6),
-                    new LottoNumber(7),
-                    new LottoNumber(8),
-                    new LottoNumber(9)
+                    LottoNumber.from(4),
+                    LottoNumber.from(5),
+                    LottoNumber.from(6),
+                    LottoNumber.from(7),
+                    LottoNumber.from(8),
+                    LottoNumber.from(9)
             )
     );
 
     LottoNumbers userLotto3 = new LottoNumbers(
             Arrays.asList(
-                    new LottoNumber(7),
-                    new LottoNumber(8),
-                    new LottoNumber(9),
-                    new LottoNumber(10),
-                    new LottoNumber(11),
-                    new LottoNumber(12)
+                    LottoNumber.from(7),
+                    LottoNumber.from(8),
+                    LottoNumber.from(9),
+                    LottoNumber.from(10),
+                    LottoNumber.from(11),
+                    LottoNumber.from(12)
             )
     );
 

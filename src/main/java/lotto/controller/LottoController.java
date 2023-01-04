@@ -13,17 +13,22 @@ public class LottoController {
     private final OutputView outputView = new OutputView();
 
     public void play() {
-        int amount = getPurchaseAmount();
-        UserLottos userLottos = new UserLottos(RandomLottoGenerator.generateLottos(amount));
-        outputView.printUserLottos(userLottos.getLottoNumbers());
-        List<Integer> lottoNumbers = inputView.getAnswerLottoInput();
-        LottoNumber bonusNumber = new LottoNumber(inputView.getBonusBallInput());
+        try {
+            int amount = getPurchaseAmount();
+            UserLottos userLottos = new UserLottos(RandomLottoGenerator.generateLottos(amount));
+            outputView.printUserLottos(userLottos.getLottoNumbers());
+            List<Integer> lottoNumbers = inputView.getAnswerLottoInput();
+            LottoNumber bonusNumber = LottoNumber.from(inputView.getBonusBallInput());
 
-        List<LottoNumber> answerLottoNumbers = lottoNumbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(answerLottoNumbers), bonusNumber);
-        outputView.printResult(winningLotto.getPrizeCountMap(userLottos.getLottoNumbers()));
+            List<LottoNumber> answerLottoNumbers = lottoNumbers.stream()
+                    .map(LottoNumber::from)
+                    .collect(Collectors.toList());
+            WinningLotto winningLotto = new WinningLotto(new LottoNumbers(answerLottoNumbers), bonusNumber);
+            outputView.printResult(winningLotto.getPrizeCountMap(userLottos.getLottoNumbers()));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            play();
+        }
     }
 
     private int getPurchaseAmount() {
