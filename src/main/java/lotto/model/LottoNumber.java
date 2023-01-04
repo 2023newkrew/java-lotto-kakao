@@ -32,9 +32,11 @@ public class LottoNumber {
     }
 
     public static LottoNumber from(String lottoNumberString) {
-        int lottoNumber = Optional.of(Integer.parseInt(lottoNumberString))
-                .orElseThrow(() -> new LottoException(ErrorCode.INVALID_INPUT_TYPE_NOT_INTEGER));
-        return from(lottoNumber);
+        try {
+            return from(Integer.parseInt(lottoNumberString));
+        } catch(NumberFormatException e) {
+            throw new LottoException(ErrorCode.INVALID_INPUT_TYPE_NOT_INTEGER);
+        }
     }
 
     private void validateLottoNumber(int lottoNumber) {
