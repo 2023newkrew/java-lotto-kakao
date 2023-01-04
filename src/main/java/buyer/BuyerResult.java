@@ -36,6 +36,8 @@ public class BuyerResult {
     }
 
     public int getTotalPrize() {
-        return Arrays.stream(Rank.values()).mapToInt(e -> result.getOrDefault(e, 0)).sum();
+        return Arrays.stream(Rank.values())
+                .mapToInt(e -> result.getOrDefault(e, 0) * e.prize)
+                .sum();
     }
 }
