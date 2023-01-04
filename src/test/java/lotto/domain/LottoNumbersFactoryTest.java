@@ -12,6 +12,10 @@ import org.junit.jupiter.api.Test;
 
 class LottoNumbersFactoryTest {
 
+
+    /**
+     * 1씩 증가하면서 생성하는 정책
+     */
     class IncreasePolicy implements GeneratePolicy {
         int num = 1;
 

@@ -13,7 +13,10 @@ class ErrorMessageFormatterTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
     void errorMessageTest(int input) {
+        //given
         String errorMessage = ErrorMessageFormatter.makeErrorMessage("a", input, "context");
+
+        //expected
         Assertions.assertThat(errorMessage).isEqualTo(String.format("EXPECTED: a\n"
                 + "ACTUAL: %d\n"
                 + "CONTEXT: context\n", input));
