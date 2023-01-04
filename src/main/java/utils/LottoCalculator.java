@@ -9,7 +9,7 @@ import static constant.LottoSetting.LOTTO_PRICE;
 
 public class LottoCalculator {
 
-    public static int calculateNumberOfLotto(Payment payment) {
+    public static int calculateLottoCount(Payment payment) {
         return payment.getPayment() / LOTTO_PRICE;
     }
 

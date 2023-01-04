@@ -26,7 +26,7 @@ public class InputView {
         return getIntValue();
     }
 
-    public int getNumberOfManualLotto() {
+    public int getManualLottoCount() {
         System.out.println(NUMBER_OF_LOTTO_BUY_MANUALLY_MESSAGE);
         return getIntValue();
     }

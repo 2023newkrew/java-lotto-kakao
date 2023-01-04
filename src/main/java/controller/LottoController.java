@@ -1,7 +1,6 @@
 package controller;
 
 import domain.*;
-import utils.InputValidator;
 import utils.LottoConverter;
 import view.InputView;
 import view.OutputView;
@@ -26,11 +25,9 @@ public class LottoController {
 
     public void run() {
         Payment payment = new Payment(inputView.getPayment());
+        LottoCount manualLottoCount = LottoCount.of(payment, inputView.getManualLottoCount());
 
-        int numberOfManualLotto = inputView.getNumberOfManualLotto();
-        InputValidator.validateNumberOfManualLotto(payment, numberOfManualLotto);
-
-        PurchasedLotto purchasedLotto = getPurchasedLotto(payment, numberOfManualLotto);
+        PurchasedLotto purchasedLotto = getPurchasedLotto(payment, manualLottoCount.getCount());
         outputView.printPurchasedLotto(purchasedLotto);
 
         LottoNumbers winLottoNumbers = LottoConverter.integerListToLottoNumbers(inputView.getWinningLottoNumbers());
@@ -50,16 +47,16 @@ public class LottoController {
         return lotto.rankEachLotto(winLottoNumbers, bonusBall);
     }
 
-    private PurchasedLotto getPurchasedLotto(Payment payment, int numberOfManualLotto) {
-        int numberOfAutomaticLotto = LottoCalculator.calculateNumberOfLotto(payment) - numberOfManualLotto;
-        List<LottoNumbers> lottoNumbersList = getManualLottoNumbers(numberOfManualLotto);
-        lottoNumbersList.addAll(LottoGenerator.generateLotto(numberOfAutomaticLotto));
+    private PurchasedLotto getPurchasedLotto(Payment payment, int manualLottoCount) {
+        int automaticLottoCount = LottoCalculator.calculateLottoCount(payment) - manualLottoCount;
+        List<LottoNumbers> lottoNumbersList = getManualLottoNumbers(manualLottoCount);
+        lottoNumbersList.addAll(LottoGenerator.generateLotto(automaticLottoCount));
 
-        return new PurchasedLotto(numberOfManualLotto, numberOfAutomaticLotto, lottoNumbersList);
+        return new PurchasedLotto(manualLottoCount, automaticLottoCount, lottoNumbersList);
     }
 
-    private List<LottoNumbers> getManualLottoNumbers(int numberOfManualLotto) {
-        return inputView.getManualLottoNumbers(numberOfManualLotto)
+    private List<LottoNumbers> getManualLottoNumbers(int manualLottoCount) {
+        return inputView.getManualLottoNumbers(manualLottoCount)
                 .stream()
                 .map(LottoConverter::integerListToLottoNumbers)
                 .collect(Collectors.toList());

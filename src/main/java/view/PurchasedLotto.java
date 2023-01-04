@@ -8,13 +8,13 @@ public class PurchasedLotto {
 
     private static final String NUMBER_OF_LOTTO_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
-    private final int numberOfManualLotto;
-    private final int numberOfAutomaticLotto;
+    private final int manualLottoCount;
+    private final int automaticLottoCount;
     private final List<LottoNumbers> lottoNumbersList;
 
-    public PurchasedLotto(int numberOfManualLotto, int numberOfAutomaticLotto, List<LottoNumbers> lottoNumbersList) {
-        this.numberOfManualLotto = numberOfManualLotto;
-        this.numberOfAutomaticLotto = numberOfAutomaticLotto;
+    public PurchasedLotto(int manualLottoCount, int automaticLottoCount, List<LottoNumbers> lottoNumbersList) {
+        this.manualLottoCount = manualLottoCount;
+        this.automaticLottoCount = automaticLottoCount;
         this.lottoNumbersList = lottoNumbersList;
     }
 
@@ -24,6 +24,6 @@ public class PurchasedLotto {
 
     @Override
     public String toString() {
-        return String.format(NUMBER_OF_LOTTO_MESSAGE, numberOfManualLotto, numberOfAutomaticLotto);
+        return String.format(NUMBER_OF_LOTTO_MESSAGE, manualLottoCount, automaticLottoCount);
     }
 }

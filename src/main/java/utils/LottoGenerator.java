@@ -18,8 +18,8 @@ public class LottoGenerator {
             .collect(Collectors.toList());
 
 
-    public static List<LottoNumbers> generateLotto(int numberOfLotto) {
-        return IntStream.range(0, numberOfLotto)
+    public static List<LottoNumbers> generateLotto(int lottoCount) {
+        return IntStream.range(0, lottoCount)
                 .mapToObj(i -> generate())
                 .collect(Collectors.toList());
     }
