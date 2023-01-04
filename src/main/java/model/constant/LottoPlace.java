@@ -1,4 +1,5 @@
-package model;
+//등수의 정보를 저장한다
+package model.constant;
 
 public enum LottoPlace {
     FIRST_PLACE,
@@ -6,5 +7,5 @@ public enum LottoPlace {
     THIRD_PLACE,
     FOURTH_PLACE,
     FIFTH_PLACE,
-    LOSE;
+    LOSE
 }
