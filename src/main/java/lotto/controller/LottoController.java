@@ -1,11 +1,8 @@
 package lotto.controller;
 
-import java.sql.SQLOutput;
 import java.util.*;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import lotto.common.exception.InvalidInputException;
 import lotto.model.number.GoalNumber;
 import lotto.model.number.LottoNumber;
 import lotto.model.statistic.LottoStatistic;
