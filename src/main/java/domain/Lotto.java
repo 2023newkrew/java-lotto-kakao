@@ -39,7 +39,7 @@ public class Lotto {
                 .filter(winningLottoNumbers::contains)
                 .count();
         if (count == 5 && isBonus(bonusNumber)) {
-            return Result.FIVEBONUS;
+            return Result.SECOND_PLACE;
         }
         return Result.of(count);
     }
