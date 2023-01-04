@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.exception.InvalidCashValue;
+import lotto.domain.exception.TypeMismatchException;
 
 import java.util.Objects;
 
@@ -27,7 +28,7 @@ public class Cash implements Comparable {
     @Override
     public boolean equals(Object o) {
         if (o == null || (getClass() != o.getClass() && o.getClass()!=Long.class)){
-            throw new RuntimeException();
+            return false;
         }
         if (Long.class == o.getClass()){
             return cash == ((Long)o);
@@ -49,7 +50,7 @@ public class Cash implements Comparable {
     @Override
     public int compareTo(Object o) {
         if (o == null || (getClass() != o.getClass() && o.getClass()!=Long.class)){
-            throw new RuntimeException();
+            throw new TypeMismatchException();
         }
         if (Long.class == o.getClass()){
             return cash > ((Long)o) ? 1 : (cash == (Long)o ? 0 : -1);

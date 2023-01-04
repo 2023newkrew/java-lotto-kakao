@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import lotto.domain.exception.InvalidLottoBallNumber;
+import lotto.domain.exception.TypeMismatchException;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -30,7 +32,7 @@ public class LottoBallNumber implements Comparable{
     @Override
     public int compareTo(Object o) {
         if (o == null || (getClass() != o.getClass() && o.getClass() != Integer.class)){
-            throw new RuntimeException();
+            throw new TypeMismatchException();
         }
         if (o.getClass() == Integer.class){
             return num-(Integer)o;
