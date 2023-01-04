@@ -1,29 +1,32 @@
 package lotto.domain;
 
 public class LottoResult {
-    private final Lotto myLotto;
-    private final Lotto winningLotto;
-    private final LottoNumber bonusNumber;
+    private final int count;
+    private final boolean bonus;
 
     public LottoResult(Lotto myLotto, Lotto winningLotto, LottoNumber bonusNumber) {
-        this.myLotto = myLotto;
-        this.winningLotto = winningLotto;
-        this.bonusNumber = bonusNumber;
+        this.count = myLotto.compare(winningLotto);
+        this.bonus = myLotto.hasBonus(bonusNumber);
+    }
+
+    public LottoResult(int count, boolean bonus) {
+        this.count = count;
+        this.bonus = bonus;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null)
+            return false;
+        if(!(obj instanceof LottoResult))
+            return false;
+        return count == ((LottoResult) obj).count
+                && bonus == ((LottoResult) obj).bonus;
     }
 
     public LottoRank getRank() {
-        if( LottoRank.FIRST.COUNT == myLotto.compare(winningLotto))
-            return LottoRank.FIRST;
-        if(LottoRank.SECOND.COUNT == myLotto.compare(winningLotto)
-            && myLotto.hasBonus(bonusNumber))
-            return LottoRank.SECOND;
-        if(LottoRank.THIRD.COUNT == myLotto.compare(winningLotto))
-            return LottoRank.THIRD;
-        if(LottoRank.FOURTH.COUNT == myLotto.compare(winningLotto))
-            return LottoRank.FOURTH;
-        if(LottoRank.FIFTH.COUNT == myLotto.compare(winningLotto))
-            return LottoRank.FIFTH;
-
-        return LottoRank.FAIL;
+        if(count==LottoRank.SECOND.COUNT)
+            return LottoRank.getRank(count, bonus);
+        return LottoRank.getRank(count, false);
     }
 }
