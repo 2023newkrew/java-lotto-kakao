@@ -31,7 +31,7 @@ public class LottoTest {
         Map<Rank, Integer> rankMap = lotto.rankEachLotto(winLottoNumbers, bonusBall);
 
         // then
-        for (Rank rank : rankMap.keySet()) {
+        for (Rank rank : Rank.values()) {
             assertThat(rankMap.get(rank)).isEqualTo(expectedRankMap.get(rank));
         }
     }

@@ -24,7 +24,6 @@ class LottoCalculatorTest {
 
         // when, then
         assertThat(LottoCalculator.calculateYield(payment, rankMap)).isEqualTo(0.35);
-
     }
 
 }
