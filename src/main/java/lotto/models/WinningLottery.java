@@ -1,12 +1,13 @@
 package lotto.models;
 
-import static lotto.common.LotteryConfiguration.MAX_VALUE;
-import static lotto.common.LotteryConfiguration.MIN_VALUE;
-
 import java.util.List;
 import lotto.models.enums.Rank;
 
 public class WinningLottery {
+
+    static public final Integer MIN_VALUE = 1;
+
+    static public final Integer MAX_VALUE = 45;
 
     private final Lottery lottery;
 

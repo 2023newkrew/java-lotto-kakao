@@ -1,6 +1,5 @@
 package lotto.models;
 
-import static lotto.common.LotteryConfiguration.LOTTERY_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
@@ -12,6 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LotteryStatisticsTest {
+
+    static public final Integer LOTTERY_COUNT = 6;
+
     @Test
     @DisplayName("로또 리스트와 지난 주 정답으로부터 로또 통계를 도출할 수 있다.")
     public void testCreateLotteryStatistics() {

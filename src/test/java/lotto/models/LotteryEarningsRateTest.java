@@ -1,7 +1,5 @@
 package lotto.models;
 
-import static lotto.common.LotteryConfiguration.LOTTERY_COUNT;
-import static lotto.common.LotteryConfiguration.LOTTERY_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
@@ -14,6 +12,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LotteryEarningsRateTest {
+
+    static public final Integer LOTTERY_COUNT = 6;
+
+    static public final Integer LOTTERY_PRICE = 1000;
+
     @Test
     @DisplayName("로또 통계와 사용 예산으로부터 수익률을 계산할 수 있다.")
     public void testCreateLotteryEarningRates() {

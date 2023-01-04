@@ -1,14 +1,16 @@
 package lotto.models;
 
-import static lotto.common.LotteryConfiguration.MAX_VALUE;
-import static lotto.common.LotteryConfiguration.MIN_VALUE;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class LotteryNumberTest {
+
+    static public final Integer MIN_VALUE = 1;
+
+    static public final Integer MAX_VALUE = 45;
+
     @ParameterizedTest
     @ValueSource(ints = {1, 5, 35, 45})
     @DisplayName("1~45 사이의 로또넘버를 가져올 수 있다.")

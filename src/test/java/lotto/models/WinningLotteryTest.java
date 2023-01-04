@@ -1,7 +1,5 @@
 package lotto.models;
 
-import static lotto.common.LotteryConfiguration.MAX_VALUE;
-import static lotto.common.LotteryConfiguration.MIN_VALUE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -13,6 +11,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class WinningLotteryTest {
+
+    static public final Integer MIN_VALUE = 1;
+
+    static public final Integer MAX_VALUE = 45;
 
     @Nested
     @DisplayName("로또 등수 테스트")

@@ -1,7 +1,5 @@
 package lotto.models;
 
-import static lotto.common.LotteryConfiguration.LOTTERY_COUNT;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +7,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lottery {
+
+    static public final Integer LOTTERY_COUNT = 6;
     private final List<LotteryNumber> numbers;
 
     public Lottery(List<Integer> numbers) {

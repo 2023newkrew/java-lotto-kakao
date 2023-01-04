@@ -1,7 +1,5 @@
 package lotto.controllers;
 
-import static lotto.common.LotteryConfiguration.LOTTERY_PRICE;
-
 import java.util.List;
 import lotto.common.LotteryGenerator;
 import lotto.models.Lottery;
@@ -13,6 +11,8 @@ import lotto.views.InputView;
 import lotto.views.OutputView;
 
 public class LotteryController {
+
+    static public final Integer LOTTERY_PRICE = 1000;
     private final OutputView outputView;
     private final InputView inputView;
 

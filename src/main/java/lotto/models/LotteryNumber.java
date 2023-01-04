@@ -1,13 +1,14 @@
 package lotto.models;
 
-import static lotto.common.LotteryConfiguration.MAX_VALUE;
-import static lotto.common.LotteryConfiguration.MIN_VALUE;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LotteryNumber {
+
+    static public final Integer MIN_VALUE = 1;
+
+    static public final Integer MAX_VALUE = 45;
 
     private static final Map<Integer, LotteryNumber> numbers = new HashMap<>();
 
