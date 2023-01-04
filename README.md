@@ -39,3 +39,17 @@
 - autoGenerator의 역할 분리
 - 객체 메시지 전달로 로직 개선
 - SRP 고려하여 리팩토링
+
+---
+
+## step2 리팩토링 사항 및 기능목록
+
+객체 역할과 SRP 고려
+
+- buyerProfit 테스트용 생성자 제거
+- buyerProfit 임계치 값 처리
+- 로또 자동 생성 객체 별도 유지 SRP 고려
+- Buyer getBuyerResult 리팩토링
+- 수동 로또 구매
+- 수동 로또 번호 입력
+- 사용자 입력 값에 대한 예외처리
