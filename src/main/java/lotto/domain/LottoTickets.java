@@ -1,11 +1,12 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static lotto.utils.Constants.MIN_PURCHASE_PRICE;
 
 public class LottoTickets {
-    private final ArrayList<LottoTicket> tickets;
+    private final List<LottoTicket> tickets;
 
     public LottoTickets(int amount) {
         if(!checkAmountUpperThan1000(amount)){
@@ -29,7 +30,7 @@ public class LottoTickets {
         return tickets.size();
     }
 
-    public ArrayList<LottoTicket> getTickets(){
+    public List<LottoTicket> getTickets(){
         return this.tickets;
     }
 

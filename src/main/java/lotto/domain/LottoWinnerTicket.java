@@ -1,7 +1,6 @@
 package lotto.domain;
 
-
-import java.util.ArrayList;
+import java.util.List;
 
 import static lotto.utils.Constants.LOTTO_LOWER_BOUND;
 import static lotto.utils.Constants.LOTTO_UPPER_BOUND;
@@ -17,7 +16,7 @@ public class LottoWinnerTicket {
         bonusRangeCheck();
     }
 
-    public ArrayList<Integer> getLottoNumbers() {
+    public List<Integer> getLottoNumbers() {
         return lottoTicket.getLottoNumbers();
     }
 

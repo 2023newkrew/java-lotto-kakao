@@ -7,7 +7,7 @@ import lotto.utils.StringConversion;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class LottoApplication {
 
@@ -33,11 +33,10 @@ public class LottoApplication {
         LottoCalculator lottoCalculator = new LottoCalculator(lottoWinnerTicket);
 
         // Winner Score 뽑아내기
-        ArrayList<Integer> winScore = lottoCalculator.getWinScore(lottoController.getLottoTickets());
+        List<Integer> winScore = lottoCalculator.getWinScore(lottoController.getLottoTickets());
 
         double rate = lottoCalculator.calcRateOfReturn(winScore, amount);
         resultView.printWinningStatics(winScore, rate);
-
     }
 
     private static LottoWinnerTicket getLottoWinnerTicket(InputView inputView, StringConversion stringConversion) {

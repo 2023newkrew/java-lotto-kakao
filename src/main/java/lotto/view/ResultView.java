@@ -3,7 +3,7 @@ package lotto.view;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static lotto.utils.Constants.MIN_PURCHASE_PRICE;
 import static lotto.utils.LottoMessage.*;
@@ -14,7 +14,7 @@ public class ResultView {
         System.out.println(amount/MIN_PURCHASE_PRICE + RESULT_PURCHASE_COUNT.getMessage());
     }
 
-    public void printWinningStatics(ArrayList<Integer> result, double rate){
+    public void printWinningStatics(List<Integer> result, double rate){
         System.out.println(RESULT_WINNING_STAT.getMessage());
         System.out.println(RESULT_LINE.getMessage());
         System.out.println(RESULT_THREE_MATCHING.getMessage() + result.get(0));
@@ -35,7 +35,7 @@ public class ResultView {
     }
 
     public void printLottoTickets(LottoTickets lottoTickets) {
-        ArrayList<LottoTicket> tickets = lottoTickets.getTickets();
+        List<LottoTicket> tickets = lottoTickets.getTickets();
         for(LottoTicket ticket : tickets){
             System.out.println(ticket.getLottoNumbers().toString());
         }

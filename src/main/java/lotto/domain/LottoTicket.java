@@ -1,11 +1,12 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static lotto.utils.Constants.*;
 
 public class LottoTicket {
-    private final ArrayList<Integer> lottoNumbers;
+    private final List<Integer> lottoNumbers;
 
     public LottoTicket(ArrayList<Integer> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
@@ -14,7 +15,7 @@ public class LottoTicket {
         lottoNumberDuplicateCheck();
     }
 
-    public ArrayList<Integer> getLottoNumbers() {
+    public List<Integer> getLottoNumbers() {
         return this.lottoNumbers;
     }
 
