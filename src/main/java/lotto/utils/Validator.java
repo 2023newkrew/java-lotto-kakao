@@ -46,6 +46,11 @@ public class Validator {
             throw new IllegalArgumentException("로또 번호는 중복 입력 해서는 안됩니다.");
         }
     }
+    public void checkLottoNumbersInRange(List<Integer> lottoNumbers){
+        for (int lottoNumber: lottoNumbers) {
+            checkInRange(lottoNumber);
+        }
+    }
     public void checkInRange(int number){
         if ( number < 1 || number > 45){
             throw new IllegalArgumentException("로또 번호는 1~45 사이입니다.");
@@ -54,6 +59,12 @@ public class Validator {
     public void checkDuplicateLottoNumberWithBonusNumber(List<Integer> lottoNumbers, int bonusNumber){
         if (lottoNumbers.contains(bonusNumber)){
             throw new IllegalArgumentException("보너스 볼은 로또 번호와 중복되면 안됩니다.");
+        }
+    }
+
+    public void checkNumbersSize(int numberOfManualLottos, int numberOfLotto){
+        if (numberOfManualLottos > numberOfLotto){
+            throw new IllegalArgumentException("수동으로 구매할 로또 수는 전체 구입 수 보다 크면 안됩니다.");
         }
     }
 }
