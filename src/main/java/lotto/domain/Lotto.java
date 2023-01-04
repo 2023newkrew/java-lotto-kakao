@@ -11,6 +11,10 @@ public class Lotto {
     private final SingleLottoNumber bonusNumber;
 
     public Lotto(LottoNumbers lottoNumbers, SingleLottoNumber bonusNumber) {
+        if (lottoNumbers.containsLottoNumber(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 볼 번호가 정답 로또와 중복됩니다.");
+        }
+
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = bonusNumber;
     }
