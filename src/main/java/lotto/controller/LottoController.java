@@ -34,7 +34,7 @@ public class LottoController {
     private int getPurchaseAmount() {
         int expenseInput = inputView.getExpenseInput();
         Money money = new Money(expenseInput);
-        int amount = money.getLottoAmount();
+        int amount = LottoSeller.getLottoAmount(money);
         outputView.printPurchaseResult(amount);
         return amount;
     }
