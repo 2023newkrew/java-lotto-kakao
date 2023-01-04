@@ -62,6 +62,11 @@ public class Validator {
         }
     }
 
+    public void checkNumbersPositive(int numberOfManualLottos){
+        if (numberOfManualLottos < 0){
+            throw new IllegalArgumentException("수동으로 구매할 로또 수는 0보다 커야합니다.");
+        }
+    }
     public void checkNumbersSize(int numberOfManualLottos, int numberOfLotto){
         if (numberOfManualLottos > numberOfLotto){
             throw new IllegalArgumentException("수동으로 구매할 로또 수는 전체 구입 수 보다 크면 안됩니다.");
