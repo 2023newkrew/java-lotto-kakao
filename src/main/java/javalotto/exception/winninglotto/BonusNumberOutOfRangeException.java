@@ -1,7 +1,7 @@
 package javalotto.exception.winninglotto;
 
-import static javalotto.domain.Lotto.LOTTO_NUMBER_MAX_VALUE;
-import static javalotto.domain.Lotto.LOTTO_NUMBER_MIN_VALUE;
+import static javalotto.util.LottoConstants.LOTTO_NUMBER_MAX_VALUE;
+import static javalotto.util.LottoConstants.LOTTO_NUMBER_MIN_VALUE;
 
 public class BonusNumberOutOfRangeException extends IllegalArgumentException {
     public BonusNumberOutOfRangeException(int bonusNumber) {

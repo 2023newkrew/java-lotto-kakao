@@ -3,6 +3,7 @@ package javalotto.domain;
 import javalotto.exception.lotto.LottoInvalidSizeException;
 import javalotto.exception.lotto.LottoNumberDuplicateException;
 import javalotto.exception.lotto.LottoNumberOutOfRangeException;
+import javalotto.util.LottoConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +11,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int LOTTO_NUMBER_MIN_VALUE = 1;
-    public static final int LOTTO_NUMBER_MAX_VALUE = 45;
-    public static final int LOTTO_NUMBERS_COUNT = 6;
-
     private final List<Integer> numbers;
 
     private Lotto(List<Integer> numbers) {
@@ -48,7 +45,7 @@ public class Lotto {
     }
 
     public static boolean isInvalidRange(int number) {
-        return LOTTO_NUMBER_MIN_VALUE > number || number > LOTTO_NUMBER_MAX_VALUE;
+        return LottoConstants.LOTTO_NUMBER_MIN_VALUE > number || number > LottoConstants.LOTTO_NUMBER_MAX_VALUE;
     }
 
     private static boolean hasDuplicate(List<Integer> numbers) {
@@ -62,7 +59,7 @@ public class Lotto {
     }
 
     private static boolean isInvalidSize(List<Integer> numbers) {
-        return numbers.size() != LOTTO_NUMBERS_COUNT;
+        return numbers.size() != LottoConstants.LOTTO_NUMBERS_COUNT;
     }
 
     public boolean contains(int number) {
