@@ -22,29 +22,29 @@ public class LottoController {
 
 
     public void run() {
-        int lottoCount = getLottoCount();
+        int lottoCount = readAmountAndCalculateLottoCount();
         lottoGame.createLotto(lottoCount);
         outputView.printAllLotto(lottoGame.getLottoHandler());
-        setLottoAnswer();
+        readLottoAnswer();
         lottoGame.grade();
         outputView.printGameResult(lottoGame.getGameResultDto());
     }
 
-    private void setLottoAnswer() {
+    private void readLottoAnswer() {
         outputView.printInputRequestOfWinningNumber();
         LottoNumbers lottoAnswerNumbers = new LottoNumbers(inputView.readLottoAnswerNumbers());
         outputView.printReadBonusBall();
         lottoGame.setLottoAnswer(new LottoAnswer(lottoAnswerNumbers, inputView.readBonusBall()));
     }
 
-    private int getLottoCount() {
+    private int readAmountAndCalculateLottoCount() {
         outputView.printReadPrice();
-        int lottoCount = calucateLottoCount();
+        int lottoCount = calculateLottoCount();
         outputView.printCount(lottoCount);
         return lottoCount;
     }
 
-    private int calucateLottoCount() {
+    private int calculateLottoCount() {
         return inputView.readPrice() / LOTTO_PRICE.getValue();
     }
 
