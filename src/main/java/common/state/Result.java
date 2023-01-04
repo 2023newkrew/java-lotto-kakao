@@ -1,15 +1,17 @@
 package common.state;
 
+import view.OutputView;
+
 import java.util.Arrays;
 
 public enum Result {
 
-    NONE(0, 0, ""),
-    FIFTH_PLACE(3, 5_000, "3개 일치"),
-    FOURTH_PLACE(4, 50_000, "4개 일치"),
-    THIRD_PLACE(5, 1500_000, "5개 일치"),
-    SECOND_PLACE(5, 30_000_000, "5개 일치, 보너스 볼 일치"),
-    FIRST_PLACE(6, 2_000_000_000, "6개 일치");
+    NONE(0, 0, OutputView.NONE_DESCRIPTON),
+    FIFTH_PLACE(3, 5_000, OutputView.FIFTH_PLACE_DESCRIPTON),
+    FOURTH_PLACE(4, 50_000, OutputView.FOURTH_PLACE_DESCRIPTON),
+    THIRD_PLACE(5, 1500_000, OutputView.THIRD_PLACE_DESCRIPTON),
+    SECOND_PLACE(5, 30_000_000, OutputView.SECOND_PLACE_DESCRIPTON),
+    FIRST_PLACE(6, 2_000_000_000, OutputView.FIRST_PLACE_DESCRIPTON);
 
     private int match;
     private int winnings;

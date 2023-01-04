@@ -5,6 +5,19 @@ import domain.Lottos;
 import java.util.List;
 
 public class OutputView {
+
+    public static final String FIRST_PLACE_DESCRIPTON = "6개 일치";
+    public static final String SECOND_PLACE_DESCRIPTON = "5개 일치, 보너스 볼 일치";
+    public static final String THIRD_PLACE_DESCRIPTON = "5개 일치";
+    public static final String FOURTH_PLACE_DESCRIPTON = "4개 일치";
+    public static final String FIFTH_PLACE_DESCRIPTON = "3개 일치";
+    public static final String NONE_DESCRIPTON = "";
+    public static final String TOTAL_RESULT_MESSAGE = "%s (%d원)- %d개";
+    public static final String PROFIT_MESSAGE = "총 수익률은 %.2f입니다.";
+    public static final String PROFIT_NEGATIVE_MESSAGE = "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+    public static final String PROFIT_POSITIVE_MESSAGE = "(기준이 1이기 때문에 결과적으로 이득라는 의미임)";
+
+
     public static void printPaidPriceRequest() {
         System.out.println("구입금액을 입력해 주세요.");
     }

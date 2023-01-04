@@ -1,6 +1,7 @@
 package domain;
 
 import common.state.Result;
+import view.OutputView;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ public class TotalResult {
         return Arrays.stream(Result.values())
                 .filter(result -> result != Result.NONE)
                 .map(result ->
-                        String.format("%s (%d원)- %d개",
+                        String.format(OutputView.TOTAL_RESULT_MESSAGE,
                                 result.getDescription(),
                                 result.getWinnings(),
                                 this.getValueOfResult(result)))
@@ -48,11 +49,11 @@ public class TotalResult {
     }
 
     public String getProfitMessage(double profit) {
-        String message = String.format("총 수익률은 %.2f입니다.", profit);
+        String message = String.format(OutputView.PROFIT_MESSAGE, profit);
         if (profit <= 1) {
-            return message + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+            return message + OutputView.PROFIT_NEGATIVE_MESSAGE;
         }
-        return message + "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+        return message + OutputView.PROFIT_POSITIVE_MESSAGE;
     }
 
     @Override
