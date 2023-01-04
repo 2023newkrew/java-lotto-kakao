@@ -1,6 +1,5 @@
 package view;
 
-import buyer.BuyerProfit;
 import buyer.BuyerResult;
 import lotto.Lotto;
 import lotto.Rank;
@@ -31,6 +30,7 @@ public class OutputView {
                         (result.getResult().getOrDefault(e, 0)) + "개");
             }
         });
+        printProfit(result);
     }
 
     private void printRankInfo(Rank rank) {
@@ -38,7 +38,7 @@ public class OutputView {
         System.out.print("(" + rank.prize + ")- ");
     }
 
-    public void printProfit(BuyerProfit buyerProfit) {
-        System.out.println("총 수익률은 " + buyerProfit.getProfit() + "입니다");
+    public void printProfit(BuyerResult result) {
+        System.out.println("총 수익률은 " + result.getProfit() + "입니다");
     }
 }

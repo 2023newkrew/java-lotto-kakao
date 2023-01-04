@@ -34,12 +34,12 @@ public class BuyerResult {
         return result;
     }
 
-    public BuyerProfit getProfit() {
+    public double getProfit() {
         int profit = Arrays.stream(Rank.values())
                 .mapToInt(e -> result.getOrDefault(e, 0) * e.prize)
                 .sum();
         int count = Arrays.stream(Rank.values()).mapToInt(e -> result.getOrDefault(e, 0)).sum();
 
-        return new BuyerProfit((double) profit / (count * LottoGenerator.LOTTERY_PRICE));
+        return (double) profit / (count * LottoGenerator.LOTTERY_PRICE);
     }
 }

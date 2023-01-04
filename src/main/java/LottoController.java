@@ -22,7 +22,6 @@ public class LottoController {
         BuyerResult buyerResult = winningLotto.getResult(buyer.getLotteries());
 
         outputView.printResult(buyerResult);
-        outputView.printProfit(buyerResult.getProfit());
     }
 
 }
