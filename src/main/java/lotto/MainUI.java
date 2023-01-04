@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 public class MainUI {
     private final Scanner scanner;
     private final PrintStream printer;
-    private final LottoTicketGenerator lottoTicketGenerator;
     private final ArrayList<LottoTicket> lottoTickets = new ArrayList<>();
     private LottoWinningNumber lottoWinningNumber = null;
     private Price income = null;
@@ -18,7 +17,6 @@ public class MainUI {
     public MainUI(InputStream inputStream, OutputStream outputStream) {
         this.scanner = new Scanner(inputStream);
         this.printer = new PrintStream(outputStream);
-        this.lottoTicketGenerator = new LottoTicketGenerator(new LottoBallGenerator());
     }
 
     public void initPurchasePrice() {
@@ -28,7 +26,7 @@ public class MainUI {
             throw new RuntimeException("로또 가격은 1000원입니다. 1000의 배수를 입력해야 합니다.");
         }
         income = new Price(incomeValue);
-        Stream.generate(lottoTicketGenerator::generate)
+        Stream.generate(LottoTicket::fromRandom)
                 .limit(income.floorDivide(new Price(1000)))
                 .collect(Collectors.toCollection(() -> lottoTickets));
     }

@@ -55,4 +55,24 @@ public class LottoBallTest {
     void ballEquality(int a, int b, int expectedValue) {
         assertThat(new LottoBall(a).compareTo(new LottoBall(b))).isEqualTo(expectedValue);
     }
+
+    @DisplayName("올바른 문자열 형태의 공 파싱")
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', value = {
+            "'1'      | 1 ",
+
+    })
+    void validBall(String ballLit, int ballNum) {
+        assertThat(LottoBall.parse(ballLit))
+                .isEqualTo(new LottoBall(ballNum));
+    }
+
+    @DisplayName("올바르지 않은 문자열 형태의 공 파싱")
+    @ParameterizedTest
+    @CsvSource(delimiter = '|', value = {
+            "'---'",
+    })
+    void invalidBall(String ballLit) {
+        assertThatThrownBy(() -> LottoBall.parse(ballLit));
+    }
 }

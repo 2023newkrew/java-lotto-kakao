@@ -14,6 +14,10 @@ public class LottoBall implements Comparable<LottoBall> {
         this.ball = ball;
     }
 
+    public static LottoBall parse(String ball) {
+        return new LottoBall(Integer.parseInt(ball));
+    }
+
     @Override
     public String toString() {
         return "" + ball;

@@ -1,9 +1,8 @@
 package lotto;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicket {
     protected final Set<LottoBall> lottoBalls;
@@ -17,6 +16,23 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
         }
         this.lottoBalls = balls;
+    }
+
+    public static LottoTicket fromRandom() {
+        List<LottoBall> candidates = IntStream.rangeClosed(1, 45)
+                .boxed()
+                .map(LottoBall::new)
+                .collect(Collectors.toList());
+        Collections.shuffle(candidates);
+        return new LottoTicket(candidates.subList(0, 6));
+    }
+
+    public static LottoTicket parse(String raw) {
+        return new LottoTicket(
+                Arrays.stream(raw.split(","))
+                        .map(LottoBall::parse)
+                        .collect(Collectors.toList())
+        );
     }
 
     @Override
