@@ -5,7 +5,9 @@ import java.util.stream.Stream;
 import lotto.domain.LottoDispenser;
 import lotto.domain.LottoSetting;
 import lotto.domain.LottoTicketList;
+import lotto.domain.strategy.ManualNumberSelectStrategy;
 import lotto.domain.strategy.NumberSelectStrategy;
+import lotto.domain.strategy.RandomNumberSelectStrategy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,9 +19,10 @@ public class LottoDispenserTest {
     @DisplayName("금액에 따른 로또 티켓 발급")
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketByPriceData")
-    public void issueLottoTicketByPrice(int price, int number) {
-        LottoDispenser lottoDispenser = LottoDispenser.from(new LottoSetting());
-        Assertions.assertThat(lottoDispenser.getLottoTicket(price).getCount()).isEqualTo(number);
+    public void issueLottoTicketByPrice(int money, int number) {
+        LottoDispenser lottoDispenser = new LottoDispenser(new LottoSetting(),
+                RandomNumberSelectStrategy.getInstance());
+        Assertions.assertThat(lottoDispenser.getLottoTicketList(money).getCount()).isEqualTo(number);
     }
 
     private static Stream<Arguments> getIssueLottoTicketByPriceData() {
@@ -33,11 +36,10 @@ public class LottoDispenserTest {
     @DisplayName("숫자 생성 전략을 통한 숫자 생성")
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketByNumberSelectStrategyData")
-    public void issueLottoTicketByPrice(List<List<Integer>> randomNumbers, int price, String expected) {
-        LottoSetting lottoSetting = new LottoSetting();
-        lottoSetting.setNumberSelectStrategy(createNumberSelectStrategy(randomNumbers));
-        LottoDispenser lottoDispenser = LottoDispenser.from(lottoSetting);
-        LottoTicketList lottoTickets = lottoDispenser.getLottoTicket(price);
+    public void issueLottoTicketByPrice(List<List<Integer>> randomNumbers, int money, String expected) {
+        LottoDispenser lottoDispenser = new LottoDispenser(new LottoSetting(),
+                createNumberSelectStrategy(randomNumbers));
+        LottoTicketList lottoTickets = lottoDispenser.getLottoTicketList(money);
         Assertions.assertThat(lottoTickets.getString()).isEqualTo(expected);
     }
 
@@ -64,5 +66,29 @@ public class LottoDispenserTest {
                 return randomNumbers.get(index++);
             }
         };
+    }
+
+    @DisplayName("수동으로 티켓 발급")
+    @ParameterizedTest
+    @MethodSource("getIssueLottoTicketManuallyData")
+    public void issueLottoTicketManually(List<List<Integer>> numbers, int money, String expected) {
+        LottoDispenser lottoDispenser = new LottoDispenser(new LottoSetting(), new ManualNumberSelectStrategy(numbers));
+        LottoTicketList lottoTickets = lottoDispenser.getLottoTicketList(money);
+        Assertions.assertThat(lottoTickets.getString()).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> getIssueLottoTicketManuallyData() {
+        return Stream.of(
+                Arguments.of(List.of(
+                                List.of(1, 2, 3, 4, 5, 6)
+                        ),
+                        1000, "[1, 2, 3, 4, 5, 6]"),
+                Arguments.of(List.of(
+                                List.of(1, 2, 3, 4, 5, 6),
+                                List.of(5, 6, 20, 23, 40, 41)
+                        ),
+                        2500, "[1, 2, 3, 4, 5, 6]\n[5, 6, 20, 23, 40, 41]"
+                )
+        );
     }
 }
