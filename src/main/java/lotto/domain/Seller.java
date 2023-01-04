@@ -6,6 +6,7 @@ import java.util.List;
 public class Seller {
 
     private static final Money SINGLE_LOTTO_TICKET_PRICE = new Money(1000);
+    private static final String MINIMUM_MONEY_ERROR_MESSAGE = "최소 1,000원 이상을 지불해야 합니다.";
 
     private final LottoNumberPicker lottoNumberPicker;
 
@@ -25,7 +26,7 @@ public class Seller {
 
     private void validatePayMoney(Money payMoney) {
         if (payMoney.isSmallerThan(SINGLE_LOTTO_TICKET_PRICE)) {
-            throw new IllegalArgumentException("최소 1,000원 이상을 지불해야 합니다.");
+            throw new IllegalArgumentException(MINIMUM_MONEY_ERROR_MESSAGE);
         }
     }
 

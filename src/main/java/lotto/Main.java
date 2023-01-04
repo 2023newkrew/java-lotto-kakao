@@ -23,7 +23,12 @@ public class Main {
 
     private static void initializePlayer() {
         int purchaseMoneyAmount = lottoView.getPurchaseMoneyAmount();
-        player = new Player(new Money(purchaseMoneyAmount));
+        try {
+            player = new Player(new Money(purchaseMoneyAmount));
+        } catch (IllegalArgumentException e) {
+            lottoView.printErrorMessage(e.getMessage());
+            initializePlayer();
+        }
     }
 
     private static void buyLottoTickets() {
