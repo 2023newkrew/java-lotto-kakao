@@ -20,7 +20,7 @@ public class LotteryMatch {
     }
 
     public boolean isMatchWith(LotteryMatch cp) {
-        if (this.matchCount == 5)
+        if (this.matchCount == MATCH_FIVE)
             return this.matchCount == cp.matchCount && this.bonusMatch == cp.bonusMatch;
 
         return this.matchCount == cp.matchCount;
