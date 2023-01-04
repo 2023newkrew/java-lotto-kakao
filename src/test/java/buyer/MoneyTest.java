@@ -11,21 +11,21 @@ public class MoneyTest {
     @Test
     void decreaseBudget(){
         //given
-        Money money = new Money(2000);
+        Money money = Money.valueOf(2000);
         //when
-        money.decreaseMoney(new Money(100));
+        Money decreasedMoney = money.decreaseMoney(Money.valueOf(100));
         //then
-        Assertions.assertThat(money).isEqualTo(new Money(1900));
+        Assertions.assertThat(decreasedMoney).isEqualTo(Money.valueOf(1900));
     }
 
     @DisplayName("충분한 budget 없을 때 decrease 시 RuntimeException")
     @Test
     void decreaseBudget_invalid(){
         //given
-        Money money = new Money(2000);
+        Money money = Money.valueOf(2000);
         //when
         //then
-        Assertions.assertThatRuntimeException().isThrownBy(() -> money.decreaseMoney(new Money(3000)));
+        Assertions.assertThatRuntimeException().isThrownBy(() -> money.decreaseMoney(Money.valueOf(3000)));
     }
 
     @DisplayName("0 이상의 정수는 생성 성공")
@@ -35,7 +35,7 @@ public class MoneyTest {
         //given
         //when
         //then
-        Assertions.assertThatNoException().isThrownBy(() -> new Money(number));
+        Assertions.assertThatNoException().isThrownBy(() -> Money.valueOf(number));
     }
 
     @DisplayName("0 미만의 정수는 예외 발생")
@@ -45,7 +45,7 @@ public class MoneyTest {
         //given
         //when
         //then
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new Money(number));
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> Money.valueOf(number));
     }
 
 }
