@@ -23,23 +23,31 @@ public class LottoController {
 
     public void play() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
-        Lottos totalLottos = getTotalLottos(purchaseAmount);
+        TotalLottoCount totalLottoCount = getTotalLottoCount(purchaseAmount);
+        Lottos totalLottos = getTotalLottos(totalLottoCount);
+        outputView.printLottoCount(totalLottoCount);
         outputView.printLottos(totalLottos);
-        WinningLotto winningLotto = inputView.getWinningLottoInput();
+        WinningLotto winningLotto = getWinningLotto();
         outputView.printResult(winningLotto, totalLottos, purchaseAmount);
-    }
-
-    private Lottos getTotalLottos(PurchaseAmount purchaseAmount) {
-        LottoCount totalLottoCount = LottoCount.of(purchaseAmount, PURCHASE_AMOUNT_UNIT_PRICE);
-        LottoCount manuallyLottoCount = inputView.getManuallyLottoCountInput();
-        Lottos manuallyLottos = inputView.getManuallyLottosInput(manuallyLottoCount);
-        LottoCount automaticallyLottoCount = totalLottoCount.getRemainExceptFor(manuallyLottoCount);
-        outputView.printLottoCount(manuallyLottoCount, automaticallyLottoCount);
-        Lottos automaticallyLottos = lottoGenerator.getLottos(automaticallyLottoCount);
-        return manuallyLottos.addAll(automaticallyLottos);
     }
 
     private PurchaseAmount getPurchaseAmount() {
         return inputView.getPurchaseAmountInput();
+    }
+
+    private TotalLottoCount getTotalLottoCount(PurchaseAmount purchaseAmount) {
+        LottoCount totalLottoCount = LottoCount.of(purchaseAmount, PURCHASE_AMOUNT_UNIT_PRICE);
+        LottoCount manuallyLottoCount = inputView.getManuallyLottoCountInput();
+        return TotalLottoCount.of(totalLottoCount, manuallyLottoCount);
+    }
+
+    private Lottos getTotalLottos(TotalLottoCount totalLottoCount) {
+        Lottos manuallyLottos = inputView.getManuallyLottosInput(totalLottoCount.getManuallyLottoCount());
+        Lottos automaticallyLottos = lottoGenerator.getLottos(totalLottoCount.getAutomaticallyLottoCount());
+        return manuallyLottos.addAll(automaticallyLottos);
+    }
+
+    private WinningLotto getWinningLotto() {
+        return inputView.getWinningLottoInput();
     }
 }
