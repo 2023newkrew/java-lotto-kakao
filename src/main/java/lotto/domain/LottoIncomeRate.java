@@ -1,6 +1,7 @@
 package lotto.domain;
 
 public class LottoIncomeRate {
+
     private final float incomeRate;
 
     public LottoIncomeRate(LottoStatistics lottoStatistics, int lottoTicketPrice) {
