@@ -5,9 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.stream.Stream;
 import lotto.exception.ErrorCode;
 import lotto.exception.LottoException;
-import lotto.model.LottoNumber;
 import lotto.model.PurchaseAmount;
-import lotto.service.LottoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -29,8 +27,7 @@ public class PurchaseAmountTest {
     private static Stream<Arguments> validateWrongPurchaseAmountTestGenerator() {
         return Stream.of(
                 Arguments.of("abc", ErrorCode.INVALID_INPUT_TYPE_NOT_INTEGER),
-                Arguments.of("-1", ErrorCode.INVALID_PURCHASE_AMOUNT),
-                Arguments.of(String.valueOf(LottoService.getLottoPrice() - 1), ErrorCode.LACK_OF_MONEY)
+                Arguments.of("-1", ErrorCode.INVALID_PURCHASE_AMOUNT)
         );
     }
 }

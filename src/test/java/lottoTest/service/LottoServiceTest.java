@@ -1,6 +1,7 @@
 package lottoTest.service;
 
 import lotto.model.LottoResult;
+import lotto.model.PurchaseAmount;
 import lotto.service.LottoService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ public class LottoServiceTest {
         LottoResult lottoResult = new LottoResult(List.of(0, 0, 0, 0, 1, 0));
         //when
         LottoService lottoService = new LottoService();
-        Double rateOfReturn = lottoService.getRateOfReturn(20000, lottoResult.getRankCountMap());
+        Double rateOfReturn = lottoService.getRateOfReturn(new PurchaseAmount("20000"), lottoResult.getRankCountMap());
         //then
         assertThat(rateOfReturn).isEqualTo(0.25);
     }

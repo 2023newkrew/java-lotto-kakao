@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.model.LottoRank;
+import lotto.model.PurchaseAmount;
 import lotto.service.LottoService;
 import lotto.view.LottoInputTemplate;
 import lotto.view.LottoOutputTemplate;
@@ -20,14 +21,15 @@ public class LottoController {
     }
 
     public void startLottoGame() {
-        Integer inputPurchaseAmount = lottoInputTemplate.inputPurchaseAmount();
-        lottoService.purchaseLotto(inputPurchaseAmount);
-        lottoOutputTemplate.printPurchaseHistory(lottoService.getLottoTickets());
+        String inputPurchaseAmount = lottoInputTemplate.inputPurchaseAmount();
+        PurchaseAmount purchaseAmount = new PurchaseAmount(inputPurchaseAmount);
+        lottoService.purchaseLotto(purchaseAmount);
+        lottoOutputTemplate.printLottoTickets(lottoService.getLottoTickets());
 
         List<Integer> inputWinningNumber = lottoInputTemplate.inputLottoNumber();
         Integer inputBonusBall = lottoInputTemplate.inputBonusBall();
         Map<LottoRank, Integer> lottoResult = lottoService.getLottoResult(inputWinningNumber, inputBonusBall);
         lottoOutputTemplate.printLottoResult(lottoResult);
-        lottoOutputTemplate.printRateOfReturn(lottoService.getRateOfReturn(inputPurchaseAmount, lottoResult));
+        lottoOutputTemplate.printRateOfReturn(lottoService.getRateOfReturn(purchaseAmount, lottoResult));
     }
 }

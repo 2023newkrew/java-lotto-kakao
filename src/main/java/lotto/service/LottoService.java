@@ -1,5 +1,6 @@
 package lotto.service;
 
+import java.util.stream.IntStream;
 import lotto.model.*;
 import lotto.repository.LottoRepository;
 
@@ -10,15 +11,15 @@ import java.util.stream.Collectors;
 public class LottoService {
     private static final Integer LOTTO_PRICE = 1000;
 
-    public void purchaseLotto(Integer purchaseAmount) {
-        for (int count = 0; count < purchaseAmount / LOTTO_PRICE; count++) {
-            LottoRepository.saveLottoTicket(new LottoTicket());
-        }
+    public void purchaseLotto(PurchaseAmount purchaseAmount) {
+        IntStream.range(0, purchaseAmount.getLottoTicketCount(LOTTO_PRICE))
+                .forEach(index -> {
+                    LottoRepository.saveLottoTicket(new LottoTicket());
+                });
     }
 
-    public List<String> getLottoTickets() {
-        LottoTickets lottoTickets = LottoRepository.getAllLottoTicket();
-        return lottoTickets.toStringList();
+    public LottoTickets getLottoTickets() {
+        return LottoRepository.getAllLottoTicket();
     }
 
     public Map<LottoRank, Integer> getLottoResult(List<Integer> inputWinningNumber, Integer inputBonusBall) {
@@ -36,11 +37,15 @@ public class LottoService {
         ).getRankCountMap();
     }
 
-    public Double getRateOfReturn(Integer inputPurchaseAmount, Map<LottoRank, Integer> lottoResult) {
+    public Double getRateOfReturn(PurchaseAmount purchaseAmount, Map<LottoRank, Integer> lottoResult) {
         int totalRevenue = 0;
         for (LottoRank lottoRank : lottoResult.keySet()) {
             totalRevenue += lottoRank.getReward() * lottoResult.get(lottoRank);
         }
-        return (double) totalRevenue / inputPurchaseAmount;
+        return purchaseAmount.calculateRateOfReturn(totalRevenue);
+    }
+
+    public static Integer getLottoPrice() {
+        return LOTTO_PRICE;
     }
 }
