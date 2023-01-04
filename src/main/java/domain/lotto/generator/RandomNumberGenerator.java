@@ -1,6 +1,6 @@
-package domain.lotto.makingnumbers;
+package domain.lotto.generator;
 
-import domain.lotto.LottoConstantData;
+import domain.lotto.LottoConstant;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,11 +12,11 @@ public class RandomNumberGenerator implements NumberGeneratable {
     public List<Integer> generate() {
         List<Integer> list = new ArrayList<>();
 
-        for (int i = LottoConstantData.MIN_LOTTO_NUMBER; i <= LottoConstantData.MAX_LOTTO_NUMBER; i++) {
+        for (int i = LottoConstant.MIN_LOTTO_NUMBER; i <= LottoConstant.MAX_LOTTO_NUMBER; i++) {
             list.add(i);
         }
 
         Collections.shuffle(list);
-        return list.subList(0, LottoConstantData.LOTTO_NUMBER_SIZE);
+        return list.subList(0, LottoConstant.LOTTO_NUMBER_SIZE);
     }
 }

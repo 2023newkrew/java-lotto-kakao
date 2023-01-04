@@ -1,8 +1,10 @@
-package domain.lotto.makingnumbers;
+package domain.lotto.number;
+
+import domain.lotto.generator.NumberGeneratable;
 
 import java.util.List;
 
-public class LottoNumberMaker {
+public class LottoNumber {
     public List<Integer> makeNumbers(NumberGeneratable numberGeneratable) {
         return numberGeneratable.generate();
     }

@@ -1,7 +1,7 @@
 package view;
 
 import domain.dto.WinningNumbersDto;
-import domain.lotto.LottoConstantData;
+import domain.lotto.LottoConstant;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,15 +17,15 @@ public class InputView {
 
         Integer purchaseBudget = sc.nextInt();
         validatePurchaseBudget(purchaseBudget);
-        return purchaseBudget / LottoConstantData.LOTTO_TICKET_PRICE;
+        return purchaseBudget / LottoConstant.LOTTO_TICKET_PRICE;
     }
 
     private static void validatePurchaseBudget(Integer purchaseBudget) {
         if (purchaseBudget == null || purchaseBudget == 0)
-            throw new IllegalArgumentException("구입 금액을 입력해주세요. (" + LottoConstantData.LOTTO_TICKET_PRICE + "원)");
+            throw new IllegalArgumentException("구입 금액을 입력해주세요. (" + LottoConstant.LOTTO_TICKET_PRICE + "원)");
 
-        if (purchaseBudget % LottoConstantData.LOTTO_TICKET_PRICE != 0)
-            throw new IllegalArgumentException("로또 가격으로 나누어 떨어지는 금액을 입력해주세요.(" + LottoConstantData.LOTTO_TICKET_PRICE + "원)");
+        if (purchaseBudget % LottoConstant.LOTTO_TICKET_PRICE != 0)
+            throw new IllegalArgumentException("로또 가격으로 나누어 떨어지는 금액을 입력해주세요.(" + LottoConstant.LOTTO_TICKET_PRICE + "원)");
     }
 
     public static WinningNumbersDto inputWinningNumbers() {

@@ -1,6 +1,6 @@
 package domain.lotto.ticket;
 
-import domain.lotto.LottoConstantData;
+import domain.lotto.LottoConstant;
 
 import java.util.*;
 
@@ -28,13 +28,13 @@ public class LottoTicket {
 
     private void validateNumberDuplication(List<Integer> lottoNumbers) {
         HashSet<Integer> hs = new HashSet<>(lottoNumbers);
-        if (hs.size() != LottoConstantData.LOTTO_NUMBER_SIZE) throw new IllegalArgumentException();
+        if (hs.size() != LottoConstant.LOTTO_NUMBER_SIZE) throw new IllegalArgumentException();
     }
 
     private void validateNumberRange(List<Integer> lottoNumbers) {
         lottoNumbers
                 .forEach((number) -> {
-                    if (number < LottoConstantData.MIN_LOTTO_NUMBER || number > LottoConstantData.MAX_LOTTO_NUMBER)
+                    if (number < LottoConstant.MIN_LOTTO_NUMBER || number > LottoConstant.MAX_LOTTO_NUMBER)
                         throw new IllegalArgumentException();
                 });
     }

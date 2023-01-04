@@ -1,4 +1,4 @@
-import domain.lotto.makingnumbers.LottoNumberMaker;
+import domain.lotto.number.LottoNumber;
 import domain.lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,8 +14,8 @@ public class RandomNumberTest {
     @DisplayName("랜덤 숫자를 생성하는 기능")
     void generateRandomNumberTest() {
         // given
-        LottoNumberMaker lottoNumberMaker = new LottoNumberMaker();
-        List<Integer> lottoNumbers = lottoNumberMaker.makeNumbers(() -> new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+        LottoNumber lottoNumber = new LottoNumber();
+        List<Integer> lottoNumbers = lottoNumber.makeNumbers(() -> new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
 
         // when
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);

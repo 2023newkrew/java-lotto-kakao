@@ -1,6 +1,6 @@
 package domain.lotto.result;
 
-import domain.lotto.LottoConstantData;
+import domain.lotto.LottoConstant;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class LottoResults {
         Integer ticketNumber = lottoResultCount.keySet().stream()
                 .mapToInt(lottoResultCount::get)
                 .sum();
-        Integer budget = ticketNumber * LottoConstantData.LOTTO_TICKET_PRICE;
+        Integer budget = ticketNumber * LottoConstant.LOTTO_TICKET_PRICE;
 
         Integer profit = lottoResultCount.keySet().stream()
                 .mapToInt((key) -> lottoResultCount.get(key) * key.getPrize())
