@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.LottoConstants;
 import lotto.domain.LottoRank;
-import lotto.domain.LottoResultMessage;
+import lotto.domain.lottoresult.LottoResultMessage;
 
 public class GameResultDto {
 

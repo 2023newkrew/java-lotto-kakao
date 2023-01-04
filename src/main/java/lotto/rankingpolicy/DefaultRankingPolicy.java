@@ -6,8 +6,8 @@ import static lotto.domain.LottoRank.SECOND;
 import java.util.HashMap;
 import java.util.Map;
 import lotto.domain.LottoRank;
-import lotto.domain.DefaultLottoResult;
-import lotto.domain.LottoResult;
+import lotto.domain.lottoresult.DefaultLottoResult;
+import lotto.domain.lottoresult.LottoResult;
 
 public class DefaultRankingPolicy implements RankingPolicy {
 

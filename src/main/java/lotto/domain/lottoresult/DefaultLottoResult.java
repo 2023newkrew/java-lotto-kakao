@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.lottoresult;
 
 import static lotto.domain.LottoConstants.LOTTO_MIN_COUNT;
 import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;

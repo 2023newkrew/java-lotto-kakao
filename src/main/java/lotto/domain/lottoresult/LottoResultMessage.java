@@ -1,6 +1,8 @@
-package lotto.domain;
+package lotto.domain.lottoresult;
 
 import static lotto.domain.LottoRank.SIXTH;
+
+import lotto.domain.LottoRank;
 
 public final class LottoResultMessage {
 

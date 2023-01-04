@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.lottoresult.DefaultLottoResult;
+import lotto.domain.lottoresult.LottoResult;
 import lotto.factory.LottoNumbersFactory;
 import lotto.generatepolicy.DefaultGeneratePolicy;
 
