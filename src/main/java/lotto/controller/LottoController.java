@@ -18,14 +18,11 @@ public class LottoController {
     }
 
     public void startLottoGame() {
-        String inputPurchaseAmount = lottoInputTemplate.inputPurchaseAmount();
-        PurchaseAmount purchaseAmount = new PurchaseAmount(inputPurchaseAmount);
+        PurchaseAmount purchaseAmount = new PurchaseAmount(lottoInputTemplate.inputPurchaseAmount());
         lottoService.purchaseLotto(purchaseAmount);
         lottoOutputTemplate.printLottoTickets(lottoService.getLottoTickets());
 
-        String inputWinningNumbers = lottoInputTemplate.inputLottoWinningNumbers();
-        String inputBonusBall = lottoInputTemplate.inputBonusBall();
-        LottoResult lottoResult = lottoService.getLottoResult(inputWinningNumbers, inputBonusBall);
+        LottoResult lottoResult = lottoService.getLottoResult(lottoInputTemplate.inputLottoWinningNumbers(), lottoInputTemplate.inputBonusBall());
         lottoOutputTemplate.printLottoResult(lottoResult);
         lottoOutputTemplate.printRateOfReturn(lottoService.getRateOfReturn(purchaseAmount, lottoResult));
     }
