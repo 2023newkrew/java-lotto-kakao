@@ -17,10 +17,9 @@ public class LottoNumbers {
     private final List<Integer> lottoNumbers;
 
     public LottoNumbers(List<Integer> lottoNumbers) {
-        lottoNumbers = new ArrayList<>(lottoNumbers);
         validate(lottoNumbers);
         lottoNumbers.sort(Integer::compare);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     private void validate(List<Integer> lottoNumbers) {
