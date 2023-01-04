@@ -16,6 +16,14 @@ public class MoneyTest {
                 .hasMessage("돈은 0원 이상이여야 합니다.");
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {5_000, 10_000, 12_000})
+    void 돈의_크기를_비교할_수_있다(final int smallerAmount) {
+        Money money = new Money(15_000);
+        Money smallerMoney = new Money(smallerAmount);
+        assertThat(smallerMoney.isSmallerThan(money)).isTrue();
+    }
+
     @Test
     void 돈에_돈을_더할_수_있다() {
         //given
