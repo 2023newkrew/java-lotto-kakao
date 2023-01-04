@@ -1,7 +1,7 @@
 import buyer.Buyer;
 import buyer.BuyerResult;
 import lotto.LottoGenerator;
-import lotto.LottoResult;
+import lotto.WinningLotto;
 import util.StringParser;
 import view.InputView;
 import view.OutputView;
@@ -21,8 +21,8 @@ public class LottoController {
         List<Integer> winningNumber = StringParser.parse(inputView.getWinningNumbersInput());
         int bonusNumber = inputView.getBonusNumberInput();
 
-        LottoResult lottoResult = new LottoResult(winningNumber, bonusNumber);
-        BuyerResult buyerResult = lottoResult.getResult(buyer.getLotteries());
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+        BuyerResult buyerResult = winningLotto.getResult(buyer.getLotteries());
 
         outputView.printResult(buyerResult);
         outputView.printProfit(buyerResult.getProfit());

@@ -4,11 +4,11 @@ import buyer.BuyerResult;
 
 import java.util.List;
 
-public class LottoResult {
+public class WinningLotto {
     private final LottoNumbers winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public LottoResult(List<Integer> winningNumbers, int bonusNumber) {
+    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
 
         this.winningNumbers = new LottoNumbers(winningNumbers);
@@ -17,9 +17,9 @@ public class LottoResult {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof LottoResult)) return false;
+        if (!(obj instanceof WinningLotto)) return false;
 
-        LottoResult cp = (LottoResult) obj;
+        WinningLotto cp = (WinningLotto) obj;
 
         return this.winningNumbers.equals(cp.winningNumbers) && this.bonusNumber.equals(cp.bonusNumber);
     }
