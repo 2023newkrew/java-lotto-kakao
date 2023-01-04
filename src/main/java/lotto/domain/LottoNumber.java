@@ -11,6 +11,8 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
 
+    private final int num;
+
     private static final Map<Integer, LottoNumber> CACHED_LOTTO_NUMBERS;
 
     static {
@@ -19,6 +21,7 @@ public class LottoNumber {
     }
 
     private LottoNumber(int num) {
+        this.num = num;
     }
 
     public static LottoNumber from(int num) {
@@ -28,8 +31,12 @@ public class LottoNumber {
 
     private static void validate(int num) {
         if (num < MIN_LOTTO_NUMBER || MAX_LOTTO_NUMBER < num) {
-            throw new IllegalArgumentException(
-                    makeErrorMessage(LOTTO_NUMBER_BOUND_EXCEPTION_MESSAGE, num, "num"));
+            throw new IllegalArgumentException(makeErrorMessage(LOTTO_NUMBER_BOUND_EXCEPTION_MESSAGE, num, "num"));
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(num);
     }
 }
