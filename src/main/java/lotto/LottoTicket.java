@@ -1,12 +1,15 @@
 package lotto;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private final List<LottoBall> lottoBalls;
 
     public LottoTicket(List<LottoBall> lottoBalls) {
-        this.lottoBalls = lottoBalls;
+        this.lottoBalls = new ArrayList<>(lottoBalls).stream()
+                .sorted()
+                .collect(Collectors.toUnmodifiableList());
 
         if (lottoBalls.size() != 6) {
             throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
@@ -14,8 +17,6 @@ public class LottoTicket {
         if (hasDuplicate()) {
             throw new IllegalArgumentException("로또 숫자는 중복될 수 없습니다.");
         }
-
-        Collections.sort(lottoBalls);
     }
 
     public int countMatchingNumber(LottoTicket targetLotto) {

@@ -36,6 +36,7 @@ public class LottoTicketTest {
             )));
         });
     }
+
     @DisplayName("로또 숫자가 없으면 예외가 발생한다.")
     @Test
     void _lotto_6ball_restriction_0() {
@@ -97,5 +98,28 @@ public class LottoTicketTest {
                     new LottoBall(1)
             )));
         });
+    }
+
+    @Test
+    @DisplayName("로또 당첨 번호가 주어졌을 때 일치하는 개수를 계산한다.")
+    void countMatchingNumber() {
+        LottoTicket lottoTicket = new LottoTicket(List.of(
+                new LottoBall(1),
+                new LottoBall(2),
+                new LottoBall(3),
+                new LottoBall(4),
+                new LottoBall(5),
+                new LottoBall(6)
+        ));
+        LottoTicket targetLotto = new LottoTicket(List.of(
+                new LottoBall(1),
+                new LottoBall(2),
+                new LottoBall(3),
+                new LottoBall(4),
+                new LottoBall(7),
+                new LottoBall(8)
+        ));
+
+        assertThat(lottoTicket.countMatchingNumber(targetLotto)).isEqualTo(4);
     }
 }
