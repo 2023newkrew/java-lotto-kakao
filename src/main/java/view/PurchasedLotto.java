@@ -3,10 +3,11 @@ package view;
 import domain.LottoNumbers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PurchasedLotto {
 
-    private static final String NUMBER_OF_LOTTO_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.";
+    private static final String LOTTO_COUNT_MESSAGE = "\n수동으로 %d장, 자동으로 %d개를 구매했습니다.\n";
 
     private final int manualLottoCount;
     private final int automaticLottoCount;
@@ -24,6 +25,8 @@ public class PurchasedLotto {
 
     @Override
     public String toString() {
-        return String.format(NUMBER_OF_LOTTO_MESSAGE, manualLottoCount, automaticLottoCount);
+        return String.format(LOTTO_COUNT_MESSAGE, manualLottoCount, automaticLottoCount) +lottoNumbersList.stream()
+                .map(LottoNumbers::toString)
+                .collect(Collectors.joining("\n"));
     }
 }

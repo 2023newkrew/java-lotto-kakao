@@ -1,9 +1,5 @@
 package view;
 
-import domain.LottoNumbers;
-
-import java.util.stream.Collectors;
-
 public class OutputView {
 
     private static final String RESULT_STATISTICS_MESSAGE = "\n당첨 통계\n---------";
@@ -11,12 +7,6 @@ public class OutputView {
 
     public void printPurchasedLotto(PurchasedLotto purchasedLotto) {
         System.out.println(purchasedLotto.toString());
-        String lottoNumbers = purchasedLotto.getLottoNumbersList()
-                .stream()
-                .map(LottoNumbers::toString)
-                .collect(Collectors.joining("\n"));
-
-        System.out.println(lottoNumbers);
     }
 
     public void printStatistics(String str) {
