@@ -2,6 +2,7 @@ package lotto.view;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
 import lotto.domain.WinningLotto;
 
 import static lotto.view.LottoPrinter.*;
