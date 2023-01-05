@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Player {
 
-    private Money initialMoney;
+    private final Money initialMoney;
     private Money currentMoney;
     private PlayerLottoResult playerLottoResult;
     private List<LottoTicket> lottoTickets = new ArrayList<>();
