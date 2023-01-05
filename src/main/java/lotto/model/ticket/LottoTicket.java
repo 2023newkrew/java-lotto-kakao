@@ -6,6 +6,7 @@ import java.util.List;
 
 public class LottoTicket {
     public static final int NUMBERS_LENGTH = 6;
+    public static final long PRICE = 1000L;
 
     private final HashSet<LottoNumber> numbers;
 

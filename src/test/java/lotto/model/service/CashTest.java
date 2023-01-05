@@ -10,6 +10,6 @@ public class CashTest {
     @DisplayName("can validate overpayment")
     void can_validate_overpayment() {
         Cash cash = new Cash(10000L);
-        assertThrows(IllegalArgumentException.class, () -> cash.pay(new Cash(10001L)));
+        assertThrows(IllegalArgumentException.class, () -> cash.pay(10001L));
     }
 }

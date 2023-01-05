@@ -6,6 +6,10 @@ import java.util.List;
 public class LottoTickets {
     private final List<LottoTicket> tickets = new ArrayList<>();
 
+    public List<LottoTicket> getTickets() {
+        return this.tickets;
+    }
+
     public int size() {
         return this.tickets.size();
     }

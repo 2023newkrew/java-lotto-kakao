@@ -21,7 +21,6 @@ public class PrizeJudgeTest {
     @CsvSource(value = {FIRST, SECOND, THIRD, FOURTH1, FOURTH2, FIFTH1, FIFTH2, LOSING})
     @DisplayName("can judge prize according to number match")
     void can_judge_prize_according_to_number_match(int matchCount, boolean hasBonus, long prize) {
-        PrizeJudge prizeJudge = new PrizeJudge();
-        assertEquals(prize, prizeJudge.getPrizeOf(matchCount, hasBonus).prize());
+        assertEquals(prize, PrizeJudge.getPrizeOf(matchCount, hasBonus).prize());
     }
 }

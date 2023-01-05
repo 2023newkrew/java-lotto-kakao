@@ -7,15 +7,10 @@ public class Cash {
         this.amount = amount;
     }
 
-    public void pay(Cash cost) {
-        if (this.amount < cost.amount) {
+    public void pay(long cost) {
+        if (this.amount < cost) {
             throw new IllegalArgumentException("로또를 구매할 현금이 부족합니다.");
         }
-        this.amount -= cost.amount;
+        this.amount -= cost;
     }
-
-    public long checkCapacity(Cash cost) {
-        return this.amount / cost.amount;
-    }
-
 }
