@@ -1,6 +1,7 @@
-package lotto.domain;
+package lotto.generatepolicy;
 
 import java.util.Random;
+import lotto.domain.LottoConstants;
 
 public class RandomGeneratePolicy implements GeneratePolicy {
 

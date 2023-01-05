@@ -24,7 +24,6 @@ public class LottoRanks {
 
     public String getResultString() {
         List<LottoRank> entry = new java.util.ArrayList<>(List.of(LottoRank.values()));
-        Double returnRate = calculateReturnRate();
         entry.remove(LottoRank.NOTHING);
         Collections.reverse(entry);
         Double rate = calculateReturnRate();

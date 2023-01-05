@@ -1,8 +1,8 @@
 package lotto.config;
 
-import lotto.domain.GeneratePolicy;
+import lotto.generatepolicy.GeneratePolicy;
 import lotto.domain.LottoHandler;
-import lotto.domain.RandomGeneratePolicy;
+import lotto.generatepolicy.RandomGeneratePolicy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.view.View;

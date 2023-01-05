@@ -5,6 +5,7 @@ import static lotto.domain.LottoNumbers.createLottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.generatepolicy.GeneratePolicy;
 
 public class Lotto {
 
