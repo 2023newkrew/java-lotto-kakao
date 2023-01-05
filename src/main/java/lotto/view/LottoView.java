@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoView {
+public class LottoView implements AutoCloseable {
 
     private static final String GET_PURCHASE_MONEY_AMOUNT_MESSAGE = "구입금액을 입력해주세요.";
     private static final String GET_WINNER_TICKET_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
@@ -89,5 +89,10 @@ public class LottoView {
 
     public void printErrorMessage(String message) {
         System.out.println(message);
+    }
+
+    @Override
+    public void close() throws Exception {
+        scanner.close();
     }
 }

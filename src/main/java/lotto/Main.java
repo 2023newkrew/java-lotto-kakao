@@ -14,11 +14,15 @@ public class Main {
     private static Player player;
 
     public static void main(String[] args) {
-        initializePlayer();
-        buyLottoTickets();
-        WinnerCombination winnerCombination = getWinnerCombination();
-        PlayerLottoResult playerLottoResult = player.findResult(winnerCombination);
-        lottoView.printStats(playerLottoResult);
+        try (lottoView) {
+            initializePlayer();
+            buyLottoTickets();
+            WinnerCombination winnerCombination = getWinnerCombination();
+            PlayerLottoResult playerLottoResult = player.findResult(winnerCombination);
+            lottoView.printStats(playerLottoResult);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static void initializePlayer() {
