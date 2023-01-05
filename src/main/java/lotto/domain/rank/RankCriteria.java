@@ -5,6 +5,18 @@ public class RankCriteria {
     private final int maxMatchCount;
     private final IsBonusRequired isBonusRequired;
 
+    public int getMinMatchCount() {
+        return minMatchCount;
+    }
+
+    public int getMaxMatchCount() {
+        return maxMatchCount;
+    }
+
+    public IsBonusRequired isBonusRequired() {
+        return isBonusRequired;
+    }
+
     public RankCriteria(int minMatchCount, int maxMatchCount, IsBonusRequired isBonusRequired) {
         this.minMatchCount = minMatchCount;
         this.maxMatchCount = maxMatchCount;
