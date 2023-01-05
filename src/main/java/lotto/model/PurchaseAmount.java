@@ -33,8 +33,7 @@ public class PurchaseAmount {
     }
 
     public int getLottoTicketCount(Integer lottoPrice) {
-        int lottoTicketCount = purchaseAmount / lottoPrice;
-        return lottoTicketCount;
+        return purchaseAmount / lottoPrice;
     }
 
     public Double calculateRateOfReturn(int totalRevenue) {

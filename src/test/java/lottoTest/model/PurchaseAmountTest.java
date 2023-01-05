@@ -68,7 +68,7 @@ public class PurchaseAmountTest {
     @DisplayName("로또 구매 후 이익률을 구하는 로직 테스트")
     public void calculateRateOfReturnTest(PurchaseAmount purchaseAmount, double expected) {
         //given
-        Integer totalRevenue = 3000;
+        int totalRevenue = 3000;
         //when & then
         assertThat(purchaseAmount.calculateRateOfReturn(totalRevenue)).isEqualTo(expected);
     }
