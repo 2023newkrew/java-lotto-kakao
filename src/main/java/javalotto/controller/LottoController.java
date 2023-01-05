@@ -22,26 +22,35 @@ public class LottoController {
     }
 
     public void simulate() {
-        PurchaseAmount purchaseAmount = inputView.getPurchaseAmountInput();
-        LottoCount manualLottoCount = inputView.getManualPurchaseCountInput();
+        PurchaseAmount purchaseAmount = PurchaseAmount.from(inputView.getPurchaseAmountInput());
+        LottoCount manualLottoCount = LottoCount.from(inputView.getManualPurchaseCountInput());
         TotalLottoCount totalLottoCount = TotalLottoCount.of(manualLottoCount, purchaseAmount);
 
-        Lottos lottos = simulateAndPrintLottoPurchase(totalLottoCount);
+        Lottos lottos = simulateLottoPurchase(totalLottoCount);
 
-        WinningLotto winningLotto = inputView.getWinningLottoInput();
+        outputView.printLottoCount(totalLottoCount);
+        outputView.printLottos(lottos);
+
+        WinningLotto winningLotto = getWinningLottoInput();
 
         LottoResult lottoResult = lottos.getLottoResult(winningLotto);
         outputView.printLottoResult(lottoResult, purchaseAmount);
     }
 
-    private Lottos simulateAndPrintLottoPurchase(TotalLottoCount totalLottoCount) {
-        Lottos manualLottos = inputView.getManualLottoNumbersInput(totalLottoCount.getManualLottoCount());
+    private Lottos simulateLottoPurchase(TotalLottoCount totalLottoCount) {
+        List<List<Integer>> manualLottoNumbers = inputView.getManualLottoNumbersInput(totalLottoCount.getManualLottoCount());
+        Lottos manualLottos = Lottos.fromNumbers(manualLottoNumbers);
+
         Lottos autoLottos = lottoGenerator.generateLottos(totalLottoCount.getAutoLottoCount());
         Lottos totalLottos = Lottos.of(manualLottos, autoLottos);
 
-        outputView.printLottoCount(totalLottoCount);
-        outputView.printLottos(totalLottos);
-
         return totalLottos;
+    }
+
+    private WinningLotto getWinningLottoInput() {
+        List<Integer> winningNumbers = inputView.getWinningNumbersInput();
+        int bonusNumber = inputView.getBonusNumberInput();
+
+        return WinningLotto.of(Lotto.from(winningNumbers), bonusNumber);
     }
 }
