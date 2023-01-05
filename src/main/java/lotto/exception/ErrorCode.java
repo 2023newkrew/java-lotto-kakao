@@ -6,7 +6,7 @@ public enum ErrorCode {
     INVALID_BONUS_BALL("유효하지 않은 보너스 볼 입니다."),
     INVALID_PURCHASE_AMOUNT("구매 금액은 0원 보다 커야합니다."),
     UNEXPECTED_COUNT_AND_BONUS_BALL("티켓 확인 결과와 일치하는 LOTTORANK가 없습니다."),
-    EXCEED_NUMBER_OF_TICKET("구매 가능 로또 수를 초과하였습니다.");
+    INVALID_NUMBER_OF_TICKET("구매 가능 로또 수를 초과하였습니다.");
 
     private final String message;
 
