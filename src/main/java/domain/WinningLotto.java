@@ -1,7 +1,7 @@
 package domain;
 
 import common.constant.Constants;
-import util.validator.WinningLottoValidator;
+import util.validator.LottoValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +12,7 @@ public class WinningLotto extends Lotto {
     private final List<Integer> winningLottoNumbers;
 
     public WinningLotto(String input) {
-        WinningLottoValidator.validate(input);
+        LottoValidator.validate(input);
         String[] splitInput = input.split(Constants.DELIMITER);
         this.winningLottoNumbers = Arrays.stream(splitInput)
                 .map(Integer::parseInt)

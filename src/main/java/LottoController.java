@@ -3,40 +3,54 @@ import view.InputView;
 import view.OutputView;
 
 public class LottoController {
-
+    private final Lottos lottos = new Lottos();
 
     public void run() {
         Money money = payMoney();
-        Lottos lottos = purChaseLotto(money.getLottoCount());
+        purchaseLotto(money.getLottoCount());
         WinningLotto winningLotto = inputWinningLotto();
         BonusNumber bonusNumber = inputBonusNumber(winningLotto);
         showTotalResult(money, lottos, winningLotto, bonusNumber);
     }
 
-
-    public Money payMoney() {
+    private Money payMoney() {
         OutputView.printPaidPriceRequest();
         return new Money(InputView.getPaidPrice());
     }
 
-    public Lottos purChaseLotto(int lottoCount) {
-        OutputView.printLottoCount(lottoCount);
-        Lottos lottos = new Lottos(lottoCount);
-        OutputView.printLottos(lottos.getPurchasedLottosNumbers());
-        return lottos;
+    private void purchaseLotto(int totalLottoCount) {
+        OutputView.printManualLottoCountRequest();
+        LottoCount lottoCount = new LottoCount(totalLottoCount, InputView.getManualLottoCount());
+        purchaseLottoManually(lottoCount.getManualLottoCount());
+        purchaseLottoAutomatically(lottoCount.getAutomaticLottoCount());
+        OutputView.printLottoCount(lottoCount.getManualLottoCount(), lottoCount.getAutomaticLottoCount());
     }
 
-    public WinningLotto inputWinningLotto() {
+    private void purchaseLottoManually(int lottoCount) {
+        OutputView.printManualLottosNumbersRequest();
+        for (int i = 0; i < lottoCount; i++) {
+            String lottoNumbers = InputView.getLottoNumbers();
+            lottos.addLottoManually(new Lotto(lottoNumbers));
+        }
+    }
+
+    private void purchaseLottoAutomatically(int lottoCount) {
+        lottos.addLottoAutomatically(lottoCount);
+        OutputView.printLottos(lottos.getPurchasedLottosNumbers());
+    }
+
+
+    private WinningLotto inputWinningLotto() {
         OutputView.printWinningNumbersRequest();
         return new WinningLotto(InputView.getWinningLottoNumbers());
     }
 
-    public BonusNumber inputBonusNumber(WinningLotto winningLotto) {
+    private BonusNumber inputBonusNumber(WinningLotto winningLotto) {
         OutputView.printBonusNumberRequest();
         return new BonusNumber(winningLotto, InputView.getBonusNumber());
     }
 
-    public void showTotalResult(Money money, Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
+    private void showTotalResult(Money money, Lottos lottos, WinningLotto winningLotto, BonusNumber bonusNumber) {
         TotalResult totalResult = lottos.getTotalResult(winningLotto, bonusNumber);
         OutputView.printTotalResult(totalResult.getTotalResultMessage());
         OutputView.printProfit(totalResult.getProfitMessage(totalResult.getProfit(money.getPaidMoney())));
