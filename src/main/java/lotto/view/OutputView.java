@@ -1,7 +1,6 @@
 package lotto.view;
 
 import lotto.domain.LottoBall;
-import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.domain.PlayerLottoResult;
 
@@ -12,6 +11,10 @@ import static lotto.domain.LottoResult.*;
 
 public class OutputView {
 
+    private static final String LOTTO_BOUGHT_MESSAGE = "개를 구매했습니다.\n";
+    private static final String LOTTO_NUMBER_PRINT_OPENER = "[";
+    private static final String LOTTO_NUMBER_JOIN_DELIMITER = ", ";
+    private static final String LOTTO_NUMBER_PRINT_CLOSER = "]\n";
     private static final String LOTTO_RESULT_STATUS = "당첨 통계\n";
     private static final String LOTTO_RESULT_LINE = "---------\n";
     private static final String LOTTO_RESULT_FIFTH_PRIZE = "3개 일치 (5000원)- %d개\n";
@@ -24,7 +27,7 @@ public class OutputView {
     public void printPurchasedTickets(List<LottoTicket> lottoTickets) {
         StringBuilder purchaseStatus = new StringBuilder();
         purchaseStatus.append(lottoTickets.size());
-        purchaseStatus.append("개를 구매했습니다.\n");
+        purchaseStatus.append(LOTTO_BOUGHT_MESSAGE);
         for (LottoTicket lottoTicket : lottoTickets) {
             purchaseStatus.append(purchasedTicketStatus(lottoTicket));
         }
@@ -37,9 +40,9 @@ public class OutputView {
                 .map(LottoBall::getNumber)
                 .map(String::valueOf)
                 .collect(Collectors.toList());
-        return "[" +
-                String.join(", ", lottoBallNumbers) +
-                "]\n";
+        return LOTTO_NUMBER_PRINT_OPENER +
+                String.join(LOTTO_NUMBER_JOIN_DELIMITER, lottoBallNumbers) +
+                LOTTO_NUMBER_PRINT_CLOSER;
     }
 
     public void printStats(PlayerLottoResult playerLottoResult) {
