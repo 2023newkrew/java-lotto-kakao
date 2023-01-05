@@ -27,13 +27,15 @@ public class OutputView {
     public void printResult(BuyerResult result) {
         System.out.println("당첨 통계");
         System.out.println("-------");
-        Arrays.stream(Rank.values()).forEach((e) -> {
-            if (e != Rank.NONE) {
-                printRankInfo(e);
-                System.out.println(result.getRankCount(e) + "개");
-            }
-        });
+        Arrays.stream(Rank.values()).forEach(rank -> printResultForRank(rank, result));
         printProfit(result.getBuyerProfit());
+    }
+
+    private void printResultForRank(Rank rank, BuyerResult result) {
+        if (rank != Rank.NONE) return;
+
+        printRankInfo(rank);
+        System.out.println(result.getRankCount(rank) + "개");
     }
 
     private void printRankInfo(Rank rank) {
