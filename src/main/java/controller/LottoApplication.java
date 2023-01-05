@@ -5,6 +5,7 @@ import domain.LottoBuyer;
 import domain.LottoNumber;
 import domain.LottoStore;
 import dto.LottoResult;
+import dto.PurchasedLotto;
 import dto.WinningLotto;
 import view.InputView;
 import view.OutputView;
@@ -18,6 +19,7 @@ public class LottoApplication {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
+        LottoStore lottoStore = new LottoStore();
 
         try {
             // 구입금액 입력
@@ -33,7 +35,8 @@ public class LottoApplication {
 
             // 수동 구매 (입력) + 자동 구매 (남은 금액) 로또 구매
             LottoBuyer lottoBuyer = new LottoBuyer(money);
-            outputView.printPurchasedLottos(lottoBuyer.buyFrom(new LottoStore(), manualLottos));
+            PurchasedLotto purchasedLotto = lottoBuyer.buyFrom(lottoStore, manualLottos);
+            outputView.printPurchasedLottos(purchasedLotto);
 
             // 당첨번호 입력
             Lotto winningLotto = Lotto.ofManual(inputView.getWinningLottoInput());

@@ -1,5 +1,6 @@
 package domain;
 
+import dto.PurchasedLotto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -20,10 +21,10 @@ public class LottoStoreTest {
         LottoStore lottoStore = new LottoStore();
 
         // when
-        List<Lotto> lottos = lottoStore.purchase(money, Collections.emptyList());
+        PurchasedLotto purchase = lottoStore.purchase(money, Collections.emptyList());
 
         // then
-        assertThat(lottos.size()).isEqualTo(money / LOTTO_COST);
+        assertThat(purchase.getAuto().size()).isEqualTo(money / LOTTO_COST);
     }
 
     @ValueSource(ints = {500, 0, -1, -100, -2000})
@@ -48,10 +49,10 @@ public class LottoStoreTest {
         LottoStore lottoStore = new LottoStore();
 
         // when
-        List<Lotto> lottos = lottoStore.purchase(money, manualLottos);
+        PurchasedLotto purchase = lottoStore.purchase(money, manualLottos);
 
         // then
-        assertThat(lottos).containsAll(manualLottos);
+        assertThat(purchase.getManual()).containsExactlyElementsOf(manualLottos);
     }
 
     @Test
@@ -65,11 +66,12 @@ public class LottoStoreTest {
         LottoStore lottoStore = new LottoStore();
 
         // when
-        List<Lotto> lottos = lottoStore.purchase(money, manualLottos);
+        PurchasedLotto purchase = lottoStore.purchase(money, manualLottos);
 
         // then
-        assertThat(lottos.size()).isEqualTo(money / LOTTO_COST);
-        assertThat(lottos).containsAll(manualLottos);
+        assertThat(purchase.getAuto().size()).isEqualTo(3);
+        assertThat(purchase.getManual().size()).isEqualTo(2);
+        assertThat(purchase.getManual()).containsExactlyElementsOf(manualLottos);
     }
 
     @Test

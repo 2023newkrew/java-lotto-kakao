@@ -1,6 +1,7 @@
 package domain;
 
 import dto.LottoResult;
+import dto.PurchasedLotto;
 import dto.WinningLotto;
 import org.junit.jupiter.api.Test;
 
@@ -15,13 +16,14 @@ public class LottoBuyerTest {
         // given
         List<Lotto> lottos = List.of(Lotto.ofAuto(), Lotto.ofAuto());
         LottoBuyer buyer = new LottoBuyer(5000);
-        LottoPurchasePlace place = ((money, manuals) -> lottos);
+        LottoPurchasePlace place = ((money, manuals) ->
+                new PurchasedLotto(lottos, Collections.emptyList()));
 
         // when
-        List<Lotto> result = buyer.buyFrom(place, Collections.emptyList());
+        PurchasedLotto purchasedLotto = buyer.buyFrom(place, Collections.emptyList());
 
         // then
-        assertThat(result).isEqualTo(lottos);
+        assertThat(purchasedLotto.getManual()).isEqualTo(lottos);
     }
 
     @Test
@@ -33,7 +35,8 @@ public class LottoBuyerTest {
                 Lotto.ofManual(List.of(5,6,7,8,9,10))
         );
         LottoBuyer lottoBuyer = new LottoBuyer(3500);
-        LottoPurchasePlace place = ((money, manuals) -> lottos);
+        LottoPurchasePlace place = ((money, manuals) ->
+                new PurchasedLotto(lottos, Collections.emptyList()));
         lottoBuyer.buyFrom(place, Collections.emptyList());
 
         Lotto winningNumbers = Lotto.ofManual(List.of(1, 2, 3, 4, 5, 6));
@@ -60,7 +63,8 @@ public class LottoBuyerTest {
                 Lotto.ofManual(List.of(5,6,7,8,9,10))
         );
         LottoBuyer lottoBuyer = new LottoBuyer(3500);
-        LottoPurchasePlace place = ((money, manuals) -> lottos);
+        LottoPurchasePlace place = ((money, manuals) ->
+                new PurchasedLotto(lottos, Collections.emptyList()));
         lottoBuyer.buyFrom(place, Collections.emptyList());
 
         Lotto winningNumbers = Lotto.ofManual(List.of(1, 2, 3, 4, 5, 6));

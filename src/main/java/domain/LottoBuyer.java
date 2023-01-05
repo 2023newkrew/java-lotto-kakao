@@ -1,6 +1,7 @@
 package domain;
 
 import dto.LottoResult;
+import dto.PurchasedLotto;
 import dto.WinningLotto;
 
 import java.util.*;
@@ -17,10 +18,11 @@ public class LottoBuyer {
         this.money = money;
     }
     
-    public List<Lotto> buyFrom(LottoPurchasePlace lottoPurchasePlace, List<Lotto> manualLottos) {
-        List<Lotto> purchasedLottos = lottoPurchasePlace.purchase(money, manualLottos);
-        this.lottos.addAll(purchasedLottos);
-        return this.lottos;
+    public PurchasedLotto buyFrom(LottoPurchasePlace lottoPurchasePlace, List<Lotto> manualLottos) {
+       PurchasedLotto purchased = lottoPurchasePlace.purchase(money, manualLottos);
+        this.lottos.addAll(purchased.getManual());
+        this.lottos.addAll(purchased.getAuto());
+        return purchased;
     }
 
     public LottoResult calculateResult(WinningLotto winningLotto) {
