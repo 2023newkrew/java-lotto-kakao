@@ -71,8 +71,8 @@ public class LottoController {
     }
 
     private LottoBall getBonusBall() {
-        String bonusBallInput = inputView.getBonusBall();
-        return new LottoBall(Integer.parseInt(bonusBallInput));
+        int bonusBallNumber = inputView.getBonusBall();
+        return new LottoBall(bonusBallNumber);
     }
 
     private void announceResult() {

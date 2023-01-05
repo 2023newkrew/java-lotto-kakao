@@ -89,8 +89,14 @@ public class InputView {
         return numbers;
     }
 
-    public String getBonusBall() {
-        System.out.println(GET_BONUS_BALL_MESSAGE);
-        return scanner.nextLine().trim();
+    public int getBonusBall() {
+        try {
+            System.out.println(GET_BONUS_BALL_MESSAGE);
+            String userInput = scanner.nextLine().trim();
+            return Integer.parseInt(userInput);
+        } catch (NumberFormatException e) {
+            System.out.println(REQUIRE_INTEGER_MESSAGE);
+            return getBonusBall();
+        }
     }
 }
