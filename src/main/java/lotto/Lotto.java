@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Lotto {
     private static final int LOTTERY_NUMBER_SIZE = 6;
 
-    private final List<LottoNumber> numbers = new ArrayList<>();
+    private final List<LottoNumber> numbers;
 
     public Lotto(String numbersAsString) {
         this(parseStringToIntList(numbersAsString));
@@ -14,14 +14,11 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        for (Integer number : numbers) {
-            this.numbers.add(new LottoNumber(number));
-        }
-        Collections.sort(this.numbers);
+        this.numbers = numbers.stream().map(LottoNumber::new).sorted().collect(Collectors.toUnmodifiableList());
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(numbers);
+        return numbers;
     }
 
     public int compareWith(Lotto lotto) {
