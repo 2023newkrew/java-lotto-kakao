@@ -7,22 +7,21 @@ package model;
 import model.constant.LottoPlace;
 import model.constant.LottoPrizeMoney;
 
-import java.util.List;
-
 public class Banker {
-    public long getTotalPrizeMoney(List<LottoPlace> lottoResult) { //사용자가 조작할 수 있어선 안됨..
+    public long getTotalPrizeMoney(LottoResult lottoResult) { //전체 상금 리턴
         long answer = 0;
-        for(LottoPlace place : lottoResult) {
-            answer += getPrizeMoney(place).valueOf();
+        for (LottoPlace place : lottoResult.getLottoPlaces().keySet()) {
+            answer += getPrizeMoney(place) * lottoResult.getLottoPlaces().get(place);
         }
         return answer;
     }
-    private LottoPrizeMoney getPrizeMoney(LottoPlace lottoPlace) {
-        if (lottoPlace == LottoPlace.FIRST_PLACE) return LottoPrizeMoney.FIRST_PRIZE_MONEY;
-        if (lottoPlace == LottoPlace.SECOND_PLACE) return LottoPrizeMoney.SECOND_PRIZE_MONEY;
-        if (lottoPlace == LottoPlace.THIRD_PLACE) return LottoPrizeMoney.THIRD_PRIZE_MONEY;
-        if (lottoPlace == LottoPlace.FOURTH_PLACE) return LottoPrizeMoney.FOURTH_PRIZE_MONEY;
-        if (lottoPlace == LottoPlace.FIFTH_PLACE) return LottoPrizeMoney.FIFTH_PRIZE_MONEY;
-        return LottoPrizeMoney.LOSE_PRIZE_MONEY;
+
+    private long getPrizeMoney(LottoPlace lottoPlace) { //등수 당 상금 매핑
+        if (lottoPlace == LottoPlace.FIRST_PLACE) return LottoPrizeMoney.FIRST_PRIZE_MONEY.valueOf();
+        if (lottoPlace == LottoPlace.SECOND_PLACE) return LottoPrizeMoney.SECOND_PRIZE_MONEY.valueOf();
+        if (lottoPlace == LottoPlace.THIRD_PLACE) return LottoPrizeMoney.THIRD_PRIZE_MONEY.valueOf();
+        if (lottoPlace == LottoPlace.FOURTH_PLACE) return LottoPrizeMoney.FOURTH_PRIZE_MONEY.valueOf();
+        if (lottoPlace == LottoPlace.FIFTH_PLACE) return LottoPrizeMoney.FIFTH_PRIZE_MONEY.valueOf();
+        return LottoPrizeMoney.LOSE_PRIZE_MONEY.valueOf();
     }
 }
