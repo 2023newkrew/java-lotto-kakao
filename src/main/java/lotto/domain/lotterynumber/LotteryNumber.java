@@ -6,9 +6,13 @@ import static lotto.constant.LotteryConstant.LOTTERY_NUMBER_MINIMUM;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class LotteryNumber {
-    private static final Map<Integer, LotteryNumber> lottoNumberMap = new HashMap<>();
+    private static final Map<Integer, LotteryNumber> lottoNumberMap = new HashMap<>(){{
+        IntStream.range(LOTTERY_NUMBER_MINIMUM, LOTTERY_NUMBER_MAXIMIM)
+                .forEach(number -> put(number, new LotteryNumber(number)));
+    }};
     private final int value;
 
     private LotteryNumber(int value) {
@@ -17,13 +21,6 @@ public class LotteryNumber {
 
     public static LotteryNumber of(int value) {
         validate(value);
-        return getLotteryNumber(value);
-    }
-
-    private static LotteryNumber getLotteryNumber(int value) {
-        if (!lottoNumberMap.containsKey(value)) {
-            lottoNumberMap.put(value, new LotteryNumber(value));
-        }
         return lottoNumberMap.get(value);
     }
 
@@ -35,5 +32,9 @@ public class LotteryNumber {
 
     public int compareTo(LotteryNumber otherNumber) {
         return Integer.compare(this.value, otherNumber.value);
+    }
+
+    public int getValue() {
+        return value;
     }
 }

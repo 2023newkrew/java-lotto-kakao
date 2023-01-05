@@ -77,7 +77,7 @@
   - [x] 값의 비교가 가능하다.
   - [x] 1 이상 45 이하의 정수만 가진다.
 - LotteryNumberCombination : 로또 번호 조합 클래스; List<LotteryNumber> 포장
-  - [ ] 출력 시 오름차순으로 정렬한다.
+  - [x] 출력 시 오름차순으로 정렬한다.
   - [x] 생성시 로또 숫자 규칙을 검증한다.
     - [x] 각 숫자는 중복되지 않는다.
   - [x] 주어진 로또 번호를 포함하는 지 확인한다.
@@ -85,8 +85,8 @@
 - WinningNumbers : 당첨 번호; LotteryNumberCombination + bonus
   - [ ] 당첨 번호 규칙을 검증한다.(보너스 번호는 기존 로또 번호와 중복되지 않는다.)
 - RandomLotteryNumberCombinationFactory
-  - [ ] 한 개의 로또를 정상적으로 생성한다.
-  - [ ] 여러 개의 로또 리스트를 정상적으로 생성한다.
+  - [x] 한 개의 로또를 정상적으로 생성한다.
+  - [x] 여러 개의 로또 리스트를 정상적으로 생성한다.
 
 #### domain.rank
 - RankCriteria

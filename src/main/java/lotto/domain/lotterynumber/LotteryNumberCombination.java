@@ -38,4 +38,13 @@ public class LotteryNumberCombination {
     public boolean contains(LotteryNumber lotteryNumber) {
         return lotteryNumbers.contains(lotteryNumber);
     }
+
+    @Override
+    public String toString() {
+        return lotteryNumbers.stream()
+                .map(LotteryNumber::getValue)
+                .sorted()
+                .collect(Collectors.toList())
+                .toString();
+    }
 }
