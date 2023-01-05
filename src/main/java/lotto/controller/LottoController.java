@@ -53,26 +53,15 @@ public class LottoController {
 
     private void getWinnerCombination() {
         try {
-            LottoTicket lottoTicket = getWinnerTicket();
-            LottoBall bonusBall = getBonusBall();
+            List<Integer> userInputNumber = inputView.getWinnerTicketNumbers();
+            LottoTicket lottoTicket = LottoTicket.fromNumbers(userInputNumber);
+            int bonusBallNumber = inputView.getBonusBall();
+            LottoBall bonusBall = new LottoBall(bonusBallNumber);
             winnerCombination = new WinnerCombination(lottoTicket, bonusBall);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
             getWinnerCombination();
         }
-    }
-
-    private LottoTicket getWinnerTicket() {
-        List<Integer> userInputNumber = inputView.getWinnerTicketNumbers();
-        List<LottoBall> lottoBalls = userInputNumber.stream()
-                .map(LottoBall::new)
-                .collect(Collectors.toList());
-        return new LottoTicket(lottoBalls);
-    }
-
-    private LottoBall getBonusBall() {
-        int bonusBallNumber = inputView.getBonusBall();
-        return new LottoBall(bonusBallNumber);
     }
 
     private void announceResult() {
