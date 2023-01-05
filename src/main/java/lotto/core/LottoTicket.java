@@ -1,11 +1,11 @@
-package lotto;
+package lotto.core;
 
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoTicket {
+    private static final int LIMIT_BALL_SIZE = 6;
     protected final Set<LottoBall> lottoBalls;
 
     public LottoTicket(Collection<LottoBall> lottoBalls) {
@@ -13,10 +13,27 @@ public class LottoTicket {
         if (balls.size() != lottoBalls.size()) {
             throw new IllegalArgumentException("각 숫자는 중복을 허용하지 않습니다.");
         }
-        if (balls.size() != 6) {
-            throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
+        if (balls.size() != LIMIT_BALL_SIZE) {
+            throw new IllegalArgumentException(String.format("로또 숫자는 %d개여야 합니다.", LIMIT_BALL_SIZE));
         }
         this.lottoBalls = balls;
+    }
+
+    public static LottoTicket fromRandom() {
+        List<LottoBall> candidates = IntStream.rangeClosed(LottoBall.MIN_BALL, LottoBall.MAX_BALL)
+                .boxed()
+                .map(LottoBall::new)
+                .collect(Collectors.toList());
+        Collections.shuffle(candidates);
+        return new LottoTicket(candidates.subList(0, 6));
+    }
+
+    public static LottoTicket parse(String raw) {
+        return new LottoTicket(
+                Arrays.stream(raw.split(","))
+                        .map(LottoBall::parse)
+                        .collect(Collectors.toList())
+        );
     }
 
     @Override

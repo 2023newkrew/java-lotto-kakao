@@ -1,4 +1,4 @@
-package lotto;
+package lotto.core;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,8 +19,7 @@ class RankingTest {
                 Ranking.FIFTH, 0,
                 Ranking.OTHER, 0
         );
-        Price totalPrice = Ranking.totalPrice(rankingCount);
-        assertThat(totalPrice).isEqualTo(new Price(2000000000));
+        assertThat(Ranking.totalPrice(rankingCount)).isEqualTo(2000000000L);
     }
 
     @DisplayName("로또 중복 당첨금 계산")
@@ -34,7 +33,6 @@ class RankingTest {
                 Ranking.FIFTH, 5,
                 Ranking.OTHER, 10
         );
-        Price totalPrice = Ranking.totalPrice(rankingCount);
-        assertThat(totalPrice).isEqualTo(new Price(1500000 + 50000 * 2 + 5000 * 5));
+        assertThat(Ranking.totalPrice(rankingCount)).isEqualTo(1500000 + 50000 * 2 + 5000 * 5);
     }
 }

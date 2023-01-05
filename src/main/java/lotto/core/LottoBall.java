@@ -1,15 +1,21 @@
-package lotto;
+package lotto.core;
 
 import java.util.Objects;
 
 public class LottoBall implements Comparable<LottoBall> {
+    public static final int MIN_BALL = 1;
+    public static final int MAX_BALL = 45;
     private final int ball;
 
     public LottoBall(int ball) {
-        if (ball <= 0 || ball > 45) {
+        if (ball < MIN_BALL || ball > MAX_BALL) {
             throw new IllegalArgumentException("ball 은 1 ~ 45 사이의 숫자여야 합니다.");
         }
         this.ball = ball;
+    }
+
+    public static LottoBall parse(String ball) {
+        return new LottoBall(Integer.parseInt(ball));
     }
 
     @Override
