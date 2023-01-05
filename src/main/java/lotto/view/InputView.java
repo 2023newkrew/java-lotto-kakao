@@ -19,6 +19,17 @@ public class InputView {
         return getLottoInput();
     }
 
+    public List<Integer> getUserLottoInput() {
+        System.out.println("로또 번호를 입력해 주세요.");
+        return getLottoInput();
+    }
+
+    public int getGenerateOptionInput() {
+        System.out.println("자동 생성은 1, 수동 생성은 2를 입력해주세요");
+        String generateOption = sc.nextLine();
+        return Integer.parseInt(generateOption);
+    }
+
     private List<Integer> getLottoInput() {
         String answerNumbers = sc.nextLine();
         return Arrays.stream(answerNumbers.split("[\\s,]+"))

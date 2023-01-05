@@ -25,7 +25,7 @@ public class LottoController {
         int lottoTicketCount = store.getLottoAmount();
         outputView.printPurchaseResult(lottoTicketCount);
 
-        return getRandomLottoNumbers(lottoTicketCount);
+        return getUserLottos(lottoTicketCount);
     }
 
     public void play() {
@@ -34,22 +34,38 @@ public class LottoController {
         outputView.printResult(answerLotto.getPrizeCountMap(lottoTickets));
     }
 
-    private AnswerLotto getAnswerLotto() {
-        List<Integer> lottoNumbers = inputView.getAnswerLottoInput();
-        SingleLottoNumber bonusNumber = new SingleLottoNumber(inputView.getBonusBallInput());
-
-        List<SingleLottoNumber> answerLottoNumbers = lottoNumbers.stream()
+    private Lotto toLotto(List<Integer> lottoNumbers) {
+        List<SingleLottoNumber> singleLottoNumberList = lottoNumbers.stream()
                 .map(SingleLottoNumber::new)
                 .sorted()
                 .collect(Collectors.toList());
 
-        return new AnswerLotto(new Lotto(answerLottoNumbers), bonusNumber);
+        return new Lotto(singleLottoNumberList);
     }
 
-    private List<Lotto> getRandomLottoNumbers(int lottoTicketCount) {
+    private AnswerLotto getAnswerLotto() {
+        List<Integer> answerLottoInput = inputView.getAnswerLottoInput();
+
+        SingleLottoNumber bonusNumber = new SingleLottoNumber(inputView.getBonusBallInput());
+
+        return new AnswerLotto(toLotto(answerLottoInput), bonusNumber);
+    }
+
+    private Lotto getLottoWithOption(int generateOption) {
+        if (generateOption == 1) {
+            return RandomLottoGenerator.generateLotto();
+        }
+
+        List<Integer> userLottoInput = inputView.getUserLottoInput();
+        return toLotto(userLottoInput);
+    }
+
+    private List<Lotto> getUserLottos(int lottoTicketCount) {
         List<Lotto> userLottos = new ArrayList<>();
         for (int i = 0; i < lottoTicketCount; i++) {
-            userLottos.add(RandomLottoGenerator.generateLotto());
+            int generateOption = inputView.getGenerateOptionInput();
+            Lotto lotto = getLottoWithOption(generateOption);
+            userLottos.add(lotto);
         }
         outputView.printUserLottos(userLottos);
         return userLottos;
