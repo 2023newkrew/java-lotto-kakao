@@ -1,8 +1,8 @@
 package view;
 
+import domain.lotto.number.LottoNumbers;
 import domain.lotto.result.LottoResultType;
 import domain.lotto.result.LottoResults;
-import domain.lotto.ticket.LottoTicket;
 import domain.lotto.ticket.LottoTickets;
 
 import java.util.Arrays;
@@ -12,8 +12,8 @@ public class OutputView {
 
     public static void printLottoTickets(final LottoTickets lottoTickets) {
         System.out.println(lottoTickets.getLottoTickets().size() + "개를 구매했습니다.");
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            System.out.println(lottoTicket.toString());
+        for (LottoNumbers lottoNumbers : lottoTickets.getLottoTickets()) {
+            System.out.println(lottoNumbers.toString());
         }
     }
 

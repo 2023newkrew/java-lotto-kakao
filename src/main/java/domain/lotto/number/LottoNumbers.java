@@ -30,4 +30,8 @@ public class LottoNumbers {
             throw new IllegalArgumentException("로또 번호는 중복없는 6자리 숫자여야 합니다.");
     }
 
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

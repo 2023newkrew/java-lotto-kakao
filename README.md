@@ -22,6 +22,6 @@
 - [x] LottoNumber 클래스 생성하여 로또 숫자 포장 및 유효성 검사 처리
 - [x] LottoResults 불변 객체로 사용하도록 수정
 - [x] LottoChecker 삭제 후 메서드들 LottoResultsType 으로 이동
-- [] 메시지만 다른 동일한 예외 타입들 테스트시 구분가능하도록 변경
-- [] 역할이 모호한 LottoTicket 제거 
+- [] 메시지만 다른 동일한 예외 타입들 테스트시 구분 가능하도록 변경
+- [x] 역할이 모호한 LottoTicket 제거 
     

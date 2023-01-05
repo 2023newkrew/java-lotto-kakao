@@ -1,7 +1,7 @@
 package domain.lotto.result;
 
+import domain.lotto.number.LottoNumbers;
 import domain.lotto.number.WinningNumbers;
-import domain.lotto.ticket.LottoTicket;
 import domain.lotto.ticket.LottoTickets;
 
 import java.util.Arrays;
@@ -16,7 +16,7 @@ public class LottoResults {
     public LottoResults(final LottoTickets lottoTickets, final WinningNumbers winningNumbers) {
         Arrays.stream(LottoResultType.values()).
                 forEach(lottoResultType -> lottoResultCount.put(lottoResultType, 0));
-        for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
+        for (LottoNumbers lottoTicket : lottoTickets.getLottoTickets()) {
             countResult(LottoResultType.getLottoResult(lottoTicket, winningNumbers));
         }
     }

@@ -1,7 +1,7 @@
 package domain.lotto.result;
 
+import domain.lotto.number.LottoNumbers;
 import domain.lotto.number.WinningNumbers;
-import domain.lotto.ticket.LottoTicket;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,13 +31,13 @@ public enum LottoResultType {
         return message;
     }
 
-    public static LottoResultType getLottoResult(final LottoTicket lottoTicket, final WinningNumbers winningNumbers) {
-        List<Integer> containedNumbers = lottoTicket.getLottoNumbers().stream()
+    public static LottoResultType getLottoResult(final LottoNumbers lottoNumbers, final WinningNumbers winningNumbers) {
+        List<Integer> containedNumbers = lottoNumbers.getNumbers().stream()
                 .filter((number) -> winningNumbers.getLottoNumber().contains(number))
                 .collect(Collectors.toList());
 
         return getRank(containedNumbers.size(),
-                lottoTicket.getLottoNumbers().contains(winningNumbers.getBonusNumber()));
+                lottoNumbers.getNumbers().contains(winningNumbers.getBonusNumber()));
     }
 
     private static LottoResultType getRank(final int size, final boolean hasBonusNumber) {

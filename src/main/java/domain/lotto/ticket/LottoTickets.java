@@ -1,15 +1,17 @@
 package domain.lotto.ticket;
 
+import domain.lotto.number.LottoNumbers;
+
 import java.util.List;
 
 public class LottoTickets {
-    private final List<LottoTicket> lottoTickets;
+    private final List<LottoNumbers> lottoTickets;
 
-    public LottoTickets(final List<LottoTicket> lottoTickets) {
+    public LottoTickets(final List<LottoNumbers> lottoTickets) {
         this.lottoTickets = lottoTickets;
     }
 
-    public List<LottoTicket> getLottoTickets() {
+    public List<LottoNumbers> getLottoTickets() {
         return lottoTickets;
     }
 }

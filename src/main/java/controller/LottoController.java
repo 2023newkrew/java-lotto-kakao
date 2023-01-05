@@ -1,10 +1,10 @@
 package controller;
 
 import domain.dto.WinningNumbersDto;
+import domain.lotto.number.LottoNumbers;
 import domain.lotto.number.WinningNumbers;
 import domain.lotto.number.LottoNumbersMaker;
 import domain.lotto.result.LottoResults;
-import domain.lotto.ticket.LottoTicket;
 import domain.lotto.ticket.LottoTickets;
 import view.InputView;
 import view.OutputView;
@@ -23,9 +23,9 @@ public class LottoController {
 
     private LottoTickets createLottoTickets(final int purchaseAmount, final WinningNumbersDto.NumberGeneratable numberGenerator) {
         LottoNumbersMaker lottoNumberMaker = new LottoNumbersMaker();
-        List<LottoTicket> lottoTicketList = new ArrayList<>();
+        List<LottoNumbers> lottoTicketList = new ArrayList<>();
         for (int i = 0; i < purchaseAmount; i++) {
-            lottoTicketList.add(new LottoTicket(lottoNumberMaker.makeNumbers(numberGenerator)));
+            lottoTicketList.add(new LottoNumbers(lottoNumberMaker.makeNumbers(numberGenerator)));
         }
         return new LottoTickets(lottoTicketList);
     }
