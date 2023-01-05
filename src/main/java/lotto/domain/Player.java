@@ -1,11 +1,12 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
 
+    private final PlayerLottoResult playerLottoResult;
     private int money;
-    private PlayerLottoResult playerLottoResult;
     private List<LottoTicket> manualLottoTickets;
     private List<LottoTicket> autoLottoTickets;
 
@@ -13,6 +14,8 @@ public class Player {
         validatePlayerMoney(money);
         this.money = money;
         this.playerLottoResult = new PlayerLottoResult();
+        this.manualLottoTickets = new ArrayList<>();
+        this.autoLottoTickets = new ArrayList<>();
     }
 
     private void validatePlayerMoney(int money) {
@@ -22,19 +25,19 @@ public class Player {
     }
 
     public void buyManualLottoTickets(LottoTicketSeller seller, List<List<Integer>> manualLottoNumbers) {
-        this.manualLottoTickets = seller.sellManualLottoTickets(manualLottoNumbers);
+        this.manualLottoTickets = seller.sellManualLottoTickets(manualLottoNumbers, money);
         calculateMoneyLeft(seller, manualLottoTickets);
+    }
+
+    public void buyAutoLottoTickets(LottoTicketSeller seller) {
+        this.autoLottoTickets = seller.sellAutoLottoTickets(money);
+        calculateMoneyLeft(seller, autoLottoTickets);
     }
 
     private void calculateMoneyLeft(LottoTicketSeller seller, List<LottoTicket> lottoTickets) {
         int spentMoney = seller.calculateTotalPrice(lottoTickets);
         playerLottoResult.addSpentMoney(spentMoney);
         this.money -= spentMoney;
-    }
-
-    public void buyAutoLottoTickets(LottoTicketSeller seller) {
-        this.autoLottoTickets = seller.sellAutoLottoTickets(money);
-        calculateMoneyLeft(seller, autoLottoTickets);
     }
 
     public PlayerLottoResult findResult(WinnerCompareRule winnerCompareRule) {

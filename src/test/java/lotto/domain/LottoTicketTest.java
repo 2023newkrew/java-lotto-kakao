@@ -117,4 +117,23 @@ public class LottoTicketTest {
         // then
         assertThat(matchCount).isEqualTo(5);
     }
+
+    @DisplayName("번호를 통해 로또 티켓을 만들 수 있다.")
+    @Test
+    void createFromNumbers() {
+        // given
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+
+        // when
+        LottoTicket lottoTicket = LottoTicket.fromNumbers(numbers);
+
+        // then
+        List<LottoBall> lottoBalls = lottoTicket.getLottoBalls();
+        assertThat(lottoBalls.get(0)).isEqualTo(new LottoBall(1));
+        assertThat(lottoBalls.get(1)).isEqualTo(new LottoBall(2));
+        assertThat(lottoBalls.get(2)).isEqualTo(new LottoBall(3));
+        assertThat(lottoBalls.get(3)).isEqualTo(new LottoBall(4));
+        assertThat(lottoBalls.get(4)).isEqualTo(new LottoBall(5));
+        assertThat(lottoBalls.get(5)).isEqualTo(new LottoBall(6));
+    }
 }

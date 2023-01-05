@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -13,6 +14,13 @@ public class LottoTicket {
         validateDuplicate(lottoBalls);
         this.lottoBalls = new ArrayList<>(lottoBalls);
         Collections.sort(this.lottoBalls);
+    }
+
+    public static LottoTicket fromNumbers(List<Integer> lottoNumbers) {
+        List<LottoBall> lottoBalls = lottoNumbers.stream()
+                .map(LottoBall::new)
+                .collect(Collectors.toList());
+        return new LottoTicket(lottoBalls);
     }
 
     private void validateSize(List<LottoBall> lottoBalls) {

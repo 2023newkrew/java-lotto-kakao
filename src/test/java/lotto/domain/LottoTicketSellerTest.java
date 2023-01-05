@@ -14,7 +14,7 @@ class LottoTicketSellerTest {
 
     @DisplayName("가격에 알맞는 갯수만큼 로또 티켓을 구매할 수 있다.")
     @ParameterizedTest
-    @ValueSource(ints = {1000, 2000, 3500, 10000, 20000000})
+    @ValueSource(ints = {10, 1000, 2000, 3500, 10000, 20000000})
     void sellLottoTickets(int payMoney) {
         // given
         LottoTicketSeller seller = new LottoTicketSeller();
@@ -26,9 +26,9 @@ class LottoTicketSellerTest {
         assertThat(lottoTicketsBought.size()).isEqualTo(payMoney / 1000);
     }
 
-    @DisplayName("가격이 1000 미만이라면 로또 티켓을 구매할 수 없다.")
+    @DisplayName("가격이 0 미만이라면 로또 티켓을 구매할 수 없다.")
     @ParameterizedTest
-    @ValueSource(ints = {-1000, 0, 300})
+    @ValueSource(ints = {-1000, -10, -300})
     void sellLottoTicketsInvalid(int payMoney) {
         // given
         LottoTicketSeller seller = new LottoTicketSeller();
