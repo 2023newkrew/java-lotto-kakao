@@ -8,6 +8,8 @@ import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import lotto.dto.GameResultDto;
 
+import static lotto.constant.ViewMessages.*;
+
 public class LottoView {
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -23,21 +25,21 @@ public class LottoView {
     }
 
     private static void printTotalMoneyMessage() {
-        System.out.println("구매금액을 입력해 주세요.");
+        System.out.println(TOTAL_PRICE_MESSAGE);
     }
 
     public static void printLottoList(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+        System.out.println(lottos.size() + BOUGHT_AMOUNT_MESSAGE);
         lottos.forEach((lotto) -> System.out.println(lotto.toString()));
         System.out.println();
     }
 
     private static void printWinningLottoNumbersMessage() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println(WINNING_LOTTO_NUMBER_MESSAGE);
     }
 
     private static void printBonusNumberMessage() {
-        System.out.println("보너스 볼을 입력해 주세요.");
+        System.out.println(BONUS_NUMBER_MESSAGE);
     }
 
     private static List<Integer> inputWinningLottoNumbers() {
@@ -55,22 +57,21 @@ public class LottoView {
     }
 
     public static void printResult(GameResultDto gameResultDto) {
-        final String bonusMatches = ", 보너스 볼 일치";
         Map<LottoGrade, Integer> lottoResultCounter = gameResultDto.getLottoResultCounter();
 
-        System.out.println("당첨 통계");
-        System.out.println("-----------");
+        System.out.println(WINNING_STATISTICS_MESSAGE);
+        System.out.println(DIVIDER_MESSAGE);
         lottoResultCounter.remove(LottoGrade.NONE);
         lottoResultCounter.keySet().stream()
                 .sorted(Comparator.comparingInt(o -> o.price))
                 .forEach((lottoGradeEnum) -> System.out.printf(
-                        "%d개 일치%s (%d원)- %d개\n",
+                        MATCH_COUNT_MESSAGE + "\n",
                         lottoGradeEnum.matchCount,
-                        lottoGradeEnum.isBonusMatches ? bonusMatches : "",
+                        lottoGradeEnum.isBonusMatches ? BONUS_BALL_MATCHES_MESSAGE : "",
                         lottoGradeEnum.price,
                         lottoResultCounter.get(lottoGradeEnum)
                 ));
-        System.out.printf("총 수익률은 %.2f 입니다.\n", gameResultDto.getEarningRate());
+        System.out.printf(EARNING_RATE_MESSAGE + "\n", gameResultDto.getEarningRate());
     }
 
     public static int inputManualLottoAmount() {
@@ -79,7 +80,7 @@ public class LottoView {
     }
 
     private static void printManualLottoAmountMessage() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println(MANUAL_LOTTO_AMOUNT_MESSAGE);
     }
 
     public static List<List<Integer>> inputManualLottoNumbers(int manualLottoAmount) {
@@ -92,6 +93,6 @@ public class LottoView {
     }
 
     private static void printManualLottoNumbersMessage() {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        System.out.println(MANUAL_LOTTO_NUMBER_MESSAGE);
     }
 }
