@@ -16,8 +16,8 @@ public class LottoWinningNumbersTest {
     @ParameterizedTest
     @MethodSource("getCreateWinningNumbersWith6NumbersAnd1BonusNumber")
     public void createWinningNumbersWith6NumbersAnd1BonusNumber(
-            List<Integer> numbers, int bonusNumber) {
-        Assertions.assertThatCode(() -> new LottoWinningNumberList(numbers, bonusNumber))
+            List<Integer> numberList, int bonusNumber) {
+        Assertions.assertThatCode(() -> new LottoWinningNumberList(numberList, bonusNumber))
                 .doesNotThrowAnyException();
     }
 
@@ -32,8 +32,8 @@ public class LottoWinningNumbersTest {
     @ParameterizedTest
     @MethodSource("getCreateWinningNumbersWithDuplicatedBonusNumberData")
     public void createWinningNumbersWithDuplicatedBonusNumber(
-            List<Integer> numbers, int bonusNumber) {
-        Assertions.assertThatThrownBy(() -> new LottoWinningNumberList(numbers, bonusNumber))
+            List<Integer> numberList, int bonusNumber) {
+        Assertions.assertThatThrownBy(() -> new LottoWinningNumberList(numberList, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

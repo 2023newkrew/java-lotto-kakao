@@ -19,10 +19,10 @@ public class LottoDispenserTest {
     @DisplayName("금액에 따른 로또 티켓 발급")
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketByPriceData")
-    public void issueLottoTicketByPrice(int money, int number) {
+    public void issueLottoTicketByPrice(int money, int count) {
         LottoDispenser lottoDispenser = new LottoDispenser(new LottoSetting(),
                 RandomNumberSelectStrategy.getInstance());
-        Assertions.assertThat(lottoDispenser.getLottoTicketList(money).getCount()).isEqualTo(number);
+        Assertions.assertThat(lottoDispenser.getLottoTicketList(money).getCount()).isEqualTo(count);
     }
 
     private static Stream<Arguments> getIssueLottoTicketByPriceData() {
@@ -36,9 +36,9 @@ public class LottoDispenserTest {
     @DisplayName("숫자 생성 전략을 통한 숫자 생성")
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketByNumberSelectStrategyData")
-    public void issueLottoTicketByPrice(List<List<Integer>> randomNumbers, int money, String expected) {
+    public void issueLottoTicketByPrice(List<List<Integer>> randomNumberList, int money, String expected) {
         LottoDispenser lottoDispenser = new LottoDispenser(new LottoSetting(),
-                createNumberSelectStrategy(randomNumbers));
+                createNumberSelectStrategy(randomNumberList));
         LottoTicketList lottoTickets = lottoDispenser.getLottoTicketList(money);
         Assertions.assertThat(lottoTickets.getString()).isEqualTo(expected);
     }
@@ -58,12 +58,12 @@ public class LottoDispenserTest {
         );
     }
 
-    private NumberSelectStrategy createNumberSelectStrategy(List<List<Integer>> randomNumbers) {
+    private NumberSelectStrategy createNumberSelectStrategy(List<List<Integer>> randomNumberList) {
         return new NumberSelectStrategy() {
             int index = 0;
             @Override
             public List<Integer> select() {
-                return randomNumbers.get(index++);
+                return randomNumberList.get(index++);
             }
 
             @Override
@@ -76,8 +76,8 @@ public class LottoDispenserTest {
     @DisplayName("수동으로 티켓 발급")
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketManuallyData")
-    public void issueLottoTicketManually(List<List<Integer>> numbers, int money, String expected) {
-        LottoDispenser lottoDispenser = new LottoDispenser(new LottoSetting(), new ManualNumberSelectStrategy(numbers));
+    public void issueLottoTicketManually(List<List<Integer>> numberList, int money, String expected) {
+        LottoDispenser lottoDispenser = new LottoDispenser(new LottoSetting(), new ManualNumberSelectStrategy(numberList));
         LottoTicketList lottoTickets = lottoDispenser.getLottoTicketList(money);
         Assertions.assertThat(lottoTickets.getString()).isEqualTo(expected);
     }
@@ -106,8 +106,8 @@ public class LottoDispenserTest {
     @DisplayName("남은 금액 표시 기능")
     @ParameterizedTest
     @MethodSource("getReceiveLeftoverMoneyData")
-    public void receiveLeftoverMoney(List<List<Integer>> numbers, int money, int expected) {
-        LottoDispenser lottoDispenser = new LottoDispenser(new LottoSetting(), new ManualNumberSelectStrategy(numbers));
+    public void receiveLeftoverMoney(List<List<Integer>> numberList, int money, int expected) {
+        LottoDispenser lottoDispenser = new LottoDispenser(new LottoSetting(), new ManualNumberSelectStrategy(numberList));
         lottoDispenser.getLottoTicketList(money);
         Assertions.assertThat(lottoDispenser.receiveLeftoverMoney()).isEqualTo(expected);
     }

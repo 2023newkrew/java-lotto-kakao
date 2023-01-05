@@ -15,11 +15,11 @@ public class LottoGameTest {
     @DisplayName("로또 티켓 구매 (구매한 개수 리턴)")
     @ParameterizedTest
     @MethodSource("getBuyLottoTicketData")
-    public void buyLottoTicket(int money, int number) {
+    public void buyLottoTicket(int money, int count) {
         LottoSetting lottoSetting = new LottoSetting();
         LottoGame lottoGame = new LottoGame(lottoSetting);
         lottoGame.buyRandomly(money);
-        Assertions.assertThat(lottoGame.getRandomTicketCount()).isEqualTo(number);
+        Assertions.assertThat(lottoGame.getRandomTicketCount()).isEqualTo(count);
     }
 
     private static Stream<Arguments> getBuyLottoTicketData() {
@@ -33,10 +33,10 @@ public class LottoGameTest {
     @DisplayName("수동으로 티켓 구매")
     @ParameterizedTest
     @MethodSource("getBuyLottoTicketManuallyData")
-    public void buyLottoTicketManually(List<List<Integer>> numbers, int money, String expected) {
+    public void buyLottoTicketManually(List<List<Integer>> numberList, int money, String expected) {
         LottoSetting lottoSetting = new LottoSetting();
         LottoGame lottoGame = new LottoGame(lottoSetting);
-        lottoGame.buyManually(money, numbers);
+        lottoGame.buyManually(money, numberList);
         Assertions.assertThat(lottoGame.getLottoTicketsString()).isEqualTo(expected);
     }
 
@@ -64,10 +64,10 @@ public class LottoGameTest {
     @DisplayName("수동으로 티켓 구매 실패")
     @ParameterizedTest
     @MethodSource("getFailToBuyLottoTicketManuallyData")
-    public void failToBuyLottoTicketManually(List<List<Integer>> numbers, int money) {
+    public void failToBuyLottoTicketManually(List<List<Integer>> numberList, int money) {
         LottoSetting lottoSetting = new LottoSetting();
         LottoGame lottoGame = new LottoGame(lottoSetting);
-        Assertions.assertThatThrownBy(() -> lottoGame.buyManually(money, numbers))
+        Assertions.assertThatThrownBy(() -> lottoGame.buyManually(money, numberList))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -97,10 +97,10 @@ public class LottoGameTest {
     @DisplayName("발급 수량 확인")
     @ParameterizedTest
     @MethodSource("getCheckCountData")
-    public void checkCount(List<List<Integer>> numbers, int money, int manualExpected, int randomExpected) {
+    public void checkCount(List<List<Integer>> numberList, int money, int manualExpected, int randomExpected) {
         LottoSetting lottoSetting = new LottoSetting();
         LottoGame lottoGame = new LottoGame(lottoSetting);
-        lottoGame.buyManually(money, numbers);
+        lottoGame.buyManually(money, numberList);
         lottoGame.buyRandomly(lottoGame.receiveLeftoverMoney());
         Assertions.assertThat(lottoGame.getManualTicketCount()).isEqualTo(manualExpected);
         Assertions.assertThat(lottoGame.getRandomTicketCount()).isEqualTo(randomExpected);

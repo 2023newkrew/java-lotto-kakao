@@ -11,16 +11,16 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class LottoNumbersTest {
+public class LottoNumberSetTest {
 
     @DisplayName("6개의 중복되지 않은 숫자 배열 생성")
     @ParameterizedTest
-    @MethodSource("getGenerateLottoNumbersData")
-    public void generateLottoNumbers(List<Integer> numbers) {
-        Assertions.assertThatCode(() -> new LottoNumberSet(numbers)).doesNotThrowAnyException();
+    @MethodSource("getGenerateLottoNumberSetData")
+    public void generateLottoNumberSet(List<Integer> numberList) {
+        Assertions.assertThatCode(() -> new LottoNumberSet(numberList)).doesNotThrowAnyException();
     }
 
-    private static Stream<Arguments> getGenerateLottoNumbersData() {
+    private static Stream<Arguments> getGenerateLottoNumberSetData() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 Arguments.of(Arrays.asList(3, 6, 12, 21, 41, 43))
@@ -29,13 +29,13 @@ public class LottoNumbersTest {
 
     @DisplayName("6개 중 중복된 숫자 존재시 실패")
     @ParameterizedTest
-    @MethodSource("getFailToGenerateDuplicatedLottoNumbersData")
-    public void failToGenerateDuplicatedLottoNumbers(List<Integer> numbers) {
-        Assertions.assertThatThrownBy(() -> new LottoNumberSet(numbers))
+    @MethodSource("getFailToGenerateDuplicatedLottoNumberSetData")
+    public void failToGenerateDuplicatedLottoNumberSet(List<Integer> numberList) {
+        Assertions.assertThatThrownBy(() -> new LottoNumberSet(numberList))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    private static Stream<Arguments> getFailToGenerateDuplicatedLottoNumbersData() {
+    private static Stream<Arguments> getFailToGenerateDuplicatedLottoNumberSetData() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 1, 3, 4, 5, 6)),
                 Arguments.of(Arrays.asList(41, 6, 12, 21, 41, 43))
@@ -44,13 +44,13 @@ public class LottoNumbersTest {
 
     @DisplayName("6개 이외의 숫자 배열 생성시 실패")
     @ParameterizedTest
-    @MethodSource("getFailToGenerateLottoNumbersOtherThan6Data")
-    public void failToGenerateLottoNumbersOtherThan6(List<Integer> numbers) {
-        Assertions.assertThatThrownBy(() -> new LottoNumberSet(numbers))
+    @MethodSource("getFailToGenerateLottoNumberSetOtherThan6Data")
+    public void failToGenerateLottoNumberSetOtherThan6(List<Integer> numberList) {
+        Assertions.assertThatThrownBy(() -> new LottoNumberSet(numberList))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    private static Stream<Arguments> getFailToGenerateLottoNumbersOtherThan6Data() {
+    private static Stream<Arguments> getFailToGenerateLottoNumberSetOtherThan6Data() {
         return Stream.of(
                 Arguments.of(Arrays.asList(1, 3, 4, 5, 6)),
                 Arguments.of(Arrays.asList(6, 12, 21, 41, 43, 44, 45))
@@ -59,13 +59,13 @@ public class LottoNumbersTest {
 
     @DisplayName("숫자가 숫자 배열에 포함되어 있는지 확인")
     @ParameterizedTest
-    @MethodSource("getCheckLottoNumberIncludedInLottoNumbersData")
-    public void checkLottoNumberIncludedInLottoNumbers(LottoNumberSet lottoNumbers,
+    @MethodSource("getCheckLottoNumberIncludedInLottoNumberSetData")
+    public void checkLottoNumberIncludedInLottoNumberSet(LottoNumberSet lottoNumberSet,
             LottoNumber lottoNumber, boolean expected) {
-        Assertions.assertThat(lottoNumbers.hasNumber(lottoNumber)).isEqualTo(expected);
+        Assertions.assertThat(lottoNumberSet.hasNumber(lottoNumber)).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> getCheckLottoNumberIncludedInLottoNumbersData() {
+    private static Stream<Arguments> getCheckLottoNumberIncludedInLottoNumberSetData() {
         return Stream.of(
                 Arguments.of(new LottoNumberSet(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.from(3), true),
                 Arguments.of(new LottoNumberSet(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.from(33), false)

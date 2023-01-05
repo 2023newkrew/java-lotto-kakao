@@ -17,8 +17,8 @@ public class LottoTicketTest {
     @DisplayName("로또 티켓 번호 확인")
     @ParameterizedTest
     @MethodSource("getCheckStringTypeOfLottoNumbersData")
-    public void checkStringTypeOfLottoNumbers(List<Integer> numbers, String expected) {
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+    public void checkStringTypeOfLottoNumbers(List<Integer> numberList, String expected) {
+        LottoTicket lottoTicket = new LottoTicket(numberList);
         Assertions.assertThat(lottoTicket.getString()).isEqualTo(expected);
     }
 
@@ -34,9 +34,9 @@ public class LottoTicketTest {
     @DisplayName("당첨 결과 계산")
     @ParameterizedTest
     @MethodSource("getCalculateWinningResultData")
-    public void calculateWinningResult(List<Integer> numbers, List<Integer> winningNumbers,
+    public void calculateWinningResult(List<Integer> numberList, List<Integer> winningNumbers,
             int bonusNumber, LottoResult result) {
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket lottoTicket = new LottoTicket(numberList);
         LottoWinningNumberList lottoWinningNumbers
                 = new LottoWinningNumberList(winningNumbers, bonusNumber);
         Assertions.assertThat(lottoTicket.getResult(lottoWinningNumbers)).isEqualTo(result);
