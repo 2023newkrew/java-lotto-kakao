@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 public class LotteryNumberCombinationTest {
     @DisplayName("1과 45 사이의 값을 포함한 List로 생성하면 예외가 발생한다.")
     @Test
-    void LotteryNumberCombinationRangeExceptionTest() {
+    void lotteryNumberCombinationRangeExceptionTest() {
         assertThatThrownBy(() -> new LotteryNumberCombination(Arrays.asList(1, 2, 3, 4, 5, 46)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(LOTTERY_NUMBER_OUT_OF_RANGE);
@@ -23,7 +23,7 @@ public class LotteryNumberCombinationTest {
 
     @DisplayName("입력의 크기가 6이 아닌 경우 예외가 발생한다.")
     @Test
-    void LotteryNumberCombinationSizeTest() {
+    void lotteryNumberCombinationSizeTest() {
         assertAll(
                 () -> assertThatThrownBy(() -> new LotteryNumberCombination(Arrays.asList(1, 2, 3, 4, 5)))
                         .isInstanceOf(IllegalArgumentException.class)
@@ -38,7 +38,7 @@ public class LotteryNumberCombinationTest {
 
     @DisplayName("LotteryNumberCombination이 입력값을 포함하는지 반환한다.")
     @Test
-    void LotteryNumberContainsTest() {
+    void lotteryNumberContainsTest() {
         LotteryNumberCombination lotteryTicket = new LotteryNumberCombination(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertAll(
                 () -> assertThat(lotteryTicket.contains(1)).isTrue(),
@@ -50,7 +50,7 @@ public class LotteryNumberCombinationTest {
 
     @DisplayName("주어진 LotteryNumberCombination과 일치하는 개수를 반환한다.")
     @Test
-    void LotteryNumberMatchCountTest() {
+    void lotteryNumberMatchCountTest() {
         LotteryNumberCombination lotteryTicket = new LotteryNumberCombination(Arrays.asList(1, 2, 3, 4, 5, 6));
         LotteryNumberCombination otherTicket = new LotteryNumberCombination(Arrays.asList(1, 2, 3, 7, 8, 9));
         assertAll(

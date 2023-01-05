@@ -83,7 +83,7 @@
   - [x] 주어진 로또 번호를 포함하는 지 확인한다.
   - [x] 다른 LotteryNumberCombination과 겹치는 LotteryNumber의 개수를 반환한다.
 - WinningNumbers : 당첨 번호; LotteryNumberCombination + bonus
-  - [ ] 당첨 번호 규칙을 검증한다.(보너스 번호는 기존 로또 번호와 중복되지 않는다.)
+  - [x] 당첨 번호 규칙을 검증한다.(보너스 번호는 기존 로또 번호와 중복되지 않는다.)
 - RandomLotteryNumberCombinationFactory
   - [x] 한 개의 로또를 정상적으로 생성한다.
   - [x] 여러 개의 로또 리스트를 정상적으로 생성한다.
