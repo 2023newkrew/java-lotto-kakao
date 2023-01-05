@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Lottos {
 
+    private static final int LOTTO_NUMBER_SIZE = 6;
+
     private final List<Lotto> lottos;
 
     public Lottos(int count) {
@@ -14,7 +16,7 @@ public class Lottos {
 
         lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(randomGenerator.createNumbers(6)));
+            lottos.add(new Lotto(randomGenerator.createNumbers(LOTTO_NUMBER_SIZE)));
         }
     }
 

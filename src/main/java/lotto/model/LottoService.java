@@ -1,13 +1,10 @@
 package lotto.model;
 
-import lotto.util.RandomGenerator;
-
 import java.util.List;
 
 public class LottoService {
 
     private static final int DEFAULT_LOTTO_COST = 1000;
-    private static final int LOTTO_NUMBERS_SIZE = 6;
 
     private Lottos lottos;
     private WinningNumbers winningNumbers;
@@ -24,12 +21,12 @@ public class LottoService {
         this.lottos = new Lottos((int) purchaseCost / DEFAULT_LOTTO_COST);
     }
 
-    public void createWinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
-        this.winningNumbers = new WinningNumbers(winningNumbers, bonusNumber);
-    }
-
     public void createLottos(int lottoCost) {
         this.lottos = new Lottos((int) purchaseCost / lottoCost);
+    }
+
+    public void createWinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
+        this.winningNumbers = new WinningNumbers(winningNumbers, bonusNumber);
     }
 
     public Lottos getLottos() {
