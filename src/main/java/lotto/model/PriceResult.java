@@ -3,7 +3,7 @@ package lotto.model;
 import java.util.*;
 
 public class PriceResult {
-    private final EnumMap<Price, Integer> result;
+    private final Map<Price, Integer> result;
 
     public PriceResult() {
         result = new EnumMap<>(Price.class);
@@ -14,7 +14,7 @@ public class PriceResult {
         }
     }
 
-    public EnumMap<Price, Integer> getResult() {
+    public Map<Price, Integer> getResult() {
         return result;
     }
 
