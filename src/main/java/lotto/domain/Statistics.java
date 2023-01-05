@@ -36,9 +36,9 @@ public class Statistics {
         return ranks.get(rank);
     }
 
-    public int getPrizeAmount() {
+    public long getPrizeAmount() {
         return Arrays.stream(LottoRank.values())
-                .mapToInt(rank -> ranks.get(rank) * rank.PRIZE)
+                .mapToLong(rank -> ranks.get(rank) * rank.PRIZE)
                 .sum();
     }
 

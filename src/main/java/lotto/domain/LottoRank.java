@@ -9,9 +9,9 @@ public enum LottoRank {
     FAIL(0, 0);
 
     public final int COUNT;
-    public final int PRIZE;
+    public final long PRIZE;
 
-    LottoRank(int count, int prize) {
+    LottoRank(int count, long prize) {
         this.COUNT = count;
         this.PRIZE = prize;
     }
