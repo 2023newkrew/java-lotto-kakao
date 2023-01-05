@@ -4,6 +4,7 @@ import dto.LottoResult;
 import dto.WinningLotto;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,9 +15,10 @@ public class LottoBuyerTest {
         // given
         List<Lotto> lottos = List.of(Lotto.ofAuto(), Lotto.ofAuto());
         LottoBuyer buyer = new LottoBuyer(5000);
+        LottoPurchasePlace place = ((money, manuals) -> lottos);
 
         // when
-        List<Lotto> result = buyer.buyFrom((money)->lottos);
+        List<Lotto> result = buyer.buyFrom(place, Collections.emptyList());
 
         // then
         assertThat(result).isEqualTo(lottos);
@@ -31,7 +33,8 @@ public class LottoBuyerTest {
                 Lotto.ofManual(List.of(5,6,7,8,9,10))
         );
         LottoBuyer lottoBuyer = new LottoBuyer(3500);
-        lottoBuyer.buyFrom((money) -> lottos);
+        LottoPurchasePlace place = ((money, manuals) -> lottos);
+        lottoBuyer.buyFrom(place, Collections.emptyList());
 
         Lotto winningNumbers = Lotto.ofManual(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(45);
@@ -57,7 +60,8 @@ public class LottoBuyerTest {
                 Lotto.ofManual(List.of(5,6,7,8,9,10))
         );
         LottoBuyer lottoBuyer = new LottoBuyer(3500);
-        lottoBuyer.buyFrom((money) -> lottos);
+        LottoPurchasePlace place = ((money, manuals) -> lottos);
+        lottoBuyer.buyFrom(place, Collections.emptyList());
 
         Lotto winningNumbers = Lotto.ofManual(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(45);
