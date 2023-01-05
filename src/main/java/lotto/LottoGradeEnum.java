@@ -1,35 +1,33 @@
 package lotto;
 
-import static lotto.constant.MessageConstant.INVALID_GRADE_NUMBER_RANGE;
-
 import java.util.Arrays;
 
 public enum LottoGradeEnum {
 
-    FIRST(6, 2_000_000_000),
-    SECOND(5, 300_000_000),
-    THIRD(5, 1_500_000),
-    FOURTH(4, 50_000),
-    FIFTH(3, 5000),
-    NONE_GRADE(0, 0);
+    FIRST(6, 2_000_000_000, false),
+    SECOND(5, 300_000_000, true),
+    THIRD(5, 1_500_000, false),
+    FOURTH(4, 50_000, false),
+    FIFTH(3, 5000, false),
+    NONE_GRADE(0, 0, false);
 
     private static final int MIN_MATCH_COUNT = 0;
     private static final int MAX_MATCH_COUNT = 6;
     private final int matchCount;
     private final int price;
+    private final boolean needBonusMatch;
 
-    LottoGradeEnum(int matchCount, int price) {
+    LottoGradeEnum(int matchCount, int price, boolean needBonusMatch) {
         this.matchCount = matchCount;
         this.price = price;
+        this.needBonusMatch = needBonusMatch;
     }
 
     public static LottoGradeEnum evaluate(int matchCount, boolean isMatchBonus) {
         validateMatchCount(matchCount);
-        if (matchCount == SECOND.matchCount && isMatchBonus) {
-            return SECOND;
-        }
         return Arrays.stream(LottoGradeEnum.values())
-                .filter((lottoGrade) -> lottoGrade != SECOND & lottoGrade.matchCount == matchCount)
+                .filter(lottoGrade -> lottoGrade.matchCount == matchCount)
+                .filter(lottoGrade -> !lottoGrade.needBonusMatch || isMatchBonus)
                 .findFirst()
                 .orElse(NONE_GRADE);
     }
@@ -44,13 +42,6 @@ public enum LottoGradeEnum {
                     )
             );
         }
-    }
-
-    public static LottoGradeEnum getGrade(int gradeNumber) {
-        if (gradeNumber < 1 || gradeNumber > 6) {
-            throw new IllegalArgumentException(INVALID_GRADE_NUMBER_RANGE);
-        }
-        return LottoGradeEnum.values()[gradeNumber - 1];
     }
 
     public int getMatchCount() {
