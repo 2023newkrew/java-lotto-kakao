@@ -77,22 +77,23 @@ public class Player {
 
     private void validateRange(int budget) {
         if (budget <= ZERO_MONEY) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR] 구매 가격은 양수여야 합니다.");
         }
     }
 
     private void validateDivisibility(int budget) {
         if (budget % LOTTERY_UNIT_PRICE != ZERO_REMAINDER) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR] 구매 가격은 1000의 배수여야 합니다.");
         }
     }
 
     private void validateSelfPickCount(int count) {
         if (count < LOTTERY_COUNT_MINIMUM) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR] 수동으로 구매하는 개수는 0 이상이어야 합니다.");
         }
         if (count > calculateLotteryNumberCombinationCount()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(String.format("[ERROR] 구매가능한 개수를 초과했습니다. 최대 개수 : %d",
+                    calculateLotteryNumberCombinationCount()));
         }
     }
 }

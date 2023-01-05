@@ -1,6 +1,8 @@
 package lotto.view;
 
 import static lotto.constant.ExceptionMessage.INPUT_BUDGET_WRONG_TYPE;
+import static lotto.constant.ExceptionMessage.INPUT_LOTTERY_NUMBER_WRONG_TYPE;
+import static lotto.constant.ExceptionMessage.INPUT_SELF_PICK_COUNT_WRONG_TYPE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,8 +11,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
-    private static final String INPUT_SELF_PICK_COUNT_WRONG_TYPE = "";
-    private static final String INPUT_LOTTERY_NUMBER_WRONG_TYPE = "";
     public static final String LOTTERY_NUMBERS_DELIMITER = ",";
     private final Scanner scanner = new Scanner(System.in);
 

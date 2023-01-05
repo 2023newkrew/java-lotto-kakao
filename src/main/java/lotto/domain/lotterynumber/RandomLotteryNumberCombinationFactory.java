@@ -30,7 +30,7 @@ public class RandomLotteryNumberCombinationFactory {
 
     private static void validateCount(int count) {
         if (count < 0) {
-            throw new IllegalArgumentException("");
+            throw new IllegalArgumentException("[ERROR] 0개 이상만 생성할 수 있습니다.");
         }
     }
 }
