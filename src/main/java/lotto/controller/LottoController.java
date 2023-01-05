@@ -29,8 +29,15 @@ public class LottoController {
         try {
             int purchaseMoneyAmount = inputView.getPurchaseMoneyAmount();
             Player player = new Player(purchaseMoneyAmount);
-            player.buyLottoTickets(seller);
-            outputView.printPurchasedTickets(player.getLottoTickets());
+
+            int manualLottoCount = inputView.getManualLottoCount();
+            List<List<Integer>> manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount);
+
+            player.buyManualLottoTickets(seller, manualLottoNumbers);
+
+            player.buyAutoLottoTickets(seller);
+
+            outputView.printPurchasedTickets(player);
             return player;
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());

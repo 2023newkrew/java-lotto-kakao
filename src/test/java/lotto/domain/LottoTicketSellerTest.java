@@ -20,7 +20,7 @@ class LottoTicketSellerTest {
         LottoTicketSeller seller = new LottoTicketSeller();
 
         // when
-        List<LottoTicket> lottoTicketsBought = seller.sellLottoTickets(payMoney);
+        List<LottoTicket> lottoTicketsBought = seller.sellAutoLottoTickets(payMoney);
 
         // then
         assertThat(lottoTicketsBought.size()).isEqualTo(payMoney / 1000);
@@ -34,7 +34,7 @@ class LottoTicketSellerTest {
         LottoTicketSeller seller = new LottoTicketSeller();
 
         // when & then
-        assertThatThrownBy(() -> seller.sellLottoTickets(payMoney))
+        assertThatThrownBy(() -> seller.sellAutoLottoTickets(payMoney))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -43,7 +43,7 @@ class LottoTicketSellerTest {
     void calculateTotalPrice() {
         // given
         LottoTicketSeller seller = new LottoTicketSeller();
-        List<LottoTicket> lottoTicketsBought = seller.sellLottoTickets(3700);
+        List<LottoTicket> lottoTicketsBought = seller.sellAutoLottoTickets(3700);
 
         // when
         int lottoTicketsPrice = seller.calculateTotalPrice(lottoTicketsBought);

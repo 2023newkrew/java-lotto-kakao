@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -27,7 +26,7 @@ public class PlayerTest {
         LottoTicketSeller seller = new LottoTicketSeller();
 
         //when & then
-        assertDoesNotThrow(() -> player.buyLottoTickets(seller));
+        assertDoesNotThrow(() -> player.buyAutoLottoTickets(seller));
     }
 
     @DisplayName("플레이어는 자신의 로또 티켓들의 당첨 결과를 받을 수 있다")
@@ -38,7 +37,7 @@ public class PlayerTest {
         LottoTicketSeller seller = new LottoTicketSeller();
 
         //when
-        player.buyLottoTickets(seller);
+        player.buyAutoLottoTickets(seller);
         PlayerLottoResult playerLottoResult = player.findResult(lottoTicket -> LottoResult.FIFTH_PLACE);
 
         //then

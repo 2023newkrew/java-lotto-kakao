@@ -11,7 +11,8 @@ public class PlayerLottoResultTest {
     @Test
     void addResult() {
         //given
-        PlayerLottoResult playerLottoResult = new PlayerLottoResult(1_000);
+        PlayerLottoResult playerLottoResult = new PlayerLottoResult();
+        playerLottoResult.addSpentMoney(1000);
 
         //when
         playerLottoResult.addResult(LottoResult.NO_MATCH);
@@ -25,7 +26,8 @@ public class PlayerLottoResultTest {
     @Test
     void calculateProfitRate() {
         //given
-        PlayerLottoResult playerLottoResult = new PlayerLottoResult(1_000);
+        PlayerLottoResult playerLottoResult = new PlayerLottoResult();
+        playerLottoResult.addSpentMoney(1000);
 
         //when
         playerLottoResult.addResult(LottoResult.NO_MATCH);

@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class PlayerLottoResult {
 
-    private final int spentMoney;
     private final Map<LottoResult, Integer> lottoResults;
+    private int spentMoney;
 
-    public PlayerLottoResult(int spentMoney) {
-        this.spentMoney = spentMoney;
+    public PlayerLottoResult() {
+        this.spentMoney = 0;
         this.lottoResults = initializeLottoResults();
     }
 
@@ -19,6 +19,10 @@ public class PlayerLottoResult {
             lottoResults.put(lottoResult, 0);
         }
         return lottoResults;
+    }
+
+    public void addSpentMoney(int spentMoney) {
+        this.spentMoney += spentMoney;
     }
 
     public void addResult(LottoResult lottoResult) {

@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lotto.domain.LottoBall.MAXIMUM_BALL_NUMBER;
 import static lotto.domain.LottoBall.MINIMUM_BALL_NUMBER;
@@ -26,23 +27,31 @@ public class LottoTicketSeller {
         return lottoBalls;
     }
 
-    public List<LottoTicket> sellLottoTickets(int payMoney) {
-        validatePayMoney(payMoney);
+    public boolean isManualLottoPossible(int manualLottoCount, int payMoney) {
+        return (payMoney < manualLottoCount * SINGLE_LOTTO_TICKET_PRICE);
+    }
+
+    public List<LottoTicket> sellManualLottoTickets(List<List<Integer>> manualLottoNumbers) {
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
+        for (List<Integer> manualLottoNumber : manualLottoNumbers) {
+            List<LottoBall> lottoBalls = manualLottoNumber.stream()
+                    .map(LottoBall::new)
+                    .collect(Collectors.toList());
+            manualLottoTickets.add(new LottoTicket(lottoBalls));
+        }
+        return manualLottoTickets;
+    }
+
+    public List<LottoTicket> sellAutoLottoTickets(int payMoney) {
         int lottoTicketCount = payMoney / SINGLE_LOTTO_TICKET_PRICE;
         List<LottoTicket> lottoTicketBought = new ArrayList<>();
         for (int i = 0; i < lottoTicketCount; i++) {
-            lottoTicketBought.add(generateLottoTicket());
+            lottoTicketBought.add(generateAutoLottoTicket());
         }
         return lottoTicketBought;
     }
 
-    private void validatePayMoney(int payMoney) {
-        if (payMoney < SINGLE_LOTTO_TICKET_PRICE) {
-            throw new IllegalArgumentException("최소 1,000원 이상을 지불해야 합니다.");
-        }
-    }
-
-    private LottoTicket generateLottoTicket() {
+    private LottoTicket generateAutoLottoTicket() {
         Collections.shuffle(lottoBalls);
         List<LottoBall> selectedLottoBalls = new ArrayList<>(lottoBalls.subList(0, LOTTO_TICKET_BALL_COUNT));
         return new LottoTicket(selectedLottoBalls);

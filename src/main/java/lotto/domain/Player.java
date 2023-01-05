@@ -6,11 +6,13 @@ public class Player {
 
     private int money;
     private PlayerLottoResult playerLottoResult;
-    private List<LottoTicket> lottoTickets;
+    private List<LottoTicket> manualLottoTickets;
+    private List<LottoTicket> autoLottoTickets;
 
     public Player(int money) {
         validatePlayerMoney(money);
         this.money = money;
+        this.playerLottoResult = new PlayerLottoResult();
     }
 
     private void validatePlayerMoney(int money) {
@@ -19,21 +21,37 @@ public class Player {
         }
     }
 
-    public void buyLottoTickets(LottoTicketSeller seller) {
-        this.lottoTickets = seller.sellLottoTickets(money);
+    public void buyManualLottoTickets(LottoTicketSeller seller, List<List<Integer>> manualLottoNumbers) {
+        this.manualLottoTickets = seller.sellManualLottoTickets(manualLottoNumbers);
+        calculateMoneyLeft(seller, manualLottoTickets);
+    }
+
+    private void calculateMoneyLeft(LottoTicketSeller seller, List<LottoTicket> lottoTickets) {
         int spentMoney = seller.calculateTotalPrice(lottoTickets);
-        playerLottoResult = new PlayerLottoResult(spentMoney);
-        this.money = money - spentMoney;
+        playerLottoResult.addSpentMoney(spentMoney);
+        this.money -= spentMoney;
+    }
+
+    public void buyAutoLottoTickets(LottoTicketSeller seller) {
+        this.autoLottoTickets = seller.sellAutoLottoTickets(money);
+        calculateMoneyLeft(seller, autoLottoTickets);
     }
 
     public PlayerLottoResult findResult(WinnerCompareRule winnerCompareRule) {
-        for (LottoTicket lottoTicket : lottoTickets) {
-            playerLottoResult.addResult(winnerCompareRule.compare(lottoTicket));
+        for (LottoTicket manualLottoTicket : manualLottoTickets) {
+            playerLottoResult.addResult(winnerCompareRule.compare(manualLottoTicket));
+        }
+        for (LottoTicket autoLottoTicket : autoLottoTickets) {
+            playerLottoResult.addResult(winnerCompareRule.compare(autoLottoTicket));
         }
         return playerLottoResult;
     }
 
-    public List<LottoTicket> getLottoTickets() {
-        return lottoTickets;
+    public List<LottoTicket> getManualLottoTickets() {
+        return manualLottoTickets;
+    }
+
+    public List<LottoTicket> getAutoLottoTickets() {
+        return autoLottoTickets;
     }
 }
