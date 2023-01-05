@@ -1,14 +1,12 @@
 package domain;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.ManualLottoGenerator;
 import exception.DuplicateNumberException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -49,6 +47,15 @@ public class LottoNumberTest {
         Lotto winningLotto = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
         String notDuplicateNumber = "7";
         assertDoesNotThrow( () -> new LottoNumber(winningLotto, notDuplicateNumber));
+    }
+
+    @DisplayName("로또 넘버 비교 테스트")
+    @Test
+    public void compareToTest() {
+        LottoNumber ten = new LottoNumber(10);
+        LottoNumber three = new LottoNumber(3);
+        int seven = 7;
+        assertThat(ten.compareTo(three)).isEqualTo(seven);
     }
 
 }
