@@ -19,6 +19,13 @@ public class Lottos implements Iterable<Lotto> {
         return lottos.size();
     }
 
+    public static Lottos union(Lottos a, Lottos b) {
+        Lottos lottos = new Lottos();
+        a.forEach(lottos::add);
+        b.forEach(lottos::add);
+        return lottos;
+    }
+
     @Override
     public Iterator<Lotto> iterator() {
         return lottos.iterator();

@@ -19,8 +19,30 @@ public class LottoView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public void printAmount(int amount) {
-        System.out.println(amount + "개를 구매했습니다.");
+    private Lotto inputLottoNumber() {
+        return new Lotto(
+                Arrays.stream(scanner.nextLine().replace(" ", "").split(","))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList())
+        );
+    }
+
+    public int inputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public Lottos inputManualLottoNumber(int count) {
+        Lottos lottos = new Lottos();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        for (int i = 0; i < count; i++) {
+            lottos.add(inputLottoNumber());
+        }
+        return lottos;
+    }
+
+    public void printAmount(int manualLottoAmount, int autoLottoAmount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualLottoAmount, autoLottoAmount);
     }
 
     public void printLotto(Lotto lotto) {
@@ -34,13 +56,9 @@ public class LottoView {
         System.out.println();
     }
 
-    public Lotto inputWinNumbers() {
+    public Lotto inputWinLottoNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Lotto(
-                Arrays.stream(scanner.nextLine().replace(" ", "").split(","))
-                        .map(Integer::parseInt)
-                        .collect(Collectors.toList())
-        );
+        return inputLottoNumber();
     }
 
     public LottoNumber inputBonusNumber() {
