@@ -45,7 +45,7 @@ public class View {
     public WinNumber inputWinningLotto() {
         List<LottoBallNumber> winNum = inputLottoBallNumberManual(INPUT_WIN_LOTTO_PROMPT);
         out.printf(INPUT_BONUS_BALL_PROMPT);
-        return new WinNumber(new LottoTrialManual(winNum),
+        return new WinNumber(new LottoTrial.Builder().addBalls(winNum).build(),
                 LottoBallNumber.get(Integer.parseInt(sc.nextLine())));
     }
 
@@ -59,7 +59,9 @@ public class View {
     }
 
     public LottoTrial inputLottoManual() {
-        return new LottoTrialManual(inputLottoBallNumberManual(INPUT_MANUAL_LOTTO_PROMPT));
+        return new LottoTrial.Builder()
+                .addBalls(inputLottoBallNumberManual(INPUT_MANUAL_LOTTO_PROMPT))
+                .build();
     }
     private List<LottoBallNumber> inputLottoBallNumberManual(String promptString){
         out.printf(promptString);

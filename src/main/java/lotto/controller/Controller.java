@@ -27,7 +27,9 @@ public class Controller {
     }
     private void createRandomLotto(){
         for (int i=1;i<=lottoCountRandom.getCount();i++){
-            LottoTrial lottoTrial = new LottoTrialRandom(new LottoPickerRandom());
+            LottoTrial lottoTrial = new LottoTrial.Builder()
+                    .addRandomBalls()
+                    .build();
             lottoTrials.add(lottoTrial);
         }
         view.printLottoTrials(lottoTrials);
