@@ -14,7 +14,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
-        this.numbers = numbers.stream().map(LottoNumber::new).sorted().collect(Collectors.toUnmodifiableList());
+        this.numbers = numbers.stream().map(LottoNumber::valueOf).sorted().collect(Collectors.toUnmodifiableList());
     }
 
     public List<LottoNumber> getLottoNumbers() {

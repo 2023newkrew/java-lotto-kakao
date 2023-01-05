@@ -53,7 +53,7 @@ public class LottoTest {
     void containsTest_true() {
         //given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoNumber = new LottoNumber(3);
+        LottoNumber lottoNumber = LottoNumber.valueOf(3);
         //when
         //then
         Assertions.assertThat(lotto.containsLottoNumber(lottoNumber)).isTrue();
@@ -64,7 +64,7 @@ public class LottoTest {
     void containsTest_false() {
         //given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        LottoNumber lottoNumber = new LottoNumber(10);
+        LottoNumber lottoNumber = LottoNumber.valueOf(10);
         //when
         //then
         Assertions.assertThat(lotto.containsLottoNumber(lottoNumber)).isFalse();

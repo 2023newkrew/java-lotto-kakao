@@ -15,14 +15,14 @@ public class WinningLotto {
 
     public WinningLotto(String winningNumbersAsString, int bonusNumber) {
         this.winningNumbers = new Lotto(winningNumbersAsString);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
         if (this.winningNumbers.containsLottoNumber(this.bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
     }
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
         this.winningNumbers = new Lotto(winningNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.valueOf(bonusNumber);
     }
 
     public Rank getRank(Lotto lotto) {
