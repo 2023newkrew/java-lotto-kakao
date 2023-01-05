@@ -21,8 +21,10 @@ public enum LottoRank {
     }
 
     public static LottoRank getRank(int count, boolean bonus) {
+        if(count == LottoRank.SECOND.COUNT && bonus)
+            return LottoRank.SECOND;
         return Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.COUNT==count && lottoRank.BONUS == bonus)
+                .filter(lottoRank -> lottoRank.COUNT==count && lottoRank.BONUS == false)
                 .findAny()
                 .orElse(FAIL);
     }

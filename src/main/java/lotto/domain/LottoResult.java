@@ -25,8 +25,6 @@ public class LottoResult {
     }
 
     public LottoRank getRank() {
-        if(count==LottoRank.SECOND.COUNT)
-            return LottoRank.getRank(count, bonus);
-        return LottoRank.getRank(count, false);
+        return LottoRank.getRank(count, bonus);
     }
 }
