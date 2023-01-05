@@ -23,7 +23,6 @@ public class App {
 
         Statistics stat = new Statistics(lottos, winLotto, bonusNumber);
 
-        lottoView.printStatisticsText();
         lottoView.printStatistics(stat);
         lottoView.printTotalProfitRate(stat);
     }

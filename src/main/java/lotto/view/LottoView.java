@@ -48,13 +48,10 @@ public class LottoView {
         return new LottoNumber(scanner.nextInt());
     }
 
-    public void printStatisticsText() {
+    public void printStatistics(Statistics stat) {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-    }
-
-    public void printStatistics(Statistics stat) {
         List<LottoRank> rankList = List.of(LottoRank.FIFTH, LottoRank.FOURTH, LottoRank.THIRD, LottoRank.SECOND, LottoRank.FIRST);
         for (LottoRank rank : rankList) {
             System.out.printf("%d개 일치 (%d원)- %d개\n", rank.COUNT, rank.PRIZE, stat.getByRank(rank));
