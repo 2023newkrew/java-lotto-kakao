@@ -22,10 +22,10 @@ public enum LottoResult {
         this.stringFormat = stringFormat;
     }
 
-    public static LottoResult getLottoResultOf(int numberCount, boolean bonusNumber) {
+    public static LottoResult getLottoResultOf(int numberCount, boolean hasBonusNumber) {
         return Arrays.stream(values())
                 .filter(it -> it.numberCount == numberCount)
-                .filter(it -> it.bonusNumber == bonusNumber)
+                .filter(it -> it.bonusNumber == hasBonusNumber)
                 .findFirst().orElse(MISS);
     }
 

@@ -3,21 +3,21 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class LottoTest {
+public class WinningLottoTest {
 
     @DisplayName("6개의 숫자 배열에 1개의 보너스 볼을 가진 당첨 번호 생성")
     @ParameterizedTest
     @MethodSource("getCreateWinningNumbersWith6NumbersAnd1BonusNumber")
     public void create_winning_numbers_with_6_numbers_and_1_bonus_number(
             List<Integer> numbers, int bonusNumber) {
-        Assertions.assertThatCode(() -> new Lotto(numbers, bonusNumber))
+        Assertions.assertThatCode(() -> new WinningLotto(numbers, bonusNumber))
                 .doesNotThrowAnyException();
     }
 
@@ -33,7 +33,7 @@ public class LottoTest {
     @MethodSource("getCreateWinningNumbersWithDuplicatedBonusNumberData")
     public void create_winning_numbers_with_duplicated_bonus_number(
             List<Integer> numbers, int bonusNumber) {
-        Assertions.assertThatThrownBy(() -> new Lotto(numbers, bonusNumber))
+        Assertions.assertThatThrownBy(() -> new WinningLotto(numbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

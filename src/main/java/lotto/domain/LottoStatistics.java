@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
-    private final Map<LottoResult, Integer> lottoStatistics = new HashMap<>();
+    private final Map<LottoResult, Integer> lottoHistogram = new HashMap<>();
     private final int total;
 
     public LottoStatistics(List<LottoResult> lottoResults) {
@@ -21,7 +21,8 @@ public class LottoStatistics {
         total = lottoResults.size();
     }
 
-    public String getString() {
+    @Override
+    public String toString() {
         return Arrays.stream(LottoResult.values())
                 .filter(it -> it != LottoResult.MISS)
                 .map(this::getLottoResultString)
@@ -30,7 +31,7 @@ public class LottoStatistics {
     }
 
     private String getLottoResultString(LottoResult lottoResult) {
-        return lottoResult.getString() + " - " + lottoStatistics.get(lottoResult) + "개";
+        return lottoResult.getString() + " - " + lottoHistogram.get(lottoResult) + "개";
     }
 
     private String getLottoEarningRateString() {
@@ -39,18 +40,18 @@ public class LottoStatistics {
 
     private float getLottoEarningRate() {
         return Arrays.stream(LottoResult.values())
-                .mapToInt(it -> it.getPrize() * lottoStatistics.get(it))
+                .mapToInt(it -> it.getPrize() * lottoHistogram.get(it))
                 .sum() / (float) (LottoTicket.LOTTO_TICKET_PRICE * total);
     }
 
     private void initStatisticsMap() {
         for (LottoResult lottoResult : LottoResult.values()) {
-            lottoStatistics.put(lottoResult, 0);
+            lottoHistogram.put(lottoResult, 0);
         }
     }
 
     private void addCountOf(LottoResult lottoResult) {
-        lottoStatistics.put(lottoResult, lottoStatistics.get(lottoResult)+1);
+        lottoHistogram.put(lottoResult, lottoHistogram.get(lottoResult)+1);
     }
 
 }

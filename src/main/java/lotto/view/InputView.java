@@ -9,9 +9,9 @@ public class InputView {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int getMoney() {
+    public static long getMoney() {
         ResultView.print("구입금액을 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        return Long.parseLong(scanner.nextLine());
     }
 
     public static List<Integer> getWinningNumbers() {

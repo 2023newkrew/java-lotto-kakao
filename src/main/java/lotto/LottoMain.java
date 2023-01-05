@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.List;
 import lotto.domain.LottoGame;
-import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
 import lotto.strategy.RandomNumberSelectStrategy;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -17,7 +17,7 @@ public class LottoMain {
     }
 
     private static void buyLotto(LottoGame lottoGame) {
-        int money = InputView.getMoney();
+        long money = InputView.getMoney();
 
         lottoGame.buyLottoTickets(money);
         ResultView.printQuantity(lottoGame.getQuantityOfLottoTickets());
@@ -27,9 +27,9 @@ public class LottoMain {
     private static void checkLotto(LottoGame lottoGame) {
         List<Integer> winningNumbers = InputView.getWinningNumbers();
         int bonusNumber = InputView.getBonusNumber();
-        Lotto lotto
-                = new Lotto(winningNumbers, bonusNumber);
+        WinningLotto winningLotto
+                = new WinningLotto(winningNumbers, bonusNumber);
 
-        ResultView.print(lottoGame.getLottoGameResult(lotto));
+        ResultView.print(lottoGame.getLottoGameResult(winningLotto));
     }
 }

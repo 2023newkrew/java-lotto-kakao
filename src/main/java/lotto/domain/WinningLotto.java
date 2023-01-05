@@ -2,12 +2,12 @@ package lotto.domain;
 
 import java.util.List;
 
-public class Lotto {
+public class WinningLotto {
 
     private final LottoNumberList lottoNumberList;
     private final LottoNumber bonusNumber;
 
-    public Lotto(List<Integer> numbers, int bonusNumber) {
+    public WinningLotto(List<Integer> numbers, int bonusNumber) {
         this.lottoNumberList = new LottoNumberList(numbers);
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
         validateDuplicateBonusNumber(bonusLottoNumber);

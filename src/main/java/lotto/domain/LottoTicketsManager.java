@@ -15,13 +15,13 @@ public class LottoTicketsManager {
 
     public String getLottoNumbersString() {
         return lottoTickets.stream()
-                .map(LottoTicket::getDetail)
+                .map(LottoTicket::toString)
                 .collect(Collectors.joining("\n"));
     }
 
-    public LottoStatistics getStatistics(Lotto lotto) {
+    public LottoStatistics getStatistics(WinningLotto winningLotto) {
         List<LottoResult> lottoResults = lottoTickets.stream()
-                .map(it -> it.getResult(lotto))
+                .map(it -> it.getResult(winningLotto))
                 .collect(Collectors.toList());
         return new LottoStatistics(lottoResults);
     }

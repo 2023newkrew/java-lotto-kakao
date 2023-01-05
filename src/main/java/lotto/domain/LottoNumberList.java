@@ -32,7 +32,8 @@ public class LottoNumberList {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public String getDetail() {
+    @Override
+    public String toString() {
         return "[" + lottoNumbers.stream()
                 .map(LottoNumber::getString)
                 .collect(Collectors.joining(", ")) + "]";

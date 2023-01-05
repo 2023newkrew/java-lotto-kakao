@@ -14,13 +14,14 @@ public class LottoTicket {
         lottoNumberList = new LottoNumberList(numbers);
     }
 
-    public String getDetail() {
-        return lottoNumberList.getDetail();
+    @Override
+    public String toString() {
+        return lottoNumberList.toString();
     }
 
-    public LottoResult getResult(Lotto lotto) {
-        int equalNumber = lotto.countCorrectNumbers(lottoNumberList);
-        boolean bonusNumber = lotto.checkBonusNumberInNumberList(lottoNumberList);
-        return LottoResult.getLottoResultOf(equalNumber, bonusNumber);
+    public LottoResult getResult(WinningLotto winningLotto) {
+        int equalNumber = winningLotto.countCorrectNumbers(lottoNumberList);
+        boolean isBonusNumberIn = winningLotto.checkBonusNumberInNumberList(lottoNumberList);
+        return LottoResult.getLottoResultOf(equalNumber, isBonusNumberIn);
     }
 }

@@ -3,9 +3,10 @@ package lotto;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+
+import lotto.domain.WinningLotto;
 import lotto.domain.enumeration.LottoResult;
 import lotto.domain.LottoTicket;
-import lotto.domain.Lotto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +20,7 @@ public class LottoTicketTest {
     @MethodSource("getCheckStringTypeOfLottoNumbersData")
     public void check_string_type_of_lotto_numbers(List<Integer> numbers, String expected) {
         LottoTicket lottoTicket = new LottoTicket(numbers);
-        Assertions.assertThat(lottoTicket.getDetail()).isEqualTo(expected);
+        Assertions.assertThat(lottoTicket.toString()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> getCheckStringTypeOfLottoNumbersData() {
@@ -37,9 +38,9 @@ public class LottoTicketTest {
     public void calculate_winning_result(List<Integer> numbers, List<Integer> winningNumbers,
             int bonusNumber, LottoResult result) {
         LottoTicket lottoTicket = new LottoTicket(numbers);
-        Lotto lotto
-                = new Lotto(winningNumbers, bonusNumber);
-        Assertions.assertThat(lottoTicket.getResult(lotto)).isEqualTo(result);
+        WinningLotto winningLotto
+                = new WinningLotto(winningNumbers, bonusNumber);
+        Assertions.assertThat(lottoTicket.getResult(winningLotto)).isEqualTo(result);
     }
 
     private static Stream<Arguments> getCalculateWinningResultData() {
