@@ -14,7 +14,7 @@ public class LottoSeller {
         return money.money() / LOTTO_PRICE;
     }
 
-    public static List<LottoNumbers> generateRandomLottos(int randomAmount) {
+    public static List<UserLotto> generateRandomLottos(int randomAmount) {
         return RandomLottoGenerator.generateLottos(randomAmount);
     }
 

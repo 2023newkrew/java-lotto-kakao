@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class WinningLotto {
     private final LottoNumbers lottoNumbers;
     private final LottoNumber bonusNumber;
@@ -20,21 +16,12 @@ public class WinningLotto {
         }
     }
 
-    public LottoPrizeCountMap getLottoPrizeCountMap(List<LottoNumbers> userLottos) {
-        Map<LottoPrize, Integer> prizeCount = new HashMap<>();
-
-        userLottos.forEach(userLotto -> {
-            LottoPrize prize = getLottoPrize(userLotto);
-            prizeCount.put(prize, prizeCount.getOrDefault(prize, 0) + 1);
-        });
-
-        return new LottoPrizeCountMap(prizeCount);
+    public LottoNumbers lottoNumbers() {
+        return lottoNumbers;
     }
 
-    private LottoPrize getLottoPrize(LottoNumbers userLotto) {
-        int matchNumberCount = this.lottoNumbers.countMatchNumber(userLotto);
-        boolean hasBonusNumber = userLotto.containsLottoNumber(bonusNumber);
-
-        return LottoRule.getPrize(matchNumberCount, hasBonusNumber);
+    public LottoNumber bonusNumber() {
+        return bonusNumber;
     }
+
 }

@@ -28,7 +28,7 @@ public class LottoSellerTest {
     @ParameterizedTest
     @ValueSource(ints = {3, 5, 7, 9})
     void 랜덤으로_구매할_장수가_입력되면_장수만큼_로또_번호들을_반환한다(int amount) {
-        List<LottoNumbers> lottos = LottoSeller.generateRandomLottos(amount);
+        List<UserLotto> lottos = LottoSeller.generateRandomLottos(amount);
         assertThat(lottos.size()).isEqualTo(amount);
     }
 }

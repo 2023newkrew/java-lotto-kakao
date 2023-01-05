@@ -2,6 +2,7 @@ package lotto.utils;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
+import lotto.domain.UserLotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,15 +19,16 @@ public class RandomLottoGenerator {
                     .mapToObj(LottoNumber::new)
                     .collect(Collectors.toList());
 
-    public static List<LottoNumbers> generateLottos(int size) {
-        List<LottoNumbers> lottoNumbers = new ArrayList<>();
+    public static List<UserLotto> generateLottos(int size) {
+        List<UserLotto> userLottos = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
             List<LottoNumber> chosen = getRandomLottoNumbers();
-            lottoNumbers.add(new LottoNumbers(chosen));
+            LottoNumbers lottoNumbers = new LottoNumbers(chosen);
+            userLottos.add(new UserLotto(lottoNumbers));
         }
 
-        return lottoNumbers;
+        return userLottos;
     }
 
     private static List<LottoNumber> getRandomLottoNumbers() {

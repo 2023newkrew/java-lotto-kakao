@@ -41,7 +41,7 @@ public class UserLottosTest {
             )
     );
 
-    List<LottoNumbers> userLottoList = Arrays.asList(userLotto1, userLotto2, userLotto3);
+    List<UserLotto> userLottoList = Arrays.asList(new UserLotto(userLotto1), new UserLotto(userLotto2), new UserLotto(userLotto3));
 
 
     @Test
