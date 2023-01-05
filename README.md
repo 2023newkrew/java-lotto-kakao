@@ -58,6 +58,7 @@
 
 ### domain
 - Player
+  - [ ] 유효한 금액을 입력받은지 계산한다.
   - [ ] 총 당첨금을 계산한다.
   - [ ] 수익률을 계산한다.
 - LotteryVendingMachine
