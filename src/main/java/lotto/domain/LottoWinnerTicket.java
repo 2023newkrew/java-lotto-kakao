@@ -6,6 +6,7 @@ import lotto.utils.LottoRank;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static lotto.domain.LottoNumber.LOTTO_LOWER_BOUND;
 import static lotto.domain.LottoNumber.LOTTO_UPPER_BOUND;
@@ -30,12 +31,7 @@ public class LottoWinnerTicket {
     // 로또 통계 배열 생성
     public Map<LottoRank, Integer> getResult(LottoTicket userTicket) {
         ArrayList<LottoNumber> tickets = userTicket.getTickets();
-        Map<LottoRank, Integer> result = new HashMap<>();
-        for(LottoNumber numbers : tickets){
-            LottoRank score = getScore(numbers);
-            result.merge(score, 1, Integer::sum); // 있으면 1 증가
-        }
-        return result;
+        return tickets.stream().collect(Collectors.toMap(this::getScore, numbers -> 1, Integer::sum));
     }
 
     // 당첨 통계 배열 계산
