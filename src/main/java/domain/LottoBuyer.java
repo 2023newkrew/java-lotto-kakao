@@ -17,8 +17,8 @@ public class LottoBuyer {
         this.money = money;
     }
     
-    public List<Lotto> buyFrom(LottoPurchasePlace lottoPurchasePlace) {
-        List<Lotto> purchasedLottos = lottoPurchasePlace.purchase(money);
+    public List<Lotto> buyFrom(LottoPurchasePlace lottoPurchasePlace, List<Lotto> manualLottos) {
+        List<Lotto> purchasedLottos = lottoPurchasePlace.purchase(money, manualLottos);
         this.lottos.addAll(purchasedLottos);
         return this.lottos;
     }
