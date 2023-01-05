@@ -1,5 +1,6 @@
-package lottov2.model.wallet;
+package lottov2.model.store;
 
+import lottov2.model.store.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

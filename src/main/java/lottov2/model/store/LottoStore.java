@@ -1,8 +1,6 @@
 package lottov2.model.store;
 
 import lottov2.model.ticket.LottoTicket;
-import lottov2.model.ticket.LottoWallet;
-import lottov2.model.wallet.Money;
 
 public class LottoStore {
 

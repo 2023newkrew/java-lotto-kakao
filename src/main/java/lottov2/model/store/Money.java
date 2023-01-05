@@ -1,4 +1,4 @@
-package lottov2.model.wallet;
+package lottov2.model.store;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

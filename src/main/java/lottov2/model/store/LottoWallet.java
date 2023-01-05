@@ -1,6 +1,6 @@
-package lottov2.model.ticket;
+package lottov2.model.store;
 
-import lottov2.model.store.LottoStore;
+import lottov2.model.ticket.LottoTicket;
 
 import java.math.BigDecimal;
 

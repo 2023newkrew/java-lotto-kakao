@@ -29,27 +29,39 @@
 * 구매 금액의 하한 제한은 0원 초과이다.
 
 * Money
-  - static Money valueOf(long)
-  - Money add(money)
-  - Money subtract(money)
-  - Money multiply(long)
-  - Money divide(money)
+  - valueOf
+  - add
+  - subtract
+  - multiply
+  - divide
 * SingleLottoNumber
-* LottoNumber 
-* LottoTicket 
-* LottoWallet
-  - Money getBalance()
-  - long getPurchasableCount(Money price)
-  - BigDecimal getProfitRate()
-  - void add(Money)
-  - void withdraw(Money)
-* LottoMachine
-  - Lotto issueAutomatically()
-* LottoStore
-  - void buyAutomatically(Wallet)
+  - valueOf
+  - intValue
+  - getAllNumbersInRange
+* LottoNumber
+  - of
+  - createByRandom
+  - stream
+* LottoTicket
+  - of
+  - stream
 * LottoRanking
+  - from
+  - getPrize
 * LottoStats
-* WinningNumber
-  - LottoRanking judge(Lotto)
+  - from
+  - countBy
+  - getTotalPrize
 * LottoCompany
-  - LottoStats analyze(LottoTicket)
+  - create
+  - analyze
+* LottoStore
+  - create
+  - getPurchasableCount
+  - getTotalPrice
+  - buyAutomatically
+* LottoWallet
+  - create
+  - buyAutomatically
+  - getTicket
+  - getProfitRate
