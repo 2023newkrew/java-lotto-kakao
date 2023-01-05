@@ -1,6 +1,8 @@
 package domain.lotto.ticket;
 
 import domain.lotto.LottoConstant;
+import domain.lotto.generator.LottoNumberGenerator;
+import domain.lotto.generator.RandomNumberGenerator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,6 +26,15 @@ public class LottoTicket {
         validateNumberDuplication(lottoNumbers);
         validateNumberRange(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(new TreeSet<>(lottoNumbers));
+    }
+
+    public static void addAutoLottoTickets(List<LottoTicket> lottoTicketList, int autoCount) {
+        LottoNumberGenerator lottoNumber = new LottoNumberGenerator();
+        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+
+        for (int i = 0; i < autoCount; i++) {
+            lottoTicketList.add(new LottoTicket(lottoNumber.makeNumbers(randomNumberGenerator)));
+        }
     }
 
     public List<LottoNumber> getLottoNumbers() {

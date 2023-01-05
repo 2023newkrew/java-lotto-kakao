@@ -35,9 +35,15 @@ public class InputView {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualLottoNumbersAmount = inputManualLottoCount(purchaseAmount);
         sc.nextLine();
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        ArrayList<LottoTicket> manualLottoTickets = new ArrayList<>();
 
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<LottoTicket> manualLottoTickets = inputManualLotto(manualLottoNumbersAmount);
+
+        return manualLottoTickets;
+    }
+
+    private static List<LottoTicket> inputManualLotto(int manualLottoNumbersAmount) {
+        List<LottoTicket> manualLottoTickets = new ArrayList<>();
         for (int i = 0; i < manualLottoNumbersAmount; i++) {
             manualLottoTickets.add(new LottoTicket(inputNumbers()));
         }
