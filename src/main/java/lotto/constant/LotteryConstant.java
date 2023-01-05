@@ -9,4 +9,5 @@ public class LotteryConstant {
     public static final int LOTTERY_UNIT_PRICE = 1_000;
     public static final int ZERO_MONEY = 0;
     public static final int ZERO_REMAINDER = 0;
+    public static final double BREAK_EVEN_POINT_RATIO = 1.0;
 }

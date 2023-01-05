@@ -50,8 +50,8 @@ public class LotteryController {
 
     private void setPlayerSelfPickCount() {
         try {
-            int selfPickCount = inputView.readSelfPickCount();
             outputView.printReadSelfPickCount();
+            int selfPickCount = inputView.readSelfPickCount();
             player.setSelfPickCount(selfPickCount);
         } catch (IllegalArgumentException e) {
             outputView.printMessage(e.getMessage());

@@ -1,11 +1,16 @@
 package lotto.view;
 
+import static lotto.constant.LotteryConstant.BREAK_EVEN_POINT_RATIO;
 import static lotto.constant.LotteryConstant.ZERO_MONEY;
 import static lotto.domain.rank.IsBonusRequired.TRUE;
+import static lotto.view.OutputViewMessage.GAINED;
+import static lotto.view.OutputViewMessage.EVEN;
 import static lotto.view.OutputViewMessage.MATCH_COUNT_STRING_FORMAT;
+import static lotto.view.OutputViewMessage.LOST;
 import static lotto.view.OutputViewMessage.PRINT_GAME_RESULT_MESSAGE;
 import static lotto.view.OutputViewMessage.PRINT_LOTTERY_COUNT_MESSAGE_FORMAT;
 import static lotto.view.OutputViewMessage.PRINT_RANK_REMAINING_MESSAGE_FORMAT;
+import static lotto.view.OutputViewMessage.PRINT_YIELD_ANALYSIS_MESSAGE_FORMAT;
 import static lotto.view.OutputViewMessage.PRINT_YIELD_MESSAGE_FORMAT;
 import static lotto.view.OutputViewMessage.READ_BONUS_NUMBER_MESSAGE;
 import static lotto.view.OutputViewMessage.READ_BUDGET_MESSAGE;
@@ -52,7 +57,7 @@ public class OutputView {
                 .filter(rank -> rank.getPrize() > ZERO_MONEY)
                 .sorted((rank1, rank2) -> Integer.compare(rank2.getIndex(), rank1.getIndex()))
                 .forEach(rank -> printSingleRankResult(rank, rankCounts.get(rank.getIndex())));
-        System.out.printf(PRINT_YIELD_MESSAGE_FORMAT, yield);
+        printYield(yield);
     }
 
     private void printSingleRankResult(LotteryRank rank, int count) {
@@ -61,6 +66,21 @@ public class OutputView {
             System.out.print(REQUIRES_BONUS_STRING);
         }
         System.out.printf(PRINT_RANK_REMAINING_MESSAGE_FORMAT, rank.getPrize(), count);
+    }
+
+    private void printYield(double yield) {
+        System.out.printf(PRINT_YIELD_MESSAGE_FORMAT, yield);
+        System.out.printf(PRINT_YIELD_ANALYSIS_MESSAGE_FORMAT, (int) BREAK_EVEN_POINT_RATIO, analyzeGainAndLoss(yield));
+    }
+
+    private String analyzeGainAndLoss(double yield) {
+        if (yield > BREAK_EVEN_POINT_RATIO) {
+            return GAINED;
+        }
+        if (yield == BREAK_EVEN_POINT_RATIO) {
+            return EVEN;
+        }
+        return LOST;
     }
 
     public void printMessage(String message) {
