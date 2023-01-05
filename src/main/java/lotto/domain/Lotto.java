@@ -2,24 +2,20 @@ package lotto.domain;
 
 import lotto.config.LottoConfig;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
     public Lotto(List<Integer> numList) {
-        if(numList.size() != LottoConfig.FIXED_SIZE){
-            throw new RuntimeException("로또 수의 개수가 잘못되었습니다.");
-        }
-        if (numList.stream().distinct().count() != LottoConfig.FIXED_SIZE) {
-            throw new RuntimeException("로또 수에 중복된 수가 있습니다.");
-        }
-        this.numbers = numList.stream()
+        numbers = numList.stream()
                 .map(LottoNumber::new)
-                .sorted(LottoNumber::compare)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(TreeSet::new));
+
+        if(numbers.size() != LottoConfig.FIXED_SIZE){
+            throw new RuntimeException("로또 수의 개수가 잘못되었거나 중복된 수가 있습니다.");
+        }
     }
 
     public Lotto(int... nums) {
@@ -27,7 +23,9 @@ public class Lotto {
     }
 
     public int getMatchCount(Lotto other) {
-        return (int) numbers.stream().filter(other.numbers::contains).count();
+        Set<LottoNumber> matchedSet = new TreeSet<>(numbers);
+        matchedSet.retainAll(other.numbers);
+        return matchedSet.size();
     }
 
     public boolean hasBonus(LottoNumber other) {
