@@ -8,7 +8,7 @@ public class Statistics {
     private final Map<LottoRank, Integer> ranks;
     private int purchase;
 
-    public Statistics(){
+    public Statistics() {
         ranks = new EnumMap<>(Map.of(
                 LottoRank.FIRST, 0,
                 LottoRank.SECOND, 0,
@@ -19,7 +19,8 @@ public class Statistics {
         ));
     }
 
-    public void build(Lottos lottos, Lotto winLotto, LottoNumber bonusNumber) {
+    public Statistics(Lottos lottos, Lotto winLotto, LottoNumber bonusNumber) {
+        this();
         for (Lotto lotto : lottos) {
             LottoResult result = new LottoResult(lotto, winLotto, bonusNumber);
             add(result.getRank());

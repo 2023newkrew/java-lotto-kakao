@@ -21,8 +21,7 @@ public class App {
         Lotto winLotto = lottoView.inputWinNumbers();
         LottoNumber bonusNumber = lottoView.inputBonusNumber();
 
-        Statistics stat = new Statistics();
-        stat.build(lottos, winLotto, bonusNumber);
+        Statistics stat = new Statistics(lottos, winLotto, bonusNumber);
 
         lottoView.printStatisticsText();
         lottoView.printStatistics(stat);
