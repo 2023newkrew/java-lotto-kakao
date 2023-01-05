@@ -30,12 +30,12 @@ public class LottoRankTest {
                 Arguments.of(4, true, RANK4),
                 Arguments.of(3, true, RANK5),
                 Arguments.of(3, false, RANK5),
-                Arguments.of(2, true, RANK6),
-                Arguments.of(1, true, RANK6),
-                Arguments.of(0, true, RANK6),
-                Arguments.of(2, false, RANK6),
-                Arguments.of(1, false, RANK6),
-                Arguments.of(0, false, RANK6)
+                Arguments.of(2, true, RANK6_1),
+                Arguments.of(1, true, RANK6_2),
+                Arguments.of(0, true, RANK6_3),
+                Arguments.of(2, false, RANK6_1),
+                Arguments.of(1, false, RANK6_2),
+                Arguments.of(0, false, RANK6_3)
         );
     }
 

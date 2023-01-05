@@ -22,7 +22,9 @@ public class LottoResult {
                 LottoRank.RANK3, rankList.get(2),
                 LottoRank.RANK4, rankList.get(3),
                 LottoRank.RANK5, rankList.get(4),
-                LottoRank.RANK6, rankList.get(5)
+                LottoRank.RANK6_1, rankList.get(5),
+                LottoRank.RANK6_2, rankList.get(6),
+                LottoRank.RANK6_3, rankList.get(7)
         );
     }
 

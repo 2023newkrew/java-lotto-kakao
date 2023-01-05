@@ -1,5 +1,8 @@
 package lotto.model;
 
+import lotto.exception.ErrorCode;
+import lotto.exception.LottoException;
+
 import java.util.Arrays;
 
 public enum LottoRank {
@@ -8,7 +11,9 @@ public enum LottoRank {
     RANK3(5, false, 1_500_000),
     RANK4(4, false, 50_000),
     RANK5(3, false, 5_000),
-    RANK6(2, false, 0);
+    RANK6_1(2, false, 0),
+    RANK6_2(1, false, 0),
+    RANK6_3(0, false, 0);
 
     private final Integer matchedCount;
     private final boolean bonusBall;
@@ -29,7 +34,7 @@ public enum LottoRank {
                     return value.bonusBall == bonus && value.matchedCount.equals(count);
                 })
                 .findAny()
-                .orElse(RANK6);
+                .orElseThrow(() -> new LottoException(ErrorCode.UNEXPECTED_COUNT_AND_BONUS_BALL));
     }
 
     public Integer getMatchedCount() {
