@@ -1,19 +1,19 @@
 package lotto.domain;
 
+import lotto.config.LottoConfig;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int FIXED_SIZE = 6;
-
     private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numList) {
-        if(numList.size() != FIXED_SIZE){
+        if(numList.size() != LottoConfig.FIXED_SIZE){
             throw new RuntimeException("로또 수의 개수가 잘못되었습니다.");
         }
-        if (numList.stream().distinct().count() != FIXED_SIZE) {
+        if (numList.stream().distinct().count() != LottoConfig.FIXED_SIZE) {
             throw new RuntimeException("로또 수에 중복된 수가 있습니다.");
         }
         this.numbers = numList.stream()
