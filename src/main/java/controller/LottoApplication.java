@@ -6,9 +6,12 @@ import domain.LottoNumber;
 import domain.LottoStore;
 import dto.LottoResult;
 import dto.WinningLotto;
-import utils.NumberParser;
 import view.InputView;
 import view.OutputView;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class LottoApplication {
 
@@ -17,19 +20,29 @@ public class LottoApplication {
         OutputView outputView = new OutputView();
 
         try {
-            String moneyInput = inputView.getMoneyInput();
-            Integer money = NumberParser.parse(moneyInput);
+            // 구입금액 입력
+            Integer money = inputView.getMoneyInput();
 
+            // 수동 구매 수 입력
+            Integer amount = inputView.getManualAmountInput();
+
+            List<Lotto> manualLottos = inputView.getManualLottosInput(amount)
+                    .stream()
+                    .map(Lotto::ofManual)
+                    .collect(Collectors.toList());
+
+            // 수동 구매 (입력) + 자동 구매 (남은 금액) 로또 구매
             LottoBuyer lottoBuyer = new LottoBuyer(money);
-            outputView.printPurchasedLottos(lottoBuyer.buyFrom(new LottoStore()));
+            outputView.printPurchasedLottos(lottoBuyer.buyFrom(new LottoStore(), manualLottos));
 
-            String winningLottoInput = inputView.getWinningLottoInput();
-            Lotto winningLotto = Lotto.ofManual(NumberParser.splitAndParse(winningLottoInput));
+            // 당첨번호 입력
+            Lotto winningLotto = Lotto.ofManual(inputView.getWinningLottoInput());
 
-            String bonusNumberInput = inputView.getBonusNumberInput();
-            LottoNumber bonusNumber = new LottoNumber(NumberParser.parse(bonusNumberInput));
+            // 보너스 번호 입력
+            LottoNumber bonusNumber = new LottoNumber(inputView.getBonusNumberInput());
             inputView.close();
 
+            // 로또 당첨 결과 출력
             LottoResult lottoResult = lottoBuyer.calculateResult(new WinningLotto(winningLotto, bonusNumber));
             outputView.printLottoStatistics(lottoResult);
         }

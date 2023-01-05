@@ -27,7 +27,7 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    public static Lotto ofAuto() {
+    static public Lotto ofAuto() {
         List<LottoNumber> lottoNumbers = Lotto.generate();
         return new Lotto(lottoNumbers);
     }
