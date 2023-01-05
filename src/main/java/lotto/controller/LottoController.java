@@ -40,11 +40,9 @@ public class LottoController {
 
     private void makeLotto(int price, int passiveLottoCount) {
         int autoCount = getAutoCount(price, passiveLottoCount);
-        if(passiveLottoCount != 0) {
-            lottoHandler.createLottos(IntStream.range(0, passiveLottoCount).boxed()
-                    .map((i) -> LottoNumbers.createLottoNumbers(view.getInputView().readLottoNumbers())).collect(
-                            Collectors.toList()), autoCount);
-        }
+        lottoHandler.createLottos(IntStream.range(0, passiveLottoCount).boxed()
+                .map((i) -> LottoNumbers.createLottoNumbers(view.getInputView().readLottoNumbers())).collect(
+                        Collectors.toList()), autoCount);
 
         view.getOutputView().printCount(passiveLottoCount, autoCount);
         view.getOutputView().printAllLotto(lottoHandler);
@@ -61,7 +59,9 @@ public class LottoController {
     private int readPassiveLottoCount(int price) {
         view.getOutputView().printReadPassiveLottoCount();
         int passiveLottoCount = view.getInputView().readPassiveLottoCount(price);
-        view.getOutputView().printReadPassiveLottoNumber();
+        if (passiveLottoCount != 0) {
+            view.getOutputView().printReadPassiveLottoNumber();
+        }
         return passiveLottoCount;
     }
 
