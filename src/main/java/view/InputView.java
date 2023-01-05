@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
+    private static final Integer LOTTO_TICKET_PRICE = 1_000;
 
     private static final Scanner sc = new Scanner(System.in);
 
@@ -18,7 +19,7 @@ public class InputView {
         while (purchaseBudget == null) {
             purchaseBudget = tryInputPurchaseBudget();
         }
-        return purchaseBudget / LottoMetaData.LOTTO_TICKET_PRICE;
+        return purchaseBudget / LOTTO_TICKET_PRICE;
     }
 
     private static Integer tryInputPurchaseBudget() {
@@ -38,10 +39,10 @@ public class InputView {
 
     private static void validatePurchaseBudget(final Integer purchaseBudget) {
         if (purchaseBudget == null || purchaseBudget == 0)
-            throw new IllegalArgumentException("구입 금액을 입력해주세요. (" + LottoMetaData.LOTTO_TICKET_PRICE + "원 단위)");
+            throw new IllegalArgumentException("구입 금액을 입력해주세요. (" + LOTTO_TICKET_PRICE + "원 단위)");
 
-        if (purchaseBudget % LottoMetaData.LOTTO_TICKET_PRICE != 0)
-            throw new IllegalArgumentException("로또 가격으로 나누어 떨어지는 금액을 입력해주세요.(" + LottoMetaData.LOTTO_TICKET_PRICE + "원)");
+        if (purchaseBudget % LOTTO_TICKET_PRICE != 0)
+            throw new IllegalArgumentException("로또 가격으로 나누어 떨어지는 금액을 입력해주세요.(" + LOTTO_TICKET_PRICE + "원)");
     }
 
     public static WinningNumbersDto inputWinningNumbers() {
