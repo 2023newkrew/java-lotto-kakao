@@ -3,16 +3,15 @@ package lotto.model.ticket;
 import java.util.HashMap;
 
 public class LottoNumbers {
-    private final HashMap<Integer, LottoNumber> lottoNumbers;
+    private static final HashMap<Integer, LottoNumber> NUMBERS = new HashMap<>();
 
-    public LottoNumbers() {
-        this.lottoNumbers = new HashMap<>();
+    static {
         for (int i = 1; i <= LottoNumber.NUMBER_RANGE; i++) {
-            this.lottoNumbers.put(i, new LottoNumber(i));
+            LottoNumbers.NUMBERS.put(i, new LottoNumber(i));
         }
     }
 
-    public LottoNumber get(int number) {
-        return this.lottoNumbers.get(number);
+    public static LottoNumber get(int number) {
+        return LottoNumbers.NUMBERS.get(number);
     }
 }

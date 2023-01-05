@@ -13,29 +13,27 @@ public class LottoTicketTest {
     @Test
     @DisplayName("can validate incorrect length of numbers")
     void can_validate_incorrect_length_of_numbers() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
         List<LottoNumber> numbers = new ArrayList<>();
 
         for (int i = 1; i < LottoTicket.NUMBERS_LENGTH; i++) {
-            numbers.add(lottoNumbers.get(i));
+            numbers.add(LottoNumbers.get(i));
         }
         assertThrows(IllegalArgumentException.class, () -> new LottoTicket(numbers));
 
-        numbers.add(lottoNumbers.get(LottoTicket.NUMBERS_LENGTH));
-        numbers.add(lottoNumbers.get(LottoTicket.NUMBERS_LENGTH + 1));
+        numbers.add(LottoNumbers.get(LottoTicket.NUMBERS_LENGTH));
+        numbers.add(LottoNumbers.get(LottoTicket.NUMBERS_LENGTH + 1));
         assertThrows(IllegalArgumentException.class, () -> new LottoTicket(numbers));
     }
 
     @Test
     @DisplayName("can validate duplication of numbers")
     void can_validate_duplication_of_numbers() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
         List<LottoNumber> numbers = new ArrayList<>();
 
         for (int i = 1; i < LottoTicket.NUMBERS_LENGTH; i++) {
-            numbers.add(lottoNumbers.get(i));
+            numbers.add(LottoNumbers.get(i));
         }
-        numbers.add(lottoNumbers.get(1));
+        numbers.add(LottoNumbers.get(1));
 
         assertThrows(IllegalArgumentException.class, () -> new LottoTicket(numbers));
     }

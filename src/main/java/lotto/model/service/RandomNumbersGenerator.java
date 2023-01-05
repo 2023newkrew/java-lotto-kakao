@@ -10,11 +10,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class RandomNumbersGenerator {
-    private final LottoNumbers lottoNumbers;
     private final List<Integer> candidate;
 
-    public RandomNumbersGenerator(LottoNumbers lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
+    public RandomNumbersGenerator() {
         this.candidate = new ArrayList<>();
         for (int i = 1; i <= LottoNumber.NUMBER_RANGE; i++) {
             this.candidate.add(i);
@@ -26,7 +24,7 @@ public class RandomNumbersGenerator {
         List<LottoNumber> numbers = new ArrayList<>();
 
         for (int i = 0; i < LottoTicket.NUMBERS_LENGTH; i++) {
-            numbers.add(this.lottoNumbers.get(this.candidate.get(i)));
+            numbers.add(LottoNumbers.get(this.candidate.get(i)));
         }
         return numbers;
     }
