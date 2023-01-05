@@ -17,14 +17,9 @@ public class OutputView {
 
     public static void printLottoStatistics(LottoResult lottoResult) {
         for (Rank place : Rank.values()) {
-            System.out.print(place.toString());
-            System.out.print(" - ");
-            System.out.print(lottoResult.getLottoRanks().get(place));
-            System.out.println("개");
+            System.out.println(String.format("%s- %d개", place.toString(), lottoResult.getLottoRanks().get(place)));
         }
-        System.out.print("총 수익률은 " + lottoResult.getEarningRate() + "입니다.");
-        System.out.print("(기준이 1이기 때문에 결과적으로 ");
         String result = lottoResult.getEarningRate() >= 1.0d ? "이익이" : "손해";
-        System.out.print(result + "라는 의미임)");
+        System.out.print(String.format("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)", lottoResult.getEarningRate(), result));
     }
 }
