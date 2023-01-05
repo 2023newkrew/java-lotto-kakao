@@ -1,8 +1,10 @@
 package lottov2.model.ticket;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoNumber {
 
@@ -18,17 +20,22 @@ public class LottoNumber {
         return new LottoNumber(numbers);
     }
 
-    private LottoNumber(Set<SingleLottoNumber> numbers) {
-        this.numbers = numbers;
-    }
-
     private static boolean isInvalid(Set<SingleLottoNumber> numbers) {
         return Objects.isNull(numbers) || numbers.size() != SIZE;
     }
 
-    public Set<Integer> getIntegers() {
-        return numbers.stream()
-                .map(SingleLottoNumber::intValue)
-                .collect(Collectors.toSet());
+    private LottoNumber(Set<SingleLottoNumber> numbers) {
+        this.numbers = numbers;
+    }
+
+    public static LottoNumber createByRandom(){
+        List<SingleLottoNumber> numberCandidate = SingleLottoNumber.getAllNumbersInRange();
+        Collections.shuffle(numberCandidate);
+
+        return LottoNumber.of(Set.copyOf(numberCandidate.subList(0, SIZE)));
+
+    }
+    public Stream<SingleLottoNumber> stream() {
+        return numbers.stream();
     }
 }

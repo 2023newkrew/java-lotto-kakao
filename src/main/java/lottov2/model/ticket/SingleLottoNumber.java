@@ -1,5 +1,9 @@
 package lottov2.model.ticket;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class SingleLottoNumber {
 
     private static final int MIN_NUMBER = 1;
@@ -25,6 +29,12 @@ public class SingleLottoNumber {
         return value < MIN_NUMBER || value > MAX_NUMBER;
     }
 
+
+    public static List<SingleLottoNumber> getAllNumbersInRange() {
+        return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
+                .mapToObj(SingleLottoNumber::valueOf)
+                .collect(Collectors.toList());
+    }
     public int intValue() {
         return value;
     }

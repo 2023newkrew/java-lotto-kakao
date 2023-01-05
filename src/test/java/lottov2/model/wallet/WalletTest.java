@@ -41,31 +41,6 @@ class WalletTest {
 
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
-    class getProfitRate {
-        @DisplayName("아무 행동도 하지 않았을 경우 1 반환")
-        @ParameterizedTest
-        @ValueSource(longs = {1L, 100L, 1000L})
-        void should_returnOne_when_doNothing(long amount) {
-            Money money = Money.valueOf(amount);
-
-            Wallet wallet = Wallet.create(money);
-
-            Assertions.assertThat(wallet.getProfitRate()).isEqualTo(BigDecimal.valueOf(1L));
-        }
-
-        @DisplayName("Money가 0일 경우 예외 발생")
-        @Test
-        void should_throwException_when_givenZeroMoney() {
-            Wallet wallet = Wallet.create(Money.valueOf(0L));
-
-            Assertions.assertThatThrownBy(() -> wallet.getProfitRate())
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("투자금이 0원일 경우 수익률을 계산할 수 없습니다.");
-        }
-    }
-
-    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    @Nested
     class withdraw {
 
         @DisplayName("잔액보다 큰 금액을 인출할 경우 예외 발생")

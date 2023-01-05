@@ -48,8 +48,11 @@ class LottoNumberTest {
             Set<SingleLottoNumber> singleLottoNumbers = toSingleLottoNumbers(numbers);
 
             LottoNumber lottoNumber = LottoNumber.of(singleLottoNumbers);
+            Set<Integer> actual = lottoNumber.stream()
+                    .map(SingleLottoNumber::intValue)
+                    .collect(Collectors.toSet());
 
-            Assertions.assertThatCollection(lottoNumber.getIntegers()).isEqualTo(numbers);
+            Assertions.assertThatCollection(actual).isEqualTo(numbers);
         }
 
         List<Arguments> should_returnLottoNumber_when_givenValidNumbers() {

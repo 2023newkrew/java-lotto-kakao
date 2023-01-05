@@ -1,6 +1,5 @@
 package lottov2.model.wallet;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Wallet {
