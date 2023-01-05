@@ -6,7 +6,7 @@ public enum ErrorMessage {
     DUPLICATED_LOTTO_NUMBER_AND_BONUS_NUMBER("보너스번호와 당첨번호는 중복될 수 없습니다."),
     OUT_OF_LOTTO_NUMBER_RANGE("로또 숫자는 1 이상 45 이하여야합니다."),
     NOT_ENOUGH_MONEY("로또를 구매하기 위한 최소 금액이 부족합니다."),
-    LOTTO_NUMBER_IS_NUMERIC("로또 숫자는 숫자만 가능합니다. 숫자만 입력해주세요.")
+    LOTTO_NUMBER_IS_NUMERIC("숫자만 입력해주세요.")
     ;
 
 
