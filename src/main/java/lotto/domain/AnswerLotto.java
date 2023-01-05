@@ -1,21 +1,20 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AnswerLotto {
 
-    private final Lotto lottoNumbers;
+    private final Lotto answerLotto;
     private final SingleLottoNumber bonusNumber;
 
-    public AnswerLotto(Lotto lottoNumbers, SingleLottoNumber bonusNumber) {
-        if (lottoNumbers.containsLottoNumber(bonusNumber)) {
+    public AnswerLotto(Lotto answerLotto, SingleLottoNumber bonusNumber) {
+        if (answerLotto.containsLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException("보너스 볼 번호가 정답 로또와 중복됩니다.");
         }
 
-        this.lottoNumbers = lottoNumbers;
+        this.answerLotto = answerLotto;
         this.bonusNumber = bonusNumber;
     }
 
@@ -31,12 +30,9 @@ public class AnswerLotto {
     }
 
     private LottoPrize getLottoPrize(Lotto userLotto) {
-        int matchNumberCount = this.lottoNumbers.countMatchNumber(userLotto);
+        int matchNumberCount = this.answerLotto.countMatchNumber(userLotto);
         boolean hasBonusNumber = userLotto.containsLottoNumber(bonusNumber);
 
-        return Arrays.stream(LottoPrize.values())
-                .filter(prize -> prize.isWon(matchNumberCount, hasBonusNumber))
-                .findFirst()
-                .orElse(LottoPrize.NONE);
+        return LottoCalculator.calculatePrize(matchNumberCount, hasBonusNumber);
     }
 }
