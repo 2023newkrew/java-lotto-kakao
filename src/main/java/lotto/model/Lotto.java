@@ -42,8 +42,8 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    public int countOverlappedNumber(Lotto other) {
-        return (int) numbers.stream()
+    public long countOverlappedNumber(Lotto other) {
+        return numbers.stream()
                 .filter(other::hasNumber)
                 .count();
     }
