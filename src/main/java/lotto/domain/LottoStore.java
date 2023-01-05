@@ -9,25 +9,29 @@ import java.util.Map;
 import static lotto.constant.ExceptionMessages.*;
 
 public class LottoStore {
+    public static final int LOTTO_PRICE = 1000;
+
     private Lottos lottos;
     private WinningLotto winningLotto;
+    private int money;
 
-    public LottoStore() {
+    public LottoStore(int money) {
         lottos = new Lottos();
+        this.money = money;
     }
 
-    public void buyRandomLottosByAmounts(int amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException(INVALID_LOTTO_MANUAL_NUMBERS);
-        }
-        this.lottos = this.lottos.addAll(Lottos.generateRandomLottosByAmounts(amount));
+    public void buyRandomLottosByMoneyLeft() {
+        this.lottos = this.lottos.addAll(Lottos.generateRandomLottosByAmounts(money / LOTTO_PRICE));
+        money -= (money / LOTTO_PRICE) * LOTTO_PRICE;
     }
 
     public void buyLottosByNumbers(List<List<Integer>> numbersList) {
-        if (numbersList == null || numbersList.size() == 0) {
+        if (numbersList == null || numbersList.size() == 0)
             throw new IllegalArgumentException(INVALID_RANDOM_LOTTO_AMOUNT);
-        }
+        if (numbersList.size() * LOTTO_PRICE > money)
+            throw new IllegalArgumentException(INVALID_MONEY_LEFT);
         this.lottos = this.lottos.addAll(Lottos.generateLottosByNumbers(numbersList));
+        money -= numbersList.size() * LOTTO_PRICE;
     }
 
     public GameResultDto getLottosResult() {
@@ -41,7 +45,7 @@ public class LottoStore {
         long totalPrice = lottoResultCounter.entrySet().stream()
                 .mapToLong((entry) -> (long) entry.getKey().price * entry.getValue())
                 .sum();
-        return (float) totalPrice / (lottos.size() * Lotto.LOTTO_PRICE);
+        return (float) totalPrice / (lottos.size() * LOTTO_PRICE);
     }
 
     public int getLottoAmount() {

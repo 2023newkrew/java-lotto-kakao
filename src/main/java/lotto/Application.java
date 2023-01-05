@@ -4,14 +4,12 @@ import lotto.domain.LottoStore;
 
 import static lotto.view.LottoView.*;
 import static lotto.view.LottoPrinter.*;
-import static lotto.domain.Lotto.LOTTO_PRICE;
 
 public class Application {
     public static void main(String[] args) {
-        int lottoAmount = inputTotalMoney() / LOTTO_PRICE;
-        LottoStore lottoStore = new LottoStore();
+        LottoStore lottoStore = new LottoStore(inputTotalMoney());
         lottoStore.buyLottosByNumbers(inputManualLottoNumbers(inputManualLottoAmount()));
-        lottoStore.buyRandomLottosByAmounts(lottoAmount - lottoStore.getLottoAmount());
+        lottoStore.buyRandomLottosByMoneyLeft();
         printLottoList(lottoStore.getLottos());
         lottoStore.setWinningLotto(inputWinningLotto());
         printResult(lottoStore.getLottosResult());
