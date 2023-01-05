@@ -5,18 +5,24 @@ import util.validator.CountValidator;
 public class Count {
 
     private final int count;
-    public final boolean zero;
-    public final int remains;
+    private final int totalCount;
 
     public Count(String count, int totalCount) {
         CountValidator.validate(count, totalCount);
         this.count = Integer.parseInt(count);
-        zero = this.count == 0;
-        remains = totalCount - this.count;
+        this.totalCount = totalCount;
     }
 
     public int getCount() {
         return count;
+    }
+
+    public boolean zero() {
+        return this.count == 0;
+    }
+
+    public int getRemains() {
+        return totalCount - this.count;
     }
 
 }

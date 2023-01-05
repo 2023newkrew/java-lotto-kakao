@@ -18,14 +18,14 @@ public class LottoGame {
 
     public static Lottos getLottos(Count manualLottoCount) {
         Lottos lottos = new Lottos();
-        if (!manualLottoCount.zero) {
+        if (!manualLottoCount.zero()) {
             OutputView.printManualLottoRequest();
         }
         for (int i = 0; i < manualLottoCount.getCount(); i++) {
             lottos.addManualLotto(InputView.getInput());
         }
-        OutputView.printLottoCount(manualLottoCount.getCount(), manualLottoCount.remains);
-        lottos.addAutoLottos(manualLottoCount.remains);
+        OutputView.printLottoCount(manualLottoCount.getCount(), manualLottoCount.getRemains());
+        lottos.addAutoLottos(manualLottoCount.getRemains());
         OutputView.printLottos(lottos.getPurchasedLottosNumbers());
         return lottos;
     }
