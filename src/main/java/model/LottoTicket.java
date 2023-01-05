@@ -10,7 +10,7 @@ import java.util.List;
 public class LottoTicket {
     private final List<Lotto> lottos;
 
-    LottoTicket(List<Lotto> lottos) {
+    public LottoTicket(List<Lotto> lottos) {
         this.lottos = new ArrayList<>(lottos);
     }
 
