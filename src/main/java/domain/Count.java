@@ -13,7 +13,7 @@ public class Count {
         this.totalCount = totalCount;
     }
 
-    public static void validate(String input, int totalCount) {
+    private static void validate(String input, int totalCount) {
         validateNumberFormat(input);
         int count = Integer.parseInt(input);
         validatePositive(count);

@@ -9,7 +9,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     final int number;
 
     public LottoNumber(String input) {
-        LottoNumberValidator.validate(input);
+        validate(input);
         number = Integer.parseInt(input);
     }
 
@@ -22,7 +22,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = Integer.parseInt(input);
     }
 
-    private static void validate(String input) {
+    public static void validate(String input) {
         validateNumberFormat(input);
         int number = Integer.parseInt(input);
         validateInRange(number);
