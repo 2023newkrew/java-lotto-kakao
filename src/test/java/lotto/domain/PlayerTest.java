@@ -44,5 +44,4 @@ public class PlayerTest {
         //when, then
         assertDoesNotThrow(() -> player.buyManualLottoTickets(seller, manualLottoTickets));
     }
-
 }
