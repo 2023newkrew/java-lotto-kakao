@@ -2,24 +2,51 @@ package domain;
 
 import dto.LottoResult;
 import dto.WinningLotto;
-
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static utils.ErrorMessage.NOT_ENOUGH_MONEY;
 
 public class LottoBuyer {
     private Integer money;
     private List<Lotto> lottos;
 
-    public LottoBuyer(Integer money, LottoObtainPlace place) {
+    public LottoBuyer(Integer money) {
         this.money = money;
-        this.lottos = place.buy(money);
+        this.lottos = new ArrayList<>();
     }
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public void buyLottos(Integer manualAmount, Integer automaticAmount) {
+        buyManualLottos(manualAmount);
+        buyAutomaticLottos(automaticAmount);
+    }
+
+    public void buyManualLottos(Integer amount) {
+        validateMoney(money);
+        LottoStore lottoStore = new ManualStore();
+        lottos.addAll(lottoStore.buy(amount));
+        payLottoMoney(amount);
+    }
+
+    public void buyAutomaticLottos(Integer amount) {
+        validateMoney(money);
+        LottoStore lottoStore = new AutomaticStore();
+        lottos.addAll(lottoStore.buy(amount));
+        payLottoMoney(amount);
+    }
+
+    private void payLottoMoney(Integer amount) {
+        money -= (amount * LottoStore.COST);
+    }
+
+    private void validateMoney(Integer money) {
+        if (money < LottoStore.COST) {
+            throw new IllegalArgumentException(NOT_ENOUGH_MONEY.getMessage());
+        }
     }
 
     public LottoResult calculateResult(WinningLotto winningLotto) {
@@ -35,7 +62,7 @@ public class LottoBuyer {
     }
 
     public Double calculateEarningRate(Map<Rank, Integer> map) {
-        Integer investMoney = (money / 1000) * 1000;
+        Integer investMoney = lottos.size() * LottoStore.COST;
         Long earningMoney = 0L;
         for (Rank rank : Rank.values()) {
             earningMoney +=  (map.get(rank) * rank.getReward());
