@@ -19,7 +19,7 @@ class OutputViewTest {
         );
 
         OutputView outputView = new OutputView();
-        outputView.printLottoTickets(lottoTickets);
+        outputView.printLottoTickets(lottoTickets, 0);
     }
 
     @Test

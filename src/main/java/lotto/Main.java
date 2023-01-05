@@ -12,12 +12,16 @@ public class Main {
         OutputView outputView = new OutputView();
 
         int purchaseAmount = inputView.scanPurchaseAmount();
-        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(purchaseAmount);
-        outputView.printLottoTickets(lottoTickets);
+
+        int numberOfManualLotto = inputView.scanNumberOfManualLotto();
+        List<List<Integer>> manualLottoNumbers = inputView.scanManualLottoNumbers(numberOfManualLotto);
+
+        List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(purchaseAmount, manualLottoNumbers);
+        outputView.printLottoTickets(lottoTickets, numberOfManualLotto);
 
         List<Integer> winningNumbers = inputView.scanWinningNumbers();
         int bonusNumber = inputView.scanBonusNumber();
-        lottoMachine.setWinningNumber(winningNumbers, bonusNumber);
+        lottoMachine.setWinningLotto(winningNumbers, bonusNumber);
 
         MatchResult matchResult = lottoMachine.match(lottoTickets);
         outputView.printMatchResult(matchResult);
