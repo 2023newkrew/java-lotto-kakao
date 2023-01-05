@@ -17,7 +17,7 @@ public class LottoGame {
         this.lottoRandomDispenser = new LottoDispenser(lottoSetting, RandomNumberSelectStrategy.getInstance());
     }
 
-    public int buyRandom(int money) {
+    public int buyRandomly(int money) {
         LottoTicketList lottoTicketList = lottoRandomDispenser.getLottoTicketList(money);
         lottoTickets.addAll(lottoTicketList);
         saveLeftoverMoney(lottoRandomDispenser.receiveLeftoverMoney());

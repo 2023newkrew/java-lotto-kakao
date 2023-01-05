@@ -22,7 +22,7 @@ public class LottoMain {
         List<List<Integer>> numbers = InputView.getManualNumbersList();
 
         int manual = lottoGame.buyManually(money, numbers);
-        int random = lottoGame.buyRandom(lottoGame.receiveLeftoverMoney());
+        int random = lottoGame.buyRandomly(lottoGame.receiveLeftoverMoney());
         ResultView.printQuantity(manual, random);
         ResultView.print(lottoGame.getLottoTicketsString());
     }

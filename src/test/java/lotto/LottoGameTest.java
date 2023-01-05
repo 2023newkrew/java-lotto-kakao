@@ -18,7 +18,7 @@ public class LottoGameTest {
     public void buyLottoTicket(int money, int number) {
         LottoSetting lottoSetting = new LottoSetting();
         LottoGame lottoGame = new LottoGame(lottoSetting);
-        int random = lottoGame.buyRandom(money);
+        int random = lottoGame.buyRandomly(money);
         Assertions.assertThat(random).isEqualTo(number);
     }
 
@@ -68,7 +68,7 @@ public class LottoGameTest {
         LottoSetting lottoSetting = new LottoSetting();
         LottoGame lottoGame = new LottoGame(lottoSetting);
         int manual = lottoGame.buyManually(money, numbers);
-        int random = lottoGame.buyRandom(lottoGame.receiveLeftoverMoney());
+        int random = lottoGame.buyRandomly(lottoGame.receiveLeftoverMoney());
         Assertions.assertThat(manual).isEqualTo(manualExpected);
         Assertions.assertThat(random).isEqualTo(randomExpected);
     }
@@ -98,7 +98,7 @@ public class LottoGameTest {
     public void receiveLeftoverMoney(int money, int number) {
         LottoSetting lottoSetting = new LottoSetting();
         LottoGame lottoGame = new LottoGame(lottoSetting);
-        lottoGame.buyRandom(money);
+        lottoGame.buyRandomly(money);
         Assertions.assertThat(lottoGame.receiveLeftoverMoney()).isEqualTo(number);
     }
 
