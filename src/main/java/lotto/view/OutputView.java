@@ -1,18 +1,15 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.Prize;
-import lotto.model.PrizeRecord;
-import lotto.model.Ticket;
+import lotto.model.*;
 
 import java.util.Arrays;
 
 public class OutputView {
 
-    private static String generateTicketString(Ticket ticket) {
+    private static String generateTicketString(LottoTicket ticket) {
         StringBuilder sb = new StringBuilder("[");
-        for (int number : ticket.getNumbers()) {
-            sb.append(number);
+        for (LottoNumber number : ticket.getNumbers()) {
+            sb.append(number.getNumber());
             sb.append(", ");
         }
         return sb.substring(0, sb.length() - 2) + "]";
@@ -20,7 +17,7 @@ public class OutputView {
 
     public static void sendPurchasedLotto(Lotto lotto) {
         System.out.printf("%d개를 구매했습니다.\n", lotto.getQuantity());
-        for (Ticket ticket : lotto.getTickets()) {
+        for (LottoTicket ticket : lotto.getTickets()) {
             System.out.println(OutputView.generateTicketString(ticket));
         }
     }

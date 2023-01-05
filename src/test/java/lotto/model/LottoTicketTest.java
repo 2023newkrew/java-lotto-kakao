@@ -9,25 +9,21 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class TicketTest {
+public class LottoTicketTest {
     @Test
     @DisplayName("can validate incorrect length of numbers")
     void can_validate_incorrect_length_of_numbers() {
         LottoNumbers lottoNumbers = new LottoNumbers();
         List<LottoNumber> numbers = new ArrayList<>();
 
-        for (int i = 1; i < Ticket.NUMBERS_LENGTH; i++) {
+        for (int i = 1; i < LottoTicket.NUMBERS_LENGTH; i++) {
             numbers.add(lottoNumbers.get(i));
         }
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Ticket(numbers);
-        });
+        assertThrows(IllegalArgumentException.class, () -> new LottoTicket(numbers));
 
-        numbers.add(lottoNumbers.get(Ticket.NUMBERS_LENGTH));
-        numbers.add(lottoNumbers.get(Ticket.NUMBERS_LENGTH + 1));
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Ticket(numbers);
-        });
+        numbers.add(lottoNumbers.get(LottoTicket.NUMBERS_LENGTH));
+        numbers.add(lottoNumbers.get(LottoTicket.NUMBERS_LENGTH + 1));
+        assertThrows(IllegalArgumentException.class, () -> new LottoTicket(numbers));
     }
 
     @Test
@@ -36,13 +32,11 @@ public class TicketTest {
         LottoNumbers lottoNumbers = new LottoNumbers();
         List<LottoNumber> numbers = new ArrayList<>();
 
-        for (int i = 1; i < Ticket.NUMBERS_LENGTH; i++) {
+        for (int i = 1; i < LottoTicket.NUMBERS_LENGTH; i++) {
             numbers.add(lottoNumbers.get(i));
         }
         numbers.add(lottoNumbers.get(1));
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Ticket(numbers);
-        });
+        assertThrows(IllegalArgumentException.class, () -> new LottoTicket(numbers));
     }
 }

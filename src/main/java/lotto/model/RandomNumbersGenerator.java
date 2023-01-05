@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RandomGenerator {
+public class RandomNumbersGenerator {
     private final LottoNumbers lottoNumbers;
     private final List<Integer> candidate;
 
-    public RandomGenerator(LottoNumbers lottoNumbers) {
+    public RandomNumbersGenerator(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
         this.candidate = new ArrayList<>();
         for (int i = 1; i <= LottoNumber.NUMBER_RANGE; i++) {
