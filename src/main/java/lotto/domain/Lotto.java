@@ -56,4 +56,5 @@ public class Lotto {
         return lottoNumbers.toString();
     }
 
+
 }

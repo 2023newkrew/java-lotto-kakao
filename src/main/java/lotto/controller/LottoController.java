@@ -1,5 +1,6 @@
 package lotto.controller;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -73,5 +74,4 @@ public class LottoController {
     private int getAutoCount(int price, int passiveLottoCount) {
         return (price / (int) LottoConstants.LOTTO_PRICE) - passiveLottoCount;
     }
-
 }

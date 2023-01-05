@@ -14,5 +14,6 @@ public class LottoApp {
         new LottoApp().run();
 
 
+
     }
 }

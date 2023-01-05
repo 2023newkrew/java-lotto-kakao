@@ -57,6 +57,7 @@ public class LottoNumbers {
 
     public int match(LottoNumbers other) {
         return (int) lottoNumbers.stream().filter(other::contains).count();
+
     }
 
     @Override

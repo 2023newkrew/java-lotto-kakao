@@ -5,6 +5,7 @@ import static lotto.utils.ErrorMessageFormatter.makeErrorMessage;
 import static lotto.utils.StringUtils.parseInt;
 import static lotto.view.InputErrorMessage.BOUND_EXCEPTION_MESSAGE;
 
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -23,6 +24,7 @@ public class InputView {
 
     public List<Integer> readLottoNumbers() {
         return Arrays.stream(scanner.nextLine().split(", ")).map(StringUtils::parseInt).collect(Collectors.toList());
+
     }
 
     public Integer readBonusBall() {
@@ -33,6 +35,7 @@ public class InputView {
 
     private void validatePrice(int price) {
         validateRange(price);
+
     }
 
     private void validateRange(int price) {
@@ -63,6 +66,7 @@ public class InputView {
         }
 
     }
+
 
 
 }

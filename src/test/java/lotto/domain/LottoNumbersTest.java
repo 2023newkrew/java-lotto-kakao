@@ -78,4 +78,5 @@ class LottoNumbersTest {
         //then
         assertThat(result).isFalse();
     }
+
 }

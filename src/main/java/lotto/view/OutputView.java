@@ -2,6 +2,7 @@ package lotto.view;
 
 import static lotto.view.OutputMessage.*;
 
+
 import lotto.domain.LottoHandler;
 
 public class OutputView {
@@ -15,6 +16,7 @@ public class OutputView {
 
     public void printAllLotto(LottoHandler lottoHandler) {
         System.out.println(lottoHandler.allLottoToString());
+
     }
 
     public void printInputRequestOfWinningNumber() {
@@ -37,5 +39,6 @@ public class OutputView {
 
     public void printResult(String lottoResultString) {
         System.out.println(PRINT_WINNING_RESULT_MESSAGE.getMessage()+lottoResultString);
+
     }
 }

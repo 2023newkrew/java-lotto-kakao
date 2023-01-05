@@ -12,5 +12,4 @@ public final class ExceptionMessage {
     public static final String BONUS_BALL_DUPLICATE_EXCEPTION_MESSAGE = "보너스 볼이 다른 볼과 중복입니다.";
 
     public static final String INVALID_MATCH_COUNT_AND_HAS_BONUS = "유효하지않은 matchCount와 hasBonus입니다.";
-
 }
