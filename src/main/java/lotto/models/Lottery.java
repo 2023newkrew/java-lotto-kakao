@@ -32,7 +32,10 @@ public class Lottery {
     }
 
     public String getNumbersString() {
-        return numbers.toString();
+        return "["
+                + numbers.stream().map((number) -> number.getNumber().toString())
+                .collect(Collectors.joining(", "))
+                + "]";
     }
 
     private void validateNumbers(List<Integer> numbers) {

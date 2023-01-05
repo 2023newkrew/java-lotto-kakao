@@ -19,6 +19,14 @@ public class OutputView {
         console.printOutput("구입금액을 입력해 주세요.");
     }
 
+    public void askForManualCount() {
+        console.printOutput("수동으로 구매할 로또 수를 입력해주세요.");
+    }
+
+    public void askForManualLotteries() {
+        console.printOutput("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
     public void printNumberOfLottery(Integer numberOfLottery) {
         console.printOutput(numberOfLottery.toString() + "개를 구매했습니다.");
     }
