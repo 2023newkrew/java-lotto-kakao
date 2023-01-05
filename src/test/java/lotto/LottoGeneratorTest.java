@@ -17,7 +17,7 @@ public class LottoGeneratorTest {
         //when
         lottoGenerator.autoGenerateRemaining(buyer);
         //then
-        Assertions.assertThat(buyer.getLotteries()).hasSize(2);
+        Assertions.assertThat(buyer.getLottos()).hasSize(2);
     }
 
     @DisplayName("수동 로또 구매 후 동일한지 확인")
@@ -29,7 +29,7 @@ public class LottoGeneratorTest {
         //when
         lottoGenerator.manuallyGenerateOne(buyer, "1,2,3,4,5,6");
         //then
-        Assertions.assertThat(buyer.getLotteries()).containsExactly(new Lotto("1,2,3,4,5,6"));
+        Assertions.assertThat(buyer.getLottos()).containsExactly(new Lotto("1,2,3,4,5,6"));
     }
 
     @DisplayName("3000원 있는 buyer가 로또 3개까지 구매할 수 있음")

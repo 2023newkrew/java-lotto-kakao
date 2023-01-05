@@ -19,13 +19,13 @@ public class LottoController {
         int autoQuantity = lottoGenerator.autoGenerateRemaining(buyer);
 
         outputView.printQuantity(manualQuantity, autoQuantity);
-        outputView.printLotteries(buyer.getLotteries());
+        outputView.printLotteries(buyer.getLottos());
 
         String winningNumbersAsString = inputView.getWinningNumbersInput();
         int bonusNumber = inputView.getBonusNumberInput();
 
         WinningLotto winningLotto = new WinningLotto(winningNumbersAsString, bonusNumber);
-        BuyerResult buyerResult = winningLotto.getResult(buyer.getLotteries());
+        BuyerResult buyerResult = winningLotto.getResult(buyer.getLottos());
 
         outputView.printResult(buyerResult);
     }

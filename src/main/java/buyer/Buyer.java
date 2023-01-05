@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Buyer {
-    private final List<Lotto> lotteries = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
     private Money budget;
 
     public Buyer(int budget) {
@@ -20,10 +20,10 @@ public class Buyer {
 
     public void buyLottery(int lotteryPrice, Lotto lotto) {
         this.budget = this.budget.decreaseMoney(Money.valueOf(lotteryPrice));
-        this.lotteries.add(lotto);
+        this.lottos.add(lotto);
     }
 
-    public List<Lotto> getLotteries() {
-        return Collections.unmodifiableList(lotteries);
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }
