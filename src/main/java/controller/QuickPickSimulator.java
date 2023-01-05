@@ -12,10 +12,10 @@ public class QuickPickSimulator implements LottoSimulator{
     private final OutputView outputView;
     private final LottoTicketGenerator lottoTicketGenerator;
 
-    public QuickPickSimulator(InputView inputView, OutputView outputView){
+    public QuickPickSimulator(InputView inputView, OutputView outputView, LottoTicketGenerator lottoTicketGenerator){
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoTicketGenerator = new LottoTicketAutoGenerator();
+        this.lottoTicketGenerator = lottoTicketGenerator;
     }
 
     @Override
