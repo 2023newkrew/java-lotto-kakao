@@ -18,10 +18,6 @@ public class BuyerResult {
         }
     }
 
-    public BuyerResult(EnumMap<Rank, Integer> result) {
-        this.result = result;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof BuyerResult)) return false;
