@@ -20,6 +20,6 @@ public class LottoRandom {
         Collections.shuffle(numList);
         numList = numList.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(numList);
-        return new ArrayList<>(numList);
+        return numList;
     }
 }
