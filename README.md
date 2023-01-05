@@ -21,6 +21,7 @@
 ### View
 - InputView
 - OutputView
+- OutputViewMessage
 
 ### Controller
 - LotteryController : Player, LotteryVendingMachine, LotteryChecker 관리, view와 중계
