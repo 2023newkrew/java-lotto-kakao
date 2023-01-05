@@ -31,24 +31,29 @@ public class LottoController {
     private List<LottoTicket> buyLottoTickets() {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         UserAccount userAccount = lottoInputView.readUserAccount();
-        buyManualLotto(userAccount, lottoTickets);
-        buyAutoLotto(userAccount, lottoTickets);
+        int manualLottoAmount = buyManualLotto(userAccount, lottoTickets);
+        int autoLottoAmount = buyAutoLotto(userAccount, lottoTickets);
+        lottoOutputView.printBuyingAmounts(manualLottoAmount, autoLottoAmount);
         return lottoTickets;
     }
 
-    private void buyManualLotto(UserAccount userAccount, List<LottoTicket> lottoTickets) {
+    private int buyManualLotto(UserAccount userAccount, List<LottoTicket> lottoTickets) {
         int buyingAmount = lottoInputView.readBuyingAmount();
         lottoOutputView.printBuyingManualLottoMessage();
         for (int i = 0; i < buyingAmount; i++) {
             LottoTicket lottoTicket = lottoStore.buyLottoTicket(userAccount, lottoInputView.readLottoNumbers());
             lottoTickets.add(lottoTicket);
         }
+        return buyingAmount;
     }
 
-    private void buyAutoLotto(UserAccount userAccount, List<LottoTicket> lottoTickets) {
+    private int buyAutoLotto(UserAccount userAccount, List<LottoTicket> lottoTickets) {
+        int buyingAmount = 0;
         while (lottoStore.canBuyLotto(userAccount)) {
             LottoTicket lottoTicket = lottoStore.buyLottoTicket(userAccount, lottoTicketGenerator.generate());
             lottoTickets.add(lottoTicket);
+            buyingAmount++;
         }
+        return buyingAmount;
     }
 }
