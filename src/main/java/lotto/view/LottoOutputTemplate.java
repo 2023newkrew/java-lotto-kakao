@@ -26,7 +26,7 @@ public class LottoOutputTemplate {
     public void printLottoTickets(LottoCount lottoCount, LottoTickets lottoTickets) {
         Integer manualLottoCount = lottoCount.getManualLottoCount();
         Integer automaticLottoCount = lottoCount.getAutomaticLottoCount();
-        System.out.println("수동으로 " + manualLottoCount+ "장, 자동으로 " + automaticLottoCount + "장을 구매했습니다.");
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + automaticLottoCount + "장을 구매했습니다.");
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
         lottoTicketList.forEach(this::printLottoTicket);
     }
@@ -35,15 +35,20 @@ public class LottoOutputTemplate {
         Map<LottoRank, Integer> lottoResultRankCountMap = lottoResult.getRankCountMap();
         System.out.println("당첨 통계\n---------");
         System.out.println(
-                RANK5.getMatchedCount().get(0) + "개 일치 (" + RANK5.getReward() + "원)- " + lottoResultRankCountMap.get(RANK5) + "개");
+                RANK5.getMatchedCount().get(0) + "개 일치 (" + RANK5.getReward() + "원)- " + lottoResultRankCountMap.get(
+                        RANK5) + "개");
         System.out.println(
-                RANK4.getMatchedCount().get(0) + "개 일치 (" + RANK4.getReward() + "원)- " + lottoResultRankCountMap.get(RANK4) + "개");
+                RANK4.getMatchedCount().get(0) + "개 일치 (" + RANK4.getReward() + "원)- " + lottoResultRankCountMap.get(
+                        RANK4) + "개");
         System.out.println(
-                RANK3.getMatchedCount().get(0) + "개 일치 (" + RANK3.getReward() + "원)- " + lottoResultRankCountMap.get(RANK3) + "개");
+                RANK3.getMatchedCount().get(0) + "개 일치 (" + RANK3.getReward() + "원)- " + lottoResultRankCountMap.get(
+                        RANK3) + "개");
         System.out.println(
-                RANK2.getMatchedCount().get(0) + "개 일치, 보너스 볼 일치(" + RANK2.getReward() + "원)- " + lottoResultRankCountMap.get(RANK2) + "개");
+                RANK2.getMatchedCount().get(0) + "개 일치, 보너스 볼 일치(" + RANK2.getReward() + "원)- "
+                        + lottoResultRankCountMap.get(RANK2) + "개");
         System.out.println(
-                RANK1.getMatchedCount().get(0) + "개 일치 (" + RANK1.getReward() + "원)- " + lottoResultRankCountMap.get(RANK1) + "개");
+                RANK1.getMatchedCount().get(0) + "개 일치 (" + RANK1.getReward() + "원)- " + lottoResultRankCountMap.get(
+                        RANK1) + "개");
     }
 
     public void printRateOfReturn(Double rateOfReturn) {

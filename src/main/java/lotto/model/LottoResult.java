@@ -39,6 +39,7 @@ public class LottoResult {
                 });
         return totalRevenue[0];
     }
+
     public Map<LottoRank, Integer> getRankCountMap() {
         return rankCountMap;
     }

@@ -27,10 +27,10 @@ public class LottoCount {
     }
 
     private void validateManualLottoCount(Integer manualLottoCount) {
-        if(totalLottoCount < manualLottoCount) {
+        if (totalLottoCount < manualLottoCount) {
             throw new LottoException(ErrorCode.LACK_OF_MONEY);
         }
-        if(manualLottoCount < 0) {
+        if (manualLottoCount < 0) {
             throw new LottoException(ErrorCode.INVALID_MANUAL_LOTTO_COUNT);
         }
     }

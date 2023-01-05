@@ -37,7 +37,7 @@ public class LottoNumber {
     public static LottoNumber from(String lottoNumberString) {
         try {
             return from(Integer.parseInt(lottoNumberString));
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new LottoException(ErrorCode.INVALID_INPUT_TYPE_NOT_INTEGER);
         }
     }

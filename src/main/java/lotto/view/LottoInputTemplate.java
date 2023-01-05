@@ -28,7 +28,7 @@ public class LottoInputTemplate {
 
     public List<String> inputManualLottos(Integer manualLottoCount) {
         List<String> manualLottos = new ArrayList<>();
-        if(manualLottoCount == 0) {
+        if (manualLottoCount == 0) {
             return manualLottos;
         }
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
