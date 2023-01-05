@@ -13,4 +13,6 @@ public class LottoConstants {
     public static final long FIFTH_PRIZE_CASH = 5_000L;
 
     public static final String CASH_UNIT = "원";
+
+    private LottoConstants() {}
 }
