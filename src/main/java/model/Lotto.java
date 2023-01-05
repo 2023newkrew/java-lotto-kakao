@@ -18,10 +18,10 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
-        if(lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new LottoNumberException("로또 번호의 개수는 6개 입니다.");
         }
-        if(lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
+        if (lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
             throw new LottoNumberException("로또 번호에는 중복이 없어야 합니다.");
         }
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
