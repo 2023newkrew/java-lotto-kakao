@@ -25,7 +25,7 @@ public class LotteryChecker {
     }
 
     public List<Integer> checkAll(List<LotteryNumberCombination> lotteryTicket) {
-        List<Integer> rankCounts = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 0));
+        List<Integer> rankCounts = new ArrayList<>(List.of(0, 0, 0, 0, 0, 0));
         lotteryTicket.stream()
                 .map(lotteryNumberComb -> check(lotteryNumberComb).getIndex())
                 .forEach(i -> rankCounts.set(i, rankCounts.get(i) + 1));

@@ -36,7 +36,8 @@ public class LotteryCheckerTest {
                 () -> assertEquals(checker.check(new LotteryNumberCombination(List.of(1, 2, 3, 4, 5, 8))), THIRD),
                 () -> assertEquals(checker.check(new LotteryNumberCombination(List.of(1, 2, 3, 4, 8, 9))), FOURTH),
                 () -> assertEquals(checker.check(new LotteryNumberCombination(List.of(1, 2, 3, 8, 9, 10))), FIFTH),
-                () -> assertEquals(checker.check(new LotteryNumberCombination(List.of(1, 2, 8, 9, 10, 11))), DEFAULT));
+                () -> assertEquals(checker.check(new LotteryNumberCombination(List.of(1, 2, 8, 9, 10, 11))), DEFAULT)
+        );
     }
 
     @DisplayName("여러 개의 로또 입력에 대해 로또 등수 리스트를 반환한다.")

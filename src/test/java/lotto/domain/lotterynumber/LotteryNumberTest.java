@@ -33,8 +33,7 @@ public class LotteryNumberTest {
     @Test
     void LotteryNumberConstructTest() {
         for (int number : validNumbers) {
-            assertThatCode(() -> LotteryNumber.of(number))
-                    .doesNotThrowAnyException();
+            assertThatCode(() -> LotteryNumber.of(number)).doesNotThrowAnyException();
         }
     }
 
