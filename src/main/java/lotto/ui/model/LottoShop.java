@@ -18,15 +18,18 @@ public class LottoShop {
         this.lottoTicketPrice = lottoTicketPrice;
     }
 
-    public List<LottoTicket> purchase(long purchasePrice) {
-        if (purchasePrice < 0) {
-            throw new RuntimeException("구입 금액은 0 보다 커야 합니다.");
-        }
-        if (purchasePrice % lottoTicketPrice != 0) {
-            throw new RuntimeException(String.format("로또 가격은 %d원입니다 구매에 거스름돈이 남으면 안됩니다.", DEFAULT_LOTTO_PRICE));
-        }
-        return Stream.generate(LottoTicket::fromRandom)
-                .limit(purchasePrice / lottoTicketPrice)
-                .collect(Collectors.toList());
+    public void purchaseLotto(Player player) {
+        long ticketCount = player.getOwnMoney() / lottoTicketPrice;
+        player.takeMoney(ticketCount * lottoTicketPrice);
+        player.giveTickets(Stream.generate(LottoTicket::fromRandom)
+                .limit(ticketCount)
+                .collect(Collectors.toList()));
     }
+
+    public void purchaseLotto(Player player, List<LottoTicket> manualTickets) {
+        long totalPrice = manualTickets.size() * lottoTicketPrice;
+        player.takeMoney(totalPrice);
+        player.giveTickets(manualTickets);
+    }
+
 }
