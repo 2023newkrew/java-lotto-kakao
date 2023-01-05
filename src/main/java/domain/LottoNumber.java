@@ -1,0 +1,54 @@
+package domain;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class LottoNumber implements Comparable<LottoNumber> {
+    private static final Integer LOTTO_NUMBER_START = 1;
+    private static final Integer LOTTO_NUMBER_END = 45;
+
+    private final Integer number;
+
+    public LottoNumber(Integer number) {
+        validateLottoNumber(number);
+        this.number = number;
+    }
+
+    private void validateLottoNumber(Integer number) {
+        if (number < LOTTO_NUMBER_START || number > LOTTO_NUMBER_END) {
+            throw new IllegalArgumentException("로또 숫자는 1 이상 45 이하여야합니다.");
+        }
+    }
+
+    public static List<LottoNumber> getAll() {
+        return IntStream
+                .range(LOTTO_NUMBER_START, LOTTO_NUMBER_END + 1)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumber that = (LottoNumber) o;
+        return Objects.equals(number, that.number);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
+    }
+
+    @Override
+    public String toString() {
+        return number.toString();
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return this.number - other.number;
+    }
+}
