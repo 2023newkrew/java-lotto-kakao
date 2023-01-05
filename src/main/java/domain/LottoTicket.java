@@ -46,4 +46,8 @@ public class LottoTicket {
                 .filter(lottoNumber -> !lottoTicket.contains(lottoNumber))
                 .collect(Collectors.toList());
     }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
 }
