@@ -4,8 +4,6 @@
  */
 package model;
 
-import model.constant.LottoInfo;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,31 +11,32 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
+
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 45;
     private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
 
     private final int number;
 
-    static {    // lottoNumber 맵을 만든다.
-        IntStream.range(LottoInfo.MIN_NUMBER.valueOf(), LottoInfo.MAX_NUMBER.valueOf())
+    static {
+        IntStream.range(MIN_NUMBER, MAX_NUMBER)
                 .forEach(number -> lottoNumbers.put(number, new LottoNumber(number)));
     }
 
-    private LottoNumber(int number) { //로또 넘버 인스턴스 생성을 막는다.
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    public static LottoNumber getLottoNumber(int number) { //공을 꺼내는 일을함
+    public static LottoNumber getLottoNumber(int number) {
         return lottoNumbers.get(number);
     }
 
-    public static List<LottoNumber> getLottoNumbers() { // 로또 공 1~45개를 담는 리스트를 새로 만들어서 리턴한다.
-        return new ArrayList<>(lottoNumbers.values()); // 해시맵에 담겨있는 로또 공 인스턴스들..
+    public static List<LottoNumber> getLottoNumbers() {
+        return new ArrayList<>(lottoNumbers.values());
     }
 
-    public int getNumber() { // 숫자 자체를 꺼내는 기능
+    public int getNumber() {
         return number;
     }
-
-
 }
 
