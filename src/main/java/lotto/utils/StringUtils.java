@@ -27,7 +27,7 @@ public class StringUtils {
             return Integer.parseInt(num);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(
-                    makeErrorMessage(REQUIRED_NUMBER_EXCEPTION_MESSAGE.getMessage(), num, "num"), e);
+                    makeErrorMessage(REQUIRED_NUMBER_EXCEPTION_MESSAGE.getMessage(), num, "parseInt"), e);
         }
 
     }
