@@ -48,7 +48,7 @@ class LottoWalletTest {
             wallet.buyLottoTicketAutomatically(store);
             LottoTicket ticket = wallet.getTicket();
 
-            Assertions.assertThat(ticket.stream().count()).isEqualTo(expected);
+            Assertions.assertThat(ticket.size()).isEqualTo(expected);
         }
 
         public List<Arguments> should_ticketCountIs_when_givenAmount() {

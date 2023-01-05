@@ -95,7 +95,7 @@ class LottoStoreTest {
 
             LottoTicket ticket = store.buyAutomatically(count);
 
-            Assertions.assertThat(ticket.stream().count()).isEqualTo(count);
+            Assertions.assertThat(ticket.size()).isEqualTo(count);
         }
 
         public List<Arguments> should_lottosCountIs_when_givenCount() {

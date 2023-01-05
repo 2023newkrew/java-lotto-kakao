@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SingleLottoNumber {
+public class SingleLottoNumber implements Comparable<SingleLottoNumber>{
 
     private static final int MIN_NUMBER = 1;
 
@@ -59,6 +59,11 @@ public class SingleLottoNumber {
     @Override
     public String toString() {
         return Integer.toString(value);
+    }
+
+    @Override
+    public int compareTo(SingleLottoNumber o) {
+        return Integer.compare(value, o.value);
     }
 }
 

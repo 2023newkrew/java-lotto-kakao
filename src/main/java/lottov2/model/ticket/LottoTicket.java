@@ -26,6 +26,10 @@ public class LottoTicket {
         this.lottos = lottos;
     }
 
+    public int size(){
+        return lottos.size();
+    }
+
     public LottoTicket append(LottoTicket other) {
         List<LottoNumber> newLottos = Stream.concat(stream(), other.stream()).collect(Collectors.toList());
 
