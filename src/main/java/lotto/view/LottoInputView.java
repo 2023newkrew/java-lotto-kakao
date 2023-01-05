@@ -1,12 +1,12 @@
 package lotto.view;
 
-import lotto.model.lotto.Lotto;
-import lotto.model.vo.LottoNumber;
-import lotto.model.vo.Money;
+import lotto.model.store.Money;
+import lotto.model.ticket.LottoNumber;
+import lotto.model.ticket.SingleLottoNumber;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoInputView {
@@ -24,27 +24,27 @@ public class LottoInputView {
         return Money.valueOf(amount);
     }
 
-    public Lotto inputWinningLotto() {
+    public LottoNumber inputWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String text = scanner.nextLine();
 
         return convertToLotto(text);
     }
 
-    private static Lotto convertToLotto(String text) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(text.split(","))
+    private static LottoNumber convertToLotto(String text) {
+        Set<SingleLottoNumber> singleLottoNumbers = Arrays.stream(text.split(","))
                 .map(String::trim)
                 .map(Integer::valueOf)
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
+                .map(SingleLottoNumber::valueOf)
+                .collect(Collectors.toSet());
 
-        return Lotto.from(lottoNumbers);
+        return LottoNumber.of(singleLottoNumbers);
     }
 
-    public LottoNumber inputBonusNumber() {
+    public SingleLottoNumber inputBonus() {
         System.out.println("보너스 볼을 입력해 주세요.");
         int number = Integer.parseInt(scanner.nextLine());
 
-        return LottoNumber.valueOf(number);
+        return SingleLottoNumber.valueOf(number);
     }
 }

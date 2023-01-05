@@ -1,5 +1,6 @@
 package lotto;
 
+
 import lotto.controller.LottoSimulator;
 
 public class Application {

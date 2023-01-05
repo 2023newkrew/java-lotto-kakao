@@ -1,48 +1,64 @@
 package lotto.controller;
 
-import lotto.model.*;
-import lotto.model.lotto.Lotto;
-import lotto.model.generator.RandomLottoGenerator;
-import lotto.model.lotto.PurchaseResult;
-import lotto.model.vo.LottoNumber;
-import lotto.model.vo.Money;
+import lotto.model.campany.LottoCompany;
+import lotto.model.campany.LottoStats;
+import lotto.model.store.LottoStore;
+import lotto.model.store.LottoWallet;
+import lotto.model.store.Money;
+import lotto.model.ticket.LottoNumber;
+import lotto.model.ticket.LottoTicket;
+import lotto.model.ticket.SingleLottoNumber;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
+import java.math.BigDecimal;
+
 public class LottoSimulator {
 
-    private final LottoStore lottoStore = LottoStore.create(RandomLottoGenerator.getInstance());
+    private static final Money LOTTO_PRICE = Money.valueOf(1000L);
 
     private final LottoInputView inputView = new LottoInputView();
 
     private final LottoOutputView outputView = new LottoOutputView();
 
     public void run() {
+        LottoWallet wallet = createWallet();
+        LottoStore store = LottoStore.create(LOTTO_PRICE);
+        LottoTicket ticket = buyLotto(wallet, store);
+        outputView.printTicket(ticket);
+        LottoStats stats = createLottoCompanyAndAnalyze(ticket);
+        BigDecimal profitRate = getProfitRate(wallet, stats);
+        outputView.printResult(stats, profitRate);
+    }
+
+    private LottoWallet createWallet() {
         Money money = inputView.inputMoney();
-        PurchaseResult purchaseResult = buyLotto(money);
-        LottoAnalyzer lottoAnalyzer = createLottoAnalyzer();
-        WinningStatistics winningStatistics = lottoAnalyzer.analyze(money, purchaseResult);
-        outputView.printWinningStatistics(winningStatistics);
+
+        return LottoWallet.create(money);
     }
 
-    private PurchaseResult buyLotto(Money money) {
-        PurchaseResult purchaseResult = lottoStore.buyLotto(money);
-        outputView.printLottos(purchaseResult);
+    private static LottoTicket buyLotto(LottoWallet wallet, LottoStore store) {
+        wallet.buyLottoTicketAutomatically(store);
 
-        return purchaseResult;
+        return wallet.getTicket();
     }
 
-    private LottoAnalyzer createLottoAnalyzer() {
-        WinningNumber winningNumber = inputWinningNumbers();
+    private LottoStats createLottoCompanyAndAnalyze(LottoTicket ticket) {
+        LottoCompany company = createLottoCompany();
 
-        return LottoAnalyzer.create(winningNumber);
+        return company.analyze(ticket);
     }
 
-    private WinningNumber inputWinningNumbers() {
-        Lotto winningNumbers = inputView.inputWinningLotto();
-        LottoNumber bonus = inputView.inputBonusNumber();
+    private LottoCompany createLottoCompany() {
+        LottoNumber winningNumber = inputView.inputWinningNumber();
+        SingleLottoNumber bonus = inputView.inputBonus();
 
-        return WinningNumber.from(winningNumbers, bonus);
+        return LottoCompany.create(winningNumber, bonus);
     }
 
+    private static BigDecimal getProfitRate(LottoWallet wallet, LottoStats stats) {
+        Money totalPrize = stats.getTotalPrize();
+
+        return wallet.getProfitRate(totalPrize);
+    }
 }
