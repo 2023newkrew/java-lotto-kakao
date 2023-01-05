@@ -39,7 +39,7 @@ public class LottoStatisticsTest {
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 26);
         LottoStatistics lottoStatistics = new LottoStatistics();
         for (int i = 0; i < lottoList.length(); i++) {
-            lottoStatistics.put(LottoResult.match(winningNumbers.check(lottoList.get(i))));
+            lottoStatistics.put(LottoResult.valueOf(winningNumbers.check(lottoList.get(i))));
         }
 
         assertEquals(5000, lottoStatistics.getProfit());

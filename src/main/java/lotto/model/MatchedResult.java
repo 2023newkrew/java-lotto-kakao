@@ -4,17 +4,17 @@ import java.util.Objects;
 
 public class MatchedResult {
 
-    private final Integer matchedCount;
+    private final Integer matchedMainNumberCount;
 
     private final Boolean isBonusNumberMatched;
 
-    public MatchedResult(Integer matchedCount, Boolean isBonusNumberMatched) {
-        this.matchedCount = matchedCount;
+    public MatchedResult(Integer matchedMainNumberCount, Boolean isBonusNumberMatched) {
+        this.matchedMainNumberCount = matchedMainNumberCount;
         this.isBonusNumberMatched = isBonusNumberMatched;
     }
 
-    public Integer getMatchedCount() {
-        return matchedCount;
+    public Integer getMatchedMainNumberCount() {
+        return matchedMainNumberCount;
     }
 
     public Boolean getBonusNumberMatched() {
@@ -26,11 +26,11 @@ public class MatchedResult {
         if (this == o) return true;
         if (!(o instanceof MatchedResult)) return false;
         MatchedResult that = (MatchedResult) o;
-        return Objects.equals(matchedCount, that.matchedCount) && Objects.equals(isBonusNumberMatched, that.isBonusNumberMatched);
+        return Objects.equals(matchedMainNumberCount, that.matchedMainNumberCount) && Objects.equals(isBonusNumberMatched, that.isBonusNumberMatched);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matchedCount, isBonusNumberMatched);
+        return Objects.hash(matchedMainNumberCount, isBonusNumberMatched);
     }
 }

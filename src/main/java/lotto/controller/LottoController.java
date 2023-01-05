@@ -54,7 +54,7 @@ public class LottoController {
         LottoStatistics lottoStatistics = new LottoStatistics();
 
         IntStream.range(0, lottoList.length())
-                .forEach(i -> lottoStatistics.put(LottoResult.match(winningNumbers.check(lottoList.get(i)))));
+                .forEach(i -> lottoStatistics.put(LottoResult.valueOf(winningNumbers.check(lottoList.get(i)))));
 
         outputView.printLottoStatistics(lottoStatistics);
 
