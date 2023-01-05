@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Parser {
 
-    public static Lotto parsingWinNumbers(final String input) {
+    public static Lotto parsingWinNumbers(final String input) throws Exception {
         List<LottoNumber> lottoNumberList = Arrays.stream(input.replace(" ", "")
                         .split(","))
                 .map(Integer::parseInt)
@@ -18,8 +18,8 @@ public class Parser {
         return new Lotto(lottoNumberList);
     }
 
-    public static LottoNumber parsingBonusNumber(final int input) {
-        return LottoNumber.getLottoNumber(input);
+    public static LottoNumber parsingBonusNumber(final String input) throws Exception {
+        return LottoNumber.getLottoNumber(Integer.parseInt(input));
     }
 
 }

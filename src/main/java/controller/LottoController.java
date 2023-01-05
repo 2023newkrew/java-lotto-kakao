@@ -1,7 +1,6 @@
 package controller;
 
 import dto.LottoWinnerDto;
-import exception.LottoNumberException;
 import model.Lotto;
 import model.LottoGame;
 import model.LottoNumber;
@@ -41,28 +40,32 @@ public class LottoController {
 
         try {
             return Parser.parsingWinNumbers(winNumbers);
-        } catch (LottoNumberException ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return inputWinNumbers();
         }
     }
 
-    private LottoNumber inputBonusNumber() {
+    private LottoNumber inputBonusNumber() { //로또 번호랑 보너스 번호가 같을 때.. 에러를 발생시켜야함
         view.printBonusNumberMessage();
         Scanner scanner = new Scanner(System.in);
-        int bonusNumber = scanner.nextInt();
-        scanner.nextLine(); //버퍼의 개행 비우기
+        String bonusNumber = scanner.nextLine();
 
         try {
             return Parser.parsingBonusNumber(bonusNumber);
-        } catch (LottoNumberException ex) {
-            System.out.println(ex.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return inputBonusNumber();
         }
     }
+
     private LottoWinnerDto inputLottoWinner(Lotto winNumbers, LottoNumber bonusNumber) {
-        return new LottoWinnerDto(winNumbers, bonusNumber);
+        try {
+            return new LottoWinnerDto(winNumbers, bonusNumber);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            bonusNumber = inputBonusNumber();
+            return inputLottoWinner(winNumbers, bonusNumber);
+        }
     }
-
-
 }
