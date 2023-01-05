@@ -12,7 +12,7 @@ public class Store {
         this.money = money;
     }
 
-    public int getLottoAmount() {
+    public int calculateTicketCount() {
         return money.getMoney() / LOTTO_PRICE;
     }
 }

@@ -23,7 +23,7 @@ public class LottoController {
         Money money = new Money(expenseInput);
         Store store = new Store(money);
 
-        int lottoTicketCount = store.getLottoAmount();
+        int lottoTicketCount = store.calculateTicketCount();
         outputView.printPurchaseResult(lottoTicketCount);
 
         return getUserLottos(lottoTicketCount);
