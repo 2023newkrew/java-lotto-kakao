@@ -26,7 +26,7 @@ public class LottoOutputTemplate {
     public void printLottoTickets(LottoCount lottoCount, LottoTickets lottoTickets) {
         Integer manualLottoCount = lottoCount.getManualLottoCount();
         Integer automaticLottoCount = lottoCount.getAutomaticLottoCount();
-        System.out.println("수동으로 " + manualLottoCount+ "장, 자동으로" + automaticLottoCount + "개를 구매했습니다.");
+        System.out.println("수동으로 " + manualLottoCount+ "장, 자동으로 " + automaticLottoCount + "장을 구매했습니다.");
         List<LottoTicket> lottoTicketList = lottoTickets.getLottoTickets();
         lottoTicketList.forEach(this::printLottoTicket);
     }
