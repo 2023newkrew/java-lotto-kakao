@@ -67,7 +67,7 @@ public class TotalResult {
     }
 
     public String getProfitMessage(double profit) {
-        String message = String.format("총 수익률은 %f입니다.", profit);
+        String message = String.format("총 수익률은 %.2f입니다.", profit);
         if (profit <= 1) {
             return message += "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
         }
