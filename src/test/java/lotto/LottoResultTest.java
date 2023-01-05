@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,18 +18,17 @@ class LottoResultTest {
     @MethodSource("lottoMatchTestGenerator")
     @DisplayName("1등, 2등, 5등 당첨 테스트")
     void lottoMatchTest(Lotto myLotto, LottoRank expectedRank) {
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = new LottoNumber(7);
-
         LottoResult result = new LottoResult(myLotto, winningLotto, bonusNumber);
         assertThat(result.getRank()).isEqualTo(expectedRank);
     }
 
     private static Stream<Arguments> lottoMatchTestGenerator() {
         return Stream.of(
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 6)), LottoRank.FIRST),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 7)), LottoRank.SECOND),
-                Arguments.of(new Lotto(List.of(1, 2, 3, 8, 9, 10)), LottoRank.FIFTH)
+                Arguments.of(new Lotto(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
+                Arguments.of(new Lotto(1, 2, 3, 4, 5, 7), LottoRank.SECOND),
+                Arguments.of(new Lotto(1, 2, 3, 8, 9, 10), LottoRank.FIFTH)
         );
     }
 

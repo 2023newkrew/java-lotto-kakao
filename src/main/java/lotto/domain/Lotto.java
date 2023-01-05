@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,10 @@ public class Lotto {
                 .map(LottoNumber::new)
                 .sorted(LottoNumber::compare)
                 .collect(Collectors.toList());
+    }
+
+    public Lotto(int... nums) {
+        this(Arrays.stream(nums).boxed().collect(Collectors.toList()));
     }
 
     public int compare(Lotto other) {
