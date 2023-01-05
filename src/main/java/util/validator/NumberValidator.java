@@ -2,7 +2,7 @@ package util.validator;
 
 public class NumberValidator {
 
-    static void validateNumberFormat(String input) {
+    private static void validateNumberFormat(String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
