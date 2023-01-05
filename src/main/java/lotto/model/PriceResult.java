@@ -1,20 +1,20 @@
 package lotto.model;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class PriceResult {
-    private final HashMap<Price, Integer> result;
+    private final EnumMap<Price, Integer> result;
 
     public PriceResult() {
-        result = new HashMap<>();
+        result = new EnumMap<>(Price.class);
         for (Price price : Price.values()) {
-            if (price!= Price.NOTHING) {
+            if (price != Price.NOTHING) {
                 result.put(price, 0);
             }
         }
     }
 
-    public HashMap<Price, Integer> getResult() {
+    public EnumMap<Price, Integer> getResult() {
         return result;
     }
 
