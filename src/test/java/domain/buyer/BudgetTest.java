@@ -19,4 +19,13 @@ public class BudgetTest {
 
         Assertions.assertThat(budget.getAbleLotteryCount(1000)).isEqualTo(12);
     }
+
+    @DisplayName("price가 양수가 아니면 오류를 반환한다")
+    @Test
+    void priceExceptionTest() {
+        Budget budget = new Budget(12000);
+
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> budget.getAbleLotteryCount(-1000));
+        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> budget.getAbleLotteryCount(0));
+    }
 }
