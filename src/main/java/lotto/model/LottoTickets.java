@@ -2,12 +2,21 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTickets {
-    List<LottoTicket> tickets;
+    private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
         this.tickets = new ArrayList<>(tickets);
+    }
+
+    public LottoTickets(LottoTicketsDto ticketsDto) {
+        this.tickets = ticketsDto.getTickets()
+                .stream().map(
+                        LottoTicket::new
+                ).collect(Collectors.toList());
     }
 
     public static LottoTickets automaticallyOf(int count) {
@@ -19,15 +28,23 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
+    public void addAll(LottoTickets tickets) {
+        this.tickets.addAll(tickets.stream().collect(Collectors.toList()));
+    }
+
     public Result getResults(WinningNumbers winningNumbers) {
         Result result = new Result();
         for (LottoTicket ticket : tickets) {
-            result.addUp(winningNumbers.matchValues(ticket));
+            result.addUp(winningNumbers.match(ticket));
         }
         return result;
     }
 
-    public List<LottoTicket> toTicketList() {
-        return new ArrayList<>(tickets);
+    public boolean contains(LottoTicket ticket) {
+        return tickets.contains(ticket);
+    }
+
+    public Stream<LottoTicket> stream() {
+        return tickets.stream();
     }
 }

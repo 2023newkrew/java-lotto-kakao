@@ -11,7 +11,7 @@ public class LottoTicketAutoGenerator {
     private LottoTicketAutoGenerator() {
         numberDomain = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
-            numberDomain.add(new LottoNumber(i));
+            numberDomain.add(LottoNumber.valueOf(i));
         }
     }
 

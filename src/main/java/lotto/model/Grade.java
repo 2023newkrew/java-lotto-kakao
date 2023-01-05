@@ -18,8 +18,8 @@ public enum Grade {
         if (count == 3) return THREE;
         if (count == 4) return FOUR;
         if (count == 5) return FIVE;
-        if (count == 6) return SIX;
         if (count == 15) return FIVE_BONUS;
+        if (count == 6) return SIX;
         return ZERO;
     }
 

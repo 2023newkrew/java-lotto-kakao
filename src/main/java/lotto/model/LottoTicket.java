@@ -1,8 +1,9 @@
 package lotto.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTicket {
     public static final int NUMBERS_SIZE = 6;
@@ -14,15 +15,24 @@ public class LottoTicket {
         this.numbers = new ArrayList<>(numbers);
     }
 
+    public LottoTicket(LottoTicketDto ticketDto) {
+        List<LottoNumber> numbers = ticketDto.getTicket()
+                .stream().map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+        validateValuesCount(numbers);
+        validateDistinction(numbers);
+        this.numbers = numbers;
+    }
+
     private void validateValuesCount(List<LottoNumber> numbers) {
         if (numbers.size() != NUMBERS_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다");
         }
     }
 
     private void validateDistinction(List<LottoNumber> numbers) {
         if (numbers.stream().distinct().count() != NUMBERS_SIZE) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다");
         }
     }
 
@@ -30,17 +40,8 @@ public class LottoTicket {
         return numbers.contains(bonusNumber);
     }
 
-    public List<LottoNumber> getNumbers() {
-        return new ArrayList<>(numbers);
-    }
-
-    public List<Integer> toIntegerList() {
-        List<Integer> values = new ArrayList<>();
-        for (LottoNumber number : numbers) {
-            values.add((number.getValue()));
-        }
-        Collections.sort(values);
-        return values;
+    public Stream<LottoNumber> stream() {
+        return numbers.stream();
     }
 
     @Override
