@@ -21,7 +21,7 @@ public class InputView {
 
     public int inputUserAmount(){
         System.out.println(INPUT_AMOUNT);
-        return Integer.parseInt(scanner.nextLine());
+        return inputInteger();
     }
 
     public String inputWinNumber(){
@@ -31,12 +31,12 @@ public class InputView {
 
     public int inputBonusNumber(){
         System.out.println(INPUT_BONUS_BALL);
-        return Integer.parseInt(scanner.nextLine());
+        return inputInteger();
     }
 
     private int inputManualCount(int amount){
         System.out.println(INPUT_MANUAL_COUNT);
-        int manualCount = Integer.parseInt(scanner.nextLine());
+        int manualCount = inputInteger();
         if(manualCount * 1000 > amount) {
             throw new IllegalArgumentException("수동으로 구매할 수 있는 로또 수는 구입 금액보다 적어야 합니다.");
         }
@@ -73,5 +73,14 @@ public class InputView {
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .toArray(Integer[]::new);
+    }
+
+    // 입력이 정수가 아니라면 에러 처리
+    private int inputInteger(){
+        try{
+            return Integer.parseInt(scanner.nextLine());
+        } catch(Exception e){
+            throw new IllegalArgumentException("입력은 정수값이어야 합니다.");
+        }
     }
 }
