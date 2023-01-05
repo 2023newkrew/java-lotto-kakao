@@ -70,6 +70,7 @@ public class Lotto {
     public String toString() {
         return "[" +
                 numbers.stream()
+                        .sorted()
                         .map(String::valueOf)
                         .collect(Collectors.joining(", ")) +
                 ']';

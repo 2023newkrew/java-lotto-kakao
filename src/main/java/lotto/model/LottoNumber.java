@@ -5,7 +5,7 @@ import lotto.model.errors.LottoOutOfRangeException;
 import java.util.Comparator;
 import java.util.Objects;
 
-public final class LottoNumber implements Comparator<LottoNumber> {
+public final class LottoNumber implements Comparator<LottoNumber>, Comparable<LottoNumber> {
 
     public static final Integer MIN_RANGE = 1;
 
@@ -46,6 +46,11 @@ public final class LottoNumber implements Comparator<LottoNumber> {
     @Override
     public int compare(LottoNumber o1, LottoNumber o2) {
         return o1.number - o2.number;
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return number - o.number;
     }
 
     @Override
