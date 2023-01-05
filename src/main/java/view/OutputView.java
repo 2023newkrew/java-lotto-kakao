@@ -8,14 +8,14 @@ import java.util.List;
 
 public class OutputView {
 
-    public void printPurchasedLottos(List<Lotto> lottos) {
+    public static void printPurchasedLottos(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
         for(Lotto lotto : lottos) {
             System.out.println(lotto.toString());
         }
     }
 
-    public void printLottoStatistics(LottoResult lottoResult) {
+    public static void printLottoStatistics(LottoResult lottoResult) {
         for (Rank place : Rank.values()) {
             System.out.print(place.toString());
             System.out.print(" - ");
