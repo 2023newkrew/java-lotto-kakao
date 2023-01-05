@@ -28,3 +28,24 @@
 * 구매 금액의 상한 제한은 LONG_MAX 이다.
 * 구매 금액의 하한 제한은 0원 초과이다.
 
+1. Money 
+2. LottoNumber 
+4. LottoNumbers
+3. LottoTicket
+7. LottoWallet
+  - long getPurchasableCount(Money price)
+  - void withdraw(Money)
+  - void addLotto(LottoTicket)
+  - List<List<Integer>> getLottoNumbers()
+  - void settleLotto(Money)
+  - BigDecimal getProfitRate()
+- LottoMachine
+  - Lotto issueAutomatically()
+8. LottoStore
+  - void buyAutomatically(Wallet)
+5. LottoRanking
+6. LottoStats
+- WinningNumbers
+  - LottoRanking judge(Lotto)
+9. LottoCompany
+  - LottoStats analyze(LottoTicket)
