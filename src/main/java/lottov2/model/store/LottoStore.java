@@ -14,15 +14,11 @@ public class LottoStore {
     private final Money price;
 
     public static LottoStore create(Money price) {
-        if (isNullOrZero(price)) {
+        if (Money.isNullOrZero(price)) {
             throw new IllegalArgumentException("로또 가격은 0원일 수 없습니다.");
         }
 
         return new LottoStore(price);
-    }
-
-    public static boolean isNullOrZero(Money price) {
-        return Objects.isNull(price) || price.equals(Money.ZERO);
     }
 
     public LottoStore(Money price) {

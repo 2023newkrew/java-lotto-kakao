@@ -26,6 +26,10 @@ public class Money {
         this.value = value;
     }
 
+    public static boolean isNullOrZero(Money money){
+        return Objects.isNull(money) || money.equals(ZERO);
+    }
+
     public BigDecimal bigDecimal() {
         return value;
     }
@@ -43,11 +47,15 @@ public class Money {
     }
 
     public BigDecimal divide(Money other) {
+        return divide(other, 0, RoundingMode.DOWN);
+    }
+
+    public BigDecimal divide(Money other, int scale, RoundingMode roundingMode) {
         if (other.equals(Money.ZERO)) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
 
-        return value.divide(other.value, RoundingMode.DOWN);
+        return value.divide(other.value, scale, roundingMode);
     }
 
     @Override
