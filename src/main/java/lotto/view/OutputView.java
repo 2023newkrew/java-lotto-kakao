@@ -32,8 +32,8 @@ public class OutputView {
                 );
     }
 
-    public void printRateOfProfit(LottoStatistics lottoStatistics, Integer inputPrice) {
-        System.out.printf("총 수익률은 %.2f입니다.\n", lottoStatistics.getRateOfProfit(inputPrice));
+    public void printRateOfProfit(LottoStatistics lottoStatistics, Integer totalPrice) {
+        System.out.printf("총 수익률은 %.2f입니다.\n", lottoStatistics.getRateOfProfit(totalPrice));
     }
 
 }
