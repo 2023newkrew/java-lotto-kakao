@@ -7,12 +7,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class LottoService {
-    private static final Integer LOTTO_PRICE = 1000;
+import static lotto.config.LottoConfig.*;
 
-    public void purchaseLotto(Integer purchaseAmount){
-        for (int count = 0; count < purchaseAmount / LOTTO_PRICE; count++) {
-            LottoRepository.saveLottoTicket(new LottoTicket());
+public class LottoService {
+    private final LottoMachine lottoMachine;
+
+    public LottoService(){
+        this.lottoMachine = new LottoMachine();
+    }
+    public void purchaseRandomLotto(Integer purchaseAmount, Integer numberOfManualLotto){
+        int numberOfRandomLotto = purchaseAmount / LOTTO_PRICE - numberOfManualLotto;
+
+        for (int count = 0; count < numberOfRandomLotto; count++) {
+            LottoRepository.saveLottoTicket(
+                    lottoMachine.createRandomLottoTicket()
+            );
+        }
+    }
+
+    public void purchaseManualLotto(List<List<Integer>> inputLottoNumbers){
+        for(List<Integer> lottoNumbers : inputLottoNumbers){
+            LottoRepository.saveLottoTicket(
+                    lottoMachine.createManualLottoTicket(lottoNumbers)
+            );
         }
     }
 
