@@ -9,6 +9,7 @@ public class InputView {
     public static int getPaidPrice() {
         return Integer.parseInt(scanner.nextLine());
     }
+
     public static int getManualLottoCount() {
         return Integer.parseInt(scanner.nextLine());
     }

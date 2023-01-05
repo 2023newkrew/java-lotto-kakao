@@ -10,20 +10,21 @@ public class Lottos {
     public Lottos() {
     }
 
-    public void addLottoAutomatically(int count){
+    public void addLottoAutomatically(int count) {
         for (int i = 0; i < count; i++) {
             Lotto lotto = new Lotto();
             purchasedLottos.add(lotto);
         }
     }
 
-    public void addLottoManually(Lotto lotto){
+    public void addLottoManually(Lotto lotto) {
         purchasedLottos.add(lotto);
     }
 
     public void add(String input) {
         purchasedLottos.add(new Lotto(input));
     }
+
     public int getSize() {
         return purchasedLottos.size();
     }

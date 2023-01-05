@@ -15,7 +15,7 @@ public class Money {
         return paidMoney;
     }
 
-    public int getLottoCount(){
+    public int getLottoCount() {
         return paidMoney / Constants.PRICE;
     }
 }
