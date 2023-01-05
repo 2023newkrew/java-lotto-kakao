@@ -1,6 +1,7 @@
 package buyer;
 
 import lotto.Lotto;
+import lotto.WinningLotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +22,14 @@ public class Buyer {
     public void buyLottery(int lotteryPrice, Lotto lotto) {
         this.budget = this.budget.decreaseMoney(Money.valueOf(lotteryPrice));
         this.lottos.add(lotto);
+    }
+
+    public BuyerResult getResult(WinningLotto winningLotto) {
+        BuyerResult buyerResult = new BuyerResult();
+        for (Lotto lotto : lottos) {
+            buyerResult.matches(winningLotto.getRank(lotto));
+        }
+        return buyerResult;
     }
 
     public List<Lotto> getLottos() {

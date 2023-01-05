@@ -35,14 +35,6 @@ public class WinningLotto {
         return lotto.containsLottoNumber(bonusNumber);
     }
 
-    public BuyerResult getResult(List<Lotto> lotteries) {
-        BuyerResult buyerResult = new BuyerResult();
-        for (Lotto lotto : lotteries) {
-            buyerResult.matches(getRank(lotto));
-        }
-        return buyerResult;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof WinningLotto)) return false;
