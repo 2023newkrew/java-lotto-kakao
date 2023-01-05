@@ -55,27 +55,35 @@ public class Main {
     }
 
     private static void buyManualLottoTickets(int manualLottoTicketsCount) {
+        // 입력한 갯수만큼 수동 로또 구매를 할 수 있는 충분한 돈이 있는지 확인
         seller.checkHasEnoughMoneyForManualLottoTickets(manualLottoTicketsCount, player.getCurrentMoney());
+        // 구매 진행
         player.buyManualLottoTickets(seller, getManualLottoTickets(manualLottoTicketsCount));
     }
 
     private static List<LottoTicket> getManualLottoTickets(int manualLottoTicketsCount) {
         try {
-            List<LottoTicket> lottoTickets = new ArrayList<>();
             lottoView.printManualLottoTicketsInputMessage();
-            for (int i = 0; i < manualLottoTicketsCount; i++) {
-                String manualLottoTicketsInput = lottoView.getManualLottoTickets();
-                Set<LottoBall> lottoBalls = Arrays.stream(manualLottoTicketsInput.split(","))
-                        .map(number -> Integer.parseInt(number.trim()))
-                        .map(number -> new LottoBall(number))
-                        .collect(Collectors.toSet());
-                lottoTickets.add(new LottoTicket(lottoBalls));
-            }
-            return lottoTickets;
+            return getManualLottoTicketsInput(manualLottoTicketsCount);
         } catch (IllegalArgumentException e) {
             lottoView.printErrorMessage(e.getMessage());
             return getManualLottoTickets(manualLottoTicketsCount);
         }
+    }
+
+    private static List<LottoTicket> getManualLottoTicketsInput(int manualLottoTicketsCount) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+
+        for (int i = 0; i < manualLottoTicketsCount; i++) {
+            String input = lottoView.getManualLottoTickets();
+            Set<LottoBall> lottoBalls = Arrays.stream(input.split(","))
+                    .map(number -> Integer.parseInt(number.trim()))
+                    .map(number -> new LottoBall(number))
+                    .collect(Collectors.toSet());
+            lottoTickets.add(new LottoTicket(lottoBalls));
+        }
+
+        return lottoTickets;
     }
 
     private static WinnerCombination getWinnerCombination() {
