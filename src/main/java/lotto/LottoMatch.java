@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Objects;
+
 public class LottoMatch {
     private final int matchCount;
     private final Boolean isBonusMatch;
@@ -20,5 +22,10 @@ public class LottoMatch {
         LottoMatch cp = (LottoMatch) obj;
 
         return (this.matchCount == cp.matchCount && this.isBonusMatch == cp.isBonusMatch);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matchCount, isBonusMatch);
     }
 }

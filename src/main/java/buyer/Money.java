@@ -1,6 +1,7 @@
 package buyer;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Money implements Comparable<Money>{
     private final BigDecimal money;
@@ -38,6 +39,11 @@ public class Money implements Comparable<Money>{
         Money cp = (Money) obj;
 
         return this.money.equals(cp.money);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(money);
     }
 
     @Override

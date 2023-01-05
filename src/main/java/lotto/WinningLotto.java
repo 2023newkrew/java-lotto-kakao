@@ -4,6 +4,7 @@ import buyer.BuyerResult;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
@@ -42,5 +43,10 @@ public class WinningLotto {
         WinningLotto cp = (WinningLotto) obj;
 
         return this.winningNumbers.equals(cp.winningNumbers) && this.bonusNumber.equals(cp.bonusNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningNumbers, bonusNumber);
     }
 }

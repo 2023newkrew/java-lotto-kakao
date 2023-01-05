@@ -1,9 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -62,5 +59,10 @@ public class Lotto {
         Lotto cp = (Lotto) obj;
 
         return this.numbers.equals(cp.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

@@ -5,6 +5,7 @@ import lotto.Rank;
 
 import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.Objects;
 
 public class BuyerResult {
     private final EnumMap<Rank, Integer> result;
@@ -41,5 +42,10 @@ public class BuyerResult {
         BuyerResult cp = (BuyerResult) obj;
 
         return this.result.equals(cp.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(result);
     }
 }
