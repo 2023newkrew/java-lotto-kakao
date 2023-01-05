@@ -9,11 +9,6 @@ public class LottoResult {
         this.bonus = myLotto.hasBonus(bonusNumber);
     }
 
-    public LottoResult(int count, boolean bonus) {
-        this.count = count;
-        this.bonus = bonus;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if(obj == null)

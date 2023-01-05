@@ -18,25 +18,26 @@ public class LottoResultTest {
         Lotto myLotto = new Lotto(1,2,3,4,5,6);
         Lotto winLotto = new Lotto(3,4,5,6,7,8);
         LottoNumber bonus = new LottoNumber(1);
-        assertThat(new LottoResult(myLotto, winLotto, bonus)).isEqualTo(new LottoResult(4, true));
+        assertThat(myLotto.compare(winLotto)).isEqualTo(4);
+        assertThat(myLotto.hasBonus(bonus)).isTrue();
     }
 
     @Test
     @DisplayName("6개 일치하면 1등 당첨이다.")
     void lottoResult2() {
-        assertThat(new LottoResult(6, true).getRank()).isEqualTo(LottoRank.FIRST);
-        assertThat(new LottoResult(6, false).getRank()).isEqualTo(LottoRank.FIRST);
+        assertThat(LottoRank.getRank(6, true)).isEqualTo(LottoRank.FIRST);
+        assertThat(LottoRank.getRank(6, false)).isEqualTo(LottoRank.FIRST);
     }
 
     @Test
     @DisplayName("5개 일치, 보너스 일치하면 2등 당첨이다.")
     void lottoResult3() {
-        assertThat(new LottoResult(5, true).getRank()).isEqualTo(LottoRank.SECOND);
+        assertThat(LottoRank.getRank(5, true)).isEqualTo(LottoRank.SECOND);
     }
 
     @Test
     @DisplayName("2개 이하 일치하면 꽝이다")
     void lottoResult4() {
-        assertThat(new LottoResult(2, true).getRank()).isEqualTo(LottoRank.FAIL);
+        assertThat(LottoRank.getRank(2, true)).isEqualTo(LottoRank.FAIL);
     }
 }
