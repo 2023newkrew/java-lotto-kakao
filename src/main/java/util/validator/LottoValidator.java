@@ -31,7 +31,7 @@ public class LottoValidator {
         inputs.stream()
                 .forEach(input -> distinctNumbers.add(input));
         if (distinctNumbers.size() != Constants.LENGTH) {
-            throw new DuplicateNumberException("입력된 로또 번호의 길이가 유효하지 않습니다.");
+            throw new DuplicateNumberException("입력된 로또 번호 중 중복된 숫자들이 존재합니다.");
         }
     }
 }
