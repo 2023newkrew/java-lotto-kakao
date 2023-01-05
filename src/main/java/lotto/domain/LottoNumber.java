@@ -14,7 +14,7 @@ public class LottoNumber {
         return this.number;
     }
 
-    public void rangeCheck(){
+    private void rangeCheck(){
         if(this.number < LOTTO_LOWER_BOUND || this.number > LOTTO_UPPER_BOUND) {
             throw new IllegalArgumentException("로또 번호가 1 ~ 45 사이의 숫자여야 합니다.");
         }

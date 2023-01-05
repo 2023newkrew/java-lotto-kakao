@@ -21,7 +21,11 @@ public class LottoTicket {
         lottoNumberDuplicateCheck();
     }
 
-    public ArrayList<LottoNumber> createRandomNumbers(){
+    public List<LottoNumber> getLottoNumbers() {
+        return this.lottoNumbers;
+    }
+
+    private ArrayList<LottoNumber> createRandomNumbers(){
         List<Integer> numList = IntStream.range(1, LOTTO_UPPER_BOUND + 1)
                 .boxed()
                 .collect(Collectors.toList());
@@ -29,10 +33,6 @@ public class LottoTicket {
         numList = numList.subList(0, LOTTO_TICKET_SIZE);
         Collections.sort(numList);
         return numList.stream().map(LottoNumber::new).collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
     }
 
     private void lottoNumberCountCheck() {

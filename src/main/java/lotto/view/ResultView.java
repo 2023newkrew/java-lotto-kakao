@@ -13,7 +13,11 @@ import static lotto.utils.LottoMessage.*;
 
 public class ResultView {
 
-    public void printPurchaseCount(int amount){
+    public void printPurchaseCount(int manualCount, int amount){
+        if (manualCount > 0){
+            System.out.print("수동으로" + manualCount + "개, ");
+            System.out.print("자동으로 ");
+        }
         System.out.println(amount/MIN_PURCHASE_PRICE + RESULT_PURCHASE_COUNT.getMessage());
     }
 
