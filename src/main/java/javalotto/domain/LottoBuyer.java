@@ -1,11 +1,12 @@
 package javalotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
 import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.*;
 
 public class LottoBuyer {
     private final PurchaseAmount purchaseAmount;
@@ -32,26 +33,15 @@ public class LottoBuyer {
     }
 
     public LottoResult getLottoResult(WinningLotto winningLotto) {
-        Map<Rank, Integer> rankCountMap = initRankCountMap();
-        setRankCountMapValues(rankCountMap, winningLotto);
-
-        return LottoResult.of(rankCountMap);
-    }
-
-    private Map<Rank, Integer> initRankCountMap() {
-        Map<Rank, Integer> rankCountMap = new HashMap<>();
-
-        stream(Rank.values())
-                .forEach(rank -> rankCountMap.put(rank, 0));
-
-        return rankCountMap;
-    }
-
-    private void setRankCountMapValues(Map<Rank, Integer> rankCountMap, WinningLotto winningLotto) {
-        lottos.getLottos().stream()
+        Map<Rank, Long> rankCountMap = lottos.getLottos().stream()
                 .map(winningLotto::getRank)
                 .flatMap(Optional::stream)
-                .forEach(rank -> rankCountMap.replace(rank, rankCountMap.get(rank) + 1));
+                .collect(groupingBy(Function.identity(), counting()));
+
+        stream(Rank.values())
+                .forEach(rank -> rankCountMap.putIfAbsent(rank, 0L));
+
+        return LottoResult.from(rankCountMap);
     }
 
     public double getRateOfReturn(LottoResult lottoResult) {

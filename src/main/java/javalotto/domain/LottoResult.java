@@ -5,28 +5,28 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoResult {
-    private final Map<Rank, Integer> lottoResultMap;
+    private final Map<Rank, Long> lottoResultMap;
 
-    private LottoResult(Map<Rank, Integer> lottoResultMap) {
+    private LottoResult(Map<Rank, Long> lottoResultMap) {
         this.lottoResultMap = lottoResultMap;
     }
 
-    public static LottoResult of(Map<Rank, Integer> lottoResultMap) {
+    public static LottoResult from(Map<Rank, Long> lottoResultMap) {
         return new LottoResult(lottoResultMap);
     }
 
-    public int getTotalPrizeAmount() {
+    public long getTotalPrizeAmount() {
         return lottoResultMap.entrySet().stream()
                 .map(this::prizeSumOfEntry)
-                .mapToInt(Integer::intValue)
+                .mapToLong(Long::longValue)
                 .sum();
     }
 
-    private int prizeSumOfEntry(Map.Entry<Rank, Integer> entry) {
+    private long prizeSumOfEntry(Map.Entry<Rank, Long> entry) {
         return entry.getKey().getPrize() * entry.getValue();
     }
 
-    private static String entryToString(Map.Entry<Rank, Integer> entry) {
+    private static String entryToString(Map.Entry<Rank, Long> entry) {
         return entry.getKey() + "- " + entry.getValue() + "개";
     }
 
