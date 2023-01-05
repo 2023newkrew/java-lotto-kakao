@@ -27,8 +27,9 @@ public class OutputView {
         console.printOutput("수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public void printNumberOfLottery(Integer numberOfLottery) {
-        console.printOutput(numberOfLottery.toString() + "개를 구매했습니다.");
+    public void printNumberOfLottery(Integer numberOfLottery, Integer manualCount) {
+        int autoCount = numberOfLottery - manualCount;
+        console.printOutput("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구매했습니다.");
     }
 
     public void printLotteries(List<Lottery> lotteries) {

@@ -54,13 +54,12 @@ public class LotteryController {
     }
 
     private Integer getNumberOfLotteries(int budget) {
-        Integer numberOfLotteries = budget / LOTTERY_PRICE;
-        outputView.printNumberOfLottery(numberOfLotteries);
-        return numberOfLotteries;
+        return budget / LOTTERY_PRICE;
     }
 
     private List<Lottery> createLotteries(int numberOfLottery, int manualCount) {
         List<Lottery> lotteries = getManualLotteries(manualCount);
+        outputView.printNumberOfLottery(numberOfLottery, manualCount);
         lotteries.addAll(LotteryGenerator.createLotteries(numberOfLottery - manualCount));
         outputView.printLotteries(lotteries);
         return lotteries;
