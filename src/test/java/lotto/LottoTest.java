@@ -23,7 +23,7 @@ public class LottoTest {
     @DisplayName("6개의 숫자에 중복이 없어야 한다.")
     void lottoNumberDupTest() {
         LottoRandom lottoRandom = new LottoRandom();
-        ArrayList<Integer> lottoNumbers = lottoRandom.createRandomNumbers(); // 자동으로 생성되는 로또 번호들
+        List<Integer> lottoNumbers = lottoRandom.createRandomNumbers(); // 자동으로 생성되는 로또 번호들
 
         // 숫자 중복이 없는지 확인
         Set<Integer> dupCheck = new HashSet<Integer>();

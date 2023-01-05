@@ -23,12 +23,12 @@ public class LottoCalculatorTest {
     void lottoCorrectNumberTest(){
         // 당첨 번호
         LottoWinnerTicket winTicket = new LottoWinnerTicket(
-                new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7);
+                new LottoNumber(List.of(1, 2, 3, 4, 5, 6)), 7);
 
         // 사용자가 뽑은 로또 번호들
-        LottoNumber userTicket1 = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 9, 10, 11)));
-        LottoNumber userTicket2 = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 9, 11)));
-        LottoNumber userTicket3 = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 11)));
+        LottoNumber userTicket1 = new LottoNumber(List.of(1, 2, 3, 9, 10, 11));
+        LottoNumber userTicket2 = new LottoNumber(List.of(1, 2, 3, 4, 9, 11));
+        LottoNumber userTicket3 = new LottoNumber(List.of(1, 2, 3, 4, 5, 11));
 
 
         assertThat(winTicket.checkSameCount(userTicket1)).isEqualTo(3);
@@ -40,12 +40,12 @@ public class LottoCalculatorTest {
     @DisplayName("보너스 볼과 일치하는 볼이 있는지 확인할 수 있어야 한다.")
     void lottoBonusCheckTest(){
         LottoWinnerTicket winTicket = new LottoWinnerTicket(
-                new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 22);
+                new LottoNumber(List.of(1, 2, 3, 4, 5, 6)), 22);
 
-        LottoNumber userTicket1 = new LottoNumber(new ArrayList<>(List.of(1, 3, 4, 5, 6, 22)));
+        LottoNumber userTicket1 = new LottoNumber(List.of(1, 3, 4, 5, 6, 22));
         Assertions.assertThat(winTicket.isBonusNumber(userTicket1, 5)).isTrue();
 
-        LottoNumber userTicket2 = new LottoNumber(new ArrayList<>(List.of(1, 3, 4, 5, 6, 23)));
+        LottoNumber userTicket2 = new LottoNumber(List.of(1, 3, 4, 5, 6, 23));
         Assertions.assertThat(winTicket.isBonusNumber(userTicket2, 5)).isFalse();
     }
 
@@ -56,7 +56,7 @@ public class LottoCalculatorTest {
         Integer[] splitNumbers = changeToArray(userInput);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoNumber(new ArrayList<>(Arrays.asList(splitNumbers))));
+                .isThrownBy(() -> new LottoNumber(Arrays.asList(splitNumbers)));
     }
 
     @ParameterizedTest
@@ -66,7 +66,7 @@ public class LottoCalculatorTest {
         Integer[] splitNumbers = changeToArray(userInput);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoNumber(new ArrayList<>(Arrays.asList(splitNumbers))));
+                .isThrownBy(() -> new LottoNumber(Arrays.asList(splitNumbers)));
     }
 
     @ParameterizedTest
@@ -76,14 +76,14 @@ public class LottoCalculatorTest {
         Integer[] splitNumbers = changeToArray(userInput);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoNumber(new ArrayList<>(Arrays.asList(splitNumbers))));
+                .isThrownBy(() -> new LottoNumber(Arrays.asList(splitNumbers)));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     @DisplayName("보너스 볼이 1 ~ 45 사이의 정수가 아니라면, 예외를 발생한다.")
     void lottoBonusNumberTest(int bonus){
-        LottoNumber lottoNumber = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+        LottoNumber lottoNumber = new LottoNumber(List.of(1, 2, 3, 4, 5, 6));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoWinnerTicket(lottoNumber, bonus));

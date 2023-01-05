@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicket {
-    private final ArrayList<LottoNumber> ticket;
+    private final List<LottoNumber> ticket;
     private final LottoRandom lottoRandom;
     private final int purchaseCount;
 
@@ -33,7 +33,7 @@ public class LottoTicket {
         return ticket.size();
     }
 
-    public ArrayList<LottoNumber> getTicket(){
+    public List<LottoNumber> getTicket(){
         return this.ticket;
     }
 

@@ -4,7 +4,6 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.utils.LottoRank;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +44,7 @@ public class ResultView {
         System.out.println(RESULT_GOOD.getMessage());
     }
     public void printLottoTickets(LottoTicket lottoTicket) {
-        ArrayList<LottoNumber> tickets = lottoTicket.getTicket();
+        List<LottoNumber> tickets = lottoTicket.getTicket();
         for(LottoNumber ticket : tickets){
             printEachTicket(ticket.getLottoNumbers());
         }

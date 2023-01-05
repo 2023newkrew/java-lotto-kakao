@@ -4,6 +4,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinnerTicket;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -57,12 +58,12 @@ public class InputView {
     public LottoWinnerTicket changeToWinnerTicket(String userInput, int bonus){
         Integer[] numbers = stringToArray(userInput);
         return new LottoWinnerTicket(
-                new LottoNumber(new ArrayList<>(List.of(numbers))), bonus);
+                new LottoNumber(Arrays.asList(numbers)), bonus);
     }
 
     public LottoNumber changeToLottoNumber(String userInput){
         Integer[] numbers = stringToArray(userInput);
-        return new LottoNumber(new ArrayList<>(List.of(numbers)));
+        return new LottoNumber(Arrays.asList(numbers));
     }
 
     private Integer[] stringToArray(String userInput){
