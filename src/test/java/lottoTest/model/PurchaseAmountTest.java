@@ -39,9 +39,8 @@ public class PurchaseAmountTest {
     public void lackOfMoneyTest() {
         //given
         Integer lottoPrice = LottoService.getLottoPrice();
-        PurchaseAmount purchaseAmount = new PurchaseAmount(String.valueOf(lottoPrice - 1));
         //when & then
-        assertThatThrownBy(() -> purchaseAmount.getLottoTicketCount(lottoPrice))
+        assertThatThrownBy(() -> new PurchaseAmount(String.valueOf(lottoPrice - 1)))
                 .isInstanceOf(LottoException.class)
                 .hasMessage(ErrorCode.LACK_OF_MONEY.getMessage());
     }

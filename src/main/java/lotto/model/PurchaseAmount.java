@@ -2,6 +2,7 @@ package lotto.model;
 
 import lotto.exception.ErrorCode;
 import lotto.exception.LottoException;
+import lotto.service.LottoService;
 import lotto.util.StringUtil;
 
 public class PurchaseAmount {
@@ -26,13 +27,13 @@ public class PurchaseAmount {
         if (purchaseAmount < 0) {
             throw new LottoException(ErrorCode.INVALID_PURCHASE_AMOUNT);
         }
+        if (purchaseAmount < LottoService.getLottoPrice()) {
+            throw new LottoException(ErrorCode.LACK_OF_MONEY);
+        }
     }
 
     public int getLottoTicketCount(Integer lottoPrice) {
         int lottoTicketCount = purchaseAmount / lottoPrice;
-        if(lottoTicketCount <= 0) {
-            throw new LottoException(ErrorCode.LACK_OF_MONEY);
-        }
         return lottoTicketCount;
     }
 
