@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.LottoConfig.LOTTO_PRICE;
+
 import java.util.Collections;
 import java.util.List;
 import lotto.dto.GameResultDto;
@@ -18,10 +20,10 @@ public class LottoGame {
         return Collections.unmodifiableList(lottos);
     }
 
-    public GameResultDto getResult() {
+    public GameResultDto getGameResult() {
         LottoGradeCounter lottoGradeCounter = getLottoGradeCounter();
         float rateOfReturn = (float) lottoGradeCounter.getTotalPrice() /
-                (lottos.size() * LottoGenerator.LOTTO_PRICE);
+                (lottos.size() * LOTTO_PRICE);
         return new GameResultDto(lottoGradeCounter.getLottoGradeCountResults(), rateOfReturn);
     }
 
