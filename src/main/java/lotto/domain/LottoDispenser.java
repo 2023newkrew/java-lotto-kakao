@@ -6,7 +6,7 @@ import lotto.domain.strategy.NumberSelectStrategy;
 
 public class LottoDispenser {
 
-    private final LottoDispenserSetting lottoDispenserSettingSetting;
+    private final LottoDispenserSetting lottoDispenserSetting;
 
     private int leftoverMoney = 0;
 
@@ -14,8 +14,8 @@ public class LottoDispenser {
         this(new LottoDispenserSetting(lottoSetting, numberSelectStrategy));
     }
 
-    public LottoDispenser(LottoDispenserSetting lottoDispenserSettingSetting) {
-        this.lottoDispenserSettingSetting = lottoDispenserSettingSetting;
+    public LottoDispenser(LottoDispenserSetting lottoDispenserSetting) {
+        this.lottoDispenserSetting = lottoDispenserSetting;
     }
 
     public LottoTicketList getLottoTicketList(int money) {
@@ -29,9 +29,9 @@ public class LottoDispenser {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
 
         for (int i = 0; i < quantity
-                && !lottoDispenserSettingSetting.getNumberSelectStrategy().isEnd(); i++) {
+                && !lottoDispenserSetting.getNumberSelectStrategy().isEnd(); i++) {
             LottoTicket lottoTicket = new LottoTicket(
-                    lottoDispenserSettingSetting.getNumberSelectStrategy().select());
+                    lottoDispenserSetting.getNumberSelectStrategy().select());
             lottoTicketList.add(lottoTicket);
         }
 
@@ -39,12 +39,12 @@ public class LottoDispenser {
     }
 
     private int calculateTicketQuantity(int money) {
-        return money / lottoDispenserSettingSetting.getLottoSetting().getLottoTicketPrice();
+        return money / lottoDispenserSetting.getLottoSetting().getLottoTicketPrice();
     }
 
     private void calculateLeftoverMoney(int money, int quantity) {
         leftoverMoney += money - quantity
-                * lottoDispenserSettingSetting.getLottoSetting().getLottoTicketPrice();
+                * lottoDispenserSetting.getLottoSetting().getLottoTicketPrice();
     }
 
     public int receiveLeftoverMoney() {
