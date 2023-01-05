@@ -2,6 +2,7 @@ package domain;
 
 import common.constant.Constants;
 import common.state.Result;
+import util.validator.LottoValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,12 +28,12 @@ public class Lotto {
     }
 
     public Lotto(String input) {
+        LottoValidator.validate(input);
         this.numbers = Arrays.stream(input.split(Constants.DELIMITER))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
-    // 꼭 고치겠습니다 :(
     public Result getResult(WinningLotto winningLotto, BonusNumber bonusNumber) {
         List<Integer> winningLottoNumbers = winningLotto.getWinningLottoNumbers();
         int matchCount = (int) numbers.stream()
