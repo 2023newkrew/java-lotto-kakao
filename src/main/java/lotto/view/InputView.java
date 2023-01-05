@@ -33,11 +33,20 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public List<LottoNumber> inputManualNumbers(){
+    private int inputManualCount(int amount){
+        System.out.println(INPUT_MANUAL_COUNT.getMessage());
+        int manualCount = Integer.parseInt(scanner.nextLine());
+        if(manualCount * 1000 > amount) {
+            throw new IllegalArgumentException("수동으로 구매할 수 있는 로또 수는 구입 금액보다 적어야 합니다.");
+        }
+        return manualCount;
+    }
+
+    public List<LottoNumber> inputManualNumbers(int amount){
+        int manualCount = inputManualCount(amount);
         System.out.println(INPUT_MANUAL_NUMBER.getMessage());
-        int count = Integer.parseInt(scanner.nextLine());
         List<LottoNumber> ret = new ArrayList<>();
-        for(int i=0; i<count; i++){
+        for(int i=0; i<manualCount; i++){
             String userInput = scanner.nextLine();
             ret.add(changeToLottoNumber(userInput));
         }

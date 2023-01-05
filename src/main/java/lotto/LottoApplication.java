@@ -8,7 +8,6 @@ import lotto.utils.LottoRank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public class LottoApplication {
         int amount = inputView.inputUserAmount();
 
         // 로또 구매
-        List<LottoNumber> manual = inputView.inputManualNumbers();
+        List<LottoNumber> manual = inputView.inputManualNumbers(amount);
         LottoGame lottoGame = new LottoGame(amount, manual);
 
         // 구입한 로또 번호들 출력

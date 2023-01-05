@@ -15,7 +15,7 @@ public class ResultView {
 
     public void printPurchaseCount(int amount, int manual){
         System.out.println(amount + RESULT_PURCHASE_COUNT.getMessage());
-        System.out.printf("수동으로 %d장, 자동으로 %d%s\n", manual, amount - manual, RESULT_PURCHASE_COUNT);
+        System.out.printf("수동으로 %d장, 자동으로 %d%s\n", manual, amount - manual, RESULT_PURCHASE_COUNT.getMessage());
     }
 
     public void printWinningStatics(Map<LottoRank, Integer> result, double rate){
