@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Lotto {
 
-    private final List<LottoNumber> numbers;
+    protected final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = LottoNumber.of(numbers);

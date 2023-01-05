@@ -20,8 +20,8 @@ public class LottoTest {
     @DisplayName("로또는 1~45 사이의 숫자를 가진다.")
     void lottoContains1To45NumberTest() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        for (Integer number : lotto.getNumbers()) {
-            assertThat(number).isGreaterThan(0)
+        for (LottoNumber number : lotto.getNumbers()) {
+            assertThat(number.getNumber()).isGreaterThan(0)
                     .isLessThan(46);
         }
     }

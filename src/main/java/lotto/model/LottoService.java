@@ -7,7 +7,7 @@ public class LottoService {
     private static final int DEFAULT_LOTTO_COST = 1000;
 
     private Lottos lottos;
-    private WinningNumbers winningNumbers;
+    private WinningLotto winningLotto;
 
     private final long purchaseCost;
     private final PriceResult priceResult;
@@ -26,7 +26,7 @@ public class LottoService {
     }
 
     public void createWinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
-        this.winningNumbers = new WinningNumbers(winningNumbers, bonusNumber);
+        this.winningLotto = new WinningLotto(winningNumbers, bonusNumber);
     }
 
     public Lottos getLottos() {
@@ -36,7 +36,7 @@ public class LottoService {
     public PriceResult getResult() {
 
         for (Lotto lotto : lottos.getLottos()) {
-            priceResult.saveResult(winningNumbers.getPrice(lotto));
+            priceResult.saveResult(winningLotto.getPrice(lotto));
         }
         return priceResult;
     }

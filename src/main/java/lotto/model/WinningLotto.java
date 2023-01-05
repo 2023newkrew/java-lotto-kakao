@@ -2,12 +2,11 @@ package lotto.model;
 
 import java.util.List;
 
-public class WinningNumbers {
-    private final List<Integer> winningNumbers;
+public class WinningLotto extends Lotto {
     private final int bonusNumber;
 
-    public WinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
-        this.winningNumbers = winningNumbers;
+    public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
+        super(winningNumbers);
         this.bonusNumber = bonusNumber;
     }
 
@@ -48,6 +47,6 @@ public class WinningNumbers {
     }
 
     private int returnValueIfContain(int number) {
-        return winningNumbers.contains(number) ? 1 : 0;
+        return contains(number) ? 1 : 0;
     }
 }
