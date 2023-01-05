@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.LottoConstants.SIZE;
+import static lotto.domain.LottoConstants.LOTTO_SIZE;
 import static lotto.domain.LottoNumbers.makeLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -20,7 +20,7 @@ class LottoNumbersTest {
 
     @BeforeAll
     static void init() {
-        oneToSixList = IntStream.rangeClosed(1, SIZE).boxed().collect(Collectors.toList());
+        oneToSixList = IntStream.rangeClosed(1, LOTTO_SIZE).boxed().collect(Collectors.toList());
     }
 
 

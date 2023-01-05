@@ -6,7 +6,7 @@ public class BonusBall {
 
     private final LottoNumber bonusBall;
 
-    public static BonusBall createBonusBall(int bonusBall){
+    public static BonusBall createBonusBall(int bonusBall) {
         return new BonusBall(bonusBall);
     }
 
@@ -14,11 +14,10 @@ public class BonusBall {
         this.bonusBall = from(bonusBall);
     }
 
-    public boolean hasBonusBall(LottoNumbers lottoNumbers){
+
+    public boolean hasBonusBall(LottoNumbers lottoNumbers) {
         return lottoNumbers.contains(bonusBall);
     }
-
-
 
 
 }

@@ -6,7 +6,7 @@ import lotto.utils.ErrorMessageFormatter;
 
 public class LottoAnswer {
 
-    LottoNumbers lottoNumbers;
+    private LottoNumbers lottoNumbers;
     private BonusBall bonusBall;
 
     public static LottoAnswer makeLottoAnswer(List<Integer> numbers, int bonusBall) {
@@ -27,5 +27,13 @@ public class LottoAnswer {
         }
     }
 
+
+    public int match(LottoNumbers other) {
+        return lottoNumbers.match(other);
+    }
+
+    public boolean hasBonusBall(LottoNumbers other){
+        return bonusBall.hasBonusBall(other);
+    }
 
 }

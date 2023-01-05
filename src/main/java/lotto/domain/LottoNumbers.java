@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.LottoConstants.SIZE;
+import static lotto.domain.LottoConstants.LOTTO_SIZE;
 import static lotto.domain.LottoNumber.from;
 import static lotto.exception.ExceptionMessage.SIZE_EXCEPTION_MESSAGE;
 
@@ -29,14 +29,14 @@ public class LottoNumbers {
 
 
     private void validateSize(int size) {
-        if (size != SIZE) {
+        if (size != LOTTO_SIZE) {
             throw new IllegalArgumentException(
                     ErrorMessageFormatter.makeErrorMessage(SIZE_EXCEPTION_MESSAGE, size, "lottoNumbers size"));
         }
     }
 
     private void validateDuplicateNumber(List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() != SIZE) {
+        if (lottoNumbers.stream().distinct().count() != LOTTO_SIZE) {
             throw new IllegalArgumentException(
                     ErrorMessageFormatter.makeErrorMessage(SIZE_EXCEPTION_MESSAGE, lottoNumbers,
                             "lottoNumbers duplicate"));
@@ -50,6 +50,10 @@ public class LottoNumbers {
 
     public boolean contains(LottoNumber input) {
         return this.lottoNumbers.contains(input);
+    }
+
+    public int match(LottoNumbers other) {
+        return (int) lottoNumbers.stream().filter(other::contains).count();
     }
 
     @Override
