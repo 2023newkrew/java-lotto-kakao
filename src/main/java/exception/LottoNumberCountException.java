@@ -5,7 +5,7 @@ package exception;
 
 public class LottoNumberCountException extends RuntimeException {
     public LottoNumberCountException() {
-        super("로또 번호의 개수는 6개 입니");
+        super("로또 번호의 개수는 6개 입니다.");
     }
 
     public LottoNumberCountException(String message) {
