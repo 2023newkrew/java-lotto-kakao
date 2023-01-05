@@ -5,8 +5,8 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import lotto.models.Lottery;
 import lotto.models.LotteryEarningsRate;
-import lotto.models.enums.Rank;
 import lotto.models.LotteryStatistics;
+import lotto.models.enums.Rank;
 
 public class OutputView {
     Console console;
@@ -48,14 +48,10 @@ public class OutputView {
     }
 
     public void printStatistics(LotteryStatistics statistics) {
-        console.printOutput("당첨 통계\n"
-                + "----------\n"
-                + "3개 일치 (" + Rank.FIFTH.getPrize() + "원)- " + statistics.getCountOf(Rank.FIFTH) + "개\n"
-                + "4개 일치 (" + Rank.FOURTH.getPrize() + "원)- " + statistics.getCountOf(Rank.FOURTH) + "개\n"
-                + "5개 일치 (" + Rank.THIRD.getPrize() + "원)- " + statistics.getCountOf(Rank.THIRD) + "개\n"
-                + "5개 일치, 보너스 볼 일치(" + Rank.SECOND.getPrize() + "원) - " + statistics.getCountOf(
-                Rank.SECOND) + "개\n"
-                + "6개 일치 (" + Rank.FIRST.getPrize() + "원)- " + statistics.getCountOf(Rank.FIRST) + "개\n");
+        console.printOutput("당첨 통계");
+        for (Rank rank : Rank.values()) {
+            console.printOutput(rank.getWinningCountString(statistics));
+        }
     }
 
     public void printEarningsRate(LotteryEarningsRate lotteryEarningsRate) {
