@@ -31,6 +31,8 @@ public class LottoStore {
     }
 
     public GameResultDto getLottosResult() {
+        if (winningLotto == null)
+            throw new IllegalArgumentException(INVALID_WINNING_LOTTO);
         Map<LottoGrade, Integer> lottosResult = lottos.getResult(winningLotto);
         return new GameResultDto(lottosResult, getEarningRate(lottosResult));
     }

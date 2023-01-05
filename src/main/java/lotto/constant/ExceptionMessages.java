@@ -8,4 +8,5 @@ public class ExceptionMessages {
     public static final String INVALID_PRICE_AMOUNT = "1000원 이상의 구매금액이 필요합니다.";
     public static final String INVALID_LOTTO_MANUAL_NUMBERS = "기입한 로또 숫자를 사용할 수 없습니다.";
     public static final String INVALID_RANDOM_LOTTO_AMOUNT = "자동 로또 구매 숫자가 음수가 될 수 없습니다.";
+    public static final String INVALID_WINNING_LOTTO = "우승 로또가 지정되지 않았습니다.";
 }
