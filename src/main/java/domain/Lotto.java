@@ -40,9 +40,11 @@ public class Lotto {
                 .filter(number -> winningLottoNumbers.contains(number))
                 .count();
 
-        boolean isBonus = isBonus(bonusNumber);
-
-        return Result.createResult(matchCount, isBonus);
+        return Arrays.stream(Result.values())
+                .filter(result -> result.getDetermine()
+                        .apply(matchCount, isBonus(bonusNumber)))
+                .findFirst()
+                .orElse(Result.NONE);
     }
 
     public boolean isBonus(BonusNumber bonusNumber) {

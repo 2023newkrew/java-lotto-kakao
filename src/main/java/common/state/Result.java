@@ -23,11 +23,8 @@ public enum Result {
         this.description = description;
     }
 
-    public static Result createResult(int matchCount, boolean isBonus) {
-        return Arrays.stream(values())
-                .filter(result -> result.determine.apply(matchCount, isBonus))
-                .findFirst()
-                .orElse(NONE);
+    public BiFunction<Integer, Boolean, Boolean> getDetermine() {
+        return determine;
     }
 
     public int getWinnings() {
