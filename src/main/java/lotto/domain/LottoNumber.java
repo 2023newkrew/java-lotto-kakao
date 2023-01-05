@@ -15,7 +15,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
                 .forEach(number -> NUMBERS[number] = new LottoNumber(number));
     }
 
-    public LottoNumber(int lottoNumber) {
+    public LottoNumber(final int lottoNumber) {
         validateLottoNumber(lottoNumber);
         this.lottoNumber = lottoNumber;
     }
@@ -29,6 +29,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("로또의 각 숫자는 1이상 45 이하여야 합니다.");
         }
+    }
+
+    public int lottoNumber() {
+        return lottoNumber;
     }
 
     @Override
@@ -54,7 +58,5 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return this.lottoNumber - o.lottoNumber();
     }
 
-    public int lottoNumber() {
-        return lottoNumber;
-    }
+
 }
