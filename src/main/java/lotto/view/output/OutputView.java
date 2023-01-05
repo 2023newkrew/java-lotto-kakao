@@ -40,8 +40,8 @@ public class OutputView {
         console.printOutput("보너스 볼을 입력해 주세요.");
     }
 
-    public void printStatistics(LottoStatistic statistics, Double rate) {
-        String rateString = String.format("%.2f", rate);
+    public void printStatistics(LottoStatistic statistics) {
+        String rateString = String.format("%.2f", statistics.getPrizeRate());
         List<LottoResultType> lottoResultTypes = Arrays.asList(LottoResultType.values());
         Collections.reverse(lottoResultTypes);
 
@@ -68,7 +68,7 @@ public class OutputView {
         return "";
     }
 
-    public void askForNumberOfLottoWithManual() {
+    public void askForNumberOfManualLotto() {
         console.printOutput("수동으로 구매할 로또 수를 입력해 주세요.");
     }
 

@@ -2,6 +2,10 @@ package lotto.view.input;
 
 import lotto.view.console.Console;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class InputView {
     Console console;
 
@@ -15,5 +19,11 @@ public class InputView {
 
     public String getString() {
         return console.input();
+    }
+    public List<Integer> getListOfInteger(String regex) {
+        return Arrays.stream(getString().split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 }

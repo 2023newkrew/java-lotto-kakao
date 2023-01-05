@@ -16,7 +16,7 @@ public final class GoalNumber extends LottoNumber {
         this.bonusBall = bonusBall;
     }
 
-    public LottoResultType getLottoResultByCompareLotto(LottoNumber lottoNumber) {
+    public LottoResultType getLottoResult(LottoNumber lottoNumber) {
         return LottoResultType.findLottoResult(getMatchCount(lottoNumber), lottoNumber.getNumbers().contains(bonusBall));
     }
 
