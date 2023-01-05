@@ -24,8 +24,8 @@ public class QuickPickSimulator implements LottoSimulator{
         outputView.printLottoPurchaseInfo(purchaseLottoTickets);
 
         List<LottoMatchResult> lottoMatchResults = playLottoGames(purchaseLottoTickets);
-        LottoMatchStatistics lottoMatchStatistics = new LottoMatchStatistics(lottoMatchResults);
-        outputView.printLottoMatchStatistics(lottoMatchStatistics);
+        WinningStatistics winningStatistics = new WinningStatistics(lottoMatchResults);
+        outputView.printLottoMatchStatistics(winningStatistics);
     }
 
     private List<LottoMatchResult> playLottoGames(List<LottoTicket> purchaseLottoTickets) {

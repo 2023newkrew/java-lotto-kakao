@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 import static domain.LottoRank.*;
 
-public class LottoMatchStatistics {
+public class WinningStatistics {
     private final List<LottoMatchResult> lottoMatchResults;
     private final List<LottoRank> statisticsTargetRanks = List.of(FIRST, SECOND, THIRD, FOURTH, FIFTH);
-    public LottoMatchStatistics(List<LottoMatchResult> lottoMatchResults) {
+    public WinningStatistics(List<LottoMatchResult> lottoMatchResults) {
         this.lottoMatchResults = lottoMatchResults;
     }
 

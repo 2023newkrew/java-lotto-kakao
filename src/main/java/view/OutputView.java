@@ -1,12 +1,11 @@
 package view;
 
-import domain.LottoMatchStatistics;
+import domain.WinningStatistics;
 import domain.LottoNumber;
 import domain.LottoRank;
 import domain.LottoTicket;
 
 import java.io.PrintStream;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,17 +36,17 @@ public class OutputView {
                 .collect(Collectors.joining(", "));
     }
 
-    public void printLottoMatchStatistics(LottoMatchStatistics lottoMatchStatistics) {
-        printRankStatistics(lottoMatchStatistics);
-        printRateOfReturn(lottoMatchStatistics);
+    public void printLottoMatchStatistics(WinningStatistics winningStatistics) {
+        printRankStatistics(winningStatistics);
+        printRateOfReturn(winningStatistics);
     }
 
-    private void printRankStatistics(LottoMatchStatistics lottoMatchStatistics) {
+    private void printRankStatistics(WinningStatistics winningStatistics) {
         outputStream.println();
         outputStream.println("당첨 통계");
         outputStream.println("----------");
 
-        Map<LottoRank, Integer> rankStatistics = lottoMatchStatistics.getRankStatistics();
+        Map<LottoRank, Integer> rankStatistics = winningStatistics.getRankStatistics();
         for (LottoRank rank : rankStatistics.keySet()) {
             printLottoRank(rank, rankStatistics.get(rank));
         }
@@ -64,7 +63,7 @@ public class OutputView {
         outputStream.println();
     }
 
-    private void printRateOfReturn(LottoMatchStatistics lottoMatchStatistics) {
-        outputStream.printf("총 수익률은 %.2f입니다.", lottoMatchStatistics.getRateOfReturn());
+    private void printRateOfReturn(WinningStatistics winningStatistics) {
+        outputStream.printf("총 수익률은 %.2f입니다.", winningStatistics.getRateOfReturn());
     }
 }
