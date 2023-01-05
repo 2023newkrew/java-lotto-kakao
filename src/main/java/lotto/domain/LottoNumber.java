@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    static final int MIN_LOTTO_NUMBER = 1;
-    static final int MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
     private final int number;
 
@@ -31,8 +31,8 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public int getNumber() {
-        return number;
+    public LottoNumber getNumber() {
+        return CACHED_LOTTO_NUMBER.get(number);
     }
 
     @Override

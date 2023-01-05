@@ -28,6 +28,6 @@ public class WinningLotto {
                 .stream()
                 .filter(winningLottoNumberSet::contains)
                 .count();
-        return LottoGradeEnum.evaluate(matchCount, winningLottoNumberSet.contains(bonusNumber));
+        return LottoGradeEnum.evaluate(matchCount, lotto.getNumbers().contains(bonusNumber));
     }
 }

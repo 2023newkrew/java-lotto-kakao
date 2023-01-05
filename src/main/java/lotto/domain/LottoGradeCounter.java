@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,10 +26,10 @@ public class LottoGradeCounter {
         counter.put(grade, counter.get(grade) + 1);
     }
 
-    public int getTotalPrice() {
+    public long getTotalPrice() {
         return counter.entrySet()
                 .stream()
-                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
+                .mapToLong(entry -> (long) entry.getKey().getPrice() * entry.getValue())
                 .sum();
     }
 
@@ -36,6 +37,7 @@ public class LottoGradeCounter {
         return counter.entrySet()
                 .stream()
                 .map(entry -> new LottoGradeCountResult(entry.getKey(), entry.getValue()))
+                .sorted(Comparator.comparing(result -> result.getGrade().getPrice()))
                 .collect(Collectors.toList());
     }
 

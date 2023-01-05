@@ -1,5 +1,7 @@
 package lotto;
 
+import static lotto.LottoConfig.LOTTO_PRICE;
+
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGame;
@@ -12,10 +14,16 @@ public class Application {
     public static void main(String[] args) {
         LottoGenerator lottoGenerator = new LottoGenerator();
         LottoView lottoView = new LottoView();
-        List<Lotto> lottos = lottoGenerator.generateLottos(lottoView.receivePurchasePrice());
+        int purchasePrice = lottoView.receivePurchasePrice();
+        List<Lotto> lottos = lottoView.receiveManualLottos();
+        lottos.addAll(
+                lottoGenerator.generateLottos(
+                        purchasePrice - lottos.size() * LOTTO_PRICE
+                )
+        );
         lottoView.printLottos(lottos);
         WinningLotto winningLotto = lottoView.receiveWinningLotto();
         LottoGame lottoGame = new LottoGame(lottos, winningLotto);
-        lottoView.printResult(lottoGame.getResult());
+        lottoView.printResult(lottoGame.getGameResult());
     }
 }

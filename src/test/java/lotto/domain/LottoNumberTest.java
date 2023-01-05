@@ -27,6 +27,6 @@ public class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 44, 45})
     void 로또_숫자를_반환할_수_있다(int number) {
-        assertThat(LottoNumber.from(number).getNumber()).isEqualTo(number);
+        assertThat(LottoNumber.from(number).getNumber()).isEqualTo(LottoNumber.from(number));
     }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.LottoConfig.LOTTO_SIZE;
 import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
 import static lotto.constant.MessageConstant.INVALID_LOTTO_SIZE;
 
@@ -12,7 +13,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int LOTTO_SIZE = 6;
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> numbers) {

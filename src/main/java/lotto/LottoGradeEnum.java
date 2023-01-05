@@ -29,7 +29,7 @@ public enum LottoGradeEnum {
             return SECOND;
         }
         return Arrays.stream(LottoGradeEnum.values())
-                .filter((lottoGrade) -> lottoGrade.matchCount == matchCount)
+                .filter((lottoGrade) -> lottoGrade != SECOND & lottoGrade.matchCount == matchCount)
                 .findFirst()
                 .orElse(NONE_GRADE);
     }
