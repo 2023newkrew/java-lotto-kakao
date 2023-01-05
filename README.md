@@ -46,8 +46,8 @@
 ### Domain
 
 #### LottoHandler
-- [ ] Lottos를 생성한다.
-- [ ] Lottos의 결과를 얻는다
+- [x] Lottos를 생성한다.
+- [x] Lottos의 결과를 얻는다
 
 #### Lottos
 - [x] List\<Lotto\>를 가진 일급 객체이다.
