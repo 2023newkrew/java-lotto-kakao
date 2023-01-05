@@ -8,12 +8,16 @@ public class LottoList {
 
     private final List<Lotto> lottoList;
 
-    private LottoList() {
-        throw new UnsupportedOperationException();
-    }
-
     public LottoList(List<Lotto> lottoList) {
         this.lottoList = lottoList;
+    }
+
+    public LottoList() {
+        lottoList = new ArrayList<>();
+    }
+
+    public void add(Lotto lotto) {
+        this.lottoList.add(lotto);
     }
 
     public List<Lotto> getLottoList() {
@@ -24,10 +28,10 @@ public class LottoList {
         return lottoList.get(index);
     }
 
-    public List<Lotto> union(LottoList other) {
+    public LottoList union(LottoList other) {
         ArrayList<Lotto> extendedLottoList = new ArrayList<>(lottoList);
         extendedLottoList.addAll(other.lottoList);
-        return extendedLottoList;
+        return new LottoList(extendedLottoList);
     }
 
     public Integer length() {

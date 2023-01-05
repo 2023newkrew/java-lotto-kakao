@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,22 +15,25 @@ public class Lotto {
     }
 
     private void validateNumbers() {
-        boolean result = numbers.stream()
-                .filter(number -> checkRange(number) && checkLength())
-                .collect(Collectors.toSet())
-                .size() == numbers.size();
-        if (!result) {
+        boolean isValidRangeAndLengthAndNoDuplicateNumbers = numbers.stream()
+                .allMatch(number -> checkRange(number) && checkLength() && checkDuplicate());
+        if (!isValidRangeAndLengthAndNoDuplicateNumbers) {
             throw new IllegalArgumentException();
         }
     }
 
     private Boolean checkRange(Integer number) {
-        return number >= LottoSettings.MIN_RANGE.getValue() &&
+        return LottoSettings.MIN_RANGE.getValue() <= number &&
                 number <= LottoSettings.MAX_RANGE.getValue();
     }
 
     private Boolean checkLength() {
         return numbers.size() == LottoSettings.MAX_LENGTH.getValue();
+    }
+
+    private Boolean checkDuplicate() {
+        return new HashSet<>(numbers)
+                .size() == numbers.size();
     }
 
     public List<Integer> getNumbers() {
