@@ -21,7 +21,7 @@ public class InputView {
         return console.input();
     }
     public List<Integer> getListOfInteger(String regex) {
-        return Arrays.stream(getString().split(","))
+        return Arrays.stream(getString().split(regex))
                 .map(String::trim)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
