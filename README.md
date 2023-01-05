@@ -12,52 +12,46 @@
 - Result (로또 일치 여부 Enum)
   - Result.[FIRST_PLACE, SECOND_PLACE, ..., FIFTH_PLACE]
 - Money (돈)
-  - 검증 (MoneyValidator)
+  - 검증
     - 숫자가 맞는지
     - 양수인지
     - 로또 한 장당 가격(1000원)으로 나누어떨어지는지
   - 살 수 있는 로또 장수 계산
 - Count (개수)
-  - 검증 (CountValidator)
+  - 검증
     - 숫자가 맞는지
     - 양수인지
     - 살 수 있는 로또 장수보다 작거나 같은지
   - 0인지 확인
   - 총 살 수 있는 로또 장수에서 현재 살 로또 장수를 뺀 나머지 구하기
 - LottoNumber (숫자)
-  - 검증 (LottoNumberValidator)
+  - 검증
     - 숫자가 맞는지
     - 최소 최대값 범위 확인
 - Lotto (LottNumber 리스트)
-  - 자동 로또 생성
-  - 수동 로또 생성
-  - 당첨 번호를 통해 Result 도출
+  - 로또 생성
+  - 다른 로또와 일치하는 숫자의 개수 계산
   - 특정 LottoNumber 포함 여부 판단
-- WinningLottoWithBonus (당첨 로또 번호(Lotto)와 보너스 번호(LottoNumber))
+- AutoLottoGenerator (자동 로또 생성기)
+  - [1 ~ 45] 로또 번호 리스트를 셔플하여 로또 생성
+- ManualLottoGenerator (수동 로또 생성기)
+  - 검증
+    - 구분자로 나누었을 때 6개로 나눠지는지
+    - 각 요소가 숫자가 맞는지
+    - 각 요소가 최소 최대값 범위 안에 있는지
+    - 각 요소가 서로 중복되지 않는지
+  - 입력값으로 로또 생성
+- WinningLotto (당첨 로또 번호(Lotto)와 보너스 번호(LottoNumber))
   - 특정 로또가 보너스 번호를 포함하고 있는지 확인
+  - 다른 로또와 비교하여 당첨 등수 확인
 - Lottos (Lotto 리스트)
   - 로또 한 장을 Lottos에 추가하는 기능
+  - 여러 개의 자동 로또를 추가하는 기능
   - 총 당첨 결과(TotalResult) 확인
+  - 로또 목록 중에 특정 로또가 포함되어 있는지 확인
 - TotalResult (당첨 등수와 당첨 로또 개수의 맵)
   - Result를 입력하면 TotalResult에 반영
   - 수익률 계산
-- NumberValidator (숫자 검증)
-  - 숫자가 맞는지
-- MoneyValidator (금액 검증)
-  - 숫자가 맞는지 (NumberValidator)
-  - 양수인지
-  - 로또 한 장당 가격(1000원)으로 나누어떨어지는지
-- CountValidator (개수 검증)
-  - 숫자가 맞는지
-  - 양수인지
-  - 살 수 있는 로또 장수보다 작거나 같은지
-- LottoNumberValidator (번호 검증)
-  - 숫자가 맞는지
-  - 1 이상 45 이하인지
-  - 보너스 숫자가 당첨 번호들과 중복되지 않는지
-- LottoValidator (로또 검증)
-  - 입력된 숫자의 개수가 6개인지
-  - 숫자들이 중복되지는 않는지
 
 ---
 
@@ -79,7 +73,7 @@
   - 보너스 번호 입력 요구 (Out)
   - 보너스 번호 입력 (In)
   - 보너스 로또 번호 생성 (LottoNumber)
-  - 당첨 번호 모음 생성 (WinningLottoWithBonus)
+  - 당첨 번호 모음 생성 (WinningLotto)
   - 번호 일치 여부 판단 (TotalResult)
   - 번호 일치 여부 출력 (Out)
   - 수익률 계산 (TotalResult)
