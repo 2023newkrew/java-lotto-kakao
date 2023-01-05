@@ -11,7 +11,7 @@ public final class OutputViewMessage {
     public static final String PRINT_YIELD_MESSAGE_FORMAT = "총 수익률은 %.2f입니다.";
     public static final String MATCH_COUNT_STRING_FORMAT = "%d개 일치";
     public static final String REQUIRES_BONUS_STRING = ", 보너스 볼 일치";
-    public static final String PRINT_RANK_REMAINING_MESSAGE_FORMAT = " (%d원) - %d개\n";
+    public static final String PRINT_RANK_REMAINING_MESSAGE_FORMAT = " (%,d원) - %d개\n";
     public static final String PRINT_YIELD_ANALYSIS_MESSAGE_FORMAT = " (기준이 %d이기 때문에 결과적으로 %s라는 의미임)";
     public static final String GAINED = "이득이";
     public static final String LOST = "손해";
