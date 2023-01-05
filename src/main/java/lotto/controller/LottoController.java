@@ -8,14 +8,15 @@ public class LottoController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
     private final Winner winner = new Winner();
-    private final LottosFactory lottosFactory = new LottosFactory();
+    private final LottosFactory maunalLottosFactory = new ManualLottosFactory();
+    private final LottosFactory autoLottosFactory = new AutoLottosFactory();
 
     public void start() {
         int money = inputView.receiveMoneyUserInput();
         int numberOfLotto = money / 1000;
-        Lottos manualLottos = lottosFactory.makeLottosManual(inputView.receiveManualLottos(numberOfLotto));
-        Lottos autoLottos = lottosFactory.makeLottosAuto(numberOfLotto - manualLottos.getLottos().size());
-        Lottos lottos = lottosFactory.joinLottos(manualLottos, autoLottos);
+        Lottos manualLottos = maunalLottosFactory.generate(numberOfLotto);
+        Lottos autoLottos = autoLottosFactory.generate(numberOfLotto - manualLottos.getLottos().size());
+        Lottos lottos = maunalLottosFactory.joinLottos(manualLottos, autoLottos);
 
         outputView.printLottos(lottos, manualLottos.getLottos().size(), autoLottos.getLottos().size());
 
