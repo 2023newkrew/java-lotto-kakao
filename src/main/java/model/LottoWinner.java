@@ -1,5 +1,5 @@
 /**
- * 당첨 번호를 저장하는 객체이다
+ * 당첨 번호(로또, 보너스 번호)를 저장하는 객체이다
  * 사용자의 로또 번호를 받으면 몇 등인지 알려준다
  * 당첨 결과가 어딘가에서 바뀌어선 안된다
  */
@@ -7,7 +7,6 @@
 package model;
 
 import model.constant.LottoPlace;
-
 
 public class LottoWinner {
 
