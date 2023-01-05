@@ -44,7 +44,7 @@ public class ResultView {
         System.out.println(RESULT_GOOD.getMessage());
     }
     public void printLottoTickets(LottoTicket lottoTicket) {
-        ArrayList<LottoNumber> tickets = lottoTicket.getTickets();
+        ArrayList<LottoNumber> tickets = lottoTicket.getTicket();
         for(LottoNumber ticket : tickets){
             printEachTicket(ticket.getLottoNumbers());
         }

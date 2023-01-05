@@ -1,15 +1,16 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTicket {
-    private final ArrayList<LottoNumber> tickets;
+    private final ArrayList<LottoNumber> ticket;
     private final LottoRandom lottoRandom;
     private final int purchaseCount;
 
-    public LottoTicket(int amount) {
+    public LottoTicket(int amount, List<LottoNumber> manual) {
         // 입력한 금액이 1000원 미만이면 로또 구입 불가능
         if(!checkAmountUpperThan1000(amount)){
             throw new IllegalArgumentException("입력한 금액이 1000원 미만입니다.");
@@ -17,9 +18,10 @@ public class LottoTicket {
 
         this.purchaseCount = amount / 1000;
         this.lottoRandom = new LottoRandom();
-        this.tickets = IntStream.range(0, purchaseCount)
+        this.ticket = IntStream.range(0, purchaseCount)
                 .mapToObj(i -> new LottoNumber(lottoRandom.createRandomNumbers()))
                 .collect(Collectors.toCollection(() -> new ArrayList<>(purchaseCount)));
+        this.ticket.addAll(manual);
     }
 
     // 사용자가 입력한 금액이 1000원 이상인지 확인
@@ -28,11 +30,11 @@ public class LottoTicket {
     }
 
     public int getLottoTicketSize(){
-        return tickets.size();
+        return ticket.size();
     }
 
-    public ArrayList<LottoNumber> getTickets(){
-        return this.tickets;
+    public ArrayList<LottoNumber> getTicket(){
+        return this.ticket;
     }
 
     public int getPurchaseCount() {

@@ -4,7 +4,6 @@ package lotto.domain;
 import lotto.utils.LottoRank;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -30,7 +29,7 @@ public class LottoWinnerTicket {
 
     // 로또 통계 배열 생성
     public Map<LottoRank, Integer> getResult(LottoTicket userTicket) {
-        ArrayList<LottoNumber> tickets = userTicket.getTickets();
+        ArrayList<LottoNumber> tickets = userTicket.getTicket();
         return tickets.stream().collect(Collectors.toMap(this::getScore, numbers -> 1, Integer::sum));
     }
 

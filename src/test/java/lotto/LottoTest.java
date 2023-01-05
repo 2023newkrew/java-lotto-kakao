@@ -49,7 +49,7 @@ public class LottoTest {
     @ValueSource(ints = {14000, 15300, 17800})
     @DisplayName("입력된 금액에 맞게 로또 티켓이 생성되어야 한다.")
     void lottoBuyTest(int cost){
-        LottoGame lottoGame = new LottoGame(cost);
+        LottoGame lottoGame = new LottoGame(cost, new ArrayList<>());
         assertThat(lottoGame.getLottoTickets().getLottoTicketSize()).isEqualTo(cost/1000);
     }
 
@@ -58,6 +58,6 @@ public class LottoTest {
     @DisplayName("1000원 미만의 금액이 들어온다면 예외를 발생한다.")
     void lottoLowerThan1000Test(int amount) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoTicket(amount));
+                .isThrownBy(() -> new LottoTicket(amount, new ArrayList<>()));
     }
 }

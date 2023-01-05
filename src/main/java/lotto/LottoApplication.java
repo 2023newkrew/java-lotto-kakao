@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.controller.LottoGame;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinnerTicket;
 import lotto.utils.LottoRank;
@@ -8,6 +9,7 @@ import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class LottoApplication {
@@ -17,7 +19,8 @@ public class LottoApplication {
         int amount = inputView.inputUserAmount();
 
         // 로또 구매
-        LottoGame lottoGame = new LottoGame(amount);
+        List<LottoNumber> manual = inputView.inputManualNumbers();
+        LottoGame lottoGame = new LottoGame(amount, manual);
 
         // 구입한 로또 번호들 출력
         ResultView resultView = new ResultView();
@@ -32,8 +35,6 @@ public class LottoApplication {
         // Winner 뽑아내기
         LottoWinnerTicket lottoWinnerTicket = inputView.changeToWinnerTicket(winNumber, bonus);
         Map<LottoRank, Integer> result = lottoWinnerTicket.getResult(lottoTicket);
-
-        result.entrySet().forEach((rank) -> System.out.println(rank.getValue()));
 
         // 당첨 통계 출력
         double rate = lottoWinnerTicket.calcRateOfReturn(amount, result);
