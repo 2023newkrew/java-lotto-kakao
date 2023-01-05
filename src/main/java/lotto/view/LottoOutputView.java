@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoOutputView {
-    public void printLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+
+    public void printLottos(List<Lotto> lottos, int manualLottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoCount, lottos.size() - manualLottoCount);
         for (Lotto lotto : lottos) {
             printLotto(lotto);
         }
