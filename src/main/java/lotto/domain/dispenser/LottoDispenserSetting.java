@@ -5,7 +5,7 @@ import lotto.domain.strategy.NumberSelectStrategy;
 
 public class LottoDispenserSetting {
     private final LottoSetting lottoSetting;
-    private NumberSelectStrategy numberSelectStrategy;
+    private final NumberSelectStrategy numberSelectStrategy;
 
     public LottoDispenserSetting(LottoSetting lottoSetting,
             NumberSelectStrategy numberSelectStrategy) {
@@ -19,9 +19,5 @@ public class LottoDispenserSetting {
 
     public NumberSelectStrategy getNumberSelectStrategy() {
         return numberSelectStrategy;
-    }
-
-    public void setNumberSelectStrategy(NumberSelectStrategy numberSelectStrategy) {
-        this.numberSelectStrategy = numberSelectStrategy;
     }
 }

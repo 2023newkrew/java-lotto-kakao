@@ -18,26 +18,8 @@ public class LottoDispenser {
         this(new LottoDispenserSetting(lottoSetting, numberSelectStrategy));
     }
 
-    public LottoDispenser(LottoSetting lottoSetting) {
-        this(new LottoDispenserSetting(lottoSetting, new NumberSelectStrategy() {
-            @Override
-            public List<Integer> select() {
-                return null;
-            }
-
-            @Override
-            public boolean isEnd() {
-                return true;
-            }
-        }));
-    }
-
     public LottoDispenser(LottoDispenserSetting lottoDispenserSetting) {
         this.lottoDispenserSetting = lottoDispenserSetting;
-    }
-
-    public void setNumberSelectStrategy(NumberSelectStrategy numberSelectStrategy) {
-        lottoDispenserSetting.setNumberSelectStrategy(numberSelectStrategy);
     }
 
     public LottoTicketList getLottoTicketList(int money) {
