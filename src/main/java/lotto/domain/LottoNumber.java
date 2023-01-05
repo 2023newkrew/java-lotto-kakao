@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.constant.ExceptionMessages.INVALID_NUMBER_RANGE;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -10,7 +11,7 @@ import java.util.stream.IntStream;
 public class LottoNumber {
     static final int MIN_LOTTO_NUMBER = 1;
     static final int MAX_LOTTO_NUMBER = 45;
-    public static final List<Integer> LOTTO_NUMBER_POOL =
+    private static final List<Integer> LOTTO_NUMBER_POOL =
             IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
                     .boxed()
                     .collect(Collectors.toList());
@@ -36,6 +37,10 @@ public class LottoNumber {
 
     public int getNumber() {
         return number;
+    }
+
+    public static List<Integer> getLottoNumberPool() {
+        return new ArrayList<>(LOTTO_NUMBER_POOL);
     }
 
     @Override

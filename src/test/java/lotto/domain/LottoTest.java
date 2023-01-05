@@ -33,13 +33,12 @@ public class LottoTest {
                 .hasMessage(INVALID_DUPLICATED_LOTTO_NUMBER);
     }
 
-//    @ParameterizedTest
-//    @ValueSource(ints = {1, 2, 10, 100, 300, 333})
-//    void 입력된_수의_로또를_자동_생성해_반환한다(int number) {
-//        List<Lotto> lottos = Lotto.autoGenerateByAmounts(number);
-//
-//        assertThat(lottos).hasSize(number);
-//    }
+    @Test
+    void 로또를_자동_생성해_반환한다() {
+        Lotto lotto = Lotto.generateRandomLotto();
+
+        assertThat(lotto.getNumbers()).hasSize(6);
+    }
 
     @Test
     void 수동으로_로또를_생성할_수_있다() {
