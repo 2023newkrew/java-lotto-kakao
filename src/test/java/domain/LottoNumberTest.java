@@ -14,6 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LottoNumberTest {
 
+    @DisplayName("숫자가 아닌 문자열 입력 시 예외 확인 테스트")
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "14$"})
+    void validateNumberFormatTest(String inputWithCharacter) {
+        assertThrows(NumberFormatException.class, () -> new LottoNumber(inputWithCharacter));
+    }
+
     @DisplayName("입력한 값이 범위를 벗어났을 때 예외 확인 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"0", "-5", "50"})
