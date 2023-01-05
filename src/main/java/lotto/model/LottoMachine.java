@@ -15,7 +15,7 @@ public class LottoMachine {
     }
 
     public static LottoMachine create(LottosGenerator lottosGenerator, Money money) {
-        List<Lotto> issuedLottos = lottosGenerator.generate(money.getLottoCount());
+        List<Lotto> issuedLottos = lottosGenerator.generate(money);
         return new LottoMachine(issuedLottos, money);
     }
 
