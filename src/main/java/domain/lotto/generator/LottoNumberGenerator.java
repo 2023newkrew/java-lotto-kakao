@@ -1,6 +1,5 @@
 package domain.lotto.generator;
 
-import domain.lotto.generator.NumberGeneratable;
 import domain.lotto.ticket.LottoNumber;
 
 import java.util.List;

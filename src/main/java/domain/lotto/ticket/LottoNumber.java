@@ -18,7 +18,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateNumberRange(int number) {
-        if(number < LottoConstant.MIN_LOTTO_NUMBER || number > LottoConstant.MAX_LOTTO_NUMBER)
+        if (number < LottoConstant.MIN_LOTTO_NUMBER || number > LottoConstant.MAX_LOTTO_NUMBER)
             throw new IllegalArgumentException();
     }
 
@@ -26,7 +26,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return number;
     }
 
-    public static List<LottoNumber> numbersToLottoNumbers(List<Integer> numbers){
+    public static List<LottoNumber> numbersToLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());

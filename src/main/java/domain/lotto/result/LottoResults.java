@@ -27,7 +27,7 @@ public class LottoResults {
         Integer ticketNumber = lottoResultCount.keySet().stream()
                 .mapToInt(lottoResultCount::get)
                 .sum();
-        Integer budget = ticketNumber * LottoConstant.LOTTO_TICKET_PRICE;
+        int budget = ticketNumber * LottoConstant.LOTTO_TICKET_PRICE;
 
         Integer profit = lottoResultCount.keySet().stream()
                 .mapToInt((key) -> lottoResultCount.get(key) * key.getPrize())

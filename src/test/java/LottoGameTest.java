@@ -17,12 +17,12 @@ public class LottoGameTest {
 
     @Test
     @DisplayName("여러 장의 로또 용지의 당첨 결과를 반환하는 기능")
-    void getManyLottoTicketsResult(){
-        LottoTicket lottoTicket1 = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,6))));
-        LottoTicket lottoTicket2 = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,7))));
-        LottoTicket lottoTicket3 = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,8))));
+    void getManyLottoTicketsResult() {
+        LottoTicket lottoTicket1 = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))));
+        LottoTicket lottoTicket2 = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1, 2, 3, 4, 5, 7))));
+        LottoTicket lottoTicket3 = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1, 2, 3, 4, 5, 8))));
 
-        WinningNumbers winningNumbers = new WinningNumbers(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,6))), new LottoNumber(7));
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), new LottoNumber(7));
 
         LottoTicketList lottoTicketList = new LottoTicketList(List.of(lottoTicket1, lottoTicket2, lottoTicket3));
 
@@ -39,10 +39,10 @@ public class LottoGameTest {
 
     @Test
     @DisplayName("수익률 계산 기능")
-    void lottoProfitRateTest(){
+    void lottoProfitRateTest() {
         LottoResults lottoResults = new LottoResults();
 
-        for(int i = 0; i < 13; i++)
+        for (int i = 0; i < 13; i++)
             lottoResults.countResult(LottoResultType.FAIL);
         lottoResults.countResult(LottoResultType.FIFTH_PLACE);
 
