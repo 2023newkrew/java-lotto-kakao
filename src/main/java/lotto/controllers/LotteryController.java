@@ -73,7 +73,7 @@ public class LotteryController {
         outputView.askForManualLotteries();
         List<Lottery> lotteries = new ArrayList<>();
         for (int i = 0; i < manualCount; i++) {
-            lotteries.add(new Lottery(inputView.getIntegerList()));
+            lotteries.add(LotteryGenerator.createLotteryManual(inputView.getIntegerList()));
         }
         return lotteries;
     }
