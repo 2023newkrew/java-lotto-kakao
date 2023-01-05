@@ -14,6 +14,7 @@ public class LottoMain {
         LottoGame lottoGame = new LottoGame(lottoSetting);
 
         buyLotto(lottoGame);
+        printLotto(lottoGame);
         checkLotto(lottoGame);
     }
 
@@ -21,9 +22,13 @@ public class LottoMain {
         int money = InputView.getMoney();
         List<List<Integer>> numbers = InputView.getManualNumbersList();
 
-        int manual = lottoGame.buyManually(money, numbers);
-        int random = lottoGame.buyRandomly(lottoGame.receiveLeftoverMoney());
-        ResultView.printQuantity(manual, random);
+        lottoGame.buyManually(money, numbers);
+        lottoGame.buyRandomly(lottoGame.receiveLeftoverMoney());
+    }
+
+    private static void printLotto(LottoGame lottoGame) {
+        ResultView.printQuantity(lottoGame.getManualTicketCount(),
+                lottoGame.getRandomTicketCount());
         ResultView.print(lottoGame.getLottoTicketsString());
     }
 

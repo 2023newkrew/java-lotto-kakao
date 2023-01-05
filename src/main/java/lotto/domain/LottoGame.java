@@ -10,37 +10,39 @@ public class LottoGame {
     private final LottoSetting lottoSetting;
     private final LottoDispenser lottoRandomDispenser;
     private final LottoTicketList lottoTickets = new LottoTicketList();
-    private int leftoverMoney = 0;
+    private final LottoGameData lottoGameData = new LottoGameData();
 
     public LottoGame(LottoSetting lottoSetting) {
         this.lottoSetting = lottoSetting;
         this.lottoRandomDispenser = new LottoDispenser(lottoSetting, RandomNumberSelectStrategy.getInstance());
     }
 
-    public int buyRandomly(int money) {
+    public void buyRandomly(int money) {
         LottoTicketList lottoTicketList = lottoRandomDispenser.getLottoTicketList(money);
         lottoTickets.addAll(lottoTicketList);
-        saveLeftoverMoney(lottoRandomDispenser.receiveLeftoverMoney());
-        return lottoTicketList.getCount();
+        lottoGameData.saveLeftoverMoney(lottoRandomDispenser.receiveLeftoverMoney());
+        lottoGameData.addRandomTicketCount(lottoTicketList.getCount());
     }
 
-    public int buyManually(int money, List<List<Integer>> numbers) {
+    public void buyManually(int money, List<List<Integer>> numbers) {
         NumberSelectStrategy numberSelectStrategy = new ManualNumberSelectStrategy(numbers);
         LottoDispenser lottoDispenser = new LottoDispenser(lottoSetting, numberSelectStrategy);
         LottoTicketList lottoTicketList = lottoDispenser.getLottoTicketList(money);
         lottoTickets.addAll(lottoTicketList);
-        saveLeftoverMoney(lottoDispenser.receiveLeftoverMoney());
-        return lottoTicketList.getCount();
-    }
-
-    private void saveLeftoverMoney(int leftoverMoney) {
-        this.leftoverMoney += leftoverMoney;
+        lottoGameData.saveLeftoverMoney(lottoDispenser.receiveLeftoverMoney());
+        lottoGameData.addManualTicketCount(lottoTicketList.getCount());
     }
 
     public int receiveLeftoverMoney() {
-        int leftoverMoney = this.leftoverMoney;
-        this.leftoverMoney = 0;
-        return leftoverMoney;
+        return lottoGameData.receiveLeftoverMoney();
+    }
+
+    public int getManualTicketCount() {
+        return lottoGameData.getManualTicketCount();
+    }
+
+    public int getRandomTicketCount() {
+        return lottoGameData.getRandomTicketCount();
     }
 
     public String getLottoTicketsString() {

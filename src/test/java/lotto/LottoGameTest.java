@@ -18,8 +18,8 @@ public class LottoGameTest {
     public void buyLottoTicket(int money, int number) {
         LottoSetting lottoSetting = new LottoSetting();
         LottoGame lottoGame = new LottoGame(lottoSetting);
-        int random = lottoGame.buyRandomly(money);
-        Assertions.assertThat(random).isEqualTo(number);
+        lottoGame.buyRandomly(money);
+        Assertions.assertThat(lottoGame.getRandomTicketCount()).isEqualTo(number);
     }
 
     private static Stream<Arguments> getBuyLottoTicketData() {
@@ -67,10 +67,10 @@ public class LottoGameTest {
     public void checkCount(List<List<Integer>> numbers, int money, int manualExpected, int randomExpected) {
         LottoSetting lottoSetting = new LottoSetting();
         LottoGame lottoGame = new LottoGame(lottoSetting);
-        int manual = lottoGame.buyManually(money, numbers);
-        int random = lottoGame.buyRandomly(lottoGame.receiveLeftoverMoney());
-        Assertions.assertThat(manual).isEqualTo(manualExpected);
-        Assertions.assertThat(random).isEqualTo(randomExpected);
+        lottoGame.buyManually(money, numbers);
+        lottoGame.buyRandomly(lottoGame.receiveLeftoverMoney());
+        Assertions.assertThat(lottoGame.getManualTicketCount()).isEqualTo(manualExpected);
+        Assertions.assertThat(lottoGame.getRandomTicketCount()).isEqualTo(randomExpected);
     }
 
     private static Stream<Arguments> getCheckCountData() {
