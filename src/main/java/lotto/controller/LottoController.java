@@ -27,6 +27,15 @@ public class LottoController {
         Integer manualLottoCount = inputView.inputManualLottoCount();
         Integer automaticLottoCount = totalLottoCount - manualLottoCount;
 
+        LottoList totalLottoList = issueTotalLotto(manualLottoCount, automaticLottoCount);
+
+        List<Integer> mainNumbers = inputView.inputMainNumbers();
+        Integer bonusNumber = inputView.inputBonusBall();
+
+        getResult(new WinningNumbers(mainNumbers, bonusNumber), totalLottoList, price);
+    }
+
+    private LottoList issueTotalLotto(Integer manualLottoCount, Integer automaticLottoCount) {
         outputView.printRequestManualLottoNumber();
         LottoList manualLottoList = manualLottoIssuer.issue(manualLottoCount);
 
@@ -35,10 +44,7 @@ public class LottoController {
         outputView.printLottoCount(manualLottoCount, automaticLottoCount);
         outputView.printLottoList(totalLottoList);
 
-        List<Integer> mainNumbers = inputView.inputMainNumbers();
-        Integer bonusNumber = inputView.inputBonusBall();
-
-        getResult(new WinningNumbers(mainNumbers, bonusNumber), totalLottoList, price);
+        return totalLottoList;
     }
 
     private void getResult(WinningNumbers winningNumbers, LottoList lottoList, Integer price) {
