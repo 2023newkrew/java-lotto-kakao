@@ -1,24 +1,26 @@
 package lotto.models.enums;
 
+import static lotto.models.enums.MatchType.*;
+
 import java.util.Arrays;
 import lotto.models.LotteryStatistics;
 
 public enum Rank {
 
-    NONE(0, 0, false),
-    FIFTH(5_000, 3, false),
-    FOURTH(50_000, 4, false),
-    THIRD(1_500_000, 5, false),
-    SECOND(30_000_000, 5, true),
-    FIRST(2_000_000_000, 6, false);
+    NONE(0, 0, IRRELEVANT),
+    FIFTH(5_000, 3, IRRELEVANT),
+    FOURTH(50_000, 4, IRRELEVANT),
+    THIRD(1_500_000, 5, INCONSISTENCY),
+    SECOND(30_000_000, 5, MATCH),
+    FIRST(2_000_000_000, 6, INCONSISTENCY);
 
     private final long prize;
 
     private final int matchCount;
 
-    private final boolean includeBonus;
+    private final MatchType includeBonus;
 
-    Rank(long prize, int matchCount, boolean includeBonus) {
+    Rank(long prize, int matchCount, MatchType includeBonus) {
         this.prize = prize;
         this.matchCount = matchCount;
         this.includeBonus = includeBonus;
@@ -33,7 +35,7 @@ public enum Rank {
             return "---------";
         }
         StringBuilder result = new StringBuilder(matchCount + "개 일치");
-        if (this.includeBonus) {
+        if (this.includeBonus == MATCH) {
             result.append( ", 보너스 볼 일치");
         }
         result.append(" (").append(prize).append("원) - ").append(statistics.getCountOf(this)).append("개");
@@ -48,12 +50,6 @@ public enum Rank {
     }
 
     private boolean match(Integer matchCount, boolean includeBonus) {
-        if (matchCount != this.matchCount) {
-            return false;
-        }
-        if (matchCount != 5) {
-            return true;
-        }
-        return includeBonus == this.includeBonus;
+        return this.matchCount == matchCount && this.includeBonus.pass(includeBonus);
     }
 }

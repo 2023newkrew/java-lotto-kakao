@@ -32,11 +32,11 @@ public class LotteryController {
     }
 
     private Integer getBudget() {
+        outputView.askForMoneyToBuyLottery();
         return outputView.requestUntilSuccess(this::getBudgetLogic);
     }
 
     private Integer getBudgetLogic() {
-        outputView.askForMoneyToBuyLottery();
         return inputView.getPositiveInteger();
     }
 
