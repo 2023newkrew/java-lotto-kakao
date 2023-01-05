@@ -1,32 +1,34 @@
 package lottov2.model.ticket;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class LottoNumber {
 
-    private static final int MIN_NUMBER = 1;
+    public static final int SIZE = 6;
 
-    private static final int MAX_NUMBER = 45;
+    private final Set<SingleLottoNumber> numbers;
 
-    private final int value;
-
-    public static LottoNumber valueOf(int value) {
-        if (isOutOfRange(value)) {
-            String errorMessage = String.format("로또 번호는 %d ~ %d 사이의 숫자입니다.", MIN_NUMBER, MAX_NUMBER);
-            throw new IllegalArgumentException(errorMessage);
+    public static LottoNumber of(Set<SingleLottoNumber> numbers) {
+        if (isInvalid(numbers)) {
+            throw new IllegalArgumentException("로또 번호는 " + SIZE + "자리 숫자입니다.");
         }
 
-        return new LottoNumber(value);
+        return new LottoNumber(numbers);
     }
 
-    private LottoNumber(int value) {
-        this.value = value;
+    private LottoNumber(Set<SingleLottoNumber> numbers) {
+        this.numbers = numbers;
     }
 
-    private static boolean isOutOfRange(int value) {
-        return value < MIN_NUMBER || value > MAX_NUMBER;
+    private static boolean isInvalid(Set<SingleLottoNumber> numbers) {
+        return Objects.isNull(numbers) || numbers.size() != SIZE;
     }
 
-    public int intValue() {
-        return value;
+    public Set<Integer> getIntegers() {
+        return numbers.stream()
+                .map(SingleLottoNumber::intValue)
+                .collect(Collectors.toSet());
     }
 }
-
