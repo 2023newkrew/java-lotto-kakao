@@ -3,7 +3,7 @@ package lotto;
 import java.util.*;
 
 public class LottoTicket {
-    protected final List<LottoBall> lottoBalls;
+    private final List<LottoBall> lottoBalls;
 
     public LottoTicket(List<LottoBall> lottoBalls) {
         this.lottoBalls = lottoBalls;
@@ -16,6 +16,17 @@ public class LottoTicket {
         }
 
         Collections.sort(lottoBalls);
+    }
+
+    public int countMatchingNumber(LottoTicket targetLotto) {
+        return (int) targetLotto.lottoBalls
+                .stream()
+                .filter(this::contains)
+                .count();
+    }
+
+    public boolean contains(LottoBall lottoBall) {
+        return lottoBalls.contains(lottoBall);
     }
 
     private boolean hasDuplicate() {
