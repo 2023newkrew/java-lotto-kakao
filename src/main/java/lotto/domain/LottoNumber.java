@@ -4,7 +4,7 @@ public class LottoNumber {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
-    private final int number;
+    private final Integer number;
 
     public LottoNumber(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
@@ -30,7 +30,7 @@ public class LottoNumber {
         return Integer.toString(number);
     }
 
-    public int compare(LottoNumber other) {
-        return number - other.number;
+    public Integer compare(LottoNumber other) {
+        return number.compareTo(other.number);
     }
 }
