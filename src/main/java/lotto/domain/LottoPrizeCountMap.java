@@ -30,17 +30,6 @@ public class LottoPrizeCountMap {
         return lottoPrizeCountMap.values().stream().mapToInt(Integer::intValue).sum();
     }
 
-    private double getProfit() {
-        double totalSpentMoney = getLottoCount() * LottoSeller.LOTTO_PRICE;
-        return getTotalPrizeMoney() / totalSpentMoney;
-    }
-
-    private long getTotalPrizeMoney() {
-        return lottoPrizeCountMap.entrySet().stream()
-                .mapToLong(e -> e.getKey().getPrizeMoney() * e.getValue())
-                .sum();
-    }
-
     @Override
     public String toString() {
         StringBuilder message = new StringBuilder();
@@ -53,5 +42,16 @@ public class LottoPrizeCountMap {
         message.append(String.format("총 수익률은 %.2f입니다.\n", getProfit()));
 
         return message.toString();
+    }
+
+    private double getProfit() {
+        double totalSpentMoney = getLottoCount() * LottoSeller.LOTTO_PRICE;
+        return getTotalPrizeMoney() / totalSpentMoney;
+    }
+
+    private long getTotalPrizeMoney() {
+        return lottoPrizeCountMap.entrySet().stream()
+                .mapToLong(e -> e.getKey().getPrizeMoney() * e.getValue())
+                .sum();
     }
 }
