@@ -8,14 +8,13 @@ import java.util.List;
 
 public class OutputView {
 
-    public static void printPurchasedLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        for(Lotto lotto : lottos) {
-            System.out.println(lotto.toString());
-        }
+    public static void printPurchasedLottos(List<Lotto> lottos, Integer manualAmount) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", manualAmount, lottos.size() - manualAmount));
+        lottos.stream().forEach((lotto) -> System.out.println(lotto.toString()));
     }
 
     public static void printLottoStatistics(LottoResult lottoResult) {
+        System.out.println("당첨 통계\n---------");
         for (Rank place : Rank.values()) {
             System.out.println(String.format("%s- %d개", place.toString(), lottoResult.getLottoRanks().get(place)));
         }
