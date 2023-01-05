@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class LottoNumber {
 
-    public static final int SIZE = 6;
+    private static final int SIZE = 6;
 
     private final Set<SingleLottoNumber> numbers;
 

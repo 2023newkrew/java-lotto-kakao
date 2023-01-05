@@ -3,8 +3,12 @@ package lottov2.model.wallet;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.math.BigDecimal;
 
 public class MoneyTest {
 
@@ -26,7 +30,29 @@ public class MoneyTest {
         void should_returnMoneyHasValue_when_valueOfAmount(long amount){
             Money money = Money.valueOf(amount);
 
-            Assertions.assertThat(money.longValue()).isEqualTo(amount);
+            Assertions.assertThat(money.bigDecimal()).isEqualTo(BigDecimal.valueOf(amount));
+        }
+    }
+
+    @Nested
+    class divide{
+
+        @DisplayName("0으로 나눌 경우 예외를 발생")
+        @Test
+        void should_throwException_when_divideZero(){
+            Assertions.assertThatThrownBy(() -> Money.ZERO.divide(Money.ZERO))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("0으로 나눌 수 없습니다.");
+        }
+
+        @DisplayName("1000원을 divider로 나눗셈")
+        @ParameterizedTest
+        @CsvSource({"1,1000","2,500","3,333","400,2","1000,1","1001,0"})
+        void should_returnMoneyHasValue_when_valueOfAmount(long divider, long expected){
+            Money money = Money.valueOf(1000);
+            Money dividerMoney = Money.valueOf(divider);
+
+            Assertions.assertThat(money.divide(dividerMoney)).isEqualTo(BigDecimal.valueOf(expected));
         }
     }
 }
