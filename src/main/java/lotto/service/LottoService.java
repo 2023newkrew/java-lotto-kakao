@@ -15,6 +15,7 @@ public class LottoService {
     public LottoService(){
         this.lottoMachine = new LottoMachine();
     }
+
     public void purchaseRandomLotto(Integer purchaseAmount, Integer numberOfManualLotto){
         int numberOfRandomLotto = purchaseAmount / LOTTO_PRICE - numberOfManualLotto;
 

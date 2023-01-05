@@ -20,18 +20,20 @@ public class LottoController {
     }
 
     public void startLottoGame() {
-        Integer inputPurchaseAmount = lottoInputTemplate.inputPurchaseAmount();
-        Integer inputManualNumberOfLotto = lottoInputTemplate.inputNumberOfManualLottoTicket(inputPurchaseAmount);
-        List<List<Integer>> inputManualLottoNumbers = lottoInputTemplate.inputManualLottoNumbers(inputManualNumberOfLotto);
+        Integer purchaseAmount = lottoInputTemplate.inputPurchaseAmount();
+        Integer numberOfManualLottoTicket = lottoInputTemplate.inputNumberOfManualLottoTicket(purchaseAmount);
+        List<List<Integer>> inputManualLottoNumbers = lottoInputTemplate.inputManualLottoNumbers(numberOfManualLottoTicket);
 
-        lottoService.purchaseRandomLotto(inputPurchaseAmount, inputManualNumberOfLotto);
+        lottoService.purchaseRandomLotto(purchaseAmount, numberOfManualLottoTicket);
         lottoService.purchaseManualLotto(inputManualLottoNumbers);
         lottoOutputTemplate.printPurchaseHistory(lottoService.getLottoTickets());
 
-        List<Integer> inputWinningNumber = lottoInputTemplate.inputWinningNumbers();
-        Integer inputBonusBall = lottoInputTemplate.inputBonusBall();
-        Map<LottoRank, Integer> lottoResult = lottoService.getLottoResult(inputWinningNumber, inputBonusBall);
+        List<Integer> winningNumbers = lottoInputTemplate.inputWinningNumbers();
+        Integer bonusBall = lottoInputTemplate.inputBonusBall();
+        Map<LottoRank, Integer> lottoResult = lottoService.getLottoResult(winningNumbers, bonusBall);
+
         lottoOutputTemplate.printLottoResult(lottoResult);
-        lottoOutputTemplate.printRateOfReturn(lottoService.getRateOfReturn(inputPurchaseAmount, lottoResult));
+        lottoOutputTemplate.printRateOfReturn(lottoService.getRateOfReturn(purchaseAmount, lottoResult));
     }
+
 }
