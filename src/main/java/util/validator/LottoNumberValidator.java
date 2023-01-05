@@ -1,6 +1,7 @@
 package util.validator;
 
 import domain.Lotto;
+import domain.AutoLottoGenerator;
 import domain.LottoNumber;
 import exception.DuplicateNumberException;
 
@@ -21,7 +22,7 @@ public class LottoNumberValidator {
     }
 
     private static void validateInRange(int inputNumber) {
-        if (!(Lotto.MINIMUM <= inputNumber && inputNumber <= Lotto.MAXIMUM)) {
+        if (!(AutoLottoGenerator.MINIMUM <= inputNumber && inputNumber <= AutoLottoGenerator.MAXIMUM)) {
             throw new IllegalArgumentException("1 이상 45 이하의 범위를 벗어났습니다.");
         }
     }

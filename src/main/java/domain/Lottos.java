@@ -10,18 +10,14 @@ public class Lottos {
     public Lottos() {
     }
 
-    public void addManualLotto(String input) {
-        lottos.add(Lotto.getManualLotto(input));
+    public void addManualLotto(Lotto lotto) {
+        lottos.add(lotto);
     }
 
     public void addAutoLottos(int count) {
         for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.getAutoLotto());
+            lottos.add(Lotto.getLotto(new AutoLottoGenerator()));
         }
-    }
-
-    public int getSize() {
-        return lottos.size();
     }
 
     public TotalResult getTotalResult(WinningLotto winningLotto) {
@@ -36,4 +32,13 @@ public class Lottos {
                 .map(Lotto::lottoToString)
                 .collect(Collectors.toList());
     }
+
+    public boolean containsLotto(Lotto lotto) {
+        return lottos.contains(lotto);
+    }
+
+    public int getSize() {
+        return lottos.size();
+    }
+
 }
