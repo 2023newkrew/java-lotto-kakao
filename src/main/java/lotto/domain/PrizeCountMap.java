@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import lotto.domain.prizestrategy.LottoPrize;
+import lotto.domain.constant.LottoRule;
 
 public class PrizeCountMap {
 
@@ -38,7 +38,7 @@ public class PrizeCountMap {
     }
 
     private double getProfit() {
-        double totalSpentMoney = getLottoCount() * Store.LOTTO_PRICE;
+        double totalSpentMoney = getLottoCount() * LottoRule.PRICE;
         return getTotalPrizeMoney() / totalSpentMoney;
     }
 

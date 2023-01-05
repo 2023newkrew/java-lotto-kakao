@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashMap;
-import lotto.domain.prizestrategy.LottoPrize;
 import org.junit.jupiter.api.Test;
 
 public class PrizeCountMapTest {

@@ -1,4 +1,12 @@
-package lotto.domain.prizestrategy;
+package lotto.domain;
+
+import lotto.domain.prizestrategy.FifthPrizeStrategy;
+import lotto.domain.prizestrategy.FirstPrizeStrategy;
+import lotto.domain.prizestrategy.FourthPrizeStrategy;
+import lotto.domain.prizestrategy.NoPrizeStrategy;
+import lotto.domain.prizestrategy.PrizeStrategy;
+import lotto.domain.prizestrategy.SecondPrizeStrategy;
+import lotto.domain.prizestrategy.ThirdPrizeStrategy;
 
 public enum LottoPrize {
     FIRST_PRIZE(2000000000, "6개 일치", new FirstPrizeStrategy()),

@@ -2,10 +2,10 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.constant.LottoRule;
 
 public class Lotto {
 
-    public static final int LOTTO_NUMBER_LENGTH = 6;
     private final List<SingleLottoNumber> singleLottoNumberList;
 
     public Lotto(List<SingleLottoNumber> singleLottoNumberList) {
@@ -15,7 +15,7 @@ public class Lotto {
     }
 
     private void validateLottoNumbers(List<SingleLottoNumber> singleLottoNumbers) {
-        if (singleLottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
+        if (singleLottoNumbers.size() != LottoRule.LENGTH) {
             throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
         }
 

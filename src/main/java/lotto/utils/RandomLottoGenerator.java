@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.SingleLottoNumber;
+import lotto.domain.constant.LottoRule;
 
 public class RandomLottoGenerator {
 
@@ -13,7 +14,7 @@ public class RandomLottoGenerator {
     }
 
     private static final List<SingleLottoNumber> lottoBalls =
-            IntStream.rangeClosed(SingleLottoNumber.MIN_LOTTO_NUMBER, SingleLottoNumber.MAX_LOTTO_NUMBER)
+            IntStream.rangeClosed(LottoRule.MIN_NUMBER, LottoRule.MAX_NUMBER)
                     .mapToObj(SingleLottoNumber::new)
                     .collect(Collectors.toList());
 
@@ -26,7 +27,7 @@ public class RandomLottoGenerator {
     private static List<SingleLottoNumber> getRandomLottoNumbers() {
         Collections.shuffle(lottoBalls);
         return lottoBalls.stream()
-                .limit(Lotto.LOTTO_NUMBER_LENGTH)
+                .limit(LottoRule.LENGTH)
                 .sorted()
                 .collect(Collectors.toList());
     }
