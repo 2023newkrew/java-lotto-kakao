@@ -2,7 +2,6 @@ package view;
 
 import domain.lotto.LotteryNumbers;
 import domain.lotto.LotteryResult;
-import util.StringParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +28,7 @@ public class InputView {
 
     private LotteryNumbers getWinningNumbersInput() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new LotteryNumbers(StringParser.parse(scanner.nextLine()));
+        return new LotteryNumbers(scanner.nextLine());
     }
 
     private int getBonusNumberInput() {
@@ -53,7 +52,7 @@ public class InputView {
 
         List<LotteryNumbers> result = new ArrayList<>();
         for (int i = 0; i < cnt; ++i) {
-            result.add(new LotteryNumbers(StringParser.parse(getManualNumbers())));
+            result.add(new LotteryNumbers(getManualNumbers()));
         }
         System.out.println();
 

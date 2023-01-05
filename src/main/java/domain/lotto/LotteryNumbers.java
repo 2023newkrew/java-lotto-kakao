@@ -1,5 +1,7 @@
 package domain.lotto;
 
+import util.StringParser;
+
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -9,6 +11,10 @@ public class LotteryNumbers {
     private static final int LOTTERY_NUMBER_SIZE = 6;
 
     private final Set<LotteryNumber> numbers = new TreeSet<>();
+
+    public LotteryNumbers(String numbers) {
+        this(StringParser.parse(numbers));
+    }
 
     public LotteryNumbers(List<Integer> numbers) {
         for (Integer number : numbers) {
