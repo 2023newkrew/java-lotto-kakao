@@ -2,6 +2,9 @@ package domain;
 
 import common.state.Result;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -48,7 +51,8 @@ public class TotalResult {
                 .map(this::getWinningsOfResult)
                 .reduce(Integer::sum)
                 .orElse(0);
-        return Math.floor((double) winnings * 100.0 / (double) paidPrice) / 100.0;
+        return new BigDecimal((double) winnings / (double) paidPrice).setScale(2, RoundingMode.FLOOR)
+                .doubleValue();
     }
 
     public List<String> getTotalResultMessage() {
