@@ -9,15 +9,15 @@ public enum LottoResultType {
     SECOND_PLACE(30_000_000, "5개 일치, 보너스 볼 일치(30000000원)"),
     FIRST_PLACE(2_000_000_000, "6개 일치 (2000000000원)");
 
-    private final Integer prize;
+    private final int prize;
     private final String message;
 
-    LottoResultType(final Integer prize, final String message) {
+    LottoResultType(final int prize, final String message) {
         this.prize = prize;
         this.message = message;
     }
 
-    public Integer getPrize() {
+    public int getPrize() {
         return prize;
     }
 

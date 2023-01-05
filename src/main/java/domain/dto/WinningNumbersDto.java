@@ -7,7 +7,7 @@ public class WinningNumbersDto {
     private List<Integer> lottoNumbers;
     private Integer bonusNumber;
 
-    public WinningNumbersDto(List<Integer> lottoNumbers, Integer bonusNumber) {
+    public WinningNumbersDto(List<Integer> lottoNumbers, int bonusNumber) {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
         this.bonusNumber = bonusNumber;
     }

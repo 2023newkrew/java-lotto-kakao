@@ -1,6 +1,5 @@
 package domain.lotto.ticket;
 
-import domain.lotto.LottoMetaData;
 import domain.lotto.number.LottoNumbers;
 
 import java.util.*;

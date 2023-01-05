@@ -1,8 +1,5 @@
 package domain.lotto.result;
 
-import domain.lotto.LottoMetaData;
-
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,16 +22,16 @@ public class LottoResults {
         lottoResultCount.put(resultType, lottoResultCount.getOrDefault(resultType, 0) + 1);
     }
 
-    public Float getProfitRate() {
-        Integer ticketNumber = lottoResultCount.keySet().stream()
+    public float getProfitRate() {
+        int ticketNumber = lottoResultCount.keySet().stream()
                 .mapToInt(lottoResultCount::get)
                 .sum();
-        Integer budget = ticketNumber * LOTTO_TICKET_PRICE;
+        int budget = ticketNumber * LOTTO_TICKET_PRICE;
 
-        Integer profit = lottoResultCount.keySet().stream()
+        int profit = lottoResultCount.keySet().stream()
                 .mapToInt((key) -> lottoResultCount.get(key) * key.getPrize())
                 .sum();
 
-        return profit.floatValue() / budget;
+        return (float)profit / budget;
     }
 }

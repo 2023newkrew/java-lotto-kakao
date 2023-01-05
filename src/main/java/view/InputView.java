@@ -1,7 +1,6 @@
 package view;
 
 import domain.dto.WinningNumbersDto;
-import domain.lotto.LottoMetaData;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -25,7 +24,7 @@ public class InputView {
     private static Integer tryInputPurchaseBudget() {
         try {
             System.out.println("구입 금액을 입력해 주세요.");
-            Integer purchaseBudget = sc.nextInt();
+            int purchaseBudget = sc.nextInt();
             validatePurchaseBudget(purchaseBudget);
             return purchaseBudget;
         } catch (IllegalArgumentException e) {
@@ -37,8 +36,8 @@ public class InputView {
         return null;
     }
 
-    private static void validatePurchaseBudget(final Integer purchaseBudget) {
-        if (purchaseBudget == null || purchaseBudget == 0)
+    private static void validatePurchaseBudget(final int purchaseBudget) {
+        if (purchaseBudget == 0)
             throw new IllegalArgumentException("구입 금액을 입력해주세요. (" + LOTTO_TICKET_PRICE + "원 단위)");
 
         if (purchaseBudget % LOTTO_TICKET_PRICE != 0)
@@ -62,7 +61,7 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
-    private static Integer inputBonusNumber() {
+    private static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return sc.nextInt();
     }

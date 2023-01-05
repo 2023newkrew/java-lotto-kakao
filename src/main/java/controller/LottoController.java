@@ -25,7 +25,7 @@ public class LottoController {
         OutputView.printLottoResults(lottoResults);
     }
 
-    private LottoTickets createLottoTickets(final Integer purchaseAmount, final NumberGeneratable numberGenerator) {
+    private LottoTickets createLottoTickets(final int purchaseAmount, final NumberGeneratable numberGenerator) {
         LottoNumberMaker lottoNumberMaker = new LottoNumberMaker();
         List<LottoTicket> lottoTicketList = new ArrayList<>();
         for (int i = 0; i < purchaseAmount; i++) {

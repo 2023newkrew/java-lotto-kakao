@@ -17,7 +17,7 @@ public class LottoChecker {
                 lottoTicket.getLottoNumbers().contains(winningNumbers.getBonusNumber()));
     }
 
-    private static LottoResultType getRank(final Integer size, final Boolean hasBonusNumber) {
+    private static LottoResultType getRank(final int size, final boolean hasBonusNumber) {
         if (size < 3) return LottoResultType.FAIL;
         if (size == 3) return LottoResultType.FIFTH_PLACE;
         if (size == 4) return LottoResultType.FOURTH_PLACE;
