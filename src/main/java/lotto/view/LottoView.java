@@ -34,8 +34,9 @@ public class LottoView implements AutoCloseable {
         }
     }
 
-    public void printPurchaseTickets(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
+    public void printPurchaseTickets(int manualLottoTicketsCount, List<LottoTicket> lottoTickets) {
+        int autoLottoTicketsCount = lottoTickets.size() - manualLottoTicketsCount;
+        System.out.println("수동으로 " + manualLottoTicketsCount + "장, 자동으로 " + autoLottoTicketsCount + "개를 구매했습니다.");
         for (LottoTicket lottoTicket : lottoTickets) {
             printLottoTicket(lottoTicket);
         }

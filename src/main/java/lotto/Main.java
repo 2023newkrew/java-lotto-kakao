@@ -39,23 +39,26 @@ public class Main {
 
     private static void buyLottoTickets() {
         try {
-            // 수동 로또 구매
             int manualLottoTicketsCount = lottoView.getManualLottoTicketsCount();
-            seller.checkHasEnoughMoneyForManualLottoTickets(manualLottoTicketsCount, player.getCurrentMoney());
-            player.buyManualLottoTickets(seller, getManualLottoTickets(manualLottoTicketsCount));
+            // 수동 로또 구매
+            buyManualLottoTickets(manualLottoTicketsCount);
             // 남은 돈으로 자동 로또 구매
             player.buyAutoLottoTickets(seller);
             // 로또 결과 초기화
             player.initPlayerLottoResult();
             // 구매한 로또 숫자 출력
-            lottoView.printPurchaseTickets(player.getLottoTickets());
+            lottoView.printPurchaseTickets(manualLottoTicketsCount, player.getLottoTickets());
         } catch (IllegalArgumentException e) {
             lottoView.printErrorMessage(e.getMessage());
             buyLottoTickets();
         }
     }
 
-    //TODO: 메서드 분리해야 함.
+    private static void buyManualLottoTickets(int manualLottoTicketsCount) {
+        seller.checkHasEnoughMoneyForManualLottoTickets(manualLottoTicketsCount, player.getCurrentMoney());
+        player.buyManualLottoTickets(seller, getManualLottoTickets(manualLottoTicketsCount));
+    }
+
     private static List<LottoTicket> getManualLottoTickets(int manualLottoTicketsCount) {
         try {
             List<LottoTicket> lottoTickets = new ArrayList<>();
