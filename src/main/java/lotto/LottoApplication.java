@@ -3,11 +3,12 @@ package lotto;
 import lotto.controller.LottoGame;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinnerTicket;
-import lotto.service.LottoCalculator;
+import lotto.utils.LottoRank;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class LottoApplication {
 
@@ -30,11 +31,12 @@ public class LottoApplication {
 
         // Winner 뽑아내기
         LottoWinnerTicket lottoWinnerTicket = inputView.changeToWinnerTicket(winNumber, bonus);
-        LottoCalculator lottoCalculator = new LottoCalculator(lottoWinnerTicket);
-        ArrayList<Integer> result = lottoCalculator.getResult(lottoGame.getLottoTickets());
+        Map<LottoRank, Integer> result = lottoWinnerTicket.getResult(lottoTicket);
+
+        result.entrySet().forEach((rank) -> System.out.println(rank.getValue()));
 
         // 당첨 통계 출력
-        double rate = lottoCalculator.calcRateOfReturn(amount);
+        double rate = lottoWinnerTicket.calcRateOfReturn(amount, result);
         resultView.printWinningStatics(result, rate);
     }
 }

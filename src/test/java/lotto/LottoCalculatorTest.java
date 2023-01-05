@@ -2,7 +2,6 @@ package lotto;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinnerTicket;
-import lotto.service.LottoCalculator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

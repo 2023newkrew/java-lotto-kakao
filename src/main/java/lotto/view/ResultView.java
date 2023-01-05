@@ -2,11 +2,14 @@ package lotto.view;
 
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.utils.LottoRank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static lotto.utils.LottoMessage.*;
+import static lotto.utils.LottoRank.*;
 
 public class ResultView {
 
@@ -14,15 +17,22 @@ public class ResultView {
         System.out.println(amount + RESULT_PURCHASE_COUNT.getMessage());
     }
 
-    public void printWinningStatics(ArrayList<Integer> result, double rate){
+    public void printWinningStatics(Map<LottoRank, Integer> result, double rate){
         System.out.println(RESULT_WINNING_STAT.getMessage());
         System.out.println(RESULT_LINE.getMessage());
-        System.out.println(RESULT_THREE_MATCHING.getMessage() + result.get(0));
-        System.out.println(RESULT_FOUR_MATCHING.getMessage() + result.get(1));
-        System.out.println(RESULT_FIVE_MATCHING.getMessage() + result.get(2));
-        System.out.println(RESULT_FIVE_BONUS_MATCHING.getMessage() + result.get(4));
-        System.out.println(RESULT_SIX_MATCHING.getMessage() + result.get(3));
+        System.out.println(RESULT_THREE_MATCHING.getMessage() + resultCount(result, FIFTH));
+        System.out.println(RESULT_FOUR_MATCHING.getMessage() + resultCount(result, FOURTH));
+        System.out.println(RESULT_FIVE_MATCHING.getMessage() + resultCount(result, THIRD));
+        System.out.println(RESULT_FIVE_BONUS_MATCHING.getMessage() + resultCount(result, SECOND));
+        System.out.println(RESULT_SIX_MATCHING.getMessage() + resultCount(result, FIRST));
         printRateOfReturn(rate);
+    }
+
+    // 각 등수 당 몇 개씩 당첨 되었는지
+    private int resultCount(Map<LottoRank, Integer> result, LottoRank rank){
+        Integer count = result.get(rank);
+        if(count == null) count = 0;
+        return count;
     }
 
     private void printRateOfReturn(double rate){
