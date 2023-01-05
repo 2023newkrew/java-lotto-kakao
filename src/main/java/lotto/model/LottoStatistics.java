@@ -11,17 +11,17 @@ public class LottoStatistics {
         lottoStatistics = new EnumMap<>(LottoResult.class);
         {
             Arrays.stream(LottoResult.values())
-                    .forEach(lottoResult -> lottoStatistics.putIfAbsent(lottoResult, 0))
+                    .forEach(lottoResult -> lottoStatistics.put(lottoResult, 0))
             ;
         }
     }
 
     public void put(LottoResult lottoResult) {
-        lottoStatistics.put(lottoResult, lottoStatistics.getOrDefault(lottoResult, 0) + 1);
+        lottoStatistics.put(lottoResult, lottoStatistics.get(lottoResult) + 1);
     }
 
     public Integer get(LottoResult lottoResult) {
-        return lottoStatistics.getOrDefault(lottoResult, 0);
+        return lottoStatistics.get(lottoResult);
     }
 
     public Integer getProfit() {
