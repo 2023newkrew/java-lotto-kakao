@@ -39,6 +39,7 @@
 #### domain.rank
 - LotteryRank : 등수 정보(상금, 산정 기준)를 가지는 등수의 Enum 클래스
 - RankCriteria : 로또 등수 산정 기준
+- IsBonusRequired : 참, 거짓, 상관 없음 세 가지 정보를 저장하기 위한 Enum 클래스
 
 ### constant
 - LotteryConstant : 각종 상수 보관
@@ -90,7 +91,7 @@
 
 #### domain.rank
 - RankCriteria
-  - [ ] 매칭 개수, 보너스 포함 여부가 해당 등수 기준에 부합하는지 판별한다.
+  - [x] 매칭 개수, 보너스 포함 여부가 해당 등수 기준에 부합하는지 판별한다.
 
 ---
 
