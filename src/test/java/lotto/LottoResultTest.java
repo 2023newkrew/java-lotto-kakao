@@ -53,7 +53,7 @@ class LottoResultTest {
         stat.add(LottoRank.FIRST);
         stat.add(LottoRank.SECOND);
         stat.add(LottoRank.FIFTH);
-        int totalPrize = (LottoRank.FIRST.PRIZE + LottoRank.SECOND.PRIZE + LottoRank.FIFTH.PRIZE);
+        long totalPrize = (LottoRank.FIRST.PRIZE + LottoRank.SECOND.PRIZE + LottoRank.FIFTH.PRIZE);
         double profitRate = totalPrize / (double) (3 * LottoPayment.LOTTO_COST);
         assertThat(stat.getPrizeAmount()).isEqualTo(totalPrize);
         assertThat(stat.getProfitRate()).isCloseTo(profitRate, within(0.0001));
