@@ -3,9 +3,9 @@ package lotto;
 import java.util.Arrays;
 
 public enum Rank {
-    FIRST(new LottoMatch(6, false), 2000000000),
-    SECOND(new LottoMatch(5, true), 30000000),
-    THIRD(new LottoMatch(5, false), 1500000),
+    FIRST(new LottoMatch(6, false), 2_000_000_000),
+    SECOND(new LottoMatch(5, true), 30_000_000),
+    THIRD(new LottoMatch(5, false), 1_500_000),
     FOURTH(new LottoMatch(4, false), 50000),
     FIFTH(new LottoMatch(3, false), 5000),
     NONE(new LottoMatch(0, false), 0);
