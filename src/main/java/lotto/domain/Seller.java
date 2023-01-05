@@ -15,7 +15,14 @@ public class Seller {
         this.lottoNumberPicker = new LottoNumberPicker();
     }
 
-    public List<LottoTicket> sellLottoTickets(Money payMoney) {
+    public void checkHasEnoughMoneyForManualLottoTickets(int manualLottoTicketsCount, Money money) {
+        Money requiredMoney = SINGLE_LOTTO_TICKET_PRICE.multiply(manualLottoTicketsCount);
+        if (money.isSmallerThan(requiredMoney)) {
+            throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR_MESSAGE);
+        }
+    }
+
+    public List<LottoTicket> sellAutoLottoTickets(Money payMoney) {
         validatePayMoney(payMoney);
         int lottoTicketCount = (int) payMoney.divideBy(SINGLE_LOTTO_TICKET_PRICE);
         List<LottoTicket> lottoTicketBought = new ArrayList<>();
@@ -33,12 +40,5 @@ public class Seller {
 
     public Money calculateTotalPrice(List<LottoTicket> lottoTickets) {
         return SINGLE_LOTTO_TICKET_PRICE.multiply(lottoTickets.size());
-    }
-
-    public void checkHasEnoughMoney(int manualLottoTicketsCount, Money money) {
-        Money requiredMoney = SINGLE_LOTTO_TICKET_PRICE.multiply(manualLottoTicketsCount);
-        if (money.isSmallerThan(requiredMoney)) {
-            throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR_MESSAGE);
-        }
     }
 }

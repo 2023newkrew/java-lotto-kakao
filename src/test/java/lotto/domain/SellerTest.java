@@ -19,8 +19,8 @@ public class SellerTest {
         Money payMoney2 = new Money(13500);
 
         //when
-        List<LottoTicket> lottoTickets = seller.sellLottoTickets(payMoney);
-        List<LottoTicket> lottoTickets2 = seller.sellLottoTickets(payMoney2);
+        List<LottoTicket> lottoTickets = seller.sellAutoLottoTickets(payMoney);
+        List<LottoTicket> lottoTickets2 = seller.sellAutoLottoTickets(payMoney2);
 
         //then
         assertThat(lottoTickets.size()).isEqualTo(14);
@@ -34,7 +34,7 @@ public class SellerTest {
         int lottoTicketsCount = 5;
         Money enoughMoney = new Money(10_000);
         //when, then
-        assertDoesNotThrow(() -> seller.checkHasEnoughMoney(lottoTicketsCount, enoughMoney));
+        assertDoesNotThrow(() -> seller.checkHasEnoughMoneyForManualLottoTickets(lottoTicketsCount, enoughMoney));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class SellerTest {
         int tooManyLottoTicketsCount = 5;
         Money notEnoughMoney = new Money(3_000);
         //when, then
-        assertThatThrownBy(() -> seller.checkHasEnoughMoney(tooManyLottoTicketsCount, notEnoughMoney))
+        assertThatThrownBy(() -> seller.checkHasEnoughMoneyForManualLottoTickets(tooManyLottoTicketsCount, notEnoughMoney))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -56,7 +56,7 @@ public class SellerTest {
         Money payMoney = new Money(validMoney);
 
         // when & then
-        assertDoesNotThrow(() -> seller.sellLottoTickets(payMoney));
+        assertDoesNotThrow(() -> seller.sellAutoLottoTickets(payMoney));
     }
 
     @ParameterizedTest
@@ -67,7 +67,7 @@ public class SellerTest {
         Money payMoney = new Money(invalidMoney);
 
         // when & then
-        assertThatThrownBy(() -> seller.sellLottoTickets(payMoney))
+        assertThatThrownBy(() -> seller.sellAutoLottoTickets(payMoney))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("최소 1,000원 이상을 지불해야 합니다.");
     }
