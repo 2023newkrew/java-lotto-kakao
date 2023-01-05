@@ -11,7 +11,7 @@ public final class LottoConstants {
     public static final long LOTTO_UNIT_PRICE = 1000;
     public static final long ZERO_WINNING = 0;
     public static final int LOTTO_MINIMUM_NON_EXISTENT_PRICE = 0;
+    
     public static final int ZERO_REMAINDER = 0;
-
     public static final String LOTTO_NUMBERS_INPUT_DELIMITER = ",";
 }
