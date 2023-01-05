@@ -14,17 +14,21 @@ public class Issuer {
         }
     }
 
-    private static Lotto issue() {
+    public static Lotto issueManualLotto(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
+    private static Lotto issueRandomLotto() {
         Collections.shuffle(numberPool);
         List<Integer> numbers = new ArrayList<>(numberPool.subList(0, LottoSettings.MAX_LENGTH.getValue()));
         Collections.sort(numbers);
         return new Lotto(numbers);
     }
 
-    public static LottoList issue(Integer count) {
+    public static LottoList issueRandomLotto(Integer count) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottoList.add(issue());
+            lottoList.add(issueRandomLotto());
         }
         return new LottoList(lottoList);
     }

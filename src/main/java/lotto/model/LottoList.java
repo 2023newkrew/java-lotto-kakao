@@ -8,12 +8,16 @@ public class LottoList {
 
     private final List<Lotto> lottoList;
 
-    private LottoList() {
-        throw new UnsupportedOperationException();
-    }
-
     public LottoList(List<Lotto> lottoList) {
         this.lottoList = lottoList;
+    }
+
+    public LottoList() {
+        lottoList = new ArrayList<>();
+    }
+
+    public void add(Lotto lotto) {
+        this.lottoList.add(lotto);
     }
 
     public List<Lotto> getLottoList() {

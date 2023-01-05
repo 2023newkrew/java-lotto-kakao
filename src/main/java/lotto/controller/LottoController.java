@@ -14,24 +14,48 @@ public class LottoController {
 
     public void start() {
         Integer price = inputView.inputPrice();
-        Integer lottoCount = price / LottoSettings.PRICE.getValue();
-        outputView.printLottoCount(lottoCount);
+        LottoCount lottoCount = new LottoCount(price / LottoSettings.PRICE.getValue());
+        Integer manualLottoCount = inputView.inputManualLottoCount();
 
-        LottoList lottoList = Issuer.issue(lottoCount);
-        outputView.printLottoList(lottoList);
+        LottoList lottoList = issueLotto(lottoCount, manualLottoCount);
 
-        List<Integer> mainNumbers = inputView.inputMainNumbers();
+        List<Integer> winningLottoNumbers = inputView.inputWinningLottoNumbers();
         Integer bonusNumber = inputView.inputBonusBall();
 
-        getResult(mainNumbers, bonusNumber, lottoList, price);
+        getResult(winningLottoNumbers, bonusNumber, lottoList, price);
     }
 
-    public void getResult(List<Integer> mainNumbers, Integer bonusNumber, LottoList lottoList, Integer price) {
-        WinningNumbers winningNumbers = new WinningNumbers(mainNumbers, bonusNumber);
+    public LottoList issueLotto(LottoCount lottoCount, Integer manualLottoCount) {
+        lottoCount.validateManualLottoCount(manualLottoCount);
+        LottoList manualLottoList = issueManualLotto(manualLottoCount);
+
+        LottoList randomLottoList = Issuer.issueRandomLotto(lottoCount.get() - manualLottoCount);
+
+        LottoList lottoList = manualLottoList.union(randomLottoList);
+        outputView.printLottoCount(lottoCount, manualLottoCount);
+        outputView.printLottoList(lottoList);
+
+        return lottoList;
+    }
+
+    public LottoList issueManualLotto(Integer manualLottoCount) {
+        LottoList manualLottoList = new LottoList();
+        inputView.messageRequireInputManualLottoNumbers();
+
+        for (int count = 0; count < manualLottoCount; count++) {
+            List<Integer> manualLotto = inputView.inputManualLottoNumbers();
+            manualLottoList.add(Issuer.issueManualLotto(manualLotto));
+        }
+
+        return manualLottoList;
+    }
+
+    public void getResult(List<Integer> winningLottoNumbers, Integer bonusNumber, LottoList lottoList, Integer price) {
+        WinningNumbers winningNumbers = new WinningNumbers(winningLottoNumbers, bonusNumber);
         LottoStatistics lottoStatistics = new LottoStatistics();
 
         for (int i = 0; i < lottoList.length(); i++) {
-            LottoResult lottoResult = LottoResult.match(winningNumbers.check(lottoList.get(i)));
+            LottoResult lottoResult = LottoResult.match(winningNumbers.match(lottoList.get(i)));
             lottoStatistics.put(lottoResult);
         }
 

@@ -27,7 +27,7 @@ public class WinningNumbersTest {
     @DisplayName("당첨 번호와 로또 번호 비교 결과")
     void matched_result_test() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        MatchedResult matchedResult = winningNumbers.check(lotto);
+        MatchedResult matchedResult = winningNumbers.match(lotto);
         assertEquals(matchedResult, new MatchedResult(
                 3, false
         ));
