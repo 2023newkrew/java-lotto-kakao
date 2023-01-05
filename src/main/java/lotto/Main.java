@@ -1,9 +1,12 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
+import lotto.domain.MatchResult;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {

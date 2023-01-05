@@ -1,6 +1,9 @@
 package lotto;
 
-import java.util.*;
+import lotto.domain.*;
+
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;

@@ -1,7 +1,13 @@
 package lotto.view;
 
-import lotto.*;
-import org.junit.jupiter.api.*;
+import lotto.domain.LottoBall;
+import lotto.domain.LottoTicket;
+import lotto.domain.MatchResult;
+import lotto.domain.Ranking;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
