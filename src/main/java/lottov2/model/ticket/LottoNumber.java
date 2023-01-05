@@ -33,8 +33,18 @@ public class LottoNumber {
         Collections.shuffle(numberCandidate);
 
         return LottoNumber.of(Set.copyOf(numberCandidate.subList(0, SIZE)));
-
     }
+
+    public boolean hasNumber(SingleLottoNumber singleNumber){
+        return numbers.contains(singleNumber);
+    }
+
+    public int countCommonNumber(LottoNumber other) {
+        return (int) numbers.stream()
+                .filter(other::hasNumber)
+                .count();
+    }
+
     public Stream<SingleLottoNumber> stream() {
         return numbers.stream();
     }
