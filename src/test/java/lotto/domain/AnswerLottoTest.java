@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import lotto.domain.prizestrategy.LottoPrize;
 import org.junit.jupiter.api.Test;
 
 public class AnswerLottoTest {

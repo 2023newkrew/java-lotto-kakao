@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import lotto.domain.prizestrategy.LottoPrize;
 
 public class LottoCalculator {
 

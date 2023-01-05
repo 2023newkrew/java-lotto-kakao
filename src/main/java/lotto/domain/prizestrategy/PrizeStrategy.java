@@ -1,7 +1,7 @@
-package lotto.domain;
+package lotto.domain.prizestrategy;
 
 @FunctionalInterface
-interface PrizeStrategy {
+public interface PrizeStrategy {
 
     boolean isQualified(int matchNumberCount, boolean hasMagicNumber);
 }
