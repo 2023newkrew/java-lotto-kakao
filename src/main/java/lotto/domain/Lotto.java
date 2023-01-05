@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.constant.ExceptionMessages.INVALID_DUPLICATED_LOTTO_NUMBER;
 import static lotto.constant.ExceptionMessages.INVALID_LOTTO_SIZE;
+import static lotto.domain.LottoNumber.LOTTO_NUMBER_POOL;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,11 +12,20 @@ public class Lotto {
     public static final int LOTTO_SIZE = 6;
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> numbers) {
+    private Lotto(List<Integer> numbers) {
         validateLotto(numbers);
         this.lottoNumbers = numbers.stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
+    }
+
+    public static Lotto generateLotto(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
+    public static Lotto generateRandomLotto() {
+        Collections.shuffle(LOTTO_NUMBER_POOL);
+        return new Lotto(LOTTO_NUMBER_POOL.subList(0, 6));
     }
 
     private void validateLotto(List<Integer> numbers) {

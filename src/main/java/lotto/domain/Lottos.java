@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import lotto.constant.LottoGrade;
 
@@ -18,6 +19,20 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public static Lottos generateRandomLottosByAmounts(int amount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
+            lottos.add(Lotto.generateRandomLotto());
+        }
+        return new Lottos(lottos);
+    }
+
+    public static Lottos generateLottosByNumbers(List<List<Integer>> numbersList) {
+        return new Lottos(numbersList.stream()
+                .map(Lotto::generateLotto)
+                .collect(Collectors.toList()));
+    }
+
     private void validateLottos(List<Lotto> lottos) {
         if (lottos == null || lottos.size() == 0)
             throw new IllegalArgumentException(INVALID_PRICE_AMOUNT);
@@ -28,6 +43,10 @@ public class Lottos {
         created.addAll(lottos);
 
         return new Lottos(created);
+    }
+
+    public Lottos addAll(Lottos lottos) {
+        return addAll(lottos.getLottos());
     }
 
     public List<Lotto> getLottos() {
