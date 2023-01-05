@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.model.campany.LottoRanking;
-import lotto.model.campany.LottoStats;
+import lotto.model.company.LottoRanking;
+import lotto.model.company.LottoStats;
 import lotto.model.ticket.LottoNumber;
 import lotto.model.ticket.LottoTicket;
 

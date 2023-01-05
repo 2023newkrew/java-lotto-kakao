@@ -1,4 +1,4 @@
-package lotto.model.campany;
+package lotto.model.company;
 
 import lotto.model.ticket.LottoNumber;
 import lotto.model.ticket.LottoTicket;

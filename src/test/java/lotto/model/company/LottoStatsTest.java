@@ -1,4 +1,4 @@
-package lotto.model.campany;
+package lotto.model.company;
 
 import lotto.model.store.Money;
 import org.assertj.core.api.Assertions;

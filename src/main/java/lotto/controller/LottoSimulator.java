@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.model.campany.LottoCompany;
-import lotto.model.campany.LottoStats;
+import lotto.model.company.LottoCompany;
+import lotto.model.company.LottoStats;
 import lotto.model.store.LottoStore;
 import lotto.model.store.LottoWallet;
 import lotto.model.store.Money;
