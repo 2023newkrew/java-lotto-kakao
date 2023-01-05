@@ -27,6 +27,27 @@ public class SellerTest {
         assertThat(lottoTickets2).hasSize(13);
     }
 
+    @Test
+    void 수동_구매를_위한_돈이_충분하면_예외를_던지지_않는다() {
+        //given
+        Seller seller = new Seller();
+        int lottoTicketsCount = 5;
+        Money enoughMoney = new Money(10_000);
+        //when, then
+        assertDoesNotThrow(() -> seller.checkHasEnoughMoney(lottoTicketsCount, enoughMoney));
+    }
+
+    @Test
+    void 수동_구매를_위한_돈이_모자르면_예외를_던진다() {
+        //given
+        Seller seller = new Seller();
+        int tooManyLottoTicketsCount = 5;
+        Money notEnoughMoney = new Money(3_000);
+        //when, then
+        assertThatThrownBy(() -> seller.checkHasEnoughMoney(tooManyLottoTicketsCount, notEnoughMoney))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     @ParameterizedTest
     @ValueSource(ints = {1_000, 3_000, 5_000_000})
     void 구매자의_돈은_1000원_이상이여야한다(int validMoney) {

@@ -7,6 +7,7 @@ public class Seller {
 
     private static final Money SINGLE_LOTTO_TICKET_PRICE = new Money(1000);
     private static final String MINIMUM_MONEY_ERROR_MESSAGE = "최소 1,000원 이상을 지불해야 합니다.";
+    private static final String NOT_ENOUGH_MONEY_ERROR_MESSAGE = "돈이 모자라 구매할 수 없습니다.";
 
     private final LottoNumberPicker lottoNumberPicker;
 
@@ -32,5 +33,12 @@ public class Seller {
 
     public Money calculateTotalPrice(List<LottoTicket> lottoTickets) {
         return SINGLE_LOTTO_TICKET_PRICE.multiply(lottoTickets.size());
+    }
+
+    public void checkHasEnoughMoney(int manualLottoTicketsCount, Money money) {
+        Money requiredMoney = SINGLE_LOTTO_TICKET_PRICE.multiply(manualLottoTicketsCount);
+        if (money.isSmallerThan(requiredMoney)) {
+            throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR_MESSAGE);
+        }
     }
 }
