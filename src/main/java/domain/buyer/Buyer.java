@@ -30,10 +30,6 @@ public class Buyer {
         return buyingPlan.getAutoCount();
     }
 
-    public int getTotalLotteryCount() {
-        return buyingPlan.getTotalCount();
-    }
-
     public List<LotteryDTO> getLotteries() {
         return lotteries.getLotteryDTOs();
     }
