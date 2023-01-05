@@ -12,8 +12,7 @@ public class LottoTicket {
 
     public static LottoTicket of(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
-                .mapToInt(number -> number)
-                .mapToObj(LottoNumber::new)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
         return new LottoTicket(lottoNumbers);
