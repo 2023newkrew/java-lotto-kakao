@@ -1,11 +1,11 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoWinningNumberList;
+import lotto.domain.result.LottoResult;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoWinningNumberList;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

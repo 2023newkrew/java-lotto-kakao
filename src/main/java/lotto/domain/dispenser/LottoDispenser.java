@@ -1,8 +1,11 @@
-package lotto.domain;
+package lotto.domain.dispenser;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.domain.game.LottoSetting;
 import lotto.domain.strategy.NumberSelectStrategy;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoTicketList;
 
 public class LottoDispenser {
 

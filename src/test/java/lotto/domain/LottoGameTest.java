@@ -1,9 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoSetting;
+import lotto.domain.game.LottoGame;
+import lotto.domain.game.LottoSetting;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

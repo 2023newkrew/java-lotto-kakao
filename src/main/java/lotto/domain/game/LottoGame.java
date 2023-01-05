@@ -1,9 +1,14 @@
-package lotto.domain;
+package lotto.domain.game;
 
 import java.util.List;
+import lotto.domain.dispenser.LottoDispenser;
+import lotto.domain.result.LottoIncomeRate;
+import lotto.domain.result.LottoStatistics;
 import lotto.domain.strategy.ManualNumberSelectStrategy;
 import lotto.domain.strategy.NumberSelectStrategy;
 import lotto.domain.strategy.RandomNumberSelectStrategy;
+import lotto.domain.ticket.LottoTicketList;
+import lotto.domain.ticket.LottoWinningNumberList;
 
 public class LottoGame {
 

@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumberSet;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumberSet;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

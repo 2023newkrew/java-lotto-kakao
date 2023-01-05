@@ -1,8 +1,10 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.LottoStatistics;
 
 public class LottoTicketList {
 

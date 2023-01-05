@@ -1,8 +1,10 @@
-package lotto.domain;
+package lotto.domain.ticket;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.domain.number.LottoNumberSet;
+import lotto.domain.result.LottoResult;
 
 public class LottoTicket {
 

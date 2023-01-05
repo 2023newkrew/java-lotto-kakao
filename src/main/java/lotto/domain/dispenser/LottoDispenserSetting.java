@@ -1,5 +1,6 @@
-package lotto.domain;
+package lotto.domain.dispenser;
 
+import lotto.domain.game.LottoSetting;
 import lotto.domain.strategy.NumberSelectStrategy;
 
 public class LottoDispenserSetting {

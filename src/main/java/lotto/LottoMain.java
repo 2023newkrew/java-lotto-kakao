@@ -1,9 +1,9 @@
 package lotto;
 
 import java.util.List;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoSetting;
-import lotto.domain.LottoWinningNumberList;
+import lotto.domain.game.LottoGame;
+import lotto.domain.game.LottoSetting;
+import lotto.domain.ticket.LottoWinningNumberList;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 

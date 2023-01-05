@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.LottoDispenser;
-import lotto.domain.LottoSetting;
-import lotto.domain.LottoTicketList;
+import lotto.domain.dispenser.LottoDispenser;
+import lotto.domain.game.LottoSetting;
+import lotto.domain.ticket.LottoTicketList;
 import lotto.domain.strategy.ManualNumberSelectStrategy;
 import lotto.domain.strategy.NumberSelectStrategy;
 import lotto.domain.strategy.RandomNumberSelectStrategy;

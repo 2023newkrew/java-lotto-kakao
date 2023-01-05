@@ -1,10 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.LottoIncomeRate;
-import lotto.domain.LottoResult;
-import lotto.domain.LottoStatistics;
+import lotto.domain.result.LottoIncomeRate;
+import lotto.domain.result.LottoResult;
+import lotto.domain.result.LottoStatistics;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
