@@ -5,14 +5,14 @@ public class LottoPayment {
 
     private int wallet;
 
-    public static int getAmount(int purchase) {
-        if (purchase < 1000) {
-            throw new RuntimeException("로또를 구매하기 위한 금액이 부족합니다.");
-        }
-        return Math.max(0, purchase / LOTTO_COST);
+    public int getAmount() {
+        return Math.max(0, wallet / LOTTO_COST);
     }
 
     public LottoPayment(int purchase) {
+        if (wallet < 0) {
+            throw new RuntimeException("로또를 구매하기 위한 금액이 부족합니다.");
+        }
         wallet = purchase;
     }
 

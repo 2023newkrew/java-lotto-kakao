@@ -14,7 +14,7 @@ class LottoGenerateTest {
     @Test
     @DisplayName("로또 하나당 1000원이다. 2000원에 두장 살 수 있다")
     void 로또한장에천원() {
-        assertThat(LottoPayment.getAmount(2500)).isEqualTo(2);
+        assertThat(new LottoPayment(2500).getAmount()).isEqualTo(2);
     }
 
     @Test
