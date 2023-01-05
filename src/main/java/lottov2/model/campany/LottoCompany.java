@@ -47,4 +47,12 @@ public class LottoCompany {
 
         return LottoRanking.from(commonNumberCount, hasBonus);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "winningNumber=" + winningNumber +
+                ", bonus=" + bonus +
+                '}';
+    }
 }

@@ -23,4 +23,9 @@ public class LottoTicket {
     public Stream<LottoNumber> stream() {
         return lottos.stream();
     }
+
+    @Override
+    public String toString() {
+        return lottos.toString();
+    }
 }

@@ -48,4 +48,9 @@ public class LottoNumber {
     public Stream<SingleLottoNumber> stream() {
         return numbers.stream();
     }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

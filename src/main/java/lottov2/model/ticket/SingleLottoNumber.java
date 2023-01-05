@@ -55,5 +55,10 @@ public class SingleLottoNumber {
     public int hashCode() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(value);
+    }
 }
 
