@@ -14,7 +14,7 @@ class LottoTest {
     void iAmRich() {
         Lotto myNumber = new Lotto(1, 2, 3, 4, 5, 6);
         Lotto answer = new Lotto(4, 5, 6, 7, 8, 9);
-        assertThat(myNumber.compare(answer)).isEqualTo(3);
+        assertThat(myNumber.getMatchCount(answer)).isEqualTo(3);
     }
 
     @Test

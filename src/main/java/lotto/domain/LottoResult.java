@@ -12,16 +12,16 @@ public class LottoResult {
     }
 
     public LottoRank getRank() {
-        if( LottoRank.FIRST.COUNT == myLotto.compare(winningLotto))
+        if( LottoRank.FIRST.COUNT == myLotto.getMatchCount(winningLotto))
             return LottoRank.FIRST;
-        if(LottoRank.SECOND.COUNT == myLotto.compare(winningLotto)
+        if(LottoRank.SECOND.COUNT == myLotto.getMatchCount(winningLotto)
             && myLotto.hasBonus(bonusNumber))
             return LottoRank.SECOND;
-        if(LottoRank.THIRD.COUNT == myLotto.compare(winningLotto))
+        if(LottoRank.THIRD.COUNT == myLotto.getMatchCount(winningLotto))
             return LottoRank.THIRD;
-        if(LottoRank.FOURTH.COUNT == myLotto.compare(winningLotto))
+        if(LottoRank.FOURTH.COUNT == myLotto.getMatchCount(winningLotto))
             return LottoRank.FOURTH;
-        if(LottoRank.FIFTH.COUNT == myLotto.compare(winningLotto))
+        if(LottoRank.FIFTH.COUNT == myLotto.getMatchCount(winningLotto))
             return LottoRank.FIFTH;
 
         return LottoRank.FAIL;

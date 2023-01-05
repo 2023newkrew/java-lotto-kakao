@@ -26,7 +26,7 @@ public class Lotto {
         this(Arrays.stream(nums).boxed().collect(Collectors.toList()));
     }
 
-    public int compare(Lotto other) {
+    public int getMatchCount(Lotto other) {
         return (int) numbers.stream().filter(other.numbers::contains).count();
     }
 
