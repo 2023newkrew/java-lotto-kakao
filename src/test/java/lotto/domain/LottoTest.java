@@ -1,11 +1,10 @@
 package lotto.domain;
 
 import static lotto.domain.Lotto.makeLotto;
-import static lotto.domain.Lotto.makeLottoAuto;
+import static lotto.domain.Lotto.makeLotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +27,7 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto는_자동으로_생성이_가능하다")
     void Lotto는_자동으로_생성이_가능하다() {
-        assertThatCode(() -> makeLottoAuto(new RandomGeneratePolicy())).doesNotThrowAnyException();
+        assertThatCode(() -> Lotto.makeLotto(new RandomGeneratePolicy())).doesNotThrowAnyException();
     }
 
     @Test

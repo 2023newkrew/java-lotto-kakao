@@ -16,7 +16,6 @@ public class LottoNumbers {
     public static LottoNumbers makeLottoNumbers(List<Integer> integers) {
         return new LottoNumbers(integers.stream().map(LottoNumber::from).collect(Collectors.toList()));
     }
-
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);

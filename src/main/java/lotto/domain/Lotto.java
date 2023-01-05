@@ -20,7 +20,7 @@ public class Lotto {
         }
     }
 
-    public static Lotto makeLottoAuto(GeneratePolicy generatePolicy) {
+    public static Lotto makeLotto(GeneratePolicy generatePolicy) {
         List<Integer> numbers = new ArrayList<>();
         while (isNotFull(numbers)) {
             addGeneratedNumber(numbers, generatePolicy.generate());
@@ -33,8 +33,16 @@ public class Lotto {
     }
 
 
+    public static Lotto makeLotto(LottoNumbers lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
+
     private Lotto(List<Integer> numbers) {
         this.lottoNumbers = makeLottoNumbers(numbers);
+    }
+    private Lotto(LottoNumbers lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
     }
 
     public LottoResult match(LottoAnswer lottoAnswer) {

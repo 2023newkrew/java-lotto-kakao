@@ -50,8 +50,8 @@
 - [ ] Lottos의 결과를 얻는다
 
 #### Lottos
-- [ ] List\<Lotto\>를 가진 일급 객체이다.
-- [ ] List\<Lotto\>의 등수를 매기는 기능이 존재한다.
+- [x] List\<Lotto\>를 가진 일급 객체이다.
+- [x] List\<Lotto\>의 등수를 매기는 기능이 존재한다.
 
 #### Lotto
 - [x] 수동 생성 기능이 있다.
