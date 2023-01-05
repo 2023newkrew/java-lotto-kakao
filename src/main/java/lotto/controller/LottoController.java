@@ -12,6 +12,8 @@ public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoTicketSeller seller;
+    private Player player;
+    private WinnerCombination winnerCombination;
 
     public LottoController() {
         this.inputView = new InputView();
@@ -20,39 +22,43 @@ public class LottoController {
     }
 
     public void play() {
-        Player player = initializePlayer();
-        WinnerCombination winnerCombination = getWinnerCombination();
-        announceResult(player, winnerCombination);
+        initializePlayer();
+        buyLotto();
+        getWinnerCombination();
+        announceResult();
     }
 
-    private Player initializePlayer() {
+    private void initializePlayer() {
         try {
             int purchaseMoneyAmount = inputView.getPurchaseMoneyAmount();
-            Player player = new Player(purchaseMoneyAmount);
-
-            int manualLottoCount = inputView.getManualLottoCount();
-            List<List<Integer>> manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount);
-
-            player.buyManualLottoTickets(seller, manualLottoNumbers);
-
-            player.buyAutoLottoTickets(seller);
-
-            outputView.printPurchasedTickets(player);
-            return player;
+            player = new Player(purchaseMoneyAmount);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
-            return initializePlayer();
+            initializePlayer();
         }
     }
 
-    private WinnerCombination getWinnerCombination() {
+    private void buyLotto() {
+        try {
+            int manualLottoCount = inputView.getManualLottoCount();
+            List<List<Integer>> manualLottoNumbers = inputView.getManualLottoNumbers(manualLottoCount);
+            player.buyManualLottoTickets(seller, manualLottoNumbers);
+            player.buyAutoLottoTickets(seller);
+            outputView.printPurchasedTickets(player);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            buyLotto();
+        }
+    }
+
+    private void getWinnerCombination() {
         try {
             LottoTicket lottoTicket = getWinnerTicket();
             LottoBall bonusBall = getBonusBall();
-            return new WinnerCombination(lottoTicket, bonusBall);
+            winnerCombination = new WinnerCombination(lottoTicket, bonusBall);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
-            return getWinnerCombination();
+            getWinnerCombination();
         }
     }
 
@@ -69,7 +75,7 @@ public class LottoController {
         return new LottoBall(Integer.parseInt(bonusBallInput));
     }
 
-    private void announceResult(Player player, WinnerCombination winnerCombination) {
+    private void announceResult() {
         PlayerLottoResult playerLottoResult = player.findResult(winnerCombination);
         outputView.printStats(playerLottoResult);
     }
