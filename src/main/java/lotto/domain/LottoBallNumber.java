@@ -11,6 +11,7 @@ import static lotto.domain.constants.LottoConstants.*;
 /**
  * An object that contains number which represent one lotto ball.<br>
  * Assert that number is between {@code BALLNUMBER_MIN_VALUE} and {@code BALLNUMBER_MAX_VALUE}<br>
+ * @author Daniel.tomi
  */
 public class LottoBallNumber implements Comparable{
 

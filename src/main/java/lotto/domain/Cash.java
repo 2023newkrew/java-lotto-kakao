@@ -10,7 +10,7 @@ import static lotto.domain.constants.LottoStringForm.Korean.CASH_UNIT;
 
 /**
  * Cash class is for containing cash, which guarantees value of Cash is not below 0
- * and automatically
+ * and automatically attach {@code LOTTO_CASH_UNIT} to value when convert to String(toString).
  * @author Daniel.tomi
 */
 

@@ -8,6 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * LottoResult class represents how many lottoNumbers match including Bonus ball.
+ * This can be converted to String, through the format in {@link lotto.domain.constants.LottoStringForm.Korean LottoStringForm.Korean}.
+ * @author daniel.tomi
+ */
 public class LottoResult {
     private final int matchCount;
     private final boolean matchBonus;

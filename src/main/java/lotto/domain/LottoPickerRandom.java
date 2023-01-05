@@ -9,6 +9,7 @@ import static lotto.domain.constants.LottoConstants.*;
 /**
  * LottoPickerRandom is the LottoPicker that picks random LottoBallNumber.
  * Once you picked, the number you picked from pickOne() would not be picked twice unless you make new LottoPicker instance.
+ * @author daniel.tomi
  */
 public class LottoPickerRandom implements LottoPicker{
     private final List<LottoBallNumber> picker = new ArrayList<>();

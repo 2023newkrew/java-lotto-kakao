@@ -1,7 +1,7 @@
 package lotto.domain.constants;
 
 /**
- * This Class contains widely being used constants among lotto package.
+ * This Class contains constants widely being used among lotto.domain package.
  * WARNING : DO NOT CHANGE THIS PARAMETER CARELESSLY. CHANGES ON THESE PARAMETER CAN AFFECT WHOLE PROGRAM.
  */
 public final class LottoConstants {

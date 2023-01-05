@@ -6,6 +6,11 @@ import static lotto.domain.constants.LottoStringForm.Korean.*;
 
 import java.util.Objects;
 
+/**
+ * LottoCount contains count of lottos, which guarantees value of LottoCount is not below 0.
+ * and automatically attach {@code LOTTO_COUNT_UNIT} to value when convert to String(toString).
+ * @author Daniel.tomi
+ */
 public class LottoCount {
 
     private final int count;
