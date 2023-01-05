@@ -1,6 +1,5 @@
 package domain.buyer;
 
-import domain.lotto.Lottery;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +17,6 @@ public class BudgetTest {
     void getAbleLotteryCount() {
         Budget budget = new Budget(12000);
 
-        Assertions.assertThat(budget.getAbleLotteryCount(Lottery.PRICE)).isEqualTo(12000 / Lottery.PRICE);
+        Assertions.assertThat(budget.getAbleLotteryCount(1000)).isEqualTo(12);
     }
 }
