@@ -34,10 +34,7 @@ public class LottoService {
     }
 
     public PriceResult getResult() {
-
-        for (Lotto lotto : lottos.getLottos()) {
-            priceResult.saveResult(winningLotto.getPrice(lotto));
-        }
+        lottos.saveResult(winningLotto, priceResult);
         return priceResult;
     }
 

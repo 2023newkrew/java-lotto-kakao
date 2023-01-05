@@ -18,7 +18,7 @@ public class PriceResult {
         return result;
     }
 
-    public void saveResult(Price price) {
+    public void addResult(Price price) {
         if (price != Price.NOTHING) {
             result.put(price, result.get(price) + 1);
         }

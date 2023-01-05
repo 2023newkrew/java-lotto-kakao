@@ -23,4 +23,10 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return lottos;
     }
+
+    public void saveResult(WinningLotto winningLotto, PriceResult priceResult) {
+        for (Lotto lotto : lottos) {
+            priceResult.addResult(winningLotto.getPrice(lotto));
+        }
+    }
 }
