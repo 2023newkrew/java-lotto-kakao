@@ -10,16 +10,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
 
     private static Lottos lottos;
-    private static WinningLottoWithBonus winningLottoWithBonus;
-    private static Lotto winningLotto;
+    private static WinningLotto winningLotto;
+    private static Lotto lotto;
     private static LottoNumber bonusNumber;
 
     @BeforeAll
     static void setUp() {
         lottos = new Lottos();
-        winningLotto = Lotto.getManualLotto("1, 2, 3, 4, 5, 6");
-        bonusNumber = new LottoNumber(winningLotto, "7");
-        winningLottoWithBonus = new WinningLottoWithBonus(winningLotto, bonusNumber);
+        lotto = Lotto.getManualLotto("1, 2, 3, 4, 5, 6");
+        bonusNumber = new LottoNumber(lotto, "7");
+        winningLotto = new WinningLotto(lotto, bonusNumber);
     }
 
     @DisplayName("수동 로또 번호 추가 시 사이즈 증가 확인 테스트")
@@ -58,7 +58,7 @@ public class LottosTest {
         lottos.addManualLotto(matchFiveBonus);
         lottos.addManualLotto(matchSix);
         Map<Result, Integer> expected = Map.of(Result.NONE, 3, Result.FIFTH_PLACE, 1, Result.SECOND_PLACE, 1, Result.FIRST_PLACE, 1);
-        assertThat(lottos.getTotalResult(winningLottoWithBonus)).isEqualTo(new TotalResult(expected));
+        assertThat(lottos.getTotalResult(winningLotto)).isEqualTo(new TotalResult(expected));
     }
 
 }

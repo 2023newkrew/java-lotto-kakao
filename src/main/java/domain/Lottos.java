@@ -24,10 +24,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public TotalResult getTotalResult(WinningLottoWithBonus winningLottoWithBonus) {
+    public TotalResult getTotalResult(WinningLotto winningLotto) {
         TotalResult totalResult = new TotalResult();
         lottos.stream()
-                .forEach(lotto -> totalResult.increaseValueOfResult(lotto.getResult(winningLottoWithBonus)));
+                .forEach(lotto -> totalResult.increaseValueOfResult(lotto.getResult(winningLotto)));
         return totalResult;
     }
 

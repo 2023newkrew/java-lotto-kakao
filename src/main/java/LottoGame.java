@@ -2,8 +2,6 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
-import java.util.List;
-
 public class LottoGame {
 
     public static Money getPaidPrice() {
@@ -44,10 +42,10 @@ public class LottoGame {
         Money paidPrice = getPaidPrice();
         Count manualLottoCount = getManualLottoCount(paidPrice);
         Lottos lottos = getLottos(manualLottoCount);
-        Lotto winningLotto = getWinningLotto();
-        LottoNumber bonusNumber = getBonusNumber(winningLotto);
-        WinningLottoWithBonus winningLottoWithBonus = new WinningLottoWithBonus(winningLotto, bonusNumber);
-        TotalResult totalResult = lottos.getTotalResult(winningLottoWithBonus);
+        Lotto lotto = getWinningLotto();
+        LottoNumber bonusNumber = getBonusNumber(lotto);
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
+        TotalResult totalResult = lottos.getTotalResult(winningLotto);
         OutputView.printTotalResult(totalResult.getTotalResultMessage());
         OutputView.printProfit(totalResult.getProfitMessage(paidPrice.getMoney()));
     }

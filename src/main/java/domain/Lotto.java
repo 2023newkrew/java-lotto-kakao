@@ -41,12 +41,12 @@ public class Lotto {
         return new Lotto(numbers);
     }
 
-    public Result getResult(WinningLottoWithBonus winningLottoWithBonus) {
-        Lotto winningLottoNumbers = winningLottoWithBonus.getWinningLotto();
+    public Result getResult(WinningLotto winningLotto) {
+        Lotto winningLottoNumbers = winningLotto.getWinningLotto();
         int count = (int) numbers.stream()
                 .filter(winningLottoNumbers::containsNumber)
                 .count();
-        return Result.of(count, winningLottoWithBonus.isBonus(this));
+        return Result.of(count, winningLotto.isBonus(this));
     }
 
     public boolean containsNumber(LottoNumber number) {
