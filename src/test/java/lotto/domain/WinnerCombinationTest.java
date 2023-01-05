@@ -1,21 +1,22 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static lotto.domain.WinnerCombinationFixture.createWinnerCombination;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class WinnerCombinationTest {
+class WinnerCombinationTest {
 
-    LottoTicket winnerTicket;
-
-    @BeforeEach
-    void setup() {
-        winnerTicket = new LottoTicket(
+    @DisplayName("당첨 번호를 생성한다")
+    @Test
+    void create() {
+        //given
+        LottoTicket winnerTicket = new LottoTicket(
                 List.of(
                         new LottoBall(1),
                         new LottoBall(2),
@@ -25,20 +26,26 @@ public class WinnerCombinationTest {
                         new LottoBall(6)
                 )
         );
-    }
-
-    @Test
-    public void 당첨번호를_생성한다() {
-        //given
         LottoBall bonusBall = new LottoBall(7);
 
         //when & then
         assertDoesNotThrow(() -> new WinnerCombination(winnerTicket, bonusBall));
     }
 
+    @DisplayName("당첨 번호를 생성할 때, 보너스 볼은 로또 티켓과 겹쳐서는 안된다")
     @Test
-    public void 당첨번호를_생성한다_보너스볼_중복() {
+    void duplicateBonusBall() {
         //given
+        LottoTicket winnerTicket = new LottoTicket(
+                List.of(
+                        new LottoBall(1),
+                        new LottoBall(2),
+                        new LottoBall(3),
+                        new LottoBall(4),
+                        new LottoBall(5),
+                        new LottoBall(6)
+                )
+        );
         LottoBall bonusBall = new LottoBall(6);
 
         //when & then
@@ -47,11 +54,11 @@ public class WinnerCombinationTest {
                 .hasMessage("보너스볼은 당첨번호와 중복될 수 없습니다.");
     }
 
+    @DisplayName("1등 당첨을 확인할 수 있다.")
     @Test
-    public void 당첨_통계를_확인할_수_있다_1등() {
+    void checkFirstPlace() {
         //given
-        LottoBall bonusBall = new LottoBall(7);
-        WinnerCombination winnerCombination = new WinnerCombination(winnerTicket, bonusBall);
+        WinnerCombination winnerCombination = createWinnerCombination(1, 6, 7);
 
         //when
         LottoTicket lottoTicket = new LottoTicket(
@@ -71,11 +78,11 @@ public class WinnerCombinationTest {
         assertThat(lottoResult).isEqualTo(LottoResult.FIRST_PLACE);
     }
 
+    @DisplayName("2등 당첨을 확인할 수 있다.")
     @Test
-    public void 당첨_통계를_확인할_수_있다_2등() {
+    void checkSecondPlace() {
         //given
-        LottoBall bonusBall = new LottoBall(7);
-        WinnerCombination winnerCombination = new WinnerCombination(winnerTicket, bonusBall);
+        WinnerCombination winnerCombination = createWinnerCombination(1, 6, 7);
 
         //when
         LottoTicket lottoTicket = new LottoTicket(
@@ -95,11 +102,11 @@ public class WinnerCombinationTest {
         assertThat(lottoResult).isEqualTo(LottoResult.SECOND_PLACE);
     }
 
+    @DisplayName("3등 당첨을 확인할 수 있다.")
     @Test
-    public void 당첨_통계를_확인할_수_있다_3등() {
+    void checkThirdPlace() {
         //given
-        LottoBall bonusBall = new LottoBall(7);
-        WinnerCombination winnerCombination = new WinnerCombination(winnerTicket, bonusBall);
+        WinnerCombination winnerCombination = createWinnerCombination(1, 6, 7);
 
         //when
         LottoTicket lottoTicket = new LottoTicket(
@@ -119,11 +126,11 @@ public class WinnerCombinationTest {
         assertThat(lottoResult).isEqualTo(LottoResult.THIRD_PLACE);
     }
 
+    @DisplayName("4등 당첨을 확인할 수 있다.")
     @Test
-    public void 당첨_통계를_확인할_수_있다_4등() {
+    void checkFourthPlace() {
         //given
-        LottoBall bonusBall = new LottoBall(7);
-        WinnerCombination winnerCombination = new WinnerCombination(winnerTicket, bonusBall);
+        WinnerCombination winnerCombination = createWinnerCombination(1, 6, 7);
 
         //when
         LottoTicket lottoTicket = new LottoTicket(
@@ -143,11 +150,11 @@ public class WinnerCombinationTest {
         assertThat(lottoResult).isEqualTo(LottoResult.FOURTH_PLACE);
     }
 
+    @DisplayName("5등 당첨을 확인할 수 있다.")
     @Test
-    public void 당첨_통계를_확인할_수_있다_5등() {
+    void checkFifthPlace() {
         //given
-        LottoBall bonusBall = new LottoBall(7);
-        WinnerCombination winnerCombination = new WinnerCombination(winnerTicket, bonusBall);
+        WinnerCombination winnerCombination = createWinnerCombination(1, 6, 7);
 
         //when
         LottoTicket lottoTicket = new LottoTicket(

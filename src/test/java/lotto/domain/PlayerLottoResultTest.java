@@ -1,12 +1,15 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PlayerLottoResultTest {
+
+    @DisplayName("로또 당첨 결과를 추가할 수 있다")
     @Test
-    void 로또_당첨_결과를_추가할_수_있다() {
+    void addResult() {
         //given
         PlayerLottoResult playerLottoResult = new PlayerLottoResult(1_000);
 
@@ -18,8 +21,9 @@ public class PlayerLottoResultTest {
         assertThat(profitRate).isEqualTo(0.0);
     }
 
+    @DisplayName("로또 당첨 결과를 통해 수익률을 계산할 수 있다")
     @Test
-    void 로또_당첨_결과를_통해_수익률을_계산할_수_있다() {
+    void calculateProfitRate() {
         //given
         PlayerLottoResult playerLottoResult = new PlayerLottoResult(1_000);
 
