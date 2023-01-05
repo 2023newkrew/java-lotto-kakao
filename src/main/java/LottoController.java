@@ -33,6 +33,7 @@ public class LottoController {
     private int buyManually(Buyer buyer) {
         int manualQuantity = inputView.getManualLottoQuantityInput();
         if (!buyer.canBuyLottosOfQuantity(manualQuantity)) throw new IllegalArgumentException("금액이 부족합니다!");
+        if (manualQuantity == 0) return 0;
         List<String> manualNumberStrings = inputView.getManualNumbersInput(manualQuantity);
         lottoGenerator.manuallyGenerate(buyer, manualNumberStrings);
         return manualQuantity;

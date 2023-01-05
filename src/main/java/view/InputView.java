@@ -9,19 +9,21 @@ public class InputView {
 
     public int getBudgetInput() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        int budgetInput = scanner.nextInt();
+        scanner.nextLine();
+        return budgetInput;
     }
 
     public int getManualLottoQuantityInput() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int manualQuantity = scanner.nextInt();
         scanner.nextLine();
-        return scanner.nextInt();
+        return manualQuantity;
     }
 
     public List<String> getManualNumbersInput(int quantity) {
         List<String> numberStrings = new ArrayList<>();
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        scanner.nextLine();
         for (int i = 0; i < quantity; i++) {
             numberStrings.add(scanner.nextLine());
         }
@@ -35,6 +37,8 @@ public class InputView {
 
     public int getBonusNumberInput() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        int bonusNumber = scanner.nextInt();
+        scanner.nextLine();
+        return bonusNumber;
     }
 }
