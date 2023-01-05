@@ -17,12 +17,12 @@ public class RandomNumbersGenerator {
         }
     }
 
-    public List<LottoNumber> getOrderedNumbers(int quantity) {
+    public List<LottoNumber> getOrderedNumbers() {
         Collections.shuffle(this.candidate);
         List<LottoNumber> numbers = new ArrayList<>();
 
-        for (int i = 0; i < quantity; i++) {
-            numbers.add(lottoNumbers.get(this.candidate.get(i)));
+        for (int i = 0; i < LottoTicket.NUMBERS_LENGTH; i++) {
+            numbers.add(this.lottoNumbers.get(this.candidate.get(i)));
         }
         return numbers;
     }
