@@ -1,5 +1,7 @@
 package domain.lotto.number;
 
+import exception.InvalidLottoNumbersException;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +29,7 @@ public class LottoNumbers {
     private void validateNumberDuplication(final List<Integer> lottoNumbers) {
         HashSet<Integer> hs = new HashSet<>(lottoNumbers);
         if (hs.size() != LOTTO_NUMBER_SIZE)
-            throw new IllegalArgumentException("로또 번호는 중복없는 6자리 숫자여야 합니다.");
+            throw new InvalidLottoNumbersException();
     }
 
     @Override

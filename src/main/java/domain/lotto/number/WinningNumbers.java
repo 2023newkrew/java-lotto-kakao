@@ -1,5 +1,7 @@
 package domain.lotto.number;
 
+import exception.BonusNumberDuplicationException;
+
 import java.util.HashSet;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class WinningNumbers {
     private void validateBonusNumberDuplication(final List<Integer> lottoNumbers, final int bonusNumber) {
         HashSet<Integer> lottoNumberSet = new HashSet<>(lottoNumbers);
         if (lottoNumberSet.contains(bonusNumber))
-            throw new IllegalArgumentException("보너스 번호가 당첨 번호에 이미 존재합니다.");
+            throw new BonusNumberDuplicationException();
     }
 
 }

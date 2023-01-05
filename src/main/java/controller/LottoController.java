@@ -4,6 +4,8 @@ import domain.dto.WinningNumbersDto;
 import domain.lotto.number.LottoNumbers;
 import domain.lotto.number.WinningNumbers;
 import domain.lotto.number.LottoNumbersMaker;
+import domain.lotto.number.generator.LottoNumbersGenerator;
+import domain.lotto.number.generator.NumbersGeneratable;
 import domain.lotto.result.LottoResults;
 import domain.lotto.ticket.LottoTickets;
 import view.InputView;
@@ -15,17 +17,17 @@ import java.util.List;
 public class LottoController {
 
     public void start() {
-        LottoTickets lottoTickets = createLottoTickets(InputView.inputPurchaseAmount(), new WinningNumbersDto.RandomNumberGenerator());
+        LottoTickets lottoTickets = createLottoTickets(InputView.inputPurchaseAmount(), new LottoNumbersGenerator());
         OutputView.printLottoTickets(lottoTickets);
         LottoResults lottoResults = new LottoResults(lottoTickets, createWinningNumbers());
         OutputView.printLottoResults(lottoResults);
     }
 
-    private LottoTickets createLottoTickets(final int purchaseAmount, final WinningNumbersDto.NumberGeneratable numberGenerator) {
+    private LottoTickets createLottoTickets(final int purchaseAmount, final NumbersGeneratable numbersGenerator) {
         LottoNumbersMaker lottoNumberMaker = new LottoNumbersMaker();
         List<LottoNumbers> lottoTicketList = new ArrayList<>();
         for (int i = 0; i < purchaseAmount; i++) {
-            lottoTicketList.add(new LottoNumbers(lottoNumberMaker.makeNumbers(numberGenerator)));
+            lottoTicketList.add(new LottoNumbers(lottoNumberMaker.makeNumbers(numbersGenerator)));
         }
         return new LottoTickets(lottoTicketList);
     }

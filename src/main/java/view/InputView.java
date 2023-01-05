@@ -1,6 +1,9 @@
 package view;
 
 import domain.dto.WinningNumbersDto;
+import exception.input.IindivisiblePurchaseBudgetException;
+import exception.input.NonNumericInputException;
+import exception.input.NotPositivePurchaseBudgetException;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -37,11 +40,11 @@ public class InputView {
     }
 
     private static void validatePurchaseBudget(final int purchaseBudget) {
-        if (purchaseBudget == 0)
-            throw new IllegalArgumentException("구입 금액을 입력해주세요. (" + LOTTO_TICKET_PRICE + "원 단위)");
+        if (purchaseBudget <= 0)
+            throw new NotPositivePurchaseBudgetException();
 
         if (purchaseBudget % LOTTO_TICKET_PRICE != 0)
-            throw new IllegalArgumentException("로또 가격으로 나누어 떨어지는 금액을 입력해주세요.(" + LOTTO_TICKET_PRICE + "원)");
+            throw new IindivisiblePurchaseBudgetException();
     }
 
     public static WinningNumbersDto inputWinningNumbers() {
@@ -68,6 +71,6 @@ public class InputView {
 
     private static void validateIsNumber(String token) {
         if (!token.matches("[0-9]+"))
-            throw new IllegalArgumentException("숫자를 입력해주세요.");
+            throw new NonNumericInputException();
     }
 }
