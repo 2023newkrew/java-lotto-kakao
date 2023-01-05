@@ -1,6 +1,6 @@
 package view;
 
-import domain.lotto.Cost;
+import domain.UserAccount;
 import domain.lotto.LottoNumber;
 import domain.lotto.LottoWinningNumber;
 
@@ -13,11 +13,11 @@ public class LottoInputView {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    public Cost readCost() {
+    public UserAccount readUserAccount() {
         System.out.println("구매금액을 입력해 주세요.");
         int inputCost = Integer.parseInt(sc.nextLine());
 
-        return new Cost(inputCost);
+        return new UserAccount(inputCost);
     }
 
     public LottoWinningNumber readWinningNumber() {

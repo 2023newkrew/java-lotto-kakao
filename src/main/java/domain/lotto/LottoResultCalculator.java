@@ -1,6 +1,7 @@
 package domain.lotto;
 
 import domain.lotto.prize.LottoPrize;
+import domain.lotto.store.LottoStore;
 import domain.lotto.ticket.LottoTicket;
 
 import java.util.*;
