@@ -7,6 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +16,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LotteryNumberTest {
-    private final int[] validNumbers = IntStream.range(LOTTERY_NUMBER_MINIMUM, LOTTERY_NUMBER_MAXIMUM).toArray();
+    private final List<Integer> validNumbers = IntStream.range(LOTTERY_NUMBER_MINIMUM, LOTTERY_NUMBER_MAXIMUM + 1)
+            .boxed()
+            .collect(Collectors.toList());
 
     @DisplayName("1과 45 사이의 값이 아닌 경우 예외가 발생한다.")
     @ParameterizedTest

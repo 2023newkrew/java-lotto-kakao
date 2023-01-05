@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LotteryNumber {
-    private static final Map<Integer, LotteryNumber> lottoNumberMap = new HashMap<>(){{
-        IntStream.range(LOTTERY_NUMBER_MINIMUM, LOTTERY_NUMBER_MAXIMUM)
+    private static final Map<Integer, LotteryNumber> lottoNumberMap = new HashMap<>() {{
+        IntStream.range(LOTTERY_NUMBER_MINIMUM, LOTTERY_NUMBER_MAXIMUM + 1)
                 .forEach(number -> put(number, new LotteryNumber(number)));
     }};
     private final int value;

@@ -11,7 +11,9 @@ public class LotteryNumberCombination {
     private final Set<LotteryNumber> lotteryNumbers;
 
     public LotteryNumberCombination(List<Integer> lotteryNumbers) {
-        this(lotteryNumbers.stream().map(LotteryNumber::of).collect(Collectors.toSet()));
+        this(lotteryNumbers.stream()
+                .map(LotteryNumber::of)
+                .collect(Collectors.toSet()));
     }
 
     public LotteryNumberCombination(Set<LotteryNumber> lotteryNumbers) {

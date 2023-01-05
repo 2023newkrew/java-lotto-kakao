@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import static lotto.constant.ExceptionMessage.BUDGET_NOT_POSITIVE;
+import static lotto.constant.ExceptionMessage.NON_EXISTENT_SELF_PICK_COUNT;
+import static lotto.constant.ExceptionMessage.NOT_DIVISIBLE_BUDGET;
+import static lotto.constant.ExceptionMessage.SELF_PICK_COUNT_EXCEED_FORMAT;
 import static lotto.constant.LotteryConstant.LOTTERY_COUNT_MINIMUM;
 import static lotto.constant.LotteryConstant.LOTTERY_UNIT_PRICE;
 import static lotto.constant.LotteryConstant.ZERO_MONEY;
@@ -16,7 +20,7 @@ public class Player {
     private int budget;
     private int selfPickCount;
     private final List<LotteryNumberCombination> lotteryTicket = new ArrayList<>();
-    private List<Integer> rankCounts;
+    private List<Integer> rankCounts = new ArrayList<>();
 
     public int getSelfPickCount() {
         return selfPickCount;
@@ -77,22 +81,22 @@ public class Player {
 
     private void validateRange(int budget) {
         if (budget <= ZERO_MONEY) {
-            throw new IllegalArgumentException("[ERROR] 구매 가격은 양수여야 합니다.");
+            throw new IllegalArgumentException(BUDGET_NOT_POSITIVE);
         }
     }
 
     private void validateDivisibility(int budget) {
         if (budget % LOTTERY_UNIT_PRICE != ZERO_REMAINDER) {
-            throw new IllegalArgumentException("[ERROR] 구매 가격은 1000의 배수여야 합니다.");
+            throw new IllegalArgumentException(NOT_DIVISIBLE_BUDGET);
         }
     }
 
     private void validateSelfPickCount(int count) {
         if (count < LOTTERY_COUNT_MINIMUM) {
-            throw new IllegalArgumentException("[ERROR] 수동으로 구매하는 개수는 0 이상이어야 합니다.");
+            throw new IllegalArgumentException(NON_EXISTENT_SELF_PICK_COUNT);
         }
         if (count > calculateLotteryNumberCombinationCount()) {
-            throw new IllegalArgumentException(String.format("[ERROR] 구매가능한 개수를 초과했습니다. 최대 개수 : %d",
+            throw new IllegalArgumentException(String.format(SELF_PICK_COUNT_EXCEED_FORMAT,
                     calculateLotteryNumberCombinationCount()));
         }
     }

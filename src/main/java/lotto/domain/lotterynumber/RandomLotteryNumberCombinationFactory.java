@@ -1,5 +1,6 @@
 package lotto.domain.lotterynumber;
 
+import static lotto.constant.ExceptionMessage.NON_EXISTENT_LOTTERY_COUNT;
 import static lotto.constant.LotteryConstant.LOTTERY_NUMBERS_LENGTH;
 import static lotto.constant.LotteryConstant.LOTTERY_NUMBER_MAXIMUM;
 import static lotto.constant.LotteryConstant.LOTTERY_NUMBER_MINIMUM;
@@ -13,7 +14,7 @@ import java.util.stream.IntStream;
 
 public class RandomLotteryNumberCombinationFactory {
     private static final List<LotteryNumber> lottoNumbersPool =
-            IntStream.range(LOTTERY_NUMBER_MINIMUM, LOTTERY_NUMBER_MAXIMUM)
+            IntStream.range(LOTTERY_NUMBER_MINIMUM, LOTTERY_NUMBER_MAXIMUM + 1)
                     .mapToObj(LotteryNumber::of)
                     .collect(Collectors.toList());
 
@@ -30,7 +31,7 @@ public class RandomLotteryNumberCombinationFactory {
 
     private static void validateCount(int count) {
         if (count < 0) {
-            throw new IllegalArgumentException("[ERROR] 0개 이상만 생성할 수 있습니다.");
+            throw new IllegalArgumentException(NON_EXISTENT_LOTTERY_COUNT);
         }
     }
 }
