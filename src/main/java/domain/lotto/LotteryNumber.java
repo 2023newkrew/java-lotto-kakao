@@ -13,7 +13,7 @@ public class LotteryNumber implements Comparable<LotteryNumber> {
 
     private void validateNumber(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new RuntimeException("잘못 된 로또 번호");
+            throw new RuntimeException("유효하지 않은 범위의 숫자입니다");
         }
     }
 
