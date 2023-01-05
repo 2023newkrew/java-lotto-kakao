@@ -1,6 +1,5 @@
 package lotto.model.company;
 
-import lotto.model.prize.Prize;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

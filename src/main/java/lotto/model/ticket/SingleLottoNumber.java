@@ -1,5 +1,6 @@
 package lotto.model.ticket;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -9,6 +10,8 @@ public class SingleLottoNumber implements Comparable<SingleLottoNumber>{
     private static final int MIN_NUMBER = 1;
 
     private static final int MAX_NUMBER = 45;
+
+    private static final List<SingleLottoNumber> ALL_NUMBERS_IN_RANGE = createAllNumbersInRange();
 
     private final int value;
 
@@ -30,11 +33,16 @@ public class SingleLottoNumber implements Comparable<SingleLottoNumber>{
     }
 
 
-    public static List<SingleLottoNumber> getAllNumbersInRange() {
+    private static List<SingleLottoNumber> createAllNumbersInRange() {
         return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
                 .mapToObj(SingleLottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
+
+    public static List<SingleLottoNumber> getAllNumbersInRange() {
+        return new ArrayList<>(ALL_NUMBERS_IN_RANGE);
+    }
+
     public int intValue() {
         return value;
     }

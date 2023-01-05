@@ -57,7 +57,7 @@ class LottoStatsTest {
     @Nested
     class countBy {
 
-        @DisplayName("각 랭킹의 갯수 반환")
+        @DisplayName("LottoStats를 생성하고 각 랭킹의 갯수가 정확한지 확인")
         @ParameterizedTest
         @MethodSource
         void should_returnCount_when_givenRankings(List<LottoRanking> rankings, LottoRanking ranking, long expected) {
