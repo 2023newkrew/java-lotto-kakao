@@ -1,7 +1,6 @@
 package controller;
 
 import domain.dto.WinningNumbersDto;
-import domain.lotto.LottoGame;
 import domain.lotto.number.WinningNumbers;
 import domain.lotto.number.LottoNumbersMaker;
 import domain.lotto.result.LottoResults;
@@ -18,8 +17,7 @@ public class LottoController {
     public void start() {
         LottoTickets lottoTickets = createLottoTickets(InputView.inputPurchaseAmount(), new WinningNumbersDto.RandomNumberGenerator());
         OutputView.printLottoTickets(lottoTickets);
-        LottoGame lottoGame = new LottoGame(lottoTickets, createWinningNumbers());
-        LottoResults lottoResults = lottoGame.getLottoTicketsResult();
+        LottoResults lottoResults = new LottoResults(lottoTickets, createWinningNumbers());
         OutputView.printLottoResults(lottoResults);
     }
 
