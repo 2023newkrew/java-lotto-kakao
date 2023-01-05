@@ -18,6 +18,7 @@ public enum LottoResultType {
     private final int prize;
     private final String message;
 
+
     LottoResultType(final int prize, final String message) {
         this.prize = prize;
         this.message = message;

@@ -15,4 +15,8 @@ public class LottoTickets {
         return lottoTickets;
     }
 
+    public void addTickets(LottoTickets lottoTickets) {
+        this.lottoTickets.addAll(lottoTickets.getLottoTickets());
+    }
+
 }

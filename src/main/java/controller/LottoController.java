@@ -28,8 +28,7 @@ public class LottoController {
 
     private LottoTickets createTotalLottoTickets(final int autoPurchaseAmount, final int manualPurchaseAmount) {
         LottoTickets lottoTickets = createManualLottoTickets(manualPurchaseAmount);
-        lottoTickets.getLottoTickets()
-                .addAll(createAutoLottoTickets(autoPurchaseAmount, new LottoNumbersGenerator()).getLottoTickets());
+        lottoTickets.addTickets(createAutoLottoTickets(autoPurchaseAmount, new LottoNumbersGenerator()));
         return lottoTickets;
     }
 
