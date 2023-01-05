@@ -5,9 +5,6 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RandomLottoGenerator {
     public Lotto generateLotto() {
         return new Lotto(
@@ -20,10 +17,10 @@ public class RandomLottoGenerator {
     }
 
     public Lottos generateLottos(int amount) {
-        List<Lotto> lottoList = new ArrayList<>();
+        Lottos lottos = new Lottos();
         for (int i = 0; i < amount; i++) {
-            lottoList.add(generateLotto());
+            lottos.add(generateLotto());
         }
-        return new Lottos(lottoList);
+        return lottos;
     }
 }
