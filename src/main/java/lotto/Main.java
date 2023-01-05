@@ -15,9 +15,9 @@ public class Main {
         List<LottoTicket> lottoTickets = lottoMachine.purchaseLottoTickets(purchaseAmount);
         outputView.printLottoTickets(lottoTickets);
 
-        String winningNumberString = inputView.scanWinningNumberString();
+        List<Integer> winningNumbers = inputView.scanWinningNumbers();
         int bonusNumber = inputView.scanBonusNumber();
-        lottoMachine.setWinningNumber(winningNumberString, bonusNumber);
+        lottoMachine.setWinningNumber(winningNumbers, bonusNumber);
 
         MatchResult matchResult = lottoMachine.match(lottoTickets);
         outputView.printMatchResult(matchResult);

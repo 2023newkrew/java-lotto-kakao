@@ -20,13 +20,12 @@ public class LottoMachine {
         return lottoTickets;
     }
 
-    public void setWinningNumber(String winningNumberString, int bonusNumber) {
-        List<LottoBall> winningNumbers = Arrays.stream(winningNumberString.split(","))
-                .map(numberString -> Integer.parseInt(numberString))
-                .map(number -> new LottoBall(number))
+    public void setWinningNumber(List<Integer> winningNumbers, int bonusNumber) {
+        List<LottoBall> winningBalls = winningNumbers.stream()
+                .map(LottoBall::new)
                 .collect(Collectors.toList());
 
-        lottoWinningNumber = new LottoWinningNumber(winningNumbers, new LottoBall(bonusNumber));
+        lottoWinningNumber = new LottoWinningNumber(winningBalls, new LottoBall(bonusNumber));
     }
 
     public MatchResult match(List<LottoTicket> lottoTickets) {

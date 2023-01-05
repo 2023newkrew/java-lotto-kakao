@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,10 +21,10 @@ class InputViewTest {
 
     @Test
     @DisplayName("로또 당첨 번호 입력")
-    void scanWinningNumberString() {
+    void scanWinningNumbers() {
         InputView inputView = new InputView(createScanner("1,2,3,4,5,6"));
-        String winningNumberString = inputView.scanWinningNumberString();
-        assertThat(winningNumberString).isEqualTo("1,2,3,4,5,6");
+        List<Integer> winningNumbers = inputView.scanWinningNumbers();
+        assertThat(winningNumbers).containsExactly(1, 2, 3, 4, 5, 6);
     }
 
     @Test
