@@ -1,6 +1,8 @@
 package lotto.view;
 
-import lotto.model.*;
+import lotto.model.prize.Prize;
+import lotto.model.prize.PrizeRecord;
+import lotto.model.ticket.LottoTickets;
 
 import java.util.Arrays;
 

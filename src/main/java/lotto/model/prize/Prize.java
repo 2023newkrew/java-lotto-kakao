@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.prize;
 
 public enum Prize {
     LOSING("", 0L),

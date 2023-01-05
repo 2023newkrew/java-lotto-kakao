@@ -1,4 +1,8 @@
-package lotto.model;
+package lotto.model.service;
+
+import lotto.model.ticket.LottoNumber;
+import lotto.model.ticket.LottoNumbers;
+import lotto.model.ticket.LottoTicket;
 
 import java.util.List;
 
@@ -9,11 +13,11 @@ public class LottoPublisher {
         this.randomNumbersGenerator = new RandomNumbersGenerator(lottoNumbers);
     }
 
-    public LottoTicket publishNewAutomaticLotto() {
+    public LottoTicket publishLotto() {
         return new LottoTicket(this.randomNumbersGenerator.getOrderedNumbers());
     }
 
-    public LottoTicket publishNewManualLotto(List<LottoNumber> numbers) {
+    public LottoTicket publishLotto(List<LottoNumber> numbers) {
         return new LottoTicket(numbers);
     }
 }

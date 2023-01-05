@@ -1,5 +1,9 @@
-package lotto.model;
+package lotto.model.service;
 
+
+import lotto.model.ticket.LottoNumber;
+import lotto.model.ticket.LottoNumbers;
+import lotto.model.ticket.LottoTicket;
 
 import java.util.ArrayList;
 import java.util.Collections;

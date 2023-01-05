@@ -1,4 +1,7 @@
-package lotto.model;
+package lotto.model.prize;
+
+import lotto.model.ticket.LottoNumber;
+import lotto.model.ticket.LottoTicket;
 
 public class WinningNumbers {
     private final LottoTicket winning;

@@ -1,4 +1,4 @@
-package lotto.model;
+package lotto.model.ticket;
 
 public class LottoNumber {
     public static final int NUMBER_RANGE = 45;
