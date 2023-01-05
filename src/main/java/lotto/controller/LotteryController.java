@@ -30,7 +30,10 @@ public class LotteryController {
     private void sellLotteryTicket() {
         setPlayerBudget();
         setPlayerSelfPickCount();
-        sellSelfPicks();
+        int selfPickCount = player.getSelfPickCount();
+        if (selfPickCount > 0) {
+            sellSelfPicks(selfPickCount);
+        }
         sellQuickPicks();
     }
 
@@ -47,8 +50,8 @@ public class LotteryController {
 
     private void setPlayerSelfPickCount() {
         try {
-            outputView.printReadSelfPickCount();
             int selfPickCount = inputView.readSelfPickCount();
+            outputView.printReadSelfPickCount();
             player.setSelfPickCount(selfPickCount);
         } catch (IllegalArgumentException e) {
             outputView.printMessage(e.getMessage());
@@ -56,14 +59,14 @@ public class LotteryController {
         }
     }
 
-    private void sellSelfPicks() {
+    private void sellSelfPicks(int selfPickCount) {
         try {
             outputView.printReadSelfPickNumbers();
-            List<List<Integer>> selfPickNumbers = inputView.readSelfPickNumbers(player.getSelfPickCount());
+            List<List<Integer>> selfPickNumbers = inputView.readSelfPickNumbers(selfPickCount);
             player.buySelfPicksWith(selfPickNumbers);
         } catch (IllegalArgumentException e) {
             outputView.printMessage(e.getMessage());
-            sellSelfPicks();
+            sellSelfPicks(selfPickCount);
         }
     }
 
