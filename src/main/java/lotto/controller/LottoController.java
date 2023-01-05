@@ -21,18 +21,21 @@ public class LottoController {
     private final LottoIssuer manualLottoIssuer = new LottoIssuer(new ManualLottoStrategy());
 
     public void start() {
-        Integer price = inputView.inputPrice();
-        Integer totalLottoCount = price / Lotto.PRICE;
+        Integer totalPrice = inputView.inputPrice();
+        Money price = new Money(totalPrice);
+        Integer totalLottoCount = price.getValue() / Lotto.PRICE;
 
         Integer manualLottoCount = inputView.inputManualLottoCount();
         Integer automaticLottoCount = totalLottoCount - manualLottoCount;
+        price.spend(manualLottoCount * Lotto.PRICE)
+                .spend(automaticLottoCount * Lotto.PRICE);
 
         LottoList totalLottoList = issueTotalLotto(manualLottoCount, automaticLottoCount);
 
         List<Integer> mainNumbers = inputView.inputMainNumbers();
         Integer bonusNumber = inputView.inputBonusBall();
 
-        getResult(new WinningNumbers(mainNumbers, bonusNumber), totalLottoList, price);
+        getResult(new WinningNumbers(mainNumbers, bonusNumber), totalLottoList, totalPrice);
     }
 
     private LottoList issueTotalLotto(Integer manualLottoCount, Integer automaticLottoCount) {
@@ -47,7 +50,7 @@ public class LottoController {
         return totalLottoList;
     }
 
-    private void getResult(WinningNumbers winningNumbers, LottoList lottoList, Integer price) {
+    private void getResult(WinningNumbers winningNumbers, LottoList lottoList, Integer totalPrice) {
         LottoStatistics lottoStatistics = new LottoStatistics();
 
         IntStream.range(0, lottoList.length())
@@ -55,6 +58,6 @@ public class LottoController {
 
         outputView.printLottoStatistics(lottoStatistics);
 
-        outputView.printRateOfProfit(lottoStatistics, price);
+        outputView.printRateOfProfit(lottoStatistics, totalPrice);
     }
 }
