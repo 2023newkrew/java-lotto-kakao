@@ -14,14 +14,8 @@ public class LottoTickets {
         lottoTickets.add(lottoTicket);
     }
 
-    public LottoResult getLottoResult(LottoWinningNumber lottoWinningNumber) {
-        LottoResult lottoResult = new LottoResult();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            lottoResult.addLottoRankCount(
-                   lottoTicket.checkLottoRank(lottoWinningNumber)
-            );
-        }
-        return lottoResult;
+    public List<LottoTicket> getLottoTickets(){
+        return lottoTickets;
     }
 
     public List<String> toStringList() {

@@ -3,9 +3,7 @@ package lottoTest.model;
 import lotto.exception.ErrorCode;
 import lotto.exception.LottoException;
 import lotto.model.LottoNumber;
-import lotto.model.LottoRank;
 import lotto.model.LottoTicket;
-import lotto.model.LottoWinningNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -94,46 +92,6 @@ public class LottoTicketTest {
                 Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 2, 7, 8, 9, 10))), 2),
                 Arguments.of(new LottoTicket(createLottoNumberList(List.of(1, 7, 8, 9, 10, 11))), 1),
                 Arguments.of(new LottoTicket(createLottoNumberList(List.of(7, 8, 9, 10, 11, 12))), 0)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource("checkRankTestGenerator")
-    @DisplayName("로또 티켓의 등수 구하기")
-    public void checkRankTest(LottoWinningNumber lottoWinningNumber, LottoRank expected){
-        //given
-        LottoTicket lottoTicket = new LottoTicket(input);
-
-        //when & then
-        assertThat(lottoTicket.checkLottoRank(lottoWinningNumber)).isEqualTo(expected);
-    }
-
-    private static Stream<Arguments> checkRankTestGenerator(){
-        return Stream.of(
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,5,6))), new LottoNumber(7)),
-                        LottoRank.RANK1
-                ),
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,5,8))), new LottoNumber(6)),
-                        LottoRank.RANK2)
-                ,
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,5,8))), new LottoNumber(7)),
-                        LottoRank.RANK3
-                ),
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,4,8,9))), new LottoNumber(7)),
-                        LottoRank.RANK4
-                ),
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,3,8,9,10))), new LottoNumber(7)),
-                        LottoRank.RANK5
-                ),
-                Arguments.of(
-                        new LottoWinningNumber(new LottoTicket(createLottoNumberList(List.of(1,2,8,9,10,11))), new LottoNumber(7)),
-                        LottoRank.RANK6
-                )
         );
     }
 
