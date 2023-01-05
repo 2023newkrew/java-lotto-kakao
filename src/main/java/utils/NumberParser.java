@@ -3,6 +3,8 @@ package utils;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static utils.ErrorMessage.LOTTO_NUMBER_IS_NUMERIC;
+
 public class NumberParser {
     public static List<Integer> splitAndParse(String input) {
         List<String> result = List.of(input.split(", "));
@@ -17,7 +19,7 @@ public class NumberParser {
         try {
             number = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또 숫자는 숫자만 가능합니다. 숫자만 입력해주세요.");
+            throw new IllegalArgumentException(LOTTO_NUMBER_IS_NUMERIC.getMessage());
         }
         return number;
     }

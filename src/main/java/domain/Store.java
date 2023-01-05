@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static utils.ErrorMessage.NOT_ENOUGH_MONEY;
+
 public class Store implements LottoObtainPlace {
     private static final Integer COST = 1000;
 
@@ -18,7 +20,7 @@ public class Store implements LottoObtainPlace {
 
     private Integer getLottoAmount(Integer money) {
         if (money < COST) {
-            throw new IllegalArgumentException("로또를 구매하기 위한 최소 금액이 부족합니다.");
+            throw new IllegalArgumentException(NOT_ENOUGH_MONEY.getMessage());
         }
         return money / COST;
     }
