@@ -30,7 +30,6 @@ public class Buyer {
         this.lottos.add(lotto);
     }
 
-
     public BuyerResult getResult(WinningLotto winningLotto) {
         BuyerResult buyerResult = new BuyerResult();
         for (Lotto lotto : lottos) {

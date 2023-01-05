@@ -1,7 +1,6 @@
 package buyer;
 
 import lotto.Lotto;
-import lotto.LottoGenerator;
 import lotto.Rank;
 import lotto.WinningLotto;
 import org.assertj.core.api.Assertions;

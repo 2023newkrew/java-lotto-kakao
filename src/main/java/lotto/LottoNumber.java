@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
