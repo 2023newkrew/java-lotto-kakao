@@ -20,9 +20,8 @@ public class LottoTickets {
     }
 
     public void createRandomTickets(int count){
-        LottoRandom lottoRandom = new LottoRandom();
         for (int i=0; i<count; i++){
-            tickets.add(new LottoTicket(lottoRandom.createRandomNumbers()));
+            tickets.add(new LottoTicket());
         }
     }
 

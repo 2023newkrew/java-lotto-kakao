@@ -1,13 +1,10 @@
 package lotto.service;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
-import lotto.domain.LottoWinnerTicket;
+import lotto.domain.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lotto.utils.Constants.MIN_PURCHASE_PRICE;
 
@@ -18,32 +15,31 @@ public class LottoCalculator {
 
     public LottoCalculator(LottoWinnerTicket winTicket) {
         this.winTicket = winTicket;
-        this.winValue = new ArrayList<>(Arrays.asList(5000, 50000, 1500000, 2000000000, 30000000));
+        Integer[] valueList = {5000, 50000, 1500000, 2000000000, 30000000};
+        this.winValue = new ArrayList<>(List.of(valueList));
     }
 
-    public List<Integer> getWinScore(LottoTickets lottoTickets) {
+    public WinnerScore getWinScore(LottoTickets lottoTickets) {
         List<LottoTicket> tickets = lottoTickets.getTickets();
-
-        List<Integer> winScore = new ArrayList<>(Collections.nCopies(5,0));
+        WinnerScore winnerScore = new WinnerScore();
         for (LottoTicket ticket : tickets) {
             int index = getScore(ticket);
             if (index != -1){
-                int value = winScore.get(index);
-                winScore.set(index, value + 1);
+                winnerScore.addScore(index);
             }
         }
-        return winScore;
+        return winnerScore;
     }
 
-    public long getWinSummary(List<Integer> score) {
+    public long getWinSummary(WinnerScore score) {
         long summary = 0;
-        for (int i=0; i < score.size(); i++) {
-            summary += (long) score.get(i) * this.winValue.get(i);
+        for (int i=0; i < score.getWinnerScore().size(); i++) {
+            summary += (long) score.getWinnerScore().get(i) * this.winValue.get(i);
         }
         return summary;
     }
 
-    public double calcRateOfReturn(List<Integer> winScore, int amount) {
+    public double calcRateOfReturn(WinnerScore winScore, int amount) {
         double summary = getWinSummary(winScore);
         amount -= amount % MIN_PURCHASE_PRICE;
         return summary / amount;
@@ -51,28 +47,36 @@ public class LottoCalculator {
 
     public int checkSameCount(LottoTicket userTicket) {
         int sameCount = 0;
-        for(int number : userTicket.getLottoNumbers()){
+        for (LottoNumber number : userTicket.getLottoNumbers()){
             sameCount += checkContains(number);
         }
         return sameCount;
     }
 
     public boolean isBonusNumber(LottoTicket userTicket) {
-        return userTicket.getLottoNumbers().contains(winTicket.getBonusNumber());
+        return userTicket.getLottoNumbers().stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList())
+                .contains(winTicket.getBonusNumber().getNumber());
     }
 
     private int getScore (LottoTicket ticket) {
         int sameCount = checkSameCount(ticket);
-        if(sameCount < MIN_WIN_NUM) return -1;
+        if (sameCount < MIN_WIN_NUM) return -1;
         sameCount -= MIN_WIN_NUM;
-        if(sameCount == 5 - MIN_WIN_NUM && isBonusNumber(ticket)) {
+        if (sameCount == 5 - MIN_WIN_NUM && isBonusNumber(ticket)) {
             return 4;
         }
         return sameCount;
     }
 
-    private int checkContains(int number){
-        if(winTicket.getLottoNumbers().contains(number)) return 1;
+    private int checkContains(LottoNumber number){
+        if (winTicket.getLottoNumbers().stream()
+                    .map(LottoNumber::getNumber)
+                    .collect(Collectors.toList())
+                    .contains(number.getNumber())) {
+            return 1;
+        }
         return 0;
     }
 

@@ -1,13 +1,13 @@
 package lotto;
 
 import lotto.controller.LottoController;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinnerTicket;
+import lotto.domain.WinnerScore;
 import lotto.service.LottoCalculator;
 import lotto.utils.StringConversion;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.List;
 
 public class LottoApplication {
 
@@ -33,7 +33,7 @@ public class LottoApplication {
         LottoCalculator lottoCalculator = new LottoCalculator(lottoWinnerTicket);
 
         // Winner Score 뽑아내기
-        List<Integer> winScore = lottoCalculator.getWinScore(lottoController.getLottoTickets());
+        WinnerScore winScore = lottoCalculator.getWinScore(lottoController.getLottoTickets());
 
         double rate = lottoCalculator.calcRateOfReturn(winScore, amount);
         resultView.printWinningStatics(winScore, rate);
@@ -41,7 +41,7 @@ public class LottoApplication {
 
     private static LottoWinnerTicket getLottoWinnerTicket(InputView inputView, StringConversion stringConversion) {
         String winNumber = inputView.inputWinNumber();
-        int bonus = inputView.inputBonusNumber();
+        LottoNumber bonus = new LottoNumber(inputView.inputBonusNumber());
         return stringConversion.changeToWinnerTicket(
                 winNumber, bonus);
     }
