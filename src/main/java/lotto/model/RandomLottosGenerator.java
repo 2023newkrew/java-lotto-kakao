@@ -8,8 +8,8 @@ public class RandomLottosGenerator implements LottosGenerator {
 
     @Override
     public List<Lotto> generate(long count) {
-        if (count <= 0) {
-            throw new IllegalArgumentException("생성하려는 로또는 1개 이상이어야 합니다.");
+        if (count < 0) {
+            throw new IllegalArgumentException("생성하려는 로또는 0개 이상이어야 합니다.");
         }
 
         return LongStream.range(0, count)

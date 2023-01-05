@@ -15,13 +15,13 @@ class RandomLottosGeneratorTest {
 
     @DisplayName("로또를 0개 미만으로 생성할 경우 예외 발생")
     @ParameterizedTest
-    @ValueSource(longs = {-1L, 0L})
+    @ValueSource(longs = {-1L, -100L})
     void generateWithInvalidCount(long count) {
         LottosGenerator lottosGenerator = new RandomLottosGenerator();
 
         Assertions.assertThatThrownBy(() -> lottosGenerator.generate(count))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("생성하려는 로또는 1개 이상이어야 합니다.");
+                .hasMessage("생성하려는 로또는 0개 이상이어야 합니다.");
     }
 
     @DisplayName("로또를 원하는 갯수만큼 생성한다.")
