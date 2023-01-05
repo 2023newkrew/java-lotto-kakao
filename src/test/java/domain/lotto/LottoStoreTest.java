@@ -2,7 +2,6 @@ package domain.lotto;
 
 import domain.UserAccount;
 import domain.lotto.store.LottoStore;
-import domain.lotto.store.dto.LottoTicketBuyRequestDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,9 +23,7 @@ public class LottoStoreTest {
                 new LottoNumber(5),
                 new LottoNumber(6)
         );
-
-        LottoTicketBuyRequestDto requestDto = new LottoTicketBuyRequestDto(userAccount, lottoNumberList);
         Assertions.assertThatNoException()
-                .isThrownBy(() -> lottoStore.buyLottoTicket(requestDto));
+                .isThrownBy(() -> lottoStore.buyLottoTicket(userAccount, lottoNumberList));
     }
 }

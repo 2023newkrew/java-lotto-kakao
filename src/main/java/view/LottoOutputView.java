@@ -26,6 +26,10 @@ public class LottoOutputView {
         printEarningRate(lottoResult.getEarningRate());
     }
 
+    public void printBuyingManualLottoMessage() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
     private void printPrizeCount(Map<LottoPrize, Integer> prizeCounts) {
         Map<LottoPrize, String> prizeDescriptionMap = makePrizeDescription();
         List<LottoPrize> lottoPrizes = Arrays.asList(LottoPrize.values());

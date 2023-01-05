@@ -2,15 +2,15 @@ package domain;
 
 public class UserAccount {
 
-    private final int balance;
+    private int balance;
 
     public UserAccount(int balance) {
         this.balance = balance;
         validateBalance();
     }
 
-    public UserAccount withdraw(int money) {
-        return new UserAccount(balance - money);
+    public void withdraw(int money) {
+        balance -= money;
     }
 
     public boolean hasEnoughMoney(int money) {

@@ -19,7 +19,7 @@ public class UserAccountTest {
     @ValueSource(ints = {-1, -100})
     @DisplayName("0원 미만의 금액이면 예외가 발생한다")
     void validateRange_throw(int value) {
-        Assertions.assertThatIllegalArgumentException()
+        Assertions.assertThatIllegalStateException()
                 .isThrownBy(() -> new UserAccount(value));
     }
 }

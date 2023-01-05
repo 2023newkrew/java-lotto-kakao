@@ -1,20 +1,18 @@
 package domain.lotto.store;
 
 import domain.UserAccount;
-import domain.lotto.store.dto.LottoTicketBuyRequestDto;
-import domain.lotto.store.dto.LottoTicketBuyResponseDto;
+import domain.lotto.LottoNumber;
 import domain.lotto.ticket.LottoTicket;
+
+import java.util.List;
 
 public class LottoStore {
 
     public static final int LOTTO_PRICE = 1000;
 
-    public LottoTicketBuyResponseDto buyLottoTicket(LottoTicketBuyRequestDto requestDto) {
-        return new LottoTicketBuyResponseDto(
-                requestDto.getUserAccount()
-                        .withdraw(LOTTO_PRICE),
-                new LottoTicket(requestDto.getLottoNumberList())
-        );
+    public LottoTicket buyLottoTicket(UserAccount userAccount, List<LottoNumber> lottoNumbers) {
+        userAccount.withdraw(LOTTO_PRICE);
+        return new LottoTicket(lottoNumbers);
     }
 
     public boolean canBuyLotto(UserAccount userAccount) {

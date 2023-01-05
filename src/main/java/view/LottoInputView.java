@@ -21,13 +21,13 @@ public class LottoInputView {
     }
 
     public LottoWinningNumber readWinningNumber() {
-        List<LottoNumber> lottoNumbers = readLottoNumbers();
+        List<LottoNumber> lottoNumbers = readWinningNumbers();
         LottoNumber bonusNumber = readBonusNumber();
 
         return new LottoWinningNumber(lottoNumbers, bonusNumber);
     }
 
-    private List<LottoNumber> readLottoNumbers() {
+    private List<LottoNumber> readWinningNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         String input = sc.nextLine();
         String[] inputStrings = input.split(",");
@@ -44,5 +44,22 @@ public class LottoInputView {
         int bonusBallNumber = Integer.parseInt(sc.nextLine());
 
         return new LottoNumber(bonusBallNumber);
+    }
+
+    public int readBuyingAmount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        return Integer.parseInt(sc.nextLine());
+    }
+
+    public List<LottoNumber> readLottoNumbers() {
+        String input = sc.nextLine();
+        String[] inputStrings = input.split(",");
+
+        return Arrays.stream(inputStrings)
+                .map(String::trim)
+                .mapToInt(Integer::parseInt)
+                .mapToObj(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 }
