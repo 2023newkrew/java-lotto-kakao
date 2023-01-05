@@ -17,7 +17,7 @@ public class LottoResults {
         Arrays.stream(LottoResultType.values()).
                 forEach(lottoResultType -> lottoResultCount.put(lottoResultType, 0));
         for (LottoTicket lottoTicket : lottoTickets.getLottoTickets()) {
-            countResult(LottoChecker.getResult(lottoTicket, winningNumbers));
+            countResult(LottoResultType.getLottoResult(lottoTicket, winningNumbers));
         }
     }
 
