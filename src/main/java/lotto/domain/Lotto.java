@@ -13,7 +13,7 @@ public class Lotto {
                 .map(LottoNumber::new)
                 .collect(Collectors.toCollection(TreeSet::new));
 
-        if(numbers.size() != LottoConfig.FIXED_SIZE){
+        if(numbers.size() != LottoConfig.LOTTO_SIZE){
             throw new RuntimeException("로또 수의 개수가 잘못되었거나 중복된 수가 있습니다.");
         }
     }

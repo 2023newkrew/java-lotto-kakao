@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.config.LottoConfig;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
@@ -38,7 +39,7 @@ class LottoNumberGenerateTest {
     @ValueSource(ints = {-10, -1, 0, 1, 2, 5, 25, 44, 45, 46, 47, 100})
     @DisplayName("로또 번호는 1과 45 사이의 숫자로만 이루어져 있다.")
     void lottoNumberBetween1To45(int n) {
-        if (LottoNumber.MIN_NUMBER <= n && n <= LottoNumber.MAX_NUMBER) {
+        if (LottoConfig.MIN_NUMBER <= n && n <= LottoConfig.MAX_NUMBER) {
             assertThatNoException().isThrownBy(() -> {
                 new LottoNumber(n);
             });
