@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.Set;
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Money;
@@ -30,11 +31,11 @@ public class LottoInputView {
     }
 
     private static Lotto convertToLotto(String text) {
-        List<LottoNumber> lottoNumbers = Arrays.stream(text.split(","))
+        Set<LottoNumber> lottoNumbers = Arrays.stream(text.split(","))
                 .map(String::trim)
                 .map(Integer::valueOf)
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return Lotto.create(lottoNumbers);
     }
 
