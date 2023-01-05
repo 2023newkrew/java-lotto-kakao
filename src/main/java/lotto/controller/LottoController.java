@@ -21,10 +21,14 @@ public class LottoController {
 
     public void startLottoGame() {
         Integer inputPurchaseAmount = lottoInputTemplate.inputPurchaseAmount();
-        lottoService.purchaseLotto(inputPurchaseAmount);
+        Integer inputManualNumberOfLotto = lottoInputTemplate.inputNumberOfManualLottoTicket(inputPurchaseAmount);
+        List<List<Integer>> inputManualLottoNumbers = lottoInputTemplate.inputManualLottoNumbers(inputManualNumberOfLotto);
+
+        lottoService.purchaseRandomLotto(inputPurchaseAmount, inputManualNumberOfLotto);
+        lottoService.purchaseManualLotto(inputManualLottoNumbers);
         lottoOutputTemplate.printPurchaseHistory(lottoService.getLottoTickets());
 
-        List<Integer> inputWinningNumber = lottoInputTemplate.inputLottoNumber();
+        List<Integer> inputWinningNumber = lottoInputTemplate.inputWinningNumbers();
         Integer inputBonusBall = lottoInputTemplate.inputBonusBall();
         Map<LottoRank, Integer> lottoResult = lottoService.getLottoResult(inputWinningNumber, inputBonusBall);
         lottoOutputTemplate.printLottoResult(lottoResult);
