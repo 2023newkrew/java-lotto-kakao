@@ -1,10 +1,10 @@
-package lotto;
+package lotto.core;
 
 import java.util.Objects;
 
 public class LottoBall implements Comparable<LottoBall> {
-    private static final int MIN_BALL = 1;
-    private static final int MAX_BALL = 45;
+    public static final int MIN_BALL = 1;
+    public static final int MAX_BALL = 45;
     private final int ball;
 
     public LottoBall(int ball) {

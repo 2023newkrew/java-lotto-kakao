@@ -1,9 +1,10 @@
-package lotto;
+package lotto.core;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-public class LottoWinningNumber extends LottoTicket {
+public class LottoWinningNumber {
     /**
      * 등수에 대한 검색 방법에 대해 사전 정의한 테이블
      * 각 키의 의미는 다음과 같다.
@@ -12,8 +13,7 @@ public class LottoWinningNumber extends LottoTicket {
      */
     private static final Map<Integer, Map<Boolean, Ranking>> RANKING_TABLE = Map.ofEntries(
             Map.entry(6, Map.of(
-                    true, Ranking.FIRST,
-                    false, Ranking.OTHER
+                    false, Ranking.FIRST
             )),
             Map.entry(5, Map.of(
                     true, Ranking.SECOND,
@@ -41,13 +41,21 @@ public class LottoWinningNumber extends LottoTicket {
             ))
 
     );
+    protected final Set<LottoBall> lottoBalls;
     protected final LottoBall bonusBall;
 
     public LottoWinningNumber(List<LottoBall> lottoNumbers, LottoBall bonusBall) {
-        super(lottoNumbers);
-        if (this.lottoBalls.contains(bonusBall)) {
+        Set<LottoBall> balls = Set.copyOf(lottoNumbers);
+        if (balls.size() != lottoNumbers.size()) {
+            throw new IllegalArgumentException("각 숫자는 중복을 허용하지 않습니다.");
+        }
+        if (balls.size() != 6) {
+            throw new IllegalArgumentException("로또 숫자는 6개여야 합니다.");
+        }
+        if (balls.contains(bonusBall)) {
             throw new IllegalArgumentException("보너스 번호는 다른 번호와 중복될 수 없습니다.");
         }
+        this.lottoBalls = balls;
         this.bonusBall = bonusBall;
     }
 
