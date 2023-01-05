@@ -7,15 +7,15 @@ import java.util.*;
 public abstract class LottoTrial {
     protected final List<LottoBallNumber> ballNumbers = new ArrayList<>();
 
-    void check(){
+    void check() {
         Set<LottoBallNumber> lottoSet = new HashSet<>(this.ballNumbers);
 
-        if (lottoSet.size()!=LottoConstants.BALLCOUNT_LIMIT) {
+        if (lottoSet.size() != LottoConstants.BALLCOUNT_LIMIT) {
             throw new DuplicatedBallNumber();
         }
     }
 
-    void sort(){
+    void sort() {
         Collections.sort(this.ballNumbers);
     }
 

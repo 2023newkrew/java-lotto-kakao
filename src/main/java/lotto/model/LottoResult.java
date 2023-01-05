@@ -10,7 +10,7 @@ public class LottoResult {
 
     public LottoResult(int matchCount, boolean matchBonus) {
         if (matchCount < 0 || matchCount > LottoConstants.BALLCOUNT_LIMIT ||
-                (matchCount==LottoConstants.BALLCOUNT_LIMIT && matchBonus)){
+                (matchCount == LottoConstants.BALLCOUNT_LIMIT && matchBonus)){
             throw new InvalidLottoResult();
         }
 
@@ -31,11 +31,11 @@ public class LottoResult {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()){
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        LottoResult that = (LottoResult) o;
+        LottoResult that = (LottoResult)o;
         return matchCount == that.getMatchCount() && matchBonus == that.isMatchBonus();
     }
 
@@ -48,7 +48,7 @@ public class LottoResult {
     public String toString() {
         String result = matchCount + "개 일치";
 
-        if (matchBonus){
+        if (matchBonus) {
             result += ", 보너스 볼 일치";
         }
 

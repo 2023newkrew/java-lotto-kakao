@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoPickerRandom implements LottoPicker{
+public class LottoPickerRandom implements LottoPicker {
     private final List<LottoBallNumber> picker = new ArrayList<>();
 
     public LottoPickerRandom() {

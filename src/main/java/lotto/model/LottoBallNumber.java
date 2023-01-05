@@ -5,12 +5,12 @@ import lotto.exception.InvalidLottoBallNumber;
 import java.util.Objects;
 
 @SuppressWarnings("rawtypes")
-public class LottoBallNumber implements Comparable{
+public class LottoBallNumber implements Comparable {
     private final int num;
 
     public LottoBallNumber(int num) {
         if (num < LottoConstants.BALLNUMBER_MIN_VALUE ||
-                num> LottoConstants.BALLNUMBER_MAX_VALUE){
+                num > LottoConstants.BALLNUMBER_MAX_VALUE) {
             throw new InvalidLottoBallNumber();
         }
 
@@ -23,10 +23,10 @@ public class LottoBallNumber implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        if (o.getClass() == Integer.class){
-            return num-(Integer)o;
+        if (o.getClass() == Integer.class) {
+            return num - (Integer)o;
         }
-        if (getClass() != o.getClass()){
+        if (getClass() != o.getClass()) {
             throw new RuntimeException();
         }
 
@@ -35,15 +35,14 @@ public class LottoBallNumber implements Comparable{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()){
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        LottoBallNumber that = (LottoBallNumber) o;
-        return num == that.getNum();
+        return num == ((LottoBallNumber)o).getNum();
     }
 
     @Override

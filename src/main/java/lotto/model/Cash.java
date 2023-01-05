@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Cash implements Comparable {
     private final long cash;
 
-    public Cash(long cash){
+    public Cash(long cash) {
         if (cash < 0) {
             throw new InvalidCashValue();
         }
@@ -17,10 +17,10 @@ public class Cash implements Comparable {
     }
 
     public Cash plus(Cash val2) {
-        return new Cash(this.cash+val2.getCash());
+        return new Cash(this.cash + val2.getCash());
     }
     public Cash plus(long val2) {
-        return new Cash(this.cash+val2);
+        return new Cash(this.cash + val2);
     }
 
     public long getCash() {
@@ -36,8 +36,7 @@ public class Cash implements Comparable {
             return false;
         }
 
-        Cash cash1 = (Cash)o;
-        return cash == cash1.cash;
+        return cash == ((Cash)o).getCash();
     }
 
     @Override
@@ -47,7 +46,7 @@ public class Cash implements Comparable {
 
     @Override
     public String toString() {
-        return cash+"원";
+        return cash + "원";
     }
 
     @Override
@@ -55,9 +54,10 @@ public class Cash implements Comparable {
         if (Long.class == o.getClass()) {
             return Long.compare(cash, (Long)o);
         }
-        if (getClass() != o.getClass()){
+        if (getClass() != o.getClass()) {
             throw new RuntimeException();
         }
+
         return Long.compare(this.cash, ((Cash)o).getCash());
     }
 }

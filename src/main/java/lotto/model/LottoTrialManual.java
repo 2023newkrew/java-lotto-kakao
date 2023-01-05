@@ -19,5 +19,4 @@ public class LottoTrialManual extends LottoTrial {
         super.check();
         super.sort();
     }
-
 }
