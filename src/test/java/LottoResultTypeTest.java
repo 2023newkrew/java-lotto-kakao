@@ -15,7 +15,7 @@ public class LottoResultTypeTest {
     @DisplayName("로또 꽝 당첨 테스트")
     void checkLottoFail() {
         // given
-        LottoNumbers lottoNumbers = new LottoNumbers(new ArrayList<>(List.of(6, 7, 8, 9, 10, 11)));
+        LottoNumbers lottoNumbers = LottoNumbers.create(()->List.of(6, 7, 8, 9, 10, 11));
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 45), 7);
 
         // when
@@ -29,7 +29,7 @@ public class LottoResultTypeTest {
     @DisplayName("로또 5등 당첨 테스트")
     void checkLotto5thPlace() {
         // given
-        LottoNumbers lottoNumbers = new LottoNumbers(new ArrayList<>(List.of(1, 2, 3, 4, 5, 7)));
+        LottoNumbers lottoNumbers = LottoNumbers.create(()->List.of(1, 2, 3, 4, 5, 7));
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 43, 44, 45), 7);
 
         // when
@@ -43,7 +43,7 @@ public class LottoResultTypeTest {
     @DisplayName("로또 4등 당첨 테스트")
     void checkLotto4thPlace() {
         // given
-        LottoNumbers lottoNumbers = new LottoNumbers(new ArrayList<>(List.of(1, 2, 3, 4, 9, 7)));
+        LottoNumbers lottoNumbers = LottoNumbers.create(()->List.of(1, 2, 3, 4, 9, 7));
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 45), 7);
 
         // when
@@ -57,7 +57,7 @@ public class LottoResultTypeTest {
     @DisplayName("로또 3등 당첨 테스트")
     void checkLotto3rdPlace() {
         // given
-        LottoNumbers lottoNumbers = new LottoNumbers(new ArrayList<>(List.of(1, 2, 3, 4, 5, 7)));
+        LottoNumbers lottoNumbers = LottoNumbers.create(()->List.of(1, 2, 3, 4, 5, 7));
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 45), 42);
 
         // when
@@ -71,7 +71,7 @@ public class LottoResultTypeTest {
     @DisplayName("로또 2등 당첨 테스트")
     void checkLotto2ndPlace() {
         // given
-        LottoNumbers lottoNumbers = new LottoNumbers(new ArrayList<>(List.of(1, 2, 3, 4, 5, 7)));
+        LottoNumbers lottoNumbers = LottoNumbers.create(()->List.of(1, 2, 3, 4, 5, 7));
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 45), 7);
 
         // when
@@ -85,7 +85,7 @@ public class LottoResultTypeTest {
     @DisplayName("로또 1등 당첨 테스트")
     void checkLotto1stPlace() {
         // given
-        LottoNumbers lottoNumbers = new LottoNumbers(new ArrayList<>(List.of(1, 2, 3, 4, 5, 7)));
+        LottoNumbers lottoNumbers = LottoNumbers.create(()->List.of(1, 2, 3, 4, 5, 7));
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 7), 12);
 
         // when

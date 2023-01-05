@@ -2,7 +2,7 @@ import domain.lotto.number.LottoNumbers;
 import domain.lotto.number.WinningNumbers;
 import domain.lotto.result.LottoResultType;
 import domain.lotto.result.LottoResults;
-import domain.lotto.ticket.LottoTickets;
+import domain.lotto.number.LottoTickets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,9 +17,9 @@ public class LottoResultsTest {
 
     @BeforeEach
     void setUp() {
-        LottoNumbers lottoTicket1 = new LottoNumbers(List.of(1, 2, 3, 40, 41, 42));  //5등
-        LottoNumbers lottoTicket2 = new LottoNumbers(List.of(1, 2, 4, 40, 41, 42));  //5등
-        LottoNumbers lottoTicket3 = new LottoNumbers(List.of(1, 2, 3, 4, 40, 41));  //4등
+        LottoNumbers lottoTicket1 = LottoNumbers.create(()->List.of(1, 2, 3, 40, 41, 42));  //5등
+        LottoNumbers lottoTicket2 = LottoNumbers.create(()->List.of(1, 2, 4, 40, 41, 42));  //5등
+        LottoNumbers lottoTicket3 = LottoNumbers.create(()->List.of(1, 2, 3, 4, 40, 41));  //4등
 
         WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 4, 5, 6), 7);
         LottoTickets lottoTickets = new LottoTickets(List.of(lottoTicket1, lottoTicket2, lottoTicket3));

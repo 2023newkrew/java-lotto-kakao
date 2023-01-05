@@ -1,5 +1,6 @@
 package domain.lotto.number;
 
+import domain.lotto.number.generator.NumbersGeneratable;
 import exception.InvalidLottoNumbersException;
 
 import java.util.HashSet;
@@ -11,7 +12,7 @@ public class LottoNumbers {
 
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers(final List<Integer> numbers) {
+    private LottoNumbers(final List<Integer> numbers) {
         validateNumberDuplication(numbers);
         this.numbers = numbers.stream()
                 .map(LottoNumber::new)
@@ -24,6 +25,10 @@ public class LottoNumbers {
                 .mapToInt(LottoNumber::getNumber)
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    public static LottoNumbers create(NumbersGeneratable numbersGeneratable) {
+        return new LottoNumbers(numbersGeneratable.generate());
     }
 
     private void validateNumberDuplication(final List<Integer> lottoNumbers) {

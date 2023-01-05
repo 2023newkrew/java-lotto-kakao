@@ -3,10 +3,9 @@ package view;
 import domain.lotto.number.LottoNumbers;
 import domain.lotto.result.LottoResultType;
 import domain.lotto.result.LottoResults;
-import domain.lotto.ticket.LottoTickets;
+import domain.lotto.number.LottoTickets;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class OutputView {
 

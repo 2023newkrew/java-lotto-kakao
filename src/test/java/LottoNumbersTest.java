@@ -14,21 +14,20 @@ public class LottoNumbersTest {
     @DisplayName("로또 번호는 1 이상 45 이하의 6자리 숫자")
     public void validateLottoNumbersRange() {
         assertThatExceptionOfType(LottoNumberOutOfRangeException.class)
-                .isThrownBy(() -> new LottoNumbers(List.of(0, 2, 3, 4, 5, 6)));
+                .isThrownBy(() -> LottoNumbers.create(()->List.of(0, 2, 3, 4, 5, 6)));
         assertThatExceptionOfType(LottoNumberOutOfRangeException.class)
-                .isThrownBy(() -> new LottoNumbers(List.of(1, 2, 3, 4, 5, 46)));
+                .isThrownBy(() -> LottoNumbers.create(()->List.of(1, 2, 3, 4, 5, 46)));
     }
 
     @Test
     @DisplayName("로또 번호는 중복되지 않는 6자리 숫자임")
     public void validateLottoNumbersDuplication() {
         assertThatExceptionOfType(InvalidLottoNumbersException.class)
-                .isThrownBy(() -> new LottoNumbers(List.of(1, 1, 3, 4, 5, 6)));
+                .isThrownBy(() -> LottoNumbers.create(()->List.of(1, 1, 3, 4, 5, 6)));
         assertThatExceptionOfType(InvalidLottoNumbersException.class)
-                .isThrownBy(() -> new LottoNumbers(List.of(1,2,3,4,5)));
+                .isThrownBy(() -> LottoNumbers.create(()->List.of(1,2,3,4,5)));
         assertThatExceptionOfType(InvalidLottoNumbersException.class)
-                .isThrownBy(() -> new LottoNumbers(List.of(1,2,3,4,5,6,7)));
+                .isThrownBy(() -> LottoNumbers.create(()->List.of(1,2,3,4,5,6,7)));
     }
-
 
 }

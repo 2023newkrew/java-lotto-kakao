@@ -2,7 +2,7 @@ package domain.lotto.result;
 
 import domain.lotto.number.LottoNumbers;
 import domain.lotto.number.WinningNumbers;
-import domain.lotto.ticket.LottoTickets;
+import domain.lotto.number.LottoTickets;
 
 import java.util.Arrays;
 import java.util.HashMap;

@@ -19,7 +19,7 @@ public class WinningNumbers {
 
     public WinningNumbers(final List<Integer> winningNumbers, final int bonusNumber) {
         validateBonusNumberDuplication(winningNumbers, bonusNumber);
-        this.winningNumbers = new LottoNumbers(winningNumbers);
+        this.winningNumbers = LottoNumbers.create(()->winningNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 

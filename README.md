@@ -25,4 +25,4 @@
 - [x] 메시지만 다른 동일한 예외 타입들 테스트시 구분 가능하도록 변경
   - 예외 상황별 예외 클래스 커스텀
 - [x] 역할이 모호한 LottoTicket 제거 
-    
+- [x] LottoNumberMakers의 로또 숫자 생성 기능을 LottoNumbers 내부 메서드로 변경 후 제거
