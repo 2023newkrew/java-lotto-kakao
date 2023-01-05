@@ -21,13 +21,16 @@ public class LottoCount {
         }
         this.count = number;
     }
+    public LottoCount(LottoCount lottoCount) {
+        this(lottoCount.count);
+    }
 
     /**
      * convert cash into count of buyable lotto.
      * @param cash
      */
     public LottoCount(Cash cash){
-        this((int)(cash.getCash() / LOTTO_PRICE));
+        this((int)(cash.getCashValue() / LOTTO_PRICE));
     }
 
     public int getCount() {
@@ -48,6 +51,13 @@ public class LottoCount {
      */
     public LottoCount add(LottoCount val){
         return new LottoCount(count+val.count);
+    }
+
+    public LottoCount minus(int val){
+        return new LottoCount(count-val);
+    }
+    public LottoCount minus(LottoCount val){
+        return new LottoCount(count-val.count);
     }
 
     @Override

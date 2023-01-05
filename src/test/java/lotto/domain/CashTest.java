@@ -32,7 +32,7 @@ public class CashTest {
         Cash cash2 = new Cash(val2);
         Cash cash3 = cash1.plus(val2);
 
-        Assertions.assertThat(cash3.getCash()).isEqualTo(3000);
+        Assertions.assertThat(cash3.getCashValue()).isEqualTo(3000);
     }
 
     @Test

@@ -3,58 +3,67 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.view.View;
 
-import static lotto.domain.constants.LottoConstants.*;
-
 public class Controller {
     private final View view = new View(System.in, System.out, System.err);
-    private Cash cash;
-    private LottoCount lottoCountRandom;
-    private LottoCount lottoCountManual;
-    private LottoTrials lottoTrials = new LottoTrials();
-    private WinNumber winNumber;
-    private TotalResult totalResult = new TotalResult();
-    private void input(){
-        Cash lottoCount = view.inputCash();
-        lottoCountManual = view.inputLottoCountManual();
-        lottoCountRandom = new LottoCount(lottoCount.minus(lottoCountManual.getCount()*LOTTO_PRICE));
+
+    public void run(){
+        try {
+            LottoTrials trials = inputTrials();
+            view.printLottoTrials(trials);
+            WinNumber winNumber = inputWinningLotto();
+            view.printTotalResult(getTotalResult(winNumber, trials));
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
-    private void inputManualLotto(){
+    private LottoTrials inputTrials(){
+        LottoTrials trials = new LottoTrials();
+        Cash cash = getCash();
+        LottoCount lottoCountTotal = new LottoCount(cash);
+        LottoCount lottoCountManual = getLottoCountManual();
+        LottoCount lottoCountRandom = new LottoCount(lottoCountTotal.minus(lottoCountManual));
+        trials.addAll(inputManualLotto(lottoCountManual));
+        view.printLottoCountWithManual(lottoCountManual, lottoCountRandom);
+        trials.addAll(createRandomLotto(lottoCountRandom));
+        return trials;
+    }
+
+    private Cash getCash(){
+        return view.inputCash();
+    }
+    private LottoCount getLottoCountManual(){
+        return view.inputLottoCountManual();
+    }
+    private LottoTrials inputManualLotto(LottoCount lottoCountManual){
+        LottoTrials result = new LottoTrials();
         for (int i=1;i<=lottoCountManual.getCount();i++){
             LottoTrial lottoTrial = view.inputLottoManual();
-            lottoTrials.add(lottoTrial);
+            result.add(lottoTrial);
         }
-        view.printLottoCountWithManual(lottoCountManual, lottoCountRandom);
+        return result;
     }
-    private void createRandomLotto(){
+    private LottoTrials createRandomLotto(LottoCount lottoCountRandom){
+        LottoTrials result = new LottoTrials();
         for (int i=1;i<=lottoCountRandom.getCount();i++){
             LottoTrial lottoTrial = new LottoTrial.Builder()
                     .addRandomBalls()
                     .build();
-            lottoTrials.add(lottoTrial);
+            result.add(lottoTrial);
         }
-        view.printLottoTrials(lottoTrials);
+        return result;
     }
 
-    private void inputWinningLotto() {
-        winNumber = view.inputWinningLotto();
+
+
+    private WinNumber inputWinningLotto() {
+        return view.inputWinningLotto();
     }
 
-    private void processLotto(){
+    private TotalResult getTotalResult(WinNumber winNumber, LottoTrials lottoTrials){
+        TotalResult totalResult = new TotalResult();
         for (int i=0; i<lottoTrials.size();i++){
             totalResult.add(winNumber.compareLotto(lottoTrials.get(i)));
         }
-        view.printTotalResult(totalResult);
-    }
-
-    public void run(){
-        try {
-            input();
-            inputManualLotto();
-            createRandomLotto();
-            inputWinningLotto();
-            processLotto();
-        } catch(Exception e){
-            e.printStackTrace();
-        }
+        return totalResult;
     }
 }

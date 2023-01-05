@@ -45,16 +45,13 @@ public class LottoBallNumber implements Comparable{
 
     /**
      * @param o the object to be compared.
-     * @throws TypeMismatchException if o is neither Integer nor LottoBallNumber
+     * @throws TypeMismatchException if o is not instance of LottoBallNumber
      * @return positive number if num is bigger, 0 when same, negative when smaller.
      */
     @Override
     public int compareTo(Object o) {
-        if (o == null || (getClass() != o.getClass() && o.getClass() != Integer.class)){
+        if (o == null || getClass() != o.getClass()){
             throw new TypeMismatchException();
-        }
-        if (o.getClass() == Integer.class){
-            return num-(Integer)o;
         }
         return Integer.compare(num,((LottoBallNumber)o).num);
     }

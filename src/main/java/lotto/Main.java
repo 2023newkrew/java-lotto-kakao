@@ -1,5 +1,6 @@
-package lotto.controller;
+package lotto;
 
+import lotto.controller.Controller;
 import lotto.domain.*;
 
 import java.util.Arrays;
