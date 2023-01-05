@@ -14,7 +14,7 @@ public class Lottos {
         lottos = new ArrayList<>();
     }
 
-    public Lottos(List<Lotto> lottos) {
+    private Lottos(List<Lotto> lottos) {
         validateLottos(lottos);
         this.lottos = lottos;
     }
