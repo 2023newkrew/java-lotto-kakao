@@ -1,9 +1,11 @@
 package domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -37,4 +39,12 @@ public class MoneyTest {
         assertDoesNotThrow(() -> new Money(normalInput));
     }
 
+    @DisplayName("금액으로 살 수 있는 로또 장수 계산 테스트")
+    @Test
+    void getCountTest() {
+        String paid = "10000";
+        Money money = new Money(paid);
+        int count = 10;
+        assertThat(money.getCount()).isEqualTo(count);
+    }
 }
