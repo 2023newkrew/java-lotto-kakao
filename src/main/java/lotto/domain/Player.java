@@ -2,7 +2,7 @@ package lotto.domain;
 
 import static lotto.constant.LotteryConstant.LOTTERY_COUNT_MINIMUM;
 import static lotto.constant.LotteryConstant.LOTTERY_UNIT_PRICE;
-import static lotto.constant.LotteryConstant.ZERO_BUDGET;
+import static lotto.constant.LotteryConstant.ZERO_MONEY;
 import static lotto.constant.LotteryConstant.ZERO_REMAINDER;
 
 import java.util.ArrayList;
@@ -76,7 +76,7 @@ public class Player {
     }
 
     private void validateRange(int budget) {
-        if (budget <= ZERO_BUDGET) {
+        if (budget <= ZERO_MONEY) {
             throw new IllegalArgumentException();
         }
     }
