@@ -5,7 +5,6 @@ import lotto.utils.LottoRank;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static lotto.domain.LottoNumber.LOTTO_LOWER_BOUND;
@@ -20,10 +19,6 @@ public class LottoWinnerTicket {
         this.winNumber = winNumber;
         this.bonusBall = bonusBall;
         bonusRangeCheck();
-    }
-
-    public Integer getBonusNumber() {
-        return bonusBall;
     }
 
     private void bonusRangeCheck(){
@@ -70,7 +65,7 @@ public class LottoWinnerTicket {
 
     // 수익률 계산
     public double calcRateOfReturn(int amount, Map<LottoRank, Integer> result) {
-        long summary = getWinSummary(result); // 인자로 Result를 받는게 맞음. 여기서 가지고 있ㅇ면 stateless 하지 않음
+        long summary = getWinSummary(result);
         amount -= amount % 1000;
         return (double) summary / amount;
     }
