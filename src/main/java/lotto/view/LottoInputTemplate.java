@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import static lotto.config.LottoConfig.LOTTO_PRICE;
+
 public class LottoInputTemplate {
     private final Scanner scanner;
 
@@ -25,6 +27,20 @@ public class LottoInputTemplate {
     private void validateInputPurchaseAmount(Integer purchaseAmount){
         if(purchaseAmount <= 0){
             throw new LottoException(ErrorCode.INVALID_PURCHASE_AMOUNT);
+        }
+    }
+
+    public Integer inputNumberOfManualLottoTicket(Integer purchaseAmount){
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        Integer numberOfManualLotto = Integer.parseInt(scanner.nextLine().trim());
+        validateNumberOfManualLotto(purchaseAmount / LOTTO_PRICE, numberOfManualLotto);
+
+        return numberOfManualLotto;
+    }
+
+    private void validateNumberOfManualLotto(Integer maxNumberOfLottoTicket, Integer numberOfManualLotto){
+        if(maxNumberOfLottoTicket < numberOfManualLotto){
+            throw new LottoException(ErrorCode.EXCEED_NUMBER_OF_TICKET);
         }
     }
 
