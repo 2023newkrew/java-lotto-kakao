@@ -8,7 +8,7 @@ public class AutoLotteryNumberTest {
     @DisplayName("AutoLotteryNumber가 자동으로 LotteryNumbers를 생성한다")
     @Test
     void generate() {
-        AutoLotteryNumber autoLotteryNumber = new AutoLotteryNumber();
+        AutoLotteryNumbersFactory autoLotteryNumber = new AutoLotteryNumbersFactory();
 
         Assertions.assertThatNoException().isThrownBy(autoLotteryNumber::generate);
     }

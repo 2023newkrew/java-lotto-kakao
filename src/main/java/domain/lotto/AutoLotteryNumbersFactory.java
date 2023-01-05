@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class AutoLotteryNumber {
+public class AutoLotteryNumbersFactory {
     private List<Integer> numberCollection = IntStream.range(1, 46)
             .boxed()
             .collect(Collectors.toList());
