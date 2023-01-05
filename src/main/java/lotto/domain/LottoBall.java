@@ -2,10 +2,10 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoBall {
+public class LottoBall implements Comparable<LottoBall> {
 
-    public static final int MINIMUM_VALUE = 1;
-    public static final int MAXIMUM_VALUE = 45;
+    protected static final int MINIMUM_BALL_NUMBER = 1;
+    protected static final int MAXIMUM_BALL_NUMBER = 45;
 
     private final int number;
 
@@ -15,8 +15,8 @@ public class LottoBall {
     }
 
     private void validateNumber(int number) {
-        if (number < MINIMUM_VALUE || number > MAXIMUM_VALUE) {
-            throw new IllegalArgumentException();
+        if (number < MINIMUM_BALL_NUMBER || number > MAXIMUM_BALL_NUMBER) {
+            throw new IllegalArgumentException(MINIMUM_BALL_NUMBER + "와 " + MAXIMUM_BALL_NUMBER + " 사이의 숫자만을 허용합니다.");
         }
     }
 
@@ -35,5 +35,10 @@ public class LottoBall {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    @Override
+    public int compareTo(LottoBall o) {
+        return this.number - o.number;
     }
 }

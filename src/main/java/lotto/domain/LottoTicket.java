@@ -1,24 +1,35 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
-    private static final int LOTTO_TICKET_BALL_COUNT = 6;
+    protected static final int LOTTO_TICKET_BALL_COUNT = 6;
 
     private final List<LottoBall> lottoBalls;
 
     public LottoTicket(List<LottoBall> lottoBalls) {
-        validateLottoBalls(lottoBalls);
-        this.lottoBalls = lottoBalls;
+        validateSize(lottoBalls);
+        validateDuplicate(lottoBalls);
+        this.lottoBalls = new ArrayList<>(lottoBalls);
+        Collections.sort(this.lottoBalls);
     }
 
-    private void validateLottoBalls(List<LottoBall> lottoBalls) {
+    public static LottoTicket fromNumbers(List<Integer> lottoNumbers) {
+        List<LottoBall> lottoBalls = lottoNumbers.stream()
+                .map(LottoBall::new)
+                .collect(Collectors.toList());
+        return new LottoTicket(lottoBalls);
+    }
+
+    private void validateSize(List<LottoBall> lottoBalls) {
         if (lottoBalls.size() != LOTTO_TICKET_BALL_COUNT) {
             throw new IllegalArgumentException("로또 티켓 한 장은 6개의 로또볼이 필요합니다.");
         }
+    }
+
+    private void validateDuplicate(List<LottoBall> lottoBalls) {
         Set<LottoBall> duplicateCheck = new HashSet<>(lottoBalls);
         if (duplicateCheck.size() != LOTTO_TICKET_BALL_COUNT) {
             throw new IllegalArgumentException("로또 티켓에 중복되는 로또볼이 있습니다.");
@@ -31,7 +42,7 @@ public class LottoTicket {
 
     public int countMatch(LottoTicket lottoTicket) {
         return (int) lottoBalls.stream()
-                .filter(lottoBall -> lottoTicket.contains(lottoBall))
+                .filter(lottoTicket::contains)
                 .count();
     }
 
