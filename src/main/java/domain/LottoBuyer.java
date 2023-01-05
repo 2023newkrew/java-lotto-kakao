@@ -45,15 +45,11 @@ public class LottoBuyer {
             .mapToLong(entry -> entry.getValue() * entry.getKey().getReward())
             .reduce(0, Long::sum);
 
-        if (money == 0) {
-            return 0.00d;
-        }
         Integer investMoney = (money / LOTTO_COST) * LOTTO_COST;
-
-        if ((earningMoney - investMoney) == 0) {
+        Double rate = ((earningMoney - investMoney) / (double) investMoney) * 100;
+        if (investMoney == 0) {
             return 0.00d;
         }
-        Double rate = (earningMoney - investMoney) / (double) investMoney * 100;
         return Math.floor(rate * RATE_DECIMAL_POINT) / RATE_DECIMAL_POINT;
     }
 }
