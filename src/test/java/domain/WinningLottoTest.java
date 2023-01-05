@@ -45,7 +45,7 @@ public class WinningLottoTest {
         LottoTicket lottoTicket = lottoTicketGenerator.generate();
 
         assertThat(winningLotto.match(lottoTicket))
-                .isEqualTo(new LottoMatchResult(6, true));
+                .isEqualTo(new LottoMatchResult(5, true));
     }
 
     @DisplayName("5개의 로또 번호가 동일하고, 나머지 로또 번호가 보너스 번호와 다르다면, 일치하는 번호의 수는 5개이다.")

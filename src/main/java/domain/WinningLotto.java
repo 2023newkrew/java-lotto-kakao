@@ -23,7 +23,7 @@ public class WinningLotto {
                 .filter(lottoNumber -> (!lottoNumber.equals(bonusNumber)))
                 .collect(Collectors.toList());
 
-        int matchCount = this.winningLottoTicket.size() - remainLottoNumbers.size();
+        int matchCount = this.winningLottoTicket.size() - unMatchLottoNumbers.size();
         boolean isBonusNumberMatched = (unMatchLottoNumbers.size() - remainLottoNumbers.size() != 0);
         return new LottoMatchResult(matchCount, isBonusNumberMatched);
     }
