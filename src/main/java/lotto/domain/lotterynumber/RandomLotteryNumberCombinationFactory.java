@@ -1,7 +1,7 @@
 package lotto.domain.lotterynumber;
 
 import static lotto.constant.LotteryConstant.LOTTERY_NUMBERS_LENGTH;
-import static lotto.constant.LotteryConstant.LOTTERY_NUMBER_MAXIMIM;
+import static lotto.constant.LotteryConstant.LOTTERY_NUMBER_MAXIMUM;
 import static lotto.constant.LotteryConstant.LOTTERY_NUMBER_MINIMUM;
 
 import java.util.Collections;
@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 
 public class RandomLotteryNumberCombinationFactory {
     private static final List<LotteryNumber> lottoNumbersPool =
-            IntStream.range(LOTTERY_NUMBER_MINIMUM, LOTTERY_NUMBER_MAXIMIM)
+            IntStream.range(LOTTERY_NUMBER_MINIMUM, LOTTERY_NUMBER_MAXIMUM)
                     .mapToObj(LotteryNumber::of)
                     .collect(Collectors.toList());
 

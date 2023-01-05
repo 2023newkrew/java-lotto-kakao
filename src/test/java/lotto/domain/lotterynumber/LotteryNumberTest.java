@@ -1,7 +1,7 @@
 package lotto.domain.lotterynumber;
 
 import static lotto.constant.ExceptionMessage.LOTTERY_NUMBER_OUT_OF_RANGE;
-import static lotto.constant.LotteryConstant.LOTTERY_NUMBER_MAXIMIM;
+import static lotto.constant.LotteryConstant.LOTTERY_NUMBER_MAXIMUM;
 import static lotto.constant.LotteryConstant.LOTTERY_NUMBER_MINIMUM;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -14,7 +14,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LotteryNumberTest {
-    private final int[] validNumbers = IntStream.range(LOTTERY_NUMBER_MINIMUM, LOTTERY_NUMBER_MAXIMIM).toArray();
+    private final int[] validNumbers = IntStream.range(LOTTERY_NUMBER_MINIMUM, LOTTERY_NUMBER_MAXIMUM).toArray();
 
     @DisplayName("1과 45 사이의 값이 아닌 경우 예외가 발생한다.")
     @ParameterizedTest

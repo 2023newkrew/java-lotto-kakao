@@ -1,6 +1,6 @@
 package lotto.domain.lotterynumber;
 
-import static lotto.constant.ExceptionMessage.LOTTO_NUMBERS_WRONG_DISTINCT_COUNT;
+import static lotto.constant.ExceptionMessage.LOTTERY_NUMBERS_WRONG_DISTINCT_COUNT;
 import static lotto.constant.LotteryConstant.LOTTERY_NUMBERS_LENGTH;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class LotteryNumberCombination {
 
     private void validate(Set<LotteryNumber> lotteryNumbers) {
         if (lotteryNumbers.size() != LOTTERY_NUMBERS_LENGTH) {
-            throw new IllegalArgumentException(LOTTO_NUMBERS_WRONG_DISTINCT_COUNT);
+            throw new IllegalArgumentException(LOTTERY_NUMBERS_WRONG_DISTINCT_COUNT);
         }
     }
 

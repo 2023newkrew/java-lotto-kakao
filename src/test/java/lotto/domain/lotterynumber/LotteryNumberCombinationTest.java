@@ -1,7 +1,7 @@
 package lotto.domain.lotterynumber;
 
 import static lotto.constant.ExceptionMessage.LOTTERY_NUMBER_OUT_OF_RANGE;
-import static lotto.constant.ExceptionMessage.LOTTO_NUMBERS_WRONG_DISTINCT_COUNT;
+import static lotto.constant.ExceptionMessage.LOTTERY_NUMBERS_WRONG_DISTINCT_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -27,12 +27,12 @@ public class LotteryNumberCombinationTest {
         assertAll(
                 () -> assertThatThrownBy(() -> new LotteryNumberCombination(Arrays.asList(1, 2, 3, 4, 5)))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage(LOTTO_NUMBERS_WRONG_DISTINCT_COUNT),
+                        .hasMessage(LOTTERY_NUMBERS_WRONG_DISTINCT_COUNT),
                 () -> assertThatThrownBy(() -> new LotteryNumberCombination(
                         Stream.of(1, 2, 3, 4, 5, 6, 7).map(LotteryNumber::of).collect(
                                 Collectors.toSet())))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage(LOTTO_NUMBERS_WRONG_DISTINCT_COUNT)
+                        .hasMessage(LOTTERY_NUMBERS_WRONG_DISTINCT_COUNT)
         );
     }
 
