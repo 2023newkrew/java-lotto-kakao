@@ -1,8 +1,8 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import static domain.LottoRank.*;
@@ -16,17 +16,8 @@ public class LottoMatchStatistics {
 
     public Map<LottoRank, Integer> getRankStatistics(){
         List<LottoRank> lottoRanks = getLottoRanks();
-        Map<LottoRank, Integer> rankStatistics = new TreeMap<>();
-
-        for(LottoRank lottoRank : statisticsTargetRanks){
-            rankStatistics.put(lottoRank, 0);
-        }
-
-        for(LottoRank lottoRank : lottoRanks){
-            int originCount = rankStatistics.get(lottoRank);
-            rankStatistics.put(lottoRank, originCount + 1);
-        }
-        return rankStatistics;
+        return statisticsTargetRanks.stream()
+                .collect(Collectors.toMap(k -> k, v -> Collections.frequency(lottoRanks, v)));
     }
 
     private List<LottoRank> getLottoRanks(){
