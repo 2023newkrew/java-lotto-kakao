@@ -39,42 +39,42 @@ public class LottoTest {
     })
     void getResultReturnNONETest(String input) {
         Lotto lotto = Lotto.getManualLotto(input);
-        assertThat(lotto.getResult(winningLotto)).isEqualTo(Result.NONE);
+        assertThat(winningLotto.getResult(lotto)).isEqualTo(Result.NONE);
     }
 
     @DisplayName("로또 번호와 당첨 번호가 세 개 일치할 경우 테스트")
     @Test
     void getResultReturnTRHEETest() {
         Lotto lotto = Lotto.getManualLotto("1, 2, 3, 7, 8, 9");
-        assertThat(lotto.getResult(winningLotto)).isEqualTo(Result.FIFTH_PLACE);
+        assertThat(winningLotto.getResult(lotto)).isEqualTo(Result.FIFTH_PLACE);
     }
 
     @DisplayName("로또 번호와 당첨 번호가 네 개 일치할 경우 테스트")
     @Test
     void getResultReturnFOURTest() {
         Lotto lotto = Lotto.getManualLotto("1, 2, 3, 4, 8, 9");
-        assertThat(lotto.getResult(winningLotto)).isEqualTo(Result.FOURTH_PLACE);
+        assertThat(winningLotto.getResult(lotto)).isEqualTo(Result.FOURTH_PLACE);
     }
 
     @DisplayName("로또 번호와 당첨 번호가 다섯 개 일치할 경우 테스트")
     @Test
     void getResultReturnFIVETest() {
         Lotto lotto = Lotto.getManualLotto("1, 2, 3, 4, 5, 9");
-        assertThat(lotto.getResult(winningLotto)).isEqualTo(Result.THIRD_PLACE);
+        assertThat(winningLotto.getResult(lotto)).isEqualTo(Result.THIRD_PLACE);
     }
 
     @DisplayName("로또 번호와 당첨 번호가 다섯 개 일치하고, 보너스 번호를 포함하고 있는 경우 테스트")
     @Test
     void getResultReturnFIVEBONUSTest() {
         Lotto lotto = Lotto.getManualLotto("1, 2, 3, 4, 5, 7");
-        assertThat(lotto.getResult(winningLotto)).isEqualTo(Result.SECOND_PLACE);
+        assertThat(winningLotto.getResult(lotto)).isEqualTo(Result.SECOND_PLACE);
     }
 
     @DisplayName("로또 번호와 당첨 번호가 여섯 개 일치할 경우 테스트")
     @Test
     void getResultReturnSIXTest() {
         Lotto lotto = Lotto.getManualLotto("1, 2, 3, 4, 5, 6");
-        assertThat(lotto.getResult(winningLotto)).isEqualTo(Result.FIRST_PLACE);
+        assertThat(winningLotto.getResult(lotto)).isEqualTo(Result.FIRST_PLACE);
     }
 
 }

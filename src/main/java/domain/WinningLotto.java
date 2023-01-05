@@ -1,5 +1,7 @@
 package domain;
 
+import common.state.Result;
+
 public class WinningLotto {
     private final Lotto winningLotto;
     private final LottoNumber bonusNumber;
@@ -9,12 +11,12 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public boolean isBonus(Lotto lotto) {
-        return lotto.containsNumber(bonusNumber);
+    public Result getResult(Lotto lotto) {
+        return Result.of(winningLotto.getMatchCount(lotto), isBonus(lotto));
     }
 
-    public Lotto getWinningLotto(){
-        return winningLotto;
+    public boolean isBonus(Lotto lotto) {
+        return lotto.containsNumber(bonusNumber);
     }
 
 }
