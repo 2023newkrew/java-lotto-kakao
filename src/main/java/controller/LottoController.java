@@ -10,10 +10,12 @@ import java.util.Scanner;
 public class LottoController {
     private final LottoGame lottoGame;
     View view;
+
     public LottoController() {
         lottoGame = new LottoGame();
         view = new View();
     }
+
     public void start() {
         lottoGame.setLottoTicket(inputPurchaseMoney());
         view.outputLottoTicket(lottoGame.getLottoTicket());
