@@ -6,9 +6,11 @@
 
 로또 1장의 가격은 1000원이다.
 
+총 구매한 로또 개수 = 수동으로 구매한 개수 + 자동으로 구매한 개수
+
 아래와 같이 출력
 
-![Example.png](Example.png)
+![Lotto_Manual.png](Lotto_Manual.png)
 
 ### 테스트 케이스
 
