@@ -20,22 +20,22 @@ public class InputView {
     }
 
     public int inputUserAmount(){
-        System.out.println(INPUT_AMOUNT.getMessage());
+        System.out.println(INPUT_AMOUNT);
         return Integer.parseInt(scanner.nextLine());
     }
 
     public String inputWinNumber(){
-        System.out.println(INPUT_WIN_NUMBERS.getMessage());
+        System.out.println(INPUT_WIN_NUMBERS);
         return scanner.nextLine();
     }
 
     public int inputBonusNumber(){
-        System.out.println(INPUT_BONUS_BALL.getMessage());
+        System.out.println(INPUT_BONUS_BALL);
         return Integer.parseInt(scanner.nextLine());
     }
 
     private int inputManualCount(int amount){
-        System.out.println(INPUT_MANUAL_COUNT.getMessage());
+        System.out.println(INPUT_MANUAL_COUNT);
         int manualCount = Integer.parseInt(scanner.nextLine());
         if(manualCount * 1000 > amount) {
             throw new IllegalArgumentException("수동으로 구매할 수 있는 로또 수는 구입 금액보다 적어야 합니다.");
@@ -45,7 +45,7 @@ public class InputView {
 
     public List<LottoNumber> inputManualNumbers(int amount){
         int manualCount = inputManualCount(amount);
-        System.out.println(INPUT_MANUAL_NUMBER.getMessage());
+        System.out.println(INPUT_MANUAL_NUMBER);
         List<LottoNumber> ret = new ArrayList<>();
         for(int i=0; i<manualCount; i++){
             String userInput = scanner.nextLine();

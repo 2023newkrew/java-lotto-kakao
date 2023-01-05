@@ -13,18 +13,18 @@ import static lotto.utils.LottoRank.*;
 public class ResultView {
 
     public void printPurchaseCount(int amount, int manual){
-        System.out.println(amount + RESULT_PURCHASE_COUNT.getMessage());
-        System.out.printf("수동으로 %d장, 자동으로 %d%s\n", manual, amount - manual, RESULT_PURCHASE_COUNT.getMessage());
+        System.out.println(amount + RESULT_PURCHASE_COUNT);
+        System.out.printf("수동으로 %d장, 자동으로 %d%s\n", manual, amount - manual, RESULT_PURCHASE_COUNT);
     }
 
     public void printWinningStatics(Map<LottoRank, Integer> result, double rate){
-        System.out.println(RESULT_WINNING_STAT.getMessage());
-        System.out.println(RESULT_LINE.getMessage());
-        System.out.println(RESULT_THREE_MATCHING.getMessage() + resultCount(result, FIFTH));
-        System.out.println(RESULT_FOUR_MATCHING.getMessage() + resultCount(result, FOURTH));
-        System.out.println(RESULT_FIVE_MATCHING.getMessage() + resultCount(result, THIRD));
-        System.out.println(RESULT_FIVE_BONUS_MATCHING.getMessage() + resultCount(result, SECOND));
-        System.out.println(RESULT_SIX_MATCHING.getMessage() + resultCount(result, FIRST));
+        System.out.println(RESULT_WINNING_STAT);
+        System.out.println(RESULT_LINE);
+        System.out.println(RESULT_FIFTH + resultCount(result, FIFTH));
+        System.out.println(RESULT_FOURTH + resultCount(result, FOURTH));
+        System.out.println(RESULT_THIRD + resultCount(result, THIRD));
+        System.out.println(RESULT_SECOND + resultCount(result, SECOND));
+        System.out.println(RESULT_FIRST + resultCount(result, FIRST));
         printRateOfReturn(rate);
     }
 
@@ -38,10 +38,10 @@ public class ResultView {
     private void printRateOfReturn(double rate){
         System.out.printf("총 수익률은 %.2f 입니다.", rate);
         if(rate < 1.0) {
-            System.out.println(RESULT_BAD.getMessage());
+            System.out.println(RESULT_BAD);
             return;
         }
-        System.out.println(RESULT_GOOD.getMessage());
+        System.out.println(RESULT_GOOD);
     }
     public void printLottoTickets(LottoTicket lottoTicket) {
         List<LottoNumber> tickets = lottoTicket.getTicket();
