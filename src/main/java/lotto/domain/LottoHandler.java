@@ -29,4 +29,8 @@ public class LottoHandler {
     }
 
 
+    public String allLottoToString() {
+        return lottos.getAllLottoToString();
+    }
+
 }

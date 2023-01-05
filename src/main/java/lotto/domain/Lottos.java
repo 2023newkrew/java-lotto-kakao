@@ -35,4 +35,9 @@ public class Lottos {
     private void addRank(Map<LottoRank, Integer> rankMap, List<LottoRank> ranks) {
         ranks.forEach(rank -> rankMap.put(rank, rankMap.get(rank) + 1));
     }
+
+    public String getAllLottoToString(){
+        return lottos.stream().map(Lotto::lottoToString).collect(Collectors.joining("\n")) + "\n";
+
+    }
 }
