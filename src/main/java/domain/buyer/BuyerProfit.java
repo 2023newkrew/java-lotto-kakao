@@ -6,12 +6,20 @@ public class BuyerProfit {
     private final double profit;
 
     public BuyerProfit(int lotteryCount, int totalPrize) {
-        if (lotteryCount == 0) {
-            profit = 0;
-            return;
-        }
+        validateNumber(lotteryCount, totalPrize);
 
-        profit = (double) totalPrize / (lotteryCount * Lottery.PRICE);
+        profit = calculateProfit(lotteryCount, totalPrize);
+    }
+
+    private void validateNumber(int lotteryCount, int totalPrize) {
+        if (lotteryCount < 0) throw new IllegalArgumentException("로또 개수는 음수일 수 없습니다");
+        if (totalPrize < 0) throw new IllegalArgumentException("상금은 음수일 수 없습니다");
+    }
+
+    private double calculateProfit(int lotteryCount, int totalPrize) {
+        if (lotteryCount == 0) return 0;
+
+        return (double) totalPrize / (lotteryCount * Lottery.PRICE);
     }
 
     @Override
