@@ -2,6 +2,7 @@ package view;
 
 import domain.dto.WinningNumbersDto;
 import domain.lotto.LottoConstant;
+import domain.lotto.ticket.LottoNumber;
 import domain.lotto.ticket.LottoTicket;
 
 import java.util.ArrayList;
@@ -14,23 +15,23 @@ public class InputView {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    public static Integer inputPurchaseAmount() {
+    public static int inputPurchaseAmount() {
         System.out.println("구입 금액을 입력해 주세요.");
 
-        Integer purchaseBudget = sc.nextInt();
+        int purchaseBudget = sc.nextInt();
         validatePurchaseBudget(purchaseBudget);
         return purchaseBudget / LottoConstant.LOTTO_TICKET_PRICE;
     }
 
-    private static void validatePurchaseBudget(Integer purchaseBudget) {
-        if (purchaseBudget == null || purchaseBudget == 0)
+    private static void validatePurchaseBudget(int purchaseBudget) {
+        if (purchaseBudget == 0)
             throw new IllegalArgumentException("구입 금액을 입력해주세요. (" + LottoConstant.LOTTO_TICKET_PRICE + "원)");
 
         if (purchaseBudget % LottoConstant.LOTTO_TICKET_PRICE != 0)
             throw new IllegalArgumentException("로또 가격으로 나누어 떨어지는 금액을 입력해주세요.(" + LottoConstant.LOTTO_TICKET_PRICE + "원)");
     }
 
-    public static List<LottoTicket> inputManualLottoNumbers(Integer purchaseAmount) {
+    public static List<LottoTicket> inputManualLottoNumbers(int purchaseAmount) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int manualLottoNumbersAmount = inputManualLottoCount(purchaseAmount);
         sc.nextLine();
@@ -43,7 +44,7 @@ public class InputView {
         return manualLottoTickets;
     }
 
-    private static int inputManualLottoCount(Integer purchaseAmount) {
+    private static int inputManualLottoCount(int purchaseAmount) {
         int manualLottoNumbersAmount = sc.nextInt();
         if (purchaseAmount < manualLottoNumbersAmount)
             throw new IllegalArgumentException("수동 구매 개수가 총 로또 개수보다 클 수는 없습니다.");
@@ -55,14 +56,14 @@ public class InputView {
         return new WinningNumbersDto(inputWinningLottoNumbers(), inputBonusNumber());
     }
 
-    private static List<Integer> inputWinningLottoNumbers() {
+    private static List<LottoNumber> inputWinningLottoNumbers() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
         return inputNumbers();
     }
 
-    private static Integer inputBonusNumber() {
+    private static LottoNumber inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return sc.nextInt();
+        return new LottoNumber(sc.nextInt());
     }
 
     private static void validateIsNumber(String token) {
@@ -70,7 +71,7 @@ public class InputView {
             throw new IllegalArgumentException("숫자를 입력해주세요.");
     }
 
-    private static List<Integer> inputNumbers() {
+    private static List<LottoNumber> inputNumbers() {
         String[] tokens = sc.nextLine().split(",");
         for (String token : tokens) {
             validateIsNumber(token.trim());
@@ -78,6 +79,7 @@ public class InputView {
 
         return Arrays.stream(tokens)
                 .map(token -> Integer.parseInt(token.trim()))
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

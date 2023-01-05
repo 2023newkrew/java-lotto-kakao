@@ -1,6 +1,7 @@
 import domain.lotto.LottoChecker;
 import domain.lotto.WinningNumbers;
 import domain.lotto.result.LottoResultType;
+import domain.lotto.ticket.LottoNumber;
 import domain.lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,8 +17,8 @@ public class LottoCheckerTest {
     void checkLottoFail(){
         // given
         LottoChecker lottoChecker = new LottoChecker();
-        LottoTicket lottoTicket = new LottoTicket(new ArrayList<>(List.of(6,7,8,9,10,11)));
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,45), 7);
+        LottoTicket lottoTicket = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(6,7,30,40,41,42))));
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(6,7,8,9,10,11))), new LottoNumber(38));
 
         // when
         LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
@@ -31,8 +32,8 @@ public class LottoCheckerTest {
     void checkLotto5thPlace(){
         // given
         LottoChecker lottoChecker = new LottoChecker();
-        LottoTicket lottoTicket = new LottoTicket(new ArrayList<>(List.of(1,2,3,4,5,7)));
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,43,44,45), 7);
+        LottoTicket lottoTicket = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,7))));
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,43,44,45))), new LottoNumber(7));
 
         // when
         LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
@@ -45,8 +46,8 @@ public class LottoCheckerTest {
     void checkLotto4thPlace(){
         // given
         LottoChecker lottoChecker = new LottoChecker();
-        LottoTicket lottoTicket = new LottoTicket(new ArrayList<>(List.of(1,2,3,4,9,7)));
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,45), 7);
+        LottoTicket lottoTicket = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,9,7))));
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,45))), new LottoNumber(7));
 
         // when
         LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
@@ -59,8 +60,8 @@ public class LottoCheckerTest {
     void checkLotto3rdPlace(){
         // given
         LottoChecker lottoChecker = new LottoChecker();
-        LottoTicket lottoTicket = new LottoTicket(new ArrayList<>(List.of(1,2,3,4,5,7)));
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,45), 42);
+        LottoTicket lottoTicket = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,40))));
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,45))), new LottoNumber(7));
 
         // when
         LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
@@ -73,8 +74,8 @@ public class LottoCheckerTest {
     void checkLotto2ndPlace(){
         // given
         LottoChecker lottoChecker = new LottoChecker();
-        LottoTicket lottoTicket = new LottoTicket(new ArrayList<>(List.of(1,2,3,4,5,7)));
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,45), 7);
+        LottoTicket lottoTicket = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,7))));
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,45))), new LottoNumber(7));
 
         // when
         LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);
@@ -88,8 +89,8 @@ public class LottoCheckerTest {
     void checkLotto1stPlace(){
         // given
         LottoChecker lottoChecker = new LottoChecker();
-        LottoTicket lottoTicket = new LottoTicket(new ArrayList<>(List.of(1,2,3,4,5,7)));
-        WinningNumbers winningNumbers = new WinningNumbers(List.of(1,2,3,4,5,7), 12);
+        LottoTicket lottoTicket = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,6))));
+        WinningNumbers winningNumbers = new WinningNumbers(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1,2,3,4,5,6))), new LottoNumber(7));
 
         // when
         LottoResultType lottoResult = lottoChecker.getResult(lottoTicket, winningNumbers);

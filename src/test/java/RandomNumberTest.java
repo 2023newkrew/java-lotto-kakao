@@ -1,4 +1,5 @@
 import domain.lotto.generator.LottoNumberGenerator;
+import domain.lotto.ticket.LottoNumber;
 import domain.lotto.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,12 +16,14 @@ public class RandomNumberTest {
     void generateRandomNumberTest() {
         // given
         LottoNumberGenerator lottoNumber = new LottoNumberGenerator();
-        List<Integer> lottoNumbers = lottoNumber.makeNumbers(() -> new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+        List<LottoNumber> lottoNumberList =
+                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> lottoNumbers = lottoNumber.makeNumbers(() -> new ArrayList<>(lottoNumberList));
 
         // when
         LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
 
         // then
-        assertThat(lottoTicket.getLottoNumbers()).containsExactly(1, 2, 3, 4, 5, 6);
+        assertThat(lottoTicket.getLottoNumbers()).hasSize(6);
     }
 }

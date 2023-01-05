@@ -1,22 +1,24 @@
 package domain.lotto;
 
+import domain.lotto.ticket.LottoNumber;
+
 import java.util.HashSet;
 import java.util.List;
 
 public class WinningNumbers {
-    private final List<Integer> lottoNumbers;
-    private final Integer bonusNumber;
+    private final List<LottoNumber> lottoNumbers;
+    private final LottoNumber bonusNumber;
 
-    public List<Integer> getLottoNumber() {
+    public List<LottoNumber> getLottoNumber() {
         return lottoNumbers;
     }
 
-    public Integer getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 
-    public WinningNumbers(List<Integer> winningNumbers, Integer bonusNumber) {
-        if (winningNumbers == null || bonusNumber == null)
+    public WinningNumbers(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
+        if (winningNumbers == null)
             throw new NullPointerException();
         validateNumberDuplication(winningNumbers, bonusNumber);
         validateNumberRange(winningNumbers);
@@ -24,16 +26,16 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validateNumberDuplication(List<Integer> lottoNumbers, Integer bonusNumber) {
-        HashSet<Integer> hs = new HashSet<>(lottoNumbers);
+    private void validateNumberDuplication(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
+        HashSet<LottoNumber> hs = new HashSet<>(lottoNumbers);
         if (hs.size() != LottoConstant.LOTTO_NUMBER_SIZE) throw new IllegalArgumentException();
         if (hs.contains(bonusNumber)) throw new IllegalArgumentException();
     }
 
-    private void validateNumberRange(List<Integer> lottoNumbers) {
+    private void validateNumberRange(List<LottoNumber> lottoNumbers) {
         lottoNumbers
                 .forEach((number) -> {
-                    if (number < LottoConstant.MIN_LOTTO_NUMBER || number > LottoConstant.MAX_LOTTO_NUMBER)
+                    if (number.getNumber() < LottoConstant.MIN_LOTTO_NUMBER || number.getNumber() > LottoConstant.MAX_LOTTO_NUMBER)
                         throw new IllegalArgumentException();
                 });
     }

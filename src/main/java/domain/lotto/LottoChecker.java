@@ -1,6 +1,7 @@
 package domain.lotto;
 
 import domain.lotto.result.LottoResultType;
+import domain.lotto.ticket.LottoNumber;
 import domain.lotto.ticket.LottoTicket;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 public class LottoChecker {
 
     public static LottoResultType getResult(LottoTicket lottoTicket, WinningNumbers winningNumbers) {
-        List<Integer> containedNumbers = lottoTicket.getLottoNumbers().stream()
+        List<LottoNumber> containedNumbers = lottoTicket.getLottoNumbers().stream()
                 .filter((number) -> winningNumbers.getLottoNumber().contains(number))
                 .collect(Collectors.toList());
 

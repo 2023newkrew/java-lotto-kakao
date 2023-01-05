@@ -10,7 +10,6 @@ import java.util.Arrays;
 public class OutputView {
 
     public static void printLottoTickets(LottoTicketList lottoTicketList) {
-//        System.out.println(lottoTicketList.getLottoTickets().size() + "개를 구매했습니다.");
         for (LottoTicket lottoTicket : lottoTicketList.getLottoTickets()) {
             System.out.println(lottoTicket.toString());
         }

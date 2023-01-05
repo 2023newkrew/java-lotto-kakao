@@ -25,7 +25,7 @@ public class LottoController {
     }
 
     private LottoTicketList createLottoTickets() {
-        Integer purchaseAmount = InputView.inputPurchaseAmount();
+        int purchaseAmount = InputView.inputPurchaseAmount();
         LottoNumberGenerator lottoNumber = new LottoNumberGenerator();
         List<LottoTicket> lottoTicketList = new ArrayList<>(InputView.inputManualLottoNumbers(purchaseAmount));
         int manualCount = lottoTicketList.size();
