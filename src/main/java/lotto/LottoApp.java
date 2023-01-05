@@ -5,18 +5,13 @@ import lotto.controller.LottoController;
 
 public class LottoApp {
 
-    private final AppConfig appConfig;
-
-    public LottoApp(AppConfig appConfig) {
-        this.appConfig = appConfig;
-    }
 
     public void run() {
-        LottoController.createLottoController(AppConfig.getView()).play();
+        LottoController.createLottoController(AppConfig.getInstance().getView()).play();
     }
 
     public static void main(String[] args) {
-        new LottoApp(AppConfig.getInstance()).run();
+        new LottoApp().run();
 
 
     }

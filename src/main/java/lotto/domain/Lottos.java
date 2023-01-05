@@ -18,7 +18,7 @@ public class Lottos {
 
     public Lottos(List<LottoNumbers> lottoNumbers, int autoCount) {
         lottos = lottoNumbers.stream().map(Lotto::makeLotto).collect(Collectors.toList());
-        IntStream.range(0, autoCount).forEach((i) -> lottos.add(Lotto.makeLotto(AppConfig.getGeneratePolicy())));
+        IntStream.range(0, autoCount).forEach((i) -> lottos.add(Lotto.makeLotto(AppConfig.getInstance().getGeneratePolicy())));
     }
 
     public LottoRanks getRanks(LottoAnswer lottoAnswer) {
