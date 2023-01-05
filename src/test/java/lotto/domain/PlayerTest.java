@@ -17,7 +17,7 @@ public class PlayerTest {
         Player player = new Player(new Money(5_500));
         Seller seller = new Seller();
         //when, then
-        assertDoesNotThrow(() -> player.buyLottoTickets(seller));
+        assertDoesNotThrow(() -> player.buyAutoLottoTickets(seller));
     }
 
     @Test
@@ -26,7 +26,7 @@ public class PlayerTest {
         Player player = new Player(new Money(5_500));
         Seller seller = new Seller();
         //when
-        player.buyLottoTickets(seller);
+        player.buyAutoLottoTickets(seller);
         player.initPlayerLottoResult();
         PlayerLottoResult playerLottoResult = player.findResult(lottoTicket -> LottoResult.THREE_MATCH);
         //then

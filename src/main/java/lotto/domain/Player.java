@@ -24,9 +24,10 @@ public class Player {
         lottoTickets.addAll(manualLottoTickets);
     }
 
-    public void buyLottoTickets(Seller seller) {
-        lottoTickets.addAll(seller.sellAutoLottoTickets(currentMoney));
-        Money spentMoney = seller.calculateTotalPrice(lottoTickets);
+    public void buyAutoLottoTickets(Seller seller) {
+        List<LottoTicket> autoLottoTickets = seller.sellAutoLottoTickets(currentMoney);
+        lottoTickets.addAll(autoLottoTickets);
+        Money spentMoney = seller.calculateTotalPrice(autoLottoTickets);
         this.currentMoney = currentMoney.subtract(spentMoney);
     }
 
@@ -44,5 +45,9 @@ public class Player {
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public Money getCurrentMoney() {
+        return currentMoney;
     }
 }
