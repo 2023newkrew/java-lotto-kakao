@@ -25,7 +25,7 @@ public class LottoApplication {
         // 구입한 로또 번호들 출력
         ResultView resultView = new ResultView();
         LottoTicket lottoTicket = lottoGame.getLottoTickets();
-        resultView.printPurchaseCount(lottoTicket.getPurchaseCount());
+        resultView.printPurchaseCount(lottoTicket.getPurchaseCount(), manual.size());
         resultView.printLottoTickets(lottoTicket);
 
         // 지난주 당첨 번호 및 보너스볼 입력
