@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LottoTicket {
 
@@ -14,8 +11,8 @@ public class LottoTicket {
     public LottoTicket(List<LottoBall> lottoBalls) {
         validateSize(lottoBalls);
         validateDuplicate(lottoBalls);
-        Collections.sort(lottoBalls);
-        this.lottoBalls = lottoBalls;
+        this.lottoBalls = new ArrayList<>(lottoBalls);
+        Collections.sort(this.lottoBalls);
     }
 
     private void validateSize(List<LottoBall> lottoBalls) {
