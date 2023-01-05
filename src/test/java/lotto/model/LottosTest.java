@@ -10,12 +10,12 @@ import java.util.List;
 class LottosTest {
     int input;
     Lottos lottos;
-    private final LottosFactory lottosFactory = new LottosFactory();
+    private final LottosFactory lottosFactory = new AutoLottosFactory();
 
     @BeforeEach
     void setUp() {
         input = 10;
-        lottos = lottosFactory.makeLottosAuto(input);
+        lottos = lottosFactory.generate(input);
     }
     @Test
     void checkSizeOfLottos() {
