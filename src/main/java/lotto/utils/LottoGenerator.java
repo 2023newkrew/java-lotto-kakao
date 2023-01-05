@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomLottoGenerator {
-    private RandomLottoGenerator() {
+public class LottoGenerator {
+    private LottoGenerator() {
     }
 
     private static final List<LottoNumber> lottoBalls =
@@ -19,16 +19,16 @@ public class RandomLottoGenerator {
                     .mapToObj(LottoNumber::new)
                     .collect(Collectors.toList());
 
-    public static List<UserLotto> generateLottos(int size) {
-        List<UserLotto> userLottos = new ArrayList<>();
+    public static List<UserLotto> generateRandomLottos(int size) {
+        List<UserLotto> randomLottos = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
             List<LottoNumber> chosen = getRandomLottoNumbers();
             LottoNumbers lottoNumbers = new LottoNumbers(chosen);
-            userLottos.add(new UserLotto(lottoNumbers));
+            randomLottos.add(new UserLotto(lottoNumbers));
         }
 
-        return userLottos;
+        return randomLottos;
     }
 
     private static List<LottoNumber> getRandomLottoNumbers() {
@@ -37,5 +37,19 @@ public class RandomLottoGenerator {
                 .limit(LottoNumbers.LOTTO_NUMBER_LENGTH)
                 .sorted()
                 .collect(Collectors.toList());
+    }
+
+    public static List<UserLotto> generateManualLottos(List<List<Integer>> numbersGroup) {
+        return numbersGroup.stream()
+                .map(numbers -> generateManualLotto(numbers))
+                .collect(Collectors.toList());
+    }
+
+    private static UserLotto generateManualLotto(List<Integer> numbers) {
+        List<LottoNumber> lottoNumbers = numbers.stream()
+                .map(number -> new LottoNumber(number))
+                .collect(Collectors.toList());
+
+        return new UserLotto(new LottoNumbers(lottoNumbers));
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-public class UserLottosTest {
+public class UserLottoTicketTest {
     LottoNumbers userLotto1 = new LottoNumbers(
             Arrays.asList(
                     LottoNumber.from(1),
@@ -41,12 +41,12 @@ public class UserLottosTest {
             )
     );
 
-    List<UserLotto> userLottoList = Arrays.asList(new UserLotto(userLotto1), new UserLotto(userLotto2), new UserLotto(userLotto3));
-
+    List<UserLotto> manualLottoList = Arrays.asList(new UserLotto(userLotto1), new UserLotto(userLotto2), new UserLotto(userLotto3));
+    List<UserLotto> randomLottoList = LottoSeller.generateRandomLottos(3);
 
     @Test
     void 사용자_로또의_리스트를_받아서_생성한다() {
-        assertThatCode(() -> new UserLottos(userLottoList))
+        assertThatCode(() -> new UserLottoTicket(randomLottoList, manualLottoList))
                 .doesNotThrowAnyException();
     }
 

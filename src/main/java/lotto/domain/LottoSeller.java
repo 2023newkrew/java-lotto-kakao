@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.RandomLottoGenerator;
+import lotto.utils.LottoGenerator;
 
 import java.util.List;
 
@@ -15,7 +15,11 @@ public class LottoSeller {
     }
 
     public static List<UserLotto> generateRandomLottos(int randomAmount) {
-        return RandomLottoGenerator.generateLottos(randomAmount);
+        return LottoGenerator.generateRandomLottos(randomAmount);
+    }
+
+    public static List<UserLotto> generateManualLottos(List<List<Integer>> manualNumbersGroup) {
+        return LottoGenerator.generateManualLottos(manualNumbersGroup);
     }
 
 }
