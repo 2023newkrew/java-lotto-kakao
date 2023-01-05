@@ -3,7 +3,6 @@ package javalotto.domain;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class LottoResult {
     private final Map<Rank, Integer> lottoResultMap;
@@ -16,13 +15,11 @@ public class LottoResult {
         return new LottoResult(lottoResultMap);
     }
 
-    public double getRateOfReturn(PurchaseAmount purchaseAmount) {
-        int returnAmount = lottoResultMap.entrySet().stream()
+    public int getTotalPrizeAmount() {
+        return lottoResultMap.entrySet().stream()
                 .map(this::prizeSumOfEntry)
                 .mapToInt(Integer::intValue)
                 .sum();
-
-        return (double) returnAmount / (double) purchaseAmount.getPurchaseAmount();
     }
 
     private int prizeSumOfEntry(Map.Entry<Rank, Integer> entry) {

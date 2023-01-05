@@ -11,13 +11,18 @@ class LottoResultTest {
     @Test
     void should_returnCorrectString_when_givenWinningLottoAndLottos() {
         WinningLotto winningLotto = WinningLotto.of(Lotto.from(List.of(1, 2, 3, 4, 5, 6)), 7);
-        Lottos lottos = Lottos.from(List.of(
-                Lotto.from(List.of(1, 2, 3, 4, 5, 6)),
-                Lotto.from(List.of(1, 2, 3, 4, 5, 6)),
-                Lotto.from(List.of(1, 2, 3, 4, 5, 7)),
-                Lotto.from(List.of(1, 2, 3, 4, 5, 45))
-        ));
-        LottoResult lottoResult = lottos.getLottoResult(winningLotto);
+        PurchaseAmount purchaseAmount = PurchaseAmount.from(4000);
+        LottoBuyer lottoBuyer = LottoBuyer.of(purchaseAmount, TotalLottoCount.of(LottoCount.from(4), purchaseAmount));
+        List<List<Integer>> lottoNumbers = List.of(
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(1, 2, 3, 4, 5, 7),
+                List.of(1, 2, 3, 4, 5, 45)
+        );
+        lottoBuyer.purchaseLottos(LottoShop.from(RandomNumberGenerator.newInstance()), lottoNumbers);
+
+        LottoResult lottoResult = lottoBuyer.getLottoResult(winningLotto);
+
         assertThat(lottoResult.toString())
                 .isEqualTo("3개 일치 (5000원)- 0개\n" +
                         "4개 일치 (50000원)- 0개\n" +

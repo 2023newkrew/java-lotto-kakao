@@ -33,31 +33,16 @@ public class Lottos {
         return new Lottos(allLottos);
     }
 
+    public static Lottos none() {
+        return new Lottos(new ArrayList<>());
+    }
+
     public int size() {
         return lottos.size();
     }
 
-    public LottoResult getLottoResult(WinningLotto winningLotto) {
-        Map<Rank, Integer> rankCountMap = initRankCountMap();
-        setRankCountMapValues(rankCountMap, winningLotto);
-
-        return LottoResult.of(rankCountMap);
-    }
-
-    private Map<Rank, Integer> initRankCountMap() {
-        Map<Rank, Integer> rankCountMap = new HashMap<>();
-
-        stream(Rank.values())
-                .forEach(rank -> rankCountMap.put(rank, 0));
-
-        return rankCountMap;
-    }
-
-    private void setRankCountMapValues(Map<Rank, Integer> rankCountMap, WinningLotto winningLotto) {
-        lottos.stream()
-                .map(winningLotto::getRank)
-                .flatMap(Optional::stream)
-                .forEach(rank -> rankCountMap.replace(rank, rankCountMap.get(rank) + 1));
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 
     @Override
