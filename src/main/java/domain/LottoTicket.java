@@ -10,14 +10,6 @@ import static domain.LottoConstant.LOTTO_LENGTH;
 public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
-    public static LottoTicket of(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-
-        return new LottoTicket(lottoNumbers);
-    }
-
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateLottoNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
@@ -51,16 +43,7 @@ public class LottoTicket {
 
     public List<LottoNumber> findUnMatchLottoNumbers(LottoTicket lottoTicket) {
         return lottoNumbers.stream()
-                .filter((lottoNumber) -> !lottoTicket.contains(lottoNumber))
+                .filter(lottoNumber -> !lottoTicket.contains(lottoNumber))
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public String toString() {
-        return "["
-                + lottoNumbers.stream()
-                .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
-                .collect(Collectors.joining(", "))
-                + "]";
     }
 }

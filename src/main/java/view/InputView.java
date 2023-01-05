@@ -29,13 +29,13 @@ public class InputView {
     }
 
     public WinningLotto getLastWinningLotto() {
-        List<Integer> lastLottoNumbers = getLastLottoNumbers();
-        LottoTicket lastLottoTicket = LottoTicket.of(lastLottoNumbers);
+        List<LottoNumber> lastLottoNumbers = getLastLottoNumbers();
+        LottoTicket lastLottoTicket = new LottoTicket(lastLottoNumbers);
         LottoNumber bonusNumber = getLastBonusNumber();
         return new WinningLotto(lastLottoTicket, bonusNumber);
     }
 
-    private List<Integer> getLastLottoNumbers(){
+    private List<LottoNumber> getLastLottoNumbers(){
         outputStream.println();
         outputStream.println("지난 주 당첨 번호를 입력해 주세요.");
         String lottoNumbers = inputStream.nextLine();
@@ -44,7 +44,10 @@ public class InputView {
         if(!isPositiveIntegers(splitNumbers)){
             throw new IllegalArgumentException("숫자를 입력해주세요.");
         }
-        return toInteger(splitNumbers);
+        return toInteger(splitNumbers)
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
     }
 
     private LottoNumber getLastBonusNumber(){
