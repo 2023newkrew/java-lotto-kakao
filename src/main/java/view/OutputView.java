@@ -1,10 +1,10 @@
 package view;
 
-import buyer.Buyer;
-import buyer.BuyerProfit;
-import buyer.BuyerResult;
-import lotto.LotteryDTO;
-import lotto.Rank;
+import domain.buyer.Buyer;
+import domain.buyer.BuyerProfit;
+import domain.buyer.BuyerResult;
+import domain.lotto.LotteryDTO;
+import domain.lotto.Rank;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,3 +1,5 @@
+import controller.LotteryController;
+
 public class Main {
     public static void main(String[] args) {
         LotteryController lotteryController = new LotteryController();
