@@ -46,7 +46,7 @@ public class LottoGame {
         LottoNumber bonusNumber = getBonusNumber(lotto);
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
         TotalResult totalResult = lottos.getTotalResult(winningLotto);
-        OutputView.printTotalResult(totalResult.getTotalResultMessage());
-        OutputView.printProfit(totalResult.getProfitMessage(paidPrice.getMoney()));
+        OutputView.printTotalResult(totalResult);
+        OutputView.printProfit(totalResult.getProfit(paidPrice.getMoney()));
     }
 }

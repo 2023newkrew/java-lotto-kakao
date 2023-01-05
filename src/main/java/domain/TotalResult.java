@@ -37,26 +37,6 @@ public class TotalResult {
         return Math.floor((double) winnings * 100.0 / (double) paidPrice) / 100.0;
     }
 
-    public List<String> getTotalResultMessage() {
-        return Arrays.stream(Result.values())
-                .filter(result -> result != Result.NONE)
-                .map(result ->
-                        String.format(OutputView.TOTAL_RESULT_MESSAGE,
-                                result.getDescription(),
-                                result.getWinnings(),
-                                this.getValueOfResult(result)))
-                .collect(Collectors.toList());
-    }
-
-    public String getProfitMessage(int paidPrice) {
-        double profit = getProfit(paidPrice);
-        String message = String.format(OutputView.PROFIT_MESSAGE, profit);
-        if (profit <= 1) {
-            return message + OutputView.PROFIT_NEGATIVE_MESSAGE;
-        }
-        return message + OutputView.PROFIT_POSITIVE_MESSAGE;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

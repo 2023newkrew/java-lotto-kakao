@@ -1,7 +1,10 @@
 package view;
 
+import common.state.Result;
 import domain.Lottos;
+import domain.TotalResult;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
@@ -47,13 +50,24 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public static void printTotalResult(List<String> lottosNumbers) {
-        lottosNumbers.stream().forEach(System.out::println);
+    public static void printTotalResult(TotalResult totalResult) {
+        Arrays.stream(Result.values())
+                .filter(result -> result != Result.NONE)
+                .map(result -> String.format(TOTAL_RESULT_MESSAGE,
+                        result.getDescription(),
+                        result.getWinnings(),
+                        totalResult.getValueOfResult(result)))
+                .forEach(System.out::println);
         System.out.println();
     }
 
-    public static void printProfit(String profitMessage) {
-        System.out.println(profitMessage);
+    public static void printProfit(double profit) {
+        String message = String.format(PROFIT_MESSAGE, profit);
+        if (profit <= 1) {
+            System.out.println(message + PROFIT_NEGATIVE_MESSAGE);
+            return;
+        }
+        System.out.println(message + PROFIT_POSITIVE_MESSAGE);
     }
 
 }
