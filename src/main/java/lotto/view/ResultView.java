@@ -50,5 +50,4 @@ public class ResultView {
         }
         System.out.println(RESULT_GOOD.getMessage());
     }
-
 }

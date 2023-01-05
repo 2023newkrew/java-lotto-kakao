@@ -69,7 +69,6 @@ public class NumberValidateTest {
     @DisplayName("당첨 번호가 6개가 아닌 경우 예외를 발생한다.")
     void lottoWinNumberCountTest(String userNumber){
         LottoNumber[] splitNumbers = stringConversion.convertToLottoArray(userNumber);
-
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
     }

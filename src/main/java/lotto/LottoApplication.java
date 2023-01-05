@@ -27,6 +27,7 @@ public class LottoApplication {
         lottoController.registerRandomLotto(amount);
         ResultView resultView = new ResultView();
         resultView.printPurchaseCount(manualCount,amount);
+
         // 구입한 로또 번호들 출력
         resultView.printLottoTickets(lottoController.getLottoTickets());
 

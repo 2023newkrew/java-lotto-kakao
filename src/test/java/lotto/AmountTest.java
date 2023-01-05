@@ -14,7 +14,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
@@ -22,6 +21,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 public class AmountTest {
     private LottoTicket userTicket1;
     private LottoTicket userTicket2;
+    
     @BeforeEach
     public void setUp() {
         List<Integer> userTicketList1 = List.of(1, 2, 3, 8, 9, 11);
@@ -31,7 +31,7 @@ public class AmountTest {
         this.userTicket2 = new LottoTicket(new ArrayList<>(userTicketList2.stream().map(LottoNumber::new)
                 .collect(Collectors.toList())));
     }
-
+    
     @ParameterizedTest
     @ValueSource(ints = {14000, 15300, 17800})
     @DisplayName("입력된 금액에 맞게 로또 티켓이 생성되어야 한다.")

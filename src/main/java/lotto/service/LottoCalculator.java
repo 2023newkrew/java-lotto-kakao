@@ -79,5 +79,4 @@ public class LottoCalculator {
         }
         return 0;
     }
-
 }

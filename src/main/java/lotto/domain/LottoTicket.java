@@ -48,5 +48,4 @@ public class LottoTicket {
             throw new IllegalArgumentException("로또 번호에 중복이 존재합니다.");
         }
     }
-
 }
