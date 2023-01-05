@@ -44,7 +44,7 @@ public class OutputView {
     }
 
     private void printRankInfo(Rank rank) {
-        System.out.print(rank.match.getMatchCount() + "개 일치");
+        System.out.print(rank.matchCount + "개 일치");
         System.out.print("(" + rank.prize + ")- ");
     }
 

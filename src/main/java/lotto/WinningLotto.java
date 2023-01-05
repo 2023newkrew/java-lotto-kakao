@@ -1,15 +1,9 @@
 package lotto;
 
-import buyer.BuyerResult;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class WinningLotto {
-    private static final int MATCH_FIVE = 5;
-
     private final Lotto winningNumbers;
     private final LottoNumber bonusNumber;
 
@@ -26,10 +20,9 @@ public class WinningLotto {
     }
 
     public Rank getRank(Lotto lotto) {
-        boolean bonusMatch = false;
         int count = winningNumbers.compareWith(lotto);
-        if (count == MATCH_FIVE) bonusMatch = isBonusMatch(lotto);
-        return Rank.getRank(new LottoMatch(count, bonusMatch));
+        boolean bonusMatch = isBonusMatch(lotto);
+        return Rank.getRank(count, bonusMatch);
     }
 
     private boolean isBonusMatch(Lotto lotto) {

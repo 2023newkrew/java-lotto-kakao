@@ -1,6 +1,5 @@
 package buyer;
 
-import lotto.LottoGenerator;
 import lotto.Rank;
 
 import java.util.Arrays;
