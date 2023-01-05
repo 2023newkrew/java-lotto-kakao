@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.AnswerLotto;
+import lotto.domain.GenerateOption;
 import lotto.domain.Lotto;
 import lotto.domain.Money;
 import lotto.domain.SingleLottoNumber;
@@ -51,8 +52,8 @@ public class LottoController {
         return new AnswerLotto(toLotto(answerLottoInput), bonusNumber);
     }
 
-    private Lotto getLottoWithOption(int generateOption) {
-        if (generateOption == 1) {
+    private Lotto getLottoWithOption(GenerateOption generateOption) {
+        if (!generateOption.isInputRequired()) {
             return RandomLottoGenerator.generateLotto();
         }
 
@@ -63,7 +64,8 @@ public class LottoController {
     private List<Lotto> getUserLottos(int lottoTicketCount) {
         List<Lotto> userLottos = new ArrayList<>();
         for (int i = 0; i < lottoTicketCount; i++) {
-            int generateOption = inputView.getGenerateOptionInput();
+            int generateOptionInput = inputView.getGenerateOptionInput();
+            GenerateOption generateOption = new GenerateOption(generateOptionInput);
             Lotto lotto = getLottoWithOption(generateOption);
             userLottos.add(lotto);
         }
