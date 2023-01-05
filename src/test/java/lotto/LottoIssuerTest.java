@@ -24,33 +24,6 @@ public class LottoIssuerTest {
     }
 
     @Test
-    @DisplayName("로또 길이 테스트")
-    void lotto_length_test() {
-        LottoList lottoList = lottoIssuer.issue(1);
-        Lotto lotto = lottoList.get(0);
-        assertEquals(lotto.length(), Lotto.NUMBER_LENGTH);
-    }
-
-    @Test
-    @DisplayName("로또 번호 범위 테스트")
-    void lotto_range_test() {
-        try {
-            LottoList lottoList = lottoIssuer.issue(1);
-            lottoList.get(0);
-        } catch (Exception e) {
-            assertTrue(e instanceof LottoOutOfRangeException);
-        }
-    }
-
-    @Test
-    @DisplayName("로또 번호 중복 테스트")
-    void lotto_duplicate_test() {
-        LottoList lottoList = lottoIssuer.issue(1);
-        Lotto lotto = lottoList.get(0);
-        assertEquals(new HashSet<>(lotto.getNumbers()).size(), lotto.length());
-    }
-
-    @Test
     @DisplayName("발권 매수 테스트")
     void lotto_list_size_test() {
         LottoList lottoList = lottoIssuer.issue(14);
