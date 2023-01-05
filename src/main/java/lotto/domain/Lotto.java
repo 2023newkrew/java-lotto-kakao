@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import static lotto.domain.LottoConstants.LOTTO_SIZE;
-import static lotto.domain.LottoNumbers.makeLottoNumbers;
+import static lotto.domain.LottoNumbers.createLottoNumbers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class Lotto {
 
 
     private Lotto(List<Integer> numbers) {
-        this.lottoNumbers = makeLottoNumbers(numbers);
+        this.lottoNumbers = createLottoNumbers(numbers);
     }
     private Lotto(LottoNumbers lottoNumbers) {
         this.lottoNumbers = lottoNumbers;

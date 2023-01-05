@@ -13,7 +13,7 @@ public class LottoNumbers {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public static LottoNumbers makeLottoNumbers(List<Integer> integers) {
+    public static LottoNumbers createLottoNumbers(List<Integer> integers) {
         return new LottoNumbers(integers.stream().map(LottoNumber::from).collect(Collectors.toList()));
     }
     private LottoNumbers(List<LottoNumber> lottoNumbers) {

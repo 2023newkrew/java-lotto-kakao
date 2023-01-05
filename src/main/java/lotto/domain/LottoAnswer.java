@@ -6,15 +6,15 @@ import lotto.utils.ErrorMessageFormatter;
 
 public class LottoAnswer {
 
-    private LottoNumbers lottoNumbers;
-    private BonusBall bonusBall;
+    private final LottoNumbers lottoNumbers;
+    private final BonusBall bonusBall;
 
-    public static LottoAnswer makeLottoAnswer(List<Integer> numbers, int bonusBall) {
+    public static LottoAnswer createLottoAnswer(List<Integer> numbers, int bonusBall) {
         return new LottoAnswer(numbers, bonusBall);
     }
 
     private LottoAnswer(List<Integer> numbers, int bonusBall) {
-        lottoNumbers = LottoNumbers.makeLottoNumbers(numbers);
+        lottoNumbers = LottoNumbers.createLottoNumbers(numbers);
         validateBonusBall(lottoNumbers, bonusBall);
         this.bonusBall = BonusBall.createBonusBall(bonusBall);
     }

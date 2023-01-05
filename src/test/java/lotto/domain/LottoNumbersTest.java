@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import static lotto.domain.LottoConstants.LOTTO_SIZE;
-import static lotto.domain.LottoNumbers.makeLottoNumbers;
+import static lotto.domain.LottoNumbers.createLottoNumbers;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -28,7 +28,7 @@ class LottoNumbersTest {
     @DisplayName("여섯개의_LottoNumber로_생성가능하다")
     void 여섯개의_IntegerList로_생성가능하다() {
         //expected
-        assertThatCode(() -> makeLottoNumbers(oneToSixList)).doesNotThrowAnyException();
+        assertThatCode(() -> createLottoNumbers(oneToSixList)).doesNotThrowAnyException();
     }
 
     @ParameterizedTest
@@ -39,7 +39,7 @@ class LottoNumbersTest {
         List<Integer> sizeIsNotSixlottoNumberList = IntStream.rangeClosed(1, input).boxed()
                 .collect(Collectors.toList());
         //expected
-        assertThatThrownBy(() -> makeLottoNumbers(sizeIsNotSixlottoNumberList)).isInstanceOf(
+        assertThatThrownBy(() -> createLottoNumbers(sizeIsNotSixlottoNumberList)).isInstanceOf(
                 IllegalArgumentException.class);
     }
 
@@ -52,7 +52,7 @@ class LottoNumbersTest {
                 .collect(Collectors.toList());
 
         //expected
-        assertThatThrownBy(() -> makeLottoNumbers(duplicateLottoNumberList)).isInstanceOf(
+        assertThatThrownBy(() -> createLottoNumbers(duplicateLottoNumberList)).isInstanceOf(
                 IllegalArgumentException.class);
     }
 
@@ -61,7 +61,7 @@ class LottoNumbersTest {
     @DisplayName("숫자가_존재하면_트루를_리턴한다")
     void 숫자가_존재하면_True를_리턴한다(int input) {
         //when
-        LottoNumbers lottoNumbers = makeLottoNumbers(oneToSixList);
+        LottoNumbers lottoNumbers = createLottoNumbers(oneToSixList);
         boolean result = lottoNumbers.contains(input);
 
         //then
@@ -73,7 +73,7 @@ class LottoNumbersTest {
     @DisplayName("숫자가_존재하면_트루를_리턴한다")
     void 숫자가_존재하지않으면_False를_리턴한다(int input) {
         //when
-        boolean result = makeLottoNumbers(oneToSixList).contains(input);
+        boolean result = createLottoNumbers(oneToSixList).contains(input);
 
         //then
         assertThat(result).isFalse();

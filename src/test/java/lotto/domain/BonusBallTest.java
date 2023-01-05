@@ -3,11 +3,8 @@ package lotto.domain;
 import static lotto.domain.BonusBall.createBonusBall;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.in;
-import static org.assertj.core.api.AssertionsForClassTypes.catchThrowableOfType;
 
 import java.util.List;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -20,7 +17,7 @@ class BonusBallTest {
     void lottoNumbers에_보너스볼이_있으면_True를_리턴한다(int input) {
 
         //given
-        LottoNumbers lottoNumbers = LottoNumbers.makeLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers = LottoNumbers.createLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         BonusBall bonusBall = createBonusBall(input);
 
         //when
@@ -38,7 +35,7 @@ class BonusBallTest {
     void lottoNumbers에_보너스볼이_없으면_False를_리턴한다(int input) {
 
         //given
-        LottoNumbers lottoNumbers = LottoNumbers.makeLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers = LottoNumbers.createLottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         BonusBall bonusBall = createBonusBall(input);
 
         //when
