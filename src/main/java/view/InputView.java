@@ -1,6 +1,7 @@
 package view;
 
 import domain.dto.WinningNumbersDto;
+import exception.NotPositiveNumberException;
 import exception.input.IindivisiblePurchaseBudgetException;
 import exception.input.NonNumericInputException;
 import exception.input.NotPositivePurchaseBudgetException;
@@ -72,5 +73,17 @@ public class InputView {
     private static void validateIsNumber(String token) {
         if (!token.matches("[0-9]+"))
             throw new NonNumericInputException();
+    }
+
+    public static int inputManualLottoNumber() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        int number = sc.nextInt();
+        validatePositiveNumber(number);
+        return number;
+    }
+
+    private static void validatePositiveNumber(final int number) {
+        if(number <= 0)
+            throw new NotPositiveNumberException();
     }
 }
