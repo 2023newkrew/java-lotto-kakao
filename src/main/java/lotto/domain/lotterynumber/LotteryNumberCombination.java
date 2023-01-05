@@ -3,6 +3,7 @@ package lotto.domain.lotterynumber;
 import static lotto.constant.ExceptionMessage.LOTTERY_NUMBERS_WRONG_DISTINCT_COUNT;
 import static lotto.constant.LotteryConstant.LOTTERY_NUMBERS_LENGTH;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ public class LotteryNumberCombination {
 
     public LotteryNumberCombination(Set<LotteryNumber> lotteryNumbers) {
         validate(lotteryNumbers);
-        this.lotteryNumbers = lotteryNumbers;
+        this.lotteryNumbers = Collections.unmodifiableSet(lotteryNumbers);
     }
 
     private void validate(Set<LotteryNumber> lotteryNumbers) {

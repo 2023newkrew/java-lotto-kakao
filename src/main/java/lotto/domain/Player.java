@@ -29,11 +29,11 @@ public class Player {
     public List<String> getLotteryTicket() {
         return lotteryTicket.stream()
                 .map(LotteryNumberCombination::toString)
-                .collect(Collectors.toList());
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public List<Integer> getRankCounts() {
-        return rankCounts;
+        return new ArrayList<>(rankCounts);
     }
 
     public double getYield() {

@@ -29,4 +29,6 @@ public class ExceptionMessage {
     public static final String NON_EXISTENT_LOTTERY_COUNT_FORMAT = "[ERROR] 생성하는 로또는 %d개 이상이어야 합니다.";
     public static final String NON_EXISTENT_LOTTERY_COUNT = String.format(NON_EXISTENT_LOTTERY_COUNT_FORMAT,
             LOTTERY_COUNT_MINIMUM);
+
+    public static final String INCOMPLETE_RANKS_ERROR = "[ERROR] Rank 규칙이 잘못되었습니다.";
 }

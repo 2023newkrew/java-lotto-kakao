@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static lotto.constant.ExceptionMessage.INCOMPLETE_RANKS_ERROR;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,13 +23,13 @@ public class LotteryChecker {
         return Arrays.stream(LotteryRank.values())
                 .filter(rank -> rank.getRankCriteria().isSatisfiedBy(matchCount, hasBonus))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(""));
+                .orElseThrow(() -> new IllegalArgumentException(INCOMPLETE_RANKS_ERROR));
     }
 
     public List<Integer> checkAll(List<LotteryNumberCombination> lotteryTicket) {
         List<Integer> rankCounts = new ArrayList<>(List.of(0, 0, 0, 0, 0, 0));
         lotteryTicket.stream()
-                .map(lotteryNumberComb -> check(lotteryNumberComb).getIndex())
+                .map(lotteryNumberCombination -> check(lotteryNumberCombination).getIndex())
                 .forEach(i -> rankCounts.set(i, rankCounts.get(i) + 1));
         return rankCounts;
     }

@@ -9,7 +9,7 @@ public class LotteryVendingMachine {
     public static List<LotteryNumberCombination> sellSelfPicksWith(List<List<Integer>> selfPickNumbers) {
         return selfPickNumbers.stream()
                 .map(LotteryNumberCombination::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public static List<LotteryNumberCombination> sellQuickPicks(int quickPickCount) {
