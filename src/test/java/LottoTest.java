@@ -1,3 +1,5 @@
+import model.*;
+import model.constant.LottoPlace;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,15 +14,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static model.constant.LottoPlace.FIRST_PLACE;
+import static model.constant.LottoPlace.SECOND_PLACE;
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTest {
 
-    private static Lottos lottos;
+    private static LottoTicket lottoTicketData;
+    private static LottoWinner lottoWinnerData;
 
     @BeforeAll
-    static void makeLottos() {
-        List<Lotto> lottoList = new ArrayList<>();
+    static void makeLottoTicket() {
+        List<Lotto> lottos = new ArrayList<>();
 
         int[][] inputs= {
                 {8, 21, 23, 41, 42, 43},
@@ -44,20 +49,31 @@ public class LottoTest {
             List<Integer> tmp = Arrays.stream(input)
                     .boxed()
                     .collect(Collectors.toList());
-            lottoList.add(new Lotto(asLottoNumbers(tmp)));
+            lottos.add(new Lotto(asLottoNumbers(tmp)));
         }
-        lottos = new Lottos(lottoList, lottoList.size());
+        lottoTicketData = new LottoTicket(lottos);
+
+        int[] winInput = {1,2,3,4,5,6};
+
+
+        List<Integer> tmp = Arrays.stream(winInput)
+                .boxed()
+                .collect(Collectors.toList());
+
+        lottoWinnerData = new LottoWinner(new Lotto(asLottoNumbers(tmp)),asLottoNumber(7));
     }
 
     @Test
     void 로또번호_6개를_발급한다() {
-        Lotto lotto = LottoFactory.createLotto();
+        LottoTicket lottoTicket = LottoFactory.createLottoTicket(1000);
+        Lotto lotto = lottoTicket.getLottoList().get(0);
         assertThat(lotto.getLottoNumbers()).hasSize(6);
     }
 
     @Test
     void 로또번호는_1이상_45이하이다() {
-        Lotto lotto = LottoFactory.createLotto();
+        LottoTicket lottoTicket = LottoFactory.createLottoTicket(1000);
+        Lotto lotto = lottoTicket.getLottoList().get(0);
         for (LottoNumber lottoNumber : lotto.getLottoNumbers()) {
             assertThat(lottoNumber.getNumber()).isBetween(1, 45);
         }
@@ -65,58 +81,60 @@ public class LottoTest {
 
     @Test
     void 로또번호는_중복되지_않는다() {
-        Lotto lotto = LottoFactory.createLotto();
+        LottoTicket lottoTicket = LottoFactory.createLottoTicket(1000);
+        Lotto lotto = lottoTicket.getLottoList().get(0);
         assertThat(lotto.getLottoNumbers()).doesNotHaveDuplicates();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {10000, 20000, 5000, 1000, 3000})
-    void  로또_구입_금액에_해당하는_로또를_발급한다(final int amount) {
-        Lottos lottos = LottoFactory.createLottos(amount);
-        assertThat(lottos.getLottoList()).hasSize(amount / LottoFactory.getLottoPrice());
+    void  로또_구입_금액에_해당하는_로또를_발급한다(final int purchaseMoney) {
+        LottoTicket lottos = LottoFactory.createLottoTicket(purchaseMoney);
+        assertThat(lottos.getLottoList()).hasSize(purchaseMoney / 1000);
     }
 
     static List<LottoNumber> asLottoNumbers (List<Integer> lottoNumbers) {
         List<LottoNumber> result = new ArrayList<>();
         for (int number : lottoNumbers)
-            result.add(LottoNumber.getLottoNumber(number));
+            result.add(asLottoNumber(number));
         return result;
+    }
+
+    static LottoNumber asLottoNumber (Integer lottoNumber) {
+        return LottoNumber.getLottoNumber(lottoNumber);
     }
 
     static Stream<Arguments> lottoData() {
         return Stream.of(
-                Arguments.of(asLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), asLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), 6),
-                Arguments.of(asLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), asLottoNumbers(Arrays.asList(2, 4, 6, 8, 10, 20)), 3)
+                Arguments.of(asLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), asLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), 7, FIRST_PLACE),
+                Arguments.of(asLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), asLottoNumbers(Arrays.asList(1, 2, 4, 5, 6, 8)), 3, SECOND_PLACE)
         );
     }
 
     @ParameterizedTest
     @MethodSource("lottoData")
-    void 로또_번호가_몇_개_일치하는지_계산한다(List<LottoNumber> lottoNumbers, List<LottoNumber> winNumbers, int answer) {
+    void 로또_번호가_몇_개_일치하는지_계산한다(List<LottoNumber> lottoNumbers, List<LottoNumber> winNumbers, int bonusNumber, LottoPlace answer) {
         Lotto lotto = new Lotto(lottoNumbers);
-        assertThat(lotto.getMatchCount(winNumbers)).isEqualTo(answer);
+        LottoWinner lottoWinner = new LottoWinner(new Lotto(winNumbers), LottoNumber.getLottoNumber(bonusNumber));
+        assertThat(lottoWinner.getLottoPlace(lotto)).isEqualTo(answer);
     }
 
-    @ParameterizedTest
-    @CsvSource({"0,false,0","1,false,0","2,false,0","3,false,5000","4,false,50000","5,true,30000000","5,false,1500000","6,true,2000000000"})
-    void 로또의_당첨금액을_계산한다(int matchCount, boolean isBonusMatch, int lotteryAmount) {
-        assertThat(Lotto.getLotteryAmount(matchCount, isBonusMatch)).isEqualTo(lotteryAmount);
-    }
-
-    static Stream<Arguments> lottoData2() {
-        return Stream.of(
-                Arguments.of(asLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), asLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), 6),
-                Arguments.of(asLottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), asLottoNumbers(Arrays.asList(2, 4, 6, 8, 10, 20)), 3)
-        );
+    @Test
+    void 로또의_당첨금액을_계산한다() {
+        LottoResult lottoResult = new LottoResult(lottoWinnerData, lottoTicketData);
+        Banker banker = new Banker();
+        assertThat(banker.getTotalPrizeMoney(lottoResult)).isEqualTo(30005000);
     }
 
     @Test
     void 총_수익률을_계산하여_출력한다() {
-        List<LottoNumber> winNumbers = asLottoNumbers(Arrays.asList(1,2,3,4,5,6));
-        WinLottoNumbers winLottoNumbers = new WinLottoNumbers();
+        LottoResult lottoResult = new LottoResult(lottoWinnerData, lottoTicketData);
+        Banker banker = new Banker();
+        //(double)banker.getTotalPrizeMoney(lottoResult) / 15000
 
-        winLottoNumbers.setWinNumbers(winNumbers);
-        winLottoNumbers.setBonusNumber(LottoNumber.getLottoNumber(7));
-        assertThat(Math.floor(lottos.getTotalLotteryRate(lottos.getTotalLotteryAmount(winLottoNumbers), 15000.0) * 100)).isEqualTo(200033);
+        //winLottoNumbers.setWinNumbers(winNumbers);
+        //winLottoNumbers.setBonusNumber(LottoNumber.getLottoNumber(7));
+        assertThat(Math.floor(banker.getTotalPrizeMoney(lottoResult)*100 / 15000)).isEqualTo(200033);
     }
+
 }
