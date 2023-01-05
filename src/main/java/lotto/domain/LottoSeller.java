@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.utils.RandomLottoGenerator;
+
+import java.util.List;
+
 public class LottoSeller {
     public final static int LOTTO_PRICE = 1000;
 
@@ -8,6 +12,10 @@ public class LottoSeller {
             throw new IllegalArgumentException("로또 한 장의 가격보다 커야 합니다.");
         }
         return money.money() / LOTTO_PRICE;
+    }
+
+    public static List<LottoNumbers> generateRandomLottos(int randomAmount) {
+        return RandomLottoGenerator.generateLottos(randomAmount);
     }
 
 }
