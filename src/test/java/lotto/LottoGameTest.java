@@ -61,6 +61,39 @@ public class LottoGameTest {
         );
     }
 
+    @DisplayName("수동으로 티켓 구매 실패")
+    @ParameterizedTest
+    @MethodSource("getFailToBuyLottoTicketManuallyData")
+    public void failToBuyLottoTicketManually(List<List<Integer>> numbers, int money) {
+        LottoSetting lottoSetting = new LottoSetting();
+        LottoGame lottoGame = new LottoGame(lottoSetting);
+        Assertions.assertThatThrownBy(() -> lottoGame.buyManually(money, numbers))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    private static Stream<Arguments> getFailToBuyLottoTicketManuallyData() {
+        return Stream.of(
+                Arguments.of(List.of(
+                                List.of(1, 2, 3, 4)
+                        ),
+                        1000,
+                Arguments.of(List.of(
+                                List.of(1, 2, 3, 4, 4, 6)
+                        ),
+                        2500
+                ),
+                Arguments.of(List.of(
+                                List.of(-1, 2, 3, 4, 5, 6)
+                        ),
+                        1500
+                ),
+                Arguments.of(List.of(
+                                List.of(1, 2, 3, 4, 5, 6, 7)
+                        ),
+                        1500
+                )));
+    }
+
     @DisplayName("발급 수량 확인")
     @ParameterizedTest
     @MethodSource("getCheckCountData")
