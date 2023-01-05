@@ -14,6 +14,8 @@ public class LottoController {
         long purchaseCost = InputView.inputPurchaseCost();
         LottoService lottoService = new LottoService(purchaseCost);
         lottoService.createLottos();
+        OutputView.printLottoCount(lottoService.getLottos().getLottos().size());
+
         OutputView.printLottos(lottoService.getLottos());
 
         // 로또 당첨 번호 매칭

@@ -6,6 +6,11 @@ import lotto.model.PriceResult;
 import java.util.stream.Collectors;
 
 public class OutputView {
+
+    public static void printLottoCount(int size) {
+        System.out.printf(MSG_PURCHASE_LOTTO_COUNT_FORMAT, size);
+    }
+
     public static void printLottos(Lottos lottos) {
         lottos.getLottos().forEach(v ->
                 System.out.printf("[%s]\n", v.getNumbers().stream()
