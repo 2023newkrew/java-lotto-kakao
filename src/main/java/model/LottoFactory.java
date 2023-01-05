@@ -1,7 +1,5 @@
 package model;
 
-import model.constant.LottoInfo;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,27 +7,26 @@ import java.util.stream.Collectors;
 
 public class LottoFactory {
 
+    private static final int LOTTO_NUMBER_COUNT = 6;
+    private static final int LOTTO_PRICE = 1000;
+
     private static Lotto createLotto() {
 
-        List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers(); //1~45개 공들이 들어있따..
+        List<LottoNumber> lottoNumbers = LottoNumber.getLottoNumbers();
 
-        Collections.shuffle(lottoNumbers); // 섞는다.. 6개를 뽑아서 로또라인으로 감싸서 리턴한다..
+        Collections.shuffle(lottoNumbers);
         return new Lotto(lottoNumbers.stream()
-                .limit(LottoInfo.LOTTO_NUMBER_COUNT.valueOf())
+                .limit(LOTTO_NUMBER_COUNT)
                 .collect(Collectors.toList()));
     }
 
-    public static LottoTicket createLottoTicket(int amount) { // 여러개 로또를 만들어서 리턴한다
+    public static LottoTicket createLottoTicket(long purchaseMoney) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < amount / LottoInfo.LOTTO_PRICE.valueOf(); i++) {
+        for (int i = 0; i < purchaseMoney / LOTTO_PRICE; i++) {
             lottoList.add(createLotto());
         }
 
-        return new LottoTicket(lottoList, LottoInfo.LOTTO_PRICE.valueOf() * lottoList.size());
+        return new LottoTicket(lottoList);
     }
-
-    //public static int getLottoPrice() {
-    //    return LottoInfo.LOTTO_PRICE.valueOf();
-    //}
 
 }
