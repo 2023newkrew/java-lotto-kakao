@@ -7,11 +7,13 @@ import domain.LottoTicket;
 
 import java.io.PrintStream;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+
+import static domain.LottoRank.*;
 
 public class OutputView {
     private final PrintStream outputStream;
+    private final List<LottoRank> statisticsTargetRanks = List.of(FIRST, SECOND, THIRD, FOURTH, FIFTH);
 
     public OutputView(PrintStream outputStream) {
         this.outputStream = outputStream;
@@ -46,9 +48,8 @@ public class OutputView {
         outputStream.println("당첨 통계");
         outputStream.println("----------");
 
-        Map<LottoRank, Integer> rankStatistics = winningStatistics.getRankStatistics();
-        for (LottoRank rank : rankStatistics.keySet()) {
-            printLottoRank(rank, rankStatistics.get(rank));
+        for(LottoRank lottoRank : statisticsTargetRanks){
+            printLottoRank(lottoRank, winningStatistics.getRankCount(lottoRank));
         }
     }
 

@@ -2,28 +2,22 @@ package domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import static domain.LottoRank.*;
 
 public class WinningStatistics {
     private final List<LottoMatchResult> lottoMatchResults;
-    private final List<LottoRank> statisticsTargetRanks = List.of(FIRST, SECOND, THIRD, FOURTH, FIFTH);
     public WinningStatistics(List<LottoMatchResult> lottoMatchResults) {
         this.lottoMatchResults = lottoMatchResults;
     }
 
-    public Map<LottoRank, Integer> getRankStatistics(){
-        List<LottoRank> lottoRanks = getLottoRanks();
-        return statisticsTargetRanks.stream()
-                .collect(Collectors.toMap(k -> k, v -> Collections.frequency(lottoRanks, v)));
+    public int getRankCount(LottoRank lottoRank){
+        return Collections.frequency(getLottoRanks(), lottoRank);
     }
 
     private List<LottoRank> getLottoRanks(){
         return lottoMatchResults.stream()
                 .map((LottoRank::from))
-                .filter((statisticsTargetRanks::contains))
                 .collect(Collectors.toList());
     }
 
