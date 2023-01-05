@@ -1,9 +1,9 @@
-package buyer;
+package domain.buyer;
 
-import lotto.Lotteries;
-import lotto.Lottery;
-import lotto.LotteryResult;
-import lotto.Rank;
+import domain.lotto.Lotteries;
+import domain.lotto.Lottery;
+import domain.lotto.LotteryResult;
+import domain.lotto.Rank;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -16,10 +16,6 @@ public class BuyerResult {
         for (Lottery lottery : lotteries.getLotteries()) {
             result.put(lotteryResult.getRank(lottery), result.getOrDefault(lotteryResult.getRank(lottery), 0) + 1);
         }
-    }
-
-    public BuyerResult(EnumMap<Rank, Integer> result) {
-        this.result = result;
     }
 
     @Override
@@ -35,9 +31,19 @@ public class BuyerResult {
         return result.getOrDefault(rank, 0);
     }
 
-    public int getTotalPrize() {
+    public BuyerProfit getBuyerProfit() {
+        return new BuyerProfit(getTotalCount(), getTotalPrize());
+    }
+
+    private int getTotalPrize() {
         return Arrays.stream(Rank.values())
                 .mapToInt(e -> result.getOrDefault(e, 0) * e.prize)
+                .sum();
+    }
+
+    private int getTotalCount() {
+        return Arrays.stream(Rank.values())
+                .mapToInt(e -> result.getOrDefault(e, 0))
                 .sum();
     }
 }

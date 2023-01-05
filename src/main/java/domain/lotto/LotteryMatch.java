@@ -1,4 +1,4 @@
-package lotto;
+package domain.lotto;
 
 public class LotteryMatch {
     private static final int MATCH_FIVE = 5;
@@ -8,10 +8,6 @@ public class LotteryMatch {
 
     public LotteryMatch(int matchCount, Boolean bonusMatch) {
         this.matchCount = matchCount;
-        if (this.matchCount != MATCH_FIVE) {
-            this.bonusMatch = false;
-            return;
-        }
         this.bonusMatch = bonusMatch;
     }
 

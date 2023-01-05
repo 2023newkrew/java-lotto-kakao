@@ -1,16 +1,23 @@
 package view;
 
-import buyer.BuyerProfit;
-import buyer.BuyerResult;
-import lotto.LotteryDTO;
-import lotto.Rank;
+import domain.buyer.Buyer;
+import domain.buyer.BuyerProfit;
+import domain.buyer.BuyerResult;
+import domain.lotto.LotteryDTO;
+import domain.lotto.Rank;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
+    public void printLotteriesInfo(Buyer buyer) {
+        System.out.print("수동으로 " + buyer.getManualCount() + "장, ");
+        System.out.println("자동으로 " + buyer.getAutoCount() + "장을 구매했습니다.");
+    }
+
     public void printLotteries(List<LotteryDTO> lotteries) {
         lotteries.forEach(this::printLottery);
+        System.out.println();
     }
 
     private void printLottery(LotteryDTO lottery) {
@@ -18,12 +25,17 @@ public class OutputView {
     }
 
     public void printResult(BuyerResult result) {
-        Arrays.stream(Rank.values()).forEach((e) -> {
-            if (e != Rank.NONE) {
-                printRankInfo(e);
-                System.out.println(result.getRankCount(e) + "개");
-            }
-        });
+        System.out.println("당첨 통계");
+        System.out.println("-------");
+        Arrays.stream(Rank.values()).forEach(rank -> printResultForRank(rank, result));
+        printProfit(result.getBuyerProfit());
+    }
+
+    private void printResultForRank(Rank rank, BuyerResult result) {
+        if (rank != Rank.NONE) return;
+
+        printRankInfo(rank);
+        System.out.println(result.getRankCount(rank) + "개");
     }
 
     private void printRankInfo(Rank rank) {
@@ -33,7 +45,7 @@ public class OutputView {
         System.out.print("(" + rank.prize + ")- ");
     }
 
-    public void printProfit(BuyerProfit buyerProfit) {
+    private void printProfit(BuyerProfit buyerProfit) {
         System.out.println("총 수익률은 " + buyerProfit.getProfit() + "입니다");
     }
 }

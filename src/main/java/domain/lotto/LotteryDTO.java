@@ -1,4 +1,4 @@
-package lotto;
+package domain.lotto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +12,8 @@ public class LotteryDTO {
 
     @Override
     public String toString() {
-        return numbers.stream().map(number -> number.toString()).collect(Collectors.joining(","));
+        return "[" +
+                numbers.stream().map(Object::toString).collect(Collectors.joining(",")) +
+                "]";
     }
 }
