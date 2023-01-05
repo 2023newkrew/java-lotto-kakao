@@ -1,22 +1,20 @@
 package domain.lotto;
 
-import util.StringParser;
-
 import java.util.List;
 
 public class LotteryResult {
     private final Lottery winningLottery;
     private final LotteryNumber bonusNumber;
 
-    public LotteryResult(String winningNumbersInput, int bonusNumber) {
-        this(StringParser.parse(winningNumbersInput), bonusNumber);
+    public LotteryResult(List<Integer> winningNumbers, int bonusNumber) {
+        this(new LotteryNumbers(winningNumbers), bonusNumber);
     }
 
-    public LotteryResult(List<Integer> winningNumbers, int bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
-
-        this.winningLottery = new Lottery(winningNumbers);
+    public LotteryResult(LotteryNumbers winningNumber, int bonusNumber) {
+        this.winningLottery = new Lottery(winningNumber);
         this.bonusNumber = new LotteryNumber(bonusNumber);
+
+        if (winningNumber.contains(this.bonusNumber)) throw new IllegalArgumentException("중복된 숫자가 존재합니다");
     }
 
     @Override

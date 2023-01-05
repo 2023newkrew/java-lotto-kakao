@@ -27,9 +27,9 @@ public class InputView {
         return lotteryResult;
     }
 
-    private String getWinningNumbersInput() {
+    private LotteryNumbers getWinningNumbersInput() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return scanner.nextLine();
+        return new LotteryNumbers(StringParser.parse(scanner.nextLine()));
     }
 
     private int getBonusNumberInput() {
