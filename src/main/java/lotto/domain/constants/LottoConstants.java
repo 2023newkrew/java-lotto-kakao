@@ -45,6 +45,10 @@ public final class LottoConstants {
      * indicates cash if you win fifth prize in this game.
      */
     public static final long FIFTH_PRIZE_CASH = 5_000L;
+    /**
+     * indicates cash if you win fifth prize in this game.
+     */
+    public static final long NO_PRIZE_CASH = 0L;
 
     /**
      * This class is for containing constants, not for making instances.

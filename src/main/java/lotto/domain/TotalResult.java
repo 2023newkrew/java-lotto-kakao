@@ -7,7 +7,7 @@ import static lotto.domain.constants.LottoConstants.*;
 import static lotto.domain.constants.LottoStringForm.Korean.*;
 
 /**
- * TotalResult gather LottoResult(s) and
+ * TotalResult gather LottoResult(s)
  */
 public class TotalResult {
     private final Map<LottoResult, LottoCount> lottoResultCount = new HashMap<>();
@@ -30,11 +30,9 @@ public class TotalResult {
     private void addPrize(LottoResult lottoResult){
         List<Cash> prizes = Arrays.stream(WinningCondition.values())
                 .map(v -> v.getPrizeIfMatch(lottoResult))
-                .filter(v->v.compareTo(0L)>0)
+                .filter(v->v.compareTo(NO_PRIZE_CASH)>0)
                 .collect(Collectors.toList());
-        if (prizes.size()!=0){
-            totalPrize = totalPrize.plus(prizes.get(0));
-        }
+        totalPrize = totalPrize.plus((prizes.size()!=0 ? prizes.get(0):new Cash(NO_PRIZE_CASH)));
     }
 
     public LottoCount getLottoCountOfResult(LottoResult lottoResult){

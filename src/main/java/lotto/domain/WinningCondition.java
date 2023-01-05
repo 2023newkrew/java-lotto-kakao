@@ -2,7 +2,7 @@ package lotto.domain;
 import static lotto.domain.constants.LottoConstants.*;
 
 /**
- * WinningCondition
+ * WinningCondition shows that
  */
 public enum WinningCondition {
     FIRST_PRIZE(new LottoResults()
@@ -42,7 +42,7 @@ public enum WinningCondition {
         if (lottoResults.contains(lottoResult)){
             return winningPrize;
         }
-        return new Cash(0L);
+        return new Cash(NO_PRIZE_CASH);
     }
 
     @Override
