@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinnerTicket;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -29,11 +30,10 @@ public class LottoCalculatorTest {
         LottoNumber userTicket2 = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 9, 11)));
         LottoNumber userTicket3 = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 11)));
 
-        LottoCalculator lottoCalculator = new LottoCalculator(winTicket);
 
-        assertThat(lottoCalculator.checkSameCount(userTicket1)).isEqualTo(3);
-        assertThat(lottoCalculator.checkSameCount(userTicket2)).isEqualTo(4);
-        assertThat(lottoCalculator.checkSameCount(userTicket3)).isEqualTo(5);
+        assertThat(winTicket.checkSameCount(userTicket1)).isEqualTo(3);
+        assertThat(winTicket.checkSameCount(userTicket2)).isEqualTo(4);
+        assertThat(winTicket.checkSameCount(userTicket3)).isEqualTo(5);
     }
 
     @Test
@@ -41,13 +41,12 @@ public class LottoCalculatorTest {
     void lottoBonusCheckTest(){
         LottoWinnerTicket winTicket = new LottoWinnerTicket(
                 new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 22);
-        LottoCalculator lottoCalculator = new LottoCalculator(winTicket);
 
         LottoNumber userTicket1 = new LottoNumber(new ArrayList<>(List.of(1, 3, 4, 5, 6, 22)));
-        Assertions.assertThat(lottoCalculator.isBonusNumber(userTicket1)).isTrue();
+        Assertions.assertThat(winTicket.isBonusNumber(userTicket1, 5)).isTrue();
 
         LottoNumber userTicket2 = new LottoNumber(new ArrayList<>(List.of(1, 3, 4, 5, 6, 23)));
-        Assertions.assertThat(lottoCalculator.isBonusNumber(userTicket2)).isFalse();
+        Assertions.assertThat(winTicket.isBonusNumber(userTicket2, 5)).isFalse();
     }
 
     @ParameterizedTest
@@ -88,29 +87,6 @@ public class LottoCalculatorTest {
 
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> new LottoWinnerTicket(lottoNumber, bonus));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"0,0,0,5,0"})
-    @DisplayName("당첨금액의 합을 알 수 있어야 한다.")
-    void lottoWinningAmountTest(String userInput){
-        LottoCalculator lottoCalculator = new LottoCalculator(new LottoWinnerTicket(
-                new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
-
-        ArrayList<Integer> winScore = new ArrayList<>(List.of(changeToArray(userInput)));
-        long summary = lottoCalculator.getWinSummary(winScore);
-        assertThat(summary).isEqualTo(10000000000L);
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {10000, 10500, 10900})
-    @DisplayName("수익률을 계산해야 한다.")
-    void lottoRateOfReturnTest(int amount){
-        LottoCalculator lottoCalculator = new LottoCalculator(new LottoWinnerTicket(
-                new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
-
-        lottoCalculator.getScore(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 7))));
-        assertThat(lottoCalculator.calcRateOfReturn(amount)).isEqualTo(3000);
     }
 
     private Integer[] changeToArray(String userInput){
