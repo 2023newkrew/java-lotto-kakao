@@ -1,4 +1,5 @@
-import exception.LottoNumberException;
+import exception.LottoNumberCountException;
+import exception.LottoNumberDuplicateException;
 import model.Lotto;
 import model.LottoNumber;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +18,7 @@ public class LottoTest {
             lottoNumbers.add(LottoNumber.getLottoNumber(number));
         }
 
-        Assertions.assertThrows(LottoNumberException.class, () -> new Lotto(lottoNumbers));
+        Assertions.assertThrows(LottoNumberCountException.class, () -> new Lotto(lottoNumbers));
     }
 
     @Test
@@ -27,6 +28,6 @@ public class LottoTest {
         for (Integer number : numbers) {
             lottoNumbers.add(LottoNumber.getLottoNumber(number));
         }
-        Assertions.assertThrows(LottoNumberException.class, () -> new Lotto(lottoNumbers));
+        Assertions.assertThrows(LottoNumberDuplicateException.class, () -> new Lotto(lottoNumbers));
     }
 }

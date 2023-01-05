@@ -4,7 +4,7 @@
  */
 package model;
 
-import exception.LottoNumberException;
+import exception.LottoNumberRangeException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +31,7 @@ public class LottoNumber {
 
     public static LottoNumber getLottoNumber(int number) {
         if(number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new LottoNumberException("로또 번호는 1이상 45이하입니다.");
+            throw new LottoNumberRangeException();
         }
         return lottoNumbers.get(number);
     }

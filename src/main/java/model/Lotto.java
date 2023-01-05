@@ -6,7 +6,7 @@
  */
 package model;
 
-import exception.LottoNumberException;
+import exception.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,10 @@ public class Lotto {
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new LottoNumberException("로또 번호의 개수는 6개 입니다.");
+            throw new LottoNumberCountException();
         }
         if (lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
-            throw new LottoNumberException("로또 번호에는 중복이 없어야 합니다.");
+            throw new LottoNumberDuplicateException();
         }
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }

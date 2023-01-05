@@ -1,4 +1,4 @@
-import exception.LottoNumberException;
+import exception.LottoNumberRangeException;
 import model.LottoNumber;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,11 +12,11 @@ public class LottoNumberTest {
 
     @Test
     void 로또_번호가_1미만일_경우_예외가_발생해야_한다() {
-        Assertions.assertThrows(LottoNumberException.class, () -> LottoNumber.getLottoNumber(-1));
+        Assertions.assertThrows(LottoNumberRangeException.class, () -> LottoNumber.getLottoNumber(-1));
     }
 
     @Test
     void 로또_번호가_45초과일_경우_예외가_발생해야_한다() {
-        Assertions.assertThrows(LottoNumberException.class, () -> LottoNumber.getLottoNumber(46));
+        Assertions.assertThrows(LottoNumberRangeException.class, () -> LottoNumber.getLottoNumber(46));
     }
 }

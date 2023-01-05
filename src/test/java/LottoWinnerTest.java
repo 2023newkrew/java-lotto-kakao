@@ -1,4 +1,4 @@
-import exception.LottoNumberException;
+import exception.LottoNumberDuplicateException;
 import model.Lotto;
 import model.LottoNumber;
 import model.LottoWinner;
@@ -18,6 +18,6 @@ public class LottoWinnerTest {
             lottoNumbers.add(LottoNumber.getLottoNumber(number));
         }
         LottoNumber bonusNumber = LottoNumber.getLottoNumber(6);
-        Assertions.assertThrows(LottoNumberException.class, () -> new LottoWinner(new Lotto(lottoNumbers), bonusNumber));
+        Assertions.assertThrows(LottoNumberDuplicateException.class, () -> new LottoWinner(new Lotto(lottoNumbers), bonusNumber));
     }
 }

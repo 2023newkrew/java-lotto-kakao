@@ -6,7 +6,7 @@
 
 package model;
 
-import exception.LottoNumberException;
+import exception.LottoNumberDuplicateException;
 import model.constant.LottoPlace;
 
 public class LottoWinner {
@@ -15,8 +15,8 @@ public class LottoWinner {
     private final LottoNumber bonusNumber;
 
     public LottoWinner(Lotto winNumbers, LottoNumber bonusNumber) {
-        if(winNumbers.getLottoNumbers().contains(bonusNumber)) {
-            throw new LottoNumberException("보너스 번호는 로또 번호들과 달라야 합니다.");
+        if (winNumbers.getLottoNumbers().contains(bonusNumber)) {
+            throw new LottoNumberDuplicateException();
         }
         this.winNumbers = winNumbers;
         this.bonusNumber = bonusNumber;
