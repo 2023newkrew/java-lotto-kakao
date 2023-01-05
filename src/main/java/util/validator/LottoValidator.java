@@ -7,7 +7,7 @@ import exception.IllegalLengthException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class WinningLottoValidator {
+public class LottoValidator {
 
     public static void validate(String input) {
         String[] splitInput = input.split(Constants.DELIMITER);
@@ -31,7 +31,7 @@ public class WinningLottoValidator {
         inputs.stream()
                 .forEach(input -> distinctNumbers.add(input));
         if (distinctNumbers.size() != Constants.LENGTH) {
-            throw new DuplicateNumberException("당첨 번호의 길이가 유효하지 않습니다.");
+            throw new DuplicateNumberException("입력된 로또 번호의 길이가 유효하지 않습니다.");
         }
     }
 }
