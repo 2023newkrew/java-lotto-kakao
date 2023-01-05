@@ -6,6 +6,8 @@ import lotto.dto.GameResultDto;
 import java.util.List;
 import java.util.Map;
 
+import static lotto.constant.ExceptionMessages.*;
+
 public class LottoStore {
     private Lottos lottos;
     private WinningLotto winningLotto;
@@ -15,10 +17,16 @@ public class LottoStore {
     }
 
     public void buyRandomLottosByAmounts(int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException(INVALID_LOTTO_MANUAL_NUMBERS);
+        }
         this.lottos = this.lottos.addAll(Lottos.generateRandomLottosByAmounts(amount));
     }
 
     public void buyLottosByNumbers(List<List<Integer>> numbersList) {
+        if (numbersList == null || numbersList.size() == 0) {
+            throw new IllegalArgumentException(INVALID_RANDOM_LOTTO_AMOUNT);
+        }
         this.lottos = this.lottos.addAll(Lottos.generateLottosByNumbers(numbersList));
     }
 
