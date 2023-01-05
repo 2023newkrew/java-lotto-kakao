@@ -8,7 +8,9 @@ public class PriceResult {
     public PriceResult() {
         result = new HashMap<>();
         for (Price price : Price.values()) {
-            result.put(price, 0);
+            if (price!= Price.NOTHING) {
+                result.put(price, 0);
+            }
         }
     }
 
@@ -17,7 +19,9 @@ public class PriceResult {
     }
 
     public void saveResult(Price price) {
-        result.put(price, result.get(price) + 1);
+        if (price != Price.NOTHING) {
+            result.put(price, result.get(price) + 1);
+        }
     }
 
     public long sumPrice() {
