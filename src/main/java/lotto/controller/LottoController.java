@@ -1,7 +1,8 @@
 package lotto.controller;
 
+import java.util.List;
+import lotto.model.LottoCount;
 import lotto.model.LottoResult;
-import lotto.model.PurchaseAmount;
 import lotto.service.LottoService;
 import lotto.view.LottoInputTemplate;
 import lotto.view.LottoOutputTemplate;
@@ -17,13 +18,64 @@ public class LottoController {
         lottoService = new LottoService();
     }
 
-    public void startLottoGame() {
-        PurchaseAmount purchaseAmount = new PurchaseAmount(lottoInputTemplate.inputPurchaseAmount());
-        lottoService.purchaseLotto(purchaseAmount);
-        lottoOutputTemplate.printLottoTickets(lottoService.getLottoTickets());
+    private void inputPurchaseAmountController() {
+        try {
+            String inputPurchaseAmount = lottoInputTemplate.inputPurchaseAmount();
+            lottoService.setPurchaseAmount(inputPurchaseAmount);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            inputPurchaseAmountController();
+        }
+    }
 
-        LottoResult lottoResult = lottoService.getLottoResult(lottoInputTemplate.inputLottoWinningNumbers(), lottoInputTemplate.inputBonusBall());
+    private void inputManualLottoCountController() {
+        try {
+            String manualLottoCount = lottoInputTemplate.inputManualLottoCount();
+            lottoService.setLottoCount(manualLottoCount);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            inputManualLottoCountController();
+        }
+    }
+
+    private void inputManualLottosController() {
+        try {
+            LottoCount lottoCount = lottoService.getLottoCount();
+            List<String> manualLottos = lottoInputTemplate.inputManualLottos(lottoCount.getManualLottoCount());
+            lottoService.purchaseLotto(manualLottos);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            inputManualLottosController();
+        }
+    }
+
+    private void outputLottoTicketsController() {
+        lottoOutputTemplate.printLottoTickets(lottoService.getLottoCount(), lottoService.getLottoTickets());
+    }
+
+    private void inputLottoWinningNumberController() {
+        try {
+            String inputLottoWinningNumbers = lottoInputTemplate.inputLottoWinningNumbers();
+            String inputBonusBall = lottoInputTemplate.inputBonusBall();
+            lottoService.setLottoWinningNumber(inputLottoWinningNumbers, inputBonusBall);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            inputLottoWinningNumberController();
+        }
+    }
+
+    private void outputLottoResultController() {
+        LottoResult lottoResult = lottoService.getLottoResult();
         lottoOutputTemplate.printLottoResult(lottoResult);
-        lottoOutputTemplate.printRateOfReturn(lottoService.getRateOfReturn(purchaseAmount, lottoResult));
+        lottoOutputTemplate.printRateOfReturn(lottoService.getRateOfReturn(lottoResult));
+    }
+
+    public void startLottoGame() {
+        inputPurchaseAmountController();
+        inputManualLottoCountController();
+        inputManualLottosController();
+        outputLottoTicketsController();
+        inputLottoWinningNumberController();
+        outputLottoResultController();
     }
 }

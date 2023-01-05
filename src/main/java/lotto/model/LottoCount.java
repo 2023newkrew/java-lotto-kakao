@@ -34,4 +34,12 @@ public class LottoCount {
             throw new LottoException(ErrorCode.INVALID_MANUAL_LOTTO_COUNT);
         }
     }
+
+    public Integer getManualLottoCount() {
+        return manualLottoCount;
+    }
+
+    public Integer getAutomaticLottoCount() {
+        return automaticLottoCount;
+    }
 }

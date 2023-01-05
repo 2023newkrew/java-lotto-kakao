@@ -10,9 +10,7 @@ public class LottoWinningNumber {
     private final LottoNumber bonusBall;
 
     public LottoWinningNumber(String lottoWinningNumbers, String bonusBall) {
-        this(new LottoTicket(Arrays.stream(lottoWinningNumbers.split(","))
-                        .map(LottoNumber::from)
-                        .collect(Collectors.toList())),
+        this(new LottoTicket(lottoWinningNumbers),
                 LottoNumber.from(bonusBall));
     }
 

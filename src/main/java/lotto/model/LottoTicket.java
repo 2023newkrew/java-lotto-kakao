@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Arrays;
 import lotto.exception.ErrorCode;
 import lotto.exception.LottoException;
 
@@ -11,6 +12,7 @@ public class LottoTicket {
     private static final Integer LOTTO_TICKET_LENGTH = 6;
     private static final Integer LOTTO_NUMBER_LOWER_BOUNDARY = 1;
     private static final Integer LOTTO_NUMBER_UPPER_BOUNDARY = 45;
+    private static final String SPLIT_DELIMITER = ",";
 
     private final List<LottoNumber> lottoTicket;
 
@@ -28,6 +30,12 @@ public class LottoTicket {
     public LottoTicket(List<LottoNumber> lottoTicket) {
         validateLottoTicketLength(lottoTicket);
         this.lottoTicket = lottoTicket;
+    }
+
+    public LottoTicket(String lottoTicket) {
+        this(Arrays.stream(lottoTicket.split(SPLIT_DELIMITER))
+                .map(LottoNumber::from)
+                .collect(Collectors.toList()));
     }
 
     private void validateLottoTicketLength(List<LottoNumber> input) {
