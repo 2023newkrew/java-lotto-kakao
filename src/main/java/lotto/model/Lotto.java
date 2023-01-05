@@ -13,6 +13,10 @@ public class Lotto {
 
     private final Set<LottoNumber> numbers;
 
+    private Lotto(Set<LottoNumber> numbers) {
+        this.numbers = numbers;
+    }
+
     public static Lotto createRandomLotto() {
         List<LottoNumber> numberPool = LottoNumber.createPool();
         Collections.shuffle(numberPool);
@@ -32,10 +36,6 @@ public class Lotto {
             throw new IllegalArgumentException("로또 번호는 중복이 없는 " + SIZE + "자리 숫자입니다.");
         }
         return new Lotto(numbers);
-    }
-
-    private Lotto(Set<LottoNumber> numbers) {
-        this.numbers = numbers;
     }
 
     public boolean hasNumber(LottoNumber number) {

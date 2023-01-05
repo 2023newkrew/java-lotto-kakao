@@ -13,15 +13,15 @@ public class LottoNumber {
 
     private final int number;
 
+    public LottoNumber(int number) {
+        validateRange(number);
+        this.number = number;
+    }
+
     public static List<LottoNumber> createPool() {
         return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
-    }
-
-    public LottoNumber(int number) {
-        validateRange(number);
-        this.number = number;
     }
 
     private void validateRange(int number) {
@@ -31,7 +31,7 @@ public class LottoNumber {
         }
     }
 
-    private static boolean isOutOfRange(int number) {
+    private boolean isOutOfRange(int number) {
         return number < MIN_NUMBER || number > MAX_NUMBER;
     }
 
