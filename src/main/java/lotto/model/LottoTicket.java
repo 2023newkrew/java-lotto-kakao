@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -33,5 +34,13 @@ public class LottoTicket {
 
     public boolean contains(LottoNumber number) {
         return this.numbers.contains(number);
+    }
+
+    public String toString() {
+        List<String> numbers = new ArrayList<>();
+        for (LottoNumber number : this.numbers) {
+            numbers.add(String.valueOf(number.getNumber()));
+        }
+        return "[" + String.join(", ", numbers) + "]";
     }
 }

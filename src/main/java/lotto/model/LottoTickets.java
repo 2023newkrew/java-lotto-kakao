@@ -17,4 +17,12 @@ public class LottoTickets {
     public void add(LottoTickets tickets) {
         this.tickets.addAll(tickets.tickets);
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (LottoTicket ticket : this.tickets) {
+            sb.append(ticket.toString()).append("\n");
+        }
+        return sb.toString();
+    }
 }
