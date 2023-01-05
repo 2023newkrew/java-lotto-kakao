@@ -31,9 +31,19 @@ public class BuyerResult {
         return result.getOrDefault(rank, 0);
     }
 
-    public int getTotalPrize() {
+    public BuyerProfit getBuyerProfit() {
+        return new BuyerProfit(getTotalCount(), getTotalPrize());
+    }
+
+    private int getTotalPrize() {
         return Arrays.stream(Rank.values())
                 .mapToInt(e -> result.getOrDefault(e, 0) * e.prize)
+                .sum();
+    }
+
+    private int getTotalCount() {
+        return Arrays.stream(Rank.values())
+                .mapToInt(e -> result.getOrDefault(e, 0))
                 .sum();
     }
 }

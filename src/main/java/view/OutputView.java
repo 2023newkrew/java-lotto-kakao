@@ -33,6 +33,7 @@ public class OutputView {
                 System.out.println(result.getRankCount(e) + "개");
             }
         });
+        printProfit(result.getBuyerProfit());
     }
 
     private void printRankInfo(Rank rank) {
@@ -42,7 +43,7 @@ public class OutputView {
         System.out.print("(" + rank.prize + ")- ");
     }
 
-    public void printProfit(BuyerProfit buyerProfit) {
+    private void printProfit(BuyerProfit buyerProfit) {
         System.out.println("총 수익률은 " + buyerProfit.getProfit() + "입니다");
     }
 }
