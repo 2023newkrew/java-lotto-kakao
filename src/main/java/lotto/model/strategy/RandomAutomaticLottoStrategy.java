@@ -8,11 +8,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class IssueByRandomAutomaticLottoStrategy implements LottoIssueStrategy {
+public class RandomAutomaticLottoStrategy implements LottoIssueStrategy {
 
     private final List<Integer> numberPool = new ArrayList<>();
 
-    {
+    public RandomAutomaticLottoStrategy() {
         IntStream.range(LottoNumber.MIN_RANGE, LottoNumber.MAX_RANGE)
                 .forEach(numberPool::add);
     }

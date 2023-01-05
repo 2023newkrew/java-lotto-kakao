@@ -4,7 +4,7 @@ import lotto.model.Lotto;
 import lotto.model.LottoIssuer;
 import lotto.model.LottoList;
 import lotto.model.errors.LottoOutOfRangeException;
-import lotto.model.strategy.IssueByRandomAutomaticLottoStrategy;
+import lotto.model.strategy.RandomAutomaticLottoStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ public class LottoIssuerTest {
 
     @BeforeEach
     void setUp() {
-        lottoIssuer = new LottoIssuer(new IssueByRandomAutomaticLottoStrategy());
+        lottoIssuer = new LottoIssuer(new RandomAutomaticLottoStrategy());
     }
 
     @Test
