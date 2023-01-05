@@ -1,7 +1,7 @@
 package lotto.service;
 
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
-import lotto.domain.LottoTickets;
 import lotto.domain.LottoWinnerTicket;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class LottoCalculator {
     }
 
     // 하나의 로또 티켓 중 몇 개의 변호를 맞췄는지
-    public int checkSameCount(LottoTicket userTicket) {
+    public int checkSameCount(LottoNumber userTicket) {
         int sameCount = 0;
         for(int number : userTicket.getLottoNumbers()){
             sameCount += checkContains(number);
@@ -29,7 +29,7 @@ public class LottoCalculator {
     }
 
     // 보너스 숫자와 일치하는 것이 있는지 확인
-    public boolean isBonusNumber(LottoTicket userTicket) {
+    public boolean isBonusNumber(LottoNumber userTicket) {
         return userTicket.getLottoNumbers().contains(winTicket.getBonusNumber());
     }
 
@@ -56,14 +56,14 @@ public class LottoCalculator {
     }
 
     // 로또 통계 배열 생성
-    public ArrayList<Integer> getResult(LottoTickets lottoTickets) {
-        ArrayList<LottoTicket> tickets = lottoTickets.getTickets();
+    public ArrayList<Integer> getResult(LottoTicket lottoTicket) {
+        ArrayList<LottoNumber> tickets = lottoTicket.getTickets();
         tickets.forEach(this::getScore);
         return this.winScore;
     }
 
     // 당첨 통계 배열 계산
-    public void getScore (LottoTicket ticket) {
+    public void getScore (LottoNumber ticket) {
         int sameCount = checkSameCount(ticket);
         if(sameCount < MIN_WIN_NUM) return;
         sameCount -= MIN_WIN_NUM;

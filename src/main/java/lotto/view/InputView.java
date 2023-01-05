@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinnerTicket;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class InputView {
     public LottoWinnerTicket changeToWinnerTicket(String userInput, int bonus){
         Integer[] numbers = stringToArray(userInput);
         return new LottoWinnerTicket(
-                new LottoTicket(new ArrayList<>(List.of(numbers))), bonus);
+                new LottoNumber(new ArrayList<>(List.of(numbers))), bonus);
     }
 
     private Integer[] stringToArray(String userInput){

@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoNumber;
 import lotto.domain.LottoWinnerTicket;
 import lotto.service.LottoCalculator;
 import org.assertj.core.api.Assertions;
@@ -23,12 +23,12 @@ public class LottoCalculatorTest {
     void lottoCorrectNumberTest(){
         // 당첨 번호
         LottoWinnerTicket winTicket = new LottoWinnerTicket(
-                new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7);
+                new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7);
 
         // 사용자가 뽑은 로또 번호들
-        LottoTicket userTicket1 = new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 9, 10, 11)));
-        LottoTicket userTicket2 = new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 9, 11)));
-        LottoTicket userTicket3 = new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 11)));
+        LottoNumber userTicket1 = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 9, 10, 11)));
+        LottoNumber userTicket2 = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 9, 11)));
+        LottoNumber userTicket3 = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 11)));
 
         LottoCalculator lottoCalculator = new LottoCalculator(winTicket);
 
@@ -41,13 +41,13 @@ public class LottoCalculatorTest {
     @DisplayName("보너스 볼과 일치하는 볼이 있는지 확인할 수 있어야 한다.")
     void lottoBonusCheckTest(){
         LottoWinnerTicket winTicket = new LottoWinnerTicket(
-                new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 22);
+                new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 22);
         LottoCalculator lottoCalculator = new LottoCalculator(winTicket);
 
-        LottoTicket userTicket1 = new LottoTicket(new ArrayList<>(List.of(1, 3, 4, 5, 6, 22)));
+        LottoNumber userTicket1 = new LottoNumber(new ArrayList<>(List.of(1, 3, 4, 5, 6, 22)));
         Assertions.assertThat(lottoCalculator.isBonusNumber(userTicket1)).isTrue();
 
-        LottoTicket userTicket2 = new LottoTicket(new ArrayList<>(List.of(1, 3, 4, 5, 6, 23)));
+        LottoNumber userTicket2 = new LottoNumber(new ArrayList<>(List.of(1, 3, 4, 5, 6, 23)));
         Assertions.assertThat(lottoCalculator.isBonusNumber(userTicket2)).isFalse();
     }
 
@@ -58,7 +58,7 @@ public class LottoCalculatorTest {
         Integer[] splitNumbers = changeToArray(userInput);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
+                .isThrownBy(() -> new LottoNumber(new ArrayList<>(Arrays.asList(splitNumbers))));
     }
 
     @ParameterizedTest
@@ -68,7 +68,7 @@ public class LottoCalculatorTest {
         Integer[] splitNumbers = changeToArray(userInput);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
+                .isThrownBy(() -> new LottoNumber(new ArrayList<>(Arrays.asList(splitNumbers))));
     }
 
     @ParameterizedTest
@@ -78,17 +78,17 @@ public class LottoCalculatorTest {
         Integer[] splitNumbers = changeToArray(userInput);
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoTicket(new ArrayList<>(Arrays.asList(splitNumbers))));
+                .isThrownBy(() -> new LottoNumber(new ArrayList<>(Arrays.asList(splitNumbers))));
     }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
     @DisplayName("보너스 볼이 1 ~ 45 사이의 정수가 아니라면, 예외를 발생한다.")
     void lottoBonusNumberTest(int bonus){
-        LottoTicket lottoTicket = new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
+        LottoNumber lottoNumber = new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoWinnerTicket(lottoTicket, bonus));
+                .isThrownBy(() -> new LottoWinnerTicket(lottoNumber, bonus));
     }
 
     @ParameterizedTest
@@ -96,7 +96,7 @@ public class LottoCalculatorTest {
     @DisplayName("당첨금액의 합을 알 수 있어야 한다.")
     void lottoWinningAmountTest(String userInput){
         LottoCalculator lottoCalculator = new LottoCalculator(new LottoWinnerTicket(
-                new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
+                new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
 
         ArrayList<Integer> winScore = new ArrayList<>(List.of(changeToArray(userInput)));
         long summary = lottoCalculator.getWinSummary(winScore);
@@ -108,9 +108,9 @@ public class LottoCalculatorTest {
     @DisplayName("수익률을 계산해야 한다.")
     void lottoRateOfReturnTest(int amount){
         LottoCalculator lottoCalculator = new LottoCalculator(new LottoWinnerTicket(
-                new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
+                new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), 7));
 
-        lottoCalculator.getScore(new LottoTicket(new ArrayList<>(List.of(1, 2, 3, 4, 5, 7))));
+        lottoCalculator.getScore(new LottoNumber(new ArrayList<>(List.of(1, 2, 3, 4, 5, 7))));
         assertThat(lottoCalculator.calcRateOfReturn(amount)).isEqualTo(3000);
     }
 

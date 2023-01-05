@@ -1,26 +1,25 @@
 package lotto.domain;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.domain.LottoTicket.LOTTO_LOWER_BOUND;
-import static lotto.domain.LottoTicket.LOTTO_UPPER_BOUND;
+import static lotto.domain.LottoNumber.LOTTO_LOWER_BOUND;
+import static lotto.domain.LottoNumber.LOTTO_UPPER_BOUND;
 
 public class LottoWinnerTicket {
-    private final LottoTicket lottoTicket;
+    private final LottoNumber winNumber;
     private final int bonusBall;
 
 
-    public LottoWinnerTicket(LottoTicket lottoTicket, int bonusBall) {
-        this.lottoTicket = lottoTicket;
+    public LottoWinnerTicket(LottoNumber winNumber, int bonusBall) {
+        this.winNumber = winNumber;
         this.bonusBall = bonusBall;
         bonusRangeCheck();
     }
 
 
     public List<Integer> getLottoNumbers() {
-        return lottoTicket.getLottoNumbers();
+        return winNumber.getLottoNumbers();
     }
 
     public Integer getBonusNumber() {
