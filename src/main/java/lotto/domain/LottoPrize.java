@@ -34,7 +34,7 @@ public enum LottoPrize {
         return this.description;
     }
 
-    public boolean isWon(int matchNumberCount, boolean hasMagicNumber) {
-        return this.prizeStrategy.isWon(matchNumberCount, hasMagicNumber);
+    public boolean isQualified(int matchNumberCount, boolean hasMagicNumber) {
+        return this.prizeStrategy.isQualified(matchNumberCount, hasMagicNumber);
     }
 }

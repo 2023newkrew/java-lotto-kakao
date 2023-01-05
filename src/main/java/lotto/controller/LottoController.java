@@ -16,18 +16,18 @@ public class LottoController {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
-    private int purchase() {
+    private int purchaseTicket() {
         int expenseInput = inputView.getExpenseInput();
         Money money = new Money(expenseInput);
         Store store = new Store(money);
-        int amount = store.getLottoAmount();
-        outputView.printPurchaseResult(amount);
-        return amount;
+        int lottoTicketCount = store.getLottoAmount();
+        outputView.printPurchaseResult(lottoTicketCount);
+        return lottoTicketCount;
     }
 
     public void play() {
-        int amount = purchase();
-        List<Lotto> userLottos = getRandomLottoNumbers(amount);
+        int lottoTicketCount = purchaseTicket();
+        List<Lotto> userLottos = getRandomLottoNumbers(lottoTicketCount);
         AnswerLotto answerLotto = getAnwerLotto();
         outputView.printResult(answerLotto.getPrizeCountMap(userLottos));
     }
