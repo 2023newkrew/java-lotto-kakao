@@ -1,11 +1,11 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.LottoResult;
-import lotto.domain.LottoTicket;
-import lotto.domain.LottoWinningNumberList;
+import lotto.domain.result.LottoResult;
+import lotto.domain.ticket.LottoTicket;
+import lotto.domain.ticket.LottoWinningNumberList;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,8 +17,8 @@ public class LottoTicketTest {
     @DisplayName("로또 티켓 번호 확인")
     @ParameterizedTest
     @MethodSource("getCheckStringTypeOfLottoNumbersData")
-    public void checkStringTypeOfLottoNumbers(List<Integer> numbers, String expected) {
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+    public void checkStringTypeOfLottoNumbers(List<Integer> numberList, String expected) {
+        LottoTicket lottoTicket = new LottoTicket(numberList);
         Assertions.assertThat(lottoTicket.getString()).isEqualTo(expected);
     }
 
@@ -34,9 +34,9 @@ public class LottoTicketTest {
     @DisplayName("당첨 결과 계산")
     @ParameterizedTest
     @MethodSource("getCalculateWinningResultData")
-    public void calculateWinningResult(List<Integer> numbers, List<Integer> winningNumbers,
+    public void calculateWinningResult(List<Integer> numberList, List<Integer> winningNumbers,
             int bonusNumber, LottoResult result) {
-        LottoTicket lottoTicket = new LottoTicket(numbers);
+        LottoTicket lottoTicket = new LottoTicket(numberList);
         LottoWinningNumberList lottoWinningNumbers
                 = new LottoWinningNumberList(winningNumbers, bonusNumber);
         Assertions.assertThat(lottoTicket.getResult(lottoWinningNumbers)).isEqualTo(result);
@@ -52,7 +52,7 @@ public class LottoTicketTest {
                         Arrays.asList(1, 2, 3, 4, 5, 6), 7, LottoResult.THIRD),
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 8, 9),
                         Arrays.asList(1, 2, 3, 4, 5, 6), 7, LottoResult.FOURTH),
-                Arguments.of(Arrays.asList(1, 2, 3, 15, 25, 41),
+                Arguments.of(Arrays.asList(1, 2, 3, 7, 25, 41),
                         Arrays.asList(1, 2, 3, 4, 5, 6), 7, LottoResult.FIFTH)
         );
     }

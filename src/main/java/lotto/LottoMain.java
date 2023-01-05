@@ -1,26 +1,34 @@
 package lotto;
 
 import java.util.List;
-import lotto.domain.LottoGame;
-import lotto.domain.LottoWinningNumberList;
-import lotto.domain.strategy.RandomNumberSelectStrategy;
+import lotto.domain.game.LottoGame;
+import lotto.domain.game.LottoSetting;
+import lotto.domain.ticket.LottoWinningNumberList;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 public class LottoMain {
 
     public static void main(String[] args) {
-        LottoGame lottoGame = new LottoGame(new RandomNumberSelectStrategy());
+        LottoSetting lottoSetting = new LottoSetting();
+        LottoGame lottoGame = new LottoGame(lottoSetting);
 
         buyLotto(lottoGame);
+        printLotto(lottoGame);
         checkLotto(lottoGame);
     }
 
     private static void buyLotto(LottoGame lottoGame) {
         int money = InputView.getMoney();
+        List<List<Integer>> numbers = InputView.getManualNumbersList();
 
-        lottoGame.buy(money);
-        ResultView.printQuantity(lottoGame.getCountOfLottoTickets());
+        lottoGame.buyManually(money, numbers);
+        lottoGame.buyRandomly(lottoGame.receiveLeftoverMoney());
+    }
+
+    private static void printLotto(LottoGame lottoGame) {
+        ResultView.printQuantity(lottoGame.getManualTicketCount(),
+                lottoGame.getRandomTicketCount());
         ResultView.print(lottoGame.getLottoTicketsString());
     }
 
@@ -30,6 +38,6 @@ public class LottoMain {
         LottoWinningNumberList lottoWinningNumbers
                 = new LottoWinningNumberList(winningNumbers, bonusNumber);
 
-        ResultView.print(lottoGame.getWinningString(lottoWinningNumbers));
+        ResultView.printStatistics(lottoGame.getWinningString(lottoWinningNumbers));
     }
 }
