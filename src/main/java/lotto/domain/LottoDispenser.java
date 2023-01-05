@@ -9,13 +9,32 @@ public class LottoDispenser {
     private final LottoDispenserSetting lottoDispenserSetting;
 
     private int leftoverMoney = 0;
+    private int ticketCount = 0;
 
     public LottoDispenser(LottoSetting lottoSetting, NumberSelectStrategy numberSelectStrategy) {
         this(new LottoDispenserSetting(lottoSetting, numberSelectStrategy));
     }
 
+    public LottoDispenser(LottoSetting lottoSetting) {
+        this(new LottoDispenserSetting(lottoSetting, new NumberSelectStrategy() {
+            @Override
+            public List<Integer> select() {
+                return null;
+            }
+
+            @Override
+            public boolean isEnd() {
+                return true;
+            }
+        }));
+    }
+
     public LottoDispenser(LottoDispenserSetting lottoDispenserSetting) {
         this.lottoDispenserSetting = lottoDispenserSetting;
+    }
+
+    public void setNumberSelectStrategy(NumberSelectStrategy numberSelectStrategy) {
+        lottoDispenserSetting.setNumberSelectStrategy(numberSelectStrategy);
     }
 
     public LottoTicketList getLottoTicketList(int money) {
@@ -35,6 +54,7 @@ public class LottoDispenser {
             lottoTicketList.add(lottoTicket);
         }
 
+        addTicketCount(lottoTicketList.size());
         return lottoTicketList;
     }
 
@@ -45,6 +65,14 @@ public class LottoDispenser {
     private void calculateLeftoverMoney(int money, int quantity) {
         leftoverMoney += money - quantity
                 * lottoDispenserSetting.getLottoSetting().getLottoTicketPrice();
+    }
+
+    private void addTicketCount(int count) {
+        ticketCount += count;
+    }
+
+    public int getTicketCount() {
+        return ticketCount;
     }
 
     public int receiveLeftoverMoney() {

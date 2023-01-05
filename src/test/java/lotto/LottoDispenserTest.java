@@ -22,7 +22,8 @@ public class LottoDispenserTest {
     public void issueLottoTicketByPrice(int money, int count) {
         LottoDispenser lottoDispenser = new LottoDispenser(new LottoSetting(),
                 RandomNumberSelectStrategy.getInstance());
-        Assertions.assertThat(lottoDispenser.getLottoTicketList(money).getCount()).isEqualTo(count);
+        lottoDispenser.getLottoTicketList(money);
+        Assertions.assertThat(lottoDispenser.getTicketCount()).isEqualTo(count);
     }
 
     private static Stream<Arguments> getIssueLottoTicketByPriceData() {

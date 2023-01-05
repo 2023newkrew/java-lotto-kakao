@@ -9,28 +9,31 @@ public class LottoGame {
 
     private final LottoSetting lottoSetting;
     private final LottoDispenser lottoRandomDispenser;
+    private final LottoDispenser lottoManualDispenser;
     private final LottoTicketList lottoTickets = new LottoTicketList();
     private final LottoGameData lottoGameData = new LottoGameData();
 
     public LottoGame(LottoSetting lottoSetting) {
         this.lottoSetting = lottoSetting;
-        this.lottoRandomDispenser = new LottoDispenser(lottoSetting, RandomNumberSelectStrategy.getInstance());
+        this.lottoRandomDispenser = new LottoDispenser(lottoSetting,
+                RandomNumberSelectStrategy.getInstance());
+        this.lottoManualDispenser = new LottoDispenser(lottoSetting);
     }
 
     public void buyRandomly(int money) {
-        LottoTicketList lottoTicketList = lottoRandomDispenser.getLottoTicketList(money);
-        lottoTickets.addAll(lottoTicketList);
-        lottoGameData.saveLeftoverMoney(lottoRandomDispenser.receiveLeftoverMoney());
-        lottoGameData.addRandomTicketCount(lottoTicketList.getCount());
+        buy(lottoRandomDispenser, money);
     }
 
     public void buyManually(int money, List<List<Integer>> numbers) {
         NumberSelectStrategy numberSelectStrategy = new ManualNumberSelectStrategy(numbers);
-        LottoDispenser lottoDispenser = new LottoDispenser(lottoSetting, numberSelectStrategy);
+        lottoManualDispenser.setNumberSelectStrategy(numberSelectStrategy);
+        buy(lottoManualDispenser, money);
+    }
+
+    private void buy(LottoDispenser lottoDispenser, int money) {
         LottoTicketList lottoTicketList = lottoDispenser.getLottoTicketList(money);
         lottoTickets.addAll(lottoTicketList);
         lottoGameData.saveLeftoverMoney(lottoDispenser.receiveLeftoverMoney());
-        lottoGameData.addManualTicketCount(lottoTicketList.getCount());
     }
 
     public int receiveLeftoverMoney() {
@@ -38,11 +41,11 @@ public class LottoGame {
     }
 
     public int getManualTicketCount() {
-        return lottoGameData.getManualTicketCount();
+        return lottoManualDispenser.getTicketCount();
     }
 
     public int getRandomTicketCount() {
-        return lottoGameData.getRandomTicketCount();
+        return lottoRandomDispenser.getTicketCount();
     }
 
     public String getLottoTicketsString() {
