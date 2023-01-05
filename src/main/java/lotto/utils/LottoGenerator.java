@@ -16,7 +16,7 @@ public class LottoGenerator {
 
     private static final List<LottoNumber> lottoBalls =
             IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
-                    .mapToObj(LottoNumber::new)
+                    .mapToObj(LottoNumber::from)
                     .collect(Collectors.toList());
 
     public static List<UserLotto> generateRandomLottos(int size) {
@@ -41,13 +41,13 @@ public class LottoGenerator {
 
     public static List<UserLotto> generateManualLottos(List<List<Integer>> numbersGroup) {
         return numbersGroup.stream()
-                .map(numbers -> generateManualLotto(numbers))
+                .map(LottoGenerator::generateManualLotto)
                 .collect(Collectors.toList());
     }
 
     private static UserLotto generateManualLotto(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers.stream()
-                .map(number -> new LottoNumber(number))
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
         return new UserLotto(new LottoNumbers(lottoNumbers));
