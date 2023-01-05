@@ -30,12 +30,17 @@ public class LottoCount {
     }
 
     /**
-     * @param val
+     * @param val you want to add to trial using integer value.
      * @return new LottoCount instance which have added value.
      */
     public LottoCount add(int val){
         return new LottoCount(count+val);
     }
+
+    /**
+     * @param val you want to add to trial using LottoCount instance.
+     * @return new LottoCount instance which have added value.
+     */
     public LottoCount add(LottoCount val){
         return new LottoCount(count+val.count);
     }
@@ -57,6 +62,12 @@ public class LottoCount {
         return Objects.hash(count);
     }
 
+    /**
+     * Automatically convert to String value which have count unit.<br>
+     * If you want to change {@code COUNT_UNIT}, change value of {@link lotto.domain.constants.LottoStringForm} manually
+     * or make another language class and use it.
+     * @return cash+{@code COUNT_UNIT}
+     */
     @Override
     public String toString() {
         return count+COUNT_UNIT;

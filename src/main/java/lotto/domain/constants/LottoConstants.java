@@ -1,5 +1,9 @@
 package lotto.domain.constants;
 
+/**
+ * This Class contains widely being used constants among lotto package.
+ * WARNING : DO NOT CHANGE THIS PARAMETER CARELESSLY. CHANGES ON THESE PARAMETER CAN AFFECT WHOLE PROGRAM.
+ */
 public final class LottoConstants {
     /**
      * LOTTO_PRICE : indicates how much is the one lotto.
@@ -42,5 +46,8 @@ public final class LottoConstants {
      */
     public static final long FIFTH_PRIZE_CASH = 5_000L;
 
+    /**
+     * This class is for containing constants, not for making instances.
+     */
     private LottoConstants(){} // 객체 생성 용도가 아님을 명시
 }

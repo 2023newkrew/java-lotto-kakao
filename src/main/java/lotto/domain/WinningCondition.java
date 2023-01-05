@@ -1,6 +1,9 @@
 package lotto.domain;
 import static lotto.domain.constants.LottoConstants.*;
 
+/**
+ * WinningCondition
+ */
 public enum WinningCondition {
     FIRST_PRIZE(new LottoResults()
             .add(LottoResult.get(ONE_TRIAL_BALL_COUNT,false))

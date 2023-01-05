@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 import static lotto.domain.constants.LottoConstants.*;
 import static lotto.domain.constants.LottoStringForm.Korean.*;
 
+/**
+ * TotalResult gather LottoResult(s) and
+ */
 public class TotalResult {
     private final Map<LottoResult, LottoCount> lottoResultCount = new HashMap<>();
     private Cash totalPrize = new Cash(0);

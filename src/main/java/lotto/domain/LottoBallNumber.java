@@ -31,7 +31,7 @@ public class LottoBallNumber implements Comparable{
     }
 
     /**
-     * @param num num whose LottoBallNumber
+     * @param num which you want to get from LottoBallNumber cache.
      * @throws InvalidLottoBallNumber if given parameter is not between
      * {@code BALLNUMBER_MIN_VALUE} and {@code BALLNUMBER_MAX_VALUE}
      */
@@ -43,7 +43,6 @@ public class LottoBallNumber implements Comparable{
     }
 
     /**
-     *
      * @param o the object to be compared.
      * @throws TypeMismatchException if o is neither Integer nor LottoBallNumber
      * @return positive number if num is bigger, 0 when same, negative when smaller.
@@ -56,7 +55,7 @@ public class LottoBallNumber implements Comparable{
         if (o.getClass() == Integer.class){
             return num-(Integer)o;
         }
-        return num - ((LottoBallNumber)o).num;
+        return Integer.compare(num,((LottoBallNumber)o).num);
     }
 
     @Override

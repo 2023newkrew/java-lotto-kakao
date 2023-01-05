@@ -8,6 +8,8 @@ import java.util.*;
 
 public abstract class LottoTrial {
     protected final List<LottoBallNumber> ballNumbers = new ArrayList<>();
+    protected LottoTrial(){}
+
     public List<LottoBallNumber> getBallNumbers(){
         return ballNumbers;
     }

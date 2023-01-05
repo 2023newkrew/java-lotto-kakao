@@ -6,11 +6,12 @@ import java.util.List;
 import static lotto.domain.constants.LottoConstants.*;
 
 
+/**
+ * LottoPickerRandom is the LottoPicker that picks random LottoBallNumber.
+ * Once you picked, the number you picked from pickOne() would not be picked twice unless you make new LottoPicker instance.
+ */
 public class LottoPickerRandom implements LottoPicker{
     private final List<LottoBallNumber> picker = new ArrayList<>();
-    /**
-     * put picker all available LottoBallNumber and shuffle it.
-     */
     public LottoPickerRandom(){
         for (int i=BALLNUMBER_MIN_VALUE;i<=BALLNUMBER_MAX_VALUE;i++){
             picker.add(LottoBallNumber.get(i));
@@ -19,7 +20,7 @@ public class LottoPickerRandom implements LottoPicker{
     }
 
     /**
-     * get random unpicked LottoBallNumber, and remove it.
+     * Returns random unpicked LottoBallNumber, with removing it.
      * @throws IndexOutOfBoundsException if picker does not have any LottoBallNumber
      * @return random unpicked LottoBallNumber
      */
