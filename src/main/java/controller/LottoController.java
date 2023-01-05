@@ -1,7 +1,10 @@
 package controller;
 
 import dto.LottoWinnerDto;
+import exception.LottoNumberException;
+import model.Lotto;
 import model.LottoGame;
+import model.LottoNumber;
 import view.View;
 import utils.Parser;
 
@@ -19,7 +22,7 @@ public class LottoController {
     public void start() {
         lottoGame.setLottoTicket(inputPurchaseMoney());
         view.outputLottoTicket(lottoGame.getLottoTicket());
-        lottoGame.setLottoWinner(inputLottoWinner());
+        lottoGame.setLottoWinner(inputLottoWinner(inputWinNumbers(), inputBonusNumber()));
         view.outputResultMessage(lottoGame.getResult());
     }
 
@@ -31,16 +34,34 @@ public class LottoController {
         return input;
     }
 
-    private LottoWinnerDto inputLottoWinner() {
+    private Lotto inputWinNumbers() {
         view.printWinnerNumberMessage();
         Scanner scanner = new Scanner(System.in);
         String winNumbers = scanner.nextLine();
 
+        try {
+            return Parser.parsingWinNumbers(winNumbers);
+        } catch (LottoNumberException ex) {
+            System.out.println(ex.getMessage());
+            return inputWinNumbers();
+        }
+    }
+
+    private LottoNumber inputBonusNumber() {
         view.printBonusNumberMessage();
+        Scanner scanner = new Scanner(System.in);
         int bonusNumber = scanner.nextInt();
         scanner.nextLine(); //버퍼의 개행 비우기
 
-        return new LottoWinnerDto(Parser.parsingWinNumbers(winNumbers), Parser.parsingBonusNumber(bonusNumber));
+        try {
+            return Parser.parsingBonusNumber(bonusNumber);
+        } catch (LottoNumberException ex) {
+            System.out.println(ex.getMessage());
+            return inputBonusNumber();
+        }
+    }
+    private LottoWinnerDto inputLottoWinner(Lotto winNumbers, LottoNumber bonusNumber) {
+        return new LottoWinnerDto(winNumbers, bonusNumber);
     }
 
 
