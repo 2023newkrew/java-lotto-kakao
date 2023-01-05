@@ -54,63 +54,20 @@
 - 규칙 5: 줄여쓰지 않는다(축약 금지).
 - 규칙 8: 일급 콜렉션을 쓴다.
 
-## 설계 (Draft)
-
-### Domain
-
-- `Lotto`
-    - `LottoNumbers lottoNumbers`
-    - `SingleLottoNumber bonusNumber`
-    - `isValidLotto()`
-
-- `SingleLottoNumber`
-
-- `LottoNumbers`
-    - `List<SingleLottoNumber> nums`
-
-- `UserLottos`
-    - `List<LottoNumbers> userLottos`
-    - `Money userMoney`
-    - `ResultMap resultMap`
-
-- `ResultMap`
-    - `HashMap<prize, amount> resultMap`
-
-- `Money`
-    - `getLottoAmount()`
-    - `isValidLottoMoney()`
-
-- `LottoStatistics`
-    - `Money totalInputMoney`
-    - `ResultMap resultMap`
-    - `calculateProfit()`
-
-### View
-
-- `InputView`
-- `OutputView`
-
-### Controller
-
-- `LottoController`
-
-### Utils
-
-- `RandomNumberGenerator`
-
 ## 기능 명세
 
-### MoneyTest
+### LottoSeller
 
 - [x] 구매금액이 1000원 미만이면 예외가 발생한다
 - [x] 구매금액만큼 살 수 있는 로또의 개수를 반환한다
+- [x] 랜덤으로 구매할 장수가 입력되면 장수만큼 로또 번호들을 반환한다.
 
-### SingleLottoNumberTest
+### LottoNumber
 
 - [x] 로또 번호는 1에서 45 사이여야 한다
 - [x] 로또 번호는 1에서 45 사이가 아니면 예외가 발생한다
 
-### LottoNumbersTest
+### LottoNumbers
 
 - [x] 입력되는 로또 번호가 6개여야 한다
 - [x] 입력되는 로또 번호가 6개가 아니면 예외가 발생한다
@@ -119,9 +76,17 @@
 - [x] 보너스 번호를 받아서 포함되어 있지 않으면 false를 반환한다
 - [x] 사용자의 로또 번호들을 받아서 일치하는 번호의 개수를 반환한다
 
-### Lotto
+### WinningLotto
 
 - [x] 정답과 보너스 볼이 있어야 한다
+- [x] 정답과 보너스 볼이 중복되면 예외가 발생한다
+
+### LottoPrizeCountMap
+
+- [ ] 로또의 당첨 정보를 넣으면 총 당첨 금액을 반환한다
+
+### UserLotto
+
 - [x] 정답과 6개가 모두 일치하면 1등상을 받아야 한다
 - [x] 정답과 5개가 일치하고 보너스 숫자와 일치하면 2등상을 받아야 한다
 - [x] 정답과 5개가 일치하면 3등상을 받아야 한다
@@ -129,10 +94,6 @@
 - [x] 정답과 3개가 일치하면 5등상을 받아야 한다
 - [x] 정답과 3개 미만이 일치하면 아무것도 받지 못한다
 
-### PrizeCountMapTest
+### UserLottoTicket
 
-- [x] 로또의 당첨 정보를 넣으면 총 당첨 금액을 반환한다
-
-### UserLottosTest
-
-- [x] 사용자 로또의 리스트를 받아서 생성한다
+- [x] 랜덤 로또의 리스트와 수동 로또 리스트를 받아서 생성한다

@@ -1,35 +1,36 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     public static final int LOTTO_NUMBER_LENGTH = 6;
-    private final List<SingleLottoNumber> singleLottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<SingleLottoNumber> singleLottoNumbers) {
-        validateLottoNumbers(singleLottoNumbers);
+    public LottoNumbers(List<LottoNumber> lottoNumbers) {
+        validateLottoNumbers(lottoNumbers);
 
-        this.singleLottoNumbers = singleLottoNumbers;
+        this.lottoNumbers = lottoNumbers;
     }
 
-    private void validateLottoNumbers(List<SingleLottoNumber> singleLottoNumbers) {
-        if (singleLottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
+    private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_LENGTH) {
             throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
         }
 
-        long uniqueNumberSize = singleLottoNumbers.stream().distinct().count();
-        if (singleLottoNumbers.size() != uniqueNumberSize) {
+        long uniqueNumberSize = lottoNumbers.stream().distinct().count();
+        if (lottoNumbers.size() != uniqueNumberSize) {
             throw new IllegalArgumentException("중복된 로또 번호가 있으면 안됩니다.");
         }
     }
 
-    public boolean containsLottoNumber(SingleLottoNumber singleLottoNumber) {
-        return this.singleLottoNumbers.stream()
-                .anyMatch(singleLottoNumber::equals);
+    public boolean containsLottoNumber(LottoNumber lottoNumber) {
+        return this.lottoNumbers.stream()
+                .anyMatch(lottoNumber::equals);
     }
 
     public int countMatchNumber(LottoNumbers other) {
-        return (int) this.singleLottoNumbers.stream()
+        return (int) this.lottoNumbers.stream()
                 .filter(other::containsLottoNumber)
                 .count();
     }
@@ -39,7 +40,10 @@ public class LottoNumbers {
         StringBuilder message = new StringBuilder();
 
         message.append("[");
-        this.singleLottoNumbers.forEach(e -> message.append(e.toString()).append(","));
+        message.append(
+                String.join(", ",
+                        lottoNumbers.stream().map(e -> e.toString()).collect(Collectors.toList()))
+        );
         message.append("]");
 
         return message.toString();
