@@ -1,17 +1,11 @@
 package lotto.util;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class ListUtil {
-    public static List<Integer> createShuffledNumbers(int lowerBoundary, int upperBoundary) {
-        List<Integer> numbers = new ArrayList<>();
-        IntStream.rangeClosed(lowerBoundary, upperBoundary)
-                        .forEach(numbers::add);
+    public static List<Integer> shuffleNumbers(List<Integer> numbers) {
         Collections.shuffle(numbers);
-
         return numbers;
     }
 

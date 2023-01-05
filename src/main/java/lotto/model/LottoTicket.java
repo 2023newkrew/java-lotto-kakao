@@ -1,24 +1,21 @@
 package lotto.model;
 
 import java.util.Arrays;
-import lotto.exception.ErrorCode;
-import lotto.exception.LottoException;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.exception.ErrorCode;
+import lotto.exception.LottoException;
 import lotto.util.ListUtil;
 
 public class LottoTicket {
     private static final Integer LOTTO_TICKET_LENGTH = 6;
-    private static final Integer LOTTO_NUMBER_LOWER_BOUNDARY = 1;
-    private static final Integer LOTTO_NUMBER_UPPER_BOUNDARY = 45;
     private static final String SPLIT_DELIMITER = ",";
 
     private final List<LottoNumber> lottoTicket;
 
     public LottoTicket() {
         List<Integer> numbers = ListUtil.getFrontSubListAndSort(
-                ListUtil.createShuffledNumbers(LOTTO_NUMBER_LOWER_BOUNDARY, LOTTO_NUMBER_UPPER_BOUNDARY), LOTTO_TICKET_LENGTH
+                ListUtil.shuffleNumbers(LottoNumber.getLottoNumbers()), LOTTO_TICKET_LENGTH
         );
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::from)
