@@ -8,19 +8,20 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(final List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new ArrayList<>(lottoNumbers); //방어적 복사.. 인자로 들어온 리스트랑 서로 다른 주소를 가지도록..
+        this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return new ArrayList<>(lottoNumbers);
     }
-/*
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -30,5 +31,4 @@ public class Lotto {
         return stringBuilder.toString();
     }
 
- */
 }
