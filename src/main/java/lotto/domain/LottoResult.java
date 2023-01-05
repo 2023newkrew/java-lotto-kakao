@@ -2,11 +2,8 @@ package lotto.domain;
 
 import static lotto.domain.LottoConstants.LOTTO_SIZE;
 import static lotto.domain.LottoConstants.MIN_LOTTO_SIZE;
-import static lotto.exception.ExceptionMessage.*;
+import static lotto.exception.ExceptionMessage.INVALID_MATCH_COUNT_AND_HAS_BONUS;
 import static lotto.utils.ErrorMessageFormatter.makeErrorMessage;
-
-import lotto.exception.ExceptionMessage;
-import lotto.utils.ErrorMessageFormatter;
 
 public class LottoResult {
 

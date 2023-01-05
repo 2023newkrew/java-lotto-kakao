@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import java.util.List;
-import java.util.Map;
-import lotto.config.AppConfig;
 
 public class LottoHandler {
     private Lottos lottos;

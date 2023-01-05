@@ -13,7 +13,7 @@ public enum OutputMessage {
     PRINT_READ_PASSIVE_LOTTO_NUMBERS_MESSAGE("\n수동으로 구매할 번호를 입력해 주세요.");
 
 
-    private String message;
+    private final String message;
 
     public String getMessage() {
         return message;
