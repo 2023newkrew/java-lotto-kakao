@@ -1,22 +1,22 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lotto.LottoGradeEnum;
 import lotto.dto.LottoGradeCountResult;
 
 public class LottoGradeCounter {
 
     private final Map<LottoGradeEnum, Integer> counter;
-    private static final int FIRST = 1;
-    private static final int FIFTH = 5;
+
     public LottoGradeCounter() {
-        counter = IntStream.range(FIRST, FIFTH + 1)
-                .boxed()
-                .collect(Collectors.toMap(LottoGradeEnum::getGrade, i -> 0));
+        counter = Arrays.stream(LottoGradeEnum.values())
+                .filter((grade) -> grade != LottoGradeEnum.NONE_GRADE)
+                .collect(Collectors.toMap(Function.identity(), grade -> 0));
     }
 
     public void putGrade(LottoGradeEnum grade) {
