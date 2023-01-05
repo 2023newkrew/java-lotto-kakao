@@ -66,10 +66,6 @@ public class InputView {
     }
 
     private LotteryNumbers getLotteryNumbersInput() {
-        try {
-            return new LotteryNumbers(scanner.nextLine());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자를 반점으로 구분해 입력해주세요");
-        }
+        return new LotteryNumbers(scanner.nextLine());
     }
 }
