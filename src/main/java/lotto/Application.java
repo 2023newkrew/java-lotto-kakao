@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.LottoStore;
 
 import static lotto.view.LottoView.*;
+import static lotto.view.LottoPrinter.*;
 import static lotto.domain.Lotto.LOTTO_PRICE;
 
 public class Application {
