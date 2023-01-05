@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LottoResults {
-    private final Integer LOTTO_TICKET_PRICE = 1_000;
+    private static final int LOTTO_TICKET_PRICE = 1_000;
 
     private static final Map<LottoResultType, Integer> lottoResultCount = new HashMap<>();
 

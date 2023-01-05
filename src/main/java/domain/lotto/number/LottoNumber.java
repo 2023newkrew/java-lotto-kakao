@@ -3,10 +3,10 @@ package domain.lotto.number;
 import exception.LottoNumberOutOfRangeException;
 
 public class LottoNumber {
-    private final int MIN_LOTTO_NUMBER = 1;
-    private final int MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
 
-    private int number;
+    private final int number;
 
     public int getNumber() {
         return this.number;
