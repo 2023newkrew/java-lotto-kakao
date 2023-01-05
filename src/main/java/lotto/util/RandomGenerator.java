@@ -6,10 +6,12 @@ import java.util.List;
 
 public class RandomGenerator {
     private final List<Integer> defaultRange;
+    private static final int DEFAULT_LOWER_BOUND = 1;
+    private static final int DEFAULT_UPPER_BOUND = 45;
 
     public RandomGenerator() {
         defaultRange = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = DEFAULT_LOWER_BOUND; i <= DEFAULT_UPPER_BOUND; i++) {
             defaultRange.add(i);
         }
     }
