@@ -4,30 +4,30 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 
-public class PrizeCountMap {
-    private final Map<LottoPrize, Integer> prizeCountMap;
+public class LottoPrizeCountMap {
+    private final Map<LottoPrize, Integer> lottoPrizeCountMap;
 
-    public PrizeCountMap(Map<LottoPrize, Integer> prizeCountMap) {
-        this.prizeCountMap = prizeCountMap;
+    public LottoPrizeCountMap(Map<LottoPrize, Integer> lottoPrizeCountMap) {
+        this.lottoPrizeCountMap = lottoPrizeCountMap;
         Arrays.stream(LottoPrize.values())
-                .forEachOrdered(e -> prizeCountMap.put(e, prizeCountMap.getOrDefault(e, 0)));
+                .forEachOrdered(e -> lottoPrizeCountMap.put(e, lottoPrizeCountMap.getOrDefault(e, 0)));
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PrizeCountMap that = (PrizeCountMap) o;
-        return Objects.equals(prizeCountMap, that.prizeCountMap);
+        LottoPrizeCountMap that = (LottoPrizeCountMap) o;
+        return Objects.equals(lottoPrizeCountMap, that.lottoPrizeCountMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prizeCountMap);
+        return Objects.hash(lottoPrizeCountMap);
     }
 
     private int getLottoCount() {
-        return prizeCountMap.values().stream().mapToInt(Integer::intValue).sum();
+        return lottoPrizeCountMap.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     private double getProfit() {
@@ -36,7 +36,7 @@ public class PrizeCountMap {
     }
 
     private long getTotalPrizeMoney() {
-        return prizeCountMap.entrySet().stream()
+        return lottoPrizeCountMap.entrySet().stream()
                 .mapToLong(e -> e.getKey().getPrizeMoney() * e.getValue())
                 .sum();
     }
@@ -47,7 +47,7 @@ public class PrizeCountMap {
 
         Arrays.stream(LottoPrize.values())
                 .forEachOrdered((e) ->
-                        message.append(String.format("%s (%d원) - %d개\n", e.getDescription(), e.getPrizeMoney(), prizeCountMap.get(e)))
+                        message.append(String.format("%s (%d원) - %d개\n", e.getDescription(), e.getPrizeMoney(), lottoPrizeCountMap.get(e)))
                 );
 
         message.append(String.format("총 수익률은 %.2f입니다.\n", getProfit()));

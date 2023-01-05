@@ -20,7 +20,7 @@ public class WinningLotto {
         }
     }
 
-    public PrizeCountMap getPrizeCountMap(List<LottoNumbers> userLottos) {
+    public LottoPrizeCountMap getLottoPrizeCountMap(List<LottoNumbers> userLottos) {
         Map<LottoPrize, Integer> prizeCount = new HashMap<>();
 
         userLottos.forEach(userLotto -> {
@@ -28,7 +28,7 @@ public class WinningLotto {
             prizeCount.put(prize, prizeCount.getOrDefault(prize, 0) + 1);
         });
 
-        return new PrizeCountMap(prizeCount);
+        return new LottoPrizeCountMap(prizeCount);
     }
 
     private LottoPrize getLottoPrize(LottoNumbers userLotto) {

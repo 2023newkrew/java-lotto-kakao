@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNumbers;
-import lotto.domain.PrizeCountMap;
+import lotto.domain.LottoPrizeCountMap;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class OutputView {
         lottoNumbers.forEach(System.out::println);
     }
 
-    public void printResult(PrizeCountMap result) {
+    public void printResult(LottoPrizeCountMap result) {
         System.out.println("당첨 통계");
         System.out.println("----------");
         System.out.println(result);

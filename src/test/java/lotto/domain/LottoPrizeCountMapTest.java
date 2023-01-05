@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
-public class PrizeCountMapTest {
+public class LottoPrizeCountMapTest {
     @Test
     void 로또의_당첨_정보를_넣으면_총_당첨_금액을_반환한다() {
-        PrizeCountMap prizeCountMap = new PrizeCountMap(
+        LottoPrizeCountMap lottoPrizeCountMap = new LottoPrizeCountMap(
                 new HashMap<>() {{
                     put(LottoPrize.FIRST_PRIZE, 1);
                     put(LottoPrize.SECOND_PRIZE, 2);

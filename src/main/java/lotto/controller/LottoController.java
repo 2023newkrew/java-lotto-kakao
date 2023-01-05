@@ -23,7 +23,7 @@ public class LottoController {
                     .map(LottoNumber::from)
                     .collect(Collectors.toList());
             WinningLotto winningLotto = new WinningLotto(new LottoNumbers(answerLottoNumbers), bonusNumber);
-            outputView.printResult(winningLotto.getPrizeCountMap(userLottos.getLottoNumbers()));
+            outputView.printResult(winningLotto.getLottoPrizeCountMap(userLottos.getLottoNumbers()));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             play();
