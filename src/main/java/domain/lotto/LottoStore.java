@@ -6,13 +6,13 @@ import domain.lotto.ticket.generator.LottoTicketGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoShop {
+public class LottoStore {
 
     public static final int LOTTO_PRICE = 1000;
 
     private final LottoTicketGenerator lottoTicketGenerator;
 
-    public LottoShop(LottoTicketGenerator lottoTicketGenerator) {
+    public LottoStore(LottoTicketGenerator lottoTicketGenerator) {
         this.lottoTicketGenerator = lottoTicketGenerator;
     }
 

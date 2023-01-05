@@ -37,7 +37,7 @@ public class LottoResultCalculator {
     }
 
     private double calculateEarningRate() {
-        double lottoCost = lottoTickets.size() * LottoShop.LOTTO_PRICE;
+        double lottoCost = lottoTickets.size() * LottoStore.LOTTO_PRICE;
         int prizeMoneySum = lottoTickets.stream()
                 .map(lottoTicket -> LottoPrize.findPrize(lottoTicket, lottoWinningNumber))
                 .filter(Optional::isPresent)
