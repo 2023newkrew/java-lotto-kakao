@@ -35,13 +35,13 @@ public class WinningNumbers {
     }
 
     private boolean hasBonus(Lotto lotto) {
-        return lotto.getNumbers().contains(bonusNumber);
+        return lotto.contains(bonusNumber);
     }
 
     private int matchNumbers(Lotto lotto) {
         int count = 0;
-        for (Integer number : lotto.getNumbers()) {
-            count += returnValueIfContain(number);
+        for (LottoNumber number : lotto.getNumbers()) {
+            count += returnValueIfContain(number.getNumber());
         }
 
         return count;

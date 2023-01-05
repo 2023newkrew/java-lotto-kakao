@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.LottoNumber;
 import lotto.model.Lottos;
 import lotto.model.PriceResult;
 
@@ -24,6 +25,7 @@ public class OutputView {
     public static void printLottos(Lottos lottos) {
         lottos.getLottos().forEach(v ->
                 System.out.printf(MSG_GENERATED_LOTTO_NUMBERS_FORMAT, v.getNumbers().stream()
+                        .map(LottoNumber::getNumber)
                         .map(Object::toString)
                         .collect(Collectors.joining(NUMBERS_DELIMITER))));
     }

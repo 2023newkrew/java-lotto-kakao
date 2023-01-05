@@ -4,13 +4,18 @@ import java.util.List;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+        this.numbers = LottoNumber.of(numbers);
     }
 
-    public List<Integer> getNumbers() {
+    public List<LottoNumber> getNumbers() {
         return numbers;
+    }
+
+    public boolean contains(int number) {
+        return numbers.stream()
+                .anyMatch(v -> v.equals(LottoNumber.from(number)));
     }
 }
