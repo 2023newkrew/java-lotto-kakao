@@ -1,28 +1,41 @@
 package lotto.domain;
 
-import lotto.strategy.NumberSelectStrategy;
+import lotto.strategy.AutoNumberSelectStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoDispenser {
 
-    private final NumberSelectStrategy numberSelectStrategy;
+    private final AutoNumberSelectStrategy autoNumberSelectStrategy;
 
-    public LottoDispenser(NumberSelectStrategy numberSelectStrategy) {
-        this.numberSelectStrategy = numberSelectStrategy;
+    public LottoDispenser(AutoNumberSelectStrategy autoNumberSelectStrategy) {
+        this.autoNumberSelectStrategy = autoNumberSelectStrategy;
     }
 
-    public LottoTicketsManager getLottoTicket(long money) {
+    public LottoTicketsManager getLottoTickets(long money, List<LottoNumberList> manualLottoNumberList) {
+        long manualTicketQuantity = manualLottoNumberList.size();
+        long autoTicketQuantity = calculateTicketQuantity(money, manualTicketQuantity);
+
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        long ticketQuantity = calculateTicketQuantity(money);
-        for (int i = 0; i < ticketQuantity; i++) {
-            lottoTickets.add(new LottoTicket(numberSelectStrategy.selectNumbers()));
-        }
+        addAutoLottoTickets(lottoTickets, autoTicketQuantity);
+        addManualLottoTickets(lottoTickets, manualLottoNumberList);
         return new LottoTicketsManager(lottoTickets);
     }
 
-    private long calculateTicketQuantity(long money) {
-        return money / LottoTicket.LOTTO_TICKET_PRICE;
+    private void addAutoLottoTickets(List<LottoTicket> lottoTickets, long autoTicketQuantity) {
+        for (int i = 0; i < autoTicketQuantity; i++) {
+            lottoTickets.add(new LottoTicket(autoNumberSelectStrategy.selectNumbers()));
+        }
+    }
+
+    private void addManualLottoTickets(List<LottoTicket> lottoTickets, List<LottoNumberList> manualLottoNumbers) {
+        for (LottoNumberList lottoNumberList : manualLottoNumbers) {
+            lottoTickets.add(new LottoTicket(lottoNumberList));
+        }
+    }
+
+    private long calculateTicketQuantity(long money, long manualLottoQuantity) {
+        return (money / LottoTicket.LOTTO_TICKET_PRICE) - manualLottoQuantity;
     }
 }

@@ -1,18 +1,20 @@
 package lotto.domain;
 
-import lotto.strategy.NumberSelectStrategy;
+import lotto.strategy.AutoNumberSelectStrategy;
+
+import java.util.List;
 
 public class LottoGame {
 
     private final LottoDispenser lottoDispenser;
     private LottoTicketsManager lottoTicketsManager;
 
-    public LottoGame(NumberSelectStrategy numberSelectStrategy) {
-        this.lottoDispenser = new LottoDispenser(numberSelectStrategy);
+    public LottoGame(AutoNumberSelectStrategy autoNumberSelectStrategy) {
+        this.lottoDispenser = new LottoDispenser(autoNumberSelectStrategy);
     }
 
-    public void buyLottoTickets(long money) {
-        lottoTicketsManager = lottoDispenser.getLottoTicket(money);
+    public void buyLottoTickets(long money, List<LottoNumberList> manualLottoNumberList) {
+        lottoTicketsManager = lottoDispenser.getLottoTickets(money, manualLottoNumberList);
     }
 
     public String getLottoTicketsString() {

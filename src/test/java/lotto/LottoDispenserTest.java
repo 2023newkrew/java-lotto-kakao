@@ -1,11 +1,12 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.LottoDispenser;
 import lotto.domain.LottoTicketsManager;
-import lotto.strategy.NumberSelectStrategy;
-import lotto.strategy.RandomNumberSelectStrategy;
+import lotto.strategy.AutoNumberSelectStrategy;
+import lotto.strategy.RandomAutoNumberSelectStrategy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,8 +19,8 @@ public class LottoDispenserTest {
     @ParameterizedTest
     @MethodSource("getIssueLottoTicketByPriceData")
     public void issue_lotto_ticket_by_price(int price, int number) {
-        LottoDispenser lottoDispenser = new LottoDispenser(new RandomNumberSelectStrategy());
-        Assertions.assertThat(lottoDispenser.getLottoTicket(price).getSize()).isEqualTo(number);
+        LottoDispenser lottoDispenser = new LottoDispenser(new RandomAutoNumberSelectStrategy());
+        Assertions.assertThat(lottoDispenser.getLottoTickets(price, Collections.emptyList()).getSize()).isEqualTo(number);
     }
 
     private static Stream<Arguments> getIssueLottoTicketByPriceData() {
@@ -35,7 +36,7 @@ public class LottoDispenserTest {
     @MethodSource("getIssueLottoTicketByNumberSelectStrategyData")
     public void issue_lotto_ticket_by_price(List<List<Integer>> randomNumbers, int price, String expected) {
         LottoDispenser lottoDispenser = new LottoDispenser(createNumberSelectStrategy(randomNumbers));
-        LottoTicketsManager lottoTicketsManager = lottoDispenser.getLottoTicket(price);
+        LottoTicketsManager lottoTicketsManager = lottoDispenser.getLottoTickets(price, Collections.emptyList());
         Assertions.assertThat(lottoTicketsManager.getLottoNumbersString()).isEqualTo(expected);
     }
 
@@ -54,8 +55,8 @@ public class LottoDispenserTest {
         );
     }
 
-    private NumberSelectStrategy createNumberSelectStrategy(List<List<Integer>> randomNumbers) {
-        return new NumberSelectStrategy() {
+    private AutoNumberSelectStrategy createNumberSelectStrategy(List<List<Integer>> randomNumbers) {
+        return new AutoNumberSelectStrategy() {
             int index = 0;
             @Override
             public List<Integer> selectNumbers() {
