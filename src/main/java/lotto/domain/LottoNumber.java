@@ -35,6 +35,10 @@ public class LottoNumber {
         }
     }
 
+    public Integer getNum() {
+        return num;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(num);

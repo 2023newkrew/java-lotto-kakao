@@ -5,6 +5,7 @@ import static lotto.domain.LottoNumber.from;
 import static lotto.exception.ExceptionMessage.SIZE_EXCEPTION_MESSAGE;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.utils.ErrorMessageFormatter;
@@ -14,8 +15,11 @@ public class LottoNumbers {
     private final List<LottoNumber> lottoNumbers;
 
     public static LottoNumbers createLottoNumbers(List<Integer> integers) {
-        return new LottoNumbers(integers.stream().map(LottoNumber::from).collect(Collectors.toList()));
+        return new LottoNumbers(integers.stream().map(LottoNumber::from)
+                .sorted(Comparator.comparingInt(LottoNumber::getNum))
+                .collect(Collectors.toList()));
     }
+
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
