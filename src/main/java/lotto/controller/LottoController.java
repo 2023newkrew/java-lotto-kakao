@@ -26,6 +26,6 @@ public class LottoController {
         // 결과 출력
         PriceResult result = lottoService.getResult();
         OutputView.printResult(result);
-        OutputView.printEarningRate(lottoService.calculateEarningsRate());
+        OutputView.printEarningRate(lottoService.getEarningsRate());
     }
 }

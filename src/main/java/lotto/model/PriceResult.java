@@ -24,7 +24,11 @@ public class PriceResult {
         }
     }
 
-    public long sumPrice() {
+    public double calculateEarningsRate(long purchaseCost) {
+        return (double) sumPrice() / purchaseCost;
+    }
+
+    private long sumPrice() {
         long sumOfPrice = 0;
         for (Price price : result.keySet()) {
             sumOfPrice += result.get(price) * price.price();

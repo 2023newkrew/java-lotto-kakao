@@ -38,7 +38,7 @@ public class LottoService {
         return priceResult;
     }
 
-    public double calculateEarningsRate() {
-        return (double) priceResult.sumPrice() / purchaseCost;
+    public double getEarningsRate() {
+        return priceResult.calculateEarningsRate(purchaseCost);
     }
 }
