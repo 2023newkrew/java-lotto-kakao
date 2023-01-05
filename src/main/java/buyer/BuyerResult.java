@@ -32,7 +32,7 @@ public class BuyerResult {
                 .sum();
         int count = Arrays.stream(Rank.values()).mapToInt(e -> result.getOrDefault(e, 0)).sum();
 
-        return (double) profit / (count * LottoGenerator.LOTTERY_PRICE);
+        return (double) profit / (count * Buyer.LOTTERY_PRICE);
     }
 
     @Override

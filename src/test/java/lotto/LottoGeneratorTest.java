@@ -31,28 +31,4 @@ public class LottoGeneratorTest {
         //then
         Assertions.assertThat(buyer.getLottos()).containsExactly(new Lotto("1,2,3,4,5,6"));
     }
-
-    @DisplayName("3000원 있는 buyer가 로또 3개까지 구매할 수 있음")
-    @ParameterizedTest
-    @ValueSource(ints = {1,2,3})
-    void canBuyNLottosTest(int num) {
-        //given
-        Buyer buyer = new Buyer(3000);
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        //when
-        //then
-        Assertions.assertThat(lottoGenerator.canBuyNLottos(buyer, num)).isTrue();
-    }
-
-    @DisplayName("3000원 있는 buyer가 로또 4개 이상 구매할 수 없음")
-    @ParameterizedTest
-    @ValueSource(ints = {4,5,6})
-    void cannotBuyNLottosTest(int num) {
-        //given
-        Buyer buyer = new Buyer(3000);
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        //when
-        //then
-        Assertions.assertThat(lottoGenerator.canBuyNLottos(buyer, num)).isFalse();
-    }
 }

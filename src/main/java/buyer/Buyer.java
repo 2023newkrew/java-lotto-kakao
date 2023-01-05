@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Buyer {
+    public final static int LOTTERY_PRICE = 1000;
+
     private final List<Lotto> lottos = new ArrayList<>();
     private Money budget;
 
@@ -19,10 +21,15 @@ public class Buyer {
         return budget.compareTo(Money.valueOf(price)) >= 0;
     }
 
-    public void buyLottery(int lotteryPrice, Lotto lotto) {
-        this.budget = this.budget.decreaseMoney(Money.valueOf(lotteryPrice));
+    public boolean canBuyLottosOfQuantity(int quantity) {
+        return hasEqualOrMoreBudgetThan(LOTTERY_PRICE * quantity);
+    }
+
+    public void buyLottery(Lotto lotto) {
+        this.budget = this.budget.decreaseMoney(Money.valueOf(LOTTERY_PRICE));
         this.lottos.add(lotto);
     }
+
 
     public BuyerResult getResult(WinningLotto winningLotto) {
         BuyerResult buyerResult = new BuyerResult();

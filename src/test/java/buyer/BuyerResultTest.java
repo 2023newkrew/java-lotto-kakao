@@ -30,7 +30,7 @@ public class BuyerResultTest {
     void profitTest() {
         //given
         Buyer buyer = new Buyer(1000);
-        buyer.buyLottery(1000, new Lotto("1, 2, 3, 4, 5, 6"));
+        buyer.buyLottery(new Lotto("1, 2, 3, 4, 5, 6"));
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 8);
         //when
         BuyerResult buyerResult = buyer.getResult(winningLotto);
