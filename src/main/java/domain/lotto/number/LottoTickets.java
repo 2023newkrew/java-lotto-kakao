@@ -14,4 +14,5 @@ public class LottoTickets {
     public List<LottoNumbers> getLottoTickets() {
         return lottoTickets;
     }
+
 }

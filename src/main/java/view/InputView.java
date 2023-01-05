@@ -1,7 +1,7 @@
 package view;
 
 import domain.dto.WinningNumbersDto;
-import exception.NotPositiveNumberException;
+import exception.input.InvalidManualPurchaseAmountException;
 import exception.input.IindivisiblePurchaseBudgetException;
 import exception.input.NonNumericInputException;
 import exception.input.NotPositivePurchaseBudgetException;
@@ -17,7 +17,7 @@ public class InputView {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    public static Integer inputPurchaseAmount() {
+    public static Integer inputAutoPurchaseAmount() {
         Integer purchaseBudget = null;
         while (purchaseBudget == null) {
             purchaseBudget = tryInputPurchaseBudget();
@@ -28,14 +28,13 @@ public class InputView {
     private static Integer tryInputPurchaseBudget() {
         try {
             System.out.println("구입 금액을 입력해 주세요.");
-            int purchaseBudget = sc.nextInt();
+            int purchaseBudget = inputNumber();
             validatePurchaseBudget(purchaseBudget);
             return purchaseBudget;
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
         } catch (InputMismatchException e) {
             OutputView.printErrorMessage("숫자를 입력해주세요.");
-            sc.nextLine();
         }
         return null;
     }
@@ -53,8 +52,11 @@ public class InputView {
     }
 
     private static List<Integer> inputWinningLottoNumbers() {
-        sc.nextLine();
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        return inputLottoNumbers();
+    }
+
+    public static List<Integer> inputLottoNumbers() {
         String[] tokens = sc.nextLine().split(",");
         for (String token : tokens) {
             validateIsNumber(token.trim());
@@ -67,7 +69,7 @@ public class InputView {
 
     private static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return sc.nextInt();
+        return inputNumber();
     }
 
     private static void validateIsNumber(String token) {
@@ -75,15 +77,37 @@ public class InputView {
             throw new NonNumericInputException();
     }
 
-    public static int inputManualLottoNumber() {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        int number = sc.nextInt();
-        validatePositiveNumber(number);
-        return number;
+    public static int inputManualPurchaseAmount(int totalPurchaseNumber) {
+        Integer purchaseNumber = null;
+        while(purchaseNumber==null) {
+            purchaseNumber = tryInputManualPurchaseAmount(totalPurchaseNumber);
+        }
+        return purchaseNumber;
     }
 
-    private static void validatePositiveNumber(final int number) {
-        if(number <= 0)
-            throw new NotPositiveNumberException();
+    private static Integer tryInputManualPurchaseAmount(int totalPurchaseNumber) {
+        try {
+            System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
+            int purchaseNumber = inputNumber();
+            validateManualPurchaseAmount(purchaseNumber, totalPurchaseNumber);
+            return purchaseNumber;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (InputMismatchException e) {
+            System.out.println("숫자를 입력해주세요.");
+        }
+        return null;
     }
+
+    private static void validateManualPurchaseAmount(final int number, final int maxNumber) {
+        if(number < 0 || number > maxNumber)
+            throw new InvalidManualPurchaseAmountException(maxNumber);
+    }
+
+    private static int inputNumber() {
+        String input = sc.nextLine();
+        validateIsNumber(input);
+        return Integer.parseInt(input);
+    }
+
 }

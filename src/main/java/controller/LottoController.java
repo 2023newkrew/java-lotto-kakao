@@ -16,18 +16,56 @@ import java.util.List;
 public class LottoController {
 
     public void start() {
-        LottoTickets lottoTickets = createLottoTickets(InputView.inputPurchaseAmount(), new LottoNumbersGenerator());
+        int totalPurchaseAmount = InputView.inputAutoPurchaseAmount();
+        int manualPurchaseAmount = InputView.inputManualPurchaseAmount(totalPurchaseAmount);
+        int autoPurchaseAmount = totalPurchaseAmount - manualPurchaseAmount;
+        LottoTickets lottoTickets = createTotalLottoTickets(autoPurchaseAmount, manualPurchaseAmount);
+        OutputView.printAutoAmountAndManualAmount(autoPurchaseAmount, manualPurchaseAmount);
         OutputView.printLottoTickets(lottoTickets);
         LottoResults lottoResults = new LottoResults(lottoTickets, createWinningNumbers());
         OutputView.printLottoResults(lottoResults);
     }
 
-    private LottoTickets createLottoTickets(final int purchaseAmount, final NumbersGeneratable numbersGenerator) {
+    private LottoTickets createTotalLottoTickets(final int autoPurchaseAmount, final int manualPurchaseAmount) {
+        LottoTickets lottoTickets = createManualLottoTickets(manualPurchaseAmount);
+        lottoTickets.getLottoTickets()
+                .addAll(createAutoLottoTickets(autoPurchaseAmount, new LottoNumbersGenerator()).getLottoTickets());
+        return lottoTickets;
+    }
+
+    private LottoTickets createAutoLottoTickets(final int purchaseAmount, final NumbersGeneratable numbersGenerator) {
         List<LottoNumbers> lottoTicketList = new ArrayList<>();
         for (int i = 0; i < purchaseAmount; i++) {
             lottoTicketList.add(LottoNumbers.create(numbersGenerator));
         }
         return new LottoTickets(lottoTicketList);
+    }
+
+    private LottoTickets createManualLottoTickets(final int purchaseAmount) {
+        if (purchaseAmount < 1) return new LottoTickets(new ArrayList<>());
+        List<LottoNumbers> lottoTicketList = new ArrayList<>();
+        OutputView.printStartInputManualLottoNumbersMessage();
+        for (int i = 0; i < purchaseAmount; i++) {
+            lottoTicketList.add(createManualLottoTicket());
+        }
+        return new LottoTickets(lottoTicketList);
+    }
+
+    private LottoNumbers createManualLottoTicket() {
+        LottoNumbers lottoNumbers = null;
+        while (lottoNumbers == null) {
+            lottoNumbers = tryCreateManualLottoTicket();
+        }
+        return lottoNumbers;
+    }
+
+    private LottoNumbers tryCreateManualLottoTicket() {
+        try {
+            return LottoNumbers.create(() -> InputView.inputLottoNumbers());
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            return null;
+        }
     }
 
     private WinningNumbers createWinningNumbers() {

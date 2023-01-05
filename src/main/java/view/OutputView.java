@@ -10,14 +10,13 @@ import java.util.Arrays;
 public class OutputView {
 
     public static void printLottoTickets(final LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getLottoTickets().size() + "개를 구매했습니다.");
         for (LottoNumbers lottoNumbers : lottoTickets.getLottoTickets()) {
             System.out.println(lottoNumbers.toString());
         }
     }
 
     public static void printLottoResults(final LottoResults lottoResults) {
-        System.out.println("당첨 통계\n" + "---------");
+        System.out.println("\n당첨 통계\n" + "---------");
         Arrays.stream(LottoResultType.values())
                 .forEach((resultType) -> {
                     if (LottoResultType.FAIL.equals(resultType)) return;
@@ -28,5 +27,13 @@ public class OutputView {
 
     public static void printErrorMessage(final String errorMessage) {
         System.out.println("️⚠️"+errorMessage);
+    }
+
+    public static void printStartInputManualLottoNumbersMessage() {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public static void printAutoAmountAndManualAmount(final int autoAmount, final int manualAmount) {
+        System.out.println(String.format("\n수동으로 %d 장, 자동으로 %d 장을 구매했습니다.", manualAmount, autoAmount));
     }
 }
