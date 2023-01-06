@@ -21,7 +21,7 @@ class LottoTicketsTest {
 
     @Test
     void 자동으로_생성된_티켓의_개수가_입력된_개수와_같아야_함() {
-        assertThat(LottoTickets.automaticallyOf(10).stream().count()).isEqualTo(10);
+        assertThat(LottoTickets.automaticallyOf(10).getTickets().size()).isEqualTo(10);
     }
 
     @Test

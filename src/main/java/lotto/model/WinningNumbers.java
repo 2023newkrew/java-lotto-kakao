@@ -11,7 +11,7 @@ public class WinningNumbers {
     }
 
     public Grade match(LottoTicket lottoTicket) {
-        int matchedCount = (int) winningTicket.stream().filter(lottoTicket::contains).count();
+        int matchedCount = winningTicket.match(lottoTicket);
         int bonusCount = 0;
         if (matchedCount == 5 && lottoTicket.contains(bonusNumber)) {
             bonusCount++;

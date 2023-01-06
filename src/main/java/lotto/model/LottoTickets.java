@@ -3,7 +3,6 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoTickets {
     private final List<LottoTicket> tickets;
@@ -43,10 +42,6 @@ public class LottoTickets {
 
     public boolean contains(LottoTicket ticket) {
         return tickets.contains(ticket);
-    }
-
-    public Stream<LottoTicket> stream() {
-        return tickets.stream();
     }
 
     public List<LottoTicket> getTickets() {
