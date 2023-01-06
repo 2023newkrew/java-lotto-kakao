@@ -64,7 +64,12 @@ public class LottoView {
 
     public int inputManualAmount(){
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return Integer.parseInt(scanner.nextLine());
+        try{
+            return Integer.parseInt(scanner.nextLine());
+        }
+        catch (Exception e){
+            throw new NumberFormatException("숫자만 입력해주세요");
+        }
     }
 
     public List<Lotto> inputManualLottos(int amount){
