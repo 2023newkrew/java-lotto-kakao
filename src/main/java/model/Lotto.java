@@ -34,10 +34,7 @@ public class Lotto {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        stringBuilder.append(lottoNumbers.stream().map(LottoNumber::getNumber).map(String::valueOf).collect(Collectors.joining(",")));
-        stringBuilder.append("]");
+        stringBuilder.append(lottoNumbers.stream().map(LottoNumber::getNumber).sorted().map(String::valueOf).collect(Collectors.toList()));
         return stringBuilder.toString();
     }
-
 }
