@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoPayment;
+import lotto.util.ManualLottoGenerator;
 import lotto.util.RandomLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,5 +38,13 @@ class LottoGenerateTest {
     void 한도초과() {
         LottoPayment payment = new LottoPayment(1000);
         assertThatThrownBy(()->payment.buyLotto(2)).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    @DisplayName("수동 입력한 문자열로 로또를 생성한다.")
+    void 수동테스트() {
+        String userInput = "1,2,3,4,5,6";
+        Lotto userManualLotto = ManualLottoGenerator.generateLotto(userInput);
+        assertThat(userManualLotto).isEqualTo(new Lotto(1,2,3,4,5,6));
     }
 }
