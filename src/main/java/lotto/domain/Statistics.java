@@ -20,8 +20,7 @@ public class Statistics {
 
     public void build(List<Lotto> lottos, Lotto winLotto, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos) {
-            LottoResult result = new LottoResult(lotto, winLotto, bonusNumber);
-            add(result.getRank());
+            add(LottoRank.getRank(lotto, winLotto, bonusNumber));
         }
     }
 

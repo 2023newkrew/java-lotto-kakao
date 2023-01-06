@@ -28,4 +28,8 @@ public enum LottoRank {
                 .findAny()
                 .orElse(FAIL);
     }
+
+    public static LottoRank getRank(Lotto myLotto, Lotto winningLotto, LottoNumber bonusNumber) {
+        return getRank(myLotto.compare(winningLotto), myLotto.hasBonus(bonusNumber));
+    }
 }
