@@ -17,6 +17,14 @@ public class Trader {
         this.prizeRecord = new PrizeRecord();
     }
 
+    public LottoTickets getPurchasedTickets() {
+        return this.purchasedTickets;
+    }
+
+    public int getFullPurchaseQuantity() {
+        return this.cash.getPurchasingAbility(LottoTicket.PRICE);
+    }
+
     public void purchaseLotto(LottoTickets tickets) {
         this.cash.pay(LottoTicket.PRICE * tickets.size());
         this.purchasedTickets.add(tickets);

@@ -1,6 +1,7 @@
 package lotto.model.ticket;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class LottoTicket {
         for (LottoNumber number : this.numbers) {
             numbers.add(String.valueOf(number.getNumber()));
         }
+        Collections.sort(numbers);
         return "[" + String.join(", ", numbers) + "]";
     }
 }

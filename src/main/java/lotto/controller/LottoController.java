@@ -1,41 +1,54 @@
 package lotto.controller;
 
-import lotto.model.*;
+import lotto.model.prize.PrizeRecord;
+import lotto.model.service.LottoPublisher;
+import lotto.model.service.Trader;
+import lotto.model.service.TradingCalculator;
+import lotto.model.ticket.LottoTicket;
+import lotto.model.prize.WinningNumbers;
+import lotto.model.ticket.LottoTickets;
 import lotto.view.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LottoController {
     public void start() {
-        Exchange exchange = new Exchange();
+        Trader trader = this.newTrader();
+        this.purchaseTickets(trader);
+        this.confirmResult(trader);
+    }
 
-        long purchaseAmount = 0;
-        while (!Exchange.isEnough(purchaseAmount)) {
-            purchaseAmount = InputView.getPurchaseAmount();
+    private Trader newTrader() {
+        long capital = 0L;
+        while (capital < LottoTicket.PRICE) {
+            capital = InputView.getCapital(LottoTicket.PRICE);
+        }
+        return new Trader(capital);
+    }
+
+    private void purchaseTickets(Trader trader) {
+        int manualQuantity = -1;
+        while (manualQuantity < 0) {
+            manualQuantity = InputView.getManualQuantity();
         }
 
-        Lotto lotto = exchange.purchaseLotto(purchaseAmount);
-        OutputView.sendPurchasedLotto(lotto);
+        LottoPublisher lottoPublisher = new LottoPublisher();
+        LottoTickets manualTickets = lottoPublisher.publishManualLotto(InputView.getManualNumbersList(manualQuantity));
+        trader.purchaseLotto(manualTickets);
 
-        List<Integer> winningNumbers = new ArrayList<>();
-        while (!WinningNumbers.isValidWinningNumbers(winningNumbers)) {
-            winningNumbers = InputView.getWinningNumbers();
-        }
+        int automaticQuantity = trader.getFullPurchaseQuantity();
+        LottoTickets automaticTickets = lottoPublisher.publishRandomLotto(automaticQuantity);
+        trader.purchaseLotto(automaticTickets);
 
-        int bonusNumber = 0;
-        while (!WinningNumbers.isValidBonusNumber(winningNumbers, bonusNumber)) {
-            bonusNumber = InputView.getBonusNumber();
-        }
+        OutputView.displayPurchasedTickets(manualQuantity, trader.getPurchasedTickets());
+    }
 
-        PrizeJudge prizeJudge = new PrizeJudge(new WinningNumbers(winningNumbers, bonusNumber));
-        PrizeRecord prizeRecord = new PrizeRecord();
+    private void confirmResult(Trader trader) {
+        WinningNumbers winningNumbers = new WinningNumbers(
+                InputView.getWinningNumbers(),
+                InputView.getBonusNumber()
+        );
 
-        for (Ticket ticket : lotto.getTickets()) {
-            prizeRecord.addCountOf(prizeJudge.getPrizeOf(ticket));
-        }
-
-        OutputView.sendStatics(prizeRecord);
-        OutputView.sendYield(exchange.calculateYield(prizeRecord));
+        PrizeRecord prizeRecord = trader.confirmResult(winningNumbers);
+        OutputView.displayStatics(prizeRecord);
+        OutputView.displayYield(TradingCalculator.calculateYield(prizeRecord));
     }
 }
