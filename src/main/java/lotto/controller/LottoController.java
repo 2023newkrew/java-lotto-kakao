@@ -28,55 +28,74 @@ public final class LottoController {
     }
 
     public void run() {
-        getMoney();
-        getLottoTickets();
+        setMoney();
+        setLottoTickets();
         WinningNumbers winningNumbers = getWinningNumbers();
         Result result = tickets.getResults(winningNumbers);
         outputView.printResultStatistics(result, money.getUsedMoney());
     }
 
-    private void getMoney() {
-        money = new Money(inputView.scanMoney());
+    private void setMoney() {
+        try {
+            money = new Money(inputView.scanMoney());
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            setMoney();
+        }
     }
 
-    private void getLottoTickets() {
-        int manualLottoTicketsCount = getManualLottoTickets();
-        getAutoLottoTickets();
+    private void setLottoTickets() {
+        int manualLottoTicketsCount = setManualLottoTickets();
+        setAutoLottoTickets();
         outputView.printLottoTickets(makeLottoTicketsDto(tickets), manualLottoTicketsCount);
     }
 
     private LottoTicketsDto makeLottoTicketsDto(LottoTickets tickets) {
         return new LottoTicketsDto(tickets.getTickets().stream()
-                .map(ticket -> {
-                    return ticket.getNumbers().stream()
+                .map(ticket -> ticket.getNumbers().stream()
                             .map(LottoNumber::getValue)
-                            .collect(Collectors.toList());
-                }).collect(Collectors.toList())
+                            .collect(Collectors.toList())
+                ).collect(Collectors.toList())
         );
     }
 
-    private int getManualLottoTickets() {
-        int manualLottoTicketsCount = inputView.scanManualLottoTicketCount();
-        money = money.buyLottoTicketsAsManyAs(manualLottoTicketsCount);
-        tickets = LottoTickets.fromNumberLists(
-                inputView.scanManualLottoTickets(manualLottoTicketsCount)
-        );
-        return manualLottoTicketsCount;
+    private int setManualLottoTickets() {
+        try {
+            int manualLottoTicketsCount = inputView.scanManualLottoTicketCount();
+            money = money.buyLottoTicketsAsManyAs(manualLottoTicketsCount);
+            tickets = LottoTickets.fromNumberLists(
+                    inputView.scanManualLottoTickets(manualLottoTicketsCount)
+            );
+            return manualLottoTicketsCount;
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return setManualLottoTickets();
+        }
     }
 
-    private int getAutoLottoTickets() {
-        int autoLottoTicketsCount = money.getPurchasableCount();
-        money = money.buyLottoTicketsConsumingAllLeftOver();
-        tickets.addAll(
-                LottoTickets.automaticallyOf(autoLottoTicketsCount)
-        );
-        return autoLottoTicketsCount;
+    private int setAutoLottoTickets() {
+        try {
+            int autoLottoTicketsCount = money.getPurchasableCount();
+            money = money.buyLottoTicketsConsumingAllLeftOver();
+            tickets.addAll(
+                    LottoTickets.automaticallyOf(autoLottoTicketsCount)
+            );
+            return autoLottoTicketsCount;
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return setAutoLottoTickets();
+        }
     }
 
     private WinningNumbers getWinningNumbers() {
-        return new WinningNumbers(
-                LottoTicket.fromNumbers(inputView.scanWinningTicket()),
-                LottoNumber.valueOf(inputView.scanBonusNumber())
-        );
+        try {
+            return new WinningNumbers(
+                    LottoTicket.fromNumbers(inputView.scanWinningTicket()),
+                    LottoNumber.valueOf(inputView.scanBonusNumber())
+            );
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return getWinningNumbers();
+        }
     }
 }

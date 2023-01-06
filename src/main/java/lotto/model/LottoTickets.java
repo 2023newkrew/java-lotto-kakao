@@ -20,6 +20,7 @@ public class LottoTickets {
     }
 
     public static LottoTickets automaticallyOf(int count) {
+
         List<LottoTicket> tickets = new ArrayList<>();
         LottoTicketAutoGenerator lottoTicketAutoGenerator = LottoTicketAutoGenerator.getInstance();
         for (int i = 0; i < count; i++) {

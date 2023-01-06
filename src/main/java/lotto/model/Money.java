@@ -30,7 +30,10 @@ public class Money {
 
     private void validateManualTicketCount(int count) {
         if (getPurchasableCount() < count) {
-            throw new IllegalArgumentException("가지고 있는 금액으로 구매할 수 있는 개수보다 작거나 같은 값을 입력해주세요");
+            throw new IllegalArgumentException("가지고 있는 금액으로 구매할 수 있는 개수보다 작거나 같은 값이어야 합니다");
+        }
+        if (count < 0) {
+            throw new IllegalArgumentException("0 이상의 정수여야 합니다");
         }
     }
 

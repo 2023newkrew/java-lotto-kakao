@@ -55,4 +55,8 @@ public class OutputView {
                 result.getProfitRate(money) > 1 ? "이익이" : "손해"
         );
     }
+
+    public void printErrorMessage(String message) {
+        System.out.println(message);
+    }
 }
