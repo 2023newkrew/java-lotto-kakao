@@ -1,7 +1,6 @@
 package lotto.model.prize;
 
 import lotto.model.ticket.LottoNumber;
-import lotto.model.ticket.LottoNumbers;
 import lotto.model.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,11 +19,11 @@ public class WinningNumbersTest {
     void can_validate_incorrect_bonus_number_that_overlaps_with_winning() {
         List<LottoNumber> winningNumbers = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            winningNumbers.add(LottoNumbers.get(i));
+            winningNumbers.add(LottoNumber.get(i));
         }
 
         LottoTicket winning = new LottoTicket(winningNumbers);
-        assertThrows(IllegalArgumentException.class, () -> new WinningNumbers(winning, LottoNumbers.get(1)));
+        assertThrows(IllegalArgumentException.class, () -> new WinningNumbers(winning, LottoNumber.get(1)));
     }
 
     @ParameterizedTest
@@ -35,16 +34,16 @@ public class WinningNumbersTest {
         List<LottoNumber> givenNumbers = new ArrayList<>();
 
         for (int i = 1; i <= matchCount; i++) {
-            winningNumbers.add(LottoNumbers.get(i));
-            givenNumbers.add(LottoNumbers.get(i));
+            winningNumbers.add(LottoNumber.get(i));
+            givenNumbers.add(LottoNumber.get(i));
         }
 
         for (int i = matchCount + 1; i <= 6; i++) {
-            winningNumbers.add(LottoNumbers.get(i + 10));
-            givenNumbers.add(LottoNumbers.get(i + 20));
+            winningNumbers.add(LottoNumber.get(i + 10));
+            givenNumbers.add(LottoNumber.get(i + 20));
         }
 
-        WinningNumbers winning = new WinningNumbers(new LottoTicket(winningNumbers), LottoNumbers.get(45));
+        WinningNumbers winning = new WinningNumbers(new LottoTicket(winningNumbers), LottoNumber.get(45));
         LottoTicket given = new LottoTicket(givenNumbers);
         assertEquals(matchCount, winning.matchNumbers(given));
     }

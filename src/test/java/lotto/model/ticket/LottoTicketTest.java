@@ -16,12 +16,12 @@ public class LottoTicketTest {
         List<LottoNumber> numbers = new ArrayList<>();
 
         for (int i = 1; i < LottoTicket.NUMBERS_LENGTH; i++) {
-            numbers.add(LottoNumbers.get(i));
+            numbers.add(LottoNumber.get(i));
         }
         assertThrows(IllegalArgumentException.class, () -> new LottoTicket(numbers));
 
-        numbers.add(LottoNumbers.get(LottoTicket.NUMBERS_LENGTH));
-        numbers.add(LottoNumbers.get(LottoTicket.NUMBERS_LENGTH + 1));
+        numbers.add(LottoNumber.get(LottoTicket.NUMBERS_LENGTH));
+        numbers.add(LottoNumber.get(LottoTicket.NUMBERS_LENGTH + 1));
         assertThrows(IllegalArgumentException.class, () -> new LottoTicket(numbers));
     }
 
@@ -31,9 +31,9 @@ public class LottoTicketTest {
         List<LottoNumber> numbers = new ArrayList<>();
 
         for (int i = 1; i < LottoTicket.NUMBERS_LENGTH; i++) {
-            numbers.add(LottoNumbers.get(i));
+            numbers.add(LottoNumber.get(i));
         }
-        numbers.add(LottoNumbers.get(1));
+        numbers.add(LottoNumber.get(1));
 
         assertThrows(IllegalArgumentException.class, () -> new LottoTicket(numbers));
     }

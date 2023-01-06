@@ -2,7 +2,6 @@ package lotto.model.service;
 
 
 import lotto.model.ticket.LottoNumber;
-import lotto.model.ticket.LottoNumbers;
 import lotto.model.ticket.LottoTicket;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class RandomNumbersGenerator {
         List<LottoNumber> numbers = new ArrayList<>();
 
         for (int i = 0; i < LottoTicket.NUMBERS_LENGTH; i++) {
-            numbers.add(LottoNumbers.get(this.candidate.get(i)));
+            numbers.add(LottoNumber.get(this.candidate.get(i)));
         }
         return numbers;
     }
