@@ -53,23 +53,37 @@ public final class LottoController {
     private LottoTicketsDto makeLottoTicketsDto(LottoTickets tickets) {
         return new LottoTicketsDto(tickets.getTickets().stream()
                 .map(ticket -> ticket.getNumbers().stream()
-                            .map(LottoNumber::getValue)
-                            .collect(Collectors.toList())
+                        .map(LottoNumber::getValue)
+                        .collect(Collectors.toList())
                 ).collect(Collectors.toList())
         );
     }
 
     private int setManualLottoTickets() {
+        int manualLottoTicketsCount = getManualLottoTicketsCount();
+        setManualLottoTicketsOf(manualLottoTicketsCount);
+        return manualLottoTicketsCount;
+    }
+
+    private int getManualLottoTicketsCount() {
         try {
             int manualLottoTicketsCount = inputView.scanManualLottoTicketCount();
             money = money.buyLottoTicketsAsManyAs(manualLottoTicketsCount);
-            tickets = LottoTickets.fromNumberLists(
-                    inputView.scanManualLottoTickets(manualLottoTicketsCount)
-            );
             return manualLottoTicketsCount;
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
-            return setManualLottoTickets();
+            return getManualLottoTicketsCount();
+        }
+    }
+
+    private void setManualLottoTicketsOf(int count) {
+        try {
+            tickets = LottoTickets.fromNumberLists(
+                    inputView.scanManualLottoTickets(count)
+            );
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            setManualLottoTicketsOf(count);
         }
     }
 

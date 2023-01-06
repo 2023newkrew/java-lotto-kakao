@@ -6,8 +6,15 @@ public class WinningNumbers {
     private final LottoNumber bonusNumber;
 
     public WinningNumbers(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        validateDistinction(winningTicket, bonusNumber);
         this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
+    }
+
+    private void validateDistinction(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        if (winningTicket.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 넘버는 당첨 번호와 중복되지 않아야 합니다");
+        }
     }
 
     public Grade match(LottoTicket lottoTicket) {

@@ -44,7 +44,7 @@
 
 [x] Main 메소드 라인 줄이기 - 컨트롤러 메서드 분리함
 [x] 단일책임원칙 고려하기 (model 이 view 를 고려하지 않도록 수정하기) - model 은 view 를 알 수 없도록 수정하고 컨트롤러에서 dto 를 만들도록 수정함
-[x] InputView 분리하기 (InputView 를 abstract 로 만들고 각각 상속해서 만들기) - model 의 검증로직을 활용하도록 수정하고 InputView 에서는 검증로직 삭제 
+[x] InputView 분리하기 (InputView 를 abstract 로 만들고 각각 상속해서 만들기) - model 의 검증로직을 활용하도록 수정하고 InputView 에서는 검증로직 삭제
 
 
 ## 2단계
