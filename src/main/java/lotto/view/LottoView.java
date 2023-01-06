@@ -72,11 +72,11 @@ public class LottoView {
         }
     }
 
-    public List<Lotto> inputManualLottos(int amount){
+    public List<String> inputManualLottos(int amount){
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        List<Lotto> result = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         while(amount-- > 0)
-            result.add(new Lotto(LottoParser.getNumbers(scanner.nextLine())));
+            result.add(scanner.nextLine());
         return result;
     }
 

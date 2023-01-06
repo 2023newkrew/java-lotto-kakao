@@ -3,6 +3,7 @@ package lotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPayment;
+import lotto.util.ManualLottoGenerator;
 import lotto.util.RandomLottoGenerator;
 import lotto.domain.Statistics;
 import lotto.view.LottoView;
@@ -14,17 +15,16 @@ public class App {
     public static void main(String[] args) {
         LottoView lottoView = new LottoView();
         List<Lotto> lottos = new ArrayList<>();
-        RandomLottoGenerator generator = new RandomLottoGenerator();
 
         LottoPayment payment = new LottoPayment(lottoView.inputPurchase());
 
         int manual = lottoView.inputManualAmount();
         payment.buyLotto(manual);
-        lottos.addAll(lottoView.inputManualLottos(manual));
+        lottos.addAll(ManualLottoGenerator.generateLottos(lottoView.inputManualLottos(manual)));
 
         int auto = payment.getAmount();
         payment.buyLotto(auto);
-        lottos.addAll(generator.generateLottos(auto));
+        lottos.addAll(RandomLottoGenerator.generateLottos(auto));
 
         lottoView.printManualAmount(manual);
         lottoView.printAutoAmount(auto);
