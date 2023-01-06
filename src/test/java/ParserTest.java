@@ -3,10 +3,13 @@ import exception.PurchaseMoneyException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static utils.Parser.parsingManualLottoCount;
-import static utils.Parser.parsingPurchaseMoney;
+import static utils.Parser.*;
 
 public class ParserTest {
+    @Test
+    void 입력되는_로또_번호가_정수가_아닐경우_예외가_발생한다() {
+        assertThatThrownBy(() -> parsingStringToLottoNumber("a")).isInstanceOf(NumberFormatException.class);
+    }
 
     @Test
     void 로또의_구입금액이_숫자가_아닐_경우_예외가_발생한다() {
