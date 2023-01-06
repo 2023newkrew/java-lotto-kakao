@@ -33,7 +33,6 @@ public class TotalResult {
                 .filter(v->v.compareTo(new Cash(NO_PRIZE_CASH))>0)
                 .collect(Collectors.toList());
         totalPrize = totalPrize.plus((prizes.size()!=0 ? prizes.get(0) : new Cash(NO_PRIZE_CASH)));
-        System.out.println(prizes+""+totalPrize);
     }
 
     public LottoCount getLottoCountOfResult(LottoResult lottoResult){
