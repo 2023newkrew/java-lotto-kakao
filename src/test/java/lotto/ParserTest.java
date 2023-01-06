@@ -17,7 +17,7 @@ public class ParserTest {
     @Test
     @DisplayName("숫자, 콤마, space 이외의 문자가 존재하면 에러를 던진다.")
     void parseErrorTest() {
-        String string = "1,2,3,4=5:6";
+        String string = "1,2,3:4=5 6";
         assertThatThrownBy(()->LottoParser.getNumbers(string)).isInstanceOf(RuntimeException.class);
     }
 }
