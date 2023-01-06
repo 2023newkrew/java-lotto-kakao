@@ -12,8 +12,6 @@ public class Money {
     }
 
     private Money(int leftOver, int used) {
-        validateRange(leftOver);
-        validateRange(used);
         this.leftOver = leftOver;
         this.used = used;
     }

@@ -4,15 +4,15 @@ import lotto.model.*;
 
 import java.util.stream.Collectors;
 
-public class ResultView {
-    private static ResultView instance;
+public class OutputView {
+    private static OutputView instance;
 
-    private ResultView() {
+    private OutputView() {
     }
 
-    public static ResultView getInstance() {
+    public static OutputView getInstance() {
         if (instance == null) {
-            instance = new ResultView();
+            instance = new OutputView();
         }
         return instance;
     }
