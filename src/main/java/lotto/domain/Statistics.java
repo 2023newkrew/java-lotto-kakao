@@ -51,6 +51,8 @@ public class Statistics {
     }
 
     public double getProfitRate() {
+        if(getPrizeAmount() < 0)
+            throw new RuntimeException("상금이 잘못되었습니다.");
         return ((double) getPrizeAmount() / (double) purchase);
     }
 }

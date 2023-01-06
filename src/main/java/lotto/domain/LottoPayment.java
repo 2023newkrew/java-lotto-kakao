@@ -11,14 +11,16 @@ public class LottoPayment {
 
     public LottoPayment(int purchase) {
         if (wallet < 0) {
-            throw new RuntimeException("로또를 구매하기 위한 금액이 부족합니다.");
+            throw new IllegalArgumentException("금액은 0이상 이어야 합니다.");
         }
         wallet = purchase;
     }
 
     public void buyLotto(int amount) {
+        if(amount < 0)
+            throw new IllegalArgumentException("수량은 양의 정수만 가능합니다");
         if(amount * LOTTO_COST > wallet)
-            throw new RuntimeException("돈이 부족합니다.");
+            throw new RuntimeException("로또를 구매하기 위한 돈이 부족합니다.");
         wallet -= amount * LOTTO_COST;
     }
 
