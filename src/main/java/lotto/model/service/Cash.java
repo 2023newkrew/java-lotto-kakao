@@ -12,7 +12,7 @@ public class Cash {
     }
 
     public void pay(long cost) {
-        if (this.amount < cost) {
+        if (this.getPurchasingAbility(cost) < 1) {
             throw new IllegalArgumentException("로또를 구매할 현금이 부족합니다.");
         }
         this.amount -= cost;

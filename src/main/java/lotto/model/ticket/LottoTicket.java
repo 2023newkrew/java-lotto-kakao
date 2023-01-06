@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int NUMBERS_LENGTH = 6;
@@ -39,11 +40,13 @@ public class LottoTicket {
     }
 
     public String toString() {
-        List<String> numbers = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         for (LottoNumber number : this.numbers) {
-            numbers.add(String.valueOf(number.getNumber()));
+            numbers.add(number.getNumber());
         }
         Collections.sort(numbers);
-        return "[" + String.join(", ", numbers) + "]";
+        return "[" + String.join(", ", numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining())) + "]";
     }
 }
