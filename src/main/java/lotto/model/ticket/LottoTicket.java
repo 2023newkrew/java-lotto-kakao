@@ -47,6 +47,6 @@ public class LottoTicket {
         Collections.sort(numbers);
         return "[" + String.join(", ", numbers.stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining())) + "]";
+                .collect(Collectors.toList())) + "]";
     }
 }
