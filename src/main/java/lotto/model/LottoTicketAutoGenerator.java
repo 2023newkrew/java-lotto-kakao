@@ -10,8 +10,8 @@ public class LottoTicketAutoGenerator {
 
     private LottoTicketAutoGenerator() {
         numberDomain = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            numberDomain.add(LottoNumber.valueOf(i));
+        for (int number = 1; number <= 45; number++) {
+            numberDomain.add(LottoNumber.valueOf(number));
         }
     }
 

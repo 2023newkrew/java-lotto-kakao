@@ -1,7 +1,9 @@
 package lotto.view;
 
+import lotto.dto.LottoTicketsDto;
 import lotto.model.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -19,14 +21,14 @@ public class OutputView {
 
     public void printLottoTickets(LottoTicketsDto tickets, int manualCount) {
         System.out.printf("\n수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualCount, tickets.size() - manualCount);
-        for (LottoTicketDto ticket : tickets.getTickets()) {
+        for (List<Integer> ticket : tickets.getTickets()) {
             printLottoTicket(ticket);
         }
         System.out.println();
     }
 
-    private void printLottoTicket(LottoTicketDto ticketDto) {
-        String numbers = ticketDto.getTicket().stream()
+    private void printLottoTicket(List<Integer> ticket) {
+        String numbers = ticket.stream()
                 .sorted().map(
                         number -> Integer.toString(number)
                 ).collect(Collectors.joining(", "));

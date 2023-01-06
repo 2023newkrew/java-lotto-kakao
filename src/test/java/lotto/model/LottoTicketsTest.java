@@ -15,26 +15,8 @@ class LottoTicketsTest {
 
     @BeforeEach
     void setUp() {
-        this.lottoTicket1 = new LottoTicket(
-                Arrays.asList(
-                        LottoNumber.valueOf(1),
-                        LottoNumber.valueOf(2),
-                        LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4),
-                        LottoNumber.valueOf(5),
-                        LottoNumber.valueOf(6)
-                )
-        );
-        this.lottoTicket2 = new LottoTicket(
-                Arrays.asList(
-                        LottoNumber.valueOf(1),
-                        LottoNumber.valueOf(2),
-                        LottoNumber.valueOf(3),
-                        LottoNumber.valueOf(4),
-                        LottoNumber.valueOf(5),
-                        LottoNumber.valueOf(7)
-                )
-        );
+        this.lottoTicket1 = LottoTicket.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        this.lottoTicket2 = LottoTicket.fromNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
     }
 
     @Test
@@ -45,14 +27,10 @@ class LottoTicketsTest {
     @Test
     void 다른_티켓들을_합치면_모든_티켓들이_포함되어야_함() {
         LottoTickets lottoTickets1 = new LottoTickets(
-                Arrays.asList(
-                        lottoTicket1
-                )
+                Arrays.asList(lottoTicket1)
         );
         LottoTickets lottoTickets2 = new LottoTickets(
-                Arrays.asList(
-                        lottoTicket2
-                )
+                Arrays.asList(lottoTicket2)
         );
         lottoTickets1.addAll(lottoTickets2);
         assertThat(lottoTickets1.contains(lottoTicket2)).isTrue();

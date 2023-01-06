@@ -10,11 +10,6 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public WinningNumbers(WinningNumbersDto winningNumbersDto) {
-        this.winningTicket = new LottoTicket(winningNumbersDto.getLottoTicketDto());
-        this.bonusNumber = LottoNumber.valueOf(winningNumbersDto.getBonusNumber());
-    }
-
     public Grade match(LottoTicket lottoTicket) {
         int matchedCount = (int) winningTicket.stream().filter(lottoTicket::contains).count();
         int bonusCount = 0;

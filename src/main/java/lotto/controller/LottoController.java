@@ -1,8 +1,11 @@
 package lotto.controller;
 
+import lotto.dto.LottoTicketsDto;
 import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+
+import java.util.stream.Collectors;
 
 public final class LottoController {
     private static LottoController instance;
@@ -39,33 +42,41 @@ public final class LottoController {
     private void getLottoTickets() {
         int manualLottoTicketsCount = getManualLottoTickets();
         getAutoLottoTickets();
-        outputView.printLottoTickets(new LottoTicketsDto(tickets), manualLottoTicketsCount);
+        outputView.printLottoTickets(makeLottoTicketsDto(tickets), manualLottoTicketsCount);
+    }
+
+    private LottoTicketsDto makeLottoTicketsDto(LottoTickets tickets) {
+        return new LottoTicketsDto(tickets.getTickets().stream()
+                .map(ticket -> {
+                    return ticket.getNumbers().stream()
+                            .map(LottoNumber::getValue)
+                            .collect(Collectors.toList());
+                }).collect(Collectors.toList())
+        );
     }
 
     private int getManualLottoTickets() {
         int manualLottoTicketsCount = inputView.scanManualLottoTicketCount();
-        tickets = new LottoTickets(
-                new LottoTicketsDto(inputView.scanManualLottoTickets(manualLottoTicketsCount))
-        );
         money = money.buyLottoTicketsAsManyAs(manualLottoTicketsCount);
+        tickets = LottoTickets.fromNumberLists(
+                inputView.scanManualLottoTickets(manualLottoTicketsCount)
+        );
         return manualLottoTicketsCount;
     }
 
     private int getAutoLottoTickets() {
         int autoLottoTicketsCount = money.getPurchasableCount();
+        money = money.buyLottoTicketsConsumingAllLeftOver();
         tickets.addAll(
                 LottoTickets.automaticallyOf(autoLottoTicketsCount)
         );
-        money = money.buyLottoTicketsConsumingAllLeftOver();
         return autoLottoTicketsCount;
     }
 
     private WinningNumbers getWinningNumbers() {
         return new WinningNumbers(
-                new WinningNumbersDto(
-                        new LottoTicketDto(inputView.scanWinningTicket()),
-                        inputView.scanBonusNumber()
-                )
+                LottoTicket.fromNumbers(inputView.scanWinningTicket()),
+                LottoNumber.valueOf(inputView.scanBonusNumber())
         );
     }
 }

@@ -28,6 +28,7 @@ class MoneyTest {
 
     @Test
     void 구매하는데_사용된_금액이_계산돼야_함() {
+        money = money.buyLottoTicketsAsManyAs(10);
         assertThat(money.getUsedMoney()).isEqualTo(10000);
     }
 

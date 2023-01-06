@@ -12,11 +12,11 @@ public class LottoTickets {
         this.tickets = new ArrayList<>(tickets);
     }
 
-    public LottoTickets(LottoTicketsDto ticketsDto) {
-        this.tickets = ticketsDto.getTickets()
-                .stream().map(
-                        LottoTicket::new
-                ).collect(Collectors.toList());
+    public static LottoTickets fromNumberLists(List<List<Integer>> ticketsRaw) {
+        return new LottoTickets(ticketsRaw.stream()
+                .map(LottoTicket::fromNumbers)
+                .collect(Collectors.toList())
+        );
     }
 
     public static LottoTickets automaticallyOf(int count) {
@@ -29,7 +29,7 @@ public class LottoTickets {
     }
 
     public void addAll(LottoTickets tickets) {
-        this.tickets.addAll(tickets.stream().collect(Collectors.toList()));
+        this.tickets.addAll(tickets.getTickets());
     }
 
     public Result getResults(WinningNumbers winningNumbers) {
@@ -46,5 +46,16 @@ public class LottoTickets {
 
     public Stream<LottoTicket> stream() {
         return tickets.stream();
+    }
+
+    public List<LottoTicket> getTickets() {
+        return new ArrayList<>(tickets);
+    }
+
+    @Override
+    public String toString() {
+        return "LottoTickets{" +
+                "tickets=" + tickets +
+                '}';
     }
 }
