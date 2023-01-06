@@ -1,61 +1,65 @@
 package controller;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.LottoNumbers;
-import domain.Rank;
+import domain.*;
+import utils.LottoConverter;
 import view.InputView;
 import view.OutputView;
+import view.PurchasedLotto;
 import view.WinningStatistics;
-import utils.YieldCalculator;
+import utils.LottoCalculator;
 import utils.LottoGenerator;
-import utils.InputValidator;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static constant.LottoSetting.LOTTO_PRICE;
-
 public class LottoController {
-    private static final String LOTTO_NUMBER_DELIMITER = ", ";
 
-    private InputView inputView;
-    private OutputView outputView;
-    private InputValidator inputValidator;
+    private final InputView inputView;
+    private final OutputView outputView;
 
     public LottoController() {
         inputView = new InputView();
         outputView = new OutputView();
-        inputValidator = new InputValidator();
     }
 
     public void run() {
-        int payment = Integer.parseInt(inputView.getUserInputPayment());
-        inputValidator.validatePayment(payment);
-        outputView.printNumberOfLotto(payment / LOTTO_PRICE);
+        Payment payment = new Payment(inputView.getPayment());
+        LottoCount manualLottoCount = LottoCount.of(payment, inputView.getManualLottoCount());
 
-        List<LottoNumbers> lottoNumbersList = LottoGenerator.generateLotto(payment);
-        String purchasedLotto = lottoNumbersList.stream()
-                .map(LottoNumbers::toString)
-                .collect(Collectors.joining("\n"));
-        outputView.printLotto(purchasedLotto);
+        PurchasedLotto purchasedLotto = getPurchasedLotto(payment, manualLottoCount.getCount());
+        outputView.printPurchasedLotto(purchasedLotto);
 
-        execute(payment, lottoNumbersList);
+        LottoNumbers winLottoNumbers = LottoConverter.integerListToLottoNumbers(inputView.getWinningLottoNumbers());
+        LottoNumber bonusBall = new LottoNumber(inputView.getBonusBallNumber());
+
+        handleLottoResult(execute(purchasedLotto, winLottoNumbers, bonusBall), payment);
     }
 
-    public void execute(int payment, List<LottoNumbers> lottoNumbersList) {
-        LottoNumbers winLottoNumbers = new LottoNumbers(Arrays.stream(inputView.getUserInputLottoNumbers().split(LOTTO_NUMBER_DELIMITER))
-                .map(number -> new LottoNumber(Integer.parseInt(number)))
-                .collect(Collectors.toList()));
-        LottoNumber bonusBall = new LottoNumber(Integer.parseInt(inputView.getUserInputBonusBallNumbers()));
-
-        Lotto lotto = new Lotto(lottoNumbersList);
-        Map<Rank, Integer> rankMap = lotto.rankEachLotto(winLottoNumbers, bonusBall);
-
+    private void handleLottoResult(Map<Rank, Integer> rankMap, Payment payment) {
         outputView.printStatistics(new WinningStatistics(rankMap).toString());
-        outputView.printYield(YieldCalculator.calculate(payment, rankMap));
+        outputView.printYield(LottoCalculator.calculateYield(payment, rankMap));
+    }
+
+    private Map<Rank, Integer> execute(PurchasedLotto purchasedLotto, LottoNumbers winLottoNumbers, LottoNumber bonusBall) {
+        Lotto lotto = new Lotto(purchasedLotto.getLottoNumbersList());
+
+        return lotto.rankEachLotto(winLottoNumbers, bonusBall);
+    }
+
+    private PurchasedLotto getPurchasedLotto(Payment payment, int manualLottoCount) {
+        int automaticLottoCount = LottoCalculator.calculateLottoCount(payment) - manualLottoCount;
+        List<LottoNumbers> lottoNumbersList = getManualLottoNumbers(manualLottoCount);
+        lottoNumbersList.addAll(LottoGenerator.generateLotto(automaticLottoCount));
+
+        return new PurchasedLotto(manualLottoCount, automaticLottoCount, lottoNumbersList);
+    }
+
+    private List<LottoNumbers> getManualLottoNumbers(int manualLottoCount) {
+        return inputView.getManualLottoNumbers(manualLottoCount)
+                .stream()
+                .map(LottoConverter::integerListToLottoNumbers)
+                .collect(Collectors.toList());
     }
 
 }

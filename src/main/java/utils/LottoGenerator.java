@@ -11,14 +11,15 @@ import java.util.stream.IntStream;
 import static constant.LottoSetting.*;
 
 public class LottoGenerator {
+
     private static final List<Integer> LOTTO_NUMBER_LIST = IntStream
             .rangeClosed(MIN_VALUE, MAX_VALUE)
             .boxed()
             .collect(Collectors.toList());
 
 
-    public static List<LottoNumbers> generateLotto(int payment) {
-        return IntStream.range(0, payment / LOTTO_PRICE)
+    public static List<LottoNumbers> generateLotto(int lottoCount) {
+        return IntStream.range(0, lottoCount)
                 .mapToObj(i -> generate())
                 .collect(Collectors.toList());
     }

@@ -1,17 +1,19 @@
 package utils;
 
+import domain.Payment;
 import domain.Rank;
 import org.junit.jupiter.api.Test;
-import utils.YieldCalculator;
 
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class YieldCalculatorTest {
+class LottoCalculatorTest {
+
     @Test
-    void calculate() {
-        YieldCalculator yieldCalculator = new YieldCalculator();
+    void 당첨_현황에_맞게_수익률을_계산한다() {
+        // given
+        Payment payment = new Payment(14000);
         Map<Rank, Integer> rankMap = Map.of(
                 Rank.FIRST_PLACE, 0,
                 Rank.SECOND_PLACE, 0,
@@ -19,7 +21,9 @@ class YieldCalculatorTest {
                 Rank.FOURTH_PLACE, 0,
                 Rank.FIFTH_PLACE, 1
         );
-        assertThat(yieldCalculator.calculate(14000, rankMap)).isEqualTo(0.35);
 
+        // when, then
+        assertThat(LottoCalculator.calculateYield(payment, rankMap)).isEqualTo(0.35);
     }
+
 }

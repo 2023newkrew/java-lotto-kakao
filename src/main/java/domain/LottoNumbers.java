@@ -11,8 +11,6 @@ import static constant.LottoSetting.*;
 
 public class LottoNumbers {
 
-    private static final int BONUS_BALL_FLAG = 5;
-
     private final List<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -22,20 +20,11 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
-    public boolean hasSize(int size) {
-        return lottoNumbers.size() == size;
-    }
-
     public Optional<Rank> compareWithWinLottoNumbers(LottoNumbers winLottoNumbers, LottoNumber bonusBall) {
         List<LottoNumber> matchedLottoNumbers = new ArrayList<>(lottoNumbers);
         matchedLottoNumbers.retainAll(winLottoNumbers.lottoNumbers);
 
-        int matchCount = matchedLottoNumbers.size();
-        if(matchCount == BONUS_BALL_FLAG && lottoNumbers.contains(bonusBall)) {
-            return Optional.of(Rank.SECOND_PLACE);
-        }
-
-        return Optional.ofNullable(Rank.findRank(matchCount));
+        return Optional.ofNullable(Rank.findRank(matchedLottoNumbers.size(), lottoNumbers.contains(bonusBall)));
     }
 
     private void validateLottoNumbers(List<LottoNumber> lottoNumbers) {

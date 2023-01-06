@@ -1,20 +1,17 @@
 package domain;
 
-import domain.LottoNumber;
-import domain.LottoNumbers;
-import domain.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static constant.LottoSetting.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -25,14 +22,14 @@ public class LottoNumbersTest {
 
     @BeforeEach
     void setUp() {
-        lottoNumberList = Arrays.asList(
+        lottoNumberList = new ArrayList<>(Arrays.asList(
                 new LottoNumber(31),
                 new LottoNumber(18),
                 new LottoNumber(5),
                 new LottoNumber(22),
                 new LottoNumber(41),
                 new LottoNumber(9)
-        );
+        ));
     }
 
     @Test
@@ -53,12 +50,23 @@ public class LottoNumbersTest {
     }
 
     @Test
-    void 로또_숫자_개수_검증() {
+    void 여섯_개_미만의_숫자로는_로또를_생성할_수_없다() {
         // given
-        LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
+        lottoNumberList.remove(0);
 
         // when, then
-        assertThat(lottoNumbers.hasSize(LOTTO_SIZE)).isTrue();
+        assertThatThrownBy(() -> new LottoNumbers(lottoNumberList))
+                .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void 여섯_개를_초과하는_숫자로는_로또를_생성할_수_없다() {
+        // given
+        lottoNumberList.add(new LottoNumber(27));
+
+        // when, then
+        assertThatThrownBy(() -> new LottoNumbers(lottoNumberList))
+                .isInstanceOf(RuntimeException.class);
     }
 
     @Test
@@ -80,7 +88,7 @@ public class LottoNumbersTest {
 
     @ParameterizedTest
     @MethodSource("provideLottoRank")
-    void 숫자가_3개_미만으로_일치하면_아무일도_일어나지_않는다(LottoNumbers winLottoNumbers, LottoNumber bonusBall, Rank expected) {
+    void 당첨_로또와_일치하는_정도에_따라_등수가_매겨진다(LottoNumbers winLottoNumbers, LottoNumber bonusBall, Rank expected) {
         // given
         LottoNumbers lottoNumbers = new LottoNumbers(lottoNumberList);
 
