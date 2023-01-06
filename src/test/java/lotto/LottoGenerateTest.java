@@ -7,6 +7,7 @@ import lotto.util.RandomLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -46,5 +47,15 @@ class LottoGenerateTest {
         String userInput = "1,2,3,4,5,6";
         Lotto userManualLotto = ManualLottoGenerator.generateLotto(userInput);
         assertThat(userManualLotto).isEqualTo(new Lotto(1,2,3,4,5,6));
+    }
+
+    @Test
+    @DisplayName("수동 입력한 로또의 목록을 반환한다")
+    void 수동테스트2() {
+        List<String> userInputs = new ArrayList<>();
+        for(int i = 0; i < 10; i++){
+            userInputs.add("1,2,3,4,5,6");
+        }
+        assertThat(ManualLottoGenerator.generateLottos(userInputs)).contains(new Lotto(1,2,3,4,5,6));
     }
 }
