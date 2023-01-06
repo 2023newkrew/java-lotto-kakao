@@ -7,9 +7,8 @@ import lotto.model.ticket.LottoTickets;
 import java.util.Arrays;
 
 public class OutputView {
-
-    public static void displayPurchasedTickets(LottoTickets tickets) {
-        System.out.printf("%d개를 구매했습니다.\n", tickets.size());
+    public static void displayPurchasedTickets(int manualQuantity, LottoTickets tickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualQuantity, tickets.size() - manualQuantity);
         System.out.println(tickets);
     }
 

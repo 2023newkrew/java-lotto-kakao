@@ -3,8 +3,12 @@ package lotto.model.service;
 public class Cash {
     private long amount;
 
-    public Cash(long amount) {
-        this.amount = amount;
+    public Cash(long capital) {
+        this.amount = capital;
+    }
+
+    public int getPurchasingAbility(long price) {
+        return (int) (this.amount / price);
     }
 
     public void pay(long cost) {
