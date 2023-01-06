@@ -1,15 +1,10 @@
 # java-lotto-kakao
 
 
-# lotto.domain
 ## lotto.domain.constants
 로또 domain에서 사용될 모든 상수들을 여기에 선언하여 사용하였습니다.
 
 상수들에 대한 자세한 사항은 javadoc으로 남겨두었습니다.
-
-대부분의 객체들은 `toString()`을 override하여 사용합니다.
-
-몇몇 비교를 해야 하는 객체들은 `Comparable`을 구현하였으며, 타입이 일치하지 않는 경우 `TypeMismatchException`을 발생시킵니다.
 
 ## lotto.domain.exception
 로또 domain에서 사용될 예외들을 여기에 모아놓았습니다.
@@ -63,7 +58,3 @@
 
 ## TotalResult
 LottoResult를 받아 WinningCondition 정보를 참고하여 각 등수별 당첨 횟수, 수익률 등을 계산해주는 객체이다.
-
-# lotto.controller
-
-# lotto.view

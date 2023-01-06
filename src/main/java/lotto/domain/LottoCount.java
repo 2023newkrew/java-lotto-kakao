@@ -57,7 +57,7 @@ public class LottoCount {
         return new LottoCount(count-val);
     }
     public LottoCount minus(LottoCount val){
-        return new LottoCount(count-val.count);
+        return minus(val.count);
     }
 
     @Override

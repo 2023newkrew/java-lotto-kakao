@@ -16,6 +16,8 @@ public class Controller {
             e.printStackTrace();
         }
     }
+    
+    
     private LottoTrials inputTrials(){
         LottoTrials trials = new LottoTrials();
         Cash cash = getCash();
@@ -58,6 +60,7 @@ public class Controller {
     private WinNumber inputWinningLotto() {
         return view.inputWinningLotto();
     }
+
 
     private TotalResult getTotalResult(WinNumber winNumber, LottoTrials lottoTrials){
         TotalResult totalResult = new TotalResult();
