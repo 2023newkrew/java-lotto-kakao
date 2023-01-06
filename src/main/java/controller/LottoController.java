@@ -7,6 +7,8 @@ import model.LottoNumber;
 import view.View;
 import utils.Parser;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LottoController {
@@ -19,18 +21,60 @@ public class LottoController {
     }
 
     public void start() {
-        lottoGame.setLottoTicket(inputPurchaseMoney());
+        lottoGame.setPurchaseMoney(inputPurchaseMoney());
+        int manualLottoCount = inputManualLottoCount(lottoGame.getTotalLottoCount());
+        lottoGame.setLottoTicket(inputManualLottos(manualLottoCount));
+        view.printAutomaticLottoMessage(manualLottoCount, lottoGame.getTotalLottoCount() - manualLottoCount);
         view.outputLottoTicket(lottoGame.getLottoTicket());
         lottoGame.setLottoWinner(inputLottoWinner(inputWinNumbers(), inputBonusNumber()));
         view.outputResultMessage(lottoGame.getResult());
     }
 
+    private int inputManualLottoCount(int totalLottoCount) {
+        view.printManualLottoCountMessage();
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        try {
+            return Parser.parsingManualLottoCount(input, totalLottoCount);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return inputManualLottoCount(totalLottoCount);
+        }
+    }
+
+    private List<Lotto> inputManualLottos(int manualLottoCount) {
+        view.printManualLottoMessage();
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            manualLottos.add(inputManualLotto());
+        }
+        return manualLottos;
+    }
+
+    private Lotto inputManualLotto() {
+        Scanner scanner = new Scanner(System.in);
+        String lottoNumbers = scanner.nextLine();
+
+        try {
+            return Parser.parsingStringToLotto(lottoNumbers);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return inputManualLotto();
+        }
+    }
+
     private long inputPurchaseMoney() {
         view.printPriceMessage();
         Scanner scanner = new Scanner(System.in);
-        long input = scanner.nextLong();
-        scanner.nextLine(); //버퍼의 개행 비우기
-        return input;
+        String input = scanner.nextLine();
+
+        try {
+            return Parser.parsingPurchaseMoney(input);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return inputPurchaseMoney();
+        }
     }
 
     private Lotto inputWinNumbers() {
@@ -39,20 +83,20 @@ public class LottoController {
         String winNumbers = scanner.nextLine();
 
         try {
-            return Parser.parsingWinNumbers(winNumbers);
+            return Parser.parsingStringToLotto(winNumbers);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return inputWinNumbers();
         }
     }
 
-    private LottoNumber inputBonusNumber() { //로또 번호랑 보너스 번호가 같을 때.. 에러를 발생시켜야함
+    private LottoNumber inputBonusNumber() {
         view.printBonusNumberMessage();
         Scanner scanner = new Scanner(System.in);
         String bonusNumber = scanner.nextLine();
 
         try {
-            return Parser.parsingBonusNumber(bonusNumber);
+            return Parser.parsingStringToLottoNumber(bonusNumber);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return inputBonusNumber();
