@@ -12,7 +12,8 @@ import lotto.view.*;
 public class LottoController {
     public void start() {
         Trader trader = this.newTrader();
-        this.purchaseTickets(trader);
+        LottoPublisher lottoPublisher = new LottoPublisher();
+        this.purchaseTickets(trader, lottoPublisher);
         this.confirmResult(trader);
     }
 
@@ -24,13 +25,12 @@ public class LottoController {
         return new Trader(capital);
     }
 
-    private void purchaseTickets(Trader trader) {
+    private void purchaseTickets(Trader trader, LottoPublisher lottoPublisher) {
         int manualQuantity = -1;
         while (manualQuantity < 0) {
             manualQuantity = InputView.getManualQuantity();
         }
 
-        LottoPublisher lottoPublisher = new LottoPublisher();
         LottoTickets manualTickets = lottoPublisher.publishManualLotto(InputView.getManualNumbersList(manualQuantity));
         trader.purchaseLotto(manualTickets);
 
