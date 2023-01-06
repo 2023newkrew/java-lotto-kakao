@@ -10,7 +10,15 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
+    public static int getManualLottoCount() {
+        return Integer.parseInt(scanner.nextLine());
+    }
+
     public static String getWinningLottoNumbers() {
+        return scanner.nextLine();
+    }
+
+    public static String getLottoNumbers() {
         return scanner.nextLine();
     }
 

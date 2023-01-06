@@ -45,45 +45,46 @@ public class LottoTest {
     @Test
     void getResultReturnTRHEETest() {
         Lotto lotto = new Lotto("1, 2, 3, 7, 8, 9");
-        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.THREE);
+        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.FIFTH);
     }
 
     @DisplayName("로또 번호와 당첨 번호가 네 개 일치할 경우 테스트")
     @Test
     void getResultReturnFOURTest() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 8, 9");
-        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.FOUR);
+        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.FOURTH);
     }
 
     @DisplayName("로또 번호와 당첨 번호가 다섯 개 일치할 경우 테스트")
     @Test
     void getResultReturnFIVETest() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 9");
-        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.FIVE);
+        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.THIRD);
     }
 
     @DisplayName("로또 번호와 당첨 번호가 다섯 개 일치하고, 보너스 번호를 포함하고 있는 경우 테스트")
     @Test
     void getResultReturnFIVEBONUSTest() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 7");
-        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.FIVEBONUS);
+        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.SECOND);
     }
 
     @DisplayName("로또 번호와 당첨 번호가 여섯 개 일치할 경우 테스트")
     @Test
     void getResultReturnSIXTest() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.SIX);
+        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.FIRST);
     }
 
     @Test
-    void isBonusTest(){
+    void isBonusTest() {
         Lotto lotto = new Lotto("7, 8, 9, 10, 11, 12");
-        assertThat(lotto.isBonus( bonusNumber)).isTrue();
+        assertThat(lotto.isBonus(bonusNumber)).isTrue();
     }
+
     @Test
-    void isNotBonusTest(){
+    void isNotBonusTest() {
         Lotto lotto = new Lotto("8, 9, 10, 11, 12, 13");
-        assertThat(lotto.isBonus( bonusNumber)).isFalse();
+        assertThat(lotto.isBonus(bonusNumber)).isFalse();
     }
 }
