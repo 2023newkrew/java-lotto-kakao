@@ -6,10 +6,7 @@ package model;
 
 import exception.LottoNumberRangeException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
@@ -30,7 +27,7 @@ public class LottoNumber {
     }
 
     public static LottoNumber getLottoNumber(int number) {
-        if(number < MIN_NUMBER || number > MAX_NUMBER) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new LottoNumberRangeException();
         }
         return lottoNumbers.get(number);
