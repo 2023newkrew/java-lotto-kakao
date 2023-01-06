@@ -1,13 +1,13 @@
 package lotto.model.service;
 
-        import lotto.model.ticket.LottoNumber;
-        import lotto.model.ticket.LottoTicket;
-        import org.junit.jupiter.api.DisplayName;
-        import org.junit.jupiter.api.Test;
+import lotto.model.ticket.LottoNumber;
+import lotto.model.ticket.LottoTicket;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-        import java.util.List;
+import java.util.List;
 
-        import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TicketGeneratorTest {
     @Test

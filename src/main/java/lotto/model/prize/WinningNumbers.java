@@ -19,18 +19,6 @@ public class WinningNumbers {
         return !this.winning.contains(bonusNumber);
     }
 
-
-    private boolean isMatched(LottoNumber number) {
-        return this.winning.contains(number);
-    }
-
-    private int count(LottoNumber number) {
-        if (this.isMatched(number)) {
-            return 1;
-        }
-        return 0;
-    }
-
     public int matchNumbers(LottoTicket ticket) {
         int matchCount = 0;
         for (LottoNumber number : ticket.getNumbers()) {
@@ -41,5 +29,16 @@ public class WinningNumbers {
 
     public boolean hasBonus(LottoTicket ticket) {
         return ticket.contains(this.bonusNumber);
+    }
+
+    private boolean isMatched(LottoNumber number) {
+        return this.winning.contains(number);
+    }
+
+    private int count(LottoNumber number) {
+        if (this.isMatched(number)) {
+            return 1;
+        }
+        return 0;
     }
 }
