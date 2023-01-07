@@ -6,11 +6,11 @@ import java.util.List;
 public class LottoTrials {
     private final List<Lotto> lottoTrials = new ArrayList<>();
 
-    public void add(Lotto lotto){
+    public void addLotto(Lotto lotto){
         lottoTrials.add(lotto);
     }
     
-    public Lotto get(int index){
+    public Lotto getLottoTrial(int index){
         return lottoTrials.get(index);
     }
 }

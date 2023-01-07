@@ -31,7 +31,7 @@ public class Controller {
 
             Output.lottoTrialOutput(lotto);
 
-            lottoTrials.add(lotto);
+            lottoTrials.addLotto(lotto);
         }
     }
 
@@ -51,7 +51,7 @@ public class Controller {
 
     public static void processLotto() {
         for (int i = 0; i < lottoCount.getCount(); i++){
-            totalResult.addResult(winNumber.compareLotto(lottoTrials.get(i)));
+            totalResult.addResult(winNumber.compareLotto(lottoTrials.getLottoTrial(i)));
         }
     }
 
