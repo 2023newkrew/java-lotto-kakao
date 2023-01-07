@@ -32,7 +32,7 @@ public class Controller {
     }
 
     public static void inputWinningLotto() throws IOException {
-        Output.printEnterWinLotto();
+        Output.printEnterWinNum();
 
         List<LottoBall> winNum = Arrays.stream(Input.winNumInput())
                 .map(v -> new LottoBall(Integer.parseInt(v.trim())))
