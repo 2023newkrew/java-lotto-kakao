@@ -5,10 +5,10 @@ import lotto.exception.DuplicatedBallNumber;
 import java.util.*;
 
 public abstract class LottoTrial {
-    protected final List<LottoBallNumber> ballNumbers = new ArrayList<>();
+    protected final List<LottoBall> ballNumbers = new ArrayList<>();
 
     void check() {
-        Set<LottoBallNumber> lottoSet = new HashSet<>(this.ballNumbers);
+        Set<LottoBall> lottoSet = new HashSet<>(this.ballNumbers);
 
         if (lottoSet.size() != LottoConstants.BALLCOUNT_LIMIT) {
             throw new DuplicatedBallNumber();
@@ -19,7 +19,7 @@ public abstract class LottoTrial {
         Collections.sort(this.ballNumbers);
     }
 
-    public List<LottoBallNumber> getBallNumbers(){
+    public List<LottoBall> getBallNumbers(){
         return ballNumbers;
     }
 

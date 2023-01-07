@@ -38,13 +38,13 @@ public class Controller {
     public static void inputWinningLotto() throws IOException {
         Output.winNumOutput();
 
-        List<LottoBallNumber> winNum = Arrays.stream(Input.winNumInput())
-                .map(v -> new LottoBallNumber(Integer.parseInt(v.trim())))
+        List<LottoBall> winNum = Arrays.stream(Input.winNumInput())
+                .map(v -> new LottoBall(Integer.parseInt(v.trim())))
                 .collect(Collectors.toList());
 
         Output.bonusNumOutput();
 
-        winNumber = new WinNumber(new LottoTrialManual(winNum), new LottoBallNumber(Input.bonusNumInput()));
+        winNumber = new WinNumber(new LottoTrialManual(winNum), new LottoBall(Input.bonusNumInput()));
 
         System.out.println();
     }
