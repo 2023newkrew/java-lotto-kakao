@@ -10,7 +10,7 @@ public class WinNumber {
         this.winNumber = winNumber;
         this.bonusNumber = bonusNumber;
 
-        if (winNumber.getBallNumbers().contains(bonusNumber)) {
+        if (winNumber.getBalls().contains(bonusNumber)) {
             throw new DuplicatedBallNumber();
         }
     }
@@ -19,8 +19,8 @@ public class WinNumber {
         int matchCount = 0;
         boolean matchBonus = false;
 
-        for (LottoBall bn : trial.getBallNumbers()) {
-            matchCount += winNumber.getBallNumbers().contains(bn) ? 1 : 0;
+        for (LottoBall bn : trial.getBalls()) {
+            matchCount += winNumber.getBalls().contains(bn) ? 1 : 0;
             matchBonus |= bn.equals(bonusNumber);
         }
 
