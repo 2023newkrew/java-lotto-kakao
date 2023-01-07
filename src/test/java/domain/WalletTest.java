@@ -15,7 +15,7 @@ public class WalletTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("지갑에 들어있는 돈 이상의 돈을 사용할 수 없다.")
+    @DisplayName("지갑에 들어있는 돈을 초과하는 돈을 사용할 수 없다.")
     @Test
     void test2(){
         Wallet wallet = new Wallet(1000);

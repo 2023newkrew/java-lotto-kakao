@@ -31,6 +31,6 @@ public class Wallet {
         validateAmount(updateAmount);
 
         usage += amount;
-        this.remainAmount = amount;
+        remainAmount -= amount;
     }
 }

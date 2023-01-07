@@ -12,11 +12,12 @@ public class LottoTicketStore {
     }
     public List<LottoTicket> purchaseLotto(List<List<LottoNumber>> lottoNumbers, Wallet wallet) {
         int totalPrice = lottoNumbers.size() * LOTTO_TICKET_PRICE;
+
         if(totalPrice > wallet.getRemainAmount()){
             throw new IllegalArgumentException("구입금액이 부족합니다.");
         }
 
-        wallet.use(wallet.getRemainAmount() - totalPrice);
+        wallet.use(totalPrice);
 
         return lottoNumbers.stream()
                 .map(LottoTicket::new)
@@ -27,7 +28,7 @@ public class LottoTicketStore {
         int lottoCount = wallet.getRemainAmount() / LOTTO_TICKET_PRICE;
         int totalPrice = lottoCount * LOTTO_TICKET_PRICE;
 
-        wallet.use(wallet.getRemainAmount() - totalPrice);
+        wallet.use(totalPrice);
         return lottoTicketGenerator.generate(lottoCount);
     }
 }
