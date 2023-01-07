@@ -6,31 +6,31 @@ import java.util.Objects;
 
 @SuppressWarnings("rawtypes")
 public class LottoBall implements Comparable {
-    private final int num;
+    private final int number;
 
-    public LottoBall(int num) {
-        if (num < LottoConstants.BALLNUMBER_MIN_VALUE ||
-                num > LottoConstants.BALLNUMBER_MAX_VALUE) {
+    public LottoBall(int number) {
+        if (number < LottoConstants.BALLNUMBER_MIN_VALUE ||
+                number > LottoConstants.BALLNUMBER_MAX_VALUE) {
             throw new InvalidLottoBallNumber();
         }
 
-        this.num = num;
+        this.number = number;
     }
 
-    public int getNum() {
-        return num;
+    public int getNumber() {
+        return number;
     }
 
     @Override
     public int compareTo(Object o) {
         if (o.getClass() == Integer.class) {
-            return num - (Integer)o;
+            return number - (Integer)o;
         }
         if (getClass() != o.getClass()) {
             throw new RuntimeException();
         }
 
-        return num - ((LottoBall)o).getNum();
+        return number - ((LottoBall)o).getNumber();
     }
 
     @Override
@@ -42,16 +42,16 @@ public class LottoBall implements Comparable {
             return false;
         }
 
-        return num == ((LottoBall)o).getNum();
+        return number == ((LottoBall)o).getNumber();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(num);
+        return Objects.hash(number);
     }
 
     @Override
     public String toString() {
-        return "" + num;
+        return "" + number;
     }
 }
