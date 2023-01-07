@@ -2,11 +2,11 @@ package lotto.model;
 
 import lotto.exception.DuplicatedBallNumber;
 
-public class WinNumber {
+public class WinLotto {
     private final Lotto winNumber;
     private final LottoBall bonusNumber;
 
-    public WinNumber(Lotto winNumber, LottoBall bonusNumber) {
+    public WinLotto(Lotto winNumber, LottoBall bonusNumber) {
         this.winNumber = winNumber;
         this.bonusNumber = bonusNumber;
 

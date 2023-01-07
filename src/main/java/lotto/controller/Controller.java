@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class Controller {
     private static LottoCount lottoCount;
     private static final LottoTrials lottoTrials = new LottoTrials();
-    private static WinNumber winNumber;
+    private static WinLotto winLotto;
     private static final TotalResult totalResult = new TotalResult();
 
     public static void inputCash() throws IOException {
@@ -38,14 +38,14 @@ public class Controller {
 
         Output.bonusNumOutput();
 
-        winNumber = new WinNumber(new LottoManual(winNum), new LottoBall(Input.bonusNumInput()));
+        winLotto = new WinLotto(new LottoManual(winNum), new LottoBall(Input.bonusNumInput()));
 
         System.out.println();
     }
 
     public static void processLotto() {
         for (int i = 0; i < lottoCount.getCount(); i++){
-            totalResult.addResult(winNumber.compareLotto(lottoTrials.getLottoTrial(i)));
+            totalResult.addResult(winLotto.compareLotto(lottoTrials.getLottoTrial(i)));
         }
     }
 
