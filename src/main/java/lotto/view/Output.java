@@ -18,6 +18,12 @@ public class Output {
         System.out.println(lottoCount.getCount() + "개를 구매했습니다.");
     }
 
+    public static void printLottoTrials(LottoTrials lottoTrials) {
+        for (int i = 0; i < lottoTrials.getSize(); i++) {
+            printLotto(lottoTrials.getLottoTrial(i));
+        }
+    }
+
     public static void printLotto(Lotto lotto) {
         StringBuilder result = new StringBuilder("[");
 
@@ -30,25 +36,19 @@ public class Output {
         System.out.println(result);
     }
 
-    public static void startCashOutput() {
+    public static void printTotalResult(TotalResult totalResult) {
+        System.out.println(totalResult);
+    }
+
+    public static void printEnterCash() {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public static void printLottoTrials(LottoTrials lottoTrials) {
-        for (int i = 0; i < lottoTrials.getSize(); i++) {
-            printLotto(lottoTrials.getLottoTrial(i));
-        }
-    }
-
-    public static void winNumOutput() {
+    public static void printEnterWinLotto() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
     }
 
-    public static void bonusNumOutput() {
+    public static void printEnterBonusNum() {
         System.out.println("보너스 볼을 입력해 주세요.");
-    }
-
-    public static void totalResultOutput(TotalResult totalResult) {
-        System.out.println(totalResult);
     }
 }

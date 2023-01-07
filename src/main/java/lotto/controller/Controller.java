@@ -16,7 +16,7 @@ public class Controller {
     private static final TotalResult totalResult = new TotalResult();
 
     public static void inputCash() throws IOException {
-        Output.startCashOutput();
+        Output.printEnterCash();
 
         Cash cash = new Cash(Input.startCashInput());
 
@@ -32,13 +32,13 @@ public class Controller {
     }
 
     public static void inputWinningLotto() throws IOException {
-        Output.winNumOutput();
+        Output.printEnterWinLotto();
 
         List<LottoBall> winNum = Arrays.stream(Input.winNumInput())
                 .map(v -> new LottoBall(Integer.parseInt(v.trim())))
                 .collect(Collectors.toList());
 
-        Output.bonusNumOutput();
+        Output.printEnterBonusNum();
 
         winLotto = new WinLotto(new LottoManual(winNum), new LottoBall(Input.bonusNumInput()));
 
@@ -52,6 +52,6 @@ public class Controller {
     }
 
     public static void outputResult() {
-        Output.totalResultOutput(totalResult);
+        Output.printTotalResult(totalResult);
     }
 }
