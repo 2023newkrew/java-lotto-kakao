@@ -12,18 +12,18 @@ public class LottoResult {
     }
 
     public LottoRank getRank() {
-        if( LottoRank.FIRST.COUNT == myLotto.getMatchCount(winningLotto))
+        int matchCount = myLotto.getMatchCount(winningLotto);
+        if (matchCount == LottoRank.FIRST.COUNT) {
             return LottoRank.FIRST;
-        if(LottoRank.SECOND.COUNT == myLotto.getMatchCount(winningLotto)
-            && myLotto.hasBonus(bonusNumber))
+        } else if (matchCount == LottoRank.SECOND.COUNT && myLotto.hasBonus(bonusNumber)) {
             return LottoRank.SECOND;
-        if(LottoRank.THIRD.COUNT == myLotto.getMatchCount(winningLotto))
+        } else if (matchCount == LottoRank.THIRD.COUNT) {
             return LottoRank.THIRD;
-        if(LottoRank.FOURTH.COUNT == myLotto.getMatchCount(winningLotto))
+        } else if (matchCount == LottoRank.FOURTH.COUNT) {
             return LottoRank.FOURTH;
-        if(LottoRank.FIFTH.COUNT == myLotto.getMatchCount(winningLotto))
+        } else if (matchCount == LottoRank.FIFTH.COUNT) {
             return LottoRank.FIFTH;
-
+        }
         return LottoRank.FAIL;
     }
 }
