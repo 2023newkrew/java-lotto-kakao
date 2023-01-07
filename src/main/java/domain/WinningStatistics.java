@@ -7,8 +7,11 @@ import java.util.stream.Collectors;
 
 public class WinningStatistics {
     private final List<LottoMatchResult> lottoMatchResults;
-    public WinningStatistics(List<LottoMatchResult> lottoMatchResults) {
-        this.lottoMatchResults = lottoMatchResults;
+    private final int usedMoney;
+
+    public WinningStatistics(GameResult gameResult, int usedMoney) {
+        this.lottoMatchResults = gameResult.getLottoMatchResults();
+        this.usedMoney = usedMoney;
     }
 
     public int getRankCount(LottoRank lottoRank){
@@ -22,7 +25,7 @@ public class WinningStatistics {
     }
 
     public double getRateOfReturn(){
-        return getProfit() / (LottoConstant.LOTTO_PRICE * lottoMatchResults.size());
+        return getProfit() / (usedMoney);
     }
 
     private double getProfit(){

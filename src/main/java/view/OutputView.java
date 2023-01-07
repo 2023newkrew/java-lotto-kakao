@@ -1,9 +1,6 @@
 package view;
 
-import domain.WinningStatistics;
-import domain.LottoNumber;
-import domain.LottoRank;
-import domain.LottoTicket;
+import domain.*;
 
 import java.io.PrintStream;
 import java.util.List;
@@ -19,12 +16,19 @@ public class OutputView {
         this.outputStream = outputStream;
     }
 
-    public void printLottoPurchaseInfo(List<LottoTicket> purchaseLottoTickets) {
-        outputStream.printf("%d개를 구매했습니다.", purchaseLottoTickets.size());
+    public void printUserInfo(User user) {
+        outputStream.println();
+        outputStream.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+                user.getManualTickets().size(), user.getAutoTickets().size());
         outputStream.println();
 
-        for(LottoTicket purchaseLotto : purchaseLottoTickets){
-            List<LottoNumber> lottoNumbers = purchaseLotto.getLottoNumbers();
+        printLottoTickets(user.getManualTickets());
+        printLottoTickets(user.getAutoTickets());
+    }
+
+    private void printLottoTickets(List<LottoTicket> lottoTickets) {
+        for(LottoTicket lottoTicket : lottoTickets){
+            List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
             outputStream.print("[");
             outputStream.print(joinLottoNumbers(lottoNumbers));
             outputStream.print("]");
@@ -38,7 +42,7 @@ public class OutputView {
                 .collect(Collectors.joining(", "));
     }
 
-    public void printLottoMatchStatistics(WinningStatistics winningStatistics) {
+    public void printWinningStatistics(WinningStatistics winningStatistics) {
         printRankStatistics(winningStatistics);
         printRateOfReturn(winningStatistics);
     }

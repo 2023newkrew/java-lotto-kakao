@@ -1,8 +1,5 @@
 package domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class WinningLotto {
 
     private final LottoTicket winningLottoTicket;
@@ -17,14 +14,11 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoMatchResult match(LottoTicket lottoTicket) {
-        List<LottoNumber> unMatchLottoNumbers = lottoTicket.findUnMatchLottoNumbers(this.winningLottoTicket);
-        List<LottoNumber> remainLottoNumbers = unMatchLottoNumbers.stream()
-                .filter(lottoNumber -> (!lottoNumber.equals(bonusNumber)))
-                .collect(Collectors.toList());
+    public LottoTicket getWinningLottoTicket() {
+        return winningLottoTicket;
+    }
 
-        int matchCount = this.winningLottoTicket.size() - unMatchLottoNumbers.size();
-        boolean isBonusNumberMatched = (unMatchLottoNumbers.size() - remainLottoNumbers.size() != 0);
-        return new LottoMatchResult(matchCount, isBonusNumberMatched);
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }
