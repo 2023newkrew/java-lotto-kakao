@@ -11,13 +11,13 @@ public class LottoPickerRandom implements LottoPicker {
         for (int i = LottoConstants.BALLNUMBER_MIN_VALUE; i <= LottoConstants.BALLNUMBER_MAX_VALUE; i++){
             allBalls.add(new LottoBall(i));
         }
-
-        Collections.shuffle(allBalls);
     }
 
     @Override
     public List<LottoBall> pick() {
         List<LottoBall> result = new ArrayList<>();
+
+        Collections.shuffle(allBalls);
 
         for (int i = 0; i < LottoConstants.BALLCOUNT_LIMIT; i++) {
             result.add(allBalls.get(i));
