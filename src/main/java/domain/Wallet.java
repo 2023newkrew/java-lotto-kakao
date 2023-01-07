@@ -26,8 +26,11 @@ public class Wallet {
 
     public void use(int amount){
         int updateAmount = remainAmount - amount;
-        usage += amount;
+
+        validateAmount(amount);
         validateAmount(updateAmount);
+
+        usage += amount;
         this.remainAmount = amount;
     }
 }
