@@ -9,7 +9,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -23,9 +25,9 @@ public class LottoGameTest {
         LottoTicket lottoTicket3 = new LottoTicket(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1, 2, 3, 4, 5, 8))));
 
         WinningNumbers winningNumbers = new WinningNumbers(LottoNumber.numbersToLottoNumbers(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6))), new LottoNumber(7));
-
-        LottoTicketList lottoTicketList = new LottoTicketList(List.of(lottoTicket1, lottoTicket2, lottoTicket3));
-
+        List<LottoTicket> testLottoList = List.of(lottoTicket1, lottoTicket2, lottoTicket3);
+        LottoTicketList lottoTicketList = new LottoTicketList();
+        lottoTicketList.addManualLottoTickets(testLottoList);
         LottoGame lottoGame = new LottoGame(lottoTicketList, winningNumbers);
 
         LottoResults lottoResults = lottoGame.getLottoTicketsResult();
@@ -47,6 +49,16 @@ public class LottoGameTest {
         lottoResults.countResult(LottoResultType.FIFTH_PLACE);
 
         assertThat(String.format("%.2f", lottoResults.getProfitRate())).isEqualTo("0.36");
+    }
+
+    @Test
+    @DisplayName("수익률 오버 플로우 발생하지 않는지")
+    void lottoResultTest(){
+        LottoResults lottoResults = new LottoResults();
+        lottoResults.countResult(LottoResultType.FIRST_PLACE);
+        lottoResults.countResult(LottoResultType.FIRST_PLACE);
+
+        assertThat(lottoResults.getProfitRate()).isEqualTo(2000000);
     }
 }
 
