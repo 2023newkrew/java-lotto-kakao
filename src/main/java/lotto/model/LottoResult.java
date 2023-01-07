@@ -43,15 +43,4 @@ public class LottoResult {
     public int hashCode() {
         return Objects.hash(matchCount, matchBonus);
     }
-
-    @Override
-    public String toString() {
-        String result = matchCount + "개 일치";
-
-        if (matchBonus) {
-            result += ", 보너스 볼 일치";
-        }
-
-        return result;
-    }
 }

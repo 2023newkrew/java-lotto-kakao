@@ -45,11 +45,6 @@ public class Cash implements Comparable {
     }
 
     @Override
-    public String toString() {
-        return cash + "원";
-    }
-
-    @Override
     public int compareTo(Object o) {
         if (Long.class == o.getClass()) {
             return Long.compare(cash, (Long)o);

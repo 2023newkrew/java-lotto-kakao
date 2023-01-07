@@ -38,8 +38,5 @@ public enum WinningCondition {
         return lottoResult;
     }
 
-    @Override
-    public String toString() {
-        return lottoResult + "(" + winningPrize + ")";
-    }
+    public Prize getWinningPrize() { return winningPrize; }
 }
