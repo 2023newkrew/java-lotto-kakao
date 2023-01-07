@@ -23,7 +23,7 @@ class LottoTest {
     void 랜덤_잘_생성되는가() {
         assertThatCode(() -> {
             for (int i = 0; i < 100; i++){
-                Lotto lotto = new LottoRandom(new LottoPickerRandom());
+                Lotto lotto = new LottoAuto(new LottoPickerRandom());
             }
         }).doesNotThrowAnyException();
     }

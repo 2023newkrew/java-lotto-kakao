@@ -27,7 +27,7 @@ public class Controller {
 
     public static void createLotto() {
         for (int i = 0; i < lottoCount.getCount(); i++){
-            Lotto lotto = new LottoRandom(new LottoPickerRandom());
+            Lotto lotto = new LottoAuto(new LottoPickerRandom());
 
             Output.lottoTrialOutput(lotto);
 
