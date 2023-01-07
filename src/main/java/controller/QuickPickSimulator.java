@@ -44,46 +44,4 @@ public class QuickPickSimulator implements LottoSimulator{
 
         return new User(purchasePrice, manualLottoTickets, autoLottoTickets);
     }
-
-//    public void asdas() {
-//        User user = getGameConfig();
-//        outputView.printUserInfo(user);
-//
-//        LottoGame lottoGame = new LottoGame(user);
-//        GameResult gameResult = lottoGame.play();
-//
-//        outputView.printGameResult(gameResult);
-//    }
-//
-//    private User getGameConfig() {
-//        int purchasePrice = getPurchasePrice();
-//        int purchaseAvailLottoTicketCount = getPurchaseAvailLottoTicketCount(purchasePrice);
-//
-//        List<LottoTicket> manualTickets = getManualLottoTickets(purchaseAvailLottoTicketCount);
-//
-//        int autoTicketCount = purchaseAvailLottoTicketCount - manualTickets.size();
-//        List<LottoTicket> autoTickets = getAutoTickets(autoTicketCount);
-//
-//        WinningLotto lastWinningLotto = getLastWinningLotto();
-//
-//        return new User(purchasePrice, manualTickets, autoTickets, lastWinningLotto);
-//    }
-//
-//    private static int getPurchaseAvailLottoTicketCount(int purchasePrice) {
-//        return purchasePrice / LottoConstant.LOTTO_PRICE;
-//    }
-//
-//    private List<LottoTicket> getManualLottoTickets(int purchaseAvailLottoCount) {
-//        int manualLottoCountToPurchase = inputView.getManualLottoCountToPurchase();
-//
-//        if(purchaseAvailLottoCount < manualLottoCountToPurchase){
-//            throw new IllegalArgumentException("구입금액이 부족합니다.");
-//        }
-//
-//        return inputView.getManualLottoNumbers(manualLottoCountToPurchase);
-//    }
-//
-//    private List<LottoTicket> getAutoTickets(int autoLottoCount) {
-//        return lottoTicketGenerator.generate(autoLottoCount);
-//    }
 }
