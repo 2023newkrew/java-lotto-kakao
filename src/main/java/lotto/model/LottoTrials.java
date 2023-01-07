@@ -19,4 +19,6 @@ public class LottoTrials {
     public Lotto getLottoTrial(int index){
         return lottoTrials.get(index);
     }
+
+    public int getSize() { return lottoTrials.size(); }
 }

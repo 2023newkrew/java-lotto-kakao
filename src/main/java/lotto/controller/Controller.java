@@ -27,6 +27,8 @@ public class Controller {
 
     public static void createLotto() {
         lottoTrials.createLottoTrials(lottoCount);
+
+        Output.printLottoTrials(lottoTrials);
     }
 
     public static void inputWinningLotto() throws IOException {

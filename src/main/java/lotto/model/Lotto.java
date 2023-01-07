@@ -23,16 +23,5 @@ public abstract class Lotto {
         return balls;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder("[");
-
-        for (int i = 0; i < LottoConstants.BALLCOUNT_LIMIT - 1; i++){
-            result.append(balls.get(i)).append(", ");
-        }
-
-        result.append(balls.get(LottoConstants.BALLCOUNT_LIMIT - 1)).append("]");
-
-        return result.toString();
-    }
+    public LottoBall getBall(int index) { return balls.get(index); }
 }
