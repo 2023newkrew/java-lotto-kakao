@@ -22,7 +22,7 @@ public class Controller {
 
         lottoCount = new LottoCount(cash);
 
-        Output.lottoCountOutput(lottoCount);
+        Output.printLottoCount(lottoCount);
     }
 
     public static void createLotto() {

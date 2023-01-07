@@ -13,7 +13,7 @@ public class Output {
     }
 
     public static void printLottoCount(LottoCount lottoCount) {
-        System.out.println(lottoCount.getCount() + "개");
+        System.out.println(lottoCount.getCount() + "개를 구매했습니다.");
     }
 
     public static void printLotto(Lotto lotto) {
@@ -30,10 +30,6 @@ public class Output {
 
     public static void startCashOutput() {
         System.out.println("구입금액을 입력해 주세요.");
-    }
-
-    public static void lottoCountOutput(LottoCount lottoCount) {
-        System.out.println(lottoCount + "를 구매했습니다.");
     }
 
     public static void printLottoTrials(LottoTrials lottoTrials) {
