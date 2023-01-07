@@ -3,10 +3,10 @@ package lotto.model;
 import lotto.exception.DuplicatedBallNumber;
 
 public class WinNumber {
-    private final LottoTrial winNumber;
+    private final Lotto winNumber;
     private final LottoBall bonusNumber;
 
-    public WinNumber(LottoTrial winNumber, LottoBall bonusNumber) {
+    public WinNumber(Lotto winNumber, LottoBall bonusNumber) {
         this.winNumber = winNumber;
         this.bonusNumber = bonusNumber;
 
@@ -15,7 +15,7 @@ public class WinNumber {
         }
     }
 
-    public LottoResult compareLotto(LottoTrial trial) {
+    public LottoResult compareLotto(Lotto trial) {
         int matchCount = 0;
         boolean matchBonus = false;
 

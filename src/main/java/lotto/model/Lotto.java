@@ -4,7 +4,7 @@ import lotto.exception.DuplicatedBallNumber;
 
 import java.util.*;
 
-public abstract class LottoTrial {
+public abstract class Lotto {
     protected final List<LottoBall> balls = new ArrayList<>();
 
     void check() {

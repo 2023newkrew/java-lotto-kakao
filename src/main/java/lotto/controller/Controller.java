@@ -27,11 +27,11 @@ public class Controller {
 
     public static void createLotto() {
         for (int i = 0; i < lottoCount.getCount(); i++){
-            LottoTrial lottoTrial = new LottoTrialRandom(new LottoPickerRandom());
+            Lotto lotto = new LottoRandom(new LottoPickerRandom());
 
-            Output.lottoTrialOutput(lottoTrial);
+            Output.lottoTrialOutput(lotto);
 
-            lottoTrials.add(lottoTrial);
+            lottoTrials.add(lotto);
         }
     }
 
@@ -44,7 +44,7 @@ public class Controller {
 
         Output.bonusNumOutput();
 
-        winNumber = new WinNumber(new LottoTrialManual(winNum), new LottoBall(Input.bonusNumInput()));
+        winNumber = new WinNumber(new LottoManual(winNum), new LottoBall(Input.bonusNumInput()));
 
         System.out.println();
     }

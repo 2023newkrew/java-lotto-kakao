@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTrials {
-    private final List<LottoTrial> lottoTrials = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
 
-    public void add(LottoTrial lottoTrial){
-        lottoTrials.add(lottoTrial);
+    public void add(Lotto lotto){
+        lottos.add(lotto);
     }
     
-    public LottoTrial get(int index){
-        return lottoTrials.get(index);
+    public Lotto get(int index){
+        return lottos.get(index);
     }
 }

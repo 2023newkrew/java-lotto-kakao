@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.model.LottoCount;
-import lotto.model.LottoTrial;
+import lotto.model.Lotto;
 import lotto.model.TotalResult;
 
 public class Output {
@@ -13,8 +13,8 @@ public class Output {
         System.out.println(lottoCount + "를 구매했습니다.");
     }
 
-    public static void lottoTrialOutput(LottoTrial lottoTrial) {
-        System.out.println(lottoTrial);
+    public static void lottoTrialOutput(Lotto lotto) {
+        System.out.println(lotto);
     }
 
     public static void winNumOutput() {
