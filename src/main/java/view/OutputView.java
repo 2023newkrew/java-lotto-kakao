@@ -1,16 +1,19 @@
 package view;
 
-import domain.LottoMatchStatistics;
+import domain.WinningStatistics;
+import domain.LottoNumber;
 import domain.LottoRank;
 import domain.LottoTicket;
 
 import java.io.PrintStream;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
+
+import static domain.LottoRank.*;
 
 public class OutputView {
     private final PrintStream outputStream;
+    private final List<LottoRank> statisticsTargetRanks = List.of(FIRST, SECOND, THIRD, FOURTH, FIFTH);
 
     public OutputView(PrintStream outputStream) {
         this.outputStream = outputStream;
@@ -20,25 +23,33 @@ public class OutputView {
         outputStream.printf("%d개를 구매했습니다.", purchaseLottoTickets.size());
         outputStream.println();
 
-        purchaseLottoTickets.stream()
-                .forEach(outputStream::println);
+        for(LottoTicket purchaseLotto : purchaseLottoTickets){
+            List<LottoNumber> lottoNumbers = purchaseLotto.getLottoNumbers();
+            outputStream.print("[");
+            outputStream.print(joinLottoNumbers(lottoNumbers));
+            outputStream.print("]");
+            outputStream.println();
+        }
     }
 
-    public void printLottoMatchStatistics(LottoMatchStatistics lottoMatchStatistics) {
-        printRankStatistics(lottoMatchStatistics);
-        printRateOfReturn(lottoMatchStatistics);
+    private static String joinLottoNumbers(List<LottoNumber> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
+                .collect(Collectors.joining(", "));
     }
 
-    private void printRankStatistics(LottoMatchStatistics lottoMatchStatistics) {
+    public void printLottoMatchStatistics(WinningStatistics winningStatistics) {
+        printRankStatistics(winningStatistics);
+        printRateOfReturn(winningStatistics);
+    }
+
+    private void printRankStatistics(WinningStatistics winningStatistics) {
         outputStream.println();
         outputStream.println("당첨 통계");
         outputStream.println("----------");
 
-        Map<LottoRank, Integer> rankStatistics = lottoMatchStatistics.getRankStatistics();
-        Iterator<LottoRank> ranks = rankStatistics.keySet().iterator();
-        while(ranks.hasNext()){
-            LottoRank rank = ranks.next();
-            printLottoRank(rank, rankStatistics.get(rank));
+        for(LottoRank lottoRank : statisticsTargetRanks){
+            printLottoRank(lottoRank, winningStatistics.getRankCount(lottoRank));
         }
     }
 
@@ -53,7 +64,7 @@ public class OutputView {
         outputStream.println();
     }
 
-    private void printRateOfReturn(LottoMatchStatistics lottoMatchStatistics) {
-        outputStream.printf("총 수익률은 %.2f입니다.", lottoMatchStatistics.getRateOfReturn());
+    private void printRateOfReturn(WinningStatistics winningStatistics) {
+        outputStream.printf("총 수익률은 %.2f입니다.", winningStatistics.getRateOfReturn());
     }
 }

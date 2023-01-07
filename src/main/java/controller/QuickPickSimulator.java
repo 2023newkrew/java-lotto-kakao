@@ -12,10 +12,10 @@ public class QuickPickSimulator implements LottoSimulator{
     private final OutputView outputView;
     private final LottoTicketGenerator lottoTicketGenerator;
 
-    public QuickPickSimulator(InputView inputView, OutputView outputView){
+    public QuickPickSimulator(InputView inputView, OutputView outputView, LottoTicketGenerator lottoTicketGenerator){
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoTicketGenerator = new LottoTicketAutoGenerator();
+        this.lottoTicketGenerator = lottoTicketGenerator;
     }
 
     @Override
@@ -24,8 +24,8 @@ public class QuickPickSimulator implements LottoSimulator{
         outputView.printLottoPurchaseInfo(purchaseLottoTickets);
 
         List<LottoMatchResult> lottoMatchResults = playLottoGames(purchaseLottoTickets);
-        LottoMatchStatistics lottoMatchStatistics = new LottoMatchStatistics(lottoMatchResults);
-        outputView.printLottoMatchStatistics(lottoMatchStatistics);
+        WinningStatistics winningStatistics = new WinningStatistics(lottoMatchResults);
+        outputView.printLottoMatchStatistics(winningStatistics);
     }
 
     private List<LottoMatchResult> playLottoGames(List<LottoTicket> purchaseLottoTickets) {

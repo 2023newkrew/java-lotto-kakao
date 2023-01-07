@@ -4,20 +4,21 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static domain.LottoConstant.*;
+
 public class LottoTicketAutoGenerator implements LottoTicketGenerator{
-    private final Random random;
-    public LottoTicketAutoGenerator(){
-        this.random = new Random();
-    }
 
     @Override
     public LottoTicket generate() {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
+        List<Integer> numbers = IntStream.range(LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE)
+                .boxed()
+                .collect(Collectors.toList());
 
-        while(lottoNumbers.size() < LottoConstant.LOTTO_LENGTH){
-            int randomNumber = getRandomNumber();
-            lottoNumbers.add(new LottoNumber(randomNumber));
-        }
+        Collections.shuffle(numbers);
+        List<LottoNumber> lottoNumbers = numbers.subList(0, LOTTO_LENGTH)
+                .stream().map(LottoNumber::new)
+                .collect(Collectors.toList());
+
         return new LottoTicket(new ArrayList<>(lottoNumbers));
     }
 
@@ -26,9 +27,5 @@ public class LottoTicketAutoGenerator implements LottoTicketGenerator{
         return IntStream.range(0, lottoCount)
                 .mapToObj((currentCount) -> generate())
                 .collect(Collectors.toList());
-    }
-
-    private int getRandomNumber(){
-        return random.nextInt(LottoConstant.LOTTO_NUMBER_MAX_VALUE) + 1;
     }
 }
