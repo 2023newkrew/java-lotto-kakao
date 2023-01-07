@@ -8,6 +8,8 @@ import lotto.model.LottoTrials;
 import lotto.model.TotalResult;
 
 public class Output {
+    private Output() {}
+
     public static void printCash(Cash cash) {
         System.out.println(cash.getCash() + LottoConstants.CASH_UNIT);
     }

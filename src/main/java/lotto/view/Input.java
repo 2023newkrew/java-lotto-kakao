@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Input {
+    private Input() {}
+
     public static long startCashInput() throws IOException {
         String text;
 
