@@ -12,7 +12,7 @@ public class LottoCount {
     }
 
     public LottoCount(int number) {
-        if (number <= 0) {
+        if (number < 0) {
             throw new InvalidLottoNumberValue();
         }
 

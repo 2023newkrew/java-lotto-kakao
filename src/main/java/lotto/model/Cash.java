@@ -9,7 +9,7 @@ public class Cash implements Comparable {
     private final long cash;
 
     public Cash(long cash) {
-        if (cash < 0) {
+        if (cash < LottoConstants.LOTTO_PRICE) {
             throw new InvalidCashValue();
         }
 
