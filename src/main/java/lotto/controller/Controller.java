@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 public class Controller {
     private static LottoCount lottoCount;
-    private static final LottoPickerRandom lottoPickerRandom = new LottoPickerRandom();
     private static final LottoTrials lottoTrials = new LottoTrials();
     private static WinNumber winNumber;
     private static final TotalResult totalResult = new TotalResult();
@@ -27,13 +26,7 @@ public class Controller {
     }
 
     public static void createLotto() {
-        for (int i = 0; i < lottoCount.getCount(); i++){
-            Lotto lotto = new LottoAuto(lottoPickerRandom);
-
-            Output.lottoTrialOutput(lotto);
-
-            lottoTrials.addLotto(lotto);
-        }
+        lottoTrials.createLottoTrials(lottoCount);
     }
 
     public static void inputWinningLotto() throws IOException {
