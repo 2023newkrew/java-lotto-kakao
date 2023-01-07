@@ -28,15 +28,6 @@ public class LottoTicket {
         this.lottoNumbers = new ArrayList<>(new TreeSet<>(lottoNumbers));
     }
 
-    public static void addAutoLottoTickets(List<LottoTicket> lottoTicketList, int autoCount) {
-        LottoNumberGenerator lottoNumber = new LottoNumberGenerator();
-        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-
-        for (int i = 0; i < autoCount; i++) {
-            lottoTicketList.add(new LottoTicket(lottoNumber.makeNumbers(randomNumberGenerator)));
-        }
-    }
-
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }

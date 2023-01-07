@@ -26,13 +26,14 @@ public class LottoController {
 
     private LottoTicketList createLottoTickets() {
         int purchaseAmount = InputView.inputPurchaseAmount();
-        List<LottoTicket> lottoTicketList = new ArrayList<>(InputView.inputManualLottoNumbers(purchaseAmount));
+        LottoTicketList lottoTicketList = new LottoTicketList();
+        List<LottoTicket> manualLottoTicketList = new ArrayList<>(InputView.inputManualLottoNumbers(purchaseAmount));
+        lottoTicketList.addManualLottoTickets(manualLottoTicketList);
 
-        int manualCount = lottoTicketList.size();
-        LottoTicket.addAutoLottoTickets(lottoTicketList, purchaseAmount - manualCount);
-
+        int manualCount = manualLottoTicketList.size();
+        lottoTicketList.addAutoLottoTickets(purchaseAmount - manualCount);
         OutputView.printManualAndAutoCount(manualCount, purchaseAmount - manualCount);
-        return new LottoTicketList(lottoTicketList);
+        return lottoTicketList;
     }
 
     private WinningNumbers createWinningNumbers() {

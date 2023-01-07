@@ -15,7 +15,7 @@ public class LottoResults {
         }
     }
 
-    public Integer getResultCount(LottoResultType lottoResultType) {
+    public int getResultCount(LottoResultType lottoResultType) {
         return lottoResultCount.getOrDefault(lottoResultType, 0);
     }
 
@@ -23,16 +23,17 @@ public class LottoResults {
         lottoResultCount.put(resultType, lottoResultCount.getOrDefault(resultType, 0) + 1);
     }
 
-    public Float getProfitRate() {
-        Integer ticketNumber = lottoResultCount.keySet().stream()
+    public double getProfitRate() {
+        long ticketNumber = lottoResultCount.keySet().stream()
                 .mapToInt(lottoResultCount::get)
                 .sum();
-        int budget = ticketNumber * LottoConstant.LOTTO_TICKET_PRICE;
 
-        Integer profit = lottoResultCount.keySet().stream()
-                .mapToInt((key) -> lottoResultCount.get(key) * key.getPrize())
+        long budget = ticketNumber * LottoConstant.LOTTO_TICKET_PRICE;
+
+        long profit = lottoResultCount.keySet().stream()
+                .mapToLong((key) -> (long) lottoResultCount.get(key) * key.getPrize())
                 .sum();
 
-        return profit.floatValue() / budget;
+        return (double)profit / budget;
     }
 }
