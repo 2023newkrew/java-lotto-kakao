@@ -18,7 +18,7 @@ public class Controller {
     public static void inputCash() throws IOException {
         Output.printEnterCash();
 
-        Cash cash = new Cash(Input.startCashInput());
+        Cash cash = new Cash(Input.cashInput());
 
         lottoCount = new LottoCount(cash);
 
@@ -51,7 +51,7 @@ public class Controller {
         }
     }
 
-    public static void outputResult() {
+    public static void showResult() {
         Output.printTotalResult(totalResult);
     }
 }

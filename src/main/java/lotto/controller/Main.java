@@ -8,6 +8,6 @@ public class Main {
         Controller.createLotto();
         Controller.inputWinningLotto();
         Controller.processLotto();
-        Controller.outputResult();
+        Controller.showResult();
     }
 }

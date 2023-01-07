@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class Input {
     private Input() {}
 
-    public static long startCashInput() throws IOException {
+    public static long cashInput() throws IOException {
         String text;
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
