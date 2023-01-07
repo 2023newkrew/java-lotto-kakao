@@ -27,8 +27,11 @@ class LottoResultTest {
     private static Stream<Arguments> lottoMatchTestGenerator() {
         return Stream.of(
                 Arguments.of(new Lotto(1, 2, 3, 4, 5, 6), LottoRank.FIRST),
+                Arguments.of(new Lotto(3, 6, 2, 5, 1, 4), LottoRank.FIRST),
+                Arguments.of(new Lotto(1, 7, 4, 5, 3, 2), LottoRank.SECOND),
                 Arguments.of(new Lotto(1, 2, 3, 4, 5, 7), LottoRank.SECOND),
-                Arguments.of(new Lotto(1, 2, 3, 8, 9, 10), LottoRank.FIFTH)
+                Arguments.of(new Lotto(1, 2, 3, 8, 9, 10), LottoRank.FIFTH),
+                Arguments.of(new Lotto(10, 3, 1, 9, 2, 8), LottoRank.FIFTH)
         );
     }
 
