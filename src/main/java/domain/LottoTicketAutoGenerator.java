@@ -7,19 +7,22 @@ import java.util.stream.IntStream;
 import static domain.LottoConstant.*;
 
 public class LottoTicketAutoGenerator implements LottoTicketGenerator{
+    public static final List<Integer> NUMBERS;
+
+    static {
+        NUMBERS = IntStream.range(LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE)
+                .boxed()
+                .collect(Collectors.toList());
+    }
 
     @Override
     public LottoTicket generate() {
-        List<Integer> numbers = IntStream.range(LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE)
-                .boxed()
-                .collect(Collectors.toList());
-
-        Collections.shuffle(numbers);
-        List<LottoNumber> lottoNumbers = numbers.subList(0, LOTTO_TICKET_LENGTH)
+        Collections.shuffle(NUMBERS);
+        List<LottoNumber> lottoNumbers = NUMBERS.subList(0, LOTTO_TICKET_LENGTH)
                 .stream().map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        return new LottoTicket(new ArrayList<>(lottoNumbers));
+        return new LottoTicket(lottoNumbers);
     }
 
     @Override
