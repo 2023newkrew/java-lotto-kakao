@@ -2,7 +2,7 @@ package lotto.view;
 
 import static lotto.view.OutputMessage.*;
 
-import lotto.dto.GameResultDto;
+
 import lotto.domain.LottoHandler;
 
 public class OutputView {
@@ -10,12 +10,13 @@ public class OutputView {
         System.out.println(PRINT_READ_PRICE_MESSAGE.getMessage());
     }
 
-    public void printCount(int lottoCount) {
-        System.out.printf(PRINT_COUNT_MESSAGE.getMessage(), lottoCount);
+    public void printCount(int passiveLottoCount, int autoLottoCount) {
+        System.out.printf(PRINT_COUNT_MESSAGE.getMessage(), passiveLottoCount, autoLottoCount);
     }
 
     public void printAllLotto(LottoHandler lottoHandler) {
-        System.out.println(lottoHandler.toString());
+        System.out.println(lottoHandler.allLottoToString());
+
     }
 
     public void printInputRequestOfWinningNumber() {
@@ -26,9 +27,18 @@ public class OutputView {
         System.out.println(PRINT_READ_BONUS_BALL_MESSAGE.getMessage());
     }
 
-    public void printGameResult(GameResultDto gameResultDto) {
-        System.out.println(PRINT_WINNING_RESULT_MESSAGE.getMessage());
-        System.out.println(gameResultDto.getResult());
-        System.out.printf(PRINT_STATICS_MESSAGE.getMessage(), gameResultDto.getYield());
+
+    public void printReadPassiveLottoCount() {
+        System.out.println(OutputMessage.PRINT_READ_PASSIVE_LOTTO_COUNT_MESSAGE.getMessage());
+    }
+
+
+    public void printReadPassiveLottoNumber() {
+        System.out.println(OutputMessage.PRINT_READ_PASSIVE_LOTTO_NUMBERS_MESSAGE.getMessage());
+    }
+
+    public void printResult(String lottoResultString) {
+        System.out.println(PRINT_WINNING_RESULT_MESSAGE.getMessage()+lottoResultString);
+
     }
 }

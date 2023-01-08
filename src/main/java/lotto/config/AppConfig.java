@@ -1,28 +1,41 @@
 package lotto.config;
 
-import lotto.controller.LottoController;
-import lotto.generatepolicy.DefaultGeneratePolicy;
 import lotto.generatepolicy.GeneratePolicy;
-import lotto.rankingpolicy.DefaultRankingPolicy;
-import lotto.domain.LottoGame;
-import lotto.rankingpolicy.RankingPolicy;
+import lotto.domain.LottoHandler;
+import lotto.generatepolicy.RandomGeneratePolicy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
+import lotto.view.View;
 
 public class AppConfig {
-    private static final InputView inputView = new InputView();
-    private static final RankingPolicy rankingPolicy = new DefaultRankingPolicy();
-    private static final OutputView outputView = new OutputView();
 
-    private static final GeneratePolicy generatePolicy = new DefaultGeneratePolicy();
-    private final LottoController lottoController;
+    private static final AppConfig instance = new AppConfig();
 
-    public AppConfig() {
-        LottoGame lottoGame = new LottoGame(rankingPolicy, generatePolicy);
-        this.lottoController = new LottoController(inputView, outputView, lottoGame);
+    private AppConfig() {
     }
 
-    public LottoController getLottoController() {
-        return lottoController;
+
+    public static AppConfig getInstance() {
+        return instance;
+    }
+
+    private static final GeneratePolicy generatePolicy = new RandomGeneratePolicy();
+    private static final View view = View.createView(new InputView(), new OutputView());
+
+    private static final LottoHandler lottoHandler = LottoHandler.createLottoHandler();
+
+    public GeneratePolicy getGeneratePolicy() {
+        return generatePolicy;
+    }
+
+    public LottoHandler getLottoHandler() {
+        return lottoHandler;
+    }
+
+    public View getView() {
+        return view;
+
     }
 }
+
+

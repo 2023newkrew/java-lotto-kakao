@@ -1,49 +1,39 @@
 package lotto.domain;
 
-import static lotto.domain.LottoConstants.LOTTO_NUMBER_LOWER_BOUND;
-import static lotto.domain.LottoConstants.LOTTO_NUMBER_UPPER_BOUND;
-import static lotto.exception.ErrorMessageFormatter.makeErrorMessage;
-import static lotto.exception.ExceptionMessage.DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE;
-import static lotto.exception.ExceptionMessage.OUT_OF_BOUNDS_EXCEPTION_MESSAGE;
+import java.util.List;
+import lotto.exception.ExceptionMessage;
+import lotto.utils.ErrorMessageFormatter;
 
 public class LottoAnswer {
+
     private final LottoNumbers lottoNumbers;
-    private final int bonusNumber;
+    private final BonusBall bonusBall;
 
-    public LottoAnswer(LottoNumbers lottoNumbers, int bonusNumber) {
-        this.lottoNumbers = lottoNumbers;
-        validateBonusNumber(lottoNumbers, bonusNumber);
-        this.bonusNumber = bonusNumber;
+    public static LottoAnswer createLottoAnswer(List<Integer> numbers, int bonusBall) {
+        return new LottoAnswer(numbers, bonusBall);
     }
 
-    private void validateBonusNumber(LottoNumbers lottoNumbers, int bonusNumber) {
-        validateContains(lottoNumbers, bonusNumber);
-        validateRange(bonusNumber);
+    private LottoAnswer(List<Integer> numbers, int bonusBall) {
+        lottoNumbers = LottoNumbers.createLottoNumbers(numbers);
+        validateBonusBall(lottoNumbers, bonusBall);
+        this.bonusBall = BonusBall.createBonusBall(bonusBall);
     }
 
-    private void validateContains(LottoNumbers lottoNumbers, int bonusNumber) {
-        if (lottoNumbers.contains(bonusNumber)) {
+    private void validateBonusBall(LottoNumbers lottoNumbers, int bonusBall) {
+        if (lottoNumbers.contains(bonusBall)) {
             throw new IllegalArgumentException(
-                    makeErrorMessage(DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE, bonusNumber, "bonusNumber"));
-
-        }
-    }
-
-    private void validateRange(int bonusNumber) {
-
-        if (bonusNumber < LOTTO_NUMBER_LOWER_BOUND || bonusNumber > LOTTO_NUMBER_UPPER_BOUND) {
-            throw new IllegalArgumentException(
-                    makeErrorMessage(OUT_OF_BOUNDS_EXCEPTION_MESSAGE, bonusNumber,
-                            "bonusNumber"));
+                    ErrorMessageFormatter.makeErrorMessage(ExceptionMessage.BONUS_BALL_DUPLICATE_EXCEPTION_MESSAGE,
+                            bonusBall, "duplicate bonus ball"));
         }
     }
 
 
-    public LottoNumbers getLottoNumbers() {
-        return lottoNumbers;
+    public int match(LottoNumbers other) {
+        return lottoNumbers.match(other);
     }
 
-    public int getBonus() {
-        return bonusNumber;
+    public boolean hasBonusBall(LottoNumbers other){
+        return bonusBall.hasBonusBall(other);
     }
+
 }

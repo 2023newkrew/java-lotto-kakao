@@ -1,43 +1,34 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import lotto.factory.LottoNumbersFactory;
-import lotto.generatepolicy.GeneratePolicy;
-import lotto.rankingpolicy.RankingPolicy;
 
 public class LottoHandler {
+    private Lottos lottos;
+    private LottoAnswer lottoAnswer;
 
-    private final RankingPolicy rankingPolicy;
+    private LottoHandler() {}
 
-    private final List<Lotto> lottos;
-
-
-    public LottoHandler(int lottoCount, RankingPolicy rankingPolicy, GeneratePolicy generatePolicy) {
-        this.rankingPolicy = rankingPolicy;
-        lottos = createLottos(generatePolicy, lottoCount);
+    public static LottoHandler createLottoHandler(){
+        return new LottoHandler();
     }
 
-    private List<Lotto> createLottos(GeneratePolicy generatePolicy, int lottoCount) {
-        return IntStream.range(0, lottoCount).boxed()
-                .map((i) -> new Lotto(LottoNumbersFactory.create(generatePolicy))).collect(
-                        Collectors.toList());
+    public void createLottos(List<LottoNumbers> lottoNumbers, int autoCount) {
+        lottos = Lottos.createLottos(lottoNumbers, autoCount);
     }
 
-    public List<Integer> grade(LottoAnswer lottoAnswer) {
-        List<Integer> rankCounts = new ArrayList<>(List.of(0, 0, 0, 0, 0, 0));
-        for (Lotto lotto : lottos) {
-            int index = rankingPolicy.grade(lotto.createLottoResult(lottoAnswer)).getIndex();
-            rankCounts.set(index, rankCounts.get(index) + 1);
-        }
-        return rankCounts;
+    public void setLottoAnswer(List<Integer> lottoNumber, int bonusBall) {
+        lottoAnswer = LottoAnswer.createLottoAnswer(lottoNumber, bonusBall);
     }
 
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        lottos.forEach(lotto -> stringBuilder.append(lotto.toString()).append('\n'));
-        return stringBuilder.toString();
+
+    public String getLottoResultString() {
+        LottoRanks ranks = lottos.getRanks(lottoAnswer);
+        return ranks.getResultString();
     }
+
+
+    public String allLottoToString() {
+        return lottos.getAllLottoToString();
+    }
+
 }

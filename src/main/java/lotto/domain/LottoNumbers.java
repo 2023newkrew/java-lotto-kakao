@@ -1,83 +1,63 @@
 package lotto.domain;
 
-import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;
-import static lotto.domain.LottoConstants.LOTTO_NUMBER_LOWER_BOUND;
-import static lotto.domain.LottoConstants.LOTTO_NUMBER_UPPER_BOUND;
-import static lotto.exception.ErrorMessageFormatter.makeErrorMessage;
-import static lotto.exception.ExceptionMessage.INVALID_COUNT_EXCEPTION_MESSAGE;
-import static lotto.exception.ExceptionMessage.NOT_UNIQUE_EXCEPTION_MESSAGE;
-import static lotto.exception.ExceptionMessage.OUT_OF_BOUNDS_EXCEPTION_MESSAGE;
+import static lotto.domain.LottoConstants.LOTTO_SIZE;
+import static lotto.domain.LottoNumber.from;
+import static lotto.exception.ExceptionMessage.SIZE_EXCEPTION_MESSAGE;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
+import lotto.utils.ErrorMessageFormatter;
 
 public class LottoNumbers {
 
-    private final List<Integer> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public LottoNumbers(List<Integer> lottoNumbers) {
+    public static LottoNumbers createLottoNumbers(List<Integer> integers) {
+        return new LottoNumbers(integers.stream().map(LottoNumber::from)
+                .sorted(Comparator.comparingInt(LottoNumber::getNum))
+                .collect(Collectors.toList()));
+    }
+
+    private LottoNumbers(List<LottoNumber> lottoNumbers) {
         validate(lottoNumbers);
-        lottoNumbers.sort(Integer::compare);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
     }
 
-    private void validate(List<Integer> lottoNumbers) {
-        validateCount(lottoNumbers);
-        validateAllRange(lottoNumbers);
-        validateUniqueness(lottoNumbers);
+    private void validate(List<LottoNumber> lottoNumbers) {
+        validateSize(lottoNumbers.size());
+        validateDuplicateNumber(lottoNumbers);
     }
 
-    private void validateUniqueness(List<Integer> lottoNumbers) {
-        if (lottoNumbers.stream().distinct().count() != LOTTO_NUMBER_COUNT) {
+
+    private void validateSize(int size) {
+        if (size != LOTTO_SIZE) {
             throw new IllegalArgumentException(
-                    makeErrorMessage(NOT_UNIQUE_EXCEPTION_MESSAGE, lottoNumbers, "lottoNumbers"));
+                    ErrorMessageFormatter.makeErrorMessage(SIZE_EXCEPTION_MESSAGE, size, "lottoNumbers size"));
         }
     }
 
-    private void validateCount(List<Integer> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+    private void validateDuplicateNumber(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.stream().distinct().count() != LOTTO_SIZE) {
             throw new IllegalArgumentException(
-                    makeErrorMessage(INVALID_COUNT_EXCEPTION_MESSAGE, lottoNumbers.toString(),
-                            "lottoNumbers"));
+                    ErrorMessageFormatter.makeErrorMessage(SIZE_EXCEPTION_MESSAGE, lottoNumbers,
+                            "lottoNumbers duplicate"));
+
         }
     }
 
-    private void validateAllRange(List<Integer> lottoNumbers) {
-        lottoNumbers.forEach(this::validateSingleRange);
+    public boolean contains(int input) {
+        return this.lottoNumbers.contains(from(input));
     }
 
-    private void validateSingleRange(int number) {
-        if (number < LOTTO_NUMBER_LOWER_BOUND || number > LOTTO_NUMBER_UPPER_BOUND) {
-            throw new IllegalArgumentException(
-                    makeErrorMessage(OUT_OF_BOUNDS_EXCEPTION_MESSAGE, number, "number"));
-        }
-
+    public boolean contains(LottoNumber input) {
+        return this.lottoNumbers.contains(input);
     }
 
-    public int getMatchCount(LottoNumbers otherLottoNumbers) {
-        return (int) otherLottoNumbers.lottoNumbers.stream().filter(this.lottoNumbers::contains).count();
-    }
+    public int match(LottoNumbers other) {
+        return (int) lottoNumbers.stream().filter(other::contains).count();
 
-    public boolean contains(int number) {
-        return this.lottoNumbers.contains(number);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoNumbers that = (LottoNumbers) o;
-        return Objects.equals(lottoNumbers, that.lottoNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoNumbers);
     }
 
     @Override

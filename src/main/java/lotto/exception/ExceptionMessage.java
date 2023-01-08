@@ -1,17 +1,15 @@
 package lotto.exception;
 
-import static lotto.domain.LottoConstants.LOTTO_NUMBER_COUNT;
-import static lotto.domain.LottoConstants.LOTTO_NUMBER_LOWER_BOUND;
-import static lotto.domain.LottoConstants.LOTTO_NUMBER_UPPER_BOUND;
+import static lotto.domain.LottoConstants.*;
+import static lotto.domain.LottoConstants.MAX_LOTTO_NUMBER;
 
 public final class ExceptionMessage {
-    public static final String OUT_OF_BOUNDS_EXCEPTION_MESSAGE = String.format("%d ~ %d 값이 주어져야 합니다.",
-            LOTTO_NUMBER_LOWER_BOUND, LOTTO_NUMBER_UPPER_BOUND);
-    public static final String NOT_UNIQUE_EXCEPTION_MESSAGE = "중복된 값이 주어질수 없습니다.";
-    public static final String INVALID_COUNT_EXCEPTION_MESSAGE = String.format("로또는 %d개의 숫자로 이루어져야 합니다.",
-            LOTTO_NUMBER_COUNT);
 
-    public static final String DUPLICATE_BONUS_NUMBER_EXCEPTION_MESSAGE = "보너스 넘버는 기존 넘버와 중복될 수 업습니다.";
-    public static final String INVALID_LOTTO_RESULT_INPUT_EXCEPTION = "Lotto result에 잘못된 입력이 주어졌습니다.";
+    public static final String LOTTO_NUMBER_BOUND_EXCEPTION_MESSAGE = String.format("LottoNumber는 %d ~ %d 값을 가집니다.",
+            MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+    public static final String SIZE_EXCEPTION_MESSAGE = String.format("LottoNumbers의 LottoNumber 사이지는 %d여야 합니다.",
+            LOTTO_SIZE);
+    public static final String BONUS_BALL_DUPLICATE_EXCEPTION_MESSAGE = "보너스 볼이 다른 볼과 중복입니다.";
 
+    public static final String INVALID_MATCH_COUNT_AND_HAS_BONUS = "유효하지않은 matchCount와 hasBonus입니다.";
 }

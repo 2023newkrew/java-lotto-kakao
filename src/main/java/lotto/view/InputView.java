@@ -1,11 +1,10 @@
 package lotto.view;
 
 import static lotto.domain.LottoConstants.LOTTO_PRICE;
-import static lotto.exception.ErrorMessageFormatter.makeErrorMessage;
+import static lotto.utils.ErrorMessageFormatter.makeErrorMessage;
+import static lotto.utils.StringUtils.parseInt;
 import static lotto.view.InputErrorMessage.BOUND_EXCEPTION_MESSAGE;
-import static lotto.view.InputErrorMessage.MODULAR_EXCEPTION_MESSAGE;
-import static lotto.view.InputErrorMessage.NULL_OR_BLANK_EXCEPTION_MESSAGE;
-import static lotto.view.InputErrorMessage.REQUIRED_NUMBER_EXCEPTION_MESSAGE;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,8 +22,9 @@ public class InputView {
         return price;
     }
 
-    public List<Integer> readLottoAnswerNumbers() {
-        return Arrays.stream(scanner.nextLine().split(", ")).map(this::parseInt).collect(Collectors.toList());
+    public List<Integer> readLottoNumbers() {
+        return Arrays.stream(scanner.nextLine().split(", ")).map(StringUtils::parseInt).collect(Collectors.toList());
+
     }
 
     public Integer readBonusBall() {
@@ -32,29 +32,10 @@ public class InputView {
         return parseInt(line);
     }
 
-    private void validateNPE(String line) {
-        if (StringUtils.isNullOrBlank(line)) {
-            throw new IllegalArgumentException(
-                    makeErrorMessage(NULL_OR_BLANK_EXCEPTION_MESSAGE.getMessage(), line, "line")
-
-            );
-        }
-    }
-
-    public int parseInt(String num) {
-        validateNPE(num);
-        try {
-            return Integer.parseInt(num);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(
-                    makeErrorMessage(REQUIRED_NUMBER_EXCEPTION_MESSAGE.getMessage(), num, "num"), e);
-        }
-
-    }
 
     private void validatePrice(int price) {
         validateRange(price);
-        validateIsValid(price);
+
     }
 
     private void validateRange(int price) {
@@ -64,11 +45,28 @@ public class InputView {
 
     }
 
-    private void validateIsValid(int price) {
-        if (price % LOTTO_PRICE != 0) {
+
+    public int readPassiveLottoCount(int totalAmount) {
+        String line = scanner.nextLine();
+        int count = parseInt(line);
+        validatePassiveLottoCount(count, totalAmount);
+        return count;
+
+    }
+
+    private void validatePassiveLottoCount(int count, int totalAmount) {
+        if (count < 0) {
             throw new IllegalArgumentException(
-                    makeErrorMessage(MODULAR_EXCEPTION_MESSAGE.getMessage(), price, "price"));
+                    makeErrorMessage(InputErrorMessage.INVALID_LOTTO_PASSIVE_COUNT.getMessage(), count, "count"));
+        }
+        if (count * LOTTO_PRICE > totalAmount) {
+            throw new IllegalArgumentException(
+                    makeErrorMessage(InputErrorMessage.NOT_ENOUGH_TOTAL_AMOUNT_EXCEPTION_MESSAGE.getMessage(), count,
+                            "count"));
         }
 
     }
+
+
+
 }
