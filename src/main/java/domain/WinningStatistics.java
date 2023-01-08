@@ -2,12 +2,24 @@ package domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
 public class WinningStatistics {
     private final List<LottoMatchResult> lottoMatchResults;
     private final int usedMoney;
+
+    private final Map<LottoRank, LottoRank> rankMap = Map.of(
+            LottoRank.FIRST, LottoRank.FIRST,
+            LottoRank.SECOND, LottoRank.SECOND,
+            LottoRank.THIRD, LottoRank.THIRD,
+            LottoRank.FOURTH, LottoRank.FOURTH,
+            LottoRank.FOURTH_BONUS, LottoRank.FOURTH,
+            LottoRank.FIFTH, LottoRank.FIFTH,
+            LottoRank.FIFTH_BONUS, LottoRank.FIFTH,
+            LottoRank.DEFAULT, LottoRank.DEFAULT
+    );
 
     public WinningStatistics(GameResult gameResult, int usedMoney) {
         this.lottoMatchResults = gameResult.getLottoMatchResults();
@@ -21,16 +33,17 @@ public class WinningStatistics {
     private List<LottoRank> getLottoRanks(){
         return lottoMatchResults.stream()
                 .map((LottoRank::from))
+                .map(rankMap::get)
                 .collect(Collectors.toList());
     }
 
     public double getRateOfReturn(){
-        return getProfit() / (usedMoney);
+        return (double) getProfit() / (usedMoney);
     }
 
-    private double getProfit(){
+    public long getProfit(){
         return getLottoRanks().stream()
-                .mapToInt(LottoRank::getPrizeMoney)
+                .mapToLong(LottoRank::getPrizeMoney)
                 .sum();
     }
 }
