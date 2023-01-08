@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.LottoConfig.LOTTO_PRICE;
 import static lotto.LottoConfig.LOTTO_SIZE;
 import static lotto.constant.MessageConstant.INVALID_PRICE;
 
@@ -15,12 +14,13 @@ public class LottoGenerator {
     private static final List<Integer> fullNumbers = IntStream.range(1, 46)
             .boxed()
             .collect(Collectors.toList());
+    public static final int MIN_GENERATE_LOTTO_COUNT = 1;
 
-    public List<Lotto> generateLottos(int price) {
-        if (price < LOTTO_PRICE) {
+    public List<Lotto> generateLottos(int generateCount) {
+        if (generateCount < MIN_GENERATE_LOTTO_COUNT) {
             throw new IllegalArgumentException(INVALID_PRICE);
         }
-        return IntStream.range(0, price / LOTTO_PRICE)
+        return IntStream.range(0, generateCount)
                 .mapToObj(i -> this.generateLotto())
                 .collect(Collectors.toList());
     }
