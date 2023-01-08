@@ -54,36 +54,18 @@
 - 규칙 5: 줄여쓰지 않는다(축약 금지).
 - 규칙 8: 일급 콜렉션을 쓴다.
 
-## 설계 (Draft)
+## 설계
 
 ### Domain
 
-- `Lotto`
-    - `LottoNumbers lottoNumbers`
-    - `SingleLottoNumber bonusNumber`
-    - `isValidLotto()`
-
-- `SingleLottoNumber`
-
-- `LottoNumbers`
-    - `List<SingleLottoNumber> nums`
-
-- `UserLottos`
-    - `List<LottoNumbers> userLottos`
-    - `Money userMoney`
-    - `ResultMap resultMap`
-
-- `ResultMap`
-    - `HashMap<prize, amount> resultMap`
-
-- `Money`
-    - `getLottoAmount()`
-    - `isValidLottoMoney()`
-
-- `LottoStatistics`
-    - `Money totalInputMoney`
-    - `ResultMap resultMap`
-    - `calculateProfit()`
+- `MoneyTest`
+- `StoreTest`
+- `SingleLottoNumberTest`
+- `LottoTest`
+- `AnswerLottoTest`
+- `LottoCalculatorTest`
+- `PrizeCountMapTest`
+- `LottoCountTest`
 
 ### View
 
@@ -104,7 +86,7 @@
 
 - [x] 금액이 양수가 아니면 예외가 발생한다
 
-### SellerTest
+### StoreTest
 
 - [x] 구매금액만큼 살 수 있는 로또의 개수를 반환한다
 - [x] 살 수 있는 로또가 없으면 예외를 반환한다
