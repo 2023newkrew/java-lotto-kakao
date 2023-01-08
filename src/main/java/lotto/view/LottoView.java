@@ -1,12 +1,11 @@
 package lotto.view;
 
-import static lotto.LottoConfig.LOTTO_PRICE;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lotto.domain.Customer;
 import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import lotto.dto.GameResultDto;
@@ -18,8 +17,6 @@ public class LottoView {
     private static final String REQUEST_RECEIVE_MANUAL_LOTTO_COUNT = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String REQUEST_RECEIVE_MANUAL_LOTTO = "수동으로 구매할 번호를 입력해 주세요.";
     private final Scanner scanner;
-    private int purchasePrice;
-    private int manualLottoCount;
 
 
     public LottoView() {
@@ -28,17 +25,15 @@ public class LottoView {
 
     public int receivePurchasePrice() {
         System.out.println(REQUEST_RECEIVE_PURCHASE_INPUT);
-        purchasePrice = Integer.parseInt(scanner.nextLine());
-        return purchasePrice;
+        return Integer.parseInt(scanner.nextLine());
     }
 
-    public void printLottos(List<Lotto> lottos) {
+    public void printLottos(Customer customer) {
         System.out.printf(
                 "수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",
-                manualLottoCount,
-                lottos.size() - manualLottoCount
+                customer.getManualLottoSize(), customer.getAutoLottoSize()
         );
-        lottos.forEach((lotto) -> System.out.println(lotto.toString()));
+        customer.getEveryLottos().forEach((lotto) -> System.out.println(lotto.toString()));
         System.out.println();
     }
 
@@ -68,21 +63,16 @@ public class LottoView {
     }
 
     public List<Lotto> receiveManualLottos() {
-        receiveManualLottoCount();
+        int manualLottoCount = receiveManualLottoCount();
         System.out.println(REQUEST_RECEIVE_MANUAL_LOTTO);
         return IntStream.range(0, manualLottoCount)
                 .mapToObj(i -> receiveManualLotto())
                 .collect(Collectors.toList());
     }
 
-    private void receiveManualLottoCount() {
+    private int receiveManualLottoCount() {
         System.out.println(REQUEST_RECEIVE_MANUAL_LOTTO_COUNT);
-        manualLottoCount = Integer.parseInt(scanner.nextLine());
-        if (manualLottoCount * LOTTO_PRICE > purchasePrice) {
-            throw new IllegalArgumentException(
-                    String.format("구매할 수 있는 로또의 갯수는 %d개 입니다.", purchasePrice / LOTTO_PRICE)
-            );
-        }
+        return Integer.parseInt(scanner.nextLine());
     }
 
     private Lotto receiveManualLotto() {
