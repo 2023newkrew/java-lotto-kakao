@@ -29,7 +29,7 @@ public class LottoTickets {
         return result;
     }
 
-    public List<LottoTicket> getTicket(){
+    public List<LottoTicket> getTicket() {
         return new ArrayList<>(tickets);
     }
 
