@@ -6,14 +6,18 @@ import java.util.List;
 public class LottoTrials {
     private final List<Lotto> lottoTrials = new ArrayList<>();
 
-    public void createLottoTrials(LottoCount lottoCount) {
+    public void createLottoAutoTrials(LottoCount lottoCountAuto) {
         final LottoPickerRandom lottoPickerRandom = new LottoPickerRandom();
 
-        for (int i = 0; i < lottoCount.getCount(); i++){
+        for (int i = 0; i < lottoCountAuto.getCount(); i++){
             Lotto lotto = new LottoAuto(lottoPickerRandom);
 
             lottoTrials.add(lotto);
         }
+    }
+
+    public void addLottoManualTrial(Lotto lotto) {
+        lottoTrials.add(lotto);
     }
 
     public Lotto getLottoTrial(int index){
