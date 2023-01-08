@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoNumberTest {
 
-    @DisplayName("같은 위치의 같은 번호는 일치한다")
+    @DisplayName("같은 번호는 일치한다")
     @Test
     void test1(){
         LottoNumber lottoNumber1 = new LottoNumber(1);
@@ -18,7 +18,7 @@ class LottoNumberTest {
         assertThat(lottoNumber1.equals(lottoNumber2)).isTrue();
     }
 
-    @DisplayName("같은 위치의 다른 번호는 일치하지 않는다")
+    @DisplayName("다른 번호는 일치하지 않는다")
     @Test
     void test2(){
         LottoNumber lottoNumber1 = new LottoNumber(1);
