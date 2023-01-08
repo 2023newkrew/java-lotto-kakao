@@ -31,10 +31,6 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public LottoNumber getNumber() {
-        return CACHED_LOTTO_NUMBER.get(number);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
