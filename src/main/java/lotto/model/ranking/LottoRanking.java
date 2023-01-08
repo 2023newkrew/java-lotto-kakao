@@ -26,7 +26,7 @@ public enum LottoRanking {
     }
 
     public static LottoRanking from(int commonCount, boolean hasBonus) {
-        if(isSecond(commonCount,hasBonus)){
+        if (isSecond(commonCount, hasBonus)) {
             return SECOND;
         }
         return Stream.of(LottoRanking.values())

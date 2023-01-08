@@ -34,7 +34,7 @@ public class WinningNumbers {
         this.bonus = bonus;
     }
 
-    public LottoRanking rank(LottoNumber lotto){
+    public LottoRanking rank(LottoNumber lotto) {
         int commonNumberCount = winningNumber.countCommonNumber(lotto);
         boolean hasBonus = lotto.hasNumber(bonus);
 

@@ -1,8 +1,8 @@
 package lotto.model.ticket;
 
+import lotto.model.ranking.LottoRanking;
 import lotto.model.ranking.RankingCounts;
 import lotto.model.ranking.WinningNumbers;
-import lotto.model.ranking.LottoRanking;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,7 +30,7 @@ public class LottoTicket {
         this.lottos = lottos;
     }
 
-    public int size(){
+    public int size() {
         return lottos.size();
     }
 

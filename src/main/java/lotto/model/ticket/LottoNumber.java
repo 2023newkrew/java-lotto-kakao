@@ -28,14 +28,14 @@ public class LottoNumber {
         this.numbers = numbers;
     }
 
-    public static LottoNumber createByRandom(){
+    public static LottoNumber createByRandom() {
         List<SingleLottoNumber> numberCandidate = SingleLottoNumber.getAllNumbersInRange();
         Collections.shuffle(numberCandidate);
 
         return LottoNumber.of(Set.copyOf(numberCandidate.subList(0, SIZE)));
     }
 
-    public boolean hasNumber(SingleLottoNumber singleNumber){
+    public boolean hasNumber(SingleLottoNumber singleNumber) {
         return numbers.contains(singleNumber);
     }
 

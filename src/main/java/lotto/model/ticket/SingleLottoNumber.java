@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SingleLottoNumber implements Comparable<SingleLottoNumber>{
+public class SingleLottoNumber implements Comparable<SingleLottoNumber> {
 
     private static final int MIN_NUMBER = 1;
 
