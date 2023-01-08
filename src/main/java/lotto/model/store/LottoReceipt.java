@@ -6,32 +6,36 @@ import java.util.Objects;
 
 public class LottoReceipt {
 
-    private final Money base;
+    private final Money totalPrice;
 
-    private final Money balance;
+    private final Money change;
 
-    public static LottoReceipt from(Money base, Money totalPrice) {
-        if (Objects.isNull(base)) {
-            base = Money.ZERO;
+    public static LottoReceipt from(Money money, Money totalPrice) {
+        if (Objects.isNull(money)) {
+            money = Money.ZERO;
         }
         if (Objects.isNull(totalPrice)) {
             totalPrice = Money.ZERO;
         }
 
-        return new LottoReceipt(base, base.subtract(totalPrice));
+        return new LottoReceipt(totalPrice, money.subtract(totalPrice));
     }
 
-    private LottoReceipt(Money base, Money balance) {
-        this.base = base;
-        this.balance = balance;
+    private LottoReceipt(Money totalPrice, Money change) {
+        this.totalPrice = totalPrice;
+        this.change = change;
     }
 
-    public Money getBalance() {
-        return balance;
+    public Money getChange() {
+        return change;
     }
 
-    public BigDecimal calculateProfitRate(Money totalPrize) {
-        return balance.add(totalPrize).divide(base, 2, RoundingMode.DOWN);
+    public double calculateProfitRate(Money totalPrize) {
+        Money totalProfit = change.add(totalPrize);
+        Money base = change.add(totalPrice);
+        BigDecimal profitRate = totalProfit.divide(base, 2, RoundingMode.DOWN);
+
+        return profitRate.doubleValue();
     }
 
     @Override
@@ -45,16 +49,17 @@ public class LottoReceipt {
 
         LottoReceipt receipt = (LottoReceipt) o;
 
-        if (!base.equals(receipt.base)) {
+        if (!totalPrice.equals(receipt.totalPrice)) {
             return false;
         }
-        return balance.equals(receipt.balance);
+
+        return getChange().equals(receipt.getChange());
     }
 
     @Override
     public int hashCode() {
-        int result = base.hashCode();
-        result = 31 * result + balance.hashCode();
+        int result = totalPrice.hashCode();
+        result = 31 * result + getChange().hashCode();
         return result;
     }
 }

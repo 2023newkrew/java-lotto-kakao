@@ -1,8 +1,8 @@
 package lotto.model.ticket;
 
-import lotto.model.ranking.WinningNumber;
+import lotto.model.ranking.RankingCounts;
+import lotto.model.ranking.WinningNumbers;
 import lotto.model.ranking.LottoRanking;
-import lotto.model.ranking.LottoStats;
 
 import java.util.List;
 import java.util.Objects;
@@ -34,18 +34,12 @@ public class LottoTicket {
         return lottos.size();
     }
 
-    public LottoTicket append(LottoTicket other) {
-        List<LottoNumber> newLottos = Stream.concat(stream(), other.stream()).collect(Collectors.toList());
-
-        return of(newLottos);
-    }
-
-    public LottoStats analyze(WinningNumber winningNumber) {
+    public RankingCounts judge(WinningNumbers winningNumbers) {
         List<LottoRanking> rankings = lottos.stream()
-                .map(winningNumber::judge)
+                .map(winningNumbers::rank)
                 .collect(Collectors.toList());
 
-        return LottoStats.from(rankings);
+        return RankingCounts.from(rankings);
     }
 
     public Stream<LottoNumber> stream() {

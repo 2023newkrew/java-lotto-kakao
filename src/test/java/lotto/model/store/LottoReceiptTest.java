@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 class LottoReceiptTest {
@@ -25,7 +24,7 @@ class LottoReceiptTest {
 
             LottoReceipt receipt = LottoReceipt.from(base, totalPrice);
 
-            Assertions.assertThat(receipt.getBalance()).isEqualTo(balance);
+            Assertions.assertThat(receipt.getChange()).isEqualTo(balance);
         }
 
         public List<Arguments> should_balanceIs_when_givenTotalPrice() {
@@ -47,23 +46,23 @@ class LottoReceiptTest {
         @DisplayName("투자금이 1000, 총 가격이 1000일 때 총 상금을 받아 수익률 계산")
         @ParameterizedTest
         @MethodSource
-        void should_profitRateIs_when_givenTotalPrize(Money totalPrize, BigDecimal profitRate) {
+        void should_profitRateIs_when_givenTotalPrize(Money totalPrize, double profitRate) {
             Money money = Money.valueOf(1000L);
             LottoReceipt receipt = LottoReceipt.from(money, money);
 
-            BigDecimal actual = receipt.calculateProfitRate(totalPrize);
+            double actual = receipt.calculateProfitRate(totalPrize);
 
             Assertions.assertThat(actual).isEqualByComparingTo(profitRate);
         }
 
         public List<Arguments> should_profitRateIs_when_givenTotalPrize() {
             return List.of(
-                    Arguments.of(null, BigDecimal.valueOf(0f)),
-                    Arguments.of(Money.ZERO, BigDecimal.valueOf(0f)),
-                    Arguments.of(Money.valueOf(1000L), BigDecimal.valueOf(1f)),
-                    Arguments.of(Money.valueOf(5000L), BigDecimal.valueOf(5f)),
-                    Arguments.of(Money.valueOf(10000L), BigDecimal.valueOf(10f)),
-                    Arguments.of(Money.valueOf(100000L), BigDecimal.valueOf(100f))
+                    Arguments.of(null, 0f),
+                    Arguments.of(Money.ZERO, 0f),
+                    Arguments.of(Money.valueOf(1000L), 1f),
+                    Arguments.of(Money.valueOf(5000L), 5f),
+                    Arguments.of(Money.valueOf(10000L), 10f),
+                    Arguments.of(Money.valueOf(100000L), 100f)
             );
         }
     }

@@ -5,16 +5,16 @@ import lotto.model.ticket.SingleLottoNumber;
 
 import java.util.Objects;
 
-public class WinningNumber {
+public class WinningNumbers {
 
     private final LottoNumber winningNumber;
 
     private final SingleLottoNumber bonus;
 
-    public static WinningNumber from(LottoNumber winningNumber, SingleLottoNumber bonus) {
+    public static WinningNumbers of(LottoNumber winningNumber, SingleLottoNumber bonus) {
         validate(winningNumber, bonus);
 
-        return new WinningNumber(winningNumber, bonus);
+        return new WinningNumbers(winningNumber, bonus);
     }
 
     private static void validate(LottoNumber winningNumber, SingleLottoNumber bonus) {
@@ -29,12 +29,12 @@ public class WinningNumber {
         }
     }
 
-    private WinningNumber(LottoNumber winningNumber, SingleLottoNumber bonus) {
+    private WinningNumbers(LottoNumber winningNumber, SingleLottoNumber bonus) {
         this.winningNumber = winningNumber;
         this.bonus = bonus;
     }
 
-    public LottoRanking judge(LottoNumber lotto){
+    public LottoRanking rank(LottoNumber lotto){
         int commonNumberCount = winningNumber.countCommonNumber(lotto);
         boolean hasBonus = lotto.hasNumber(bonus);
 

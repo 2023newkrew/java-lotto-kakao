@@ -70,7 +70,7 @@ class LottoStoreTest {
             PurchaseResult purchaseResult = store.buyAutomatically(money);
             LottoReceipt receipt = purchaseResult.getReceipt();
 
-            Assertions.assertThat(receipt.getBalance()).isEqualTo(balance);
+            Assertions.assertThat(receipt.getChange()).isEqualTo(balance);
         }
 
         public List<Arguments> should_receiptIs_when_givenMoney() {

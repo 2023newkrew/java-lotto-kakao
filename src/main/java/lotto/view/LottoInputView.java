@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.ranking.WinningNumbers;
 import lotto.model.store.Money;
 import lotto.model.ticket.LottoNumber;
 import lotto.model.ticket.SingleLottoNumber;
@@ -24,7 +25,14 @@ public class LottoInputView {
         return Money.valueOf(amount);
     }
 
-    public LottoNumber inputWinningNumber() {
+    public WinningNumbers inputWinningNumbers() {
+        LottoNumber winningNumber = inputWinningNumber();
+        SingleLottoNumber bonus = inputBonus();
+
+        return WinningNumbers.of(winningNumber, bonus);
+    }
+
+    private LottoNumber inputWinningNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         String text = scanner.nextLine();
 
@@ -41,7 +49,7 @@ public class LottoInputView {
         return LottoNumber.of(singleLottoNumbers);
     }
 
-    public SingleLottoNumber inputBonus() {
+    private SingleLottoNumber inputBonus() {
         System.out.println("보너스 볼을 입력해 주세요.");
         int number = Integer.parseInt(scanner.nextLine());
 
