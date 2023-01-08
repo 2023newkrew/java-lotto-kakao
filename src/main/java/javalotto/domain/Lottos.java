@@ -9,7 +9,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     private Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public static Lottos from(List<Lotto> lottos) {
@@ -42,7 +42,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 
     @Override
