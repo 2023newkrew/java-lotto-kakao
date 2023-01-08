@@ -7,8 +7,19 @@ public class LottoMatchResult {
     private final boolean isBonusNumberMatched;
 
     public LottoMatchResult(int matchCount, boolean isBonusNumberMatched) {
+        if(!isValidLottoMatchResult(matchCount, isBonusNumberMatched)){
+            throw new IllegalArgumentException("해당 일치 수와 보너스 일치 여부는 적절하지 않습니다.");
+        }
         this.matchCount = matchCount;
         this.isBonusNumberMatched = isBonusNumberMatched;
+    }
+
+    private boolean isValidLottoMatchResult(int matchCount, boolean isBonusNumberMatched) {
+        if(matchCount == 6 && isBonusNumberMatched
+            || matchCount < 0){
+            return false;
+        }
+        return true;
     }
 
     public int getMatchCount() {
