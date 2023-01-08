@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class TotalResult {
     private final Map<LottoResult, Integer> lottoResults = new HashMap<>();
-    private Cash totalPrize = new Cash(0);
+    private Prize totalPrize = new Prize(0L);
     private int trial = 0;
 
     public TotalResult() {
@@ -25,7 +25,7 @@ public class TotalResult {
     }
 
     private void addPrize(LottoResult lottoResult) {
-        List<Cash> prizes = Arrays.stream(WinningCondition.values())
+        List<Prize> prizes = Arrays.stream(WinningCondition.values())
                 .map(v -> v.getPrizeIfMatch(lottoResult))
                 .filter(v -> v.compareTo(0L) > 0)
                 .collect(Collectors.toList());

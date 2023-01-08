@@ -2,13 +2,13 @@ package lotto.model;
 
 import lotto.exception.InvalidCashValue;
 
-public class Prize extends Cash {
-    public Prize(Cash cash) {
+public class BuyCash extends Cash {
+    public BuyCash(Cash cash) {
         this(cash.getCash());
     }
 
-    public Prize(long cash) {
-        if (cash < 0) {
+    public BuyCash(long cash) {
+        if (cash < LottoConstants.LOTTO_PRICE) {
             throw new InvalidCashValue();
         }
 
@@ -16,12 +16,12 @@ public class Prize extends Cash {
     }
 
     @Override
-    public Prize plus(Cash val2) {
+    public BuyCash plus(Cash val2) {
         return this.plus(val2.getCash());
     }
 
     @Override
-    public Prize plus(long val2) {
-        return new Prize(this.cash + val2);
+    public BuyCash plus(long val2) {
+        return new BuyCash(this.cash + val2);
     }
 }

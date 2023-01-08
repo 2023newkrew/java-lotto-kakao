@@ -18,9 +18,9 @@ public class Controller {
     public static void inputCash() throws IOException {
         Output.printEnterCash();
 
-        Cash cash = new Cash(Input.cashInput());
+        Cash buyCash = new BuyCash(Input.cashInput());
 
-        lottoCount = new LottoCount(cash);
+        lottoCount = new LottoCount(buyCash);
 
         Output.printLottoCount(lottoCount);
     }

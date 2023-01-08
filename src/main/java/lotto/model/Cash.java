@@ -1,27 +1,13 @@
 package lotto.model;
 
-import lotto.exception.InvalidCashValue;
-
 import java.util.Objects;
 
 @SuppressWarnings("rawtypes")
-public class Cash implements Comparable {
-    private final long cash;
+public abstract class Cash implements Comparable {
+    protected long cash;
 
-    public Cash(long cash) {
-        if (cash < LottoConstants.LOTTO_PRICE) {
-            throw new InvalidCashValue();
-        }
-
-        this.cash = cash;
-    }
-
-    public Cash plus(Cash val2) {
-        return new Cash(this.cash + val2.getCash());
-    }
-    public Cash plus(long val2) {
-        return new Cash(this.cash + val2);
-    }
+    public abstract Cash plus(Cash val2);
+    public abstract Cash plus(long val2);
 
     public long getCash() {
         return cash;
