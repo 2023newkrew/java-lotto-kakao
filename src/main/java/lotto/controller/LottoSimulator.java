@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.model.company.LottoCompany;
-import lotto.model.company.LottoStats;
+import lotto.model.ranking.LottoStats;
+import lotto.model.store.LottoReceipt;
 import lotto.model.store.LottoStore;
 import lotto.model.store.LottoWallet;
 import lotto.model.store.Money;
@@ -44,16 +44,16 @@ public class LottoSimulator {
     }
 
     private LottoStats createLottoCompanyAndAnalyze(LottoTicket ticket) {
-        LottoCompany company = createLottoCompany();
+        WinningNumber company = createLottoCompany();
 
-        return company.analyze(ticket);
+        return ticket.analyze(company);
     }
 
-    private LottoCompany createLottoCompany() {
+    private WinningNumber createLottoCompany() {
         LottoNumber winningNumber = inputView.inputWinningNumber();
         SingleLottoNumber bonus = inputView.inputBonus();
 
-        return LottoCompany.create(winningNumber, bonus);
+        return WinningNumber.from(winningNumber, bonus);
     }
 
     private static BigDecimal getProfitRate(LottoWallet wallet, LottoStats stats) {

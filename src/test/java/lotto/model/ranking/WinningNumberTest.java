@@ -1,8 +1,7 @@
-package lotto.model.company;
+package lotto.model.ranking;
 
 import lotto.TestUtil;
 import lotto.model.ticket.LottoNumber;
-import lotto.model.ticket.LottoTicket;
 import lotto.model.ticket.SingleLottoNumber;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.Set;
 
-class LottoCompanyTest {
+class WinningNumberTest {
 
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
@@ -25,7 +24,7 @@ class LottoCompanyTest {
         @ParameterizedTest
         @MethodSource
         void should_throwException_when_invalidNumberOrBonus(LottoNumber winningNumber, SingleLottoNumber bonus, String message) {
-            Assertions.assertThatThrownBy(() -> LottoCompany.create(winningNumber, bonus))
+            Assertions.assertThatThrownBy(() -> WinningNumber.from(winningNumber, bonus))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(message);
         }
@@ -49,7 +48,7 @@ class LottoCompanyTest {
             LottoNumber winningNumber = LottoNumber.of(TestUtil.toSingleLottoNumbers(numbers));
             SingleLottoNumber bonus = SingleLottoNumber.valueOf(bonusNumber);
 
-            LottoCompany company = LottoCompany.create(winningNumber, bonus);
+            WinningNumber company = WinningNumber.from(winningNumber, bonus);
 
             Assertions.assertThat(company).isNotNull();
         }
@@ -65,25 +64,24 @@ class LottoCompanyTest {
 
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
-    class analyze {
+    class judge {
 
         @DisplayName("로또 티켓의 등수 판정")
         @ParameterizedTest
         @MethodSource
-        void should_returnRanking_when_givenNumbers(LottoCompany company, Set<Integer> numbers, LottoRanking ranking) {
+        void should_returnRanking_when_givenNumbers(WinningNumber company, Set<Integer> numbers, LottoRanking ranking) {
             LottoNumber lotto = LottoNumber.of(TestUtil.toSingleLottoNumbers(numbers));
-            LottoTicket ticket = LottoTicket.of(List.of(lotto));
 
-            LottoStats actual = company.analyze(ticket);
+            LottoRanking actual = company.judge(lotto);
 
-            Assertions.assertThat(actual.countBy(ranking)).isOne();
+            Assertions.assertThat(actual).isEqualTo(ranking);
         }
 
         List<Arguments> should_returnRanking_when_givenNumbers() {
             Set<Integer> numbers = Set.of(1, 2, 3, 4, 5, 6);
             LottoNumber winningNumber = LottoNumber.of(TestUtil.toSingleLottoNumbers(numbers));
             SingleLottoNumber bonus = SingleLottoNumber.valueOf(7);
-            LottoCompany company = LottoCompany.create(winningNumber, bonus);
+            WinningNumber company = WinningNumber.from(winningNumber, bonus);
 
             return List.of(
                     Arguments.of(company, Set.of(8, 9, 10, 11, 12, 13), LottoRanking.NOTHING),

@@ -1,5 +1,9 @@
 package lotto.model.ticket;
 
+import lotto.model.ranking.WinningNumber;
+import lotto.model.ranking.LottoRanking;
+import lotto.model.ranking.LottoStats;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -34,6 +38,14 @@ public class LottoTicket {
         List<LottoNumber> newLottos = Stream.concat(stream(), other.stream()).collect(Collectors.toList());
 
         return of(newLottos);
+    }
+
+    public LottoStats analyze(WinningNumber winningNumber) {
+        List<LottoRanking> rankings = lottos.stream()
+                .map(winningNumber::judge)
+                .collect(Collectors.toList());
+
+        return LottoStats.from(rankings);
     }
 
     public Stream<LottoNumber> stream() {

@@ -1,4 +1,4 @@
-package lotto.model.company;
+package lotto.model.ranking;
 
 import lotto.model.store.Money;
 
