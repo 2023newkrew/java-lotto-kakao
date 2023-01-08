@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.domain.AnswerLotto;
-import lotto.domain.GenerateOption;
 import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.Money;
 import lotto.domain.SingleLottoNumber;
 import lotto.domain.Store;
@@ -24,9 +24,12 @@ public class LottoController {
         Store store = new Store(money);
 
         int lottoTicketCount = store.calculateTicketCount();
-        outputView.printPurchaseResult(lottoTicketCount);
+        int manualLottoCount = inputView.getGenerateOptionInput();
+        LottoCount lottoCount = new LottoCount(manualLottoCount, lottoTicketCount);
 
-        return getUserLottos(lottoTicketCount);
+        outputView.printPurchaseResult(manualLottoCount, lottoTicketCount - manualLottoCount);
+
+        return getUserLottoList(lottoCount);
     }
 
     public void play() {
@@ -52,24 +55,33 @@ public class LottoController {
         return new AnswerLotto(toLotto(answerLottoInput), bonusNumber);
     }
 
-    private Lotto getLottoWithOption(GenerateOption generateOption) {
-        if (!generateOption.isInputRequired()) {
-            return RandomLottoGenerator.generateLotto();
-        }
+    private List<Lotto> getUserLottoList(LottoCount lottoCount) {
+        List<Lotto> userLottoList = new ArrayList<>();
+        userLottoList.addAll(getManualLotto(lottoCount));
+        userLottoList.addAll(getAutoLotto(lottoCount));
 
-        List<Integer> userLottoInput = inputView.getUserLottoInput();
-        return toLotto(userLottoInput);
+        outputView.printUserLottos(userLottoList);
+        return userLottoList;
     }
 
-    private List<Lotto> getUserLottos(int lottoTicketCount) {
-        List<Lotto> userLottos = new ArrayList<>();
-        for (int i = 0; i < lottoTicketCount; i++) {
-            int generateOptionInput = inputView.getGenerateOptionInput();
-            GenerateOption generateOption = new GenerateOption(generateOptionInput);
-            Lotto lotto = getLottoWithOption(generateOption);
-            userLottos.add(lotto);
+    private List<Lotto> getAutoLotto(LottoCount lottoCount) {
+        List<Lotto> autoLottoList = new ArrayList<>();
+        while (lottoCount.isAutoLottoAvailable()) {
+            Lotto randomLotto = RandomLottoGenerator.generateLotto();
+            autoLottoList.add(randomLotto);
+            lottoCount.decreaseAutoCount();
         }
-        outputView.printUserLottos(userLottos);
-        return userLottos;
+        return autoLottoList;
+    }
+
+    private List<Lotto> getManualLotto(LottoCount lottoCount) {
+        outputView.printManualLottoGuide();
+        List<Lotto> manualLottoList = new ArrayList<>();
+        while (lottoCount.isManualLottoAvailable()) {
+            List<Integer> userLottoInput = inputView.getUserLottoInput();
+            manualLottoList.add(toLotto(userLottoInput));
+            lottoCount.decreaseManualCount();
+        }
+        return manualLottoList;
     }
 }

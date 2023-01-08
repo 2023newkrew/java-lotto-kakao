@@ -20,12 +20,11 @@ public class InputView {
     }
 
     public List<Integer> getUserLottoInput() {
-        System.out.println("로또 번호를 입력해 주세요.");
         return getLottoInput();
     }
 
     public int getGenerateOptionInput() {
-        System.out.println("자동 생성은 1, 수동 생성은 2를 입력해주세요");
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         String generateOption = sc.nextLine();
         return Integer.parseInt(generateOption);
     }
