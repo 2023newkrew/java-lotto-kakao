@@ -5,6 +5,7 @@ import lotto.model.ticket.LottoTicket;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
@@ -24,15 +25,28 @@ public class LottoStore {
         this.price = price;
     }
 
-    public long getPurchasableCount(Money money) {
+    public PurchaseResult buyAutomatically(Money money) {
+        long lottoCount = getPurchasableCount(money);
+        LottoTicket ticket = createRandomLottos(lottoCount);
+        Money totalPrice = getTotalPrice(lottoCount);
+        LottoReceipt receipt = LottoReceipt.from(money, totalPrice);
+
+        return PurchaseResult.of(ticket, receipt);
+    }
+
+    private long getPurchasableCount(Money money) {
+        if (Objects.isNull(money)) {
+            return 0L;
+        }
+
         return money.divide(price).longValue();
     }
 
-    public Money getTotalPrice(long count) {
+    private Money getTotalPrice(long count) {
         return price.multiply(BigDecimal.valueOf(count));
     }
 
-    public LottoTicket buyAutomatically(long count) {
+    private LottoTicket createRandomLottos(long count) {
         List<LottoNumber> lottos = LongStream.range(0, count)
                 .mapToObj(ignore -> LottoNumber.createByRandom())
                 .collect(Collectors.toList());

@@ -26,7 +26,7 @@ public class Money {
         this.value = value;
     }
 
-    public static boolean isNullOrZero(Money money){
+    public static boolean isNullOrZero(Money money) {
         return Objects.isNull(money) || money.equals(ZERO);
     }
 
@@ -35,10 +35,18 @@ public class Money {
     }
 
     public Money add(Money other) {
+        if (isNullOrZero(other)) {
+            return this;
+        }
+
         return valueOf(value.add(other.value));
     }
 
     public Money subtract(Money other) {
+        if (isNullOrZero(other)) {
+            return this;
+        }
+
         return valueOf(value.subtract(other.value));
     }
 
@@ -51,7 +59,7 @@ public class Money {
     }
 
     public BigDecimal divide(Money other, int scale, RoundingMode roundingMode) {
-        if (other.equals(Money.ZERO)) {
+        if (isNullOrZero(other)) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
 
