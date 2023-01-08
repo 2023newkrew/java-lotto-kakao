@@ -30,9 +30,8 @@ public enum LottoResultType {
     }
 
     public static LottoResultType getLottoResult(final LottoNumbers lottoNumbers, final WinningNumbers winningNumbers) {
-        int matchNumberSize = winningNumbers.getMatchNumberSize(lottoNumbers);
-        boolean hasBonusNumber = winningNumbers.checkHasBonusNumber(lottoNumbers);
-        return getRank(matchNumberSize, hasBonusNumber);
+        return getRank(winningNumbers.getMatchNumberSize(lottoNumbers)
+                , winningNumbers.checkHasBonusNumber(lottoNumbers));
     }
 
     private static LottoResultType getRank(final int matchNumber, final boolean hasBonusNumber) {
