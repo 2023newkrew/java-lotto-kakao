@@ -4,6 +4,9 @@ import java.util.Comparator;
 import java.util.Objects;
 
 public class LottoValue implements Comparator<LottoValue> {
+    private final static int MIN_VALUE = 1;
+    private final static int MAX_VALUE = 45;
+
     private final int value;
 
     public LottoValue() {
@@ -18,7 +21,7 @@ public class LottoValue implements Comparator<LottoValue> {
     }
 
     private boolean isOutOfRange(int value) {
-        return value < 1 || value > 45;
+        return value < MIN_VALUE || value > MAX_VALUE;
     }
 
     @Override
