@@ -21,7 +21,7 @@ public class LottoResults {
         }
     }
 
-    public Integer getResultCount(final LottoResultType lottoResultType) {
+    public int getResultCount(final LottoResultType lottoResultType) {
         return lottoResultCount.getOrDefault(lottoResultType, 0);
     }
 

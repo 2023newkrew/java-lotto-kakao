@@ -12,8 +12,8 @@ public class LottoNumbersGenerator implements NumbersGeneratable {
     private static final int LOTTO_NUMBER_SIZE = 6;
 
     private static final List<Integer> lottoNumberPool = new ArrayList<>(
-            IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER+1).
-                    boxed()
+            IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
+                    .boxed()
                     .collect(Collectors.toList()));
 
     @Override
