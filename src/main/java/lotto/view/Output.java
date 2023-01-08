@@ -11,8 +11,9 @@ import lotto.model.WinningCondition;
 public class Output {
     private Output() {}
 
-    public static void printLottoCount(LottoCount lottoCount) {
-        System.out.println(lottoCount.getCount() + "개를 구매했습니다.");
+    public static void printLottoCount(LottoCount lottoCountManual, LottoCount lottoCountAuto) {
+        System.out.println("\n수동으로 " + lottoCountManual.getCount()
+                +  "장, 자동으로 " + lottoCountAuto.getCount() + "개를 구매했습니다.");
     }
 
     public static void printLottoTrials(LottoTrials lottoTrials) {
@@ -58,6 +59,10 @@ public class Output {
     public static void printEnterCash() {
         System.out.println("구입금액을 입력해 주세요.");
     }
+
+    public static void printEnterManualNum() { System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요."); }
+
+    public static void printEnterLottoManual() { System.out.println("\n수동으로 구매할 번호를 입력해 주세요."); }
 
     public static void printEnterWinNum() {
         System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
