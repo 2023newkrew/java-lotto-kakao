@@ -15,7 +15,7 @@ public class LottoTicketAutoGenerator implements LottoTicketGenerator{
                 .collect(Collectors.toList());
 
         Collections.shuffle(numbers);
-        List<LottoNumber> lottoNumbers = numbers.subList(0, LOTTO_LENGTH)
+        List<LottoNumber> lottoNumbers = numbers.subList(0, LOTTO_TICKET_LENGTH)
                 .stream().map(LottoNumber::new)
                 .collect(Collectors.toList());
 

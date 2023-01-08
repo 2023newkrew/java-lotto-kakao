@@ -1,6 +1,7 @@
 package domain;
 
 public class Wallet {
+    public static final String INVALID_AMOUNT_MSG = "금액은 양의 정수이어야 합니다.";
     private int remainAmount;
 
     private int usage;
@@ -12,7 +13,7 @@ public class Wallet {
 
     private static void validateAmount(int amount) {
         if(amount < 0){
-            throw new IllegalArgumentException("금액은 양의 정수이어야 합니다.");
+            throw new IllegalArgumentException(INVALID_AMOUNT_MSG);
         }
     }
 
