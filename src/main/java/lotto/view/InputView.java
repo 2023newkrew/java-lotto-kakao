@@ -23,10 +23,10 @@ public class InputView {
         return getLottoInput();
     }
 
-    public int getGenerateOptionInput() {
+    public int getManualLottoCountInput() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        String generateOption = sc.nextLine();
-        return Integer.parseInt(generateOption);
+        String manualLottoCountInput = sc.nextLine();
+        return Integer.parseInt(manualLottoCountInput);
     }
 
     private List<Integer> getLottoInput() {
