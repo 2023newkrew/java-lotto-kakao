@@ -11,8 +11,8 @@ public enum LottoResultType {
     FAIL(-1, false, 0),
     FIFTH_PLACE(3, false, 5_000),
     FOURTH_PLACE(4, false, 50_000),
-    SECOND_PLACE(5, true, 30_000_000),
     THIRD_PLACE(5, false, 1_500_000),
+    SECOND_PLACE(5, true, 30_000_000),
     FIRST_PLACE(6, false, 2_000_000_000);
 
     private final int matchCount;
@@ -30,12 +30,9 @@ public enum LottoResultType {
     }
 
     public static LottoResultType getLottoResult(final LottoNumbers lottoNumbers, final WinningNumbers winningNumbers) {
-        List<Integer> containedNumbers = lottoNumbers.getNumbers().stream()
-                .filter((number) -> winningNumbers.getLottoNumber().contains(number))
-                .collect(Collectors.toList());
-
-        return getRank(containedNumbers.size(),
-                lottoNumbers.getNumbers().contains(winningNumbers.getBonusNumber()));
+        int matchNumberSize = winningNumbers.getMatchNumberSize(lottoNumbers);
+        boolean hasBonusNumber = winningNumbers.checkHasBonusNumber(lottoNumbers);
+        return getRank(matchNumberSize, hasBonusNumber);
     }
 
     private static LottoResultType getRank(final int matchNumber, final boolean hasBonusNumber) {
@@ -46,7 +43,10 @@ public enum LottoResultType {
     }
 
     public boolean checkMatch(int matchCount, boolean hasBonusNumber) {
-        if(needBonusNumber && !hasBonusNumber) {
+        if (needBonusNumber && !hasBonusNumber) {
+            return false;
+        }
+        if (matchCount == 5 && (!needBonusNumber && hasBonusNumber)) {
             return false;
         }
         return this.matchCount == matchCount;
@@ -54,15 +54,12 @@ public enum LottoResultType {
 
     public String getMessage() {
         StringBuilder sb = new StringBuilder();
-        if (matchCount < 3) {
-            sb.append("꽝! 3개 미만");
-        }
         if (matchCount >= 3) {
             sb.append(matchCount).append("개 일치");
         }
         if (needBonusNumber) {
             sb.append(", 보너스 볼 일치");
         }
-        return sb.append("(").append(prize).append("원)").toString();
+        return sb.append(" (").append(prize).append("원)").toString();
     }
 }

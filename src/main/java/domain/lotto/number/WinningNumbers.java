@@ -9,17 +9,9 @@ public class WinningNumbers {
     private final LottoNumbers winningNumbers;
     private final LottoNumber bonusNumber;
 
-    public List<Integer> getLottoNumber() {
-        return winningNumbers.getNumbers();
-    }
-
-    public int getBonusNumber() {
-        return bonusNumber.getNumber();
-    }
-
     public WinningNumbers(final List<Integer> winningNumbers, final int bonusNumber) {
         validateBonusNumberDuplication(winningNumbers, bonusNumber);
-        this.winningNumbers = LottoNumbers.create(()->winningNumbers);
+        this.winningNumbers = LottoNumbers.create(() -> winningNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
@@ -29,4 +21,11 @@ public class WinningNumbers {
             throw new BonusNumberDuplicationException();
     }
 
+    public int getMatchNumberSize(final LottoNumbers lottoNumbers) {
+        return winningNumbers.getMatchNumbers(lottoNumbers).size();
+    }
+
+    public boolean checkHasBonusNumber(final LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }

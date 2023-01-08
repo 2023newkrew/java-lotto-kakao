@@ -35,4 +35,4 @@
 ## 리팩토링 목록 - 2 
 - [x] 누락된 static, final 키워드 추가
 - [x] LottoResultType 에 당첨 조건 값 필드 추가
-- [] LottNumbers에 포함된 숫자를 구할 때 getter 대신 메서드 활용
+- [x] LottNumbers에 포함된 숫자를 구할 때 getter 대신 메서드 활용

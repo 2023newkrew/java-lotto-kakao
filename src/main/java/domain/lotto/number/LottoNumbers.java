@@ -37,6 +37,18 @@ public class LottoNumbers {
             throw new InvalidLottoNumbersException();
     }
 
+    public List<LottoNumber> getMatchNumbers(final LottoNumbers lottoNumbers) {
+        System.out.println(lottoNumbers);
+        System.out.println(numbers);
+        return lottoNumbers.numbers.stream()
+                .filter(this::contains)
+                .collect(Collectors.toList());
+    }
+
+    public boolean contains(final LottoNumber lottoNumber) {
+        return getNumbers().contains(lottoNumber.getNumber());
+    }
+
     @Override
     public String toString() {
         return numbers.toString();
