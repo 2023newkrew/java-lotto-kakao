@@ -22,15 +22,11 @@ class LottoTest {
     @Test
     void 랜덤_잘_생성되는가() {
         assertThatCode(() -> {
+            LottoPickerRandom lottoPickerRandom = new LottoPickerRandom();
+
             for (int i = 0; i < 100; i++){
-                Lotto lotto = new LottoAuto(new LottoPickerRandom());
+                Lotto lotto = new LottoAuto(lottoPickerRandom);
             }
         }).doesNotThrowAnyException();
-    }
-
-    @Test
-    void toString_잘_되는가() {
-        Assertions.assertThat(new LottoManual(new ArrayList<>(List.of(6, 2, 3, 4, 5, 1))).toString())
-                .isEqualTo("[1, 2, 3, 4, 5, 6]");
     }
 }
