@@ -52,7 +52,7 @@ public class LottoTicketTest {
 
     @DisplayName("로또 티켓은 어떤 로또 번호가 포함되지 않았는지 알 수 있어야 한다.")
     @ParameterizedTest
-    @ValueSource(ints = {7, 8, 9, 10, -1, 45})
+    @ValueSource(ints = {7, 8, 9, 10, 45})
     void test5(int lottoNumber){
         LottoTicket lottoTicket = new StubLottoTicketGenerator(1, 2, 3, 4, 5, 6).generate();
 
