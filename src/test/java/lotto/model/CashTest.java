@@ -11,15 +11,15 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class CashTest {
     @ParameterizedTest
-    @ValueSource(longs = {-1, -1000, -4000})
-    void 마이너스_금액인_경우_예외(long value) {
+    @ValueSource(longs = {-1, -1000, -4000, 0, 100, 500, 999})
+    void 로또_1장_가격_미만인_경우_예외(long value) {
         assertThatThrownBy(() -> {
             Cash cash = new Cash(value);
         }).isInstanceOf(InvalidCashValue.class);
     }
 
     @ParameterizedTest
-    @ValueSource(longs = {1, 1000, 40000000})
+    @ValueSource(longs = {1000, 5000, 40000000})
     void 정상_금액인_경우_정상실행(long value) {
         assertThatCode(() -> {
             Cash cash = new Cash(value);
@@ -37,13 +37,5 @@ public class CashTest {
 
         Assertions.assertThat(cash3.getCash()).isEqualTo(3000);
         Assertions.assertThat(cash4.getCash()).isEqualTo(5000);
-    }
-
-    @Test
-    void toString의_경우_단위를_붙여야_한다() {
-        long val1 = 1000;
-        Cash cash1 = new Cash(val1);
-
-        Assertions.assertThat(cash1.toString()).isEqualTo("1000원");
     }
 }
