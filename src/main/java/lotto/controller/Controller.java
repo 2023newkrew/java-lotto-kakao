@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public class Controller {
     private static LottoCount lottoCount;
+    private static LottoCount lottoCountManual;
+    private static LottoCount lottoCountAuto;
     private static final LottoTrials lottoTrials = new LottoTrials();
     private static WinLotto winLotto;
     private static final TotalResult totalResult = new TotalResult();
@@ -21,12 +23,31 @@ public class Controller {
         Cash buyCash = new BuyCash(Input.cashInput());
 
         lottoCount = new LottoCount(buyCash);
-
-        Output.printLottoCount(lottoCount);
     }
 
-    public static void createLotto() {
-        lottoTrials.createLottoTrials(lottoCount);
+    public static void inputManualNum() throws IOException {
+        Output.printEnterManualNum();
+
+        lottoCountManual = new LottoCountManual(Input.manualNumInput());
+        lottoCountAuto = new LottoCountAuto(lottoCount.getCount() - lottoCountManual.getCount());
+    }
+
+    public static void inputLottoManual() throws IOException {
+        Output.printEnterLottoManual();
+
+        for (int i = 0; i < lottoCountManual.getCount(); i++) {
+            List<LottoBall> manualLotto = Arrays.stream(Input.lottoManualInput())
+                    .map(v -> new LottoBall(Integer.parseInt(v.trim())))
+                    .collect(Collectors.toList());
+
+            lottoTrials.addLottoManualTrial(new LottoManual(manualLotto));
+        }
+    }
+
+    public static void createLottoAuto() {
+        Output.printLottoCount(lottoCountManual, lottoCountAuto);
+
+        lottoTrials.createLottoAutoTrials(lottoCountAuto);
 
         Output.printLottoTrials(lottoTrials);
     }
