@@ -1,10 +1,8 @@
 package domain;
 
 import common.state.Result;
-import view.OutputView;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class TotalResult {
     private final Map<Result, Integer> totalResult;

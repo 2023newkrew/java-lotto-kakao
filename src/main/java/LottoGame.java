@@ -21,17 +21,22 @@ public class LottoGame {
         if (!manualLottoCount.zero()) {
             OutputView.printManualLottoRequest();
         }
+        Lottos manualLottos = getManualLottos(manualLottoCount);
+        OutputView.printLottoCount(manualLottoCount.getCount(), manualLottoCount.getRemains());
+        Lottos autoLottos = Lottos.getAutoLottos(manualLottoCount.getRemains());
+        Lottos lottos = new Lottos(manualLottos, autoLottos);
+        OutputView.printLottos(lottos.getPurchasedLottosNumbers());
+        return lottos;
+    }
+
+    public static Lottos getManualLottos(Count manualLottoCount) {
         Lottos manualLottos = new Lottos(
                 Stream.generate(() -> InputView.getInput())
                         .limit(manualLottoCount.getCount())
                         .map(s -> LottoFactory.getLotto(new ManualLottoGenerator(s)))
                         .collect(Collectors.toList())
         );
-        OutputView.printLottoCount(manualLottoCount.getCount(), manualLottoCount.getRemains());
-        Lottos autoLottos = Lottos.getAutoLottos(manualLottoCount.getRemains());
-        Lottos lottos = new Lottos(manualLottos, autoLottos);
-        OutputView.printLottos(lottos.getPurchasedLottosNumbers());
-        return lottos;
+        return manualLottos;
     }
 
     public static Lotto getWinningLotto() {
