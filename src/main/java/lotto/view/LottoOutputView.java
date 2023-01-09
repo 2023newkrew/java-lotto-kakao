@@ -12,7 +12,7 @@ public class LottoOutputView {
 
     public void printPurchaseResult(PurchaseResult purchaseResult) {
         LottoTicket ticket = purchaseResult.getTicket();
-        System.out.println(ticket.size() + "개를 구매했습니다.");
+        System.out.println(ticket.count() + "개를 구매했습니다.");
         ticket.stream().forEach(this::printLotto);
         System.out.println();
     }

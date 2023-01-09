@@ -30,7 +30,7 @@ public class LottoTicket {
         this.lottos = lottos;
     }
 
-    public int size() {
+    public int count() {
         return lottos.size();
     }
 

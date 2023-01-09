@@ -2,11 +2,8 @@ package lotto.controller;
 
 import lotto.model.ranking.AnalysisResult;
 import lotto.model.ranking.RankingCounts;
-import lotto.model.store.LottoReceipt;
-import lotto.model.store.PurchaseResult;
+import lotto.model.store.*;
 import lotto.model.ranking.WinningNumbers;
-import lotto.model.store.LottoStore;
-import lotto.model.store.Money;
 import lotto.model.ticket.LottoTicket;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
@@ -20,7 +17,8 @@ public class LottoSimulator {
     private final LottoOutputView outputView;
 
     public static LottoSimulator create(Money lottoPrice, LottoInputView inputView, LottoOutputView outputView) {
-        LottoStore store = LottoStore.create(lottoPrice);
+        LottoMachine lottoMachine = LottoMachine.create(lottoPrice);
+        LottoStore store = LottoStore.create(lottoMachine);
 
         return new LottoSimulator(store, inputView, outputView);
     }

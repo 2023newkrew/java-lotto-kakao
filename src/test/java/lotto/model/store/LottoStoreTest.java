@@ -18,18 +18,13 @@ class LottoStoreTest {
     @Nested
     class create {
 
-        @DisplayName("로또 가격이 없거나 0일 경우 예외 발생")
+        @DisplayName("로또 머신이 없을 경우 예외 발생")
         @ParameterizedTest
         @NullSource
-        @MethodSource
-        void should_throwException_when_priceIsNullOrZero(Money price) {
-            Assertions.assertThatThrownBy(() -> LottoStore.create(price))
+        void should_throwException_when_priceIsNullOrZero(LottoMachine lottoMachine) {
+            Assertions.assertThatThrownBy(() -> LottoStore.create(lottoMachine))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("로또 가격은 0원일 수 없습니다.");
-        }
-
-        public List<Arguments> should_throwException_when_priceIsNullOrZero() {
-            return List.of(Arguments.of(Money.ZERO));
+                    .hasMessage("로또 머신이 없습니다.");
         }
     }
 
@@ -41,12 +36,12 @@ class LottoStoreTest {
         @ParameterizedTest
         @MethodSource
         void should_lottosCountIs_when_givenMoney(Money money, int lottoCount) {
-            LottoStore store = LottoStore.create(Money.valueOf(1000L));
+            LottoStore store = createDefaultStore();
 
             PurchaseResult purchaseResult = store.buyAutomatically(money);
             LottoTicket ticket = purchaseResult.getTicket();
 
-            Assertions.assertThat(ticket.size()).isEqualTo(lottoCount);
+            Assertions.assertThat(ticket.count()).isEqualTo(lottoCount);
         }
 
         public List<Arguments> should_lottosCountIs_when_givenMoney() {
@@ -65,7 +60,7 @@ class LottoStoreTest {
         @ParameterizedTest
         @MethodSource
         void should_receiptIs_when_givenMoney(Money money, Money balance) {
-            LottoStore store = LottoStore.create(Money.valueOf(1000L));
+            LottoStore store = createDefaultStore();
 
             PurchaseResult purchaseResult = store.buyAutomatically(money);
             LottoReceipt receipt = purchaseResult.getReceipt();
@@ -83,5 +78,12 @@ class LottoStoreTest {
                     Arguments.of(Money.valueOf(9999L), Money.valueOf(999L))
             );
         }
+    }
+
+    private static LottoStore createDefaultStore() {
+        Money price = Money.valueOf(1000L);
+        LottoMachine lottoMachine = LottoMachine.create(price);
+
+        return LottoStore.create(lottoMachine);
     }
 }

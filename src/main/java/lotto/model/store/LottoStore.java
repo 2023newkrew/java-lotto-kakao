@@ -3,26 +3,23 @@ package lotto.model.store;
 import lotto.model.ticket.LottoNumber;
 import lotto.model.ticket.LottoTicket;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
 
 public class LottoStore {
 
-    private final Money price;
+    private final LottoMachine lottoMachine;
 
-    public static LottoStore create(Money price) {
-        if (Money.isNullOrZero(price)) {
-            throw new IllegalArgumentException("로또 가격은 0원일 수 없습니다.");
+    public static LottoStore create(LottoMachine lottoMachine) {
+        if (Objects.isNull(lottoMachine)) {
+            throw new IllegalArgumentException("로또 머신이 없습니다.");
         }
 
-        return new LottoStore(price);
+        return new LottoStore(lottoMachine);
     }
 
-    public LottoStore(Money price) {
-        this.price = price;
+    public LottoStore(LottoMachine lottoMachine) {
+        this.lottoMachine = lottoMachine;
     }
 
     public PurchaseResult buyAutomatically(Money money) {
