@@ -27,7 +27,7 @@ public class LottoBuyer {
 
     public LottoResult calculateResult(WinningLotto winningLotto) {
         List<LottoRank> statuses = lottos.stream()
-                .map(lotto -> lotto.getRank(winningLotto))
+                .map(winningLotto::getRank)
                 .collect(Collectors.toList());
 
         Map<LottoRank, Integer> map = new EnumMap<>(LottoRank.class);
