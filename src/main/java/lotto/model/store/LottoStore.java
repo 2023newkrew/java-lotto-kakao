@@ -24,30 +24,21 @@ public class LottoStore {
 
     public PurchaseResult buyAutomatically(Money money) {
         long lottoCount = getPurchasableCount(money);
-        LottoTicket ticket = createRandomLottos(lottoCount);
-        Money totalPrice = getTotalPrice(lottoCount);
-        LottoReceipt receipt = LottoReceipt.from(money, totalPrice);
+        LottoTicket ticket = lottoMachine.createRandomTicket(lottoCount);
+        LottoReceipt receipt = lottoMachine.createReceipt(money, lottoCount);
 
         return PurchaseResult.of(ticket, receipt);
     }
 
-    private long getPurchasableCount(Money money) {
-        if (Objects.isNull(money)) {
-            return 0L;
-        }
-
-        return money.divide(price).longValue();
+    public long getPurchasableCount(Money money) {
+        return lottoMachine.getPurchasableCount(money);
     }
 
-    private Money getTotalPrice(long count) {
-        return price.multiply(BigDecimal.valueOf(count));
-    }
+    public PurchaseResult buyManually(Money money, LottoTicket ticket) {
+        long lottoCount = getPurchasableCount(money);
+        LottoTicket randomTicket = lottoMachine.createRandomTicket(lottoCount - ticket.count());
+        LottoReceipt receipt = lottoMachine.createReceipt(money, lottoCount);
 
-    private LottoTicket createRandomLottos(long count) {
-        List<LottoNumber> lottos = LongStream.range(0, count)
-                .mapToObj(ignore -> LottoNumber.createByRandom())
-                .collect(Collectors.toList());
-
-        return LottoTicket.of(lottos);
+        return PurchaseResult.of(ticket.append(randomTicket), receipt);
     }
 }

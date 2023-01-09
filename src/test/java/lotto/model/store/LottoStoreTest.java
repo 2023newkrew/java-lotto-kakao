@@ -1,5 +1,6 @@
 package lotto.model.store;
 
+import lotto.model.ticket.LottoNumber;
 import lotto.model.ticket.LottoTicket;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 class LottoStoreTest {
 
@@ -78,6 +80,44 @@ class LottoStoreTest {
                     Arguments.of(Money.valueOf(9999L), Money.valueOf(999L))
             );
         }
+    }
+
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    @Nested
+    class buyManually {
+
+        @DisplayName("Money만큼 자동으로 생성한 로또로 수동 생성")
+        @ParameterizedTest
+        @MethodSource
+        void should_equalsAutoAndManual_when_givenMoney(Money money) {
+            LottoStore store = createDefaultStore();
+            PurchaseResult autoPurchaseResult = store.buyAutomatically(money);
+            List<LottoNumber> autoLottos = getLottos(autoPurchaseResult);
+
+            PurchaseResult manualPurchaseResult = store.buyManually(money, autoPurchaseResult.getTicket());
+            List<LottoNumber> manualLottos = getLottos(manualPurchaseResult);
+
+
+            Assertions.assertThatCollection(autoLottos).isEqualTo(manualLottos);
+        }
+
+        public List<Arguments> should_equalsAutoAndManual_when_givenMoney() {
+            return List.of(
+                    Arguments.of((Object) null),
+                    Arguments.of(Money.ZERO),
+                    Arguments.of(Money.valueOf(1L)),
+                    Arguments.of(Money.valueOf(1000L)),
+                    Arguments.of(Money.valueOf(1500L)),
+                    Arguments.of(Money.valueOf(3000L)),
+                    Arguments.of(Money.valueOf(9999L))
+            );
+        }
+    }
+
+    private static List<LottoNumber> getLottos(PurchaseResult autoPurchaseResult) {
+        return autoPurchaseResult.getTicket()
+                .stream()
+                .collect(Collectors.toList());
     }
 
     private static LottoStore createDefaultStore() {

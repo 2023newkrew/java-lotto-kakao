@@ -46,6 +46,17 @@ public class LottoTicket {
         return lottos.stream();
     }
 
+    public LottoTicket append(LottoTicket other) {
+        return LottoTicket.of(concat(other));
+    }
+
+    private List<LottoNumber> concat(LottoTicket other) {
+        return Stream.concat(
+                        stream(),
+                        other.stream())
+                .collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
         return lottos.toString();
