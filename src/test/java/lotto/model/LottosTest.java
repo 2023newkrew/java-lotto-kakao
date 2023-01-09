@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.factory.AutoLottosFactory;
+import lotto.factory.LottosFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

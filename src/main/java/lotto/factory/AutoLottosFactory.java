@@ -1,4 +1,7 @@
-package lotto.model;
+package lotto.factory;
+
+import lotto.model.Lotto;
+import lotto.model.Lottos;
 
 import java.util.ArrayList;
 import java.util.List;

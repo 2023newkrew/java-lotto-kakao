@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-class WinnerTest {
+class LottoGameTest {
     @Test
     void checkRankingCount() {
-        Winner winner = new Winner();
+        LottoGame lottoGame = new LottoGame();
         RankingType Rank1 = RankingType.FIRST;
         RankingType Rank2 = RankingType.THIRD;
         RankingType Rank3 = RankingType.DEFAULT;
@@ -24,12 +24,12 @@ class WinnerTest {
             put(RankingType.DEFAULT, 1);
         }};
 
-        Assertions.assertEquals(winner.rankingCount(input).getRankingResult(), rankingResult);
+        Assertions.assertEquals(lottoGame.rankingCount(input).getRankingResult(), rankingResult);
     }
 
     @Test
     void calRevenue(){
-        Winner winner = new Winner();
+        LottoGame lottoGame = new LottoGame();
 
         int money = 3000;
         Map<RankingType, Integer> rankingResult  = new EnumMap<>(RankingType.class) {{
@@ -42,6 +42,6 @@ class WinnerTest {
         }};
 
 
-        Assertions.assertEquals(winner.revenue(new RankingResult(rankingResult), money), 667166.67);
+        Assertions.assertEquals(lottoGame.revenue(new RankingResult(rankingResult), money), 667166.67);
     }
 }

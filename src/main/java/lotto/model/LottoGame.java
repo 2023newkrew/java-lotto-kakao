@@ -4,7 +4,7 @@ import lotto.model.enums.RankingType;
 
 import java.util.*;
 
-public class Winner {
+public class LottoGame {
     public RankingResult rankingCount(List<RankingType> rankingTypes) {
         Map<RankingType, Integer> rankingResult = new EnumMap<>(RankingType.class);
         for (RankingType rank : RankingType.values()) {
@@ -22,5 +22,13 @@ public class Winner {
             prizeSum += rank.getPrize() * rankingResult.getRankingResult().get(rank);
         }
         return Math.round((prizeSum / money) * 100) / 100.0;
+    }
+
+    public Lottos joinLottos(Lottos manualLottos, Lottos autoLottos) {
+        List<Lotto> joinLottos = new ArrayList<>();
+        joinLottos.addAll(manualLottos.getLottos());
+        joinLottos.addAll(autoLottos.getLottos());
+
+        return new Lottos(joinLottos);
     }
 }
