@@ -2,6 +2,9 @@ import domain.*;
 import view.InputView;
 import view.OutputView;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class LottoGame {
 
     public static Money getPaidPrice() {
@@ -15,15 +18,18 @@ public class LottoGame {
     }
 
     public static Lottos getLottos(Count manualLottoCount) {
-        Lottos lottos = new Lottos();
         if (!manualLottoCount.zero()) {
             OutputView.printManualLottoRequest();
         }
-        for (int i = 0; i < manualLottoCount.getCount(); i++) {
-            lottos.addManualLotto(LottoFactory.getLotto(new ManualLottoGenerator(InputView.getInput())));
-        }
+        Lottos manualLottos = new Lottos(
+                Stream.generate(() -> InputView.getInput())
+                        .limit(manualLottoCount.getCount())
+                        .map(s -> LottoFactory.getLotto(new ManualLottoGenerator(s)))
+                        .collect(Collectors.toList())
+        );
         OutputView.printLottoCount(manualLottoCount.getCount(), manualLottoCount.getRemains());
-        lottos.addAutoLottos(manualLottoCount.getRemains());
+        Lottos autoLottos = Lottos.getAutoLottos(manualLottoCount.getRemains());
+        Lottos lottos = new Lottos(manualLottos, autoLottos);
         OutputView.printLottos(lottos.getPurchasedLottosNumbers());
         return lottos;
     }

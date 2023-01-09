@@ -18,7 +18,7 @@ public class LottoTest {
 
     @BeforeAll
     static void setUp() {
-        lotto = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        lotto = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
         bonusNumber = new LottoNumber(lotto, "7");
         winningLotto = new WinningLotto(lotto, bonusNumber);
     }
@@ -27,13 +27,13 @@ public class LottoTest {
     @Test
     void createManualLottoTest() {
         String properInput = "8, 21, 23, 41, 42, 43";
-        Assertions.assertDoesNotThrow(() -> Lotto.getLotto(new ManualLottoGenerator(properInput)));
+        Assertions.assertDoesNotThrow(() -> LottoFactory.getLotto(new ManualLottoGenerator(properInput)));
     }
 
     @DisplayName("자동 로또 생성 시 예외 통과 테스트")
     @Test
     void createAutoLottoTest() {
-        Assertions.assertDoesNotThrow(() -> Lotto.getLotto(AutoLottoGenerator.get()));
+        Assertions.assertDoesNotThrow(() -> LottoFactory.getLotto(AutoLottoGenerator.get()));
     }
 
 //    @DisplayName("자동 로또 생성기로 생성한 로또가 제대로 생성되었는지 확인 테스트")

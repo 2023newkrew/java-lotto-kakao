@@ -1,23 +1,32 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public Lottos() {
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
-    public void addManualLotto(Lotto lotto) {
-        lottos.add(lotto);
+    public Lottos(Lottos manualLottos, Lottos autoLottos) {
+        lottos = manualLottos.concat(autoLottos);
     }
 
-    public void addAutoLottos(int count) {
+    private List<Lotto> concat(Lottos other) {
+        return Stream.concat(lottos.stream(), other.lottos.stream()).collect(Collectors.toList());
+    }
+
+    public static Lottos getAutoLottos(int count) {
+        List<Lotto> autoLottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            lottos.add(LottoFactory.getLotto(AutoLottoGenerator.get()));
+            autoLottos.add(LottoFactory.getLotto(AutoLottoGenerator.get()));
         }
+        return new Lottos(autoLottos);
     }
 
     public TotalResult getTotalResult(WinningLotto winningLotto) {

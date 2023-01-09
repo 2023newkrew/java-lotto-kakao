@@ -3,6 +3,8 @@ package domain;
 import common.state.Result;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,7 +18,7 @@ public class LottosTest {
 
     @BeforeAll
     static void setUp() {
-        lottos = new Lottos();
+//        lottos = new Lottos(new ArrayList<>());
         lotto = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
         bonusNumber = new LottoNumber(lotto, "7");
         winningLotto = new WinningLotto(lotto, bonusNumber);
@@ -27,7 +29,7 @@ public class LottosTest {
     void addManualLottoTest() {
         String newLottoNumbers = "8, 21, 23, 41, 42, 43";
         Lotto newLotto = LottoFactory.getLotto(new ManualLottoGenerator(newLottoNumbers));
-        lottos.addManualLotto(newLotto);
+        lottos = new Lottos(List.of(newLotto));
         assertThat(lottos.containsLotto(newLotto)).isTrue();
     }
 
@@ -36,7 +38,7 @@ public class LottosTest {
     void addAutoLottosTest() {
         int beforeSize = lottos.getSize();
         int autoLottoCount = 3;
-        lottos.addAutoLottos(autoLottoCount);
+        lottos = Lottos.getAutoLottos(autoLottoCount);
         int afterSize = lottos.getSize();
         assertThat(afterSize).isEqualTo(beforeSize + autoLottoCount);
     }
@@ -50,12 +52,7 @@ public class LottosTest {
         Lotto matchThree = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 7, 8, 9"));
         Lotto matchFiveBonus = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 7"));
         Lotto matchSix = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
-        lottos.addManualLotto(matchZero);
-        lottos.addManualLotto(matchOne);
-        lottos.addManualLotto(matchTwo);
-        lottos.addManualLotto(matchThree);
-        lottos.addManualLotto(matchFiveBonus);
-        lottos.addManualLotto(matchSix);
+        lottos = new Lottos(List.of(matchZero, matchOne, matchTwo, matchThree, matchFiveBonus, matchSix));
         Map<Result, Integer> expected = Map.of(Result.NONE, 3, Result.FIFTH_PLACE, 1, Result.SECOND_PLACE, 1, Result.FIRST_PLACE, 1);
         assertThat(lottos.getTotalResult(winningLotto)).isEqualTo(new TotalResult(expected));
     }
@@ -64,7 +61,7 @@ public class LottosTest {
     @Test
     void containsLottoTest() {
         Lotto lotto = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
-        lottos.addManualLotto(lotto);
+        lottos = new Lottos(List.of(lotto));
         assertThat(lottos.containsLotto(lotto)).isTrue();
     }
 
