@@ -1,7 +1,7 @@
 package javalotto;
 
 import javalotto.controller.LottoController;
-import javalotto.domain.LottoGenerator;
+import javalotto.domain.LottoShop;
 import javalotto.domain.RandomNumberGenerator;
 import javalotto.view.InputView;
 import javalotto.view.OutputView;
@@ -11,7 +11,7 @@ public class Main {
         LottoController lottoController = LottoController.of(
                 InputView.newInstance(),
                 OutputView.newInstance(),
-                LottoGenerator.from(RandomNumberGenerator.newInstance())
+                LottoShop.from(RandomNumberGenerator.newInstance())
         );
 
         lottoController.simulate();

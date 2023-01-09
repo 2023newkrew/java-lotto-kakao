@@ -11,17 +11,15 @@ public class OutputView {
         return new OutputView();
     }
 
-    public void printLottoCount(LottoCount lottoCount) {
-        System.out.println(lottoCount.getCount() + "개를 구매했습니다.");
-    }
-
-    public void printLottos(Lottos lottos) {
+    public void printLottos(LottoBuyer lottoBuyer, Lottos lottos) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.",
+                lottoBuyer.getManualLottoCount(), lottoBuyer.getAutoLottoCount()));
         System.out.println(lottos);
     }
 
-    public void printLottoResult(LottoResult lottoResult, PurchaseAmount purchaseAmount) {
+    public void printLottoResult(LottoBuyer lottoBuyer, LottoResult lottoResult) {
         printWinningStatistics(lottoResult);
-        printRateOfReturn(lottoResult, purchaseAmount);
+        printRateOfReturn(lottoBuyer, lottoResult);
     }
 
     private void printWinningStatistics(LottoResult lottoResult) {
@@ -30,8 +28,8 @@ public class OutputView {
         System.out.println(lottoResult);
     }
 
-    private void printRateOfReturn(LottoResult lottoResult, PurchaseAmount purchaseAmount) {
-        double rateOfReturn = lottoResult.getRateOfReturn(purchaseAmount);
+    private void printRateOfReturn(LottoBuyer lottoBuyer, LottoResult lottoResult) {
+        double rateOfReturn = lottoBuyer.getRateOfReturn(lottoResult);
         System.out.println(String.format("총 수익률은 %.2f입니다.%s", rateOfReturn, rateOfReturnDescription(rateOfReturn)));
     }
 

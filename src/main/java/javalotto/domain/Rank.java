@@ -29,7 +29,7 @@ public enum Rank {
                 .findFirst();
     }
 
-    public boolean isRank(int matchCount, boolean isBonusMatch) {
+    private boolean isRank(int matchCount, boolean isBonusMatch) {
         return this.matchCount == matchCount && this.bonusMatchType.isSatisfiedBy(isBonusMatch);
     }
 
@@ -42,7 +42,7 @@ public enum Rank {
         return matchCount + "개 일치" + bonusMatchType + "(" + prize + "원)";
     }
 
-    enum BonusMatchType {
+     enum BonusMatchType {
         ALL(isBonusMatch -> true),
         MATCH((isBonusMatch) -> isBonusMatch),
         MISMATCH((isBonusMatch) -> !isBonusMatch);
@@ -53,7 +53,7 @@ public enum Rank {
             this.bonusMatchTypeCondition = bonusMatchTypeCondition;
         }
 
-        boolean isSatisfiedBy(boolean isBonusNumberMatch) {
+        private boolean isSatisfiedBy(boolean isBonusNumberMatch) {
             return this.bonusMatchTypeCondition.test(isBonusNumberMatch);
         }
 

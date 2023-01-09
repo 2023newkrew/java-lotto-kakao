@@ -1,8 +1,8 @@
 package javalotto.domain;
 
-import java.util.Objects;
+import javalotto.exception.lotto.InvalidLottoCountException;
 
-import static javalotto.constants.PurchaseAmountConstants.PURCHASE_AMOUNT_UNIT_PRICE;
+import java.util.Objects;
 
 public class LottoCount {
     private final int count;
@@ -11,14 +11,17 @@ public class LottoCount {
         this.count = count;
     }
 
-    public static LottoCount of(PurchaseAmount purchaseAmount) {
-        return new LottoCount(purchaseAmount.getPurchaseAmount() / PURCHASE_AMOUNT_UNIT_PRICE);
-    }
+    public static LottoCount from(int count) {
+        validateCount(count);
 
-    public static LottoCount withCount(int count) {
         return new LottoCount(count);
     }
 
+    private static void validateCount(int count) {
+        if (count < 0) {
+            throw new InvalidLottoCountException(count);
+        }
+    }
     public int getCount() {
         return this.count;
     }
