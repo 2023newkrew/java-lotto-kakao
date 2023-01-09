@@ -1,32 +1,34 @@
 package lotto.view;
 
+import lotto.dto.LottoTicketsDto;
 import lotto.model.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
-public class ResultView {
-    private static ResultView instance;
+public class OutputView {
+    private static OutputView instance;
 
-    private ResultView() {
+    private OutputView() {
     }
 
-    public static ResultView getInstance() {
+    public static OutputView getInstance() {
         if (instance == null) {
-            instance = new ResultView();
+            instance = new OutputView();
         }
         return instance;
     }
 
     public void printLottoTickets(LottoTicketsDto tickets, int manualCount) {
         System.out.printf("\n수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualCount, tickets.size() - manualCount);
-        for (LottoTicketDto ticket : tickets.getTickets()) {
+        for (List<Integer> ticket : tickets.getTickets()) {
             printLottoTicket(ticket);
         }
         System.out.println();
     }
 
-    private void printLottoTicket(LottoTicketDto ticketDto) {
-        String numbers = ticketDto.getTicket().stream()
+    private void printLottoTicket(List<Integer> ticket) {
+        String numbers = ticket.stream()
                 .sorted().map(
                         number -> Integer.toString(number)
                 ).collect(Collectors.joining(", "));
@@ -52,5 +54,9 @@ public class ResultView {
                 result.getProfitRate(money),
                 result.getProfitRate(money) > 1 ? "이익이" : "손해"
         );
+    }
+
+    public void printErrorMessage(String message) {
+        System.out.println(message);
     }
 }

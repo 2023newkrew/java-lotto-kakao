@@ -3,7 +3,6 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class LottoTicket {
     public static final int NUMBERS_SIZE = 6;
@@ -15,13 +14,11 @@ public class LottoTicket {
         this.numbers = new ArrayList<>(numbers);
     }
 
-    public LottoTicket(LottoTicketDto ticketDto) {
-        List<LottoNumber> numbers = ticketDto.getTicket()
-                .stream().map(LottoNumber::valueOf)
+    public static LottoTicket fromNumbers(List<Integer> lottoNumbers) {
+        List<LottoNumber> numbers = lottoNumbers.stream()
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
-        validateValuesCount(numbers);
-        validateDistinction(numbers);
-        this.numbers = numbers;
+        return new LottoTicket(numbers);
     }
 
     private void validateValuesCount(List<LottoNumber> numbers) {
@@ -36,12 +33,16 @@ public class LottoTicket {
         }
     }
 
-    public boolean contains(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
+    public boolean contains(LottoNumber number) {
+        return numbers.contains(number);
     }
 
-    public Stream<LottoNumber> stream() {
-        return numbers.stream();
+    public int match(LottoTicket ticket) {
+        return (int) numbers.stream().filter(ticket::contains).count();
+    }
+
+    public List<LottoNumber> getNumbers() {
+        return new ArrayList<>(numbers);
     }
 
     @Override
