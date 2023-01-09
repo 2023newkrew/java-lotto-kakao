@@ -17,16 +17,9 @@ public class LottoTicket {
     }
 
     private HashSet<LottoNumber> getValidNumbers(List<LottoNumber> numbers) {
-        if (numbers.size() != LottoTicket.NUMBERS_LENGTH) {
-            throw new IllegalArgumentException("로또는 6개의 번호를 가져야 합니다.");
-        }
-        boolean isValid = true;
-        HashSet<LottoNumber> validNumbers = new HashSet<>();
-        for (LottoNumber number : numbers) {
-            isValid = isValid && validNumbers.add(number);
-        }
-        if (!isValid) {
-            throw new IllegalArgumentException("로또는 중복된 번호를 가질 수 없습니다.");
+        HashSet<LottoNumber> validNumbers = new HashSet<>(numbers);
+        if (validNumbers.size() != LottoTicket.NUMBERS_LENGTH) {
+            throw new IllegalArgumentException("로또는 중복되지 않는 6개의 번호를 가져야 합니다.");
         }
         return validNumbers;
     }

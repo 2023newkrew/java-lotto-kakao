@@ -7,8 +7,12 @@ import lotto.model.ticket.LottoTickets;
 import java.util.Arrays;
 
 public class OutputView {
-    public static void displayPurchasedTickets(int manualQuantity, LottoTickets tickets) {
-        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualQuantity, tickets.size() - manualQuantity);
+    private OutputView() {
+        throw new AssertionError();
+    }
+
+    public static void displayPurchasedTickets(int automaticQuantity, LottoTickets tickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", tickets.size() - automaticQuantity, automaticQuantity);
         System.out.println(tickets);
     }
 

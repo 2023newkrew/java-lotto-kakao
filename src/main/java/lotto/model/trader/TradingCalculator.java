@@ -1,10 +1,14 @@
-package lotto.model.service;
+package lotto.model.trader;
 
 import lotto.model.prize.Prize;
 import lotto.model.prize.PrizeRecord;
 import lotto.model.ticket.LottoTicket;
 
 public class TradingCalculator {
+    private TradingCalculator() {
+        throw new AssertionError();
+    }
+
     public static double calculateYield(PrizeRecord prizeRecord) {
         return (double) TradingCalculator.calculateProfit(prizeRecord) / TradingCalculator.calculateCapital(prizeRecord);
     }

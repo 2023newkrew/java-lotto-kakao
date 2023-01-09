@@ -1,4 +1,4 @@
-package lotto.model.service;
+package lotto.model.trader;
 
 public class Cash {
     private long amount;

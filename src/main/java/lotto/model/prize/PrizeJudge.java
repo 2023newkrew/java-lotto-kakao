@@ -1,6 +1,10 @@
 package lotto.model.prize;
 
 public class PrizeJudge {
+    private PrizeJudge() {
+        throw new AssertionError();
+    }
+
     public static Prize getPrizeOf(int matchCount, boolean hasBonus) {
         if (matchCount == 6) return Prize.FIRST;
         if (matchCount == 5 && hasBonus) return Prize.SECOND;

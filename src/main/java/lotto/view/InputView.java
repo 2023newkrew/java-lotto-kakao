@@ -11,34 +11,18 @@ public class InputView {
     private static final String REGEX_NUMBER = ", ";
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static long getCapital(long minimum) {
-        long capital = 0L;
+    private InputView() {
+        throw new AssertionError();
+    }
+
+    public static long getCapital() {
         System.out.println("구입금액을 입력해 주세요.");
-        String input = scanner.nextLine();
-        try {
-            capital = Long.parseLong(input);
-        } catch (NumberFormatException e) {
-            System.out.println("올바른 수를 입력해 주세요.");
-        }
-        if (capital < minimum) {
-            System.out.println("로또 가격 이상의 값을 입력해 주세요.");
-        }
-        return capital;
+        return Long.parseLong(scanner.nextLine());
     }
 
     public static int getManualQuantity() {
-        int quantity = 0;
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        String input = scanner.nextLine();
-        try {
-            quantity = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            System.out.println("올바른 수를 입력해 주세요.");
-        }
-        if (quantity < 0) {
-            System.out.println("0 이상의 값을 입력해 주세요.");
-        }
-        return quantity;
+        return Integer.parseInt(scanner.nextLine());
     }
 
     private static List<LottoNumber> getNumbers() {

@@ -1,5 +1,6 @@
-package lotto.model.service;
+package lotto.model.trader;
 
+import lotto.model.publisher.LottoPublisher;
 import lotto.model.ticket.LottoTicket;
 import lotto.model.ticket.LottoTickets;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package lotto.model.service;
+package lotto.model.trader;
 
 import lotto.model.prize.PrizeJudge;
 import lotto.model.prize.PrizeRecord;
