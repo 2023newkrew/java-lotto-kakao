@@ -13,7 +13,7 @@ public class LottoMachine {
     private LottoWinningNumber winningLotto = null;
 
     public List<LottoTicket> purchaseLottoTickets(int purchaseAmount, List<List<Integer>> manualLottoNumbers) {
-        validatePurchaseAmount(purchaseAmount);
+        validatePurchaseAmount(purchaseAmount, manualLottoNumbers.size());
         int numberOfLotto = purchaseAmount / 1000;
 
         Stream<LottoTicket> manualLottoStream = generateManualLottoStream(manualLottoNumbers);
@@ -33,9 +33,15 @@ public class LottoMachine {
         return new MatchResult(rankingCount);
     }
 
-    private void validatePurchaseAmount(int purchaseAmount) {
+    private void validatePurchaseAmount(int purchaseAmount, int numberOfManualLotto) {
+        if (purchaseAmount == 0) {
+            throw new IllegalArgumentException("로또를 1장 이상 구매해야 합니다.");
+        }
         if (purchaseAmount % 1000 != 0) {
             throw new IllegalArgumentException("로또 가격은 1000원입니다. 1000의 배수를 입력해야 합니다.");
+        }
+        if (purchaseAmount / 1000 < numberOfManualLotto) {
+            throw new IllegalArgumentException("구입 금액에 비해 많은 수량의 수동 로또를 구매할 수 없습니다.");
         }
     }
 
