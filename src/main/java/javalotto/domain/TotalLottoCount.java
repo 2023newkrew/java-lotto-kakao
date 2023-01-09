@@ -11,7 +11,7 @@ public class TotalLottoCount {
     }
 
     public static TotalLottoCount of(LottoCount totalLottoCount, LottoCount manuallyLottoCount) {
-        LottoCount automaticallyLottoCount = totalLottoCount.getRemainExceptFor(manuallyLottoCount);
+        LottoCount automaticallyLottoCount = LottoCount.withCount(totalLottoCount.getCount() - manuallyLottoCount.getCount());
         return new TotalLottoCount(manuallyLottoCount, automaticallyLottoCount);
     }
 

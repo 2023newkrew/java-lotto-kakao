@@ -26,12 +26,4 @@ class LottoCountTest {
                 Arguments.arguments(PurchaseAmount.from(12000), 12)
         );
     }
-
-    @Test
-    public void should_throwException_when_getRemainExceptForResultIsNegative() {
-        LottoCount lottoCount1 = LottoCount.withCount(10);
-        LottoCount lottoCount2 = LottoCount.withCount(20);
-        Assertions.assertThatThrownBy(() -> lottoCount1.getRemainExceptFor(lottoCount2))
-                .isInstanceOf(LottoCountNegativeException.class);
-    }
 }

@@ -48,9 +48,4 @@ public class LottoCount {
     public int hashCode() {
         return Objects.hash(count);
     }
-
-    public LottoCount getRemainExceptFor(LottoCount other) {
-        int remainedLottoCount = this.count - other.count;
-        return LottoCount.withCount(remainedLottoCount);
-    }
 }
