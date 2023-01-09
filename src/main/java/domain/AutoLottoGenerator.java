@@ -15,6 +15,16 @@ public class AutoLottoGenerator implements LottoGenerator {
     private static final List<LottoNumber> WHOLE_NUMBERS = IntStream.rangeClosed(MINIMUM, MAXIMUM)
             .boxed().map(number -> new LottoNumber(number))
             .collect(Collectors.toList());
+    private static AutoLottoGenerator autoLottoGenerator;
+
+    private AutoLottoGenerator() {}
+
+    public static AutoLottoGenerator get() {
+        if (autoLottoGenerator == null) {
+            autoLottoGenerator = new AutoLottoGenerator();
+        }
+        return autoLottoGenerator;
+    }
 
     @Override
     public Lotto generateLotto() {
