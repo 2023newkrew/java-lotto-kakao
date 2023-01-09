@@ -5,7 +5,6 @@ import javalotto.exception.lotto.LottoNumberDuplicateException;
 import javalotto.exception.lotto.LottoNumberOutOfRangeException;
 import javalotto.util.LottoConstants;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +12,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     private Lotto(List<Integer> numbers) {
-        this.numbers = new ArrayList<>(numbers);
+        this.numbers = numbers;
     }
 
     public static Lotto from(List<Integer> numbers) {
@@ -21,7 +20,7 @@ public class Lotto {
 
         List<Integer> sortedNumbers = numbers.stream()
                 .sorted()
-                .collect(Collectors.toList());
+                .collect(Collectors.toUnmodifiableList());
 
         return new Lotto(sortedNumbers);
     }
