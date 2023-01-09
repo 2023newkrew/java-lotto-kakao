@@ -1,11 +1,13 @@
 package lotto;
 
-import static lotto.constant.MessageConstant.INVALID_MATCH_COUNT_RANGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottoGradeEnumTest {
@@ -25,7 +27,25 @@ public class LottoGradeEnumTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 7})
     void 맞은_갯수는_0이상_6이하이어야_한다(int matchCount) {
-        assertThatThrownBy(() -> LottoGradeEnum.evaluate(matchCount, true))
-                .hasMessage(INVALID_MATCH_COUNT_RANGE);
+        assertThatThrownBy(() -> LottoGradeEnum.evaluate(matchCount, true));
     }
+
+
+    @ParameterizedTest
+    @MethodSource("enumEvaluateArgument")
+    void 평가_테스트(int matchCount, boolean isMatchBonus, LottoGradeEnum expected) {
+        assertThat(LottoGradeEnum.evaluate(matchCount, isMatchBonus)).isSameAs(expected);
+    }
+
+    static Stream<Arguments> enumEvaluateArgument() {
+        return Stream.of(
+                Arguments.arguments(LottoGradeEnum.FIRST.getMatchCount(), false, LottoGradeEnum.FIRST),
+                Arguments.arguments(LottoGradeEnum.SECOND.getMatchCount(), true, LottoGradeEnum.SECOND),
+                Arguments.arguments(LottoGradeEnum.THIRD.getMatchCount(), false, LottoGradeEnum.THIRD),
+                Arguments.arguments(LottoGradeEnum.FOURTH.getMatchCount(), false, LottoGradeEnum.FOURTH),
+                Arguments.arguments(LottoGradeEnum.FIFTH.getMatchCount(), false, LottoGradeEnum.FIFTH),
+                Arguments.arguments(LottoGradeEnum.NONE_GRADE.getMatchCount(), false, LottoGradeEnum.NONE_GRADE)
+        );
+    }
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import static lotto.constant.MessageConstant.INVALID_DUPLICATED_LOTTO_NUMBER;
+import static lotto.constant.MessageConstant.INVALID_LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -16,7 +17,8 @@ public class LottoTest {
     @Test
     void 숫자_리스트_크기가_6개가_아니면_예외가_발생한다() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3)))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(INVALID_LOTTO_SIZE);
     }
 
     @Test
@@ -32,4 +34,10 @@ public class LottoTest {
                 .hasMessage(INVALID_DUPLICATED_LOTTO_NUMBER);
     }
 
+    @Test
+    void 로또의_숫자셋은_불변_객체로_래핑한다() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        assertThatThrownBy(() -> lotto.getNumbers().add(LottoNumber.from(1)))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
 }
