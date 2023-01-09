@@ -26,10 +26,6 @@ public class Money {
         this.value = value;
     }
 
-    public static boolean isNullOrZero(Money money) {
-        return Objects.isNull(money) || money.equals(ZERO);
-    }
-
     public BigDecimal bigDecimal() {
         return value;
     }
@@ -48,6 +44,10 @@ public class Money {
         }
 
         return valueOf(value.subtract(other.value));
+    }
+
+    public static boolean isNullOrZero(Money money) {
+        return Objects.isNull(money) || money.equals(ZERO);
     }
 
     public Money multiply(long multiplicand) {

@@ -13,7 +13,7 @@ public class LottoOutputView {
     public void printPurchaseResult(long manualCount, PurchaseResult purchaseResult) {
         LottoTicket ticket = purchaseResult.getTicket();
         System.out.println();
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",manualCount, ticket.count() -manualCount);
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualCount, ticket.count() - manualCount);
         ticket.stream().forEach(this::printLotto);
     }
 
