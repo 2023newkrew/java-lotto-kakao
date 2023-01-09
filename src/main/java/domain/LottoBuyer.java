@@ -42,7 +42,7 @@ public class LottoBuyer {
         List<Lotto> lottos = Stream.concat(manualLottos.stream(), autoLottos.stream())
                 .collect(Collectors.toList());
         List<LottoRank> statuses = lottos.stream()
-                .map(winningLotto::getRank)
+                .map(winningLotto::getLottoRank)
                 .collect(Collectors.toList());
 
         Map<LottoRank, Integer> map = new EnumMap<>(LottoRank.class);

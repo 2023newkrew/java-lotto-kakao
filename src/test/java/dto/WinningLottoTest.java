@@ -30,7 +30,7 @@ public class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(Lotto.ofManual(numbers), new LottoNumber(7));
 
         // when
-        LottoRank place = winningLotto.getRank(lotto);
+        LottoRank place = winningLotto.getLottoRank(lotto);
 
         // then
         assertThat(place).isEqualTo(LottoRank.FIRST_RANK);
@@ -44,7 +44,7 @@ public class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(Lotto.ofManual(numbers), new LottoNumber(7));
 
         // when
-        LottoRank place = winningLotto.getRank(lotto);
+        LottoRank place = winningLotto.getLottoRank(lotto);
 
         // then
         assertThat(place).isEqualTo(LottoRank.SECOND_RANK);

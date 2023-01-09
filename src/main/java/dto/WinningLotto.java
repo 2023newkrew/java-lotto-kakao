@@ -22,7 +22,7 @@ public class WinningLotto {
         }
     }
 
-    public LottoRank getRank(Lotto lotto) {
+    public LottoRank getLottoRank(Lotto lotto) {
         return LottoRank.getRank(lotto.matches(this.lotto), lotto.has(bonusNumber));
     }
 }
