@@ -37,7 +37,7 @@ public class LottoTicket {
     }
 
     private void validateDuplicateLottoNumbers(List<LottoNumber> lottoNumbers) {
-        if(new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
+        if (new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
             throw new LottoException(ErrorCode.DUPLICATE_LOTTO_NUMBERS);
         }
     }

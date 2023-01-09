@@ -22,7 +22,7 @@ public class LottoController {
 
     private PurchaseAmount inputPurchaseAmount() {
         try {
-            String inputPurchaseAmountString =  lottoInputTemplate.inputPurchaseAmount();
+            String inputPurchaseAmountString = lottoInputTemplate.inputPurchaseAmount();
             return new PurchaseAmount(inputPurchaseAmountString);
         } catch (Exception e) {
             System.out.println(e.getMessage());
