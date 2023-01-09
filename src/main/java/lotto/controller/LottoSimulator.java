@@ -38,7 +38,8 @@ public class LottoSimulator {
 
     private PurchaseResult createPurchaseResult() {
         Money money = inputView.inputMoney();
-        long manualCount = inputView.inputManualCount();
+        long maxCount = store.getPurchasableCount(money);
+        long manualCount = inputView.inputManualCount(maxCount);
         LottoTicket manualTicket = inputView.inputManualLottos(manualCount);
         PurchaseResult purchaseResult = store.buyManually(money, manualTicket);
         outputView.printPurchaseResult(manualCount, purchaseResult);
