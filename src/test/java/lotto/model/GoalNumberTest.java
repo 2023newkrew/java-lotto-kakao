@@ -17,7 +17,7 @@ class GoalNumberTest {
         Integer bonusBall = 7;
         GoalNumber goalNumber = new GoalNumber(testNumbers, bonusBall);
         LottoNumber lottoNumber = LottoNumber.create(testNumbers);
-        LottoResultType lottoResultType = goalNumber.getLottoResultByCompareLotto(lottoNumber);
+        LottoResultType lottoResultType = goalNumber.getLottoResult(lottoNumber);
 
         assertThat(lottoResultType).isEqualTo(LottoResultType.FIRST);
     }

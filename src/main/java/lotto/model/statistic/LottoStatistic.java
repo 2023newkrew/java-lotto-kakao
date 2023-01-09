@@ -7,8 +7,11 @@ import java.util.Map;
 
 public class LottoStatistic {
     private final Map<LottoResultType, Integer> statisticMap;
+    private final Integer lottoPrice;
+    private Integer totalNumberOfLotto;
 
-    public LottoStatistic() {
+    public LottoStatistic(Integer lottoPrice) {
+        this.lottoPrice = lottoPrice;
         this.statisticMap = initializeStatisticsMap();
     }
 
@@ -19,7 +22,17 @@ public class LottoStatistic {
                 .orElse(0L);
     }
 
+    public double getPrizeRate() {
+        int sumOfLottoPrice = lottoPrice * totalNumberOfLotto;
+        if(sumOfLottoPrice <= 0) {
+            return 0;
+        }
+        return (double) getSumOfPrize() / sumOfLottoPrice;
+    }
+
     public void raiseCount(LottoResultType key) {
+        totalNumberOfLotto += 1;
+
         statisticMap.put(key, statisticMap.get(key) + 1);
     }
 
