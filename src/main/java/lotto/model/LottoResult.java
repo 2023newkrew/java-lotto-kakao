@@ -9,13 +9,22 @@ public class LottoResult {
     private final boolean matchBonus;
 
     public LottoResult(int matchCount, boolean matchBonus) {
-        if (matchCount < 0 || matchCount > LottoConstants.BALLCOUNT_LIMIT ||
-                (matchCount == LottoConstants.BALLCOUNT_LIMIT && matchBonus)){
-            throw new InvalidLottoResult();
-        }
+        isValidResult(matchCount, matchBonus);
 
         this.matchBonus = matchBonus;
         this.matchCount = matchCount;
+    }
+
+    private void isValidResult(int matchCount, boolean matchBonus) {
+        if (matchCount < 0) {
+            throw new InvalidLottoResult("matchCount should be positive integer");
+        }
+        if (matchCount > LottoConstants.BALLCOUNT_LIMIT) {
+            throw new InvalidLottoResult("matchCount should be equal or smaller than BALLCOUNT_LIMIT");
+        }
+        if (matchCount == LottoConstants.BALLCOUNT_LIMIT && matchBonus) {
+            throw new InvalidLottoResult("if matchCount is equal to BALLCOUNT_LIMIT, matchBonus should be false");
+        }
     }
 
     public int getMatchCount() {
