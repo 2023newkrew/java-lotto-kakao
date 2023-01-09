@@ -1,15 +1,14 @@
 package lotto.controller;
 
-import lotto.model.Issuer;
-import lotto.model.LottoList;
-import lotto.model.LottoStatistics;
-import lotto.model.WinningNumbers;
+import lotto.model.*;
 import lotto.model.enums.LottoResult;
-import lotto.model.enums.LottoSettings;
+import lotto.model.strategy.ManualLottoStrategy;
+import lotto.model.strategy.RandomAutomaticLottoStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class LottoController {
 
@@ -17,30 +16,48 @@ public class LottoController {
 
     private final OutputView outputView = new OutputView();
 
-    public void start() {
-        Integer price = inputView.inputPrice();
-        Integer lottoCount = price / LottoSettings.PRICE.getValue();
-        outputView.printLottoCount(lottoCount);
+    private final LottoIssuer automaticLottoIssuer = new LottoIssuer(new RandomAutomaticLottoStrategy());
 
-        LottoList lottoList = Issuer.issue(lottoCount);
-        outputView.printLottoList(lottoList);
+    private final LottoIssuer manualLottoIssuer = new LottoIssuer(new ManualLottoStrategy());
+
+    public void start() {
+        Integer totalPrice = inputView.inputPrice();
+        Money price = new Money(totalPrice);
+        Integer totalLottoCount = price.getValue() / Lotto.PRICE;
+
+        Integer manualLottoCount = inputView.inputManualLottoCount();
+        Integer automaticLottoCount = totalLottoCount - manualLottoCount;
+        price.spend(manualLottoCount * Lotto.PRICE)
+                .spend(automaticLottoCount * Lotto.PRICE);
+
+        LottoList totalLottoList = issueTotalLotto(manualLottoCount, automaticLottoCount);
 
         List<Integer> mainNumbers = inputView.inputMainNumbers();
         Integer bonusNumber = inputView.inputBonusBall();
 
-        getResult(new WinningNumbers(mainNumbers, bonusNumber), lottoList, price);
+        getResult(new WinningNumbers(mainNumbers, bonusNumber), totalLottoList, totalPrice);
     }
 
-    public void getResult(WinningNumbers winningNumbers, LottoList lottoList, Integer price) {
+    private LottoList issueTotalLotto(Integer manualLottoCount, Integer automaticLottoCount) {
+        outputView.printRequestManualLottoNumber();
+        LottoList manualLottoList = manualLottoIssuer.issue(manualLottoCount);
+
+        LottoList automaticLottoList = automaticLottoIssuer.issue(automaticLottoCount);
+        LottoList totalLottoList = manualLottoList.merge(automaticLottoList);
+        outputView.printLottoCount(manualLottoCount, automaticLottoCount);
+        outputView.printLottoList(totalLottoList);
+
+        return totalLottoList;
+    }
+
+    private void getResult(WinningNumbers winningNumbers, LottoList lottoList, Integer totalPrice) {
         LottoStatistics lottoStatistics = new LottoStatistics();
 
-        for (int i = 0; i < lottoList.length(); i++) {
-            LottoResult lottoResult = LottoResult.match(winningNumbers.check(lottoList.get(i)));
-            lottoStatistics.put(lottoResult);
-        }
+        IntStream.range(0, lottoList.length())
+                .forEach(i -> lottoStatistics.put(LottoResult.valueOf(winningNumbers.check(lottoList.get(i)))));
 
         outputView.printLottoStatistics(lottoStatistics);
 
-        outputView.printRateOfProfit(lottoStatistics, price);
+        outputView.printRateOfProfit(lottoStatistics, totalPrice);
     }
 }
