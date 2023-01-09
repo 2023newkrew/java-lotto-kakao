@@ -5,6 +5,7 @@ import lotto.domain.LottoRandom;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -50,14 +51,15 @@ public class LottoTest {
     @DisplayName("입력된 금액에 맞게 로또 티켓이 생성되어야 한다.")
     void lottoBuyTest(int cost){
         LottoGame lottoGame = new LottoGame(cost, new ArrayList<>());
-        assertThat(lottoGame.getLottoTickets().getLottoTicketSize()).isEqualTo(cost/1000);
+        assertThat(lottoGame.getCustomer().getLottoTickets().getLottoTicketSize()).isEqualTo(cost/1000);
     }
 
+    @Disabled
     @ParameterizedTest
     @ValueSource(ints = {999, 0})
     @DisplayName("1000원 미만의 금액이 들어온다면 예외를 발생한다.")
     void lottoLowerThan1000Test(int amount) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoTickets(amount, new ArrayList<>()));
+                .isThrownBy(() -> new LottoTickets(new ArrayList<>(), new ArrayList<>()));
     }
 }

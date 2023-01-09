@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.Customer;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 import lotto.utils.LottoRank;
@@ -12,7 +13,8 @@ import static lotto.utils.LottoRank.*;
 
 public class ResultView {
 
-    public void printPurchaseCount(int amount, int manual){
+    public void printPurchaseCount(Customer customer, int manual){
+        int amount = customer.getAmount();
         System.out.println(amount + RESULT_PURCHASE_COUNT);
         System.out.printf("수동으로 %d장, 자동으로 %d%s\n", manual, amount - manual, RESULT_PURCHASE_COUNT);
     }
@@ -43,8 +45,8 @@ public class ResultView {
         }
         System.out.println(RESULT_GOOD);
     }
-    public void printLottoTickets(LottoTickets lottoTickets) {
-        List<LottoTicket> tickets = lottoTickets.getTicket();
+    public void printLottoTickets(Customer customer) {
+        List<LottoTicket> tickets = customer.getLottoTickets().getTicket();
         for(LottoTicket ticket : tickets){
             printEachTicket(ticket.getLottoNumbers());
         }

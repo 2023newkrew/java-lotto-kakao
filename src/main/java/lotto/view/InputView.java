@@ -53,22 +53,6 @@ public class InputView {
         return ret;
     }
 
-    // 사용자 입력값을 WinnerTicket 으로 변환
-    public LottoWinnerTicket changeToWinnerTicket(String userInput, int bonus) {
-        Integer[] numbers = stringToArray(userInput);
-        return new LottoWinnerTicket(
-                new LottoTicket(Arrays.asList(numbers)), bonus);
-    }
-
-    private Integer[] stringToArray(String userInput){
-        return Stream.of(userInput
-                        .replace(" ", "")
-                        .split(","))
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .toArray(Integer[]::new);
-    }
-
     // 입력이 정수가 아니라면 에러 처리
     private int inputInteger(){
         try{
