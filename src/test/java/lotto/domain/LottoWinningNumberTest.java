@@ -45,14 +45,7 @@ public class LottoWinningNumberTest {
     void win1() {
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoNumbers, new LottoBall(7));
 
-        LottoTicket lottoTicket = new LottoTicket(List.of(
-                new LottoBall(1),
-                new LottoBall(2),
-                new LottoBall(3),
-                new LottoBall(4),
-                new LottoBall(5),
-                new LottoBall(6)
-        ));
+        LottoTicket lottoTicket = new LottoTicket(1, 2, 3, 4, 5, 6);
 
         Ranking ranking = lottoWinningNumber.calculateRanking(lottoTicket);
         assertThat(ranking).isEqualTo(Ranking.FIRST);
@@ -63,14 +56,7 @@ public class LottoWinningNumberTest {
     void win2() {
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoNumbers, new LottoBall(7));
 
-        LottoTicket lottoTicket = new LottoTicket(List.of(
-                new LottoBall(1),
-                new LottoBall(2),
-                new LottoBall(3),
-                new LottoBall(4),
-                new LottoBall(5),
-                new LottoBall(7)
-        ));
+        LottoTicket lottoTicket = new LottoTicket(1, 2, 3, 4, 5, 7);
 
         Ranking ranking = lottoWinningNumber.calculateRanking(lottoTicket);
         assertThat(ranking).isEqualTo(Ranking.SECOND);
@@ -81,14 +67,7 @@ public class LottoWinningNumberTest {
     void win3() {
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoNumbers, new LottoBall(7));
 
-        LottoTicket lottoTicket = new LottoTicket(List.of(
-                new LottoBall(1),
-                new LottoBall(2),
-                new LottoBall(3),
-                new LottoBall(4),
-                new LottoBall(5),
-                new LottoBall(8)
-        ));
+        LottoTicket lottoTicket = new LottoTicket(1, 2, 3, 4, 5, 8);
 
         Ranking ranking = lottoWinningNumber.calculateRanking(lottoTicket);
         assertThat(ranking).isEqualTo(Ranking.THIRD);
@@ -99,14 +78,7 @@ public class LottoWinningNumberTest {
     void win4() {
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoNumbers, new LottoBall(7));
 
-        LottoTicket lottoTicket = new LottoTicket(List.of(
-                new LottoBall(1),
-                new LottoBall(2),
-                new LottoBall(3),
-                new LottoBall(4),
-                new LottoBall(8),
-                new LottoBall(9)
-        ));
+        LottoTicket lottoTicket = new LottoTicket(1, 2, 3, 4, 8, 9);
 
         Ranking ranking = lottoWinningNumber.calculateRanking(lottoTicket);
         assertThat(ranking).isEqualTo(Ranking.FOURTH);
@@ -117,14 +89,7 @@ public class LottoWinningNumberTest {
     void win5() {
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoNumbers, new LottoBall(7));
 
-        LottoTicket lottoTicket = new LottoTicket(List.of(
-                new LottoBall(1),
-                new LottoBall(2),
-                new LottoBall(3),
-                new LottoBall(8),
-                new LottoBall(9),
-                new LottoBall(10)
-        ));
+        LottoTicket lottoTicket = new LottoTicket(1, 2, 3, 8, 9, 10);
 
         Ranking ranking = lottoWinningNumber.calculateRanking(lottoTicket);
         assertThat(ranking).isEqualTo(Ranking.FIFTH);

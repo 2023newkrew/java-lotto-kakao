@@ -1,6 +1,5 @@
 package lotto.view;
 
-import lotto.domain.LottoBall;
 import lotto.domain.LottoTicket;
 import lotto.domain.MatchResult;
 import lotto.domain.Ranking;
@@ -34,16 +33,7 @@ class OutputViewTest {
     @Test
     @DisplayName("로또 출력")
     void printLottoTickets() {
-        List<LottoTicket> lottoTickets = List.of(
-                new LottoTicket(List.of(
-                        new LottoBall(1),
-                        new LottoBall(2),
-                        new LottoBall(3),
-                        new LottoBall(4),
-                        new LottoBall(5),
-                        new LottoBall(6)
-                ))
-        );
+        List<LottoTicket> lottoTickets = List.of(new LottoTicket(1, 2, 3, 4, 5, 6));
 
         OutputView outputView = new OutputView();
         outputView.printLottoTickets(lottoTickets, 1);

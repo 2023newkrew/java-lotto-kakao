@@ -19,6 +19,12 @@ public class LottoTicket {
         }
     }
 
+    public LottoTicket(int... lottoNumbers) {
+        this(Arrays.stream(lottoNumbers)
+                .mapToObj(LottoBall::new)
+                .collect(Collectors.toUnmodifiableList()));
+    }
+
     public int countMatchingNumber(LottoTicket targetLotto) {
         return (int) targetLotto.lottoBalls
                 .stream()
@@ -38,5 +44,18 @@ public class LottoTicket {
     @Override
     public String toString() {
         return lottoBalls.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTicket that = (LottoTicket) o;
+        return lottoBalls.equals(that.lottoBalls);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoBalls);
     }
 }
