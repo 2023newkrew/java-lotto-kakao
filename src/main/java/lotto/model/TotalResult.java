@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class TotalResult {
     private final Map<LottoResult, Integer> lottoResults = new HashMap<>();
-    private Prize totalPrize = new Prize(0L);
+    private Cash totalPrize = new Prize(0L);
     private int trial = 0;
 
     public TotalResult() {
@@ -31,7 +31,7 @@ public class TotalResult {
                 .collect(Collectors.toList());
 
         if (prizes.size() != 0) {
-            totalPrize = (Prize) totalPrize.plus(prizes.get(0));
+            totalPrize = totalPrize.plus(prizes.get(0));
         }
     }
 
