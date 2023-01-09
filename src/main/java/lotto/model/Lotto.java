@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    List<Integer> lotto;
+    private final List<Integer> lotto;
 
     public Lotto() {
         this(RandomNumbersGenerator.generateRandomNumbers());
@@ -23,18 +23,18 @@ public class Lotto {
         return lotto;
     }
 
-    public RankingType checkWin(List<Integer> winNumbers, int bonus) {
+    public RankingType checkWin(WinningNumbers winningNumbers) {
         int matchedNum = lotto.stream()
-                .filter(winNumbers::contains)
+                .filter(winningNumbers.getWiningMainNumbers()::contains)
                 .collect(Collectors.toSet())
                 .size();
-        if(matchedNum == 5) {
-            return RankingType.findRanking(matchedNum, checkBonus(bonus));
+        if (matchedNum == 5) {
+            return RankingType.findRanking(matchedNum, checkBonus(winningNumbers.getWinningBonusNumber()));
         }
         return RankingType.findRanking(matchedNum, false);
     }
 
-    private boolean checkBonus(int bonus){
+    private boolean checkBonus(int bonus) {
         return lotto.contains(bonus);
     }
 }

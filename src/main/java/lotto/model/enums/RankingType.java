@@ -10,7 +10,7 @@ public enum RankingType {
     FIFTH(5000, 3, false, "3개 일치 (5000원)"),
     DEFAULT(0, 0, false, "");
 
-    private final int prize;
+    private final long prize;
     private final int count;
     private final boolean hasBonusNumber;
 
@@ -30,11 +30,11 @@ public enum RankingType {
                 .orElse(DEFAULT);
     }
 
-    public int getPrize() {
+    public long getPrize() {
         return prize;
     }
 
-    public String getHowManyMatches(){
+    public String getHowManyMatches() {
         return howManyMatches;
     }
 }

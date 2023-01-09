@@ -3,30 +3,25 @@ package lotto.model;
 import lotto.model.enums.RankingType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
 
-    List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public Lottos(int input) {
-        addRandom(input);
-    }
-
-    private void addRandom(int input) {
-        for (int i = 0; i < input; i++) {
-            lottos.add(new Lotto());
-        }
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
-    public List<RankingType> getRankings(List<Integer> winNumbers, int bonus) {
+    public List<RankingType> getRankings(WinningNumbers winningNumbers) {
         List<RankingType> rankingTypes = new ArrayList<>();
-        for(Lotto lotto: lottos){
-            rankingTypes.add(lotto.checkWin(winNumbers, bonus));
+        for (Lotto lotto : lottos) {
+            rankingTypes.add(lotto.checkWin(winningNumbers));
         }
         return rankingTypes;
     }

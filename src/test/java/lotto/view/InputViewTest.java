@@ -2,7 +2,6 @@ package lotto.view;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.shadow.com.univocity.parsers.common.input.InputAnalysisProcess;
 
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
@@ -38,9 +37,10 @@ public class InputViewTest {
 
     @Test
     void checkLastLottoNumbers(){
-        String input = "1,2,3,4,5,6\n";
+        String input = "1,2,3,4,5,6\n" +
+                "7";
         systemIn(input);
-        Assertions.assertEquals(inputView.receiveLastLottoNumbers(), Arrays.asList(1,2,3,4,5,6));
+        Assertions.assertEquals(inputView.receiveLottoNumbers(), Arrays.asList(1,2,3,4,5,6));
     }
 
     @Test

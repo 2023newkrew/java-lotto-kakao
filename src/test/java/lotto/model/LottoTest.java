@@ -41,7 +41,7 @@ class LottoTest {
         List<Integer> winNumbers = Arrays.asList(1,2,3,4,5,6);
         int bonus = 7;
         Lotto lotto = new Lotto(numbers);
-        Assertions.assertEquals(lotto.checkWin(winNumbers, bonus).name(), expect);
+        Assertions.assertEquals(lotto.checkWin(new WinningNumbers(winNumbers, bonus)).name(), expect);
     }
 
 }
