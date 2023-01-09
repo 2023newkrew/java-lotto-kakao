@@ -5,10 +5,9 @@ import lotto.exception.LottoException;
 
 import java.util.Objects;
 
-public class LottoNumber implements Comparable<LottoNumber>{
-    private static final Integer LOTTO_NUMBER_LOWER_BOUNDARY = 1;
-    private static final Integer LOTTO_NUMBER_UPPER_BOUNDARY = 45;
+import static lotto.config.LottoConfig.*;
 
+public class LottoNumber implements Comparable<LottoNumber>{
     private final Integer lottoNumber;
 
     public LottoNumber(Integer lottoNumber) {

@@ -31,7 +31,7 @@ public class LottoServiceTest {
     @DisplayName("수익률 구하기 테스트")
     public void getRateOfReturnTest() {
         //given
-        LottoResult lottoResult = new LottoResult(List.of(0, 0, 0, 0, 1, 0));
+        LottoResult lottoResult = new LottoResult(List.of(0, 0, 0, 0, 1, 0, 0, 0));
         //when
         LottoService lottoService = new LottoService();
         Double rateOfReturn = lottoService.getRateOfReturn(20000, lottoResult.getRankCountMap());
