@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Controller {
-    private static LottoCount lottoCount;
+    private static Cash buyCash;
     private static LottoCount lottoCountManual;
     private static LottoCount lottoCountAuto;
     private static final LottoTrials lottoTrials = new LottoTrials();
@@ -20,19 +20,17 @@ public class Controller {
     public static void inputCash() throws IOException {
         Output.printEnterCash();
 
-        Cash buyCash = new BuyCash(Input.cashInput());
-
-        lottoCount = new LottoCount(buyCash);
-    }
-
-    public static void inputManualNum() throws IOException {
-        Output.printEnterManualNum();
-
-        lottoCountManual = new LottoCountManual(Input.manualNumInput());
-        lottoCountAuto = new LottoCountAuto(lottoCount.getCount() - lottoCountManual.getCount());
+        buyCash = new BuyCash(Input.cashInput());
     }
 
     public static void inputLottoManual() throws IOException {
+        Output.printEnterManualNum();
+
+        lottoCountManual = new LottoCount(Input.manualNumInput());
+        lottoCountAuto = new LottoCount(new LottoCount(buyCash).getCount() - lottoCountManual.getCount());
+
+        if (lottoCountManual.getCount() == 0) return;
+
         Output.printEnterLottoManual();
 
         for (int i = 0; i < lottoCountManual.getCount(); i++) {
@@ -67,7 +65,7 @@ public class Controller {
     }
 
     public static void processLotto() {
-        for (int i = 0; i < lottoCount.getCount(); i++){
+        for (int i = 0; i < lottoTrials.getSize(); i++){
             totalResult.addResult(winLotto.compareLotto(lottoTrials.getLottoTrial(i)));
         }
     }
