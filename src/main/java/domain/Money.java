@@ -34,8 +34,8 @@ public class Money {
     }
 
     private static void validateNoChange(int money) {
-        if (money % Money.LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("로또는 " + Money.LOTTO_PRICE + "원 단위로 판매합니다.");
+        if (money % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("로또는 " + LOTTO_PRICE + "원 단위로 판매합니다.");
         }
     }
 
