@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import lotto.utils.LottoRank;
 
 import java.util.List;
@@ -43,9 +43,9 @@ public class ResultView {
         }
         System.out.println(RESULT_GOOD);
     }
-    public void printLottoTickets(LottoTicket lottoTicket) {
-        List<LottoNumber> tickets = lottoTicket.getTicket();
-        for(LottoNumber ticket : tickets){
+    public void printLottoTickets(LottoTickets lottoTickets) {
+        List<LottoTicket> tickets = lottoTickets.getTicket();
+        for(LottoTicket ticket : tickets){
             printEachTicket(ticket.getLottoNumbers());
         }
     }

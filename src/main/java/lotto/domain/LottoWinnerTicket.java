@@ -3,21 +3,20 @@ package lotto.domain;
 
 import lotto.utils.LottoRank;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static lotto.domain.LottoNumber.LOTTO_LOWER_BOUND;
-import static lotto.domain.LottoNumber.LOTTO_UPPER_BOUND;
+import static lotto.domain.LottoTicket.LOTTO_LOWER_BOUND;
+import static lotto.domain.LottoTicket.LOTTO_UPPER_BOUND;
 
 public class LottoWinnerTicket {
-    private final LottoNumber winNumber;
+    private final LottoTicket winNumber;
     private final int bonusBall;
 
 
-    public LottoWinnerTicket(LottoNumber winNumber, int bonusBall) {
+    public LottoWinnerTicket(LottoTicket winNumber, int bonusBall) {
         this.winNumber = winNumber;
         this.bonusBall = bonusBall;
         bonusRangeCheck();
@@ -30,26 +29,26 @@ public class LottoWinnerTicket {
     }
 
     // 로또 통계 배열 생성
-    public Map<LottoRank, Integer> getResult(LottoTicket userTicket) {
-        List<LottoNumber> tickets = userTicket.getTicket();
+    public Map<LottoRank, Integer> getResult(LottoTickets userTicket) {
+        List<LottoTicket> tickets = userTicket.getTicket();
         return Collections.unmodifiableMap(tickets.stream().collect(Collectors.toMap(this::getScore, numbers -> 1, Integer::sum)));
     }
 
     // 당첨 통계 배열 계산
-    public LottoRank getScore (LottoNumber ticket) {
+    public LottoRank getScore (LottoTicket ticket) {
         int sameCount = checkSameCount(ticket);
         boolean isBonus = isBonusNumber(ticket, sameCount);
         return LottoRank.getRank(sameCount, isBonus);
     }
 
     // 하나의 로또 티켓 중 몇 개의 변호를 맞췄는지
-    public int checkSameCount(LottoNumber userTicket) {
+    public int checkSameCount(LottoTicket userTicket) {
         return userTicket.getLottoNumbers().stream()
                 .reduce(0, (sum, now) -> sum + checkContains(now));
     }
 
     // 보너스 숫자와 일치하는 것이 있는지 확인
-    public boolean isBonusNumber(LottoNumber userTicket, int sameCount) {
+    public boolean isBonusNumber(LottoTicket userTicket, int sameCount) {
         if(sameCount != 5) return true;
         return userTicket.getLottoNumbers().contains(bonusBall);
     }

@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 import lotto.domain.LottoWinnerTicket;
 
 import java.util.ArrayList;
@@ -43,10 +43,10 @@ public class InputView {
         return manualCount;
     }
 
-    public List<LottoNumber> inputManualNumbers(int amount){
+    public List<LottoTicket> inputManualNumbers(int amount){
         int manualCount = inputManualCount(amount);
         System.out.println(INPUT_MANUAL_NUMBER);
-        List<LottoNumber> ret = new ArrayList<>();
+        List<LottoTicket> ret = new ArrayList<>();
         for(int i=0; i<manualCount; i++){
             String userInput = scanner.nextLine();
             ret.add(changeToLottoNumber(userInput));
@@ -58,12 +58,12 @@ public class InputView {
     public LottoWinnerTicket changeToWinnerTicket(String userInput, int bonus){
         Integer[] numbers = stringToArray(userInput);
         return new LottoWinnerTicket(
-                new LottoNumber(Arrays.asList(numbers)), bonus);
+                new LottoTicket(Arrays.asList(numbers)), bonus);
     }
 
-    public LottoNumber changeToLottoNumber(String userInput){
+    public LottoTicket changeToLottoNumber(String userInput){
         Integer[] numbers = stringToArray(userInput);
-        return new LottoNumber(Arrays.asList(numbers));
+        return new LottoTicket(Arrays.asList(numbers));
     }
 
     private Integer[] stringToArray(String userInput){

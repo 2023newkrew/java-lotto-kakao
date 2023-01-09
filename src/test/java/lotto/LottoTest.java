@@ -2,8 +2,8 @@ package lotto;
 
 import lotto.controller.LottoGame;
 import lotto.domain.LottoRandom;
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
@@ -37,9 +37,9 @@ public class LottoTest {
     @DisplayName("랜덤 숫자가 1~45 사이에 존재해야만 한다.")
     void lottoNumberRangeTest() {
         LottoRandom lottoRandom = new LottoRandom();
-        LottoNumber lottoNumber = new LottoNumber(lottoRandom.createRandomNumbers());
+        LottoTicket lottoTicket = new LottoTicket(lottoRandom.createRandomNumbers());
         for (int i = 0; i < 6; i++) { // stream 으로 수정 필요
-            Assertions.assertThat(lottoNumber.getLottoNumbers().get(i)).
+            Assertions.assertThat(lottoTicket.getLottoNumbers().get(i)).
                     isGreaterThanOrEqualTo(1).
                     isLessThanOrEqualTo(45);
         }
@@ -58,6 +58,6 @@ public class LottoTest {
     @DisplayName("1000원 미만의 금액이 들어온다면 예외를 발생한다.")
     void lottoLowerThan1000Test(int amount) {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new LottoTicket(amount, new ArrayList<>()));
+                .isThrownBy(() -> new LottoTickets(amount, new ArrayList<>()));
     }
 }

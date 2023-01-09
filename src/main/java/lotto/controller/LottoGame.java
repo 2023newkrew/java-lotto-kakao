@@ -1,18 +1,18 @@
 package lotto.controller;
 
-import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
+import lotto.domain.LottoTickets;
 
 import java.util.List;
 
 public class LottoGame {
-    private final LottoTicket lottoTicket;
+    private final LottoTickets lottoTickets;
 
-    public LottoGame(int amount, List<LottoNumber> manual) {
-        this.lottoTicket = new LottoTicket(amount, manual);
+    public LottoGame(int amount, List<LottoTicket> manual) {
+        this.lottoTickets = new LottoTickets(amount, manual);
     }
 
-    public LottoTicket getLottoTickets(){
-        return this.lottoTicket;
+    public LottoTickets getLottoTickets(){
+        return this.lottoTickets;
     }
 }
