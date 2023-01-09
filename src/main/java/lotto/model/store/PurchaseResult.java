@@ -1,8 +1,5 @@
 package lotto.model.store;
 
-import lotto.model.ranking.AnalysisResult;
-import lotto.model.ranking.RankingCounts;
-import lotto.model.ranking.WinningNumbers;
 import lotto.model.ticket.LottoTicket;
 
 import java.util.Objects;
@@ -35,11 +32,5 @@ public class PurchaseResult {
 
     public LottoReceipt getReceipt() {
         return receipt;
-    }
-
-    public AnalysisResult analyze(WinningNumbers winningNumbers) {
-        RankingCounts rankingCounts = ticket.judge(winningNumbers);
-
-        return AnalysisResult.from(rankingCounts, receipt);
     }
 }

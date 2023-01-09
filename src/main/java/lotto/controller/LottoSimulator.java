@@ -1,10 +1,13 @@
 package lotto.controller;
 
 import lotto.model.ranking.AnalysisResult;
+import lotto.model.ranking.RankingCounts;
+import lotto.model.store.LottoReceipt;
 import lotto.model.store.PurchaseResult;
 import lotto.model.ranking.WinningNumbers;
 import lotto.model.store.LottoStore;
 import lotto.model.store.Money;
+import lotto.model.ticket.LottoTicket;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -34,7 +37,15 @@ public class LottoSimulator {
         outputView.printPurchaseResult(purchaseResult);
 
         WinningNumbers winningNumbers = inputView.inputWinningNumbers();
-        AnalysisResult analysisResult = purchaseResult.analyze(winningNumbers);
+        AnalysisResult analysisResult = analyze(purchaseResult, winningNumbers);
         outputView.printAnalysisResult(analysisResult);
+    }
+
+    private static AnalysisResult analyze(PurchaseResult purchaseResult, WinningNumbers winningNumbers) {
+        LottoTicket ticket = purchaseResult.getTicket();
+        LottoReceipt receipt = purchaseResult.getReceipt();
+        RankingCounts rankingCounts = ticket.judge(winningNumbers);
+
+        return AnalysisResult.from(rankingCounts, receipt);
     }
 }
