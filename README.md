@@ -29,27 +29,3 @@
  - [x] 3개 일치
 
 [x] 수익률 계산 <br>
-
-
-lotto
- - list numbers; - 6개 1 ~ 45
- - 생성자 ()
-   - radom()
- - 생성자 (list numbers)
-   - list numbers () return
-    - w1(당첨번호, 보너스볼) 교집합
-      - 5개일 경우 보너스 체크
-       return int 1,2,3
- - 
-lottos
- - list lotto
- - w2(당첨번호, 보너스볼){
-   - for each
-   - w1(lotto)
-   - return list
-
-winner
-- 
-   - 
- - w3 수익률 계산(ranking count, 구입금액)
-   - 수익률 계산 double return

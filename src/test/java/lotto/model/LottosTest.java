@@ -15,11 +15,12 @@ class LottosTest {
     Lottos lottos;
     final static int NUMBER_OF_LOTTOS = 10;
     final static List<Integer> DUMMY_LIST = Arrays.asList(1, 2, 3, 4, 5, 6);
+    final static List<List<Integer>> DUMMY_MANUALLOTTO_LIST = Arrays.asList(DUMMY_LIST);
 
     @BeforeEach
     void setUp() {
         money = 10000;
-        lottos = new Lottos(money);
+        lottos = new Lottos(money, DUMMY_MANUALLOTTO_LIST);
     }
 
     @Test

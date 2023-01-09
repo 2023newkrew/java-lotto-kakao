@@ -26,7 +26,6 @@ public class RandomNumbersGenerator {
 
     public static List<Integer> generateRandomNumbers() {
         List<Integer> numbers = new ArrayList<>(INIT_LIST);
-
         Collections.shuffle(numbers);
         return numbers.subList(0, Constants.LOTTO_SIZE);
     }
