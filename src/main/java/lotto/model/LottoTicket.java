@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.exception.ErrorCode;
@@ -25,6 +26,7 @@ public class LottoTicket {
 
     public LottoTicket(List<LottoNumber> lottoTicket) {
         validateLottoTicketLength(lottoTicket);
+        validateDuplicateLottoNumbers(lottoTicket);
         this.lottoTicket = lottoTicket;
     }
 
@@ -34,8 +36,14 @@ public class LottoTicket {
                 .collect(Collectors.toList()));
     }
 
-    private void validateLottoTicketLength(List<LottoNumber> input) {
-        if (input == null || input.size() != LOTTO_TICKET_LENGTH) {
+    private void validateDuplicateLottoNumbers(List<LottoNumber> lottoNumbers) {
+        if(new HashSet<>(lottoNumbers).size() != lottoNumbers.size()) {
+            throw new LottoException(ErrorCode.DUPLICATE_LOTTO_NUMBERS);
+        }
+    }
+
+    private void validateLottoTicketLength(List<LottoNumber> lottoNumbers) {
+        if (lottoNumbers == null || lottoNumbers.size() != LOTTO_TICKET_LENGTH) {
             throw new LottoException(ErrorCode.INVALID_LOTTO_NUMBER_LENGTH);
         }
     }
