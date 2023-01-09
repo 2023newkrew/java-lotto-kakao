@@ -11,16 +11,15 @@ public class LottoCount {
 
     public LottoCount(Integer totalLottoCount, String manualLottoCountString) {
         this.totalLottoCount = totalLottoCount;
-        validateTypeOfManualLottoCount(manualLottoCountString);
-        Integer manualLottoCount = StringUtil.convertStringToInt(manualLottoCountString);
+        Integer manualLottoCount = validateTypeOfManualLottoCount(manualLottoCountString);
         validateManualLottoCount(manualLottoCount);
         this.manualLottoCount = manualLottoCount;
         this.automaticLottoCount = this.totalLottoCount - this.manualLottoCount;
     }
 
-    private void validateTypeOfManualLottoCount(String manualLottoCount) {
+    private Integer validateTypeOfManualLottoCount(String manualLottoCount) {
         try {
-            StringUtil.convertStringToInt(manualLottoCount);
+            return StringUtil.convertStringToInt(manualLottoCount);
         } catch (NumberFormatException e) {
             throw new LottoException(ErrorCode.INVALID_INPUT_TYPE_NOT_INTEGER);
         }
