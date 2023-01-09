@@ -53,6 +53,28 @@ public class LottoTicketTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("validateDuplicateLottoNumbersTestGenerator")
+    @DisplayName("중복된 로또 번호가 포함된 리스트가 주어지면 예외반환")
+    public void validateDuplicateLottoNumbersTest(List<LottoNumber> input, ErrorCode expected) {
+        //given
+
+        //when & then
+        assertThatThrownBy(() -> new LottoTicket(input))
+                .isInstanceOf(LottoException.class)
+                .hasMessage(expected.getMessage());
+
+    }
+
+    private static Stream<Arguments> validateDuplicateLottoNumbersTestGenerator() {
+        return Stream.of(
+                Arguments.of(createLottoNumberList(List.of(1, 2, 3, 4, 5, 5)
+                ), ErrorCode.DUPLICATE_LOTTO_NUMBERS),
+                Arguments.of(createLottoNumberList(List.of(1, 1, 1, 1, 1, 1)
+                ), ErrorCode.DUPLICATE_LOTTO_NUMBERS)
+        );
+    }
+
     @Test
     @DisplayName("로또 티켓에 특정 숫자가 포함되어 있는지 검사하는 메소드 테스트")
     public void includeNumberTest() {

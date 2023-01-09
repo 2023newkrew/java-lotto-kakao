@@ -1,9 +1,12 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.exception.ErrorCode;
 import lotto.exception.LottoException;
@@ -34,7 +37,7 @@ public class LottoNumber {
     public static LottoNumber from(String lottoNumberString) {
         try {
             return from(Integer.parseInt(lottoNumberString));
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new LottoException(ErrorCode.INVALID_INPUT_TYPE_NOT_INTEGER);
         }
     }
@@ -47,5 +50,9 @@ public class LottoNumber {
 
     public Integer getLottoNumber() {
         return lottoNumber;
+    }
+
+    public static List<Integer> getLottoNumbers() {
+        return new ArrayList<>(lottoNumbers.keySet());
     }
 }

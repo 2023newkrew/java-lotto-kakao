@@ -39,9 +39,8 @@ public class PurchaseAmountTest {
     public void lackOfMoneyTest() {
         //given
         Integer lottoPrice = LottoService.getLottoPrice();
-        PurchaseAmount purchaseAmount = new PurchaseAmount(String.valueOf(lottoPrice - 1));
         //when & then
-        assertThatThrownBy(() -> purchaseAmount.getLottoTicketCount(lottoPrice))
+        assertThatThrownBy(() -> new PurchaseAmount(String.valueOf(lottoPrice - 1)))
                 .isInstanceOf(LottoException.class)
                 .hasMessage(ErrorCode.LACK_OF_MONEY.getMessage());
     }
@@ -69,7 +68,7 @@ public class PurchaseAmountTest {
     @DisplayName("로또 구매 후 이익률을 구하는 로직 테스트")
     public void calculateRateOfReturnTest(PurchaseAmount purchaseAmount, double expected) {
         //given
-        Integer totalRevenue = 3000;
+        int totalRevenue = 3000;
         //when & then
         assertThat(purchaseAmount.calculateRateOfReturn(totalRevenue)).isEqualTo(expected);
     }
