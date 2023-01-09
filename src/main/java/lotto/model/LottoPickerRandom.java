@@ -15,14 +15,8 @@ public class LottoPickerRandom implements LottoPicker {
 
     @Override
     public List<LottoBall> pick() {
-        List<LottoBall> result = new ArrayList<>();
-
         Collections.shuffle(allBalls);
 
-        for (int i = 0; i < LottoConstants.BALLCOUNT_LIMIT; i++) {
-            result.add(allBalls.get(i));
-        }
-
-        return result;
+        return new ArrayList<>(allBalls.subList(0, LottoConstants.BALLCOUNT_LIMIT));
     }
 }
