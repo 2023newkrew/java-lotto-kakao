@@ -31,7 +31,7 @@ public class LottoMachine {
             return 0L;
         }
 
-        return money.divide(price).longValue();
+        return (long) money.divide(price);
     }
 
     public LottoTicket createRandomTicket(long count) {
@@ -44,14 +44,14 @@ public class LottoMachine {
     }
 
     private static void validateCount(long count) {
-        if(count < 0){
+        if (count < 0) {
             throw new IllegalArgumentException("생성할 로또의 수량이 0보다 작습니다.");
         }
     }
 
     public LottoReceipt createReceipt(Money money, long count) {
         validateCount(count);
-        Money totalPrice = price.multiply(BigDecimal.valueOf(count));
+        Money totalPrice = price.multiply(count);
 
         return LottoReceipt.from(money, totalPrice);
     }

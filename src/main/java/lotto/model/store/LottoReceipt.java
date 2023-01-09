@@ -33,9 +33,8 @@ public class LottoReceipt {
     public double calculateProfitRate(Money totalPrize) {
         Money totalProfit = change.add(totalPrize);
         Money base = change.add(totalPrice);
-        BigDecimal profitRate = totalProfit.divide(base, 2, RoundingMode.DOWN);
 
-        return profitRate.doubleValue();
+        return totalProfit.divide(base, 2);
     }
 
     @Override

@@ -50,20 +50,20 @@ public class Money {
         return valueOf(value.subtract(other.value));
     }
 
-    public Money multiply(BigDecimal multiplicand) {
-        return valueOf(value.multiply(multiplicand));
+    public Money multiply(long multiplicand) {
+        return valueOf(value.multiply(BigDecimal.valueOf(multiplicand)));
     }
 
-    public BigDecimal divide(Money other) {
-        return divide(other, 0, RoundingMode.DOWN);
+    public double divide(Money other) {
+        return divide(other, 0);
     }
 
-    public BigDecimal divide(Money other, int scale, RoundingMode roundingMode) {
+    public double divide(Money other, int scale) {
         if (isNullOrZero(other)) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
 
-        return value.divide(other.value, scale, roundingMode);
+        return value.divide(other.value, scale, RoundingMode.DOWN).doubleValue();
     }
 
     @Override

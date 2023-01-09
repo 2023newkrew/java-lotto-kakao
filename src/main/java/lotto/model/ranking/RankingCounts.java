@@ -45,7 +45,7 @@ public class RankingCounts {
     }
 
     private Money sumPrizeBy(LottoRanking ranking) {
-        BigDecimal count = BigDecimal.valueOf(countBy(ranking));
+        long count = countBy(ranking);
 
         return ranking.getPrize().multiply(count);
     }
