@@ -36,7 +36,7 @@ public class LottoController {
     }
 
     private TotalLottoCount getTotalLottoCount(PurchaseAmount purchaseAmount) {
-        LottoCount totalLottoCount = LottoCount.of(purchaseAmount, PURCHASE_AMOUNT_UNIT_PRICE);
+        LottoCount totalLottoCount = LottoCount.of(purchaseAmount);
         LottoCount manuallyLottoCount = inputView.getManuallyLottoCountInput();
         return TotalLottoCount.of(totalLottoCount, manuallyLottoCount);
     }

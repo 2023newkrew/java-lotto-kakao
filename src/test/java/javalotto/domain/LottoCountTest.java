@@ -15,15 +15,15 @@ class LottoCountTest {
 
     @ParameterizedTest
     @MethodSource
-    public void should_calculateCorrectCount_when_purchaseAmountAndUnitPriceGiven(PurchaseAmount purchaseAmount, int unitPrice, int expectedResult) {
-        LottoCount lottoCount = LottoCount.of(purchaseAmount, unitPrice);
+    public void should_calculateCorrectCount_when_purchaseAmountAndUnitPriceGiven(PurchaseAmount purchaseAmount, int expectedResult) {
+        LottoCount lottoCount = LottoCount.of(purchaseAmount);
         Assertions.assertThat(lottoCount.getCount()).isEqualTo(expectedResult);
     }
 
     static Stream<Arguments> should_calculateCorrectCount_when_purchaseAmountAndUnitPriceGiven() {
         return Stream.of(
-                Arguments.arguments(PurchaseAmount.from(2000), 1000, 2),
-                Arguments.arguments(PurchaseAmount.from(12000), 2000, 6)
+                Arguments.arguments(PurchaseAmount.from(2000), 2),
+                Arguments.arguments(PurchaseAmount.from(12000), 12)
         );
     }
 

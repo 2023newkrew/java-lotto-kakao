@@ -11,8 +11,8 @@ public class LottoCount {
         this.count = count;
     }
 
-    public static LottoCount of(PurchaseAmount purchaseAmount, int unitPrice) {
-        int count = purchaseAmount.getPurchaseAmount() / unitPrice;
+    public static LottoCount of(PurchaseAmount purchaseAmount) {
+        int count = purchaseAmount.getPurchaseAmount() / PurchaseAmount.PURCHASE_AMOUNT_UNIT_PRICE;
         validateLottoCount(count);
         return new LottoCount(count);
     }
