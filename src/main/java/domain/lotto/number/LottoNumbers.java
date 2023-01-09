@@ -1,33 +1,56 @@
 package domain.lotto.number;
 
-import domain.lotto.LottoMetaData;
+import domain.lotto.number.generator.NumbersGeneratable;
+import exception.InvalidLottoNumbersException;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
-    private final List<Integer> numbers;
+    private final int LOTTO_NUMBER_SIZE = 6;
 
-    public LottoNumbers(final List<Integer> numbers) {
+    private final List<LottoNumber> numbers;
+
+    private LottoNumbers(final List<Integer> numbers) {
         validateNumberDuplication(numbers);
-        numbers.forEach(this::validateNumberRange);
-        this.numbers = new ArrayList<>(numbers);
+        this.numbers = numbers.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return numbers.stream()
+                .mapToInt(LottoNumber::getNumber)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    public static LottoNumbers create(NumbersGeneratable numbersGeneratable) {
+        return new LottoNumbers(numbersGeneratable.generate());
     }
 
     private void validateNumberDuplication(final List<Integer> lottoNumbers) {
         HashSet<Integer> hs = new HashSet<>(lottoNumbers);
-        if (hs.size() != LottoMetaData.LOTTO_NUMBER_SIZE)
-            throw new IllegalArgumentException("로또 번호는 중복없는 6자리 숫자여야 합니다.");
+        if (hs.size() != LOTTO_NUMBER_SIZE)
+            throw new InvalidLottoNumbersException();
     }
 
-    private void validateNumberRange(final Integer number) {
-        if (number < LottoMetaData.MIN_LOTTO_NUMBER || number > LottoMetaData.MAX_LOTTO_NUMBER)
-            throw new IllegalArgumentException("번호는 1 이상 45 이하의 숫자여야 합니다.");
+    public List<LottoNumber> getMatchNumbers(final LottoNumbers lottoNumbers) {
+        System.out.println(lottoNumbers);
+        System.out.println(numbers);
+        return lottoNumbers.numbers.stream()
+                .filter(this::contains)
+                .collect(Collectors.toList());
     }
 
+    public boolean contains(final LottoNumber lottoNumber) {
+        return getNumbers().contains(lottoNumber.getNumber());
+    }
+
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
 }

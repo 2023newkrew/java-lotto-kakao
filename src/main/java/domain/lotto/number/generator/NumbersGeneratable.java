@@ -1,8 +1,8 @@
-package domain.lotto.number;
+package domain.lotto.number.generator;
 
 import java.util.List;
 
 @FunctionalInterface
-public interface NumberGeneratable {
+public interface NumbersGeneratable {
     List<Integer> generate();
 }
