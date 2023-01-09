@@ -6,6 +6,9 @@ public class LottoCount {
     private int autoLottoCount;
 
     public LottoCount(int manualLottoCount, int lottoTicketCount) {
+        if (manualLottoCount < 0) {
+            throw new IllegalArgumentException("수동 로또 수는 음수가 될 수 없습니다");
+        }
         if (manualLottoCount > lottoTicketCount) {
             throw new IllegalArgumentException("전체 로또 수 보다 많이 살 수 없습니다.");
         }

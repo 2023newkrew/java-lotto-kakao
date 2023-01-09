@@ -16,6 +16,11 @@ class LottoCountTest {
     }
 
     @Test
+    void 수동_티켓_수가_음수면_예외가_발생한다() {
+        assertThatThrownBy(() -> new LottoCount(-1, 2)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void 수동_티켓_수가_전체_티켓_수보다_많으면_예외가_발생한다() {
         assertThatThrownBy(() -> new LottoCount(2, 1)).isInstanceOf(IllegalArgumentException.class);
     }
