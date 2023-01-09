@@ -40,7 +40,7 @@ public class Controller {
                     .map(v -> new LottoBall(Integer.parseInt(v.trim())))
                     .collect(Collectors.toList());
 
-            lottoTrials.addLottoManualTrial(new LottoManual(manualLotto));
+            lottoTrials.addLottoManualTrial(new Lotto(manualLotto));
         }
     }
 
@@ -61,7 +61,7 @@ public class Controller {
 
         Output.printEnterBonusNum();
 
-        winLotto = new WinLotto(new LottoManual(winNum), new LottoBall(Input.bonusNumInput()));
+        winLotto = new WinLotto(new Lotto(winNum), new LottoBall(Input.bonusNumInput()));
 
         System.out.println();
     }

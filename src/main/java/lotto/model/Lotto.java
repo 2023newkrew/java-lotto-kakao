@@ -4,8 +4,24 @@ import lotto.exception.DuplicatedBallNumber;
 
 import java.util.*;
 
-public abstract class Lotto {
-    protected final List<LottoBall> balls = new ArrayList<>();
+public class Lotto {
+    private final List<LottoBall> balls = new ArrayList<>();
+
+    public Lotto(Collection<LottoBall> balls) {
+        this.balls.addAll(balls);
+
+        check();
+        sort();
+    }
+
+    public Lotto(List<Integer> balls) {
+        for (int ball : balls) {
+            this.balls.add(new LottoBall(ball));
+        }
+
+        check();
+        sort();
+    }
 
     void check() {
         Set<LottoBall> lottoSet = new HashSet<>(this.balls);

@@ -15,7 +15,7 @@ class LottoTest {
     void 중복된_경우_예외_던지자() {
         List<Integer> oneTrial = new ArrayList<>(List.of(1, 2, 3, 4, 5, 5));
         assertThatThrownBy(() -> {
-            Lotto lotto = new LottoManual(oneTrial);
+            Lotto lottoManual = new Lotto(oneTrial);
         }).isInstanceOf(DuplicatedBallNumber.class);
     }
 
@@ -25,7 +25,7 @@ class LottoTest {
             LottoPickerRandom lottoPickerRandom = new LottoPickerRandom();
 
             for (int i = 0; i < 100; i++){
-                Lotto lotto = new LottoAuto(lottoPickerRandom);
+                Lotto lottoAuto = new Lotto(lottoPickerRandom.pick());
             }
         }).doesNotThrowAnyException();
     }

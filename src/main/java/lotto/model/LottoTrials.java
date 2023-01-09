@@ -10,7 +10,7 @@ public class LottoTrials {
         final LottoPickerRandom lottoPickerRandom = new LottoPickerRandom();
 
         for (int i = 0; i < lottoCountAuto.getCount(); i++){
-            Lotto lotto = new LottoAuto(lottoPickerRandom);
+            Lotto lotto = new Lotto(lottoPickerRandom.pick());
 
             lottoTrials.add(lotto);
         }
