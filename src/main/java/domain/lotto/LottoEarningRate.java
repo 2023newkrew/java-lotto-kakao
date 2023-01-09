@@ -13,7 +13,7 @@ public class LottoEarningRate {
 
     public LottoEarningRate(LottoPrizeResult lottoPrizeResult, LottoTickets lottoTickets) {
         int prizeMoneySum = lottoPrizeResult.calculatePrizeMoneySum();
-        Cost cost = lottoTickets.calculatePurcaseCost();
+        Cost cost = lottoTickets.calculatePurchaseCost();
         double tempEarningRate = (double) prizeMoneySum / cost.getCost();
         validateEarningRate(tempEarningRate);
         this.earningRate = tempEarningRate;

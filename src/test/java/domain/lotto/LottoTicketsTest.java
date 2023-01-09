@@ -15,10 +15,19 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoTicketsTest {
     LottoNumbersGenerator lottoNumbersGenerator;
+    LottoNumbers lottoNumbers;
 
     @BeforeEach
     void setUp() {
         lottoNumbersGenerator = new LottoNumbersRandomGenerator(LottoNumber.MINIMUM_NUMBER, LottoNumber.MAXIMUM_NUMBER);
+        lottoNumbers = new LottoNumbers(Set.of(
+                new LottoNumber(1),
+                new LottoNumber(2),
+                new LottoNumber(3),
+                new LottoNumber(4),
+                new LottoNumber(5),
+                new LottoNumber(6)
+        ));
     }
 
     @DisplayName("LottoNumbers의 List를 넘겨받아서 LottoTickets를 생성한다.")
@@ -49,7 +58,7 @@ public class LottoTicketsTest {
 
         LottoTickets lottoTickets = new LottoTickets(tickets);
 
-        Cost cost = lottoTickets.calculatePurcaseCost();
+        Cost cost = lottoTickets.calculatePurchaseCost();
 
         assertThat(cost).isEqualTo(new Cost(LottoShop.LOTTO_PRICE * ticketCount));
     }
@@ -58,18 +67,9 @@ public class LottoTicketsTest {
     @DisplayName("당첨 번호와 비교해서 로또 당첨 결과를 반환한다. - 1등")
     @Test
     void matchTickets1() {
-        LottoNumbers lottoNumbers = new LottoNumbers(Set.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
-
         LottoTickets lottoTickets = new LottoTickets(List.of(lottoNumbers));
 
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoNumbers, new LottoNumber(45));
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers, new LottoNumber(45));
 
         Map<LottoPrize, Integer> expectedMap = new EnumMap<>(LottoPrize.class);
         Arrays.stream(LottoPrize.values())
@@ -78,7 +78,7 @@ public class LottoTicketsTest {
 
         LottoPrizeResult expected = new LottoPrizeResult(expectedMap);
 
-        LottoPrizeResult result = lottoTickets.matchTickets(lottoWinningNumber);
+        LottoPrizeResult result = lottoTickets.matchTickets(lottoWinningNumbers);
 
         Assertions.assertThat(result).isEqualTo(expected);
     }
@@ -86,15 +86,6 @@ public class LottoTicketsTest {
     @DisplayName("당첨 번호와 비교해서 로또 당첨 결과를 반환한다. - 2등")
     @Test
     void countPrize2() {
-        LottoNumbers lottoNumbers = new LottoNumbers(Set.of(
-                new LottoNumber(1),
-                new LottoNumber(2),
-                new LottoNumber(3),
-                new LottoNumber(4),
-                new LottoNumber(5),
-                new LottoNumber(6)
-        ));
-
         LottoTickets lottoTickets = new LottoTickets(List.of(lottoNumbers));
 
         LottoNumbers winningNumbers = new LottoNumbers(Set.of(
@@ -106,7 +97,7 @@ public class LottoTicketsTest {
                 new LottoNumber(45)
         ));
 
-        LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningNumbers, new LottoNumber(6));
+        LottoWinningNumbers lottoWinningNumbers = new LottoWinningNumbers(winningNumbers, new LottoNumber(6));
 
         Map<LottoPrize, Integer> expectedMap = new EnumMap<>(LottoPrize.class);
         Arrays.stream(LottoPrize.values())
@@ -115,7 +106,7 @@ public class LottoTicketsTest {
 
         LottoPrizeResult expected = new LottoPrizeResult(expectedMap);
 
-        LottoPrizeResult result = lottoTickets.matchTickets(lottoWinningNumber);
+        LottoPrizeResult result = lottoTickets.matchTickets(lottoWinningNumbers);
 
         Assertions.assertThat(result).isEqualTo(expected);
     }
@@ -130,6 +121,17 @@ public class LottoTicketsTest {
 
         LottoTickets lottoTickets = new LottoTickets(tickets);
 
-        assertThat(lottoTickets.getTicketCount()).isEqualTo(ticketCount);
+        assertThat(lottoTickets.countAllTickets()).isEqualTo(ticketCount);
+    }
+
+    @DisplayName("수동 로또 번호와 자동 로또 번호로 LottoTickets를 생성한다")
+    @Test
+    void create_manualAndAuto() {
+        LottoNumbers autoLottoNumbers = lottoNumbersGenerator.generate();
+        List<LottoNumbers> manualTickets = List.of(lottoNumbers);
+        List<LottoNumbers> autoTickets = List.of(autoLottoNumbers);
+
+        assertThatNoException()
+                .isThrownBy(() -> new LottoTickets(manualTickets, autoTickets));
     }
 }

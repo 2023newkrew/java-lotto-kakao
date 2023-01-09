@@ -6,6 +6,8 @@ import domain.lotto.LottoShop;
 import view.LottoInputView;
 import view.LottoOutputView;
 
+import java.util.List;
+
 public class LottoController {
 
     private final LottoInputView lottoInputView = new LottoInputView();
@@ -15,12 +17,16 @@ public class LottoController {
 
     public void startLotto() {
         Cost cost = lottoInputView.readCost();
-        LottoTickets lottoTickets = lottoShop.buyLottoTickets(cost);
+        LottoTicketPurchaseAmount manualPurchaseAmount = lottoInputView.readLottoManualPurchaseAmount(cost);
+        List<LottoNumbers> manualLottoNumbers = lottoInputView.readManualLottoNumbers(manualPurchaseAmount);
+
+        LottoTickets lottoTickets = lottoShop.buyLottoTickets(manualLottoNumbers, cost);
         lottoOutputView.printLottoTicketPurchaseCount(lottoTickets);
         lottoOutputView.printLottoTickets(lottoTickets);
-        LottoWinningNumber lottoWinningNumber = lottoInputView.readWinningNumber();
 
-        LottoPrizeResult lottoPrizeResult = lottoTickets.matchTickets(lottoWinningNumber);
+        LottoWinningNumbers lottoWinningNumbers = lottoInputView.readLottoWinningNumbers();
+
+        LottoPrizeResult lottoPrizeResult = lottoTickets.matchTickets(lottoWinningNumbers);
         LottoEarningRate lottoEarningRate = new LottoEarningRate(lottoPrizeResult, lottoTickets);
         lottoOutputView.printLottoPrizeResult(lottoPrizeResult);
         lottoOutputView.printEarningRate(lottoEarningRate);

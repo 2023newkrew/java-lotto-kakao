@@ -9,7 +9,7 @@ import java.util.Set;
 
 class LottoPrizeTest {
 
-    LottoWinningNumber lottoWinningNumber;
+    LottoWinningNumbers lottoWinningNumbers;
     LottoNumbers lottoNumbers;
 
     @BeforeEach
@@ -24,7 +24,7 @@ class LottoPrizeTest {
         ));
 
         LottoNumber bonusNumber = new LottoNumber(10);
-        lottoWinningNumber = new LottoWinningNumber(lottoNumbers, bonusNumber);
+        lottoWinningNumbers = new LottoWinningNumbers(lottoNumbers, bonusNumber);
     }
 
     @DisplayName("다 맞으면 1등이다.")
@@ -39,7 +39,7 @@ class LottoPrizeTest {
                 new LottoNumber(6)
         ));
 
-        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumber);
+        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumbers);
         Assertions.assertThat(prize)
                 .isEqualTo(LottoPrize.FIRST_PRIZE);
     }
@@ -56,7 +56,7 @@ class LottoPrizeTest {
                 new LottoNumber(10)
         ));
 
-        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumber);
+        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumbers);
         Assertions.assertThat(prize)
                 .isEqualTo(LottoPrize.SECOND_PRIZE);
     }
@@ -73,7 +73,7 @@ class LottoPrizeTest {
                 new LottoNumber(41)
         ));
 
-        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumber);
+        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumbers);
         Assertions.assertThat(prize)
                 .isEqualTo(LottoPrize.THIRD_PRIZE);
     }
@@ -90,7 +90,7 @@ class LottoPrizeTest {
                 new LottoNumber(42)
         ));
 
-        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumber);
+        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumbers);
         Assertions.assertThat(prize)
                 .isEqualTo(LottoPrize.FOURTH_PRIZE);
     }
@@ -107,7 +107,7 @@ class LottoPrizeTest {
                 new LottoNumber(43)
         ));
 
-        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumber);
+        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumbers);
         Assertions.assertThat(prize)
                 .isEqualTo(LottoPrize.FIFTH_PRIZE);
     }
@@ -124,7 +124,7 @@ class LottoPrizeTest {
                 new LottoNumber(43)
         ));
 
-        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumber);
+        LottoPrize prize = LottoPrize.matchLottoNumbers(lottoNumbers, lottoWinningNumbers);
         Assertions.assertThat(prize)
                 .isEqualTo(LottoPrize.NONE_PRIZE);
     }

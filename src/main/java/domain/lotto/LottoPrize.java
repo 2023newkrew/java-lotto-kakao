@@ -30,10 +30,10 @@ public enum LottoPrize implements Comparable<LottoPrize> {
         return prizeMoney;
     }
 
-    public static LottoPrize matchLottoNumbers(LottoNumbers lottoNumbers, LottoWinningNumber lottoWinningNumber) {
+    public static LottoPrize matchLottoNumbers(LottoNumbers lottoNumbers, LottoWinningNumbers lottoWinningNumbers) {
         List<LottoPrize> orderedLottoPrizes = getOrderedLottoPrizes();
         return orderedLottoPrizes.stream()
-                .filter(lottoPrize -> lottoPrize.prizeJudgment.judge(lottoNumbers, lottoWinningNumber))
+                .filter(lottoPrize -> lottoPrize.prizeJudgment.judge(lottoNumbers, lottoWinningNumbers))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }

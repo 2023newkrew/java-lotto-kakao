@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class LottoWinningNumberTest {
+public class LottoWinningNumbersTest {
 
     LottoNumbers lottoNumbers;
 
@@ -33,7 +33,7 @@ public class LottoWinningNumberTest {
         LottoNumber bonusNumber = new LottoNumber(10);
 
         assertThatNoException()
-                .isThrownBy(() -> new LottoWinningNumber(lottoNumbers, bonusNumber));
+                .isThrownBy(() -> new LottoWinningNumbers(lottoNumbers, bonusNumber));
     }
 
     @DisplayName("당첨 번호 중 보너스 번호와 중복된 번호가 있으면 예외가 발생한다")
@@ -43,6 +43,6 @@ public class LottoWinningNumberTest {
         LottoNumber bonusNumber = new LottoNumber(number);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoWinningNumber(lottoNumbers, bonusNumber));
+                .isThrownBy(() -> new LottoWinningNumbers(lottoNumbers, bonusNumber));
     }
 }

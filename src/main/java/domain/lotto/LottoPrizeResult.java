@@ -12,10 +12,6 @@ public class LottoPrizeResult {
         this.prizeCounts = prizeCounts;
     }
 
-    public Map<LottoPrize, Integer> getPrizeCounts() {
-        return prizeCounts;
-    }
-
     public int calculatePrizeMoneySum() {
         return prizeCounts.entrySet().stream()
                 .mapToInt(prizeCount -> prizeCount.getKey().getPrizeMoney() * prizeCount.getValue())
