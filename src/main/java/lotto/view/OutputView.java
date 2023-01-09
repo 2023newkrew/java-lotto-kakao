@@ -18,8 +18,8 @@ public class OutputView {
     private static final String MSG_RESULT_FORMAT = "결과적으로 %s라는 의미임)\n";
     private static final String NUMBERS_DELIMITER = ", ";
 
-    public static void printLottoCount(int manualLottoCount, int LottoCount) {
-        System.out.printf(MSG_PURCHASE_LOTTO_COUNT_FORMAT, manualLottoCount, LottoCount - manualLottoCount);
+    public static void printLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.printf(MSG_PURCHASE_LOTTO_COUNT_FORMAT, manualLottoCount, autoLottoCount);
     }
 
     public static void printLottos(Lottos lottos) {
