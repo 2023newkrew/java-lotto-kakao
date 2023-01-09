@@ -2,7 +2,6 @@ package lotto.model.ranking;
 
 import lotto.model.store.Money;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -36,18 +35,7 @@ public class RankingCounts {
         return rankingCounts.getOrDefault(ranking, 0L);
     }
 
-    public Money calculateTotalPrize() {
-        return rankingCounts.keySet()
-                .stream()
-                .map(this::sumPrizeBy)
-                .reduce(Money::add)
-                .orElse(Money.ZERO);
+    public Money sumEachPrize(LottoRanking ranking) {
+        return ranking.getPrize().multiply(countBy(ranking));
     }
-
-    private Money sumPrizeBy(LottoRanking ranking) {
-        long count = countBy(ranking);
-
-        return ranking.getPrize().multiply(count);
-    }
-
 }

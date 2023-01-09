@@ -38,7 +38,8 @@ public class LottoStore {
 
     public PurchaseResult buyManually(Money money, LottoTicket ticket) {
         long lottoCount = getPurchasableCount(money);
-        LottoTicket randomTicket = LottoTicket.createByRandom(lottoCount - ticket.count());
+        long manualCount = lottoCount - ticket.count();
+        LottoTicket randomTicket = LottoTicket.createByRandom(manualCount);
         LottoReceipt receipt = createReceipt(money, lottoCount);
 
         return PurchaseResult.of(ticket.append(randomTicket), receipt);

@@ -1,22 +1,21 @@
 package lotto.model.ranking;
 
 import lotto.model.store.LottoReceipt;
-import lotto.model.store.Money;
 
 public class AnalysisResult {
 
     private final RankingCounts rankingCounts;
 
-    private final double profitRate;
+    private final ProfitRate profitRate;
 
     public static AnalysisResult from(RankingCounts rankingCounts, LottoReceipt receipt) {
-        Money totalPrize = rankingCounts.calculateTotalPrize();
-        double profitRate = receipt.calculateProfitRate(totalPrize);
+        TotalPrize totalPrize = TotalPrize.from(rankingCounts);
+        ProfitRate profitRate = ProfitRate.from(receipt, totalPrize.getMoney());
 
         return new AnalysisResult(rankingCounts, profitRate);
     }
 
-    private AnalysisResult(RankingCounts rankingCounts, double profitRate) {
+    private AnalysisResult(RankingCounts rankingCounts, ProfitRate profitRate) {
         this.rankingCounts = rankingCounts;
         this.profitRate = profitRate;
     }
@@ -26,6 +25,6 @@ public class AnalysisResult {
     }
 
     public double getProfitRate() {
-        return profitRate;
+        return profitRate.doubleValue();
     }
 }

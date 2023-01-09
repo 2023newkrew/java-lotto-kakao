@@ -1,6 +1,5 @@
 package lotto.model.ranking;
 
-import lotto.TestUtil;
 import lotto.model.store.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -39,13 +38,7 @@ class RankingCountsTest {
         @ParameterizedTest
         @MethodSource
         void should_returnRankingCount_when_givenRanking(LottoRanking ranking, long rankingCount) {
-            List<LottoRanking> rankings = List.of(
-                    LottoRanking.FIRST,
-                    LottoRanking.SECOND, LottoRanking.SECOND,
-                    LottoRanking.THIRD, LottoRanking.THIRD, LottoRanking.THIRD,
-                    LottoRanking.FOURTH, LottoRanking.FOURTH, LottoRanking.FOURTH, LottoRanking.FOURTH,
-                    LottoRanking.FIFTH, LottoRanking.FIFTH, LottoRanking.FIFTH, LottoRanking.FIFTH, LottoRanking.FIFTH
-            );
+            List<LottoRanking> rankings = createTestRankings();
             RankingCounts rankingCounts = RankingCounts.from(rankings);
 
             Assertions.assertThat(rankingCounts.countBy(ranking)).isEqualTo(rankingCount);
@@ -66,28 +59,38 @@ class RankingCountsTest {
 
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
-    class calculateTotalPrize {
+    class sumEachPrize {
 
 
-        @DisplayName("총 상금 계산")
+        @DisplayName("등수 별 총 상금 계산")
         @ParameterizedTest
         @MethodSource
-        void should_returnTotalProfit_when_givenRankings(List<LottoRanking> rankings, Money expected) {
+        void should_returnTotalProfit_when_givenRankings(LottoRanking ranking, Money expected) {
+            List<LottoRanking> rankings = createTestRankings();
             RankingCounts rankingCounts = RankingCounts.from(rankings);
 
-            Assertions.assertThat(rankingCounts.calculateTotalPrize()).isEqualTo(expected);
+            Assertions.assertThat(rankingCounts.sumEachPrize(ranking)).isEqualTo(expected);
         }
 
         List<Arguments> should_returnTotalProfit_when_givenRankings() {
             return List.of(
-                    Arguments.of(TestUtil.repeatRankings(LottoRanking.FIRST, 1), Money.valueOf(2_000_000_000L)),
-                    Arguments.of(TestUtil.repeatRankings(LottoRanking.SECOND, 2), Money.valueOf(60_000_000L)),
-                    Arguments.of(TestUtil.repeatRankings(LottoRanking.THIRD, 3), Money.valueOf(450_000L)),
-                    Arguments.of(TestUtil.repeatRankings(LottoRanking.FOURTH, 4), Money.valueOf(200_000L)),
-                    Arguments.of(TestUtil.repeatRankings(LottoRanking.FIFTH, 5), Money.valueOf(25_000L)),
-                    Arguments.of(TestUtil.repeatRankings(LottoRanking.NOTHING, 6), Money.valueOf(0L)),
-                    Arguments.of(List.of(), Money.valueOf(0L))
+                    Arguments.of(LottoRanking.FIRST, Money.valueOf(2_000_000_000L)),
+                    Arguments.of(LottoRanking.SECOND, Money.valueOf(60_000_000L)),
+                    Arguments.of(LottoRanking.THIRD, Money.valueOf(450_000L)),
+                    Arguments.of(LottoRanking.FOURTH, Money.valueOf(200_000L)),
+                    Arguments.of(LottoRanking.FIFTH, Money.valueOf(25_000L)),
+                    Arguments.of(LottoRanking.NOTHING, Money.valueOf(0L))
             );
         }
+    }
+
+    private static List<LottoRanking> createTestRankings() {
+        return List.of(
+                LottoRanking.FIRST,
+                LottoRanking.SECOND, LottoRanking.SECOND,
+                LottoRanking.THIRD, LottoRanking.THIRD, LottoRanking.THIRD,
+                LottoRanking.FOURTH, LottoRanking.FOURTH, LottoRanking.FOURTH, LottoRanking.FOURTH,
+                LottoRanking.FIFTH, LottoRanking.FIFTH, LottoRanking.FIFTH, LottoRanking.FIFTH, LottoRanking.FIFTH
+        );
     }
 }

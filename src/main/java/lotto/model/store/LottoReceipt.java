@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class LottoReceipt {
 
-    private final Money totalPrice;
+    private final Money money;
 
     private final Money change;
 
@@ -12,51 +12,29 @@ public class LottoReceipt {
         if (Objects.isNull(money)) {
             money = Money.ZERO;
         }
+        Money change = calculateChange(money, totalPrice);
+
+        return new LottoReceipt(money, change);
+    }
+
+    private static Money calculateChange(Money payment, Money totalPrice) {
         if (Objects.isNull(totalPrice)) {
             totalPrice = Money.ZERO;
         }
 
-        return new LottoReceipt(totalPrice, money.subtract(totalPrice));
+        return payment.subtract(totalPrice);
     }
 
-    private LottoReceipt(Money totalPrice, Money change) {
-        this.totalPrice = totalPrice;
+    private LottoReceipt(Money money, Money change) {
+        this.money = money;
         this.change = change;
+    }
+
+    public Money getPayment() {
+        return money;
     }
 
     public Money getChange() {
         return change;
-    }
-
-    public double calculateProfitRate(Money totalPrize) {
-        Money totalProfit = change.add(totalPrize);
-        Money base = change.add(totalPrice);
-
-        return totalProfit.divide(base, 2);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof LottoReceipt)) {
-            return false;
-        }
-
-        LottoReceipt receipt = (LottoReceipt) o;
-
-        if (!totalPrice.equals(receipt.totalPrice)) {
-            return false;
-        }
-
-        return getChange().equals(receipt.getChange());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = totalPrice.hashCode();
-        result = 31 * result + getChange().hashCode();
-        return result;
     }
 }

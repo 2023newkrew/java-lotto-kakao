@@ -38,32 +38,4 @@ class LottoReceiptTest {
             );
         }
     }
-
-    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    @Nested
-    class calculateProfitRate {
-
-        @DisplayName("투자금이 1000, 총 가격이 1000일 때 총 상금을 받아 수익률 계산")
-        @ParameterizedTest
-        @MethodSource
-        void should_profitRateIs_when_givenTotalPrize(Money totalPrize, double profitRate) {
-            Money money = Money.valueOf(1000L);
-            LottoReceipt receipt = LottoReceipt.from(money, money);
-
-            double actual = receipt.calculateProfitRate(totalPrize);
-
-            Assertions.assertThat(actual).isEqualByComparingTo(profitRate);
-        }
-
-        public List<Arguments> should_profitRateIs_when_givenTotalPrize() {
-            return List.of(
-                    Arguments.of(null, 0f),
-                    Arguments.of(Money.ZERO, 0f),
-                    Arguments.of(Money.valueOf(1000L), 1f),
-                    Arguments.of(Money.valueOf(5000L), 5f),
-                    Arguments.of(Money.valueOf(10000L), 10f),
-                    Arguments.of(Money.valueOf(100000L), 100f)
-            );
-        }
-    }
 }
