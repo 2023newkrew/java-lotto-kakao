@@ -5,10 +5,9 @@ import java.util.List;
 
 public class LottoTrials {
     private final List<Lotto> lottoTrials = new ArrayList<>();
+    private static final LottoPicker lottoPickerRandom = new LottoPickerRandom();
 
     public void createLottoAutoTrials(LottoCount lottoCountAuto) {
-        final LottoPickerRandom lottoPickerRandom = new LottoPickerRandom();
-
         for (int i = 0; i < lottoCountAuto.getCount(); i++){
             Lotto lotto = new Lotto(lottoPickerRandom.pick());
 
