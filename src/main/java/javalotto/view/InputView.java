@@ -1,9 +1,9 @@
 package javalotto.view;
 
-import javalotto.domain.Lotto;
-import javalotto.domain.PurchaseAmount;
-import javalotto.domain.WinningLotto;
+import javalotto.domain.*;
+import javalotto.exception.input.InputInvalidFormatException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -26,6 +26,23 @@ public class InputView {
         return PurchaseAmount.from(Integer.parseInt(scanner.nextLine()));
     }
 
+    public LottoCount getManuallyLottoCountInput() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+
+        return LottoCount.withCount(Integer.parseInt(scanner.nextLine()));
+    }
+
+    public Lottos getManuallyLottosInput(LottoCount manuallyLottoCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+
+        List<Lotto> manuallyPurchasedLottos = new ArrayList<>();
+        for (int i = 0; i < manuallyLottoCount.getCount(); i++) {
+            List<Integer> lottoNumbers = getNumbersInput();
+            manuallyPurchasedLottos.add(Lotto.from(lottoNumbers));
+        }
+        return Lottos.from(manuallyPurchasedLottos);
+    }
+
     public WinningLotto getWinningLottoInput() {
         List<Integer> winningNumbers = getWinningNumbersInput();
         int bonusNumber = getBonusNumberInput();
@@ -35,8 +52,23 @@ public class InputView {
 
     private List<Integer> getWinningNumbersInput() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String inputNumbers = scanner.nextLine();
+        return getNumbersInput();
+    }
 
+    private List<Integer> getNumbersInput() {
+        String inputNumbers = scanner.nextLine();
+        return tryGetNumberListBy(inputNumbers);
+    }
+
+    private static List<Integer> tryGetNumberListBy(String inputNumbers) {
+        try {
+            return getNumberListBy(inputNumbers);
+        } catch (NumberFormatException e) {
+            throw new InputInvalidFormatException(inputNumbers, e);
+        }
+    }
+
+    private static List<Integer> getNumberListBy(String inputNumbers) {
         return Arrays.stream(inputNumbers.split(", "))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());

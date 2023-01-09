@@ -13,9 +13,9 @@ public enum Rank {
     FOURTH(4, ALL, 50_000),
     FIFTH(3, ALL, 5_000);
 
-    final int matchCount;
-    final BonusMatchType bonusMatchType;
-    final int prize;
+    private final int matchCount;
+    private final BonusMatchType bonusMatchType;
+    private final int prize;
 
     Rank(int matchCount, BonusMatchType bonusMatchType, int prize) {
         this.matchCount = matchCount;
@@ -29,8 +29,12 @@ public enum Rank {
                 .findFirst();
     }
 
-    public boolean isRank(int matchCount, boolean isBonusMatch) {
+    private boolean isRank(int matchCount, boolean isBonusMatch) {
         return this.matchCount == matchCount && this.bonusMatchType.isSatisfiedBy(isBonusMatch);
+    }
+
+    public long getSumOfPrize(int count) {
+        return (long) this.prize * count;
     }
 
     @Override
@@ -43,13 +47,13 @@ public enum Rank {
         MATCH((isBonusMatch) -> isBonusMatch),
         MISMATCH((isBonusMatch) -> !isBonusMatch);
 
-        final Predicate<Boolean> bonusMatchTypeCondition;
+        private final Predicate<Boolean> bonusMatchTypeCondition;
 
         BonusMatchType(Predicate<Boolean> bonusMatchTypeCondition) {
             this.bonusMatchTypeCondition = bonusMatchTypeCondition;
         }
 
-        boolean isSatisfiedBy(boolean isBonusNumberMatch) {
+        private boolean isSatisfiedBy(boolean isBonusNumberMatch) {
             return this.bonusMatchTypeCondition.test(isBonusNumberMatch);
         }
 

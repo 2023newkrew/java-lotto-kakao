@@ -1,9 +1,6 @@
 package javalotto.domain;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -46,5 +43,11 @@ public class Lottos {
         return lottos.stream()
                 .map(Lotto::toString)
                 .collect(Collectors.joining("\n"));
+    }
+
+    public Lottos addAll(Lottos other) {
+        List<Lotto> totalLottos = new ArrayList<>(this.lottos);
+        totalLottos.addAll(other.lottos);
+        return Lottos.from(totalLottos);
     }
 }

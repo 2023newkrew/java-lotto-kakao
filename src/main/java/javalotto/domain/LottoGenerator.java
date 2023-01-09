@@ -1,9 +1,9 @@
 package javalotto.domain;
 
+import javalotto.util.LottoConstants;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import static javalotto.domain.Lotto.*;
 
 public class LottoGenerator {
 
@@ -28,6 +28,6 @@ public class LottoGenerator {
     }
 
     private Lotto getLotto() {
-        return Lotto.from(numberGenerator.generateNumbers(LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE + 1, LOTTO_NUMBERS_COUNT));
+        return Lotto.from(numberGenerator.generateNumbers(LottoConstants.LOTTO_NUMBER_MIN_VALUE, LottoConstants.LOTTO_NUMBER_MAX_VALUE + 1, LottoConstants.LOTTO_NUMBERS_COUNT));
     }
 }

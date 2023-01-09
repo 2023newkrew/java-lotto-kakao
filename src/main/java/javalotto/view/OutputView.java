@@ -11,8 +11,8 @@ public class OutputView {
         return new OutputView();
     }
 
-    public void printLottoCount(LottoCount lottoCount) {
-        System.out.println(lottoCount.getCount() + "개를 구매했습니다.");
+    public void printLottoCount(TotalLottoCount totalLottoCount) {
+        System.out.println(totalLottoCount);
     }
 
     public void printLottos(Lottos lottos) {
