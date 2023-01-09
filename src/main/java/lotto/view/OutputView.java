@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private static final String MSG_PURCHASE_LOTTO_COUNT_FORMAT = "%s개를 구매했습니다.";
+    private static final String MSG_PURCHASE_LOTTO_COUNT_FORMAT = "%s개를 구매했습니다.\n";
     private static final String MSG_GENERATED_LOTTO_NUMBERS_FORMAT = "[%s]\n";
     private static final String MSG_PRICE_RESULT_FORMAT = "%s (%s)- %s개\n";
     private static final String MSG_EARNING_RATE_FORMAT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 ";

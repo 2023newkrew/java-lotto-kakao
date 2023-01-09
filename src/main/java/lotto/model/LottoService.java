@@ -17,12 +17,12 @@ public class LottoService {
         this.priceResult = new PriceResult();
     }
 
-    public void createLottos() {
-        this.lottos = new Lottos((int) purchaseCost / DEFAULT_LOTTO_COST);
-    }
-
     public void createLottos(int lottoCost) {
         this.lottos = new Lottos((int) purchaseCost / lottoCost);
+    }
+
+    public void createLottos() {
+        createLottos(DEFAULT_LOTTO_COST);
     }
 
     public void createWinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
