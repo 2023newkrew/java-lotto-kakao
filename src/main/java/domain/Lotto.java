@@ -11,10 +11,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto getLotto(LottoGenerator lottoGenerator) {
-        return lottoGenerator.generateLotto();
-    }
-
     public int getMatchCount(Lotto lotto) {
         return (int) numbers.stream()
                 .filter(lotto::containsNumber)

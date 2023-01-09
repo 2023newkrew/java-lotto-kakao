@@ -17,7 +17,7 @@ public class LottosTest {
     @BeforeAll
     static void setUp() {
         lottos = new Lottos();
-        lotto = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        lotto = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
         bonusNumber = new LottoNumber(lotto, "7");
         winningLotto = new WinningLotto(lotto, bonusNumber);
     }
@@ -26,7 +26,7 @@ public class LottosTest {
     @Test
     void addManualLottoTest() {
         String newLottoNumbers = "8, 21, 23, 41, 42, 43";
-        Lotto newLotto = Lotto.getLotto(new ManualLottoGenerator(newLottoNumbers));
+        Lotto newLotto = LottoFactory.getLotto(new ManualLottoGenerator(newLottoNumbers));
         lottos.addManualLotto(newLotto);
         assertThat(lottos.containsLotto(newLotto)).isTrue();
     }
@@ -44,12 +44,12 @@ public class LottosTest {
     @DisplayName("당첨 통계 확인 테스트")
     @Test
     void getTotalResultTest() {
-        Lotto matchZero = Lotto.getLotto(new ManualLottoGenerator("7, 8, 9, 10, 11, 12"));
-        Lotto matchOne = Lotto.getLotto(new ManualLottoGenerator("1, 7, 8, 9, 10, 11"));
-        Lotto matchTwo = Lotto.getLotto(new ManualLottoGenerator("1, 2, 7, 8, 9, 10"));
-        Lotto matchThree = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 7, 8, 9"));
-        Lotto matchFiveBonus = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 7"));
-        Lotto matchSix = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        Lotto matchZero = LottoFactory.getLotto(new ManualLottoGenerator("7, 8, 9, 10, 11, 12"));
+        Lotto matchOne = LottoFactory.getLotto(new ManualLottoGenerator("1, 7, 8, 9, 10, 11"));
+        Lotto matchTwo = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 7, 8, 9, 10"));
+        Lotto matchThree = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 7, 8, 9"));
+        Lotto matchFiveBonus = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 7"));
+        Lotto matchSix = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
         lottos.addManualLotto(matchZero);
         lottos.addManualLotto(matchOne);
         lottos.addManualLotto(matchTwo);
@@ -63,7 +63,7 @@ public class LottosTest {
     @DisplayName("로또 목록이 특정 로또를 포함하고 있을 때 참 반환 테스트")
     @Test
     void containsLottoTest() {
-        Lotto lotto = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        Lotto lotto = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
         lottos.addManualLotto(lotto);
         assertThat(lottos.containsLotto(lotto)).isTrue();
     }
@@ -71,7 +71,7 @@ public class LottosTest {
     @DisplayName("로또 목록이 특정 로또를 포함하고 있지 않을 때 거짓 반환 테스트")
     @Test
     void doesNotContainLottoTest() {
-        Lotto lotto = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        Lotto lotto = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
         assertThat(lottos.containsLotto(lotto)).isFalse();
     }
 

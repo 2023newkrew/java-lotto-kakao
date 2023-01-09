@@ -20,7 +20,7 @@ public class LottoGame {
             OutputView.printManualLottoRequest();
         }
         for (int i = 0; i < manualLottoCount.getCount(); i++) {
-            lottos.addManualLotto(Lotto.getLotto(new ManualLottoGenerator(InputView.getInput())));
+            lottos.addManualLotto(LottoFactory.getLotto(new ManualLottoGenerator(InputView.getInput())));
         }
         OutputView.printLottoCount(manualLottoCount.getCount(), manualLottoCount.getRemains());
         lottos.addAutoLottos(manualLottoCount.getRemains());
@@ -30,7 +30,7 @@ public class LottoGame {
 
     public static Lotto getWinningLotto() {
         OutputView.printWinningNumbersRequest();
-        return Lotto.getLotto(new ManualLottoGenerator(InputView.getInput()));
+        return LottoFactory.getLotto(new ManualLottoGenerator(InputView.getInput()));
     }
 
     public static LottoNumber getBonusNumber(Lotto winningLotto) {

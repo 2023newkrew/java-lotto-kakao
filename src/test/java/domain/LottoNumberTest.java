@@ -36,7 +36,7 @@ public class LottoNumberTest {
     @DisplayName("보너스 숫자가 당첨 번호와 겹치면 예외 발생")
     @Test
     public void duplicateTest() {
-        Lotto winningLotto = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        Lotto winningLotto = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
         String duplicateNumber = "1";
         assertThrows(DuplicateNumberException.class, () -> new LottoNumber(winningLotto, duplicateNumber));
     }
@@ -44,7 +44,7 @@ public class LottoNumberTest {
     @DisplayName("보너스 숫자가 당첨 번호와 겹치지 않는 경우 통과")
     @Test
     public void notDuplicateTest() {
-        Lotto winningLotto = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        Lotto winningLotto = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
         String notDuplicateNumber = "7";
         assertDoesNotThrow( () -> new LottoNumber(winningLotto, notDuplicateNumber));
     }

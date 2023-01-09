@@ -15,14 +15,16 @@ public class ManualLottoGeneratorTest {
     @ParameterizedTest
     @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
     void validateThrowIllegalLengthExceptionTest(String inputLengthNotSix) {
-        assertThrows(IllegalLengthException.class, () -> new ManualLottoGenerator(inputLengthNotSix));
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(inputLengthNotSix);
+        assertThrows(IllegalLengthException.class, () -> manualLottoGenerator.generateLotto());
     }
 
     @DisplayName("입력된 숫자가 중복될 때 예외 확인 테스트")
     @ParameterizedTest
     @ValueSource(strings = {"2, 2, 3, 4, 5, 6", "1, 1, 1, 1, 1, 1"})
     void validateThrowDuplicateNumberExceptionTest(String inputDuplicate) {
-        assertThrows(DuplicateNumberException.class, () -> new ManualLottoGenerator(inputDuplicate));
+        ManualLottoGenerator manualLottoGenerator = new ManualLottoGenerator(inputDuplicate);
+        assertThrows(DuplicateNumberException.class, () -> manualLottoGenerator.generateLotto());
     }
 
     @DisplayName("입력된 숫자가 정상적일 때 예외 통과 테스트")

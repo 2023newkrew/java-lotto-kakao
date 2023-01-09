@@ -52,7 +52,7 @@ public class LottoTest {
     @DisplayName("로또와 당첨 로또 간에 일치하는 숫자의 개수 반환 테스트")
     @Test
     void getMatchCountTest() {
-        Lotto matchTHREE = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 7, 8, 9"));
+        Lotto matchTHREE = LottoFactory.getLotto(new ManualLottoGenerator("1, 2, 3, 7, 8, 9"));
         assertThat(matchTHREE.getMatchCount(lotto)).isEqualTo(3);
     }
 

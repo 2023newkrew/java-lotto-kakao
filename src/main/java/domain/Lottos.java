@@ -16,7 +16,7 @@ public class Lottos {
 
     public void addAutoLottos(int count) {
         for (int i = 0; i < count; i++) {
-            lottos.add(Lotto.getLotto(AutoLottoGenerator.get()));
+            lottos.add(LottoFactory.getLotto(AutoLottoGenerator.get()));
         }
     }
 
