@@ -11,45 +11,68 @@ public class LottosTest {
 
     private static Lottos lottos;
     private static WinningLotto winningLotto;
-    private static BonusNumber bonusNumber;
+    private static Lotto lotto;
+    private static LottoNumber bonusNumber;
 
     @BeforeAll
     static void setUp() {
         lottos = new Lottos();
-        winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
-        bonusNumber = new BonusNumber(winningLotto, "7");
-
+        lotto = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        bonusNumber = new LottoNumber(lotto, "7");
+        winningLotto = new WinningLotto(lotto, bonusNumber);
     }
 
-    @DisplayName("로또 번호 추가 시 사이즈 증가 확인 테스트")
+    @DisplayName("수동 로또 번호 추가 시 로또 목록에 포함되어 있는지 확인 테스트")
     @Test
-    void addTest() {
-        int beforeSize = lottos.getSize();
+    void addManualLottoTest() {
         String newLottoNumbers = "8, 21, 23, 41, 42, 43";
-        lottos.add(newLottoNumbers);
-        int afterSize = lottos.getSize();
-        assertThat(afterSize).isEqualTo(beforeSize + 1);
+        Lotto newLotto = Lotto.getLotto(new ManualLottoGenerator(newLottoNumbers));
+        lottos.addManualLotto(newLotto);
+        assertThat(lottos.containsLotto(newLotto)).isTrue();
     }
 
-
+    @DisplayName("자동 로또 번호 생성 시 사이즈 증가 확인 테스트")
+    @Test
+    void addAutoLottosTest() {
+        int beforeSize = lottos.getSize();
+        int autoLottoCount = 3;
+        lottos.addAutoLottos(autoLottoCount);
+        int afterSize = lottos.getSize();
+        assertThat(afterSize).isEqualTo(beforeSize + autoLottoCount);
+    }
 
     @DisplayName("당첨 통계 확인 테스트")
     @Test
     void getTotalResultTest() {
-        String matchZero = "7, 8, 9, 10, 11, 12";
-        String matchOne = "1, 7, 8, 9, 10, 11";
-        String matchTwo = "1, 2, 7, 8, 9, 10";
-        String matchThree = "1, 2, 3, 7, 8, 9";
-        String matchFiveBonus = "1, 2, 3, 4, 5, 7";
-        String matchSix = "1, 2, 3, 4, 5, 6";
-        lottos.add(matchZero);
-        lottos.add(matchOne);
-        lottos.add(matchTwo);
-        lottos.add(matchThree);
-        lottos.add(matchFiveBonus);
-        lottos.add(matchSix);
-        Map<Result, Integer> expected = Map.of(Result.NONE, 3, Result.THREE, 1, Result.FIVEBONUS, 1, Result.SIX, 1);
-        assertThat(lottos.getTotalResult(winningLotto, bonusNumber)).isEqualTo(new TotalResult(expected));
+        Lotto matchZero = Lotto.getLotto(new ManualLottoGenerator("7, 8, 9, 10, 11, 12"));
+        Lotto matchOne = Lotto.getLotto(new ManualLottoGenerator("1, 7, 8, 9, 10, 11"));
+        Lotto matchTwo = Lotto.getLotto(new ManualLottoGenerator("1, 2, 7, 8, 9, 10"));
+        Lotto matchThree = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 7, 8, 9"));
+        Lotto matchFiveBonus = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 7"));
+        Lotto matchSix = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        lottos.addManualLotto(matchZero);
+        lottos.addManualLotto(matchOne);
+        lottos.addManualLotto(matchTwo);
+        lottos.addManualLotto(matchThree);
+        lottos.addManualLotto(matchFiveBonus);
+        lottos.addManualLotto(matchSix);
+        Map<Result, Integer> expected = Map.of(Result.NONE, 3, Result.FIFTH_PLACE, 1, Result.SECOND_PLACE, 1, Result.FIRST_PLACE, 1);
+        assertThat(lottos.getTotalResult(winningLotto)).isEqualTo(new TotalResult(expected));
+    }
+
+    @DisplayName("로또 목록이 특정 로또를 포함하고 있을 때 참 반환 테스트")
+    @Test
+    void containsLottoTest() {
+        Lotto lotto = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        lottos.addManualLotto(lotto);
+        assertThat(lottos.containsLotto(lotto)).isTrue();
+    }
+
+    @DisplayName("로또 목록이 특정 로또를 포함하고 있지 않을 때 거짓 반환 테스트")
+    @Test
+    void doesNotContainLottoTest() {
+        Lotto lotto = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        assertThat(lottos.containsLotto(lotto)).isFalse();
     }
 
 }

@@ -1,26 +1,22 @@
 package domain;
 
-import common.constant.Constants;
-import util.validator.WinningLottoValidator;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import common.state.Result;
 
 public class WinningLotto {
-    private final List<Integer> winningLottoNumbers;
+    private final Lotto winningLotto;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(String input) {
-        WinningLottoValidator.validate(input);
-        String[] splitInput = input.split(Constants.DELIMITER);
-        this.winningLottoNumbers = Arrays.stream(splitInput)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
+        this.winningLotto = winningLotto;
+        this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getWinningLottoNumbers(){
-        return new ArrayList<>(winningLottoNumbers);
+    public Result getResult(Lotto lotto) {
+        return Result.of(winningLotto.getMatchCount(lotto), isBonus(lotto));
+    }
+
+    public boolean isBonus(Lotto lotto) {
+        return lotto.containsNumber(bonusNumber);
     }
 
 }

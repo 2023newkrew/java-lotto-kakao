@@ -1,6 +1,7 @@
 package domain;
 
 import common.state.Result;
+import view.OutputView;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,20 +17,6 @@ public class TotalResult {
     public TotalResult(Map<Result, Integer> totalResult) {
         this();
         this.totalResult.putAll(totalResult);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TotalResult that = (TotalResult) o;
-        return Arrays.stream(Result.values())
-                .allMatch(result -> this.totalResult.get(result) == that.totalResult.get(result));
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(totalResult);
     }
 
     public void increaseValueOfResult(Result result) {
@@ -50,23 +37,18 @@ public class TotalResult {
         return Math.floor((double) winnings * 100.0 / (double) paidPrice) / 100.0;
     }
 
-    public List<String> getTotalResultMessage() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TotalResult that = (TotalResult) o;
         return Arrays.stream(Result.values())
-                .filter(result -> result != Result.NONE)
-                .map(result ->
-                        String.format("%s (%d원)- %d개",
-                                result.getDescription(),
-                                result.getWinnings(),
-                                this.getValueOfResult(result)))
-                .collect(Collectors.toList());
+                .allMatch(result -> this.totalResult.get(result) == that.totalResult.get(result));
     }
 
-    public String getProfitMessage(double profit) {
-        String message = String.format("총 수익률은 %.2f입니다.", profit);
-        if (profit <= 1) {
-            return message + "(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
-        }
-        return message + "(기준이 1이기 때문에 결과적으로 이득이라는 의미임)";
+    @Override
+    public int hashCode() {
+        return Objects.hash(totalResult);
     }
 
 }

@@ -13,80 +13,61 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoTest {
 
     private static WinningLotto winningLotto;
-    private static BonusNumber bonusNumber;
+    private static Lotto lotto;
+    private static LottoNumber bonusNumber;
 
     @BeforeAll
     static void setUp() {
-        winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6");
-        bonusNumber = new BonusNumber(winningLotto, "7");
-
+        lotto = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 4, 5, 6"));
+        bonusNumber = new LottoNumber(lotto, "7");
+        winningLotto = new WinningLotto(lotto, bonusNumber);
     }
 
-    @DisplayName("로또 생성 시 예외 통과 테스트")
+    @DisplayName("수동 로또 생성 시 예외 통과 테스트")
     @Test
-    void createLottoTest() {
+    void createManualLottoTest() {
         String properInput = "8, 21, 23, 41, 42, 43";
-        Assertions.assertDoesNotThrow(() -> new Lotto(properInput));
+        Assertions.assertDoesNotThrow(() -> Lotto.getLotto(new ManualLottoGenerator(properInput)));
     }
 
-    @DisplayName("로또 번호와 당첨 번호가 세 개 이하 일치할 경우 테스트")
+    @DisplayName("자동 로또 생성 시 예외 통과 테스트")
+    @Test
+    void createAutoLottoTest() {
+        Assertions.assertDoesNotThrow(() -> Lotto.getLotto(new AutoLottoGenerator()));
+    }
+
+    @DisplayName("자동 로또 생성기로 생성한 로또가 제대로 생성되었는지 확인 테스트")
+    @Test
+    void autoLottoGeneratorTest() {
+        Lotto lotto = Lotto.getLotto(new ManualLottoGenerator("8, 21, 23, 41, 42, 43"));
+        Lotto lottoByAutoLottoGenerator = Lotto.getLotto(new AutoLottoGenerator() {
+            @Override
+            public Lotto generateLotto() {
+                return lotto;
+            }
+        });
+        assertThat(lottoByAutoLottoGenerator).isEqualTo(lotto);
+    }
+
+    @DisplayName("로또와 당첨 로또 간에 일치하는 숫자의 개수 반환 테스트")
+    @Test
+    void getMatchCountTest() {
+        Lotto matchTHREE = Lotto.getLotto(new ManualLottoGenerator("1, 2, 3, 7, 8, 9"));
+        assertThat(matchTHREE.getMatchCount(lotto)).isEqualTo(3);
+    }
+
+    @DisplayName("로또가 특정 숫자를 포함하고 있을 때 참 반환 테스트")
     @ParameterizedTest
-    @ValueSource(strings = {
-            "7, 8, 9, 10, 11, 12",
-            "1, 7, 8, 9, 10, 11",
-            "1, 2, 7, 8, 9, 10"
-    })
-    void getResultReturnNONETest(String input) {
-        Lotto lotto = new Lotto(input);
-        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.NONE);
+    @ValueSource(ints = {1, 2, 3, 4, 5, 6})
+    void containsNumberTest(int containingNumber) {
+        assertThat(lotto.containsNumber(new LottoNumber(containingNumber))).isTrue();
     }
 
-    @DisplayName("로또 번호와 당첨 번호가 세 개 일치할 경우 테스트")
-    @Test
-    void getResultReturnTRHEETest() {
-        Lotto lotto = new Lotto("1, 2, 3, 7, 8, 9");
-        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.THREE);
+    @DisplayName("로또가 특정 숫자를 포함하고 있지 않을 때 거짓 반환 테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {7, 8, 9, 10, 11, 12})
+    void doesNotContainNumberTest(int notContainingNumber) {
+        assertThat(lotto.containsNumber(new LottoNumber(notContainingNumber))).isFalse();
     }
 
-    @DisplayName("로또 번호와 당첨 번호가 네 개 일치할 경우 테스트")
-    @Test
-    void getResultReturnFOURTest() {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 8, 9");
-        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.FOUR);
-    }
-
-    @DisplayName("로또 번호와 당첨 번호가 다섯 개 일치할 경우 테스트")
-    @Test
-    void getResultReturnFIVETest() {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 9");
-        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.FIVE);
-    }
-
-    @DisplayName("로또 번호와 당첨 번호가 다섯 개 일치하고, 보너스 번호를 포함하고 있는 경우 테스트")
-    @Test
-    void getResultReturnFIVEBONUSTest() {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 7");
-        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.FIVEBONUS);
-    }
-
-    @DisplayName("로또 번호와 당첨 번호가 여섯 개 일치할 경우 테스트")
-    @Test
-    void getResultReturnSIXTest() {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        assertThat(lotto.getResult(winningLotto, bonusNumber)).isEqualTo(Result.SIX);
-    }
-
-    @DisplayName("보너스 번호 일치하는 경우 참 반환 테스트")
-    @Test
-    void isBonusTest(){
-        Lotto lottoWithBonusNumber = new Lotto("7, 8, 9, 10, 11, 12");
-        assertThat(lottoWithBonusNumber.isBonus(bonusNumber)).isTrue();
-    }
-
-    @DisplayName("보너스 번호 일치하지 않는 경우 거짓 반환 테스트")
-    @Test
-    void isNotBonusTest(){
-        Lotto lottoWithoutBonusNumber = new Lotto("8, 9, 10, 11, 12, 13");
-        assertThat(lottoWithoutBonusNumber.isBonus(bonusNumber)).isFalse();
-    }
 }
