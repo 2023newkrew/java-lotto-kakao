@@ -11,15 +11,14 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-    private static final LottoView lottoView = new LottoView();
     private static final Seller seller = new Seller();
     private static Player player;
 
     public static void main(String[] args) {
-        try (lottoView) {
-            initializePlayer();
-            buyLottoTickets();
-            WinnerCombination winnerCombination = getWinnerCombination();
+        try (LottoView lottoView = new LottoView()) {
+            initializePlayer(lottoView);
+            buyLottoTickets(lottoView);
+            WinnerCombination winnerCombination = getWinnerCombination(lottoView);
             PlayerLottoResult playerLottoResult = player.findResult(winnerCombination);
             lottoView.printStats(playerLottoResult);
         } catch (Exception e) {
@@ -27,21 +26,21 @@ public class Main {
         }
     }
 
-    private static void initializePlayer() {
-        int purchaseMoneyAmount = lottoView.getPurchaseMoneyAmount();
+    private static void initializePlayer(LottoView lottoView) {
         try {
+            int purchaseMoneyAmount = Integer.parseInt(lottoView.getPurchaseMoneyAmount());
             player = new Player(new Money(purchaseMoneyAmount));
         } catch (IllegalArgumentException e) {
             lottoView.printErrorMessage(e.getMessage());
-            initializePlayer();
+            initializePlayer(lottoView);
         }
     }
 
-    private static void buyLottoTickets() {
+    private static void buyLottoTickets(LottoView lottoView) {
         try {
-            int manualLottoTicketsCount = lottoView.getManualLottoTicketsCount();
+            int manualLottoTicketsCount = Integer.parseInt(lottoView.getManualLottoTicketsCount());
             // 수동 로또 구매
-            buyManualLottoTickets(manualLottoTicketsCount);
+            buyManualLottoTickets(manualLottoTicketsCount, lottoView);
             // 남은 돈으로 자동 로또 구매
             player.buyAutoLottoTickets(seller);
             // 로또 결과 초기화
@@ -50,28 +49,28 @@ public class Main {
             lottoView.printPurchaseTickets(manualLottoTicketsCount, player.getLottoTickets());
         } catch (IllegalArgumentException e) {
             lottoView.printErrorMessage(e.getMessage());
-            buyLottoTickets();
+            buyLottoTickets(lottoView);
         }
     }
 
-    private static void buyManualLottoTickets(int manualLottoTicketsCount) {
+    private static void buyManualLottoTickets(int manualLottoTicketsCount, LottoView lottoView) {
         // 입력한 갯수만큼 수동 로또 구매를 할 수 있는 충분한 돈이 있는지 확인
         seller.checkHasEnoughMoneyForManualLottoTickets(manualLottoTicketsCount, player.getCurrentMoney());
         // 구매 진행
-        player.buyManualLottoTickets(seller, getManualLottoTickets(manualLottoTicketsCount));
+        player.buyManualLottoTickets(seller, getManualLottoTickets(manualLottoTicketsCount, lottoView));
     }
 
-    private static List<LottoTicket> getManualLottoTickets(int manualLottoTicketsCount) {
+    private static List<LottoTicket> getManualLottoTickets(int manualLottoTicketsCount, LottoView lottoView) {
         try {
             lottoView.printManualLottoTicketsInputMessage();
-            return getManualLottoTicketsInput(manualLottoTicketsCount);
+            return getManualLottoTicketsInput(manualLottoTicketsCount, lottoView);
         } catch (IllegalArgumentException e) {
             lottoView.printErrorMessage(e.getMessage());
-            return getManualLottoTickets(manualLottoTicketsCount);
+            return getManualLottoTickets(manualLottoTicketsCount, lottoView);
         }
     }
 
-    private static List<LottoTicket> getManualLottoTicketsInput(int manualLottoTicketsCount) {
+    private static List<LottoTicket> getManualLottoTicketsInput(int manualLottoTicketsCount, LottoView lottoView) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         for (int i = 0; i < manualLottoTicketsCount; i++) {
@@ -86,13 +85,13 @@ public class Main {
         return lottoTickets;
     }
 
-    private static WinnerCombination getWinnerCombination() {
-        LottoTicket lottoTicket = getWinnerTicket();
-        LottoBall bonusBall = getBonusBall();
+    private static WinnerCombination getWinnerCombination(LottoView lottoView) {
+        LottoTicket lottoTicket = getWinnerTicket(lottoView);
+        LottoBall bonusBall = getBonusBall(lottoView);
         return new WinnerCombination(lottoTicket, bonusBall);
     }
 
-    private static LottoTicket getWinnerTicket() {
+    private static LottoTicket getWinnerTicket(LottoView lottoView) {
         try {
             String winnerTicketInput = lottoView.getWinnerTicket();
             Set<LottoBall> lottoBalls = Arrays.stream(winnerTicketInput.split(","))
@@ -102,17 +101,16 @@ public class Main {
             return new LottoTicket(lottoBalls);
         } catch (IllegalArgumentException e) {
             lottoView.printErrorMessage(e.getMessage());
-            return getWinnerTicket();
+            return getWinnerTicket(lottoView);
         }
     }
 
-    private static LottoBall getBonusBall() {
+    private static LottoBall getBonusBall(LottoView lottoView) {
         try {
-            String bonusBallInput = lottoView.getBonusBall();
-            return new LottoBall(Integer.parseInt(bonusBallInput));
+            return new LottoBall(Integer.parseInt(lottoView.getBonusBall()));
         } catch (IllegalArgumentException e) {
             lottoView.printErrorMessage(e.getMessage());
-            return getBonusBall();
+            return getBonusBall(lottoView);
         }
     }
 }

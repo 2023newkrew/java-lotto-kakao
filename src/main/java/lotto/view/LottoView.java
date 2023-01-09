@@ -1,8 +1,10 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.LottoBall;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.PlayerLottoResult;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -24,14 +26,16 @@ public class LottoView implements AutoCloseable {
         this.scanner = new Scanner(System.in);
     }
 
-    public int getPurchaseMoneyAmount() {
-        System.out.println(GET_PURCHASE_MONEY_AMOUNT_MESSAGE);
-        try {
-            return Integer.parseInt(scanner.nextLine().trim());
-        } catch (NumberFormatException e) {
-            printErrorMessage(WRONG_TYPE_ERROR_MESSAGE);
-            return getPurchaseMoneyAmount();
-        }
+    public String getPurchaseMoneyAmount() {
+        return getInput(GET_PURCHASE_MONEY_AMOUNT_MESSAGE);
+    }
+
+    public String getManualLottoTicketsCount() {
+        return getInput(GET_MANUAL_LOTTO_TICKETS_COUNT_MESSAGE);
+    }
+
+    public String getManualLottoTickets() {
+        return getInput(null);
     }
 
     public void printPurchaseTickets(int manualLottoTicketsCount, List<LottoTicket> lottoTickets) {
@@ -56,29 +60,11 @@ public class LottoView implements AutoCloseable {
     }
 
     public String getWinnerTicket() {
-        try {
-            System.out.println(GET_WINNER_TICKET_MESSAGE);
-            String input = scanner.nextLine().trim();
-            // parseInt 가능한지 확인
-            for (String number : input.split(",")) {
-                Integer.parseInt(number.trim());
-            }
-            return input;
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(WRONG_TYPE_ERROR_MESSAGE);
-        }
+        return getInput(GET_WINNER_TICKET_MESSAGE);
     }
 
     public String getBonusBall() {
-        try {
-            System.out.println(GET_BONUS_BALL_MESSAGE);
-            String input = scanner.nextLine().trim();
-            // parseInt 가능한지 확인
-            Integer.parseInt(input.trim());
-            return input;
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(WRONG_TYPE_ERROR_MESSAGE);
-        }
+        return getInput(GET_BONUS_BALL_MESSAGE);
     }
 
     public void printStats(PlayerLottoResult playerLottoResult) {
@@ -111,35 +97,35 @@ public class LottoView implements AutoCloseable {
         System.out.println(message);
     }
 
-    @Override
-    public void close() throws Exception {
-        scanner.close();
+    public void printManualLottoTicketsInputMessage() {
+        System.out.println(GET_MANUAL_LOTTO_TICKETS_MESSAGE);
     }
 
-    public int getManualLottoTicketsCount() {
-        System.out.println(GET_MANUAL_LOTTO_TICKETS_COUNT_MESSAGE);
+    private String getInput(String informMessage) {
         try {
-            return Integer.parseInt(scanner.nextLine().trim());
-        } catch (NumberFormatException e) {
-            printErrorMessage(WRONG_TYPE_ERROR_MESSAGE);
-            return getManualLottoTicketsCount();
-        }
-    }
-
-    public String getManualLottoTickets() {
-        try {
+            printInformMessage(informMessage);
             String input = scanner.nextLine().trim();
-            // parseInt 가능한지 확인
-            for (String number : input.split(",")) {
-                Integer.parseInt(number.trim());
-            }
+            checkParsableToInt(input);
             return input;
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(WRONG_TYPE_ERROR_MESSAGE);
         }
     }
 
-    public void printManualLottoTicketsInputMessage() {
-        System.out.println(GET_MANUAL_LOTTO_TICKETS_MESSAGE);
+    private void printInformMessage(String informMessage) {
+        if (informMessage != null && !informMessage.isBlank()) {
+            System.out.println(informMessage);
+        }
+    }
+
+    private void checkParsableToInt(String input) throws NumberFormatException {
+        for (String number : input.split(",")) {
+            Integer.parseInt(number.trim());
+        }
+    }
+
+    @Override
+    public void close() throws Exception {
+        scanner.close();
     }
 }
