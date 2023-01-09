@@ -10,6 +10,10 @@ public class Lotto {
         this.numbers = LottoNumber.of(numbers);
     }
 
+    public Lotto(Integer... numbers) {
+        this.numbers = LottoNumber.of(List.of(numbers));
+    }
+
     public List<LottoNumber> getNumbers() {
         return numbers;
     }
