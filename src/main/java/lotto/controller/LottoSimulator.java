@@ -17,8 +17,7 @@ public class LottoSimulator {
     private final LottoOutputView outputView;
 
     public static LottoSimulator create(Money lottoPrice, LottoInputView inputView, LottoOutputView outputView) {
-        LottoMachine lottoMachine = LottoMachine.create(lottoPrice);
-        LottoStore store = LottoStore.create(lottoMachine);
+        LottoStore store = LottoStore.create(lottoPrice);
 
         return new LottoSimulator(store, inputView, outputView);
     }

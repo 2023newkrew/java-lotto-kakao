@@ -7,6 +7,7 @@ import lotto.model.ranking.WinningNumbers;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 public class LottoTicket {
@@ -28,6 +29,21 @@ public class LottoTicket {
 
     private LottoTicket(List<LottoNumber> lottos) {
         this.lottos = lottos;
+    }
+
+    public static LottoTicket createByRandom(long count) {
+        validateCount(count);
+        List<LottoNumber> lottos = LongStream.range(0, count)
+                .mapToObj(ignore -> LottoNumber.createByRandom())
+                .collect(Collectors.toList());
+
+        return LottoTicket.of(lottos);
+    }
+
+    private static void validateCount(long count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("생성할 로또의 수량이 0보다 작습니다.");
+        }
     }
 
     public int count() {
