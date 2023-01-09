@@ -6,6 +6,7 @@ import domain.LottoRank;
 
 public class WinningLotto {
     private static final String ERROR_BONUS_DUPLICATE = "보너스번호와 당첨번호는 중복될 수 없습니다.";
+
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
@@ -23,12 +24,5 @@ public class WinningLotto {
 
     public LottoRank getRank(Lotto lotto) {
         return LottoRank.getRank(lotto.matches(this.lotto), lotto.has(bonusNumber));
-    }
-    public Lotto getLotto() {
-        return lotto;
-    }
-
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
     }
 }

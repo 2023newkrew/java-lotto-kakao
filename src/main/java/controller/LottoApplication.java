@@ -31,9 +31,10 @@ public class LottoApplication {
                     .map(Lotto::ofManual)
                     .collect(Collectors.toList());
 
-            LottoBuyer lottoBuyer = new LottoBuyer(money);
-            PurchasedLotto purchasedLotto = lottoBuyer.buyFrom(lottoStore, manualLottos);
-            outputView.printPurchasedLottos(purchasedLotto);
+            LottoBuyer lottoBuyer = new LottoBuyer(money, lottoStore);
+            lottoBuyer.buyManual(manualLottos);
+            lottoBuyer.buyAuto();
+            outputView.printPurchasedLottos(PurchasedLotto.of(lottoBuyer));
 
             Lotto winningLotto = Lotto.ofManual(inputView.getWinningLottoInput());
             LottoNumber bonusNumber = new LottoNumber(inputView.getBonusNumberInput());
