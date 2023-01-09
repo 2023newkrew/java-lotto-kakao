@@ -1,6 +1,7 @@
 package javalotto.view;
 
 import javalotto.domain.*;
+import javalotto.exception.input.InputInvalidFormatException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,7 +57,15 @@ public class InputView {
 
     private List<Integer> getNumbersInput() {
         String inputNumbers = scanner.nextLine();
-        return getNumberListBy(inputNumbers);
+        return tryGetNumberListBy(inputNumbers);
+    }
+
+    private static List<Integer> tryGetNumberListBy(String inputNumbers) {
+        try {
+            return getNumberListBy(inputNumbers);
+        } catch (NumberFormatException e) {
+            throw new InputInvalidFormatException(inputNumbers, e);
+        }
     }
 
     private static List<Integer> getNumberListBy(String inputNumbers) {
