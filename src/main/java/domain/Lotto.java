@@ -1,7 +1,5 @@
 package domain;
 
-import dto.WinningLotto;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -14,11 +12,11 @@ public class Lotto {
     private final List<LottoNumber> numbers;
 
     private Lotto(List<LottoNumber> numbers) {
-        validateLotto(numbers);
+        validate(numbers);
         this.numbers = numbers;
     }
 
-    static public Lotto ofManual(List<Integer> numbers) {
+    public static Lotto ofManual(List<Integer> numbers) {
         List<LottoNumber> lottoNumbers = numbers
                 .stream()
                 .map(LottoNumber::new)
@@ -32,14 +30,14 @@ public class Lotto {
         return new Lotto(lottoNumbers);
     }
 
-    static private List<LottoNumber> generate() {
+    private static List<LottoNumber> generate() {
         Collections.shuffle(LOTTO_NUMBER_CANDIDATES);
         List<LottoNumber> lottoNumbers = new ArrayList<>(LOTTO_NUMBER_CANDIDATES.subList(0, LOTTO_SIZE));
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
 
-    static private void validateLotto(List<LottoNumber> numbers) {
+    private static void validate(List<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
         }
@@ -50,20 +48,18 @@ public class Lotto {
         }
     }
 
-    public LottoRank getRank(WinningLotto winningLotto) {
-        Integer matchCount = 0;
-        for(LottoNumber number : numbers) {
-            if (winningLotto.getLotto().has(number)) {
-                matchCount++;
-            }
-        }
-        return LottoRank.getRank(matchCount, numbers.contains(winningLotto.getBonusNumber()));
-    }
-
     public Boolean has(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }
 
+    public Integer matches(Lotto lotto) {
+        List<Boolean> match = numbers
+                .stream()
+                .map(lotto::has)
+                .filter(cond -> cond)
+                .collect(Collectors.toList());
+        return match.size();
+    }
     @Override
     public String toString() {
         return numbers.toString();

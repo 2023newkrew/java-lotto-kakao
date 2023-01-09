@@ -5,29 +5,39 @@ import domain.LottoBuyer;
 import domain.LottoNumber;
 import domain.LottoStore;
 import dto.LottoResult;
+import dto.PurchasedLotto;
 import dto.WinningLotto;
-import utils.NumberParser;
 import view.InputView;
 import view.OutputView;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class LottoApplication {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
+        LottoStore lottoStore = new LottoStore();
 
         try {
-            String moneyInput = inputView.getMoneyInput();
-            Integer money = NumberParser.parse(moneyInput);
+            Integer money = inputView.getMoneyInput();
 
-            LottoBuyer lottoBuyer = new LottoBuyer(money);
-            outputView.printPurchasedLottos(lottoBuyer.buyFrom(new LottoStore()));
+            Integer amount = inputView.getManualAmountInput();
 
-            String winningLottoInput = inputView.getWinningLottoInput();
-            Lotto winningLotto = Lotto.ofManual(NumberParser.splitAndParse(winningLottoInput));
+            List<Lotto> manualLottos = inputView.getManualLottosInput(amount)
+                    .stream()
+                    .map(Lotto::ofManual)
+                    .collect(Collectors.toList());
 
-            String bonusNumberInput = inputView.getBonusNumberInput();
-            LottoNumber bonusNumber = new LottoNumber(NumberParser.parse(bonusNumberInput));
+            LottoBuyer lottoBuyer = new LottoBuyer(money, lottoStore);
+            lottoBuyer.buyManual(manualLottos);
+            lottoBuyer.buyAuto();
+            outputView.printPurchasedLottos(PurchasedLotto.of(lottoBuyer));
+
+            Lotto winningLotto = Lotto.ofManual(inputView.getWinningLottoInput());
+            LottoNumber bonusNumber = new LottoNumber(inputView.getBonusNumberInput());
             inputView.close();
 
             LottoResult lottoResult = lottoBuyer.calculateResult(new WinningLotto(winningLotto, bonusNumber));

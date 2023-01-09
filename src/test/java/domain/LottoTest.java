@@ -1,12 +1,13 @@
 package domain;
 
-import dto.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LottoTest {
     @Test
@@ -30,32 +31,36 @@ public class LottoTest {
     }
 
     @Test
-    void 로또는_자신의_당첨등수를_알_수_있다_1등() {
+    void 로또는_가진_로또번호를_알_수_있다() {
         // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
-
+        List<Integer> numbers = List.of(23, 25, 45, 34, 5, 7);
         Lotto lotto = Lotto.ofManual(numbers);
-        WinningLotto winningLotto = new WinningLotto(Lotto.ofManual(numbers), new LottoNumber(7));
 
-        // when
-        LottoRank place = lotto.getRank(winningLotto);
-
-        // then
-        assertThat(place).isEqualTo(LottoRank.FIRST_RANK);
+        // when, then
+        numbers.forEach(number -> assertTrue(lotto.has(new LottoNumber(number))));
     }
 
     @Test
-    void 로또는_자신의_당첨등수를_알_수_있다_2등() {
+    void 로또는_가지지_않은_로또번호를_알_수_있다() {
         // given
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 11);
+        List<Integer> numbers = List.of(23, 25, 45, 34, 5, 7);
+        List<Integer> notHasNumbers = List.of(1, 44, 2, 24, 4, 6);
+        Lotto lotto = Lotto.ofManual(numbers);
 
-        Lotto lotto = Lotto.ofManual(List.of(1, 2, 3, 4, 5, 7));
-        WinningLotto winningLotto = new WinningLotto(Lotto.ofManual(numbers), new LottoNumber(7));
+        // when, then
+        notHasNumbers.forEach(number -> assertFalse(lotto.has(new LottoNumber(number))));
+    }
+
+    @Test
+    void 로또는_다른_로또와_동일_번호_개수를_알_수_있다() {
+        // given
+        Lotto lotto = Lotto.ofManual(List.of(23, 25, 45, 34, 5, 7));
+        Lotto other = Lotto.ofManual(List.of(23, 25, 1, 2, 3, 4));
 
         // when
-        LottoRank place = lotto.getRank(winningLotto);
+        Integer result = lotto.matches(other);
 
         // then
-        assertThat(place).isEqualTo(LottoRank.SECOND_RANK);
+        assertThat(result).isEqualTo(2);
     }
 }
