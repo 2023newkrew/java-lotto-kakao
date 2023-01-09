@@ -1,69 +1,58 @@
 package lotto.view;
 
-import static lotto.domain.LottoConstants.*;
-import static lotto.domain.LottoConstants.LOTTO_MINIMUM_NON_EXISTENT_PRICE;
-import static lotto.domain.LottoConstants.LOTTO_UNIT_PRICE;
-import static lotto.exception.ExceptionMessages.BONUS_BALL_TYPE_EXCEPTION_MESSAGE;
-import static lotto.exception.ExceptionMessages.LOTTO_ANSWER_NUMBERS_TYPE_EXCEPTION_MESSAGE;
-import static lotto.exception.ExceptionMessages.NON_EXISTENT_PRICE_EXCEPTION_MESSAGE;
-import static lotto.exception.ExceptionMessages.NOT_DIVISIBLE_PRICE_EXCEPTION_MESSAGE;
-import static lotto.exception.ExceptionMessages.PRICE_TYPE_EXCEPTION_MESSAGE;
+import static lotto.constant.ExceptionMessage.INPUT_BUDGET_WRONG_TYPE;
+import static lotto.constant.ExceptionMessage.INPUT_LOTTERY_NUMBER_WRONG_TYPE;
+import static lotto.constant.ExceptionMessage.INPUT_SELF_PICK_COUNT_WRONG_TYPE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class InputView {
+    public static final String LOTTERY_NUMBERS_DELIMITER = ",";
     private final Scanner scanner = new Scanner(System.in);
 
-    public int readPrice() {
+    public int readBudget() {
+        String input = scanner.nextLine();
+        return parseInt(input, INPUT_BUDGET_WRONG_TYPE);
+    }
+
+    public int readSelfPickCount() {
+        String input = scanner.nextLine();
+        return parseInt(input, INPUT_SELF_PICK_COUNT_WRONG_TYPE);
+    }
+
+    public List<List<Integer>> readSelfPickNumbers(int selfPickCount) {
+        List<List<Integer>> selfPickNumbers = new ArrayList<>();
+        for (int index = 0;index < selfPickCount;index++) {
+            selfPickNumbers.add(readLottoNumberCombination());
+        }
+        return selfPickNumbers;
+    }
+
+    public List<Integer> readWinningLotteryNumberCombination() {
+        return readLottoNumberCombination();
+    }
+
+    public int readBonusNumber() {
+        String input = scanner.nextLine();
+        return parseInt(input, INPUT_LOTTERY_NUMBER_WRONG_TYPE);
+    }
+
+    private List<Integer> readLottoNumberCombination() {
+        String input = scanner.nextLine();
+        return Arrays.stream(input.split(LOTTERY_NUMBERS_DELIMITER))
+                .map(x -> parseInt(x, INPUT_LOTTERY_NUMBER_WRONG_TYPE))
+                .collect(Collectors.toList());
+    }
+
+    private int parseInt(String input, String exceptionMessage) {
         try {
-            String input = scanner.nextLine();
-            int price = Integer.parseInt(input);
-            validatePrice(price);
-            return price;
+            return Integer.parseInt(input.trim());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(PRICE_TYPE_EXCEPTION_MESSAGE);
-        }
-    }
-
-    public List<Integer> readLottoAnswerNumbers() {
-        try {
-            String input = scanner.nextLine();
-            return Arrays.stream(input.split(LOTTO_NUMBERS_INPUT_DELIMITER))
-                    .map(x -> Integer.parseInt(x.trim()))
-                    .collect(Collectors.toList());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(LOTTO_ANSWER_NUMBERS_TYPE_EXCEPTION_MESSAGE);
-        }
-    }
-
-    public Integer readBonusBall() {
-        try {
-            int bonusBall = scanner.nextInt();
-            return bonusBall;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(BONUS_BALL_TYPE_EXCEPTION_MESSAGE);
-        }
-
-    }
-
-    private void validatePrice(int price) {
-        validateRange(price);
-        validateDivisibility(price);
-    }
-
-    private void validateRange(int price) {
-        if (price <= LOTTO_MINIMUM_NON_EXISTENT_PRICE) {
-            throw new IllegalArgumentException(NON_EXISTENT_PRICE_EXCEPTION_MESSAGE);
-        }
-
-    }
-
-    private void validateDivisibility(int price) {
-        if (price % LOTTO_UNIT_PRICE != ZERO_REMAINDER) {
-            throw new IllegalArgumentException(NOT_DIVISIBLE_PRICE_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(exceptionMessage, e);
         }
     }
 }

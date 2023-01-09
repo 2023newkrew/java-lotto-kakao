@@ -1,58 +1,89 @@
 package lotto.view;
 
-import static lotto.domain.LottoConstants.ZERO_WINNING;
-import static lotto.view.Messages.BONUS_BALL_STRING;
-import static lotto.view.Messages.MATCH_COUNT_STRING_FORMAT;
-import static lotto.view.Messages.PRINT_GAME_RESULT_MESSAGE;
-import static lotto.view.Messages.PRINT_LOTTO_COUNT_MESSAGE_FORMAT;
-import static lotto.view.Messages.PRINT_RANK_REMAINING_MESSAGE_FORMAT;
-import static lotto.view.Messages.PRINT_YIELD_MESSAGE_FORMAT;
-import static lotto.view.Messages.READ_BONUS_BALL_MESSAGE;
-import static lotto.view.Messages.READ_LOTTO_ANSWER_NUMBERS_MESSAGE;
-import static lotto.view.Messages.READ_PRICE_MESSAGE;
+import static lotto.constant.LotteryConstant.BREAK_EVEN_POINT_RATIO;
+import static lotto.constant.LotteryConstant.ZERO_MONEY;
+import static lotto.domain.rank.IsBonusRequired.TRUE;
+import static lotto.view.OutputViewMessage.GAINED;
+import static lotto.view.OutputViewMessage.EVEN;
+import static lotto.view.OutputViewMessage.MATCH_COUNT_STRING_FORMAT;
+import static lotto.view.OutputViewMessage.LOST;
+import static lotto.view.OutputViewMessage.PRINT_GAME_RESULT_MESSAGE;
+import static lotto.view.OutputViewMessage.PRINT_LOTTERY_COUNT_MESSAGE_FORMAT;
+import static lotto.view.OutputViewMessage.PRINT_RANK_REMAINING_MESSAGE_FORMAT;
+import static lotto.view.OutputViewMessage.PRINT_YIELD_ANALYSIS_MESSAGE_FORMAT;
+import static lotto.view.OutputViewMessage.PRINT_YIELD_MESSAGE_FORMAT;
+import static lotto.view.OutputViewMessage.READ_BONUS_NUMBER_MESSAGE;
+import static lotto.view.OutputViewMessage.READ_BUDGET_MESSAGE;
+import static lotto.view.OutputViewMessage.READ_SELF_PICK_COUNT_MESSAGE;
+import static lotto.view.OutputViewMessage.READ_SELF_PICK_NUMBERS_MESSAGE;
+import static lotto.view.OutputViewMessage.READ_WINNING_LOTTERY_NUMBER_COMBINATION_MESSAGE;
+import static lotto.view.OutputViewMessage.REQUIRES_BONUS_STRING;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.GameResultDto;
-import lotto.domain.LottoHandler;
-import lotto.domain.LottoRank;
+import lotto.domain.rank.LotteryRank;
 
 public class OutputView {
-    public void printReadPrice() {
-        System.out.println(READ_PRICE_MESSAGE);
+    public void printReadBudget() {
+        System.out.println(READ_BUDGET_MESSAGE);
     }
 
-    public void printCount(int lottoCount) {
-        System.out.printf(PRINT_LOTTO_COUNT_MESSAGE_FORMAT, lottoCount);
+    public void printReadSelfPickCount() {
+        System.out.println(READ_SELF_PICK_COUNT_MESSAGE);
     }
 
-    public void printAllLotto(LottoHandler lottoHandler) {
-        System.out.println(lottoHandler.toString());
+    public void printReadSelfPickNumbers() {
+        System.out.println(READ_SELF_PICK_NUMBERS_MESSAGE);
     }
 
-    public void printReadLottoAnswerNumbers() {
-        System.out.println(READ_LOTTO_ANSWER_NUMBERS_MESSAGE);
+    public void printLotteryTicket(int selfPickCount, List<String> lotteryTicket) {
+        int quickPickCount = lotteryTicket.size() - selfPickCount;
+        System.out.printf(PRINT_LOTTERY_COUNT_MESSAGE_FORMAT, selfPickCount, quickPickCount);
+        lotteryTicket.forEach(System.out::println);
+        System.out.println();
     }
 
-    public void printReadBonusBall() {
-        System.out.println(READ_BONUS_BALL_MESSAGE);
+    public void printReadWinningLotteryNumberCombination() {
+        System.out.println(READ_WINNING_LOTTERY_NUMBER_COMBINATION_MESSAGE);
     }
 
-    public void printGameResult(GameResultDto gameResultDto) {
-        List<Integer> rankCount = gameResultDto.getRankCount();
+    public void printReadBonusNumber() {
+        System.out.println(READ_BONUS_NUMBER_MESSAGE);
+    }
+
+    public void printResult(List<Integer> rankCounts, double yield) {
         System.out.println(PRINT_GAME_RESULT_MESSAGE);
-        Arrays.stream(LottoRank.values())
-                .sorted((rank1, rank2) -> Integer.compare(rank2.index(), rank1.index()))
-                .filter(rank -> rank.winning() > ZERO_WINNING)
-                .forEach(rank -> printSingleRankResult(rank, rankCount.get(rank.index())));
-        System.out.printf(PRINT_YIELD_MESSAGE_FORMAT, gameResultDto.getYield());
+        Arrays.stream(LotteryRank.values())
+                .filter(rank -> rank.getPrize() > ZERO_MONEY)
+                .sorted((rank1, rank2) -> Integer.compare(rank2.getIndex(), rank1.getIndex()))
+                .forEach(rank -> printSingleRankResult(rank, rankCounts.get(rank.getIndex())));
+        printYield(yield);
     }
 
-    private void printSingleRankResult(LottoRank rank, int count) {
-        System.out.printf(MATCH_COUNT_STRING_FORMAT, rank.minMatchCount());
-        if (rank.isRequiresBonus()) {
-            System.out.print(BONUS_BALL_STRING);
+    private void printSingleRankResult(LotteryRank rank, int count) {
+        System.out.printf(MATCH_COUNT_STRING_FORMAT, rank.getMinMatchCount());
+        if (rank.isBonusRequired() == TRUE) {
+            System.out.print(REQUIRES_BONUS_STRING);
         }
-        System.out.printf(PRINT_RANK_REMAINING_MESSAGE_FORMAT, rank.winning(), count);
+        System.out.printf(PRINT_RANK_REMAINING_MESSAGE_FORMAT, rank.getPrize(), count);
+    }
+
+    private void printYield(double yield) {
+        System.out.printf(PRINT_YIELD_MESSAGE_FORMAT, yield);
+        System.out.printf(PRINT_YIELD_ANALYSIS_MESSAGE_FORMAT, (int) BREAK_EVEN_POINT_RATIO, analyzeGainAndLoss(yield));
+    }
+
+    private String analyzeGainAndLoss(double yield) {
+        if (yield > BREAK_EVEN_POINT_RATIO) {
+            return GAINED;
+        }
+        if (yield == BREAK_EVEN_POINT_RATIO) {
+            return EVEN;
+        }
+        return LOST;
+    }
+
+    public void printMessage(String message) {
+        System.out.println(message);
     }
 }
