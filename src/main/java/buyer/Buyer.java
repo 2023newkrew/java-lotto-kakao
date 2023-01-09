@@ -1,26 +1,44 @@
 package buyer;
 
-import lotto.Lotteries;
-import lotto.Lottery;
+import lotto.Lotto;
+import lotto.WinningLotto;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Buyer {
-    private final Lotteries lotteries = new Lotteries();
-    private final Budget budget;
+    public final static int LOTTERY_PRICE = 1000;
+
+    private final List<Lotto> lottos = new ArrayList<>();
+    private Money budget;
 
     public Buyer(int budget) {
-        this.budget = new Budget(budget);
+        this.budget = Money.valueOf(budget);
     }
 
-    public boolean hasMoreBudgetThan(int price) {
-        return budget.hasMoreThan(price);
+    public boolean hasEqualOrMoreBudgetThan(int price) {
+        return budget.compareTo(Money.valueOf(price)) >= 0;
     }
 
-    public void buyLottery(int lotteryPrice, Lottery lottery) {
-        this.budget.decreaseBudget(lotteryPrice);
-        this.lotteries.addLottery(lottery);
+    public boolean canBuyLottosOfQuantity(int quantity) {
+        return hasEqualOrMoreBudgetThan(LOTTERY_PRICE * quantity);
     }
 
-    public Lotteries getLotteries() {
-        return lotteries;
+    public void buyLottery(Lotto lotto) {
+        this.budget = this.budget.decreaseMoney(Money.valueOf(LOTTERY_PRICE));
+        this.lottos.add(lotto);
+    }
+
+    public BuyerResult getResult(WinningLotto winningLotto) {
+        BuyerResult buyerResult = new BuyerResult();
+        for (Lotto lotto : lottos) {
+            buyerResult.matches(winningLotto.getRank(lotto));
+        }
+        return buyerResult;
+    }
+
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }

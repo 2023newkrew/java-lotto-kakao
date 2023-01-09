@@ -1,25 +1,34 @@
 package view;
 
-import buyer.BuyerProfit;
 import buyer.BuyerResult;
-import lotto.Lotteries;
-import lotto.Lottery;
+import lotto.Lotto;
 import lotto.Rank;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public void printLotteries(Lotteries lotteries) {
-        lotteries.getLotteries().forEach(this::printLottery);
+    public void printQuantity(int manualQuantity, int autoQuantity) {
+        System.out.println(
+                "수동으로 " +
+                Integer.toString(manualQuantity) +
+                "장, 자동으로 " +
+                Integer.toString(autoQuantity) +
+                "개를 구매했습니다."
+        );
     }
 
-    private void printLottery(Lottery lottery) {
+    public void printLotteries(List<Lotto> lotteries) {
+        lotteries.forEach(this::printLottery);
+    }
+
+    private void printLottery(Lotto lottery) {
         System.out.println(
-                lottery.getLotteryNumber()
+                lottery.getLottoNumbers()
                         .stream()
                         .map(lotteryNumber -> Integer.toString(lotteryNumber.getNumber()))
-                        .collect(Collectors.joining(","))
+                        .collect(Collectors.joining(", "))
         );
     }
 
@@ -31,14 +40,15 @@ public class OutputView {
                         (result.getResult().getOrDefault(e, 0)) + "개");
             }
         });
+        printProfit(result);
     }
 
     private void printRankInfo(Rank rank) {
-        System.out.print(rank.match.getMatchCount() + "개 일치");
+        System.out.print(rank.matchCount + "개 일치");
         System.out.print("(" + rank.prize + ")- ");
     }
 
-    public void printProfit(BuyerProfit buyerProfit) {
-        System.out.println("총 수익률은 " + buyerProfit.getProfit() + "입니다");
+    public void printProfit(BuyerResult result) {
+        System.out.println("총 수익률은 " + result.getProfit() + "입니다");
     }
 }
