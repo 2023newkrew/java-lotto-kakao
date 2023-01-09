@@ -20,7 +20,6 @@ public class LottoTicket {
         List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::from)
                 .collect(Collectors.toList());
-        validateLottoTicketLength(lottoNumbers);
         lottoTicket = lottoNumbers;
     }
 
