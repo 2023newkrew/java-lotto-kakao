@@ -42,7 +42,7 @@ public class LottoMachine {
             throw new IllegalArgumentException("로또를 1장 이상 구매해야 합니다.");
         }
         if (purchaseAmount % 1000 != 0) {
-            throw new IllegalArgumentException("로또 가격은 1000원입니다. 1000의 배수를 입력해야 합니다.");
+            throw new IllegalArgumentException("로또 가격은 1000원입니다. 구입 금액으로 1000의 배수를 입력해야 합니다.");
         }
         if (purchaseAmount / 1000 < numberOfManualLotto) {
             throw new IllegalArgumentException("구입 금액에 비해 많은 수량의 수동 로또를 구매할 수 없습니다.");
