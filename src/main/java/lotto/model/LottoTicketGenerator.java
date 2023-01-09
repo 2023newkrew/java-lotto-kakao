@@ -5,13 +5,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoTicketGenerator {
-    private final List<LottoValue> lottoDomain;
+    private static final int MIN_VALUE = 1;
+    private static final int MAX_VALUE = 45;
+    private final List<Integer> lottoDomain;
     private static LottoTicketGenerator instance;
 
     private LottoTicketGenerator() {
         lottoDomain = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
-            lottoDomain.add(new LottoValue(i));
+        for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
+            lottoDomain.add(i);
         }
     }
 

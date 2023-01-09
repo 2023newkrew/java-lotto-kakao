@@ -1,8 +1,8 @@
 package lotto;
 
+import lotto.model.LottoTicket;
 import lotto.model.LottoTickets;
 import lotto.model.Result;
-import lotto.model.WinningNumbers;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
@@ -24,7 +24,7 @@ public class LottoMain {
         rv.printLottoTickets(tickets);
 
         String winningNumbers, bonusNumber;
-        WinningNumbers wn;
+        LottoTicket wn;
         do {
             winningNumbers = iv.getWinningNumbers();
             bonusNumber = iv.getBonusNumber();
@@ -36,9 +36,9 @@ public class LottoMain {
         rv.printResultStatistics(result, money);
     }
 
-    private static WinningNumbers createWinningNumbersInstance(String winningNumbers, String bonusNumber) {
+    private static LottoTicket createWinningNumbersInstance(String winningNumbers, String bonusNumber) {
         try {
-            return new WinningNumbers(winningNumbers, bonusNumber);
+            return new LottoTicket(winningNumbers, bonusNumber);
         } catch (Exception E) {
             System.out.println(E.getMessage());
             return null;

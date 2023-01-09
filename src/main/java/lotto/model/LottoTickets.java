@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTickets {
-    List<LottoTicket> tickets;
+    private final List<LottoTicket> tickets;
 
     public LottoTickets(List<LottoTicket> tickets) {
-        this.tickets = tickets;
+        this.tickets = new ArrayList<>(tickets);
     }
 
     public static LottoTickets countOf(int count) {
@@ -19,7 +19,7 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
-    public Result getResults(WinningNumbers winningNumbers) {
+    public Result getResults(LottoTicket winningNumbers) {
         Result result = new Result();
         Grade key;
         for (LottoTicket ticket : tickets) {
@@ -32,5 +32,4 @@ public class LottoTickets {
     public List<LottoTicket> getTicket() {
         return new ArrayList<>(tickets);
     }
-
 }
