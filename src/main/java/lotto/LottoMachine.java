@@ -9,8 +9,12 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoMachine {
-    private final RandomLottoTicketGenerator randomLottoGenerator = new RandomLottoTicketGenerator();
+    private final RandomLottoTicketGenerator randomLottoGenerator;
     private LottoWinningNumber winningLotto = null;
+
+    public LottoMachine(RandomLottoTicketGenerator randomLottoGenerator) {
+        this.randomLottoGenerator = randomLottoGenerator;
+    }
 
     public List<LottoTicket> purchaseLottoTickets(int purchaseAmount, List<List<Integer>> manualLottoNumbers) {
         validatePurchaseAmount(purchaseAmount, manualLottoNumbers.size());

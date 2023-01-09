@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoTicket;
 import lotto.domain.MatchResult;
+import lotto.domain.RandomLottoTicketGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoMachine lottoMachine = new LottoMachine(new RandomLottoTicketGenerator());
         InputView inputView = new InputView(new Scanner(System.in));
         OutputView outputView = new OutputView();
 
