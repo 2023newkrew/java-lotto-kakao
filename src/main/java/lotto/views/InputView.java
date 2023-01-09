@@ -11,7 +11,15 @@ public class InputView {
         this.console = console;
     }
 
-    public Integer getInteger() {
+    public Integer getPositiveInteger() {
+        Integer integer = getInteger();
+        if (integer < 1) {
+            throw new RuntimeException("양수를 입력하세요.");
+        }
+        return integer;
+    }
+
+    private Integer getInteger() {
         try {
             return Integer.parseInt(console.input());
         } catch (NumberFormatException e) {
@@ -34,3 +42,4 @@ public class InputView {
         return console.input();
     }
 }
+

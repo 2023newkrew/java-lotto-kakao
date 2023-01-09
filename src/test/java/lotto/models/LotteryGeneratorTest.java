@@ -14,8 +14,8 @@ class LotteryGeneratorTest {
 
     @Test
     @DisplayName("자동으로 로또를 생성할 수 있다.")
-    public void testCreateLottery() {
-        Lottery lottery = LotteryGenerator.createLottery();
+    public void testCreateLotteryAuto() {
+        Lottery lottery = LotteryGenerator.createLotteryAuto();
         assertThat(lottery.getNumbers()).hasSize(6);
         assertThat(lottery.getNumbers()).isSortedAccordingTo((prev, next) -> {
             if (Objects.equals(prev.getNumber(), next.getNumber()))
@@ -24,6 +24,20 @@ class LotteryGeneratorTest {
                 return 1;
             return -1;
         });
+    }
+
+    @Test
+    @DisplayName("수동으로 로또를 생성할 수 있다.")
+    public void testCreateLotteryManual() {
+        Lottery lottery = LotteryGenerator.createLotteryManual(List.of(2,1,4,3,6,5));
+        assertThat(lottery.getNumbers()).containsExactly(
+                LotteryNumber.from(1),
+                LotteryNumber.from(2),
+                LotteryNumber.from(3),
+                LotteryNumber.from(4),
+                LotteryNumber.from(5),
+                LotteryNumber.from(6)
+        );
     }
 
     @ParameterizedTest

@@ -1,5 +1,6 @@
 package lotto.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.common.LotteryGenerator;
 import lotto.models.Lottery;
@@ -23,48 +24,75 @@ public class LotteryController {
 
     public void run() {
         Integer budget = getBudget();
-        Integer numberOfLotteries = parseNumberOfLotteries(budget);
-        List<Lottery> lotteries = createLotteryList(numberOfLotteries);
-        WinningLottery winningLottery = getGoal();
+        Integer numberOfLotteries = getNumberOfLotteries(budget);
+        Integer manualCount = getManualCount(numberOfLotteries);
+        List<Lottery> lotteries = createLotteries(numberOfLotteries, manualCount);
+        WinningLottery winningLottery = getWinningLotteries();
         showResult(winningLottery, lotteries, budget);
     }
 
     private Integer getBudget() {
+        outputView.askForMoneyToBuyLottery();
         return outputView.requestUntilSuccess(this::getBudgetLogic);
     }
 
     private Integer getBudgetLogic() {
-        outputView.askForMoneyToBuyLottery();
-        return inputView.getInteger();
+        return inputView.getPositiveInteger();
     }
 
-    private Integer parseNumberOfLotteries(int budget) {
-        Integer numberOfLotteries = budget / LOTTERY_PRICE;
-        outputView.printNumberOfLottery(numberOfLotteries);
-        return numberOfLotteries;
+    private Integer getManualCount(Integer numberOfLotteries) {
+        return outputView.requestUntilSuccess(() -> getManualCountLogic(numberOfLotteries));
     }
 
-    private List<Lottery> createLotteryList(int numberOfLottery) {
-        List<Lottery> lotteries = LotteryGenerator.createLotteries(numberOfLottery);
+    private Integer getManualCountLogic(Integer numberOfLotteries) {
+        outputView.askForManualCount();
+        Integer manualCount = inputView.getPositiveInteger();
+        if (manualCount > numberOfLotteries) {
+            throw new RuntimeException("입력하신 금액에 따라 " + numberOfLotteries + "개의 로또만 구매하실 수 있습니다.");
+        }
+        return manualCount;
+    }
+
+    private Integer getNumberOfLotteries(int budget) {
+        return budget / LOTTERY_PRICE;
+    }
+
+    private List<Lottery> createLotteries(int numberOfLottery, int manualCount) {
+        List<Lottery> lotteries = getManualLotteries(manualCount);
+        outputView.printNumberOfLottery(numberOfLottery, manualCount);
+        lotteries.addAll(LotteryGenerator.createLotteries(numberOfLottery - manualCount));
         outputView.printLotteries(lotteries);
         return lotteries;
     }
 
-    private WinningLottery getGoal() {
-        return outputView.requestUntilSuccess(this::getGoalLogic);
+    private List<Lottery> getManualLotteries(Integer manualCount) {
+        return outputView.requestUntilSuccess(() -> getManualLotteriesLogic(manualCount));
     }
 
-    private WinningLottery getGoalLogic() {
-        List<Integer> goalNumbers = getGoalNumbers();
+    private List<Lottery> getManualLotteriesLogic(Integer manualCount) {
+        outputView.askForManualLotteries();
+        List<Lottery> lotteries = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            lotteries.add(LotteryGenerator.createLotteryManual(inputView.getIntegerList()));
+        }
+        return lotteries;
+    }
+
+    private WinningLottery getWinningLotteries() {
+        return outputView.requestUntilSuccess(this::getWinningLotteriesLogic);
+    }
+
+    private WinningLottery getWinningLotteriesLogic() {
+        List<Integer> goalNumbers = getWinningLotteriesNumbers();
         Integer bonusBall = getBonusBall();
         return new WinningLottery(goalNumbers, bonusBall);
     }
 
-    private List<Integer> getGoalNumbers() {
-        return outputView.requestUntilSuccess(this::getGoalNumbersLogic);
+    private List<Integer> getWinningLotteriesNumbers() {
+        return outputView.requestUntilSuccess(this::getWinningLotteriesNumbersLogic);
     }
 
-    private List<Integer> getGoalNumbersLogic() {
+    private List<Integer> getWinningLotteriesNumbersLogic() {
         outputView.askForLastGoalNumbers();
         return inputView.getIntegerList();
     }
@@ -75,7 +103,7 @@ public class LotteryController {
 
     private Integer getBonusBallLogic() {
         outputView.askForBonusBall();
-        return inputView.getInteger();
+        return inputView.getPositiveInteger();
     }
 
     private void showResult(WinningLottery winningLottery, List<Lottery> lotteries, Integer budget) {

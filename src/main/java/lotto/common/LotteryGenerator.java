@@ -20,7 +20,7 @@ public class LotteryGenerator {
             .boxed()
             .collect(Collectors.toList());
 
-    public static Lottery createLottery() {
+    public static Lottery createLotteryAuto() {
         Collections.shuffle(lotteryPreset);
         List<Integer> numbers = lotteryPreset.subList(0, LOTTERY_COUNT).stream()
                 .sorted()
@@ -28,10 +28,14 @@ public class LotteryGenerator {
         return new Lottery(numbers);
     }
 
+    public static Lottery createLotteryManual(List<Integer> numbers) {
+        return new Lottery(numbers);
+    }
+
     public static List<Lottery> createLotteries(int numberOfLottery) {
         List<Lottery> list = new ArrayList<>();
         for (int i = 0; i < numberOfLottery; i++) {
-            list.add(createLottery());
+            list.add(createLotteryAuto());
         }
         return list;
     }

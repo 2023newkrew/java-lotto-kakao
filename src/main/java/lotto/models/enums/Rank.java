@@ -1,22 +1,26 @@
 package lotto.models.enums;
 
+import static lotto.models.enums.MatchType.*;
+
 import java.util.Arrays;
+import lotto.models.LotteryStatistics;
 
 public enum Rank {
-    FIRST(2_000_000_000, 6, false),
-    SECOND(30_000_000, 5, true),
-    THIRD(1_500_000, 5, false),
-    FOURTH(50_000, 4, false),
-    FIFTH(5_000, 3, false),
-    NONE(0, 0, false);
+
+    NONE(0, 0, IRRELEVANT),
+    FIFTH(5_000, 3, IRRELEVANT),
+    FOURTH(50_000, 4, IRRELEVANT),
+    THIRD(1_500_000, 5, INCONSISTENCY),
+    SECOND(30_000_000, 5, MATCH),
+    FIRST(2_000_000_000, 6, INCONSISTENCY);
 
     private final long prize;
 
     private final int matchCount;
 
-    private final boolean includeBonus;
+    private final MatchType includeBonus;
 
-    Rank(long prize, int matchCount, boolean includeBonus) {
+    Rank(long prize, int matchCount, MatchType includeBonus) {
         this.prize = prize;
         this.matchCount = matchCount;
         this.includeBonus = includeBonus;
@@ -24,6 +28,18 @@ public enum Rank {
 
     public long getPrize() {
         return prize;
+    }
+
+    public String getWinningCountString(LotteryStatistics statistics) {
+        if (this == Rank.NONE) {
+            return "---------";
+        }
+        StringBuilder result = new StringBuilder(matchCount + "개 일치");
+        if (this.includeBonus == MATCH) {
+            result.append( ", 보너스 볼 일치");
+        }
+        result.append(" (").append(prize).append("원) - ").append(statistics.getCountOf(this)).append("개");
+        return result.toString();
     }
 
     static public Rank findRank(Integer matchCount, boolean includeBonus) {
@@ -34,12 +50,6 @@ public enum Rank {
     }
 
     private boolean match(Integer matchCount, boolean includeBonus) {
-        if (matchCount != this.matchCount) {
-            return false;
-        }
-        if (matchCount != 5) {
-            return true;
-        }
-        return includeBonus == this.includeBonus;
+        return this.matchCount == matchCount && this.includeBonus.pass(includeBonus);
     }
 }

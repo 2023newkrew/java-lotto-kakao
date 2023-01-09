@@ -5,8 +5,8 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import lotto.models.Lottery;
 import lotto.models.LotteryEarningsRate;
-import lotto.models.enums.Rank;
 import lotto.models.LotteryStatistics;
+import lotto.models.enums.Rank;
 
 public class OutputView {
     Console console;
@@ -19,8 +19,17 @@ public class OutputView {
         console.printOutput("구입금액을 입력해 주세요.");
     }
 
-    public void printNumberOfLottery(Integer numberOfLottery) {
-        console.printOutput(numberOfLottery.toString() + "개를 구매했습니다.");
+    public void askForManualCount() {
+        console.printOutput("수동으로 구매할 로또 수를 입력해주세요.");
+    }
+
+    public void askForManualLotteries() {
+        console.printOutput("수동으로 구매할 번호를 입력해 주세요.");
+    }
+
+    public void printNumberOfLottery(Integer numberOfLottery, Integer manualCount) {
+        int autoCount = numberOfLottery - manualCount;
+        console.printOutput("수동으로 " + manualCount + "장, 자동으로 " + autoCount + "개를 구매했습니다.");
     }
 
     public void printLotteries(List<Lottery> lotteries) {
@@ -39,14 +48,10 @@ public class OutputView {
     }
 
     public void printStatistics(LotteryStatistics statistics) {
-        console.printOutput("당첨 통계\n"
-                + "----------\n"
-                + "3개 일치 (" + Rank.FIFTH.getPrize() + "원)- " + statistics.getCountOf(Rank.FIFTH) + "개\n"
-                + "4개 일치 (" + Rank.FOURTH.getPrize() + "원)- " + statistics.getCountOf(Rank.FOURTH) + "개\n"
-                + "5개 일치 (" + Rank.THIRD.getPrize() + "원)- " + statistics.getCountOf(Rank.THIRD) + "개\n"
-                + "5개 일치, 보너스 볼 일치(" + Rank.SECOND.getPrize() + "원) - " + statistics.getCountOf(
-                Rank.SECOND) + "개\n"
-                + "6개 일치 (" + Rank.FIRST.getPrize() + "원)- " + statistics.getCountOf(Rank.FIRST) + "개\n");
+        console.printOutput("당첨 통계");
+        for (Rank rank : Rank.values()) {
+            console.printOutput(rank.getWinningCountString(statistics));
+        }
     }
 
     public void printEarningsRate(LotteryEarningsRate lotteryEarningsRate) {
