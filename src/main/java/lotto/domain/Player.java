@@ -1,22 +1,39 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
 
-    private Money money;
+    private final Money initialMoney;
+    private Money currentMoney;
     private PlayerLottoResult playerLottoResult;
-    private List<LottoTicket> lottoTickets;
+    private List<LottoTicket> lottoTickets = new ArrayList<>();
 
     public Player(Money money) {
-        this.money = money;
+        this.initialMoney = money;
+        this.currentMoney = money;
     }
 
-    public void buyLottoTickets(Seller seller) {
-        this.lottoTickets = seller.sellLottoTickets(money);
-        Money spentMoney = seller.calculateTotalPrice(lottoTickets);
-        playerLottoResult = new PlayerLottoResult(spentMoney);
-        this.money = money.subtract(spentMoney);
+    public void buyManualLottoTickets(Seller seller, List<LottoTicket> manualLottoTickets) throws IllegalArgumentException {
+        seller.checkHasEnoughMoneyForManualLottoTickets(manualLottoTickets.size(), currentMoney);
+
+        Money spentMoney = seller.calculateTotalPrice(manualLottoTickets);
+        this.currentMoney = currentMoney.subtract(spentMoney);
+
+        lottoTickets.addAll(manualLottoTickets);
+    }
+
+    public void buyAutoLottoTickets(Seller seller) {
+        List<LottoTicket> autoLottoTickets = seller.sellAutoLottoTickets(currentMoney);
+        lottoTickets.addAll(autoLottoTickets);
+        Money spentMoney = seller.calculateTotalPrice(autoLottoTickets);
+        this.currentMoney = currentMoney.subtract(spentMoney);
+    }
+
+    public void initPlayerLottoResult() {
+        Money totalSpentMoney = initialMoney.subtract(currentMoney);
+        playerLottoResult = new PlayerLottoResult(totalSpentMoney);
     }
 
     public PlayerLottoResult findResult(WinnerCompareRule winnerCompareRule) {
@@ -28,5 +45,9 @@ public class Player {
 
     public List<LottoTicket> getLottoTickets() {
         return lottoTickets;
+    }
+
+    public Money getCurrentMoney() {
+        return currentMoney;
     }
 }

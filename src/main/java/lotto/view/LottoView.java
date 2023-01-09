@@ -1,16 +1,21 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.LottoBall;
+import lotto.domain.LottoResult;
+import lotto.domain.LottoTicket;
+import lotto.domain.PlayerLottoResult;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class LottoView {
+public class LottoView implements AutoCloseable {
 
     private static final String GET_PURCHASE_MONEY_AMOUNT_MESSAGE = "구입금액을 입력해주세요.";
+    private static final String GET_MANUAL_LOTTO_TICKETS_COUNT_MESSAGE = "수동으로 구매할 로또 수를 입력해 주세요.";
     private static final String GET_WINNER_TICKET_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String GET_MANUAL_LOTTO_TICKETS_MESSAGE = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String GET_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     private static final String WRONG_TYPE_ERROR_MESSAGE = "잘못된 형식입니다.";
@@ -21,18 +26,21 @@ public class LottoView {
         this.scanner = new Scanner(System.in);
     }
 
-    public int getPurchaseMoneyAmount() {
-        System.out.println(GET_PURCHASE_MONEY_AMOUNT_MESSAGE);
-        try {
-            return Integer.parseInt(scanner.nextLine().trim());
-        } catch (NumberFormatException e) {
-            printErrorMessage(WRONG_TYPE_ERROR_MESSAGE);
-            return getPurchaseMoneyAmount();
-        }
+    public String getPurchaseMoneyAmount() {
+        return getInput(GET_PURCHASE_MONEY_AMOUNT_MESSAGE);
     }
 
-    public void printPurchaseTickets(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
+    public String getManualLottoTicketsCount() {
+        return getInput(GET_MANUAL_LOTTO_TICKETS_COUNT_MESSAGE);
+    }
+
+    public String getManualLottoTickets() {
+        return getInput(null);
+    }
+
+    public void printPurchaseTickets(int manualLottoTicketsCount, List<LottoTicket> lottoTickets) {
+        int autoLottoTicketsCount = lottoTickets.size() - manualLottoTicketsCount;
+        System.out.println("수동으로 " + manualLottoTicketsCount + "장, 자동으로 " + autoLottoTicketsCount + "개를 구매했습니다.");
         for (LottoTicket lottoTicket : lottoTickets) {
             printLottoTicket(lottoTicket);
         }
@@ -52,13 +60,11 @@ public class LottoView {
     }
 
     public String getWinnerTicket() {
-        System.out.println(GET_WINNER_TICKET_MESSAGE);
-        return scanner.nextLine().trim();
+        return getInput(GET_WINNER_TICKET_MESSAGE);
     }
 
     public String getBonusBall() {
-        System.out.println(GET_BONUS_BALL_MESSAGE);
-        return scanner.nextLine().trim();
+        return getInput(GET_BONUS_BALL_MESSAGE);
     }
 
     public void printStats(PlayerLottoResult playerLottoResult) {
@@ -89,5 +95,37 @@ public class LottoView {
 
     public void printErrorMessage(String message) {
         System.out.println(message);
+    }
+
+    public void printManualLottoTicketsInputMessage() {
+        System.out.println(GET_MANUAL_LOTTO_TICKETS_MESSAGE);
+    }
+
+    private String getInput(String informMessage) {
+        try {
+            printInformMessage(informMessage);
+            String input = scanner.nextLine().trim();
+            checkParsableToInt(input);
+            return input;
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(WRONG_TYPE_ERROR_MESSAGE);
+        }
+    }
+
+    private void printInformMessage(String informMessage) {
+        if (informMessage != null && !informMessage.isBlank()) {
+            System.out.println(informMessage);
+        }
+    }
+
+    private void checkParsableToInt(String input) throws NumberFormatException {
+        for (String number : input.split(",")) {
+            Integer.parseInt(number.trim());
+        }
+    }
+
+    @Override
+    public void close() throws Exception {
+        scanner.close();
     }
 }
