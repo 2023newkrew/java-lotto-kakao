@@ -31,7 +31,7 @@ public class TotalResult {
                 .collect(Collectors.toList());
 
         if (prizes.size() != 0) {
-            totalPrize = totalPrize.plus(prizes.get(0));
+            totalPrize = (Prize) totalPrize.plus(prizes.get(0));
         }
     }
 

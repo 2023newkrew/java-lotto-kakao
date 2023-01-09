@@ -3,11 +3,19 @@ package lotto.model;
 import java.util.Objects;
 
 @SuppressWarnings("rawtypes")
-public abstract class Cash implements Comparable {
+public class Cash implements Comparable {
     protected long cash;
 
-    public abstract Cash plus(Cash val2);
-    public abstract Cash plus(long val2);
+    protected Cash(long cash) {
+        this.cash = cash;
+    }
+
+    public Cash plus(Cash val2) {
+        return this.plus(val2.getCash());
+    }
+    public Cash plus(long val2) {
+        return new Cash(this.cash + val2);
+    }
 
     public long getCash() {
         return cash;
