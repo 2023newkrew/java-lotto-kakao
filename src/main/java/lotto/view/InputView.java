@@ -43,27 +43,21 @@ public class InputView {
         return manualCount;
     }
 
-    public List<LottoTicket> inputManualNumbers(int amount){
+    public List<String> inputManualNumbers(int amount){
         int manualCount = inputManualCount(amount);
         System.out.println(INPUT_MANUAL_NUMBER);
-        List<LottoTicket> ret = new ArrayList<>();
+        List<String> ret = new ArrayList<>();
         for(int i=0; i<manualCount; i++){
-            String userInput = scanner.nextLine();
-            ret.add(changeToLottoNumber(userInput));
+            ret.add(scanner.nextLine());
         }
         return ret;
     }
 
     // 사용자 입력값을 WinnerTicket 으로 변환
-    public LottoWinnerTicket changeToWinnerTicket(String userInput, int bonus){
+    public LottoWinnerTicket changeToWinnerTicket(String userInput, int bonus) {
         Integer[] numbers = stringToArray(userInput);
         return new LottoWinnerTicket(
                 new LottoTicket(Arrays.asList(numbers)), bonus);
-    }
-
-    public LottoTicket changeToLottoNumber(String userInput){
-        Integer[] numbers = stringToArray(userInput);
-        return new LottoTicket(Arrays.asList(numbers));
     }
 
     private Integer[] stringToArray(String userInput){
