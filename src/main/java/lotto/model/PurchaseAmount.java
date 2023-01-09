@@ -9,15 +9,14 @@ public class PurchaseAmount {
     private final int purchaseAmount;
 
     public PurchaseAmount(String purchaseAmountString) {
-        validateTypeOfPurchaseAmount(purchaseAmountString);
-        Integer purchaseAmount = StringUtil.convertStringToInt(purchaseAmountString);
+        Integer purchaseAmount = validateTypeOfPurchaseAmount(purchaseAmountString);
         validateInputPurchaseAmount(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
     }
 
-    private void validateTypeOfPurchaseAmount(String purchaseAmount) {
+    private Integer validateTypeOfPurchaseAmount(String purchaseAmount) {
         try {
-            StringUtil.convertStringToInt(purchaseAmount);
+            return StringUtil.convertStringToInt(purchaseAmount);
         } catch (NumberFormatException e) {
             throw new LottoException(ErrorCode.INVALID_INPUT_TYPE_NOT_INTEGER);
         }
