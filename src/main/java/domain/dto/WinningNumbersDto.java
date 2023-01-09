@@ -1,22 +1,24 @@
 package domain.dto;
 
+import domain.lotto.ticket.LottoNumber;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WinningNumbersDto {
-    private List<Integer> lottoNumbers;
-    private Integer bonusNumber;
+    private List<LottoNumber> lottoNumbers;
+    private LottoNumber bonusNumber;
 
-    public WinningNumbersDto(List<Integer> lottoNumbers, Integer bonusNumber) {
+    public WinningNumbersDto(List<LottoNumber> lottoNumbers, LottoNumber bonusNumber) {
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
         this.bonusNumber = bonusNumber;
     }
 
-    public List<Integer> getLottoNumbers() {
+    public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
-    public Integer getBonusNumber() {
+    public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
 }
