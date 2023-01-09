@@ -14,7 +14,13 @@ public class LottoController {
         long purchaseCost = InputView.inputPurchaseCost();
         LottoService lottoService = new LottoService(purchaseCost);
         lottoService.createLottos();
-        OutputView.printLottoCount(lottoService.getLottos().getLottos().size());
+
+        // 수동 입력
+        int manualLottoCount = InputView.inputManualLottoCount();
+        List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
+        lottoService.setManualLottos(manualLottoNumbers);
+
+        OutputView.printLottoCount(manualLottoCount, lottoService.getLottos().size() - manualLottoCount);
 
         OutputView.printLottos(lottoService.getLottos());
 

@@ -29,4 +29,9 @@ public class Lottos {
             priceResult.addResult(winningLotto.getPrice(lotto));
         }
     }
+
+    public int size(){
+        return lottos.size();
+    }
+
 }
