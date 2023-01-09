@@ -14,6 +14,10 @@ public class LottoTicket {
         lottoNumberList = new LottoNumberList(numbers);
     }
 
+    public LottoTicket(LottoNumberList lottoNumberList) {
+        this.lottoNumberList = lottoNumberList;
+    }
+
     @Override
     public String toString() {
         return lottoNumberList.toString();

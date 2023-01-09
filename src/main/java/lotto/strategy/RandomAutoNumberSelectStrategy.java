@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class RandomNumberSelectStrategy implements NumberSelectStrategy {
+public class RandomAutoNumberSelectStrategy implements AutoNumberSelectStrategy {
 
     private static final int NUMBER_MIN_BOUND = 1;
     private static final int NUMBER_MAX_BOUND = 45;

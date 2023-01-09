@@ -1,8 +1,9 @@
 package lotto;
 
+import java.util.Collections;
 import java.util.stream.Stream;
 import lotto.domain.LottoGame;
-import lotto.strategy.RandomNumberSelectStrategy;
+import lotto.strategy.RandomAutoNumberSelectStrategy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,13 +12,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class LottoGameTest {
 
-    LottoGame lottoGame = new LottoGame(new RandomNumberSelectStrategy());
+    LottoGame lottoGame = new LottoGame(new RandomAutoNumberSelectStrategy());
 
     @DisplayName("로또 티켓 구매 (구매한 개수 리턴)")
     @ParameterizedTest
     @MethodSource("getBuyLottoTicketData")
     public void buy_lotto_ticket(int price, int number) {
-        lottoGame.buyLottoTickets(price);
+        lottoGame.buyLottoTickets(price, Collections.emptyList());
         Assertions.assertThat(lottoGame.getQuantityOfLottoTickets()).isEqualTo(number);
     }
 

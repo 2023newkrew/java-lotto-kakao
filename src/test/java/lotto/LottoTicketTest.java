@@ -54,7 +54,7 @@ public class LottoTicketTest {
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 8, 9),
                         Arrays.asList(1, 2, 3, 4, 5, 6), 7, LottoResult.FOURTH),
                 Arguments.of(Arrays.asList(1, 2, 3, 15, 25, 41),
-                        Arrays.asList(1, 2, 3, 4, 5, 6), 7, LottoResult.FIFTH)
+                        Arrays.asList(1, 2, 3, 4, 5, 6), 41, LottoResult.FIFTH)
         );
     }
 
