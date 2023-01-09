@@ -30,13 +30,20 @@ public class LottoSimulator {
     }
 
     public void run() {
-        Money money = inputView.inputMoney();
-        PurchaseResult purchaseResult = store.buyAutomatically(money);
-        outputView.printPurchaseResult(purchaseResult);
-
+        PurchaseResult purchaseResult = createPurchaseResult();
         WinningNumbers winningNumbers = inputView.inputWinningNumbers();
         AnalysisResult analysisResult = analyze(purchaseResult, winningNumbers);
         outputView.printAnalysisResult(analysisResult);
+    }
+
+    private PurchaseResult createPurchaseResult() {
+        Money money = inputView.inputMoney();
+        long manualCount = inputView.inputManualCount();
+        LottoTicket manualTicket = inputView.inputManualLottos(manualCount);
+        PurchaseResult purchaseResult = store.buyManually(money, manualTicket);
+        outputView.printPurchaseResult(manualCount, purchaseResult);
+
+        return purchaseResult;
     }
 
     private static AnalysisResult analyze(PurchaseResult purchaseResult, WinningNumbers winningNumbers) {

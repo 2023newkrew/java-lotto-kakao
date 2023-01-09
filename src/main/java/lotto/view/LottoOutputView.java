@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 
 public class LottoOutputView {
 
-    public void printPurchaseResult(PurchaseResult purchaseResult) {
+    public void printPurchaseResult(long manualCount, PurchaseResult purchaseResult) {
         LottoTicket ticket = purchaseResult.getTicket();
-        System.out.println(ticket.count() + "개를 구매했습니다.");
-        ticket.stream().forEach(this::printLotto);
         System.out.println();
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n",manualCount, ticket.count() -manualCount);
+        ticket.stream().forEach(this::printLotto);
     }
 
     private void printLotto(LottoNumber lotto) {
