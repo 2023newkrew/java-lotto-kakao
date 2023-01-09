@@ -2,25 +2,25 @@ package lotto.model;
 
 import lotto.exception.DuplicatedBallNumber;
 
-public class WinNumber {
-    private final LottoTrial winNumber;
-    private final LottoBallNumber bonusNumber;
+public class WinLotto {
+    private final Lotto winNumber;
+    private final LottoBall bonusNumber;
 
-    public WinNumber(LottoTrial winNumber, LottoBallNumber bonusNumber) {
+    public WinLotto(Lotto winNumber, LottoBall bonusNumber) {
         this.winNumber = winNumber;
         this.bonusNumber = bonusNumber;
 
-        if (winNumber.getBallNumbers().contains(bonusNumber)) {
+        if (winNumber.getBalls().contains(bonusNumber)) {
             throw new DuplicatedBallNumber();
         }
     }
 
-    public LottoResult compareLotto(LottoTrial trial) {
+    public LottoResult compareLotto(Lotto trial) {
         int matchCount = 0;
         boolean matchBonus = false;
 
-        for (LottoBallNumber bn : trial.getBallNumbers()) {
-            matchCount += winNumber.getBallNumbers().contains(bn) ? 1 : 0;
+        for (LottoBall bn : trial.getBalls()) {
+            matchCount += winNumber.getBalls().contains(bn) ? 1 : 0;
             matchBonus |= bn.equals(bonusNumber);
         }
 

@@ -10,52 +10,67 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Controller {
-    private static LottoCount lottoCount;
+    private static Cash buyCash;
+    private static LottoCount lottoCountManual;
+    private static LottoCount lottoCountAuto;
     private static final LottoTrials lottoTrials = new LottoTrials();
-    private static WinNumber winNumber;
+    private static WinLotto winLotto;
     private static final TotalResult totalResult = new TotalResult();
 
     public static void inputCash() throws IOException {
-        Output.startCashOutput();
+        Output.printEnterCash();
 
-        Cash cash = new Cash(Input.startCashInput());
-
-        lottoCount = new LottoCount(cash);
-
-        Output.lottoCountOutput(lottoCount);
+        buyCash = new BuyCash(Input.cashInput());
     }
 
-    public static void createLotto() {
-        for (int i = 0; i < lottoCount.getCount(); i++){
-            LottoTrial lottoTrial = new LottoTrialRandom(new LottoPickerRandom());
+    public static void inputLottoManual() throws IOException {
+        Output.printEnterManualNum();
 
-            Output.lottoTrialOutput(lottoTrial);
+        lottoCountManual = new LottoCount(Input.manualNumInput());
+        lottoCountAuto = new LottoCount(new LottoCount(buyCash).getCount() - lottoCountManual.getCount());
 
-            lottoTrials.add(lottoTrial);
+        if (lottoCountManual.getCount() == 0) return;
+
+        Output.printEnterLottoManual();
+
+        for (int i = 0; i < lottoCountManual.getCount(); i++) {
+            List<LottoBall> manualLotto = Arrays.stream(Input.lottoManualInput())
+                    .map(v -> new LottoBall(Integer.parseInt(v.trim())))
+                    .collect(Collectors.toList());
+
+            lottoTrials.addLottoManualTrial(new Lotto(manualLotto));
         }
     }
 
-    public static void inputWinningLotto() throws IOException {
-        Output.winNumOutput();
+    public static void createLottoAuto() {
+        Output.printLottoCount(lottoCountManual, lottoCountAuto);
 
-        List<LottoBallNumber> winNum = Arrays.stream(Input.winNumInput())
-                .map(v -> new LottoBallNumber(Integer.parseInt(v.trim())))
+        lottoTrials.createLottoAutoTrials(lottoCountAuto);
+
+        Output.printLottoTrials(lottoTrials);
+    }
+
+    public static void inputWinningLotto() throws IOException {
+        Output.printEnterWinNum();
+
+        List<LottoBall> winNum = Arrays.stream(Input.winNumInput())
+                .map(v -> new LottoBall(Integer.parseInt(v.trim())))
                 .collect(Collectors.toList());
 
-        Output.bonusNumOutput();
+        Output.printEnterBonusNum();
 
-        winNumber = new WinNumber(new LottoTrialManual(winNum), new LottoBallNumber(Input.bonusNumInput()));
+        winLotto = new WinLotto(new Lotto(winNum), new LottoBall(Input.bonusNumInput()));
 
         System.out.println();
     }
 
     public static void processLotto() {
-        for (int i = 0; i < lottoCount.getCount(); i++){
-            totalResult.addResult(winNumber.compareLotto(lottoTrials.get(i)));
+        for (int i = 0; i < lottoTrials.getSize(); i++){
+            totalResult.addResult(winLotto.compareLotto(lottoTrials.getLottoTrial(i)));
         }
     }
 
-    public static void outputResult() {
-        Output.totalResultOutput(totalResult);
+    public static void showResult() {
+        Output.printTotalResult(totalResult);
     }
 }

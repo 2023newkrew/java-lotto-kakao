@@ -1,5 +1,7 @@
 package lotto.model;
 
+import java.util.List;
+
 public interface LottoPicker {
-    LottoBallNumber pickOne();
+    List<LottoBall> pick();
 }
