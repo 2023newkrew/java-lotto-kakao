@@ -1,32 +1,42 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static model.LottoScore.getResultByRank;
+
 public class LottoResult {
+    private static final LinkedHashMap<Integer, Long> prize = new LinkedHashMap<>() {{
+        put(3, 5000L);
+        put(4, 50_000L);
+        put(5, 1_500_000L);
+        put(6, 30_000_000L);
+        put(7, 2_000_000_000L);
+    }};
+
     private final LottoGame lottoGame;
-    private final WinningLotto winningLotto;
-    private final LottoPrize lottoPrize;
+    private final LottoDraw lottoDraw;
 
-    private long getTotalPrize() {
-        return lottoGame.getLottoList().stream().mapToLong(l -> lottoPrize.getPrize(winningLotto.getScore(l))).sum();
-    }
-
-    private List<LottoScore> getLottoScores() {
-        return lottoGame.getLottoList().stream().map(winningLotto::getScore).collect(Collectors.toList());
-    }
-
-    public LottoResult(LottoGame lottoGame, WinningLotto winningLotto) {
+    public LottoResult(LottoGame lottoGame, LottoDraw lottoDraw) {
         this.lottoGame = lottoGame;
-        this.winningLotto = winningLotto;
-        this.lottoPrize = new LottoPrize();
+        this.lottoDraw = lottoDraw;
     }
 
     public double getEarningRate(long money) {
-        return (double) getTotalPrize() / money;
+        long totalPrize = lottoGame.getLottoList().stream().mapToLong(l -> prize.getOrDefault(lottoDraw.getRank(l), 0L)).sum();
+        return (double) totalPrize / money;
     }
 
     public String getResult() {
-        return this.lottoPrize.formatPrizes(getLottoScores());
+        List<Integer> ranks = lottoGame.getLottoList().stream().map(lottoDraw::getRank).collect(Collectors.toList());
+        List<String> prizeResults = new ArrayList<>();
+
+        prize.forEach((rank, prizeMoney) -> {
+            prizeResults.add(getResultByRank(rank, prizeMoney) + ranks.stream().filter(r -> r.equals(rank)).count() + "개");
+        });
+
+        return String.join("\n", prizeResults);
     }
 }
