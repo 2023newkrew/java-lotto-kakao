@@ -8,17 +8,16 @@ import lotto.domain.WinnerScore;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.utils.Constants.MIN_PURCHASE_PRICE;
 import static lotto.utils.LottoMessage.*;
 
 public class ResultView {
 
-    public void printPurchaseCount(int manualCount, int amount){
+    public void printPurchaseCount(int manualCount, int randomCount){
         if (manualCount > 0){
             System.out.print("수동으로" + manualCount + "개, ");
             System.out.print("자동으로 ");
         }
-        System.out.println(amount/MIN_PURCHASE_PRICE + RESULT_PURCHASE_COUNT.getMessage());
+        System.out.println(randomCount + RESULT_PURCHASE_COUNT.getMessage());
     }
 
     public void printWinningStatics(WinnerScore result, double rate){
@@ -50,4 +49,5 @@ public class ResultView {
         }
         System.out.println(RESULT_GOOD.getMessage());
     }
+
 }

@@ -16,7 +16,7 @@ public class LottoTickets {
         if(!checkAmountUpperThan1000(amount)){
             throw new IllegalArgumentException("입력한 금액이 1000원 미만입니다.");
         }
-        this.tickets = new ArrayList<>(amount/MIN_PURCHASE_PRICE);
+        this.tickets = new ArrayList<>();
     }
 
     public void createManualTicket(LottoTicket ticket){
@@ -30,11 +30,19 @@ public class LottoTickets {
     }
 
     public int getLottoTicketCount(){
-        return tickets.size();
+        return this.tickets.size();
     }
 
     public List<LottoTicket> getTickets(){
         return this.tickets;
+    }
+
+    public void concatTickets(LottoTickets lottoTickets) {
+        int loopCount = lottoTickets.getTickets().size();
+        for (int i=0; i < loopCount; i++){
+            LottoTicket lottoTicket = lottoTickets.getTickets().get(i);
+            createManualTicket(lottoTicket);
+        }
     }
 
     private boolean checkAmountUpperThan1000(int amount){

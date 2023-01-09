@@ -16,9 +16,9 @@ public class LottoTicket {
     }
 
     public LottoTicket(ArrayList<LottoNumber> lottoNumbers) {
+        lottoNumberCountCheck(lottoNumbers);
+        lottoNumberDuplicateCheck(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-        lottoNumberCountCheck();
-        lottoNumberDuplicateCheck();
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -35,13 +35,13 @@ public class LottoTicket {
         return numList.stream().map(LottoNumber::new).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private void lottoNumberCountCheck() {
+    private void lottoNumberCountCheck(ArrayList<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_TICKET_SIZE) {
             throw new IllegalArgumentException("로또 번호의 개수가 6개가 아닙니다");
         }
     }
 
-    private void lottoNumberDuplicateCheck() {
+    private void lottoNumberDuplicateCheck(ArrayList<LottoNumber> lottoNumbers) {
         if (lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
                 .distinct().count() != LOTTO_TICKET_SIZE) {

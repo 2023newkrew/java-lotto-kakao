@@ -16,33 +16,26 @@ public class LottoApplication {
 
     public static void main(String[] args) {
         InputView inputView = new InputView();
-        int amount = inputView.inputUserAmount();
-        int manualCount = inputView.inputManualCount(amount);
-        amount -= manualCount * MIN_PURCHASE_PRICE;
+        int totalAmount = inputView.inputUserAmount();
+        LottoController lottoController = new LottoController(totalAmount);
+
+        int manualCount = inputView.inputManualCount(totalAmount);
+        int randomCount = (totalAmount - manualCount * MIN_PURCHASE_PRICE) / MIN_PURCHASE_PRICE;
         LottoTickets lottoTickets = inputView.inputManualNumbers(manualCount);
 
-        // 로또 구매
-        LottoController lottoController = new LottoController(amount);
         lottoController.registerManualLotto(lottoTickets);
-        lottoController.registerRandomLotto(amount);
-        ResultView resultView = new ResultView();
-        resultView.printPurchaseCount(manualCount,amount);
+        lottoController.registerRandomLotto(randomCount);
 
-        // 구입한 로또 번호들 출력
+        ResultView resultView = new ResultView();
+        resultView.printPurchaseCount(manualCount,randomCount);
         resultView.printLottoTickets(lottoController.getLottoTickets());
 
-        // 지난주 당첨 번호 및 보너스볼 입력
         StringConversion stringConversion = new StringConversion();
-
-        // 보너스볼 입력
         LottoWinnerTicket lottoWinnerTicket = getLottoWinnerTicket(inputView, stringConversion);
 
         LottoCalculator lottoCalculator = new LottoCalculator(lottoWinnerTicket);
-
-        // Winner Score 뽑아내기
         WinnerScore winScore = lottoCalculator.getWinScore(lottoController.getLottoTickets());
-
-        double rate = lottoCalculator.calcRateOfReturn(winScore, amount);
+        double rate = lottoCalculator.calcRateOfReturn(winScore, totalAmount);
         resultView.printWinningStatics(winScore, rate);
     }
 

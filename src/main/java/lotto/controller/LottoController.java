@@ -1,34 +1,27 @@
 package lotto.controller;
 
-import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
 
-import static lotto.utils.Constants.MIN_PURCHASE_PRICE;
-
 public class LottoController {
-    private final LottoTickets Tickets;
+    private final LottoTickets tickets;
 
     public LottoController(int amount) {
-        this.Tickets = new LottoTickets(amount);
+        this.tickets = new LottoTickets(amount);
     }
 
-    public void registerRandomLotto(int amount){
-        this.Tickets.createRandomTickets(amount/MIN_PURCHASE_PRICE);
+    public void registerRandomLotto(int randomCount){
+        this.tickets.createRandomTickets(randomCount);
     }
 
     public void registerManualLotto(LottoTickets lottoTickets){
-        int loopCount = lottoTickets.getTickets().size();
-        for (int i=0; i < loopCount; i++){
-            LottoTicket lottoTicket = lottoTickets.getTickets().get(i);
-            this.Tickets.createManualTicket(lottoTicket);
-        }
+        this.tickets.concatTickets(lottoTickets);
     }
 
     public int getLottoTicketCount() {
-        return Tickets.getLottoTicketCount();
+        return this.tickets.getLottoTicketCount();
     }
 
     public LottoTickets getLottoTickets(){
-        return this.Tickets;
+        return this.tickets;
     }
 }
