@@ -1,13 +1,16 @@
 package lotto.view;
 
-import lotto.LottoTicket;
-import lotto.MatchResult;
-import lotto.Ranking;
+import lotto.domain.LottoTicket;
+import lotto.domain.MatchResult;
+import lotto.domain.Ranking;
 
 import java.util.List;
 
 public class OutputView {
-    public void printLottoTickets(List<LottoTicket> lottoTickets) {
+    public void printLottoTickets(List<LottoTicket> lottoTickets, int numberOfManualLotto) {
+        int numberOfRandomLotto = lottoTickets.size() - numberOfManualLotto;
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", numberOfManualLotto, numberOfRandomLotto);
+
         for (LottoTicket lottoTicket : lottoTickets) {
             System.out.println(lottoTicket);
         }
