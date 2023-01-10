@@ -39,17 +39,16 @@ public class InputView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public LottoTickets inputManualNumbers(int manualCount) {
+    public LottoTickets inputManualNumbers(int totalAmount, int manualCount) {
+        LottoTickets lottoTickets = new LottoTickets(totalAmount);
         if (manualCount != 0) {
             System.out.println(INPUT_MANUAL_NUMBERS.getMessage());
             StringConversion stringConversion = new StringConversion();
-            LottoTickets lottoTickets = new LottoTickets(manualCount*MIN_PURCHASE_PRICE);
             for (int i=0; i< manualCount; i++) {
                 String userNumber = scanner.nextLine();
-                lottoTickets.createManualTicket(stringConversion.changeToLottoTicket(userNumber));
+                lottoTickets.registerManualTicket(stringConversion.changeToLottoTicket(userNumber));
             }
-            return lottoTickets;
         }
-        return new LottoTickets();
+        return lottoTickets;
     }
 }

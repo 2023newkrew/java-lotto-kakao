@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.controller.LottoController;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTicket;
 import lotto.domain.LottoTickets;
@@ -38,9 +37,9 @@ public class AmountTest {
     @ValueSource(ints = {14000, 15300, 17800})
     @DisplayName("입력된 금액에 맞게 로또 티켓이 생성되어야 한다.")
     void lottoBuyTest(int cost) {
-        LottoController lottoController = new LottoController(cost);
-        lottoController.registerRandomLotto(cost/MIN_PURCHASE_PRICE);
-        assertThat(lottoController.getLottoTicketCount()).isEqualTo(cost/MIN_PURCHASE_PRICE);
+        LottoTickets lottoTickets = new LottoTickets(cost);
+        lottoTickets.registerRandomTicket(cost/MIN_PURCHASE_PRICE);
+        assertThat(lottoTickets.getLottoTicketCount()).isEqualTo(cost/MIN_PURCHASE_PRICE);
     }
 
     @ParameterizedTest
@@ -55,26 +54,9 @@ public class AmountTest {
     @DisplayName("구매한 로또의 개수는 수동과 자동의 합과 같다")
     void lottoCountSummaryTest(){
         LottoTickets lottoTickets = new LottoTickets(14000);
-        lottoTickets.createRandomTickets(12);
-        lottoTickets.createManualTicket(userTicket1);
-        lottoTickets.createManualTicket(userTicket2);
+        lottoTickets.registerRandomTicket(12);
+        lottoTickets.registerManualTicket(userTicket1);
+        lottoTickets.registerManualTicket(userTicket2);
         Assertions.assertThat(lottoTickets.getLottoTicketCount()).isEqualTo(14);
-    }
-
-    @Test
-    @DisplayName("두 개의 티켓리스트를 합칠 수 있다")
-    void concatenateTicketsTest(){
-        LottoTickets lottoTickets1 = new LottoTickets();
-        LottoTickets lottoTickets2 = new LottoTickets();
-        lottoTickets1.createManualTicket(userTicket1);
-        lottoTickets1.createManualTicket(userTicket2);
-        lottoTickets2.createManualTicket(userTicket1);
-        lottoTickets2.createManualTicket(userTicket1);
-
-        lottoTickets1.concatTickets(lottoTickets2);
-        Assertions.assertThat(lottoTickets1.getTickets().stream()
-                                .filter(ticket -> ticket == userTicket1)
-                                .count())
-                                .isEqualTo(3);
     }
 }

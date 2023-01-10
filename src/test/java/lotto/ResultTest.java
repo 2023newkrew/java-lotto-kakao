@@ -72,13 +72,14 @@ public class ResultTest {
     void lottoWinningAmountTest() {
         LottoCalculator lottoCalculator = new LottoCalculator(winnerTicket);
         WinnerScore winScore = new WinnerScore();
-        LottoTickets lottoTickets = new LottoTickets();
+        LottoTickets lottoTickets = new LottoTickets(4000);
 
-        lottoTickets.createManualTicket(userTicket1);
-        lottoTickets.createManualTicket(userTicket2);
-        lottoTickets.createManualTicket(userTicket4);
-        lottoTickets.createManualTicket(userTicket4);
+        lottoTickets.registerManualTicket(userTicket1);
+        lottoTickets.registerManualTicket(userTicket2);
+        lottoTickets.registerManualTicket(userTicket4);
+        lottoTickets.registerManualTicket(userTicket4);
 
+        System.out.println(lottoTickets);
         winScore.addScore(lottoTickets, winnerTicket);
         long summary = lottoCalculator.getWinSummary(winScore);
         assertThat(summary).isEqualTo(4000055000L);
@@ -91,7 +92,7 @@ public class ResultTest {
         LottoCalculator lottoCalculator = new LottoCalculator(winnerTicket);
 
         LottoTickets lottoTickets = new LottoTickets(amount);
-        lottoTickets.createManualTicket(userBonusTicket);
+        lottoTickets.registerManualTicket(userBonusTicket);
 
         WinnerScore winScore = lottoCalculator.getWinScore(lottoTickets);
         assertThat(lottoCalculator.calcRateOfReturn(winScore,amount)).isEqualTo(3000);

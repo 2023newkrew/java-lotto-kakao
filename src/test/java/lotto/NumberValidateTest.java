@@ -38,7 +38,7 @@ public class NumberValidateTest {
     @DisplayName("6개의 숫자에 중복이 없어야 한다.")
     void lottoNumberDupTest() {
         LottoTickets lottoTickets = new LottoTickets(1000);
-        lottoTickets.createRandomTickets(1);
+        lottoTickets.registerRandomTicket(1);
         for (LottoTicket lottoTicket: lottoTickets.getTickets()){
             Set<Integer> dupCheck = new HashSet<>();
             for (LottoNumber lottoNumber : lottoTicket.getLottoNumbers()) {
@@ -52,7 +52,7 @@ public class NumberValidateTest {
     @DisplayName("랜덤 숫자가 1~45 사이에 존재해야만 한다.")
     void lottoNumberRangeTest() {
         LottoTickets lottoTickets = new LottoTickets(1000);
-        lottoTickets.createRandomTickets(1);
+        lottoTickets.registerRandomTicket(1);
 
         for (LottoTicket lottoTicket: lottoTickets.getTickets()){
             for (int i = 0; i < LOTTO_TICKET_SIZE; i++) {

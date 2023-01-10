@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.controller.LottoController;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoTickets;
 import lotto.domain.LottoWinnerTicket;
@@ -17,24 +16,22 @@ public class LottoApplication {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         int totalAmount = inputView.inputUserAmount();
-        LottoController lottoController = new LottoController(totalAmount);
 
         int manualCount = inputView.inputManualCount(totalAmount);
         int randomCount = (totalAmount - manualCount * MIN_PURCHASE_PRICE) / MIN_PURCHASE_PRICE;
-        LottoTickets lottoTickets = inputView.inputManualNumbers(manualCount);
+        LottoTickets lottoTickets = inputView.inputManualNumbers(totalAmount, manualCount);
 
-        lottoController.registerManualLotto(lottoTickets);
-        lottoController.registerRandomLotto(randomCount);
+        lottoTickets.registerRandomTicket(randomCount);
 
         ResultView resultView = new ResultView();
         resultView.printPurchaseCount(manualCount,randomCount);
-        resultView.printLottoTickets(lottoController.getLottoTickets());
+        resultView.printLottoTickets(lottoTickets);
 
         StringConversion stringConversion = new StringConversion();
         LottoWinnerTicket lottoWinnerTicket = getLottoWinnerTicket(inputView, stringConversion);
 
         LottoCalculator lottoCalculator = new LottoCalculator(lottoWinnerTicket);
-        WinnerScore winScore = lottoCalculator.getWinScore(lottoController.getLottoTickets());
+        WinnerScore winScore = lottoCalculator.getWinScore(lottoTickets);
         double rate = lottoCalculator.calcRateOfReturn(winScore, totalAmount);
         resultView.printWinningStatics(winScore, rate);
     }
