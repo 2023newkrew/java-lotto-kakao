@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.model.LottoTicket;
 import lotto.model.LottoTickets;
+import lotto.model.MatchLottoTicket;
 import lotto.model.Result;
 import lotto.view.InputView;
 import lotto.view.ResultView;
@@ -11,27 +12,39 @@ import java.util.ArrayList;
 public class LottoMain {
     private static final int LOTTO_PRICE = 1000;
 
+    static final InputView iv = InputView.getInstance();
+    static final ResultView rv = ResultView.getInstance();
+
+
     public static void main(String[] args) {
-        InputView iv = InputView.getInstance();
-        ResultView rv = ResultView.getInstance();
-
-        int money = iv.getMoneyInput();
+        int money = getMoney();
         int count = money / LOTTO_PRICE;
-        int exchange = money - count * LOTTO_PRICE;
-        money = count * LOTTO_PRICE;
+        LottoTickets userLottoTickets = buyLottoTickets(count);
 
-        LottoTickets tickets = LottoTickets.countOf(count);
-        rv.printCountOfLottoTickets(tickets.getTicket().size());
-        rv.printExchange(exchange);
-        rv.printLottoTickets(tickets);
+        LottoTicket wn = getWinningNumbers();
+        Result result = MatchLottoTicket.matchLotto(userLottoTickets, wn);
+        printResult(result, money);
+    }
 
-        String winningNumbers, bonusNumber;
-        LottoTicket wn;
-        do {
-            winningNumbers = iv.getWinningNumbers();
-            bonusNumber = iv.getBonusNumber();
-            wn = createWinningNumbersInstance(winningNumbers, bonusNumber);
-        } while (wn == null);
+
+    private static int getMoney() {
+        int inputMoney = iv.getMoneyInput();
+        rv.printExchange((inputMoney / LOTTO_PRICE), inputMoney % LOTTO_PRICE);
+        return (inputMoney / LOTTO_PRICE) * LOTTO_PRICE;
+    }
+
+    private static LottoTickets buyLottoTickets(int count) {
+        LottoTickets lt = getManualAndAutoLotto(count);
+        rv.printCountOfLottoTickets(lt.getTicket().size());
+        rv.printLottoTickets(lt);
+        return lt;
+    }
+
+
+    private static LottoTickets getManualAndAutoLotto(int count) {
+        ArrayList<String> manualLotto = getManualLotto(count);
+        return LottoTickets.countOf(manualLotto, count);
+    }
 
     private static ArrayList<String> getManualLotto(int count) {
         int manualCount = iv.getManualCount(count);
@@ -45,16 +58,26 @@ public class LottoMain {
         return manualLotto;
     }
 
-        Result result = tickets.getResults(wn);
-        rv.printResultStatistics(result, money);
+    private static LottoTicket getWinningNumbers() {
+        return createWinningNumbersInstance(iv.getWinningNumbers(), iv.getBonusNumber());
+    }
+
+
+    private static void validateManualCount(int manualCount, int count) {
+        if (manualCount < 0) {
+            throw new IllegalArgumentException("0 이상의 값만 입력 가능합니다.");
+        }
+        if (count < manualCount) {
+            throw new IllegalArgumentException("구매 가능한 범위 내의 값만 입력 가능합니다.");
+        }
     }
 
     private static LottoTicket createWinningNumbersInstance(String winningNumbers, String bonusNumber) {
-        try {
-            return new LottoTicket(winningNumbers, bonusNumber);
-        } catch (Exception E) {
-            System.out.println(E.getMessage());
-            return null;
-        }
+        return new LottoTicket(winningNumbers, bonusNumber);
+    }
+
+    private static void printResult(Result result, int money) {
+        rv.printResultStatistics(result);
+        rv.printRevenueRate(result, money);
     }
 }
