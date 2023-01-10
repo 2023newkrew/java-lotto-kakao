@@ -4,24 +4,24 @@ import lotto.domain.lotto.LottoNumber;
 import util.ListUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoTicket {
 
     public static final int LOTTO_NUMBERS_SIZE = 6;
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateSize(lottoNumbers);
         validateDuplicates(lottoNumbers);
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
-        Collections.sort(this.lottoNumbers);
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+        return new ArrayList<>(lottoNumbers);
     }
 
     private void validateSize(List<LottoNumber> lottoNumbers) {

@@ -64,6 +64,7 @@ public class LottoOutputView {
     }
 
     private void printLottoNumbers(List<LottoNumber> lottoNumbers) {
+        Collections.sort(lottoNumbers);
         String numbers = lottoNumbers.stream()
                 .map(LottoNumber::getValue)
                 .map(String::valueOf)
