@@ -5,19 +5,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static domain.LottoConstant.LOTTO_LENGTH;
+import static domain.LottoConstant.LOTTO_TICKET_LENGTH;
 
 public class LottoTicket {
+    public static final String INVALID_LOTTO_TICKET_LENGTH_MSG = String.format("로또의 길이는 %d 이어야 합니다.", LOTTO_TICKET_LENGTH);
     private final List<LottoNumber> lottoNumbers;
-
-    public static LottoTicket of(List<Integer> numbers) {
-        List<LottoNumber> lottoNumbers = numbers.stream()
-                .mapToInt(number -> number)
-                .mapToObj(LottoNumber::new)
-                .collect(Collectors.toList());
-
-        return new LottoTicket(lottoNumbers);
-    }
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         validateLottoNumber(lottoNumbers);
@@ -26,7 +18,7 @@ public class LottoTicket {
 
     private void validateLottoNumber(List<LottoNumber> lottoNumbers) {
         if(isInValidLottoNumberLength(lottoNumbers)){
-            throw new IllegalArgumentException("로또의 길이는 " + LOTTO_LENGTH + "이어야 합니다.");
+            throw new IllegalArgumentException(INVALID_LOTTO_TICKET_LENGTH_MSG);
         }
         if(hasDuplicatedLottoNumber(lottoNumbers)){
             throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다.");
@@ -39,7 +31,7 @@ public class LottoTicket {
     }
 
     private boolean isInValidLottoNumberLength(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.size() != LOTTO_LENGTH;
+        return lottoNumbers.size() != LOTTO_TICKET_LENGTH;
     }
 
     public boolean contains(LottoNumber lottoNumber){
@@ -52,16 +44,11 @@ public class LottoTicket {
 
     public List<LottoNumber> findUnMatchLottoNumbers(LottoTicket lottoTicket) {
         return lottoNumbers.stream()
-                .filter((lottoNumber) -> !lottoTicket.contains(lottoNumber))
+                .filter(lottoNumber -> !lottoTicket.contains(lottoNumber))
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public String toString() {
-        return "["
-                + lottoNumbers.stream()
-                .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
-                .collect(Collectors.joining(", "))
-                + "]";
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 }

@@ -5,11 +5,13 @@ import java.util.Objects;
 import static domain.LottoConstant.*;
 
 public class LottoNumber {
+    public static final String INVALID_LOTTO_NUMBER_MSG = String.format("로또 번호는 %d 이상 %d 이하여야합니다.", LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE);
     private final int number;
 
     public LottoNumber(int number) {
         if(isLottoNumberOutOfRange(number)){
-            throw new IllegalArgumentException("로또 번호는 " + LOTTO_NUMBER_MIN_VALUE + "이상" + LOTTO_NUMBER_MAX_VALUE + "이하여야합니다.");
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_MSG);
+
         }
         this.number = number;
     }

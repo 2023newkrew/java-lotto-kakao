@@ -5,41 +5,43 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class QuickPickSimulator implements LottoSimulator{
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoTicketGenerator lottoTicketGenerator;
+    private final LottoTicketStore lottoTicketStore;
 
-    public QuickPickSimulator(InputView inputView, OutputView outputView){
+    public QuickPickSimulator(InputView inputView, OutputView outputView, LottoTicketStore lottoTicketStore){
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoTicketGenerator = new LottoTicketAutoGenerator();
+        this.lottoTicketStore = lottoTicketStore;
     }
 
-    @Override
-    public void play() {
-        List<LottoTicket> purchaseLottoTickets = getPurchaseLottoTickets();
-        outputView.printLottoPurchaseInfo(purchaseLottoTickets);
+    public void simulate(){
+        User user = getUserInfo();
+        outputView.printUserInfo(user);
 
-        List<LottoMatchResult> lottoMatchResults = playLottoGames(purchaseLottoTickets);
-        LottoMatchStatistics lottoMatchStatistics = new LottoMatchStatistics(lottoMatchResults);
-        outputView.printLottoMatchStatistics(lottoMatchStatistics);
+        WinningLotto lastWinningLotto = getLastWinningLotto();
+
+        LottoGame lottoGame = new LottoGame(user, lastWinningLotto);
+        GameResult gameResult = lottoGame.play();
+        WinningStatistics winningStatistics = new WinningStatistics(gameResult, user.getWallet().getUsage());
+        outputView.printWinningStatistics(winningStatistics);
     }
 
-    private List<LottoMatchResult> playLottoGames(List<LottoTicket> purchaseLottoTickets) {
-        WinningLotto lastWinningLotto = inputView.getLastWinningLotto();
-
-        return purchaseLottoTickets.stream()
-                .map(lastWinningLotto::match)
-                .collect(Collectors.toList());
+    private WinningLotto getLastWinningLotto() {
+        return inputView.getLastWinningLotto();
     }
 
-    private List<LottoTicket> getPurchaseLottoTickets() {
-        int purchasePrice = inputView.getPurchasePrice();
-        int lottoCount =  purchasePrice / LottoConstant.LOTTO_PRICE;
+    private User getUserInfo() {
+        Wallet purchasePrice = new Wallet(inputView.getPurchasePrice());
 
-        return lottoTicketGenerator.generate(lottoCount);
+        int manualLottoCountToPurchase = inputView.getManualLottoCountToPurchase();
+        List<List<LottoNumber>> lottoNumbers = inputView.getManualLottoNumbers(manualLottoCountToPurchase);
+
+        List<LottoTicket> manualLottoTickets = lottoTicketStore.purchaseLotto(lottoNumbers, purchasePrice);
+        List<LottoTicket> autoLottoTickets = lottoTicketStore.purchaseLotto(purchasePrice);
+
+        return new User(purchasePrice, manualLottoTickets, autoLottoTickets);
     }
 }
