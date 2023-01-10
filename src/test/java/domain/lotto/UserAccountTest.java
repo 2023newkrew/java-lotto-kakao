@@ -1,6 +1,6 @@
 package domain.lotto;
 
-import domain.UserAccount;
+import lotto.domain.UserAccount;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,7 +1,8 @@
 package domain.lotto;
 
-import domain.UserAccount;
-import domain.lotto.store.LottoStore;
+import lotto.domain.UserAccount;
+import lotto.domain.lotto.LottoNumber;
+import lotto.domain.lotto.store.LottoStore;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
