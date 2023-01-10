@@ -2,12 +2,13 @@ package domain.lotto;
 
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.ticket.LottoTicket;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class LottoTicketTest {
 
@@ -22,7 +23,7 @@ public class LottoTicketTest {
                 new LottoNumber(5)
         );
 
-        Assertions.assertThatIllegalArgumentException()
+        assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoTicket(lottoNumbers));
     }
 
@@ -38,7 +39,7 @@ public class LottoTicketTest {
                 new LottoNumber(5)
         );
 
-        Assertions.assertThatIllegalArgumentException()
+        assertThatIllegalArgumentException()
                 .isThrownBy(() -> new LottoTicket(lottoNumbers));
     }
 }

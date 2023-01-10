@@ -4,7 +4,6 @@ import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.LottoWinningNumber;
 import lotto.domain.lotto.prize.LottoPrize;
 import lotto.domain.lotto.ticket.LottoTicket;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class LottoPrizeTest {
 
@@ -47,7 +48,7 @@ class LottoPrizeTest {
 
         LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber)
                 .get();
-        Assertions.assertThat(prize)
+        assertThat(prize)
                 .isEqualTo(LottoPrize.FIRST_PRIZE);
     }
 
@@ -65,7 +66,7 @@ class LottoPrizeTest {
 
         LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber)
                 .get();
-        Assertions.assertThat(prize)
+        assertThat(prize)
                 .isEqualTo(LottoPrize.SECOND_PRIZE);
     }
 
@@ -83,7 +84,7 @@ class LottoPrizeTest {
 
         LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber)
                 .get();
-        Assertions.assertThat(prize)
+        assertThat(prize)
                 .isEqualTo(LottoPrize.THIRD_PRIZE);
     }
 
@@ -101,7 +102,7 @@ class LottoPrizeTest {
 
         LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber)
                 .get();
-        Assertions.assertThat(prize)
+        assertThat(prize)
                 .isEqualTo(LottoPrize.FOURTH_PRIZE);
     }
 
@@ -119,7 +120,7 @@ class LottoPrizeTest {
 
         LottoPrize prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber)
                 .get();
-        Assertions.assertThat(prize)
+        assertThat(prize)
                 .isEqualTo(LottoPrize.FIFTH_PRIZE);
     }
 
@@ -136,7 +137,7 @@ class LottoPrizeTest {
         ));
 
         Optional<LottoPrize> prize = LottoPrize.findPrize(lottoTicket, lottoWinningNumber);
-        Assertions.assertThat(prize)
+        assertThat(prize)
                 .isEmpty();
     }
 

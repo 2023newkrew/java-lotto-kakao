@@ -3,11 +3,12 @@ package domain.lotto;
 import lotto.domain.UserAccount;
 import lotto.domain.lotto.LottoNumber;
 import lotto.domain.lotto.store.LottoStore;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThatNoException;
 
 public class LottoStoreTest {
 
@@ -24,7 +25,7 @@ public class LottoStoreTest {
                 new LottoNumber(5),
                 new LottoNumber(6)
         );
-        Assertions.assertThatNoException()
+        assertThatNoException()
                 .isThrownBy(() -> lottoStore.buyLottoTicket(userAccount, lottoNumberList));
     }
 }
