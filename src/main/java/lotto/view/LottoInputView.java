@@ -35,7 +35,7 @@ public class LottoInputView {
         return Arrays.stream(inputStrings)
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 
@@ -43,7 +43,7 @@ public class LottoInputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonusBallNumber = Integer.parseInt(sc.nextLine());
 
-        return new LottoNumber(bonusBallNumber);
+        return LottoNumber.from(bonusBallNumber);
     }
 
     public int readBuyingAmount() {
@@ -59,7 +59,7 @@ public class LottoInputView {
         return Arrays.stream(inputStrings)
                 .map(String::trim)
                 .mapToInt(Integer::parseInt)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::from)
                 .collect(Collectors.toList());
     }
 }

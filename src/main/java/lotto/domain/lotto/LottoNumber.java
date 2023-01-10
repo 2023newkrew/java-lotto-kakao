@@ -1,6 +1,9 @@
 package lotto.domain.lotto;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -9,7 +12,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int value;
 
-    public LottoNumber(int value) {
+    private static final Map<Integer, LottoNumber> lottoNumberMap = new HashMap<>();
+
+    static {
+        IntStream.range(MINIMUM_VALUE, MAXIMUM_VALUE + 1)
+                .forEach(num -> lottoNumberMap.put(num, new LottoNumber(num)));
+    }
+
+    private LottoNumber(int value) {
         validateRange(value);
         this.value = value;
     }
@@ -18,7 +28,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return value;
     }
 
-    private void validateRange(int value) {
+    public static LottoNumber from(int number) {
+        validateRange(number);
+        return lottoNumberMap.get(number);
+    }
+
+    private static void validateRange(int value) {
         if (value < MINIMUM_VALUE || value > MAXIMUM_VALUE) {
             throw new IllegalArgumentException("잘못된 범위의 숫자입니다.");
         }
