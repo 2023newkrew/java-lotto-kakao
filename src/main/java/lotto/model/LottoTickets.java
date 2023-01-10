@@ -12,7 +12,9 @@ public class LottoTickets {
     }
 
     public static LottoTickets countOf(ArrayList<String> manual, int count) {
-        List<LottoTicket> tickets = manual.stream().map(lotto -> new LottoTicket(lotto, "")).collect(Collectors.toList());
+        List<LottoTicket> tickets = manual.stream()
+                .map(lotto -> new LottoTicket(lotto, ""))
+                .collect(Collectors.toList());
         for (int i = 0; i < count; i++) {
             tickets.add(LottoTicketGenerator.generate());
         }

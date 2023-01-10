@@ -85,12 +85,16 @@ public class LottoTicket {
         return Integer.parseInt(string);
     }
 
-    public boolean contains(Integer bonusNumber) {
-        return lottoValues.contains(bonusNumber);
+    public boolean contains(Integer number) {
+        return lottoValues.contains(number);
     }
 
     public List<Integer> getLottoValues() {
         return new ArrayList<>(lottoValues);
+    }
+
+    public Integer getBonusNumber() {
+        return bonusNumber;
     }
 
     public String toString() {
@@ -99,17 +103,5 @@ public class LottoTicket {
             st.add(Integer.toString(value));
         }
         return "[" + String.join(", ", st) + "]";
-    }
-
-    public Grade matchValues(LottoTicket lottoTicket) {
-        int sixCount = (int) lottoTicket.getLottoValues()
-                .stream()
-                .filter(this::contains)
-                .count();
-        int bonusCount = 0;
-        if (sixCount == 5 && lottoTicket.contains(bonusNumber)) {
-            bonusCount++;
-        }
-        return Grade.getGrade(sixCount + 10 * bonusCount);
     }
 }
