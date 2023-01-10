@@ -15,19 +15,19 @@ import static lotto.domain.constants.LottoStringForm.Korean.CASH_UNIT;
 */
 
 public class Cash implements Comparable {
-    private final long cash;
+    private final long cashValue;
 
     /**
      * makes Cash instance which have {@code (cash)} won.
-     * @param cash
+     * @param cashValue
      *
      * @author Daniel.kim
      */
-    public Cash(long cash){
-        if (cash < 0) {
+    public Cash(long cashValue){
+        if (cashValue < 0) {
             throw new InvalidCashValue();
         }
-        this.cash = cash;
+        this.cashValue = cashValue;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Cash implements Comparable {
      * @return new Cash which contains added value.
      */
     public Cash plus(Cash val2) {
-        return plus(this.cash+val2.getCash());
+        return plus(val2.getCashValue());
     }
 
     /**
@@ -47,7 +47,7 @@ public class Cash implements Comparable {
      * @return new Cash which contains added value.
      */
     public Cash plus(long val2) {
-        return new Cash(this.cash+val2);
+        return new Cash(this.cashValue +val2);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Cash implements Comparable {
      * @return new Cash which contains subtracted value.
      */
     public Cash minus(Cash val2) {
-        return minus(this.cash-val2.cash);
+        return minus(val2.cashValue);
     }
 
     /**
@@ -67,14 +67,14 @@ public class Cash implements Comparable {
      * @return new Cash which contains subtracted value.
      */
     public Cash minus(long val2) {
-        return new Cash(this.cash-val2);
+        return new Cash(this.cashValue -val2);
     }
 
     /**
      * @return long value which indicates cash.
      */
-    public long getCash() {
-        return cash;
+    public long getCashValue() {
+        return cashValue;
     }
 
     /**
@@ -84,19 +84,16 @@ public class Cash implements Comparable {
      */
     @Override
     public boolean equals(Object o) {
-        if (o == null || (getClass() != o.getClass() && o.getClass()!=Long.class)){
+        if (o == null || getClass() != o.getClass()){
             return false;
         }
-        if (Long.class == o.getClass()){
-            return cash == ((Long)o);
-        }
         Cash cash1 = (Cash)o;
-        return cash == cash1.cash;
+        return cashValue == cash1.cashValue;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cash);
+        return Objects.hash(cashValue);
     }
 
     /**
@@ -107,7 +104,7 @@ public class Cash implements Comparable {
      */
     @Override
     public String toString() {
-        return cash+CASH_UNIT;
+        return cashValue +CASH_UNIT;
     }
 
     /**
@@ -118,13 +115,9 @@ public class Cash implements Comparable {
      */
     @Override
     public int compareTo(Object o) {
-        if (o == null || (getClass() != o.getClass() && o.getClass()!=Long.class)){
+        if (o == null || getClass() != o.getClass()){
             throw new TypeMismatchException();
         }
-        if (Long.class == o.getClass()){
-            return cash > ((Long)o) ? 1 : (cash == (Long)o ? 0 : -1);
-        }
-        long otherCash = ((Cash)o).cash;
-        return Long.compare(cash, otherCash);
+        return Long.compare(cashValue, ((Cash)o).cashValue);
     }
 }

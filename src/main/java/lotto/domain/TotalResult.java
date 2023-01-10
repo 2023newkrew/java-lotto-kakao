@@ -30,9 +30,9 @@ public class TotalResult {
     private void addPrize(LottoResult lottoResult){
         List<Cash> prizes = Arrays.stream(WinningCondition.values())
                 .map(v -> v.getPrizeIfMatch(lottoResult))
-                .filter(v->v.compareTo(NO_PRIZE_CASH)>0)
+                .filter(v->v.compareTo(new Cash(NO_PRIZE_CASH))>0)
                 .collect(Collectors.toList());
-        totalPrize = totalPrize.plus((prizes.size()!=0 ? prizes.get(0):new Cash(NO_PRIZE_CASH)));
+        totalPrize = totalPrize.plus((prizes.size()!=0 ? prizes.get(0) : new Cash(NO_PRIZE_CASH)));
     }
 
     public LottoCount getLottoCountOfResult(LottoResult lottoResult){
@@ -51,7 +51,7 @@ public class TotalResult {
         if (trial == 0){
             throw new ArithmeticException();
         }
-        return (double)(totalPrize.getCash()) / (trial*LOTTO_PRICE);
+        return (double)(totalPrize.getCashValue()) / (trial*LOTTO_PRICE);
     }
 
 

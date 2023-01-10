@@ -17,6 +17,11 @@ public class LottoTrials implements Iterator<LottoTrial> {
         lottoTrialIterator = lottoTrials.iterator();
     }
 
+    public void addAll(LottoTrials lottoTrials){
+        this.lottoTrials.addAll(lottoTrials.lottoTrials);
+        lottoTrialIterator = this.lottoTrials.iterator();
+    }
+
     public int size(){
         return lottoTrials.size();
     }
