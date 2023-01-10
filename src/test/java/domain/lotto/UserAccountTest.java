@@ -2,11 +2,11 @@ package domain.lotto;
 
 import lotto.domain.UserAccount;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.*;
 
 public class UserAccountTest {
     @ParameterizedTest
@@ -23,5 +23,20 @@ public class UserAccountTest {
     void validateRange_throw(int value) {
         assertThatIllegalStateException()
                 .isThrownBy(() -> new UserAccount(value));
+    }
+
+    @Test
+    void withdraw() {
+        UserAccount userAccount = new UserAccount(10000);
+        userAccount.withdraw(1000);
+        assertThat(userAccount.getBalance()).isEqualTo(9000);
+    }
+
+    @Test
+    void withdraw_exception() {
+        UserAccount userAccount = new UserAccount(0);
+
+        assertThatIllegalStateException()
+                .isThrownBy(() -> userAccount.withdraw(1000));
     }
 }
