@@ -1,4 +1,4 @@
-package lotto.model.company;
+package lotto.model.ranking;
 
 import lotto.model.store.Money;
 
@@ -26,7 +26,7 @@ public enum LottoRanking {
     }
 
     public static LottoRanking from(int commonCount, boolean hasBonus) {
-        if(isSecond(commonCount,hasBonus)){
+        if (isSecond(commonCount, hasBonus)) {
             return SECOND;
         }
         return Stream.of(LottoRanking.values())

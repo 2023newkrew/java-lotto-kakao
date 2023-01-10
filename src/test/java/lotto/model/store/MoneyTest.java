@@ -47,12 +47,12 @@ public class MoneyTest {
 
         @DisplayName("1000원을 divider로 나눗셈")
         @ParameterizedTest
-        @CsvSource({"1,1000","2,500","3,333","400,2","1000,1","1001,0"})
-        void should_returnMoneyHasValue_when_valueOfAmount(long divider, long expected){
+        @CsvSource({"1,1000","2,500","3,333.33","400,2.5","1000,1","1001,0.99"})
+        void should_returnMoneyHasValue_when_valueOfAmount(long divider, double expected){
             Money money = Money.valueOf(1000);
             Money dividerMoney = Money.valueOf(divider);
 
-            Assertions.assertThat(money.divide(dividerMoney)).isEqualTo(BigDecimal.valueOf(expected));
+            Assertions.assertThat(money.divide(dividerMoney,2)).isEqualTo(expected);
         }
     }
 }

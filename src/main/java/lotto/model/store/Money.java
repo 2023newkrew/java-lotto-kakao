@@ -26,36 +26,44 @@ public class Money {
         this.value = value;
     }
 
-    public static boolean isNullOrZero(Money money){
-        return Objects.isNull(money) || money.equals(ZERO);
-    }
-
     public BigDecimal bigDecimal() {
         return value;
     }
 
     public Money add(Money other) {
+        if (isNullOrZero(other)) {
+            return this;
+        }
+
         return valueOf(value.add(other.value));
     }
 
     public Money subtract(Money other) {
+        if (isNullOrZero(other)) {
+            return this;
+        }
+
         return valueOf(value.subtract(other.value));
     }
 
-    public Money multiply(BigDecimal multiplicand) {
-        return valueOf(value.multiply(multiplicand));
+    public static boolean isNullOrZero(Money money) {
+        return Objects.isNull(money) || money.equals(ZERO);
     }
 
-    public BigDecimal divide(Money other) {
-        return divide(other, 0, RoundingMode.DOWN);
+    public Money multiply(long multiplicand) {
+        return valueOf(value.multiply(BigDecimal.valueOf(multiplicand)));
     }
 
-    public BigDecimal divide(Money other, int scale, RoundingMode roundingMode) {
-        if (other.equals(Money.ZERO)) {
+    public double divide(Money other) {
+        return divide(other, 0);
+    }
+
+    public double divide(Money other, int scale) {
+        if (isNullOrZero(other)) {
             throw new IllegalArgumentException("0으로 나눌 수 없습니다.");
         }
 
-        return value.divide(other.value, scale, roundingMode);
+        return value.divide(other.value, scale, RoundingMode.DOWN).doubleValue();
     }
 
     @Override

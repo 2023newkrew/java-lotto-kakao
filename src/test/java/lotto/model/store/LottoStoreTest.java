@@ -1,5 +1,6 @@
 package lotto.model.store;
 
+import lotto.model.ticket.LottoNumber;
 import lotto.model.ticket.LottoTicket;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 class LottoStoreTest {
 
@@ -33,78 +35,122 @@ class LottoStoreTest {
         }
     }
 
+
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
     class getPurchasableCount {
 
-        @DisplayName("로또 가격이 1000원일 때 구입 가능한 로또 수량 반환")
+        @DisplayName("구입 가능한 로또 갯수 반환")
         @ParameterizedTest
         @MethodSource
-        void should_returnCount_when_givenMoney(Money money, long expected) {
-            LottoStore store = LottoStore.create(Money.valueOf(1000L));
+        void should_returnCount_when_givenMoney(Money money, long count) {
+            Money price = Money.valueOf(1000L);
+            LottoStore store = LottoStore.create(price);
 
-            long count = store.getPurchasableCount(money);
+            long actual = store.getPurchasableCount(money);
 
-            Assertions.assertThat(count).isEqualTo(expected);
+            Assertions.assertThat(actual).isEqualTo(count);
         }
 
         public List<Arguments> should_returnCount_when_givenMoney() {
             return List.of(
+                    Arguments.of(null, 0L),
                     Arguments.of(Money.ZERO, 0L),
-                    Arguments.of(Money.valueOf(500L), 0L),
                     Arguments.of(Money.valueOf(1000L), 1L),
-                    Arguments.of(Money.valueOf(3333L), 3L)
+                    Arguments.of(Money.valueOf(1500L), 1L),
+                    Arguments.of(Money.valueOf(9999L), 9L)
             );
         }
     }
 
-    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-    @Nested
-    class getTotalPrice {
-
-        @DisplayName("로또 가격이 1000원일 때 구입할 로또의 총 가격 반환")
-        @ParameterizedTest
-        @MethodSource
-        void should_returnTotalPrice_when_givenCount(long count, Money expected) {
-            LottoStore store = LottoStore.create(Money.valueOf(1000L));
-
-            Money money = store.getTotalPrice(count);
-
-            Assertions.assertThat(money).isEqualTo(expected);
-        }
-
-        public List<Arguments> should_returnTotalPrice_when_givenCount() {
-            return List.of(
-                    Arguments.of(0L, Money.ZERO),
-                    Arguments.of(1L, Money.valueOf(1000L)),
-                    Arguments.of(2L, Money.valueOf(2000L)),
-                    Arguments.of(99L, Money.valueOf(99000L))
-            );
-        }
-    }
 
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
     class buyAutomatically {
 
-        @DisplayName("수량만큼 로또 반환")
+        @DisplayName("1000원당 로또 1장 반환")
         @ParameterizedTest
         @MethodSource
-        void should_lottosCountIs_when_givenCount(long count) {
+        void should_lottosCountIs_when_givenMoney(Money money, int lottoCount) {
             LottoStore store = LottoStore.create(Money.valueOf(1000L));
 
-            LottoTicket ticket = store.buyAutomatically(count);
+            PurchaseResult purchaseResult = store.buyAutomatically(money);
+            LottoTicket ticket = purchaseResult.getTicket();
 
-            Assertions.assertThat(ticket.size()).isEqualTo(count);
+            Assertions.assertThat(ticket.count()).isEqualTo(lottoCount);
         }
 
-        public List<Arguments> should_lottosCountIs_when_givenCount() {
+        public List<Arguments> should_lottosCountIs_when_givenMoney() {
             return List.of(
-                    Arguments.of(0L),
-                    Arguments.of(1L),
-                    Arguments.of(2L),
-                    Arguments.of(99L)
+                    Arguments.of(null, 0),
+                    Arguments.of(Money.ZERO, 0),
+                    Arguments.of(Money.valueOf(1L), 0),
+                    Arguments.of(Money.valueOf(1000L), 1),
+                    Arguments.of(Money.valueOf(1500L), 1),
+                    Arguments.of(Money.valueOf(3000L), 3),
+                    Arguments.of(Money.valueOf(9999L), 9)
             );
         }
+
+        @DisplayName("1000원당 로또 1장을 구입하고 남은 돈 반환")
+        @ParameterizedTest
+        @MethodSource
+        void should_receiptIs_when_givenMoney(Money money, Money balance) {
+            LottoStore store = LottoStore.create(Money.valueOf(1000L));
+
+            PurchaseResult purchaseResult = store.buyAutomatically(money);
+            LottoReceipt receipt = purchaseResult.getReceipt();
+
+            Assertions.assertThat(receipt.getChange()).isEqualTo(balance);
+        }
+
+        public List<Arguments> should_receiptIs_when_givenMoney() {
+            return List.of(
+                    Arguments.of(null, Money.ZERO),
+                    Arguments.of(Money.ZERO, Money.ZERO),
+                    Arguments.of(Money.valueOf(1000L), Money.ZERO),
+                    Arguments.of(Money.valueOf(1500L), Money.valueOf(500L)),
+                    Arguments.of(Money.valueOf(3000L), Money.ZERO),
+                    Arguments.of(Money.valueOf(9999L), Money.valueOf(999L))
+            );
+        }
+    }
+
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    @Nested
+    class buyManually {
+
+        @DisplayName("Money만큼 자동으로 생성한 로또로 수동 생성")
+        @ParameterizedTest
+        @MethodSource
+        void should_equalsAutoAndManual_when_givenMoney(Money money) {
+            LottoStore store = LottoStore.create(Money.valueOf(1000L));
+            PurchaseResult autoPurchaseResult = store.buyAutomatically(money);
+            List<LottoNumber> autoLottos = getLottos(autoPurchaseResult);
+
+            PurchaseResult manualPurchaseResult = store.buyManually(money, autoPurchaseResult.getTicket());
+            List<LottoNumber> manualLottos = getLottos(manualPurchaseResult);
+
+
+            Assertions.assertThatCollection(autoLottos).isEqualTo(manualLottos);
+        }
+
+        public List<Arguments> should_equalsAutoAndManual_when_givenMoney() {
+            return List.of(
+                    Arguments.of((Object) null),
+                    Arguments.of(Money.ZERO),
+                    Arguments.of(Money.valueOf(1L)),
+                    Arguments.of(Money.valueOf(1000L)),
+                    Arguments.of(Money.valueOf(1500L)),
+                    Arguments.of(Money.valueOf(3000L)),
+                    Arguments.of(Money.valueOf(9999L))
+            );
+        }
+    }
+
+    private static List<LottoNumber> getLottos(PurchaseResult autoPurchaseResult) {
+        return autoPurchaseResult.getTicket()
+                .stream()
+                .collect(Collectors.toList());
     }
 }

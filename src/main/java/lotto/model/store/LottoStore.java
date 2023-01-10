@@ -1,12 +1,8 @@
 package lotto.model.store;
 
-import lotto.model.ticket.LottoNumber;
 import lotto.model.ticket.LottoTicket;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.LongStream;
+import java.util.Objects;
 
 public class LottoStore {
 
@@ -25,18 +21,33 @@ public class LottoStore {
     }
 
     public long getPurchasableCount(Money money) {
-        return money.divide(price).longValue();
+        if (Objects.isNull(money)) {
+            return 0L;
+        }
+
+        return (long) money.divide(price);
     }
 
-    public Money getTotalPrice(long count) {
-        return price.multiply(BigDecimal.valueOf(count));
+    public PurchaseResult buyAutomatically(Money money) {
+        long lottoCount = getPurchasableCount(money);
+        LottoTicket ticket = LottoTicket.createByRandom(lottoCount);
+        LottoReceipt receipt = createReceipt(money, lottoCount);
+
+        return PurchaseResult.of(ticket, receipt);
     }
 
-    public LottoTicket buyAutomatically(long count) {
-        List<LottoNumber> lottos = LongStream.range(0, count)
-                .mapToObj(ignore -> LottoNumber.createByRandom())
-                .collect(Collectors.toList());
+    public PurchaseResult buyManually(Money money, LottoTicket ticket) {
+        long lottoCount = getPurchasableCount(money);
+        long manualCount = lottoCount - ticket.count();
+        LottoTicket randomTicket = LottoTicket.createByRandom(manualCount);
+        LottoReceipt receipt = createReceipt(money, lottoCount);
 
-        return LottoTicket.of(lottos);
+        return PurchaseResult.of(ticket.append(randomTicket), receipt);
+    }
+
+    private LottoReceipt createReceipt(Money money, long count) {
+        Money totalPrice = price.multiply(count);
+
+        return LottoReceipt.from(money, totalPrice);
     }
 }

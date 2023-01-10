@@ -1,4 +1,4 @@
-package lotto.model.company;
+package lotto.model.ranking;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
