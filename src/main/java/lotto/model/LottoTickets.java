@@ -19,16 +19,6 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
-    public Result getResults(LottoTicket winningNumbers) {
-        Result result = new Result();
-        Grade key;
-        for (LottoTicket ticket : tickets) {
-            key = winningNumbers.matchValues(ticket);
-            result.put(key, result.get(key) + 1);
-        }
-        return result;
-    }
-
     public List<LottoTicket> getTicket() {
         return new ArrayList<>(tickets);
     }
