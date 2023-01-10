@@ -6,6 +6,8 @@ import lotto.model.Result;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
+import java.util.ArrayList;
+
 public class LottoMain {
     private static final int LOTTO_PRICE = 1000;
 
@@ -31,6 +33,17 @@ public class LottoMain {
             wn = createWinningNumbersInstance(winningNumbers, bonusNumber);
         } while (wn == null);
 
+    private static ArrayList<String> getManualLotto(int count) {
+        int manualCount = iv.getManualCount(count);
+        validateManualCount(manualCount, count);
+        ArrayList<String> manualLotto = iv.getManualLottoNumbers(manualCount);
+        try {
+            manualLotto.stream().map(Integer::parseInt);
+        } catch (NumberFormatException e) {
+            System.out.println("숫자와 구분자만 입력 가능 합니다.");
+        }
+        return manualLotto;
+    }
 
         Result result = tickets.getResults(wn);
         rv.printResultStatistics(result, money);
