@@ -14,23 +14,23 @@ public class LottoTicket {
     private final List<LottoNumber> lottoNumbers;
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
+        validateSize(lottoNumbers);
+        validateDuplicates(lottoNumbers);
         this.lottoNumbers = new ArrayList<>(lottoNumbers);
         Collections.sort(this.lottoNumbers);
-        validateSize();
-        validateDuplicates();
     }
 
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
 
-    private void validateSize() {
+    private void validateSize(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
 
-    private void validateDuplicates() {
+    private void validateDuplicates(List<LottoNumber> lottoNumbers) {
         if (ListUtils.hasDuplicates(lottoNumbers)) {
             throw new IllegalArgumentException("중복된 로또 번호가 있습니다.");
         }
