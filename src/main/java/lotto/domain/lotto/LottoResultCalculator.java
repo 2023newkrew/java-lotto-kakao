@@ -4,6 +4,8 @@ import lotto.domain.lotto.prize.LottoPrize;
 import lotto.domain.lotto.store.LottoStore;
 import lotto.domain.lotto.ticket.LottoTicket;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class LottoResultCalculator {
@@ -17,7 +19,7 @@ public class LottoResultCalculator {
     }
 
     public LottoResult calculateLottoResult() {
-        double earningRate = calculateEarningRate();
+        BigDecimal earningRate = calculateEarningRate();
         Map<LottoPrize, Integer> prizeCounts = countLottoPrize();
 
         return new LottoResult(prizeCounts, earningRate);
@@ -37,15 +39,17 @@ public class LottoResultCalculator {
         return prizeCounts;
     }
 
-    private double calculateEarningRate() {
-        double lottoCost = lottoTickets.size() * LottoStore.LOTTO_PRICE;
-        int prizeMoneySum = lottoTickets.stream()
-                .map(lottoTicket -> LottoPrize.findPrize(lottoTicket, lottoWinningNumber))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .mapToInt(LottoPrize::getPrizeMoney)
-                .sum();
+    private BigDecimal calculateEarningRate() {
+        BigDecimal lottoCost = new BigDecimal(lottoTickets.size() * LottoStore.LOTTO_PRICE);
+        BigDecimal prizeMoneySum = new BigDecimal(
+                lottoTickets.stream()
+                        .map(lottoTicket -> LottoPrize.findPrize(lottoTicket, lottoWinningNumber))
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .mapToInt(LottoPrize::getPrizeMoney)
+                        .sum()
+        );
 
-        return prizeMoneySum / lottoCost;
+        return prizeMoneySum.divide(lottoCost, RoundingMode.DOWN);
     }
 }

@@ -2,14 +2,15 @@ package lotto.domain.lotto;
 
 import lotto.domain.lotto.prize.LottoPrize;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 public class LottoResult {
 
     private final Map<LottoPrize, Integer> prizeCounts;
-    private final double earningRate;
+    private final BigDecimal earningRate;
 
-    public LottoResult(Map<LottoPrize, Integer> prizeCounts, double earningRate) {
+    public LottoResult(Map<LottoPrize, Integer> prizeCounts, BigDecimal earningRate) {
         this.prizeCounts = prizeCounts;
         this.earningRate = earningRate;
     }
@@ -18,7 +19,7 @@ public class LottoResult {
         return prizeCounts;
     }
 
-    public double getEarningRate() {
+    public BigDecimal getEarningRate() {
         return earningRate;
     }
 }

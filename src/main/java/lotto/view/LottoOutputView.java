@@ -5,6 +5,7 @@ import lotto.domain.lotto.LottoResult;
 import lotto.domain.lotto.prize.LottoPrize;
 import lotto.domain.lotto.ticket.LottoTicket;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -58,7 +59,7 @@ public class LottoOutputView {
     }
 
 
-    private void printEarningRate(double earningRate) {
+    private void printEarningRate(BigDecimal earningRate) {
         System.out.printf("총 수익률은 %.2f입니다.\n", earningRate);
     }
 
