@@ -8,13 +8,13 @@ public class UserAccount {
         validateBalance(balance);
         this.balance = balance;
     }
+    
+    public int getBalance() {
+        return balance;
+    }
 
     public void withdraw(int money) {
         balance -= money;
-    }
-
-    public boolean hasEnoughMoney(int money) {
-        return this.balance >= money;
     }
 
     private void validateBalance(int balance) {
@@ -22,4 +22,5 @@ public class UserAccount {
             throw new IllegalStateException("잔액은 0이상이여야 합니다.");
         }
     }
+
 }

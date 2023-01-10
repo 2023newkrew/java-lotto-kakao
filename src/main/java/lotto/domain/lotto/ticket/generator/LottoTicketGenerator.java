@@ -1,9 +1,7 @@
 package lotto.domain.lotto.ticket.generator;
 
-import lotto.domain.lotto.LottoNumber;
-
-import java.util.List;
+import lotto.domain.lotto.ticket.LottoTicket;
 
 public interface LottoTicketGenerator {
-    List<LottoNumber> generate();
+    LottoTicket generate();
 }
