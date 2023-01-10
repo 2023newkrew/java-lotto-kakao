@@ -1,13 +1,12 @@
 package lotto;
 
-import lotto.model.LottoTicket;
-import lotto.model.LottoTickets;
-import lotto.model.MatchLottoTicket;
-import lotto.model.Result;
+import lotto.model.*;
 import lotto.view.InputView;
 import lotto.view.ResultView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoMain {
     private static final int LOTTO_PRICE = 1000;
@@ -43,7 +42,13 @@ public class LottoMain {
 
     private static LottoTickets getManualAndAutoLotto(int count) {
         ArrayList<String> manualLotto = getManualLotto(count);
-        return LottoTickets.countOf(manualLotto, count);
+        List<LottoTicket> tickets = manualLotto.stream()
+                .map(lotto -> new LottoTicket(lotto, ""))
+                .collect(Collectors.toList());
+        for (int i = 0; i < count; i++) {
+            tickets.add(LottoTicketGenerator.generate());
+        }
+        return new LottoTickets(tickets);
     }
 
     private static ArrayList<String> getManualLotto(int count) {

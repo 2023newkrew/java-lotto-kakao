@@ -5,11 +5,17 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
+
+
 public class LottoTicketsTest {
 
     @Test
-    void 수동_복권_생성_확인() {
-        LottoTickets lt = LottoTickets.countOf(new ArrayList<>(Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7")), 2);
-        System.out.println(lt.getTicket());
+    void 복권_생성_확인() {
+        ArrayList<LottoTicket> lt = new ArrayList<>(Arrays.asList(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        assertThatCode(() -> new LottoTickets(lt)).doesNotThrowAnyException();
+
     }
 }
