@@ -15,19 +15,18 @@ public class LottoTickets {
         this.tickets = new ArrayList<>(amount/MIN_PURCHASE_PRICE);
     }
 
-    public void createManualTicket(LottoTicket ticket){
+    public void registerManualTicket(LottoTicket ticket){
         this.tickets.add(ticket);
     }
 
-    public void createRandomTickets(int count){
-        LottoRandom lottoRandom = new LottoRandom();
+    public void registerRandomTicket(int count){
         for (int i=0; i<count; i++){
-            tickets.add(new LottoTicket(lottoRandom.createRandomNumbers()));
+            this.tickets.add(new LottoTicket());
         }
     }
 
     public int getLottoTicketCount(){
-        return tickets.size();
+        return this.tickets.size();
     }
 
     public List<LottoTicket> getTickets(){
