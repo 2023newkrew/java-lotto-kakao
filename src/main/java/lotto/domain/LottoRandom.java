@@ -13,13 +13,13 @@ public class LottoRandom {
         this.random = new Random();
     }
 
-    public ArrayList<Integer> createRandomNumbers(){
+    public List<Integer> createRandomNumbers(){
         List<Integer> numList = IntStream.range(1, LOTTO_MAX_NUMBER + 1)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numList);
         numList = numList.subList(0, LOTTO_NUMBER_COUNT);
         Collections.sort(numList);
-        return new ArrayList<>(numList);
+        return numList;
     }
 }
