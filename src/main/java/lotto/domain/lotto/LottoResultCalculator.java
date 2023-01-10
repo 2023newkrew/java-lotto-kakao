@@ -50,6 +50,6 @@ public class LottoResultCalculator {
                         .sum()
         );
 
-        return prizeMoneySum.divide(lottoCost, RoundingMode.DOWN);
+        return prizeMoneySum.divide(lottoCost, 2, RoundingMode.DOWN);
     }
 }
