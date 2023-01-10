@@ -20,6 +20,14 @@ public class LottoController {
     private final LottoStore lottoStore = new LottoStore();
 
     public void startLotto() {
+        List<LottoTicket> lottoTickets = prepareLottoTickets();
+        lottoOutputView.printLottoTickets(lottoTickets);
+        LottoWinningNumber lottoWinningNumber = lottoInputView.readWinningNumber();
+        LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, lottoWinningNumber);
+        lottoOutputView.printLottoResult(lottoResultCalculator.calculateLottoResult());
+    }
+
+    private List<LottoTicket> prepareLottoTickets() {
         UserAccount userAccount = lottoInputView.readUserAccount();
         List<LottoTicket> lottoTickets = new ArrayList<>();
         int manualLottoAmount = lottoInputView.readBuyingAmount();
@@ -32,9 +40,6 @@ public class LottoController {
                 lottoStore.buyLottoTicket(userAccount, randomLottoAmount, new LottoTicketRandomGenerator())
         );
         lottoOutputView.printBuyingAmounts(manualLottoAmount, randomLottoAmount);
-        lottoOutputView.printLottoTickets(lottoTickets);
-        LottoWinningNumber lottoWinningNumber = lottoInputView.readWinningNumber();
-        LottoResultCalculator lottoResultCalculator = new LottoResultCalculator(lottoTickets, lottoWinningNumber);
-        lottoOutputView.printLottoResult(lottoResultCalculator.calculateLottoResult());
+        return lottoTickets;
     }
 }
