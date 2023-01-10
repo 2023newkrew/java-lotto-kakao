@@ -13,9 +13,8 @@ public class LottoTickets {
 
     public static LottoTickets countOf(ArrayList<String> manual, int count) {
         List<LottoTicket> tickets = manual.stream().map(lotto -> new LottoTicket(lotto, "")).collect(Collectors.toList());
-        LottoTicketGenerator lottoTicketGenerator = LottoTicketGenerator.getInstance();
         for (int i = 0; i < count; i++) {
-            tickets.add(lottoTicketGenerator.generate());
+            tickets.add(LottoTicketGenerator.generate());
         }
         return new LottoTickets(tickets);
     }
