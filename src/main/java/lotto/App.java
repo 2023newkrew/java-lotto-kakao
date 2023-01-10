@@ -2,21 +2,32 @@ package lotto;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.util.LottoPayment;
+import lotto.domain.LottoPayment;
+import lotto.util.ManualLottoGenerator;
 import lotto.util.RandomLottoGenerator;
 import lotto.domain.Statistics;
 import lotto.view.LottoView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class App {
     public static void main(String[] args) {
         LottoView lottoView = new LottoView();
-        RandomLottoGenerator generator = new RandomLottoGenerator();
-        int amount = LottoPayment.getAmount(lottoView.inputPurchase());
-        List<Lotto> lottos = generator.generateLottos(amount);
+        List<Lotto> lottos = new ArrayList<>();
 
-        lottoView.printAmount(amount);
+        LottoPayment payment = new LottoPayment(lottoView.inputPurchase());
+
+        int manual = lottoView.inputManualAmount();
+        payment.buyLotto(manual);
+        lottos.addAll(ManualLottoGenerator.generateLottos(lottoView.inputManualLottos(manual)));
+
+        int auto = payment.getAmount();
+        payment.buyLotto(auto);
+        lottos.addAll(RandomLottoGenerator.generateLottos(auto));
+
+        lottoView.printManualAmount(manual);
+        lottoView.printAutoAmount(auto);
         lottoView.printLottos(lottos);
 
         Lotto winLotto = lottoView.inputWinNumbers();

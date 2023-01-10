@@ -3,12 +3,12 @@ package lotto.domain;
 import java.util.List;
 
 public class Statistics {
-    private int FIRST;
-    private int SECOND;
-    private int THIRD;
-    private int FOURTH;
-    private int FIFTH;
-    private int purchase;
+    private long FIRST;
+    private long SECOND;
+    private long THIRD;
+    private long FOURTH;
+    private long FIFTH;
+    private long purchase;
 
     public Statistics(){
         FIRST = 0;
@@ -20,8 +20,7 @@ public class Statistics {
 
     public void build(List<Lotto> lottos, Lotto winLotto, LottoNumber bonusNumber) {
         for (Lotto lotto : lottos) {
-            LottoResult result = new LottoResult(lotto, winLotto, bonusNumber);
-            add(result.getRank());
+            add(LottoRank.getRank(lotto, winLotto, bonusNumber));
         }
     }
 
@@ -34,7 +33,7 @@ public class Statistics {
         purchase += 1000;
     }
 
-    public int getByRank(LottoRank rank) {
+    public long getByRank(LottoRank rank) {
         if(rank == LottoRank.FIRST) return FIRST;
         if(rank == LottoRank.SECOND) return SECOND;
         if(rank == LottoRank.THIRD) return THIRD;
@@ -43,7 +42,7 @@ public class Statistics {
         return 0;
     }
 
-    public int getPrizeAmount() {
+    public long getPrizeAmount() {
         return FIRST * LottoRank.FIRST.PRIZE
                 + SECOND * LottoRank.SECOND.PRIZE
                 + THIRD * LottoRank.THIRD.PRIZE
@@ -52,6 +51,8 @@ public class Statistics {
     }
 
     public double getProfitRate() {
+        if(getPrizeAmount() < 0)
+            throw new RuntimeException("상금이 잘못되었습니다.");
         return ((double) getPrizeAmount() / (double) purchase);
     }
 }

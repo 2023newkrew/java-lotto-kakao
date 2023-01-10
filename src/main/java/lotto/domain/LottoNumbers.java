@@ -11,6 +11,7 @@ public class LottoNumbers {
         if(numbers.size() != SIZE
                 || numbers.stream().distinct().count() != SIZE)
             throw new IllegalArgumentException("로또 번호가 이상합니다.");
+        numbers.sort((a,b)->a.compare(b));
         this.numbers = numbers;
     }
 

@@ -1,11 +1,11 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.util.LottoParser;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class LottoView {
     private final Scanner scanner;
@@ -19,8 +19,8 @@ public class LottoView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public void printAmount(int amount) {
-        System.out.println(amount + "개를 구매했습니다.");
+    public void printAutoAmount(int amount) {
+        System.out.printf("자동으로 %d개를 구매했습니다.\n", amount);
     }
 
     public void printLotto(Lotto lotto) {
@@ -36,11 +36,7 @@ public class LottoView {
 
     public Lotto inputWinNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Lotto(
-                Arrays.stream(scanner.nextLine().replace(" ", "").split(","))
-                        .map(Integer::parseInt)
-                        .collect(Collectors.toList())
-        );
+        return new Lotto(LottoParser.getNumbers(scanner.nextLine()));
     }
 
     public LottoNumber inputBonusNumber() {
@@ -64,5 +60,27 @@ public class LottoView {
 
     public void printTotalProfitRate(Statistics stat) {
         System.out.printf("총 수익률은 %f입니다.\n", stat.getProfitRate());
+    }
+
+    public int inputManualAmount(){
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        try{
+            return Integer.parseInt(scanner.nextLine());
+        }
+        catch (Exception e){
+            throw new NumberFormatException("숫자만 입력해주세요");
+        }
+    }
+
+    public List<String> inputManualLottos(int amount){
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<String> result = new ArrayList<>();
+        while(amount-- > 0)
+            result.add(scanner.nextLine());
+        return result;
+    }
+
+    public void printManualAmount(int amount) {
+        System.out.printf("수동으로 %d장, ", amount);
     }
 }

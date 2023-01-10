@@ -36,4 +36,12 @@ public class Lotto {
     public String toString() {
         return lotto.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(!(obj instanceof Lotto))
+            return false;
+        return lotto.matchCount(((Lotto) obj).lotto) == LottoNumbers.SIZE;
+    }
 }
