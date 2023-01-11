@@ -3,7 +3,7 @@ package utils;
 import exception.ManualLottoCountException;
 import model.Lotto;
 import model.LottoNumber;
-import model.Money;
+import model.PurchaseMoney;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -24,8 +24,8 @@ public class Parser {
         return LottoNumber.getLottoNumber(Integer.parseInt(input));
     }
 
-    public static Money parsingStringToMoney(final String input) throws IllegalArgumentException {
-        return new Money(Long.parseLong(input));
+    public static PurchaseMoney parsingStringToPurchaseMoney(final String input) throws IllegalArgumentException {
+        return new PurchaseMoney(Long.parseLong(input));
     }
 
     public static int parsingManualLottoCount(final String input, int totalLottoCount) {

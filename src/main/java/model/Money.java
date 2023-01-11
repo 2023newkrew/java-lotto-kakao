@@ -1,19 +1,18 @@
 package model;
 
-import exception.PurchaseMoneyException;
-
 public class Money {
-    private final long purchaseMoney;
+    protected long money;
 
-    public Money(long purchaseMoney) {
-        if (purchaseMoney < 1000 || purchaseMoney % 1000 != 0) {
-            throw new PurchaseMoneyException();
-        }
-        this.purchaseMoney = purchaseMoney;
+    public Money() {
+        money = 0;
     }
 
-    long getPurchaseMoney() {
-        return purchaseMoney;
+    public Money(long money) {
+        this.money = money;
+    }
+
+    public long getMoney() {
+        return money;
     }
 
 }

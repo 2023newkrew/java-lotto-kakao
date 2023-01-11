@@ -1,10 +1,7 @@
 package controller;
 
 import dto.LottoWinnerDto;
-import model.Lotto;
-import model.LottoGame;
-import model.LottoNumber;
-import model.Money;
+import model.*;
 import view.View;
 import utils.Parser;
 
@@ -73,13 +70,13 @@ public class LottoController {
         }
     }
 
-    private Money inputPurchaseMoney() {
+    private PurchaseMoney inputPurchaseMoney() {
         view.printPriceMessage();
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
         try {
-            return Parser.parsingStringToMoney(input);
+            return Parser.parsingStringToPurchaseMoney(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return inputPurchaseMoney();
