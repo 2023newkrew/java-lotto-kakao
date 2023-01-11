@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoOutputView {
-    public void printLottos(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
+
+    public void printLottos(List<Lotto> lottos, int manualLottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", manualLottoCount, lottos.size() - manualLottoCount);
         for (Lotto lotto : lottos) {
             printLotto(lotto);
         }
@@ -43,10 +44,10 @@ public class LottoOutputView {
     }
 
     private static void printWinningPrizes(WinningStatistics winningStatistics) {
-        System.out.printf("3개 일치 (5000원)- %d개%n", winningStatistics.countBy(Prize.FIFTH));
-        System.out.printf("4개 일치 (50000원)- %d개%n", winningStatistics.countBy(Prize.FOURTH));
-        System.out.printf("5개 일치 (150000원)- %d개%n", winningStatistics.countBy(Prize.THIRD));
-        System.out.printf("5개 일치, 보너스 볼 일치(30000000원)- %d개%n", winningStatistics.countBy(Prize.SECOND));
-        System.out.printf("6개 일치 (2000000000원)- %d개%n", winningStatistics.countBy(Prize.FIRST));
+        System.out.printf("3개 일치, (5000원)- %d개%n", winningStatistics.countBy(Prize.FIFTH));
+        System.out.printf("4개 일치, (50000원)- %d개%n", winningStatistics.countBy(Prize.FOURTH));
+        System.out.printf("5개 일치, (150000원)- %d개%n", winningStatistics.countBy(Prize.THIRD));
+        System.out.printf("5개 일치, 보너스 볼 일치, (30000000원)- %d개%n", winningStatistics.countBy(Prize.SECOND));
+        System.out.printf("6개 일치, (2000000000원)- %d개%n", winningStatistics.countBy(Prize.FIRST));
     }
 }

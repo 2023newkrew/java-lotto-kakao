@@ -1,14 +1,10 @@
-package lotto;
+package lotto.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
-
-import lotto.model.Money;
-import lotto.model.Prize;
-import lotto.model.WinningStatistics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +18,7 @@ class WinningStatisticsTest {
             "FIRST, 2_000_000", "SECOND, 30_000", "THIRD, 150",
             "FOURTH, 50", "FIFTH, 5", "NOTHING, 0"
     })
-    void sumFirstPrize(Prize prize, long expectedProfit) {
+    void calculateSinglePrizeProfitRate(Prize prize, long expectedProfit) {
         WinningStatistics winningStatistics = new WinningStatistics(
                 new Money(1000), Map.of(prize, 1L)
         );
@@ -34,7 +30,7 @@ class WinningStatisticsTest {
 
     @DisplayName("수익율전체 상금을 합산한다.")
     @Test
-    void sumFirstAndSecondPrize() {
+    void calculateMultiPrizeProfitRate() {
         WinningStatistics winningStatistics = new WinningStatistics(
                 new Money(25345), Map.of(Prize.FIRST, 1L,
                         Prize.SECOND, 2L,

@@ -13,6 +13,10 @@ public class Money {
         this.amount = amount;
     }
 
+    public Money getMoneyAfterBuyLottos(int lottoCount) {
+        return new Money(amount - LOTTO_PRICE * lottoCount);
+    }
+
     public long getLottoCount() {
         return amount / LOTTO_PRICE;
     }
