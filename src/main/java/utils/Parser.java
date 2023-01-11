@@ -1,9 +1,9 @@
 package utils;
 
 import exception.ManualLottoCountException;
-import exception.PurchaseMoneyException;
 import model.Lotto;
 import model.LottoNumber;
+import model.Money;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -24,17 +24,8 @@ public class Parser {
         return LottoNumber.getLottoNumber(Integer.parseInt(input));
     }
 
-    public static long parsingPurchaseMoney(final String input) {
-        long purchaseMoney = 0;
-        try {
-            purchaseMoney = Long.parseLong(input);
-        } catch (Exception e) {
-            throw (e);
-        }
-        if (purchaseMoney < 0 || purchaseMoney % 1000 != 0) { // 여기 머니로 감싸서 수정할 것
-            throw new PurchaseMoneyException();
-        }
-        return purchaseMoney;
+    public static Money parsingStringToMoney(final String input) throws IllegalArgumentException {
+        return new Money(Long.parseLong(input));
     }
 
     public static int parsingManualLottoCount(final String input, int totalLottoCount) {

@@ -14,14 +14,19 @@ public class LottoGame {
     private LottoTicket lottoTicket; //로또 티켓 관리 (수동+자동)
     private LottoWinner lottoWinner; //당첨 로또 관리(사용자 입력받음)
 
-    private long purchaseMoney;
+    private int lottoCount; //전체 로또 개수 = purchaseMoney/1000;
 
-    public void setPurchaseMoney(long purchaseMoney) {
+    private int manualLottoCount; // 수동 로또 개수 = 입력 받는 값임
+
+    private int autoLottoCount; // 자동 로또 개수 = 전체 - 수동
+    private Money purchaseMoney;
+
+    public void setPurchaseMoney(Money purchaseMoney) {
         this.purchaseMoney = purchaseMoney;
     }
 
     public int getTotalLottoCount() {
-        return (int) purchaseMoney / LOTTO_PRICE;
+        return (int) purchaseMoney.getPurchaseMoney() / LOTTO_PRICE;
     }
 
     public void setLottoTicket(List<Lotto> manualLottos) {
@@ -40,8 +45,7 @@ public class LottoGame {
         Banker banker = new Banker();
         LottoResult lottoResult = new LottoResult(lottoWinner, lottoTicket);
         long winningMoney = banker.getTotalPrizeMoney(lottoResult);
-        return new LottoResultDto(lottoResult.getLottoPlaces(), (double) winningMoney / purchaseMoney);
-
+        return new LottoResultDto(lottoResult.getLottoPlaces(), (double) winningMoney / purchaseMoney.getPurchaseMoney());
     }
 
 }
