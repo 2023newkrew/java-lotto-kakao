@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -8,8 +9,8 @@ import java.util.stream.IntStream;
 public class LottoNumber {
 
     private static final int MIN_NUMBER = 1;
-
     private static final int MAX_NUMBER = 45;
+    private static final List<LottoNumber> POOL = createPool();
 
     private final int number;
 
@@ -18,10 +19,15 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static List<LottoNumber> createPool() {
+    private static List<LottoNumber> createPool() {
         return IntStream.rangeClosed(MIN_NUMBER, MAX_NUMBER)
                 .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
+    }
+
+    public static List<LottoNumber> shuffledNumberPool() {
+        Collections.shuffle(POOL);
+        return Collections.unmodifiableList(POOL);
     }
 
     private void validateRange(int number) {

@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,8 +17,7 @@ public class Lotto {
     }
 
     public static Lotto createRandomLotto() {
-        List<LottoNumber> numberPool = LottoNumber.createPool();
-        Collections.shuffle(numberPool);
+        List<LottoNumber> numberPool = LottoNumber.shuffledNumberPool();
         Set<LottoNumber> numbers = new HashSet<>(numberPool.subList(0, SIZE));
         return create(numbers);
     }

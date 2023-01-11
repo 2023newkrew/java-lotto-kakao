@@ -31,7 +31,7 @@ class LottoNumberTest {
     @DisplayName("로또 번호 풀은 1~45의 숫자를 한개씩 가지고 있다.")
     @Test
     void createPool() {
-        List<LottoNumber> actual = LottoNumber.createPool();
+        List<LottoNumber> actual = LottoNumber.shuffledNumberPool();
 
         List<LottoNumber> expected = IntStream.rangeClosed(1, 45)
                 .mapToObj(LottoNumber::new)
