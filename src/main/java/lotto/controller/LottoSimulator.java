@@ -32,7 +32,7 @@ public class LottoSimulator {
     }
 
     private static LottoMachine createLottoMachine(Money money, List<Lotto> manualLottos) {
-        LottosGenerator lottosGenerator = new ManualLottosGenerator(manualLottos, new RandomLottosGenerator());
+        LottosGenerator lottosGenerator = new ManualAndAdditionalLottosGenerator(manualLottos, new RandomLottosGenerator());
         return LottoMachine.create(lottosGenerator, money);
     }
 

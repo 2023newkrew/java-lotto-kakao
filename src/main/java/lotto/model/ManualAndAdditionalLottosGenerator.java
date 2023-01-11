@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ManualLottosGenerator implements LottosGenerator {
+public class ManualAndAdditionalLottosGenerator implements LottosGenerator {
 
     private final List<Lotto> manualLottos;
-    private final LottosGenerator remainLottosGenerator;
+    private final LottosGenerator additionalLottosGenerator;
 
-    public ManualLottosGenerator(List<Lotto> manualLottos, LottosGenerator remainLottosGenerator) {
+    public ManualAndAdditionalLottosGenerator(List<Lotto> manualLottos, LottosGenerator additionalLottosGenerator) {
         this.manualLottos = manualLottos;
-        this.remainLottosGenerator = remainLottosGenerator;
+        this.additionalLottosGenerator = additionalLottosGenerator;
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ManualLottosGenerator implements LottosGenerator {
 
     private List<Lotto> generateWithAdditionalLottos(Money money) {
         Money remainMoney = money.getMoneyAfterBuyLottos(manualLottos.size());
-        List<Lotto> additionalLottos = remainLottosGenerator.generate(remainMoney);
+        List<Lotto> additionalLottos = additionalLottosGenerator.generate(remainMoney);
         return Stream.concat(manualLottos.stream(), additionalLottos.stream())
                 .collect(Collectors.toList());
     }

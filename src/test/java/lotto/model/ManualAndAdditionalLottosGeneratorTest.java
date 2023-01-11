@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ManualLottosGeneratorTest {
+class ManualAndAdditionalLottosGeneratorTest {
 
     @DisplayName("수동으로 로또를 생성한다.")
     @Test
@@ -16,7 +16,7 @@ class ManualLottosGeneratorTest {
                 Lotto.create(21, 22, 23, 24, 25, 26),
                 Lotto.create(31, 32, 33, 34, 35, 36)
         );
-        ManualLottosGenerator sut = new ManualLottosGenerator(lottos, new RandomLottosGenerator());
+        ManualAndAdditionalLottosGenerator sut = new ManualAndAdditionalLottosGenerator(lottos, new RandomLottosGenerator());
 
         Assertions.assertThat(sut.generate(new Money(4000)))
                 .containsExactlyInAnyOrderElementsOf(lottos);
@@ -31,7 +31,7 @@ class ManualLottosGeneratorTest {
                 Lotto.create(21, 22, 23, 24, 25, 26),
                 Lotto.create(31, 32, 33, 34, 35, 36)
         );
-        ManualLottosGenerator sut = new ManualLottosGenerator(lottos, new RandomLottosGenerator());
+        ManualAndAdditionalLottosGenerator sut = new ManualAndAdditionalLottosGenerator(lottos, new RandomLottosGenerator());
 
         Assertions.assertThatThrownBy(() -> sut.generate(new Money(3999)))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -47,7 +47,7 @@ class ManualLottosGeneratorTest {
                 Lotto.create(21, 22, 23, 24, 25, 26),
                 Lotto.create(31, 32, 33, 34, 35, 36)
         );
-        ManualLottosGenerator sut = new ManualLottosGenerator(lottos, new RandomLottosGenerator());
+        ManualAndAdditionalLottosGenerator sut = new ManualAndAdditionalLottosGenerator(lottos, new RandomLottosGenerator());
 
         List<Lotto> actual = sut.generate(new Money(10_000));
 
