@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputView {
@@ -42,6 +43,28 @@ public class InputView {
             return true;
         }
         return false;
+    }
+
+    public int getManualCount(int count) {
+        System.out.println();
+        System.out.printf("수동으로 구매할 로또 수를 입력해 주세요.(0 ~ %d)\n", count);
+        int num;
+        try {
+            num = Integer.parseInt(sc.nextLine());
+            return num;
+        } catch (Exception E) {
+            return -1;
+        }
+    }
+
+    public ArrayList<String> getManualLottoNumbers(int count) {
+        System.out.println();
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        ArrayList<String> numbers = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            numbers.add(sc.nextLine());
+        }
+        return numbers;
     }
 
     public String getWinningNumbers() {
