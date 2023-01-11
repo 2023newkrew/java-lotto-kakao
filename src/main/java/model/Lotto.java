@@ -9,22 +9,28 @@ package model;
 import exception.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<LottoNumber> lottoNumbers) {
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+    public Lotto(final Set<LottoNumber> lottoNumbers) {
+//        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+//            throw new LottoNumberCountException();
+//        }
+//        if (lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
+//            throw new LottoNumberDuplicateException();
+//        }
+
+        if(lottoNumbers.size() != LOTTO_NUMBER_COUNT) { //여기 다시 손보자
             throw new LottoNumberCountException();
         }
-        if (lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
-            throw new LottoNumberDuplicateException();
-        }
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {

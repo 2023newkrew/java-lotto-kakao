@@ -6,17 +6,17 @@ import model.Lotto;
 import model.LottoNumber;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Parser {
 
     public static Lotto parsingStringToLotto(final String input) throws Exception {
-        List<LottoNumber> lottoNumberList = Arrays.stream(input.replace(" ", "")
+        Set<LottoNumber> lottoNumberList = Arrays.stream(input.replace(" ", "")
                         .split(","))
                 .map(Integer::parseInt)
                 .map(LottoNumber::getLottoNumber)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return new Lotto(lottoNumberList);
     }
 

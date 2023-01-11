@@ -14,7 +14,7 @@ public class LottoFactory {
         Collections.shuffle(lottoNumbers);
         return new Lotto(lottoNumbers.stream()
                 .limit(LOTTO_NUMBER_COUNT)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toSet()));
     }
 
     public static LottoTicket createLottoTicket(int automaticLottoCount, List<Lotto> lottos) {

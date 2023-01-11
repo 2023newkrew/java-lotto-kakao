@@ -6,10 +6,7 @@ import org.assertj.core.util.VisibleForTesting;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoResultTest {
 
@@ -18,7 +15,7 @@ public class LottoResultTest {
     }
 
     Lotto toLotto(List<Integer> numberList) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        Set<LottoNumber> lottoNumbers = new HashSet<>();
         for (Integer number : numberList) {
             lottoNumbers.add(toLottoNumber(number));
         }
