@@ -11,6 +11,10 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
+    public Lottos(int lottoCount) {
+        this(new ArrayList<>(), lottoCount);
+    }
+
     public Lottos(List<List<Integer>> manualLottoNumbers, int autoLottoCount) {
         RandomGenerator randomGenerator = new RandomGenerator();
 
