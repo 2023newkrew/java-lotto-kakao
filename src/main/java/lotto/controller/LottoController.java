@@ -10,17 +10,18 @@ import java.util.List;
 public class LottoController {
 
     public void run() {
-        // 로또 생성
+        // 로또 서비스 생성
         long purchaseCost = InputView.inputPurchaseCost();
         LottoService lottoService = new LottoService(purchaseCost);
-        lottoService.createLottos();
+        int lottoCount = (int) purchaseCost / LottoService.LOTTO_COST;
 
         // 수동 입력
         int manualLottoCount = InputView.inputManualLottoCount();
         List<List<Integer>> manualLottoNumbers = InputView.inputManualLottoNumbers(manualLottoCount);
-        lottoService.setManualLottos(manualLottoNumbers);
 
-        OutputView.printLottoCount(manualLottoCount, lottoService.getLottos().size() - manualLottoCount);
+        // 로또 생성
+        lottoService.createLottos(manualLottoNumbers, lottoCount - manualLottoCount);
+        OutputView.printLottoCount(manualLottoCount, lottoCount - manualLottoCount);
 
         OutputView.printLottos(lottoService.getLottos());
 

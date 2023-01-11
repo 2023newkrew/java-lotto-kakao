@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LottoService {
 
-    private static final int DEFAULT_LOTTO_COST = 1000;
+    public static final int LOTTO_COST = 1000;
 
     private Lottos lottos;
     private WinningLotto winningLotto;
@@ -17,13 +17,10 @@ public class LottoService {
         this.priceResult = new PriceResult();
     }
 
-    public void createLottos(int lottoCost) {
-        this.lottos = new Lottos((int) purchaseCost / lottoCost);
+    public void createLottos(List<List<Integer>> manualLottoNumbers, int lottoCount) {
+        this.lottos = new Lottos(manualLottoNumbers, lottoCount);
     }
 
-    public void createLottos() {
-        createLottos(DEFAULT_LOTTO_COST);
-    }
 
     public void createWinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
         this.winningLotto = new WinningLotto(winningNumbers, bonusNumber);
