@@ -11,27 +11,9 @@ public class WinningLotto extends Lotto {
     }
 
     public Price getPrice(Lotto lotto) {
-        return judgePrice(matchNumbers(lotto), hasBonus(lotto));
+        return Price.judgePrice(matchNumbers(lotto), hasBonus(lotto));
     }
 
-    private Price judgePrice(int matchNumbers, boolean hasBonus) {
-        if (matchNumbers == 6) {
-            return Price.FIRST;
-        }
-        if (matchNumbers == 5 && hasBonus) {
-            return Price.SECOND;
-        }
-        if (matchNumbers == 5) {
-            return Price.THIRD;
-        }
-        if (matchNumbers == 4) {
-            return Price.FOURTH;
-        }
-        if (matchNumbers == 3) {
-            return Price.FIFTH;
-        }
-        return Price.NOTHING;
-    }
 
     private boolean hasBonus(Lotto lotto) {
         return lotto.contains(bonusNumber);
