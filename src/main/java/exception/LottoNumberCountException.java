@@ -3,7 +3,7 @@
  */
 package exception;
 
-public class LottoNumberCountException extends RuntimeException {
+public class LottoNumberCountException extends IllegalArgumentException {
     public LottoNumberCountException() {
         super("로또 번호의 개수는 6개 입니다.");
     }

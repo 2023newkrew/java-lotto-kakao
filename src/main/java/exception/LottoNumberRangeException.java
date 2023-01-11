@@ -3,7 +3,7 @@
  */
 package exception;
 
-public class LottoNumberRangeException extends RuntimeException {
+public class LottoNumberRangeException extends IllegalArgumentException {
     public LottoNumberRangeException() {
         super("로또 번호는 1이상 45 이하입니다.");
     }

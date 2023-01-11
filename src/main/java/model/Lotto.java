@@ -27,7 +27,7 @@ public class Lotto {
 //            throw new LottoNumberDuplicateException();
 //        }
 
-        if(lottoNumbers.size() != LOTTO_NUMBER_COUNT) { //여기 다시 손보자
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) { //여기 다시 손보자
             throw new LottoNumberCountException();
         }
         this.lottoNumbers = new HashSet<>(lottoNumbers);

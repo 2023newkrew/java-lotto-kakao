@@ -3,7 +3,7 @@
  */
 package exception;
 
-public class LottoNumberDuplicateException extends RuntimeException {
+public class LottoNumberDuplicateException extends IllegalArgumentException {
     public LottoNumberDuplicateException() {
         super("로또 번호에 중복이 없어야 합니다.");
     }

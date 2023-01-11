@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Parser {
 
-    public static Lotto parsingStringToLotto(final String input) throws Exception {
+    public static Lotto parsingStringToLotto(final String input) throws IllegalArgumentException {
         Set<LottoNumber> lottoNumberList = Arrays.stream(input.replace(" ", "")
                         .split(","))
                 .map(Integer::parseInt)
@@ -20,7 +20,7 @@ public class Parser {
         return new Lotto(lottoNumberList);
     }
 
-    public static LottoNumber parsingStringToLottoNumber(final String input) throws Exception {
+    public static LottoNumber parsingStringToLottoNumber(final String input) throws IllegalArgumentException {
         return LottoNumber.getLottoNumber(Integer.parseInt(input));
     }
 
@@ -31,7 +31,7 @@ public class Parser {
         } catch (Exception e) {
             throw (e);
         }
-        if (purchaseMoney < 0 || purchaseMoney % 1000 != 0) {
+        if (purchaseMoney < 0 || purchaseMoney % 1000 != 0) { // 여기 머니로 감싸서 수정할 것
             throw new PurchaseMoneyException();
         }
         return purchaseMoney;
@@ -44,7 +44,7 @@ public class Parser {
         } catch (Exception e) {
             throw (e);
         }
-        if (manualLottoCount > totalLottoCount || manualLottoCount < 0) {
+        if (manualLottoCount > totalLottoCount || manualLottoCount < 0) { //여기도 감싸서 수정할 것
             throw new ManualLottoCountException();
         }
         return manualLottoCount;

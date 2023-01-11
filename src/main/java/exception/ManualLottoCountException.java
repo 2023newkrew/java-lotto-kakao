@@ -3,7 +3,7 @@
  */
 package exception;
 
-public class ManualLottoCountException extends RuntimeException {
+public class ManualLottoCountException extends IllegalArgumentException {
     public ManualLottoCountException() {
         super("수동으로 구매하는 로또의 개수는 0이상 전체 구매 개수 이하여야 합니다.");
     }

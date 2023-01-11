@@ -37,8 +37,12 @@ public class LottoController {
 
         try {
             return Parser.parsingManualLottoCount(input, totalLottoCount);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return inputManualLottoCount(totalLottoCount);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            view.printUnknownErrorMessage();
             return inputManualLottoCount(totalLottoCount);
         }
     }
@@ -58,8 +62,12 @@ public class LottoController {
 
         try {
             return Parser.parsingStringToLotto(lottoNumbers);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return inputManualLotto();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            view.printUnknownErrorMessage();
             return inputManualLotto();
         }
     }
@@ -71,8 +79,12 @@ public class LottoController {
 
         try {
             return Parser.parsingPurchaseMoney(input);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return inputPurchaseMoney();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            view.printUnknownErrorMessage();
             return inputPurchaseMoney();
         }
     }
@@ -84,8 +96,12 @@ public class LottoController {
 
         try {
             return Parser.parsingStringToLotto(winNumbers);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return inputWinNumbers();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            view.printUnknownErrorMessage();
             return inputWinNumbers();
         }
     }
@@ -97,8 +113,12 @@ public class LottoController {
 
         try {
             return Parser.parsingStringToLottoNumber(bonusNumber);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return inputBonusNumber();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            view.printUnknownErrorMessage();
             return inputBonusNumber();
         }
     }
@@ -106,10 +126,13 @@ public class LottoController {
     private LottoWinnerDto inputLottoWinner(Lotto winNumbers, LottoNumber bonusNumber) {
         try {
             return new LottoWinnerDto(winNumbers, bonusNumber);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            bonusNumber = inputBonusNumber();
-            return inputLottoWinner(winNumbers, bonusNumber);
+            return inputLottoWinner(winNumbers, inputBonusNumber());
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            view.printUnknownErrorMessage();
+            return inputLottoWinner(winNumbers, inputBonusNumber());
         }
     }
 }

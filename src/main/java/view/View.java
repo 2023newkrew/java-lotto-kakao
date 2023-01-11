@@ -39,6 +39,10 @@ public class View {
 
     }
 
+    public void printUnknownErrorMessage() {
+        System.out.println("알 수 없는 에러 입니다.");
+    }
+
     public void outputResultMessage(LottoResultDto lottoResultDto) {
         System.out.println("당첨 통계");
         System.out.println("---------");

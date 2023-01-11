@@ -12,7 +12,7 @@ public class LottoWinnerDto {
 
     private final LottoWinner lottoWinner;
 
-    public LottoWinnerDto(Lotto winNumbers, LottoNumber bonusNumber) throws Exception {
+    public LottoWinnerDto(Lotto winNumbers, LottoNumber bonusNumber) throws IllegalArgumentException {
         lottoWinner = new LottoWinner(winNumbers, bonusNumber);
     }
 
