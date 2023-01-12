@@ -22,7 +22,7 @@ public class InputView {
         this.inputStream = new Scanner(inputStream);
     }
 
-    public int getPurchasePrice() {
+    public int getUserAmount() {
         outputStream.println("구입금액을 입력해 주세요.");
 
         String purchasePrice = inputStream.nextLine();

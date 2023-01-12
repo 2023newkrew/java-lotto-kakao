@@ -15,19 +15,19 @@ public class User {
         this.autoTickets = List.of();
     }
 
-    public void purchaseAutoLottoTicket(LottoTicketStore lottoTicketStore, int autoLottoTicketCount){
+    public void buyAutoLottoTicket(LottoTicketStore lottoTicketStore, int autoLottoTicketCount){
         int autoLottoTicketCost = LottoTicketStore.AUTO_LOTTO_TICKET_COST;
-        int totalPrice = autoLottoTicketCost * autoLottoTicketCount;
-        wallet.use(totalPrice);
+        int totalCost = autoLottoTicketCost * autoLottoTicketCount;
+        wallet.use(totalCost);
 
-        autoTickets = lottoTicketStore.purchaseAutoLotto(autoLottoTicketCount, totalPrice);
+        autoTickets = lottoTicketStore.purchaseAutoLotto(autoLottoTicketCount, totalCost);
     }
 
-    public void purchaseManualLottoTicket(LottoTicketStore lottoTicketStore, List<List<LottoNumber>> lottoNumbers, int manualLottoTicketCount){
+    public void buyManualLottoTicket(LottoTicketStore lottoTicketStore, List<List<LottoNumber>> lottoNumbers, int manualLottoTicketCount){
         int autoLottoTicketCost = LottoTicketStore.MANUAL_LOTTO_TICKET_COST;
-        int totalPrice = autoLottoTicketCost * manualLottoTicketCount;
-        wallet.use(totalPrice);
-        manualTickets = lottoTicketStore.purchaseManualLotto(lottoNumbers, totalPrice);
+        int totalCost = autoLottoTicketCost * manualLottoTicketCount;
+        wallet.use(totalCost);
+        manualTickets = lottoTicketStore.purchaseManualLotto(lottoNumbers, totalCost);
     }
 
     public List<LottoTicket> getManualTickets() {

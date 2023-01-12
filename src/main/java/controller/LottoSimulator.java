@@ -34,15 +34,15 @@ public class LottoSimulator{
     }
 
     private User getUserInfo() {
-        int purchasePrice = inputView.getPurchasePrice();
-        User user = new User(purchasePrice);
+        int userAmount = inputView.getUserAmount();
+        User user = new User(userAmount);
 
         int manualLottoTicketCountToPurchase = inputView.getManualLottoCountToPurchase();
         List<List<LottoNumber>> lottoNumbers = inputView.getManualLottoNumbers(manualLottoTicketCountToPurchase);
-        user.purchaseManualLottoTicket(lottoTicketStore, lottoNumbers, manualLottoTicketCountToPurchase);
+        user.buyManualLottoTicket(lottoTicketStore, lottoNumbers, manualLottoTicketCountToPurchase);
 
         int autoLottoTicketCountToPurchase = (user.getRemainAmount()) / LottoTicketStore.AUTO_LOTTO_TICKET_COST;
-        user.purchaseAutoLottoTicket(lottoTicketStore, autoLottoTicketCountToPurchase);
+        user.buyAutoLottoTicket(lottoTicketStore, autoLottoTicketCountToPurchase);
 
         return user;
     }

@@ -14,9 +14,9 @@ public class LottoTicketStore {
     }
 
     public List<LottoTicket> purchaseManualLotto(List<List<LottoNumber>> lottoNumbers, int paymentCost) {
-        int totalPrice = lottoNumbers.size() * MANUAL_LOTTO_TICKET_COST;
+        int totalCost = lottoNumbers.size() * MANUAL_LOTTO_TICKET_COST;
 
-        validationCost(paymentCost, totalPrice);
+        validationCost(paymentCost, totalCost);
 
         return lottoNumbers.stream()
                 .map(LottoTicket::new)
