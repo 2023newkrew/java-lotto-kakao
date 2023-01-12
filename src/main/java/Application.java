@@ -1,5 +1,4 @@
 import controller.LottoSimulator;
-import controller.QuickPickSimulator;
 import domain.LottoTicketAutoGenerator;
 import domain.LottoTicketStore;
 import view.InputView;
@@ -11,7 +10,7 @@ public class Application {
         OutputView outputView = new OutputView(System.out);
         LottoTicketStore lottoTicketStore = new LottoTicketStore(new LottoTicketAutoGenerator());
 
-        LottoSimulator lottoSimulator = new QuickPickSimulator(inputView, outputView, lottoTicketStore);
+        LottoSimulator lottoSimulator = new LottoSimulator(inputView, outputView, lottoTicketStore);
         lottoSimulator.simulate();
     }
 }
