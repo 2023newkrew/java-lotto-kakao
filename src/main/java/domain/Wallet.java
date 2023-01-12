@@ -6,9 +6,9 @@ public class Wallet {
 
     private int usage;
 
-    public Wallet(int remainAmount) {
-        validateAmount(remainAmount);
-        this.remainAmount = remainAmount;
+    public Wallet(int amount) {
+        validateAmount(amount);
+        this.remainAmount = amount;
     }
 
     private static void validateAmount(int amount) {
@@ -25,13 +25,13 @@ public class Wallet {
         return remainAmount;
     }
 
-    public void use(int amount){
-        int updateAmount = remainAmount - amount;
+    public void use(int usedAmount){
+        int updatedAmount = remainAmount - usedAmount;
 
-        validateAmount(amount);
-        validateAmount(updateAmount);
+        validateAmount(usedAmount);
+        validateAmount(updatedAmount);
 
-        usage += amount;
-        remainAmount -= amount;
+        usage += usedAmount;
+        remainAmount -= usedAmount;
     }
 }
