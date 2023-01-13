@@ -17,6 +17,6 @@ public class IntegerUtil {
         return numbers.stream()
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

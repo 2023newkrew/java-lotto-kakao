@@ -12,7 +12,7 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     static {
         NUMBERS = IntStream.range(LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE)
                 .boxed()
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -20,7 +20,7 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
         Collections.shuffle(NUMBERS);
         List<LottoNumber> lottoNumbers = NUMBERS.subList(0, LOTTO_NUMBERS_LENGTH)
                 .stream().map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .toList();
 
         return new LottoNumbers(lottoNumbers);
     }
@@ -29,6 +29,6 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     public List<LottoNumbers> generate(int lottoCount) {
         return IntStream.range(0, lottoCount)
                 .mapToObj((currentCount) -> generate())
-                .collect(Collectors.toList());
+                .toList();
     }
 }

@@ -45,7 +45,7 @@ public class LottoNumbers {
     public List<LottoNumber> findUnMatchLottoNumbers(LottoNumbers lottoNumbers) {
         return this.lottoNumbers.stream()
                 .filter(lottoNumber -> !lottoNumbers.contains(lottoNumber))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<LottoNumber> getLottoNumbers() {

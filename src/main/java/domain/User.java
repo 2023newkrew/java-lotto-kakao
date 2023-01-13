@@ -57,7 +57,7 @@ public class User {
 
     public List<LottoTicket> getLottoTickets(){
         return Stream.concat(autoTickets.stream(), manualTickets.stream())
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public int getMoneyUsage(){

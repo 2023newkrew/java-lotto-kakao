@@ -17,7 +17,7 @@ public class LottoGame {
         List<LottoNumber> unMatchLottoNumbers = lottoNumbers.findUnMatchLottoNumbers(winningLotto.getWinningLottoNumbers());
         List<LottoNumber> remainLottoNumbers = unMatchLottoNumbers.stream()
                 .filter(lottoNumber -> (!lottoNumber.equals(winningLotto.getBonusNumber())))
-                .collect(Collectors.toList());
+                .toList();
 
         int matchCount = lottoNumbers.size() - unMatchLottoNumbers.size();
         boolean isBonusNumberMatched = (unMatchLottoNumbers.size() - remainLottoNumbers.size() != 0);
@@ -27,7 +27,7 @@ public class LottoGame {
     public GameResult play(){
         List<LottoMatchResult> lottoMatchResults = lottoNumbers.stream()
                 .map((lottoTicket) -> match(lottoTicket.getLottoNumbers(), winningLotto))
-                .collect(Collectors.toList());
+                .toList();
 
         return new GameResult(lottoMatchResults);
     }

@@ -19,7 +19,7 @@ public class LottoNumbersStoreTest {
         lottoTicketStore = new LottoTicketStore(new RandomLottoNumbersGenerator());
         defaultLottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6).stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .toList());
     }
 
     @DisplayName("수동 로또 구매 시, 금액이 부족할 경우 로또를 구매할 수 없다.")

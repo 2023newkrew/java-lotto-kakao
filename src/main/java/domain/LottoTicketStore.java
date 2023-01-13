@@ -31,7 +31,7 @@ public class LottoTicketStore {
 
         return lottoNumbers.stream()
                 .map(LottoTicket::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<LottoTicket> purchaseAutoLotto(int purchaseLottoCount, int paymentCost) {
@@ -40,7 +40,7 @@ public class LottoTicketStore {
         validationCost(paymentCost, totalCost);
         return lottoNumbersGenerator.generate(purchaseLottoCount).stream()
                 .map(LottoTicket::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private static void validationCost(int paymentCost, int totalCost) {

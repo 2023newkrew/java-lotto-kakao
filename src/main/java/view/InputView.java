@@ -71,7 +71,7 @@ public class InputView {
         List<LottoNumber> lottoNumbers = IntegerUtil.toInteger(splitNumbers)
                 .stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .toList();
 
         return new LottoNumbers(lottoNumbers);
     }
@@ -98,7 +98,7 @@ public class InputView {
     private List<String> trim(List<String> numbers){
         return numbers.stream()
                 .map(String::trim)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private List<String> split(String numbers){

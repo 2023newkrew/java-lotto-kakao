@@ -34,7 +34,7 @@ public class WinningStatistics {
         return lottoMatchResults.stream()
                 .map((LottoRank::from))
                 .map(rankMap::get)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public double getRateOfReturn(){
