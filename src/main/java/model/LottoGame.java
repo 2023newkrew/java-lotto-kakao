@@ -6,20 +6,14 @@ package model;
 import dto.LottoResultDto;
 import dto.LottoTicketDto;
 import dto.LottoWinnerDto;
-
-import java.util.List;
+import dto.ManualLottoDto;
+import exception.ManualLottoCountException;
 
 public class LottoGame {
     private static final int LOTTO_PRICE = 1000;
     private LottoTicket lottoTicket; //로또 티켓 관리 (수동+자동)
     private LottoWinner lottoWinner; //당첨 로또 관리(사용자 입력받음)
-
-    private int lottoCount; //전체 로또 개수 = purchaseMoney/1000;
-
-    private int manualLottoCount; // 수동 로또 개수 = 입력 받는 값임
-
-    private int autoLottoCount; // 자동 로또 개수 = 전체 - 수동
-    private PurchaseMoney purchaseMoney;
+    private PurchaseMoney purchaseMoney; //구매 금액
 
     public void setPurchaseMoney(PurchaseMoney purchaseMoney) {
         this.purchaseMoney = purchaseMoney;
@@ -29,8 +23,18 @@ public class LottoGame {
         return (int) purchaseMoney.getMoney() / LOTTO_PRICE;
     }
 
-    public void setLottoTicket(List<Lotto> manualLottos) {
-        lottoTicket = LottoFactory.createLottoTicket(getTotalLottoCount() - manualLottos.size(), manualLottos);
+    /**
+     * @throws ManualLottoCountException - 입력된 수동 로또의 개수가 0 미만이거나 전체 구입 개수를 초과할 때 발생하는 예외
+     */
+    public int setManualLottoCount(int manualLottoCount) throws ManualLottoCountException {
+        if (manualLottoCount < 0 || manualLottoCount > getTotalLottoCount()) {
+            throw new ManualLottoCountException();
+        }
+        return manualLottoCount;
+    }
+
+    public void setLottoTicket(ManualLottoDto manualLottos) {
+        lottoTicket = LottoFactory.createLottoTicket(getTotalLottoCount() - manualLottos.getLottos().size(), manualLottos.getLottos());
     }
 
     public void setLottoWinner(LottoWinnerDto lottoWinnerDto) {
@@ -44,8 +48,8 @@ public class LottoGame {
     public LottoResultDto getResult() {
         Banker banker = new Banker();
         LottoResult lottoResult = new LottoResult(lottoWinner, lottoTicket);
-        long winningMoney = banker.getTotalPrizeMoney(lottoResult);
-        return new LottoResultDto(lottoResult.getLottoPlaces(), (double) winningMoney / purchaseMoney.getMoney());
+        Money winningMoney = banker.getTotalPrizeMoney(lottoResult);
+        return new LottoResultDto(lottoResult.getLottoPlaces(), winningMoney.rate(purchaseMoney));
     }
 
 }
