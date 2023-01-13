@@ -20,15 +20,8 @@ public class Lotto {
     private final Set<LottoNumber> lottoNumbers;
 
     public Lotto(final Set<LottoNumber> lottoNumbers) {
-//        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
-//            throw new LottoNumberCountException();
-//        }
-//        if (lottoNumbers.size() != lottoNumbers.stream().distinct().count()) {
-//            throw new LottoNumberDuplicateException();
-//        }
-
-        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) { //여기 다시 손보자
-            throw new LottoNumberCountException();
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new LottoNumberDuplicateException();
         }
         this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
