@@ -6,8 +6,8 @@ import java.util.stream.IntStream;
 
 import static domain.LottoConstant.*;
 
-public class LottoTicketAutoGenerator implements LottoTicketGenerator{
-    public static final List<Integer> NUMBERS;
+public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
+    private static final List<Integer> NUMBERS;
 
     static {
         NUMBERS = IntStream.range(LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE)
@@ -16,19 +16,19 @@ public class LottoTicketAutoGenerator implements LottoTicketGenerator{
     }
 
     @Override
-    public LottoTicket generate() {
+    public LottoNumbers generate() {
         Collections.shuffle(NUMBERS);
-        List<LottoNumber> lottoNumbers = NUMBERS.subList(0, LOTTO_TICKET_LENGTH)
+        List<LottoNumber> lottoNumbers = NUMBERS.subList(0, LOTTO_NUMBERS_LENGTH)
                 .stream().map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .toList();
 
-        return new LottoTicket(lottoNumbers);
+        return new LottoNumbers(lottoNumbers);
     }
 
     @Override
-    public List<LottoTicket> generate(int lottoCount) {
+    public List<LottoNumbers> generate(int lottoCount) {
         return IntStream.range(0, lottoCount)
                 .mapToObj((currentCount) -> generate())
-                .collect(Collectors.toList());
+                .toList();
     }
 }

@@ -1,16 +1,14 @@
 package view;
 
 import domain.LottoNumber;
-import domain.LottoTicket;
+import domain.LottoNumbers;
 import domain.WinningLotto;
 import util.IntegerUtil;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class InputView {
@@ -22,7 +20,7 @@ public class InputView {
         this.inputStream = new Scanner(inputStream);
     }
 
-    public int getPurchasePrice() {
+    public int getUserAmount() {
         outputStream.println("구입금액을 입력해 주세요.");
 
         String purchasePrice = inputStream.nextLine();
@@ -41,37 +39,36 @@ public class InputView {
         return Integer.parseInt(maulPurchaseLottoNumber);
     }
 
-    public List<List<LottoNumber>> getManualLottoNumbers(int lottoCount) {
+    public List<LottoNumbers> getManualLottoNumbers(int lottoCount) {
         outputStream.println();
         outputStream.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<List<LottoNumber>> lottoTickets = new LinkedList<>();
-        IntStream.range(0, lottoCount)
-                .forEach((lottoIndex) -> lottoTickets.add(getLottoTicket()));
-        return lottoTickets;
+        return IntStream.range(0, lottoCount)
+                .mapToObj((lottoIndex) -> getLottoNumbers())
+                .toList();
     }
 
     public WinningLotto getLastWinningLotto() {
-        LottoTicket lastLottoTicket = getLastLottoTicket();
+        LottoNumbers lastLottoNumbers = getLastLottoNumbers();
         LottoNumber bonusNumber = getLastBonusNumber();
 
-        return new WinningLotto(lastLottoTicket, bonusNumber);
+        return new WinningLotto(lastLottoNumbers, bonusNumber);
     }
 
-    private LottoTicket getLastLottoTicket(){
+    private LottoNumbers getLastLottoNumbers(){
         outputStream.println();
         outputStream.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new LottoTicket(getLottoTicket());
+        return getLottoNumbers();
     }
 
-    private List<LottoNumber> getLottoTicket() {
+    private LottoNumbers getLottoNumbers() {
         List<String> splitNumbers = trim(split(inputStream.nextLine()));
-
         validateIntegers(splitNumbers);
-        return IntegerUtil.toInteger(splitNumbers)
+
+        return new LottoNumbers(IntegerUtil.toInteger(splitNumbers)
                 .stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toList());
+                .toList());
     }
 
     private LottoNumber getLastBonusNumber(){
@@ -96,7 +93,7 @@ public class InputView {
     private List<String> trim(List<String> numbers){
         return numbers.stream()
                 .map(String::trim)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private List<String> split(String numbers){

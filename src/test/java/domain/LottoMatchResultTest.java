@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LottoMatchResultTest {
+class LottoMatchResultTest {
     @DisplayName("로또 번호가 6개 일치하고, 보너스 번호도 일치할 수 없다.")
     @Test
     void test1(){

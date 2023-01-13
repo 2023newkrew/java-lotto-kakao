@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class WalletTest {
+class WalletTest {
     @DisplayName("지갑은 양의 정수의 돈을 가질 수 있다.")
     @ParameterizedTest
     @ValueSource(ints = {-1, -100})

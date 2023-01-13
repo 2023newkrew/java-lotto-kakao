@@ -3,8 +3,6 @@ package domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
 
 public class WinningStatistics {
     private final List<LottoMatchResult> lottoMatchResults;
@@ -34,7 +32,7 @@ public class WinningStatistics {
         return lottoMatchResults.stream()
                 .map((LottoRank::from))
                 .map(rankMap::get)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public double getRateOfReturn(){

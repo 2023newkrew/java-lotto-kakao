@@ -1,22 +1,49 @@
 package domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import domain.LottoTicketStore.LottoTicket;
 
 public class User {
     private final Wallet wallet;
-    private final List<LottoTicket> manualTickets;
-    private final List<LottoTicket> autoTickets;
+    private List<LottoTicket> manualTickets;
+    private List<LottoTicket> autoTickets;
 
-    public User(Wallet wallet, List<LottoTicket> manualTickets, List<LottoTicket> autoTickets) {
-        this.wallet = wallet;
-        this.manualTickets = manualTickets;
-        this.autoTickets = autoTickets;
+    public User() {
+        this(new Wallet());
     }
 
-    public Wallet getWallet() {
-        return wallet;
+    private User(Wallet wallet){
+        this.wallet = wallet;
+        this.manualTickets = List.of();
+        this.autoTickets = List.of();
+    }
+
+    public void receiveMoney(int money){
+        wallet.receiveMoney(money);
+    }
+
+    private void pay(int cost){
+        if(wallet.getAmount() < cost){
+            throw new IllegalArgumentException("금액이 부족합니다.");
+        }
+        wallet.use(cost);
+    }
+
+    public void buyAutoLottoTicket(LottoTicketStore lottoTicketStore, int autoLottoTicketCount){
+        int autoLottoTicketCost = LottoTicketStore.AUTO_LOTTO_TICKET_COST;
+        int totalCost = autoLottoTicketCost * autoLottoTicketCount;
+
+        pay(totalCost);
+        autoTickets = lottoTicketStore.purchaseAutoLotto(autoLottoTicketCount, totalCost);
+    }
+
+    public void buyManualLottoTicket(LottoTicketStore lottoTicketStore, List<LottoNumbers> lottoNumbers, int manualLottoTicketCount){
+        int autoLottoTicketCost = LottoTicketStore.MANUAL_LOTTO_TICKET_COST;
+        int totalCost = autoLottoTicketCost * manualLottoTicketCount;
+
+        pay(totalCost);
+        manualTickets = lottoTicketStore.purchaseManualLotto(lottoNumbers, totalCost);
     }
 
     public List<LottoTicket> getManualTickets() {
@@ -29,6 +56,14 @@ public class User {
 
     public List<LottoTicket> getLottoTickets(){
         return Stream.concat(autoTickets.stream(), manualTickets.stream())
-                .collect(Collectors.toList());
+                .toList();
+    }
+
+    public int getMoneyUsage(){
+        return wallet.getUsage();
+    }
+
+    public int getRemainAmount(){
+        return wallet.getAmount();
     }
 }
