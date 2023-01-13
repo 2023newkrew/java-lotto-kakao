@@ -18,10 +18,10 @@ public class LottoTicketStore {
     public static final int MANUAL_LOTTO_TICKET_COST = 1_000;
     public static final int AUTO_LOTTO_TICKET_COST = 1_000;
 
-    private final LottoTicketGenerator lottoTicketGenerator;
+    private final LottoNumbersGenerator lottoNumbersGenerator;
 
-    public LottoTicketStore(LottoTicketGenerator lottoTicketGenerator){
-        this.lottoTicketGenerator = lottoTicketGenerator;
+    public LottoTicketStore(LottoNumbersGenerator lottoNumbersGenerator){
+        this.lottoNumbersGenerator = lottoNumbersGenerator;
     }
 
     public List<LottoTicket> purchaseManualLotto(List<LottoNumbers> lottoNumbers, int paymentCost) {
@@ -38,7 +38,7 @@ public class LottoTicketStore {
         int totalCost = purchaseLottoCount * AUTO_LOTTO_TICKET_COST;
 
         validationCost(paymentCost, totalCost);
-        return lottoTicketGenerator.generate(purchaseLottoCount).stream()
+        return lottoNumbersGenerator.generate(purchaseLottoCount).stream()
                 .map(LottoTicket::new)
                 .collect(Collectors.toList());
     }

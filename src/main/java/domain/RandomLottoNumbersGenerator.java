@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 import static domain.LottoConstant.*;
 
-public class LottoNumbersAutoGenerator implements LottoTicketGenerator{
+public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     public static final List<Integer> NUMBERS;
 
     static {

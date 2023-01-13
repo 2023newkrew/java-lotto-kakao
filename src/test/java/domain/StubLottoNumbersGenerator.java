@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StubLottoNumbersGenerator {
+public class StubLottoNumbersGenerator{
 
     private final int[] values;
     public StubLottoNumbersGenerator(int ... values){
