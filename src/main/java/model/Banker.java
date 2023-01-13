@@ -7,15 +7,16 @@ package model;
 import model.constant.LottoPlace;
 
 public class Banker {
-    public long getTotalPrizeMoney(LottoResult lottoResult) { //전체 상금 리턴
-        long answer = 0;
+    public Money getTotalPrizeMoney(LottoResult lottoResult) { //전체 상금 리턴
+        Money money = new Money();
         for (LottoPlace place : lottoResult.getLottoPlaces().keySet()) {
-            answer += getPrizeMoney(place) * lottoResult.getLottoPlaces().get(place);
+            money.add(getPrizeMoney(place), lottoResult.getLottoPlaces().get(place));
+
         }
-        return answer;
+        return money;
     }
 
-    private long getPrizeMoney(LottoPlace lottoPlace) { //등수 당 상금 매핑
-        return lottoPlace.valueOf();
+    private Money getPrizeMoney(LottoPlace lottoPlace) { //등수 당 상금 매핑
+        return new Money(lottoPlace.valueOf());
     }
 }
