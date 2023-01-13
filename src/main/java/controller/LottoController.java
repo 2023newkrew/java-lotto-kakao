@@ -3,6 +3,7 @@ package controller;
 import dto.*;
 import model.*;
 import utils.*;
+import utils.templatemethod.AbstractTemplate;
 import view.View;
 
 import java.util.ArrayList;
@@ -33,20 +34,34 @@ public class LottoController {
 
     private PurchaseMoney inputPurchaseMoney() {
         view.printPriceMessage();
-        Context<PurchaseMoney> context = new Context<>(
-                param -> Parser.parsingStringToPurchaseMoney(param),
-                () -> inputPurchaseMoney()
-        );
-        return context.execute(scanner.nextLine());
+        AbstractTemplate<PurchaseMoney> template = new AbstractTemplate<>() {
+            @Override
+            protected PurchaseMoney parse(String param) {
+                return Parser.parsingStringToPurchaseMoney(param);
+            }
+
+            @Override
+            protected PurchaseMoney retry() {
+                return inputPurchaseMoney();
+            }
+        };
+        return template.run(scanner.nextLine());
     }
 
     private int setManualLottoCount() {
         view.printManualLottoCountMessage();
-        Context<Integer> context = new Context<>(
-                param -> lottoGame.setManualLottoCount(Parser.parsingStringToInt(param)),
-                () -> setManualLottoCount()
-        );
-        return context.execute(scanner.nextLine());
+        AbstractTemplate<Integer> template = new AbstractTemplate<>() {
+            @Override
+            protected Integer parse(String param) {
+                return lottoGame.setManualLottoCount(Parser.parsingStringToInt(param));
+            }
+
+            @Override
+            protected Integer retry() {
+                return setManualLottoCount();
+            }
+        };
+        return template.run(scanner.nextLine());
     }
 
     private ManualLottoDto inputManualLottos(int manualLottoCount) {
@@ -59,28 +74,48 @@ public class LottoController {
     }
 
     private Lotto inputLotto() {
-        String input = scanner.nextLine();
-        Context<Lotto> context = new Context<>(
-                param -> Parser.parsingStringToLotto(param),
-                () -> inputLotto()
-        );
-        return context.execute(input);
+        AbstractTemplate<Lotto> template = new AbstractTemplate<>() {
+            @Override
+            protected Lotto parse(String param) {
+                return Parser.parsingStringToLotto(param);
+            }
+
+            @Override
+            protected Lotto retry() {
+                return inputLotto();
+            }
+        };
+        return template.run(scanner.nextLine());
     }
 
     private LottoNumber inputBonusNumber() {
         view.printBonusNumberMessage();
-        Context<LottoNumber> context = new Context<>(
-                param -> Parser.parsingStringToLottoNumber(param),
-                () -> inputBonusNumber()
-        );
-        return context.execute(scanner.nextLine());
+        AbstractTemplate<LottoNumber> template = new AbstractTemplate<>() {
+            @Override
+            protected LottoNumber parse(String param) {
+                return Parser.parsingStringToLottoNumber(param);
+            }
+
+            @Override
+            protected LottoNumber retry() {
+                return inputBonusNumber();
+            }
+        };
+        return template.run(scanner.nextLine());
     }
 
     private LottoWinnerDto inputLottoWinner(Lotto winNumbers) {
-        Context<LottoWinnerDto> context = new Context<>(
-                param -> new LottoWinnerDto(winNumbers, inputBonusNumber()),
-                () -> inputLottoWinner(winNumbers)
-        );
-        return context.execute("");
+        AbstractTemplate<LottoWinnerDto> template = new AbstractTemplate<>() {
+            @Override
+            protected LottoWinnerDto parse(String param) {
+                return new LottoWinnerDto(winNumbers, inputBonusNumber());
+            }
+
+            @Override
+            protected LottoWinnerDto retry() {
+                return inputLottoWinner(winNumbers);
+            }
+        };
+        return template.run("");
     }
 }
