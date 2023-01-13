@@ -55,8 +55,8 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(lottoWinner, lottoTicket);
 
         Banker banker = new Banker();
-        long winningMoney = banker.getTotalPrizeMoney(lottoResult);
+        Money winningMoney = banker.getTotalPrizeMoney(lottoResult);
 
-        Assertions.assertEquals(26.25, (double) winningMoney / 4000);
+        Assertions.assertEquals(26.25, winningMoney.rate(new Money(4000)));
     }
 }
