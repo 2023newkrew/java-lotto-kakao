@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import domain.LottoTicketStore.LottoTicket;
 
 public class LottoGame {
