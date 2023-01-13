@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoRankTest {
+class LottoRankTest {
     @DisplayName("6개 일치하면, 1등")
     @Test
     void test1(){

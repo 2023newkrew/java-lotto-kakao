@@ -7,12 +7,12 @@ import java.util.stream.IntStream;
 import static domain.LottoConstant.*;
 
 public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
-    public static final List<Integer> NUMBERS;
+    private static final List<Integer> NUMBERS;
 
     static {
         NUMBERS = IntStream.range(LOTTO_NUMBER_MIN_VALUE, LOTTO_NUMBER_MAX_VALUE)
                 .boxed()
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override

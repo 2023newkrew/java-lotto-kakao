@@ -8,8 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-public class LottoNumbersStoreTest {
-
+class LottoNumbersStoreTest {
     LottoTicketStore lottoTicketStore;
     LottoNumbers defaultLottoNumbers;
 

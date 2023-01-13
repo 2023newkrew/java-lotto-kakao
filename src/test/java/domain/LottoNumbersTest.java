@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoNumbersTest {
+class LottoNumbersTest {
     @DisplayName("로또 티켓은 6개의 로또 번호를 가진다")
     @Test
     void test1(){

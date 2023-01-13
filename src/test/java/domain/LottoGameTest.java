@@ -9,7 +9,7 @@ import domain.LottoTicketStore.LottoTicket;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottoGameTest {
+class LottoGameTest {
     private LottoTicketStore lottoTicketStore;
 
     @BeforeEach

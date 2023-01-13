@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
-public class WinningLottoTest {
+class WinningLottoTest {
     @DisplayName("당첨 번호에 포함된 숫자는 보너스 번호가 될 수 없다.")
     @Test
     void test(){

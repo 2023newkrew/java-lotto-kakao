@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinningStatisticsTest {
+class WinningStatisticsTest {
     @DisplayName("FIFTH와 FIFTH_BONUS는 같은 등수로 취급한다.")
     @Test
     void test1(){

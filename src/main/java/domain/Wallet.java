@@ -3,7 +3,7 @@ package domain;
 public class Wallet {
     private static final String INVALID_USED_AMOUNT_VALUE_EXCEPTION_MSG = "사용 금액은 양의 정수이어야 합니다.";
     private static final String LACK_OF_HOLDING_AMOUNT_EXCEPTION_MSG = "보유 금액이 부족합니다.";
-    public static final int INIT_AMOUNT = 0;
+    private static final int INIT_AMOUNT = 0;
     private int amount;
 
     private int usage;

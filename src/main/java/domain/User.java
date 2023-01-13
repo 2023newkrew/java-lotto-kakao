@@ -62,6 +62,7 @@ public class User {
     public int getMoneyUsage(){
         return wallet.getUsage();
     }
+
     public int getRemainAmount(){
         return wallet.getAmount();
     }
