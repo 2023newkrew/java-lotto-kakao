@@ -1,7 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class StubLottoNumbersGenerator{
 
@@ -12,11 +11,8 @@ public class StubLottoNumbersGenerator{
     }
 
     public LottoNumbers generate() {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-
-        for(int value : values){
-            lottoNumbers.add(new LottoNumber(value));
-        }
-        return new LottoNumbers(lottoNumbers);
+        return new LottoNumbers(Arrays.stream(values)
+                .mapToObj(LottoNumber::new)
+                .toList());
     }
 }

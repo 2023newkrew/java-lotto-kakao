@@ -7,7 +7,6 @@ import util.IntegerUtil;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -44,10 +43,9 @@ public class InputView {
         outputStream.println();
         outputStream.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<LottoNumbers> lottoNumbers = new LinkedList<>();
-        IntStream.range(0, lottoCount)
-                .forEach((lottoIndex) -> lottoNumbers.add(getLottoNumbers()));
-        return lottoNumbers;
+        return IntStream.range(0, lottoCount)
+                .mapToObj((lottoIndex) -> getLottoNumbers())
+                .toList();
     }
 
     public WinningLotto getLastWinningLotto() {
@@ -65,14 +63,12 @@ public class InputView {
 
     private LottoNumbers getLottoNumbers() {
         List<String> splitNumbers = trim(split(inputStream.nextLine()));
-
         validateIntegers(splitNumbers);
-        List<LottoNumber> lottoNumbers = IntegerUtil.toInteger(splitNumbers)
+
+        return new LottoNumbers(IntegerUtil.toInteger(splitNumbers)
                 .stream()
                 .map(LottoNumber::new)
-                .toList();
-
-        return new LottoNumbers(lottoNumbers);
+                .toList());
     }
 
     private LottoNumber getLastBonusNumber(){
