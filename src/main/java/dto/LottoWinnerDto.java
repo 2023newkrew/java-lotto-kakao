@@ -9,10 +9,9 @@ import model.LottoWinner;
 import model.Lotto;
 
 public class LottoWinnerDto {
-
     private final LottoWinner lottoWinner;
 
-    public LottoWinnerDto(Lotto winNumbers, LottoNumber bonusNumber) throws IllegalArgumentException {
+    public LottoWinnerDto(Lotto winNumbers, LottoNumber bonusNumber) {
         lottoWinner = new LottoWinner(winNumbers, bonusNumber);
     }
 

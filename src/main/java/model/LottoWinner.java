@@ -14,7 +14,10 @@ public class LottoWinner {
     private final Lotto winNumbers;
     private final LottoNumber bonusNumber;
 
-    public LottoWinner(Lotto winNumbers, LottoNumber bonusNumber) {
+    /**
+     * @throws LottoNumberDuplicateException - 입력된 보너스 번호가 당첨 로또들 중 하나와 같을 때 발생하는 예외
+     */
+    public LottoWinner(Lotto winNumbers, LottoNumber bonusNumber) throws LottoNumberDuplicateException {
         if (winNumbers.getLottoNumbers().contains(bonusNumber)) {
             throw new LottoNumberDuplicateException();
         }
