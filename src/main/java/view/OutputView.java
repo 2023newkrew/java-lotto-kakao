@@ -5,6 +5,7 @@ import domain.*;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.stream.Collectors;
+import domain.LottoTicketStore.LottoTicket;
 
 import static domain.LottoRank.*;
 
@@ -26,9 +27,9 @@ public class OutputView {
         printLottoTickets(user.getAutoTickets());
     }
 
-    private void printLottoTickets(List<LottoNumbers> lottoTickets) {
-        for(LottoNumbers lottoTicket : lottoTickets){
-            List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
+    private void printLottoTickets(List<LottoTicket> lottoTickets) {
+        for(LottoTicket lottoTicket : lottoTickets){
+            LottoNumbers lottoNumbers = lottoTicket.getLottoNumbers();
             outputStream.print("[");
             outputStream.print(joinLottoNumbers(lottoNumbers));
             outputStream.print("]");
@@ -36,8 +37,8 @@ public class OutputView {
         }
     }
 
-    private static String joinLottoNumbers(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
+    private static String joinLottoNumbers(LottoNumbers lottoNumbers) {
+        return lottoNumbers.getLottoNumbers().stream()
                 .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
                 .collect(Collectors.joining(", "));
     }

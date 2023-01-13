@@ -41,11 +41,11 @@ public class InputView {
         return Integer.parseInt(maulPurchaseLottoNumber);
     }
 
-    public List<List<LottoNumber>> getManualLottoNumbers(int lottoCount) {
+    public List<LottoNumbers> getManualLottoNumbers(int lottoCount) {
         outputStream.println();
         outputStream.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<List<LottoNumber>> lottoNumbers = new LinkedList<>();
+        List<LottoNumbers> lottoNumbers = new LinkedList<>();
         IntStream.range(0, lottoCount)
                 .forEach((lottoIndex) -> lottoNumbers.add(getLottoNumbers()));
         return lottoNumbers;
@@ -61,17 +61,19 @@ public class InputView {
     private LottoNumbers getLastLottoNumbers(){
         outputStream.println();
         outputStream.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new LottoNumbers(getLottoNumbers());
+        return getLottoNumbers();
     }
 
-    private List<LottoNumber> getLottoNumbers() {
+    private LottoNumbers getLottoNumbers() {
         List<String> splitNumbers = trim(split(inputStream.nextLine()));
 
         validateIntegers(splitNumbers);
-        return IntegerUtil.toInteger(splitNumbers)
+        List<LottoNumber> lottoNumbers = IntegerUtil.toInteger(splitNumbers)
                 .stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
+
+        return new LottoNumbers(lottoNumbers);
     }
 
     private LottoNumber getLastBonusNumber(){

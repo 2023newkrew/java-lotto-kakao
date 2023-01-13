@@ -3,11 +3,12 @@ package domain;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import domain.LottoTicketStore.LottoTicket;
 
 public class User {
     private final Wallet wallet;
-    private List<LottoNumbers> manualTickets;
-    private List<LottoNumbers> autoTickets;
+    private List<LottoTicket> manualTickets;
+    private List<LottoTicket> autoTickets;
 
     public User() {
         this(new Wallet());
@@ -38,7 +39,7 @@ public class User {
         autoTickets = lottoTicketStore.purchaseAutoLotto(autoLottoTicketCount, totalCost);
     }
 
-    public void buyManualLottoTicket(LottoTicketStore lottoTicketStore, List<List<LottoNumber>> lottoNumbers, int manualLottoTicketCount){
+    public void buyManualLottoTicket(LottoTicketStore lottoTicketStore, List<LottoNumbers> lottoNumbers, int manualLottoTicketCount){
         int autoLottoTicketCost = LottoTicketStore.MANUAL_LOTTO_TICKET_COST;
         int totalCost = autoLottoTicketCost * manualLottoTicketCount;
 
@@ -46,15 +47,15 @@ public class User {
         manualTickets = lottoTicketStore.purchaseManualLotto(lottoNumbers, totalCost);
     }
 
-    public List<LottoNumbers> getManualTickets() {
+    public List<LottoTicket> getManualTickets() {
         return manualTickets;
     }
 
-    public List<LottoNumbers> getAutoTickets() {
+    public List<LottoTicket> getAutoTickets() {
         return autoTickets;
     }
 
-    public List<LottoNumbers> getLottoTickets(){
+    public List<LottoTicket> getLottoTickets(){
         return Stream.concat(autoTickets.stream(), manualTickets.stream())
                 .collect(Collectors.toList());
     }

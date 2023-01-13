@@ -39,7 +39,7 @@ public class LottoSimulator{
 
     private void initUserLottoTickets() {
         int manualLottoTicketCountToPurchase = inputView.getManualLottoCountToPurchase();
-        List<List<LottoNumber>> lottoNumbers = inputView.getManualLottoNumbers(manualLottoTicketCountToPurchase);
+        List<LottoNumbers> lottoNumbers = inputView.getManualLottoNumbers(manualLottoTicketCountToPurchase);
         user.buyManualLottoTicket(lottoTicketStore, lottoNumbers, manualLottoTicketCountToPurchase);
 
         int autoLottoTicketCountToPurchase = (user.getRemainAmount()) / LottoTicketStore.AUTO_LOTTO_TICKET_COST;

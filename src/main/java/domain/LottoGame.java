@@ -2,12 +2,13 @@ package domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import domain.LottoTicketStore.LottoTicket;
 
 public class LottoGame {
-    private final List<LottoNumbers> lottoNumbers;
+    private final List<LottoTicket> lottoNumbers;
     private final WinningLotto winningLotto;
 
-    public LottoGame(List<LottoNumbers> lottoNumbers, WinningLotto winningLotto) {
+    public LottoGame(List<LottoTicket> lottoNumbers, WinningLotto winningLotto) {
         this.lottoNumbers = lottoNumbers;
         this.winningLotto = winningLotto;
     }
@@ -25,7 +26,7 @@ public class LottoGame {
 
     public GameResult play(){
         List<LottoMatchResult> lottoMatchResults = lottoNumbers.stream()
-                .map((lottoTicket) -> match(lottoTicket, winningLotto))
+                .map((lottoTicket) -> match(lottoTicket.getLottoNumbers(), winningLotto))
                 .collect(Collectors.toList());
 
         return new GameResult(lottoMatchResults);
