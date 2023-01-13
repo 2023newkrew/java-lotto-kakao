@@ -12,11 +12,11 @@ public class LottoGameTest {
     @Test
     void test1(){
         LottoNumber bonusNumber = new LottoNumber(45);
-        WinningLotto winningLotto = new WinningLotto(new StubLottoTicketGenerator(1, 2, 3, 4, 5, 6).generate(), bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(new StubLottoNumbersGenerator(1, 2, 3, 4, 5, 6).generate(), bonusNumber);
 
-        LottoTicket lottoTicket = new StubLottoTicketGenerator(6, 5, 4, 3, 2, 1).generate();
+        LottoNumbers lottoNumbers = new StubLottoNumbersGenerator(6, 5, 4, 3, 2, 1).generate();
 
-        LottoGame lottoGame = new LottoGame(List.of(lottoTicket), winningLotto);
+        LottoGame lottoGame = new LottoGame(List.of(lottoNumbers), winningLotto);
         assertThat(lottoGame.play().getLottoMatchResults())
                 .contains(new LottoMatchResult(6, false));
     }
@@ -25,11 +25,11 @@ public class LottoGameTest {
     @Test
     void test2(){
         LottoNumber bonusNumber = new LottoNumber(45);
-        WinningLotto winningLotto = new WinningLotto(new StubLottoTicketGenerator(1, 2, 3, 4, 5, 6).generate(), bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(new StubLottoNumbersGenerator(1, 2, 3, 4, 5, 6).generate(), bonusNumber);
 
-        LottoTicket lottoTicket = new StubLottoTicketGenerator(1, 2, 3, 4, 5, 45).generate();
+        LottoNumbers lottoNumbers = new StubLottoNumbersGenerator(1, 2, 3, 4, 5, 45).generate();
 
-        LottoGame lottoGame = new LottoGame(List.of(lottoTicket), winningLotto);
+        LottoGame lottoGame = new LottoGame(List.of(lottoNumbers), winningLotto);
         assertThat(lottoGame.play().getLottoMatchResults())
                 .contains(new LottoMatchResult(5, true));
     }
@@ -38,11 +38,11 @@ public class LottoGameTest {
     @Test
     void test3(){
         LottoNumber bonusNumber = new LottoNumber(45);
-        WinningLotto winningLotto = new WinningLotto(new StubLottoTicketGenerator(1, 2, 3, 4, 5, 6).generate(), bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(new StubLottoNumbersGenerator(1, 2, 3, 4, 5, 6).generate(), bonusNumber);
 
-        LottoTicket lottoTicket = new StubLottoTicketGenerator(1, 2, 3, 4, 5, 42).generate();
+        LottoNumbers lottoNumbers = new StubLottoNumbersGenerator(1, 2, 3, 4, 5, 42).generate();
 
-        LottoGame lottoGame = new LottoGame(List.of(lottoTicket), winningLotto);
+        LottoGame lottoGame = new LottoGame(List.of(lottoNumbers), winningLotto);
         assertThat(lottoGame.play().getLottoMatchResults())
                 .contains(new LottoMatchResult(5, false));
     }

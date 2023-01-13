@@ -13,17 +13,17 @@ public class LottoTicketStore {
         this.lottoTicketGenerator = lottoTicketGenerator;
     }
 
-    public List<LottoTicket> purchaseManualLotto(List<List<LottoNumber>> lottoNumbers, int paymentCost) {
+    public List<LottoNumbers> purchaseManualLotto(List<List<LottoNumber>> lottoNumbers, int paymentCost) {
         int totalCost = lottoNumbers.size() * MANUAL_LOTTO_TICKET_COST;
 
         validationCost(paymentCost, totalCost);
 
         return lottoNumbers.stream()
-                .map(LottoTicket::new)
+                .map(LottoNumbers::new)
                 .collect(Collectors.toList());
     }
 
-    public List<LottoTicket> purchaseAutoLotto(int purchaseLottoCount, int paymentCost) {
+    public List<LottoNumbers> purchaseAutoLotto(int purchaseLottoCount, int paymentCost) {
         int totalCost = purchaseLottoCount * AUTO_LOTTO_TICKET_COST;
 
         validationCost(paymentCost, totalCost);

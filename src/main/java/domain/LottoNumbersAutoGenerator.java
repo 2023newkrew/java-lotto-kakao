@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 import static domain.LottoConstant.*;
 
-public class LottoTicketAutoGenerator implements LottoTicketGenerator{
+public class LottoNumbersAutoGenerator implements LottoTicketGenerator{
     public static final List<Integer> NUMBERS;
 
     static {
@@ -16,17 +16,17 @@ public class LottoTicketAutoGenerator implements LottoTicketGenerator{
     }
 
     @Override
-    public LottoTicket generate() {
+    public LottoNumbers generate() {
         Collections.shuffle(NUMBERS);
-        List<LottoNumber> lottoNumbers = NUMBERS.subList(0, LOTTO_TICKET_LENGTH)
+        List<LottoNumber> lottoNumbers = NUMBERS.subList(0, LOTTO_NUMBERS_LENGTH)
                 .stream().map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        return new LottoTicket(lottoNumbers);
+        return new LottoNumbers(lottoNumbers);
     }
 
     @Override
-    public List<LottoTicket> generate(int lottoCount) {
+    public List<LottoNumbers> generate(int lottoCount) {
         return IntStream.range(0, lottoCount)
                 .mapToObj((currentCount) -> generate())
                 .collect(Collectors.toList());

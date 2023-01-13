@@ -8,7 +8,7 @@ public class WinningLottoTest {
     @DisplayName("당첨 번호에 포함된 숫자는 보너스 번호가 될 수 없다.")
     @Test
     void test(){
-        StubLottoTicketGenerator lottoTicketGenerator = new StubLottoTicketGenerator(1, 2, 3, 4, 5, 6);
+        StubLottoNumbersGenerator lottoTicketGenerator = new StubLottoNumbersGenerator(1, 2, 3, 4, 5, 6);
         LottoNumber bonusNumber = new LottoNumber(6);
 
         Assertions.assertThatThrownBy(() -> new WinningLotto(lottoTicketGenerator.generate(), bonusNumber))

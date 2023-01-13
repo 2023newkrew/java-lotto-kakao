@@ -9,14 +9,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LottoTicketStoreTest {
+public class LottoNumbersStoreTest {
 
     LottoTicketStore lottoTicketStore;
     List<LottoNumber> lottoNumbers;
 
     @BeforeEach
     void setUo(){
-        lottoTicketStore = new LottoTicketStore(new LottoTicketAutoGenerator());
+        lottoTicketStore = new LottoTicketStore(new LottoNumbersAutoGenerator());
         lottoNumbers = List.of(1, 2, 3, 4, 5, 6).stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());

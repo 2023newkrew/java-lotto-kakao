@@ -34,10 +34,10 @@ public class LottoSimulator{
 
     private void initGame() {
         initUserAmount();
-        initUserLottoTicket();
+        initUserLottoTickets();
     }
 
-    private void initUserLottoTicket() {
+    private void initUserLottoTickets() {
         int manualLottoTicketCountToPurchase = inputView.getManualLottoCountToPurchase();
         List<List<LottoNumber>> lottoNumbers = inputView.getManualLottoNumbers(manualLottoTicketCountToPurchase);
         user.buyManualLottoTicket(lottoTicketStore, lottoNumbers, manualLottoTicketCountToPurchase);

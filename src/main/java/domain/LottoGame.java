@@ -4,27 +4,27 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoGame {
-    private final List<LottoTicket> lottoTickets;
+    private final List<LottoNumbers> lottoNumbers;
     private final WinningLotto winningLotto;
 
-    public LottoGame(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        this.lottoTickets = lottoTickets;
+    public LottoGame(List<LottoNumbers> lottoNumbers, WinningLotto winningLotto) {
+        this.lottoNumbers = lottoNumbers;
         this.winningLotto = winningLotto;
     }
 
-    private LottoMatchResult match(LottoTicket lottoTicket, WinningLotto winningLotto) {
-        List<LottoNumber> unMatchLottoNumbers = lottoTicket.findUnMatchLottoNumbers(winningLotto.getWinningLottoTicket());
+    private LottoMatchResult match(LottoNumbers lottoNumbers, WinningLotto winningLotto) {
+        List<LottoNumber> unMatchLottoNumbers = lottoNumbers.findUnMatchLottoNumbers(winningLotto.getWinningLottoNumbers());
         List<LottoNumber> remainLottoNumbers = unMatchLottoNumbers.stream()
                 .filter(lottoNumber -> (!lottoNumber.equals(winningLotto.getBonusNumber())))
                 .collect(Collectors.toList());
 
-        int matchCount = lottoTicket.size() - unMatchLottoNumbers.size();
+        int matchCount = lottoNumbers.size() - unMatchLottoNumbers.size();
         boolean isBonusNumberMatched = (unMatchLottoNumbers.size() - remainLottoNumbers.size() != 0);
         return new LottoMatchResult(matchCount, isBonusNumberMatched);
     }
 
     public GameResult play(){
-        List<LottoMatchResult> lottoMatchResults = lottoTickets.stream()
+        List<LottoMatchResult> lottoMatchResults = lottoNumbers.stream()
                 .map((lottoTicket) -> match(lottoTicket, winningLotto))
                 .collect(Collectors.toList());
 

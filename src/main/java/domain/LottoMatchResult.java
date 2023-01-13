@@ -17,7 +17,7 @@ public class LottoMatchResult {
     }
 
     private boolean isValidLottoMatchResult(int matchCount, boolean isBonusNumberMatched) {
-        if(matchCount == LottoConstant.LOTTO_TICKET_LENGTH && isBonusNumberMatched
+        if(matchCount == LottoConstant.LOTTO_NUMBERS_LENGTH && isBonusNumberMatched
             || matchCount < MATCH_COUNT_MIN_VALUE){
             return false;
         }

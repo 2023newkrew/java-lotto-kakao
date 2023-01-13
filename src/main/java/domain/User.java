@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 
 public class User {
     private final Wallet wallet;
-    private List<LottoTicket> manualTickets;
-    private List<LottoTicket> autoTickets;
+    private List<LottoNumbers> manualTickets;
+    private List<LottoNumbers> autoTickets;
 
     public User() {
         this(new Wallet());
@@ -46,15 +46,15 @@ public class User {
         manualTickets = lottoTicketStore.purchaseManualLotto(lottoNumbers, totalCost);
     }
 
-    public List<LottoTicket> getManualTickets() {
+    public List<LottoNumbers> getManualTickets() {
         return manualTickets;
     }
 
-    public List<LottoTicket> getAutoTickets() {
+    public List<LottoNumbers> getAutoTickets() {
         return autoTickets;
     }
 
-    public List<LottoTicket> getLottoTickets(){
+    public List<LottoNumbers> getLottoTickets(){
         return Stream.concat(autoTickets.stream(), manualTickets.stream())
                 .collect(Collectors.toList());
     }

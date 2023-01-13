@@ -1,7 +1,7 @@
 package view;
 
 import domain.LottoNumber;
-import domain.LottoTicket;
+import domain.LottoNumbers;
 import domain.WinningLotto;
 import util.IntegerUtil;
 
@@ -45,26 +45,26 @@ public class InputView {
         outputStream.println();
         outputStream.println("수동으로 구매할 번호를 입력해 주세요.");
 
-        List<List<LottoNumber>> lottoTickets = new LinkedList<>();
+        List<List<LottoNumber>> lottoNumbers = new LinkedList<>();
         IntStream.range(0, lottoCount)
-                .forEach((lottoIndex) -> lottoTickets.add(getLottoTicket()));
-        return lottoTickets;
+                .forEach((lottoIndex) -> lottoNumbers.add(getLottoNumbers()));
+        return lottoNumbers;
     }
 
     public WinningLotto getLastWinningLotto() {
-        LottoTicket lastLottoTicket = getLastLottoTicket();
+        LottoNumbers lastLottoNumbers = getLastLottoNumbers();
         LottoNumber bonusNumber = getLastBonusNumber();
 
-        return new WinningLotto(lastLottoTicket, bonusNumber);
+        return new WinningLotto(lastLottoNumbers, bonusNumber);
     }
 
-    private LottoTicket getLastLottoTicket(){
+    private LottoNumbers getLastLottoNumbers(){
         outputStream.println();
         outputStream.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new LottoTicket(getLottoTicket());
+        return new LottoNumbers(getLottoNumbers());
     }
 
-    private List<LottoNumber> getLottoTicket() {
+    private List<LottoNumber> getLottoNumbers() {
         List<String> splitNumbers = trim(split(inputStream.nextLine()));
 
         validateIntegers(splitNumbers);

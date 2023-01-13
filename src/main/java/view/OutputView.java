@@ -26,8 +26,8 @@ public class OutputView {
         printLottoTickets(user.getAutoTickets());
     }
 
-    private void printLottoTickets(List<LottoTicket> lottoTickets) {
-        for(LottoTicket lottoTicket : lottoTickets){
+    private void printLottoTickets(List<LottoNumbers> lottoTickets) {
+        for(LottoNumbers lottoTicket : lottoTickets){
             List<LottoNumber> lottoNumbers = lottoTicket.getLottoNumbers();
             outputStream.print("[");
             outputStream.print(joinLottoNumbers(lottoNumbers));
