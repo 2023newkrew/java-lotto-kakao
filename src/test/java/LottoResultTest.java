@@ -1,8 +1,5 @@
-import dto.LottoResultDto;
-import dto.LottoWinnerDto;
 import model.*;
 import model.constant.LottoPlace;
-import org.assertj.core.util.VisibleForTesting;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
