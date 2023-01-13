@@ -37,18 +37,25 @@ public class LottoSimulator{
         initUserLottoTickets();
     }
 
-    private void initUserLottoTickets() {
-        int manualLottoTicketCountToPurchase = inputView.getManualLottoCountToPurchase();
-        List<LottoNumbers> lottoNumbers = inputView.getManualLottoNumbers(manualLottoTicketCountToPurchase);
-        user.buyManualLottoTicket(lottoTicketStore, lottoNumbers, manualLottoTicketCountToPurchase);
-
-        int autoLottoTicketCountToPurchase = (user.getRemainAmount()) / LottoTicketStore.AUTO_LOTTO_TICKET_COST;
-        user.buyAutoLottoTicket(lottoTicketStore, autoLottoTicketCountToPurchase);
-    }
-
     private void initUserAmount() {
         int userAmount = inputView.getUserAmount();
         user.receiveMoney(userAmount);
+    }
+
+    private void initUserLottoTickets() {
+        initUserManualLottoTickets();
+        initUserAutoLottoTickets();
+    }
+
+    private void initUserManualLottoTickets() {
+        int manualLottoTicketCountToPurchase = inputView.getManualLottoCountToPurchase();
+        List<LottoNumbers> lottoNumbers = inputView.getManualLottoNumbers(manualLottoTicketCountToPurchase);
+        user.buyManualLottoTicket(lottoTicketStore, lottoNumbers, manualLottoTicketCountToPurchase);
+    }
+
+    private void initUserAutoLottoTickets() {
+        int autoLottoTicketCountToPurchase = (user.getRemainAmount()) / LottoTicketStore.AUTO_LOTTO_TICKET_COST;
+        user.buyAutoLottoTicket(lottoTicketStore, autoLottoTicketCountToPurchase);
     }
 
     private WinningLotto getLastWinningLotto() {
