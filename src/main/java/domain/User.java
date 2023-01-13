@@ -9,24 +9,40 @@ public class User {
     private List<LottoTicket> manualTickets;
     private List<LottoTicket> autoTickets;
 
-    public User(int initAmount) {
-        this.wallet = new Wallet(initAmount);
+    public User() {
+        this(new Wallet());
+    }
+
+    private User(Wallet wallet){
+        this.wallet = wallet;
         this.manualTickets = List.of();
         this.autoTickets = List.of();
+    }
+
+    public void receiveMoney(int money){
+        wallet.receiveMoney(money);
+    }
+
+    private void pay(int cost){
+        if(wallet.getAmount() < cost){
+            throw new IllegalArgumentException("금액이 부족합니다.");
+        }
+        wallet.use(cost);
     }
 
     public void buyAutoLottoTicket(LottoTicketStore lottoTicketStore, int autoLottoTicketCount){
         int autoLottoTicketCost = LottoTicketStore.AUTO_LOTTO_TICKET_COST;
         int totalCost = autoLottoTicketCost * autoLottoTicketCount;
-        wallet.use(totalCost);
 
+        pay(totalCost);
         autoTickets = lottoTicketStore.purchaseAutoLotto(autoLottoTicketCount, totalCost);
     }
 
     public void buyManualLottoTicket(LottoTicketStore lottoTicketStore, List<List<LottoNumber>> lottoNumbers, int manualLottoTicketCount){
         int autoLottoTicketCost = LottoTicketStore.MANUAL_LOTTO_TICKET_COST;
         int totalCost = autoLottoTicketCost * manualLottoTicketCount;
-        wallet.use(totalCost);
+
+        pay(totalCost);
         manualTickets = lottoTicketStore.purchaseManualLotto(lottoNumbers, totalCost);
     }
 
@@ -47,6 +63,6 @@ public class User {
         return wallet.getUsage();
     }
     public int getRemainAmount(){
-        return wallet.getRemainAmount();
+        return wallet.getAmount();
     }
 }
