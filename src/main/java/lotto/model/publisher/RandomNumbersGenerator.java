@@ -1,4 +1,4 @@
-package lotto.model.publisher.automatic;
+package lotto.model.publisher;
 
 
 import lotto.model.ticket.LottoNumber;

@@ -1,6 +1,5 @@
 package lotto.model.publisher;
 
-import lotto.model.publisher.manual.ManualTicketingStrategy;
 import lotto.model.ticket.LottoNumber;
 import lotto.model.ticket.LottoTicket;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +13,7 @@ public class TicketGeneratorTest {
     @Test
     @DisplayName("can generate ticket from given numbers")
     void can_generate_ticket_from_given_numbers() {
-        TicketGenerator manualTicketGenerator = new TicketGenerator(new ManualTicketingStrategy());
+        TicketGenerator manualTicketGenerator = new TicketGenerator();
         List<LottoNumber> givenNumbers = List.of(
                 LottoNumber.get(1),
                 LottoNumber.get(2),
