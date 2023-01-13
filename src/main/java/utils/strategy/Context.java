@@ -1,7 +1,7 @@
 /**
  * try-catch context
  */
-package utils;
+package utils.strategy;
 
 import view.View;
 
