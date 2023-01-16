@@ -1,31 +1,22 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.Prize;
-import lotto.model.PrizeRecord;
-import lotto.model.Ticket;
+import lotto.model.prize.Prize;
+import lotto.model.prize.PrizeRecord;
+import lotto.model.ticket.LottoTickets;
 
 import java.util.Arrays;
 
 public class OutputView {
-
-    private static String generateTicketString(Ticket ticket) {
-        StringBuilder sb = new StringBuilder("[");
-        for (int number : ticket.getNumbers()) {
-            sb.append(number);
-            sb.append(", ");
-        }
-        return sb.substring(0, sb.length() - 2) + "]";
+    private OutputView() {
+        throw new AssertionError();
     }
 
-    public static void sendPurchasedLotto(Lotto lotto) {
-        System.out.printf("%d개를 구매했습니다.\n", lotto.getQuantity());
-        for (Ticket ticket : lotto.getTickets()) {
-            System.out.println(OutputView.generateTicketString(ticket));
-        }
+    public static void displayPurchasedTickets(int automaticQuantity, LottoTickets tickets) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", tickets.size() - automaticQuantity, automaticQuantity);
+        System.out.println(tickets);
     }
 
-    public static void sendStatics(PrizeRecord prizeRecord) {
+    public static void displayStatics(PrizeRecord prizeRecord) {
         System.out.println("\n당첨 통계\n---------");
         for (Prize prize : Arrays.copyOfRange(Prize.values(), 1, Prize.values().length)) {
             System.out.printf("%s (%d원) - %d개\n",
@@ -35,7 +26,7 @@ public class OutputView {
         }
     }
 
-    public static void sendYield(double yield) {
+    public static void displayYield(double yield) {
         System.out.printf("총 수익률은 %.2f입니다.", yield);
     }
 }
