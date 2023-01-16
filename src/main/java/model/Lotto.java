@@ -6,16 +6,24 @@
  */
 package model;
 
+import exception.*;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<LottoNumber> lottoNumbers;
+    private static final int LOTTO_NUMBER_COUNT = 6;
+    private final Set<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = new ArrayList<>(lottoNumbers);
+    public Lotto(final Set<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new LottoNumberDuplicateException();
+        }
+        this.lottoNumbers = new HashSet<>(lottoNumbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -25,10 +33,7 @@ public class Lotto {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        stringBuilder.append(lottoNumbers.stream().map(LottoNumber::getNumber).map(String::valueOf).collect(Collectors.joining(",")));
-        stringBuilder.append("]");
+        stringBuilder.append(lottoNumbers.stream().map(LottoNumber::getNumber).sorted().map(String::valueOf).collect(Collectors.toList()));
         return stringBuilder.toString();
     }
-
 }

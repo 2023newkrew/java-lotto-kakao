@@ -15,16 +15,31 @@ public class View {
     }
 
     public void printWinnerNumberMessage() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.(콤마로 구분해서 입력해주세요.)");
     }
 
     public void printBonusNumberMessage() {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
+    public void printManualLottoCountMessage() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+    }
+
+    public void printManualLottoMessage() {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.(콤마로 구분해서 입력해주세요.)");
+    }
+
+    public void printLottoCountMessage(int manualLottoCount, int automaticLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + automaticLottoCount + "개를 구매했습니다.");
+    }
+
     public void outputLottoTicket(LottoTicketDto lottoTicketDto) {
         lottoTicketDto.getLottoTicket().forEach(lotto -> System.out.println(lotto.toString()));
+    }
 
+    public void printUnknownErrorMessage() {
+        System.out.println("알 수 없는 에러 입니다.");
     }
 
     public void outputResultMessage(LottoResultDto lottoResultDto) {

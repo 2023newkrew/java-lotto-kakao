@@ -9,15 +9,13 @@ import model.LottoWinner;
 import model.Lotto;
 
 public class LottoWinnerDto {
-    private final Lotto winNumbers;
-    private final LottoNumber bonusNumber;
+    private final LottoWinner lottoWinner;
 
-    public LottoWinnerDto(Lotto winNumbers, LottoNumber bonusNumber){
-        this.winNumbers = winNumbers;
-        this.bonusNumber = bonusNumber;
+    public LottoWinnerDto(Lotto winNumbers, LottoNumber bonusNumber) {
+        lottoWinner = new LottoWinner(winNumbers, bonusNumber);
     }
 
     public LottoWinner getLottoWinner() {
-        return new LottoWinner(winNumbers, bonusNumber);
+        return lottoWinner;
     }
 }
