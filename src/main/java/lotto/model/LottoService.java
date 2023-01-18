@@ -4,23 +4,20 @@ import java.util.List;
 
 public class LottoService {
 
-    public static final int LOTTO_COST = 1000;
+    private static final int LOTTO_COST = 1000;
 
-    private Lottos lottos;
+    private final Lottos lottos;
     private WinningLotto winningLotto;
 
     private final long purchaseCost;
     private final PriceResult priceResult;
 
-    public LottoService(long purchaseCost) {
+    public LottoService(long purchaseCost, List<List<Integer>> manualLottoNumbers) {
         this.purchaseCost = purchaseCost;
+        this.lottos = new Lottos(manualLottoNumbers,
+                (int) (purchaseCost / LOTTO_COST) - manualLottoNumbers.size());
         this.priceResult = new PriceResult();
     }
-
-    public void createLottos(List<List<Integer>> manualLottoNumbers, int lottoCount) {
-        this.lottos = new Lottos(manualLottoNumbers, lottoCount);
-    }
-
 
     public void createWinningNumbers(List<Integer> winningNumbers, int bonusNumber) {
         this.winningLotto = new WinningLotto(winningNumbers, bonusNumber);
