@@ -29,16 +29,20 @@ public enum Price {
                 .filter(price -> price.matchCount == matchCount)
                 .collect(Collectors.toList());
 
+        // 2, 3등
         if (selectedPrice.size() == 2) {
             return selectedPrice.stream()
                     .filter(price -> price.hasBonus == hasBonus)
-                    .findFirst().get();
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("비정상적인 프로그램 수행입니다."));
         }
 
+        // 당첨 X
         if (selectedPrice.isEmpty()) {
             return Price.NOTHING;
         }
 
+        // 1, 4, 5등
         return selectedPrice.get(0);
     }
 
