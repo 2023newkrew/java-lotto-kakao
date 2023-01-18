@@ -32,7 +32,8 @@ public enum Price {
         if (selectedPrice.size() == 2) {
             return selectedPrice.stream()
                     .filter(price -> price.hasBonus == hasBonus)
-                    .findFirst().get();
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("비정상적인 프로그램 수행입니다."));
         }
 
         if (selectedPrice.isEmpty()) {
