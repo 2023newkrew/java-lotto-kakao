@@ -1,12 +1,13 @@
 package lotto.domain;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class AnswerLotto {
 
     private final Lotto answerLotto;
+
     private final SingleLottoNumber bonusNumber;
 
     public AnswerLotto(Lotto answerLotto, SingleLottoNumber bonusNumber) {
@@ -18,15 +19,12 @@ public class AnswerLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public PrizeCountMap getPrizeCountMap(List<Lotto> userLottos) {
-        Map<LottoPrize, Integer> prizeCount = new HashMap<>();
+    public PrizeGroupingMap getPrizeCountMap(List<Lotto> userLottos) {
+        Map<LottoPrize, List<Lotto>> prizeCount = userLottos.stream().collect(Collectors.groupingBy(
+                this::getLottoPrize
+        ));
 
-        userLottos.forEach(userLotto -> {
-            LottoPrize prize = getLottoPrize(userLotto);
-            prizeCount.put(prize, prizeCount.getOrDefault(prize, 0) + 1);
-        });
-
-        return new PrizeCountMap(prizeCount);
+        return new PrizeGroupingMap(prizeCount);
     }
 
     private LottoPrize getLottoPrize(Lotto userLotto) {

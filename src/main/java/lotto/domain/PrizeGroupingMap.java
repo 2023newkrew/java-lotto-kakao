@@ -2,16 +2,17 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import lotto.domain.constant.LottoRule;
 
-public class PrizeCountMap {
+public class PrizeGroupingMap {
 
-    private final Map<LottoPrize, Integer> prizeCountMap;
+    private final Map<LottoPrize, List<Lotto>> prizeGroupingMap;
 
-    public PrizeCountMap(Map<LottoPrize, Integer> prizeCountMap) {
-        this.prizeCountMap = new HashMap<>(prizeCountMap);
+    public PrizeGroupingMap(Map<LottoPrize, List<Lotto>> prizeGroupingMap) {
+        this.prizeGroupingMap = new HashMap<>(prizeGroupingMap);
     }
 
     private double getProfit() {
@@ -19,10 +20,16 @@ public class PrizeCountMap {
         return getTotalPrizeMoney() / totalSpentMoney;
     }
 
+    private int getLottoCount() {
+        return prizeGroupingMap.values().stream()
+                .mapToInt(List::size)
+                .sum();
+    }
+
     private long getTotalPrizeMoney() {
         return Arrays.stream(LottoPrize.values())
                 .mapToLong(e ->
-                        e.getPrizeMoney() * this.prizeCountMap.getOrDefault(e, 0)
+                        e.getPrizeMoney() * this.prizeGroupingMap.getOrDefault(e, List.of()).size()
                 )
                 .sum();
     }
@@ -35,7 +42,7 @@ public class PrizeCountMap {
                 .forEachOrdered((e) ->
                         message.append(String.format("%s (%d원) - %d개\n",
                                 e.getDescription(), e.getPrizeMoney(),
-                                prizeCountMap.getOrDefault(e, 0)))
+                                prizeGroupingMap.getOrDefault(e, List.of()).size()))
                 );
         message.append(String.format("총 수익률은 %.2f입니다.\n", getProfit()));
 
@@ -50,18 +57,12 @@ public class PrizeCountMap {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        PrizeCountMap that = (PrizeCountMap) o;
-        return Objects.equals(prizeCountMap, that.prizeCountMap);
+        PrizeGroupingMap that = (PrizeGroupingMap) o;
+        return Objects.equals(prizeGroupingMap, that.prizeGroupingMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(prizeCountMap);
-    }
-
-    private int getLottoCount() {
-        return prizeCountMap.values().stream()
-                .mapToInt(Integer::intValue)
-                .sum();
+        return Objects.hash(prizeGroupingMap);
     }
 }

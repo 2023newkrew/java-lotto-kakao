@@ -3,16 +3,17 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.HashMap;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
-public class PrizeCountMapTest {
+public class PrizeGroupingMapTest {
 
     @Test
     void 로또의_당첨_정보를_넣으면_결과_정보를_반환한다() {
-        PrizeCountMap prizeCountMap = new PrizeCountMap(
+        PrizeGroupingMap prizeGroupingMap = new PrizeGroupingMap(
                 new HashMap<>() {{
-                    put(LottoPrize.FIFTH_PRIZE, 1);
-                    put(LottoPrize.NONE, 13);
+                    put(LottoPrize.FIFTH_PRIZE, List.of());
+                    put(LottoPrize.NONE, List.of());
                 }}
         );
         String expected = "6개 일치 (2000000000원) - 0개\n"
@@ -23,6 +24,6 @@ public class PrizeCountMapTest {
                 + "0개 일치 (0원) - 13개\n"
                 + "총 수익률은 0.36입니다.\n";
 
-        assertThat(prizeCountMap.toString()).isEqualTo(expected);
+        assertThat(prizeGroupingMap.toString()).isEqualTo(expected);
     }
 }
