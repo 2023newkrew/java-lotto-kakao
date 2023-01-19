@@ -18,7 +18,8 @@ public class LottoBuyerTest {
                 Lotto.ofNumbers(List.of(3,4,5,6,7,8)),
                 Lotto.ofNumbers(List.of(5,6,7,8,9,10))
         );
-        LottoBuyer lottoBuyer = new LottoBuyer(price, (money)->lottos);
+        LottoBuyer lottoBuyer = new LottoBuyer(price);
+        lottoBuyer.buyAutomaticLottos(price / LottoStore.COST);
 
         Lotto winningNumbers = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(45);
@@ -40,7 +41,8 @@ public class LottoBuyerTest {
                 Lotto.ofNumbers(List.of(3,4,5,6,7,8)),
                 Lotto.ofNumbers(List.of(5,6,7,8,9,10))
         );
-        LottoBuyer lottoBuyer = new LottoBuyer(price, (money)->lottos);
+        LottoBuyer lottoBuyer = new LottoBuyer(price);
+        lottoBuyer.buyAutomaticLottos(price / LottoStore.COST);
 
         Lotto winningNumbers = Lotto.ofNumbers(List.of(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = new LottoNumber(45);

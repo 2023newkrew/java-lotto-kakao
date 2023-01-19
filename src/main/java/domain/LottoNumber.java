@@ -2,6 +2,8 @@ package domain;
 
 import java.util.Objects;
 
+import static utils.ErrorMessage.OUT_OF_LOTTO_NUMBER_RANGE;
+
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final Integer LOTTO_NUMBER_START = 1;
     private static final Integer LOTTO_NUMBER_END = 45;
@@ -15,7 +17,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validateLottoNumber(Integer number) {
         if (number < LOTTO_NUMBER_START || number > LOTTO_NUMBER_END) {
-            throw new IllegalArgumentException("로또 숫자는 1 이상 45 이하여야합니다.");
+            throw new IllegalArgumentException(OUT_OF_LOTTO_NUMBER_RANGE.getMessage());
         }
     }
 
