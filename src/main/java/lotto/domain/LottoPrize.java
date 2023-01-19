@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import lotto.domain.prizestrategy.FifthPrizeStrategy;
 import lotto.domain.prizestrategy.FirstPrizeStrategy;
 import lotto.domain.prizestrategy.FourthPrizeStrategy;
@@ -38,5 +39,12 @@ public enum LottoPrize {
 
     public boolean isQualified(int matchNumberCount, boolean hasMagicNumber) {
         return this.prizeStrategy.isQualified(matchNumberCount, hasMagicNumber);
+    }
+
+    public static LottoPrize calculatePrize(int matchNumberCount, boolean hasBonusNumber) {
+        return Arrays.stream(LottoPrize.values())
+                .filter(prize -> prize.isQualified(matchNumberCount, hasBonusNumber))
+                .findFirst()
+                .orElse(LottoPrize.NONE);
     }
 }

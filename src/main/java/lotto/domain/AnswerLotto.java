@@ -31,6 +31,6 @@ public class AnswerLotto {
         int matchNumberCount = this.answerLotto.countMatchNumber(userLotto);
         boolean hasBonusNumber = userLotto.containsLottoNumber(bonusNumber);
 
-        return LottoCalculator.calculatePrize(matchNumberCount, hasBonusNumber);
+        return LottoPrize.calculatePrize(matchNumberCount, hasBonusNumber);
     }
 }
