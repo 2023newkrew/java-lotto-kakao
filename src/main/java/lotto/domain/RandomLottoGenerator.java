@@ -1,11 +1,9 @@
-package lotto.utils;
+package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lotto.domain.Lotto;
-import lotto.domain.SingleLottoNumber;
 import lotto.domain.constant.LottoRule;
 
 public class RandomLottoGenerator {

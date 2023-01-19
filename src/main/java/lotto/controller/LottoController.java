@@ -7,9 +7,9 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.Money;
 import lotto.domain.NumberList;
+import lotto.domain.RandomLottoGenerator;
 import lotto.domain.SingleLottoNumber;
 import lotto.domain.Store;
-import lotto.utils.RandomLottoGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
