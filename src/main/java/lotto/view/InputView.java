@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.NumberList;
 
 public class InputView {
 
@@ -14,12 +15,12 @@ public class InputView {
         return Integer.parseInt(sc.nextLine());
     }
 
-    public List<Integer> getAnswerLottoInput() {
+    public NumberList getAnswerLottoInput() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return getLottoInput();
     }
 
-    public List<Integer> getUserLottoInput() {
+    public NumberList getUserLottoInput() {
         return getLottoInput();
     }
 
@@ -29,11 +30,12 @@ public class InputView {
         return Integer.parseInt(manualLottoCountInput);
     }
 
-    private List<Integer> getLottoInput() {
+    private NumberList getLottoInput() {
         String answerNumbers = sc.nextLine();
-        return Arrays.stream(answerNumbers.split("[\\s,]+"))
+        List<Integer> integerList = Arrays.stream(answerNumbers.split("[\\s,]+"))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+        return new NumberList(integerList);
     }
 
     public int getBonusBallInput() {
