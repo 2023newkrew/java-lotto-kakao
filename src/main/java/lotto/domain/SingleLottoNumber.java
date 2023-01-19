@@ -25,7 +25,7 @@ public class SingleLottoNumber implements Comparable<SingleLottoNumber> {
 
     public static SingleLottoNumber from(int singleLottoNumber) {
         if (!cache.containsKey(singleLottoNumber)) {
-            cache.put(singleLottoNumber, SingleLottoNumber.from(singleLottoNumber));
+            cache.put(singleLottoNumber, new SingleLottoNumber(singleLottoNumber));
         }
         return cache.get(singleLottoNumber);
     }
