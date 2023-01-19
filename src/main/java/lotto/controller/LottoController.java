@@ -7,9 +7,11 @@ import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
 import lotto.domain.Money;
 import lotto.domain.NumberList;
+import lotto.domain.PrizeGroupingMap;
 import lotto.domain.RandomLottoGenerator;
 import lotto.domain.SingleLottoNumber;
 import lotto.domain.Store;
+import lotto.dto.ResultDTO;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -22,7 +24,8 @@ public class LottoController {
     public void play() {
         List<Lotto> lottoTickets = purchaseTicket();
         AnswerLotto answerLotto = getAnswerLotto();
-        outputView.printResult(answerLotto.getPrizeCountMap(lottoTickets));
+        PrizeGroupingMap prizeGroupingMap = answerLotto.getPrizeCountMap(lottoTickets);
+        outputView.printResult(ResultDTO.from(prizeGroupingMap));
     }
 
     private List<Lotto> purchaseTicket() {
