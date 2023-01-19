@@ -22,8 +22,8 @@ public class PrizeGroupingMapTest {
     void 로또의_당첨_정보를_넣으면_결과_정보를_반환한다() {
         PrizeGroupingMap prizeGroupingMap = new PrizeGroupingMap(
                 new HashMap<>() {{
-                    put(LottoPrize.FIFTH_PRIZE, List.of(lotto));
-                    put(LottoPrize.NONE, List.of(lotto, lotto, lotto, lotto));
+                    put(LottoPrize.FIFTH_PRIZE, 1L);
+                    put(LottoPrize.NONE, 4L);
                 }}
         );
 

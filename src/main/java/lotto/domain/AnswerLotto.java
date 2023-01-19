@@ -20,8 +20,8 @@ public class AnswerLotto {
     }
 
     public PrizeGroupingMap getPrizeCountMap(List<Lotto> userLottos) {
-        Map<LottoPrize, List<Lotto>> prizeCount = userLottos.stream().collect(Collectors.groupingBy(
-                this::getLottoPrize
+        Map<LottoPrize, Long> prizeCount = userLottos.stream().collect(Collectors.groupingBy(
+                this::getLottoPrize, Collectors.counting()
         ));
 
         return new PrizeGroupingMap(prizeCount);
