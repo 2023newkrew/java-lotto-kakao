@@ -16,21 +16,8 @@ import lotto.view.OutputView;
 public class LottoController {
 
     private final InputView inputView = new InputView();
+
     private final OutputView outputView = new OutputView();
-
-    private List<Lotto> purchaseTicket() {
-        int expenseInput = inputView.getExpenseInput();
-        Money money = new Money(expenseInput);
-        Store store = new Store(money);
-
-        int lottoTicketCount = store.calculateTicketCount();
-        int manualLottoCount = inputView.getManualLottoCountInput();
-        LottoCount lottoCount = new LottoCount(manualLottoCount, lottoTicketCount);
-
-        outputView.printPurchaseResult(manualLottoCount, lottoTicketCount - manualLottoCount);
-
-        return getUserLottoList(lottoCount);
-    }
 
     public void play() {
         List<Lotto> lottoTickets = purchaseTicket();
@@ -53,6 +40,20 @@ public class LottoController {
         SingleLottoNumber bonusNumber = new SingleLottoNumber(inputView.getBonusBallInput());
 
         return new AnswerLotto(toLotto(answerLottoInput), bonusNumber);
+    }
+
+    private List<Lotto> purchaseTicket() {
+        int expenseInput = inputView.getExpenseInput();
+        Money money = new Money(expenseInput);
+        Store store = new Store(money);
+
+        int lottoTicketCount = store.calculateTicketCount();
+        int manualLottoCount = inputView.getManualLottoCountInput();
+        LottoCount lottoCount = new LottoCount(manualLottoCount, lottoTicketCount);
+
+        outputView.printPurchaseResult(manualLottoCount, lottoTicketCount - manualLottoCount);
+
+        return getUserLottoList(lottoCount);
     }
 
     private List<Lotto> getUserLottoList(LottoCount lottoCount) {

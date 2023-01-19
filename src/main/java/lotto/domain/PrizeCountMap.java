@@ -14,29 +14,6 @@ public class PrizeCountMap {
         this.prizeCountMap = new HashMap<>(prizeCountMap);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        PrizeCountMap that = (PrizeCountMap) o;
-        return Objects.equals(prizeCountMap, that.prizeCountMap);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(prizeCountMap);
-    }
-
-    private int getLottoCount() {
-        return prizeCountMap.values().stream()
-                .mapToInt(Integer::intValue)
-                .sum();
-    }
-
     private double getProfit() {
         double totalSpentMoney = getLottoCount() * LottoRule.PRICE;
         return getTotalPrizeMoney() / totalSpentMoney;
@@ -63,5 +40,28 @@ public class PrizeCountMap {
         message.append(String.format("총 수익률은 %.2f입니다.\n", getProfit()));
 
         return message.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        PrizeCountMap that = (PrizeCountMap) o;
+        return Objects.equals(prizeCountMap, that.prizeCountMap);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prizeCountMap);
+    }
+
+    private int getLottoCount() {
+        return prizeCountMap.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
