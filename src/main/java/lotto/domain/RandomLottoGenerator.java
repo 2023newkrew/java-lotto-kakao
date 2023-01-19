@@ -13,7 +13,7 @@ public class RandomLottoGenerator {
 
     private static final List<SingleLottoNumber> lottoBalls =
             IntStream.rangeClosed(LottoRule.MIN_NUMBER, LottoRule.MAX_NUMBER)
-                    .mapToObj(SingleLottoNumber::new)
+                    .mapToObj(SingleLottoNumber::from)
                     .collect(Collectors.toList());
 
     public static Lotto generateLotto() {

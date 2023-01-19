@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import lotto.domain.constant.LottoRule;
 
@@ -7,12 +9,25 @@ public class SingleLottoNumber implements Comparable<SingleLottoNumber> {
 
     private final int singleLottoNumber;
 
-    public SingleLottoNumber(int singleLottoNumber) {
+    private static final Map<Integer, SingleLottoNumber> cache = new HashMap<>();
+
+    private SingleLottoNumber(int singleLottoNumber) {
         if (singleLottoNumber < LottoRule.MIN_NUMBER || singleLottoNumber > LottoRule.MAX_NUMBER) {
             throw new IllegalArgumentException("로또의 각 숫자는 1이상 45 이하여야 합니다.");
         }
 
         this.singleLottoNumber = singleLottoNumber;
+    }
+
+    public int getSingleLottoNumber() {
+        return singleLottoNumber;
+    }
+
+    public static SingleLottoNumber from(int singleLottoNumber) {
+        if (!cache.containsKey(singleLottoNumber)) {
+            cache.put(singleLottoNumber, SingleLottoNumber.from(singleLottoNumber));
+        }
+        return cache.get(singleLottoNumber);
     }
 
     @Override
@@ -40,9 +55,5 @@ public class SingleLottoNumber implements Comparable<SingleLottoNumber> {
     @Override
     public int compareTo(SingleLottoNumber o) {
         return this.singleLottoNumber - o.getSingleLottoNumber();
-    }
-
-    public int getSingleLottoNumber() {
-        return singleLottoNumber;
     }
 }

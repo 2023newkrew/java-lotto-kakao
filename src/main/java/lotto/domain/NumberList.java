@@ -14,7 +14,7 @@ public class NumberList {
 
     public Lotto toLotto() {
         return new Lotto(this.numbers.stream()
-                .map(SingleLottoNumber::new)
+                .map(SingleLottoNumber::from)
                 .collect(Collectors.toList()));
     }
 }

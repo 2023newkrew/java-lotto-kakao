@@ -56,7 +56,7 @@ public class LottoController {
     private AnswerLotto getAnswerLotto() {
         NumberList answerLottoInput = inputView.getAnswerLottoInput();
 
-        SingleLottoNumber bonusNumber = new SingleLottoNumber(inputView.getBonusBallInput());
+        SingleLottoNumber bonusNumber = SingleLottoNumber.from(inputView.getBonusBallInput());
 
         return new AnswerLotto(answerLottoInput.toLotto(), bonusNumber);
     }
