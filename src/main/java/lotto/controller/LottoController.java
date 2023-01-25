@@ -39,7 +39,7 @@ public class LottoController {
         int manualLottoCount = inputView.getManualLottoCountInput();
         LottoCount lottoCount = new LottoCount(manualLottoCount, lottoTicketCount);
 
-        outputView.printPurchaseResult(manualLottoCount, lottoTicketCount - manualLottoCount);
+        outputView.printPurchaseResult(lottoCount);
 
         return getUserLottoList(lottoCount);
     }

@@ -3,6 +3,7 @@ package lotto.domain;
 public class LottoCount {
 
     private int manualLottoCount;
+
     private int autoLottoCount;
 
     public LottoCount(int manualLottoCount, int lottoTicketCount) {
@@ -30,5 +31,13 @@ public class LottoCount {
 
     public void decreaseAutoCount() {
         this.autoLottoCount--;
+    }
+
+    public int getManualLottoCount() {
+        return manualLottoCount;
+    }
+
+    public int getAutoLottoCount() {
+        return autoLottoCount;
     }
 }

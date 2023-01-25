@@ -1,13 +1,15 @@
 package lotto.view;
 
 import java.util.List;
+import lotto.domain.LottoCount;
 import lotto.dto.LottoPresentationDTO;
 import lotto.dto.ResultDTO;
 
 public class OutputView {
 
-    public void printPurchaseResult(int manualLottoCount, int autoLottoCount) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", manualLottoCount, autoLottoCount);
+    public void printPurchaseResult(LottoCount lottoCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.%n", lottoCount.getManualLottoCount(),
+                lottoCount.getAutoLottoCount());
     }
 
     public void printManualLottoGuide() {
