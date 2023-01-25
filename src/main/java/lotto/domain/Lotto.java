@@ -35,14 +35,7 @@ public class Lotto {
                 .count();
     }
 
-    @Override
-    public String toString() {
-        StringBuilder message = new StringBuilder();
-
-        message.append("[");
-        this.singleLottoNumberList.forEach(e -> message.append(e.toString()).append(","));
-        message.append("]");
-
-        return message.toString();
+    public List<SingleLottoNumber> getSingleLottoNumberList() {
+        return singleLottoNumberList;
     }
 }

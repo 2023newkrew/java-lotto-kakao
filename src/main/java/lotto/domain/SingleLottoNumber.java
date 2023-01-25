@@ -48,11 +48,6 @@ public class SingleLottoNumber implements Comparable<SingleLottoNumber> {
     }
 
     @Override
-    public String toString() {
-        return String.format("%d", this.singleLottoNumber);
-    }
-
-    @Override
     public int compareTo(SingleLottoNumber o) {
         return this.singleLottoNumber - o.getSingleLottoNumber();
     }

@@ -1,7 +1,7 @@
 package lotto.view;
 
 import java.util.List;
-import lotto.domain.Lotto;
+import lotto.dto.LottoPresentationDTO;
 import lotto.dto.ResultDTO;
 
 public class OutputView {
@@ -14,7 +14,7 @@ public class OutputView {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
     }
 
-    public void printUserLottos(List<Lotto> lottoList) {
+    public void printUserLottos(List<LottoPresentationDTO> lottoList) {
         lottoList.forEach(System.out::println);
     }
 

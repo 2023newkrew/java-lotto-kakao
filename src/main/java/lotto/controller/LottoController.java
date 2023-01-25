@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lotto.domain.AnswerLotto;
 import lotto.domain.Lotto;
 import lotto.domain.LottoCount;
@@ -11,6 +12,7 @@ import lotto.domain.PrizeGroupingMap;
 import lotto.domain.RandomLottoGenerator;
 import lotto.domain.SingleLottoNumber;
 import lotto.domain.Store;
+import lotto.dto.LottoPresentationDTO;
 import lotto.dto.ResultDTO;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -66,7 +68,11 @@ public class LottoController {
         userLottoList.addAll(getManualLotto(lottoCount));
         userLottoList.addAll(getAutoLotto(lottoCount));
 
-        outputView.printUserLottos(userLottoList);
+        List<LottoPresentationDTO> lottoPresentationDTOs = userLottoList.stream()
+                .map(LottoPresentationDTO::from)
+                .collect(Collectors.toList());
+
+        outputView.printUserLottos(lottoPresentationDTOs);
         return userLottoList;
     }
 
