@@ -1,9 +1,12 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
+import lotto.domain.LottoCount;
 import lotto.domain.NumberList;
 
 public class InputView {
@@ -20,8 +23,14 @@ public class InputView {
         return getLottoInput();
     }
 
-    public NumberList getUserLottoInput() {
-        return getLottoInput();
+    public List<Lotto> getUserLottoInput(LottoCount lottoCount) {
+        List<Lotto> manualLottos = new ArrayList<>();
+        while (lottoCount.isManualLottoAvailable()) {
+            NumberList userLottoInput = getLottoInput();
+            manualLottos.add(userLottoInput.toLotto());
+            lottoCount.decreaseManualCount();
+        }
+        return manualLottos;
     }
 
     public int getManualLottoCountInput() {
