@@ -11,16 +11,31 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int count) {
+    public Lottos(int lottoCount) {
+        this(new ArrayList<>(), lottoCount);
+    }
+
+    public Lottos(List<List<Integer>> manualLottoNumbers, int autoLottoCount) {
         RandomGenerator randomGenerator = new RandomGenerator();
 
         lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        manualLottoNumbers.forEach(v -> lottos.add(new Lotto(v)));
+        for (int i = 0; i < autoLottoCount; i++) {
             lottos.add(new Lotto(randomGenerator.createNumbers(LOTTO_NUMBER_SIZE)));
         }
     }
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public void saveResult(WinningLotto winningLotto, PriceResult priceResult) {
+        for (Lotto lotto : lottos) {
+            priceResult.addResult(winningLotto.getPrice(lotto));
+        }
+    }
+
+    public int size() {
+        return lottos.size();
     }
 }
