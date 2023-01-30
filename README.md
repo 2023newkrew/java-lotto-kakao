@@ -1,4 +1,4 @@
-# java-lotto-kakao
+# java-answerLotto-kakao
 
 ## 요구사항
 
@@ -54,36 +54,18 @@
 - 규칙 5: 줄여쓰지 않는다(축약 금지).
 - 규칙 8: 일급 콜렉션을 쓴다.
 
-## 설계 (Draft)
+## 설계
 
 ### Domain
 
-- `Lotto`
-    - `LottoNumbers lottoNumbers`
-    - `SingleLottoNumber bonusNumber`
-    - `isValidLotto()`
-
-- `SingleLottoNumber`
-
-- `LottoNumbers`
-    - `List<SingleLottoNumber> nums`
-
-- `UserLottos`
-    - `List<LottoNumbers> userLottos`
-    - `Money userMoney`
-    - `ResultMap resultMap`
-
-- `ResultMap`
-    - `HashMap<prize, amount> resultMap`
-
-- `Money`
-    - `getLottoAmount()`
-    - `isValidLottoMoney()`
-
-- `LottoStatistics`
-    - `Money totalInputMoney`
-    - `ResultMap resultMap`
-    - `calculateProfit()`
+- `MoneyTest`
+- `StoreTest`
+- `SingleLottoNumberTest`
+- `LottoTest`
+- `AnswerLottoTest`
+- `LottoCalculatorTest`
+- `PrizeCountMapTest`
+- `LottoCountTest`
 
 ### View
 
@@ -102,15 +84,19 @@
 
 ### MoneyTest
 
-- [x] 구매금액이 1000원 미만이면 예외가 발생한다
+- [x] 금액이 양수가 아니면 예외가 발생한다
+
+### StoreTest
+
 - [x] 구매금액만큼 살 수 있는 로또의 개수를 반환한다
+- [x] 살 수 있는 로또가 없으면 예외를 반환한다
 
 ### SingleLottoNumberTest
 
 - [x] 로또 번호는 1에서 45 사이여야 한다
 - [x] 로또 번호는 1에서 45 사이가 아니면 예외가 발생한다
 
-### LottoNumbersTest
+### LottoTest
 
 - [x] 입력되는 로또 번호가 6개여야 한다
 - [x] 입력되는 로또 번호가 6개가 아니면 예외가 발생한다
@@ -119,9 +105,13 @@
 - [x] 보너스 번호를 받아서 포함되어 있지 않으면 false를 반환한다
 - [x] 사용자의 로또 번호들을 받아서 일치하는 번호의 개수를 반환한다
 
-### Lotto
+### AnswerLottoTest
 
 - [x] 정답과 보너스 볼이 있어야 한다
+- [x] 정답 안에 보너스 볼과 같은 번호가 포함되어 있으면 에러가 발생한다
+
+### LottoCalculatorTest
+
 - [x] 정답과 6개가 모두 일치하면 1등상을 받아야 한다
 - [x] 정답과 5개가 일치하고 보너스 숫자와 일치하면 2등상을 받아야 한다
 - [x] 정답과 5개가 일치하면 3등상을 받아야 한다
@@ -133,6 +123,12 @@
 
 - [x] 로또의 당첨 정보를 넣으면 결과 정보를 반환한다
 
-### UserLottosTest
+### LottoCountTest
 
-- [x] 사용자 로또의 리스트를 받아서 생성한다
+- [x] 수동 티켓 수와 전체 티켓 수를 받는다
+- [x] 수동 티켓 수가 전체 티켓 수보다 많으면 예외가 발생한다
+- [x] 수동 티켓 수가 음수면 예외가 발생한다
+- [x] 수동 티켓 발급이 가능하면 true를 반환한다
+- [x] 수동 티켓 발급이 불가능하면 false를 반환한다
+- [x] 자동 티켓 발급이 가능하면 true를 반환한다
+- [x] 자동 티켓 발급이 불가능하면 false를 반환한다
