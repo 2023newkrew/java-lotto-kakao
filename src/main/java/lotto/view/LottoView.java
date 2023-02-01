@@ -2,7 +2,6 @@ package lotto.view;
 
 import lotto.domain.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -10,9 +9,12 @@ import java.util.stream.Collectors;
 
 public class LottoView {
     private final Scanner scanner;
+    private final List<LottoRank> rankList;
 
     public LottoView() {
         scanner = new Scanner(System.in);
+        rankList = Arrays.asList(LottoRank.values());
+        rankList.remove(LottoRank.FAIL);
     }
 
     public int inputPurchase() {
@@ -71,8 +73,6 @@ public class LottoView {
         System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---------");
-        List<LottoRank> rankList = new ArrayList<>(Arrays.asList(LottoRank.values()));
-        rankList.remove(LottoRank.FAIL);
         for (LottoRank rank : rankList) {
             System.out.printf("%d개 일치 (%d원)- %d개\n", rank.COUNT, rank.PRIZE, stat.getByRank(rank));
         }
