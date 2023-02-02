@@ -19,10 +19,10 @@ public class Statistics {
         ));
     }
 
-    public Statistics(Lottos lottos, Lotto winLotto, LottoNumber bonusNumber) {
+    public Statistics(Lottos lottos, WinningLotto winningLotto) {
         this();
         for (Lotto lotto : lottos) {
-            LottoResult result = new LottoResult(lotto, winLotto, bonusNumber);
+            LottoResult result = new LottoResult(lotto, winningLotto);
             add(result.getRank());
         }
     }
@@ -38,7 +38,7 @@ public class Statistics {
 
     public long getPrizeAmount() {
         return Arrays.stream(LottoRank.values())
-                .mapToLong(rank -> ranks.get(rank) * rank.PRIZE)
+                .mapToLong(rank -> ranks.get(rank) * rank.prize)
                 .sum();
     }
 

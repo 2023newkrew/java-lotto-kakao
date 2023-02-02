@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,9 +19,8 @@ class LottoResultTest {
     @MethodSource("lottoMatchTestGenerator")
     @DisplayName("1등, 2등, 5등 당첨 테스트")
     void lottoMatchTest(Lotto myLotto, LottoRank expectedRank) {
-        Lotto winningLotto = new Lotto(1, 2, 3, 4, 5, 6);
-        LottoNumber bonusNumber = new LottoNumber(7);
-        LottoResult result = new LottoResult(myLotto, winningLotto, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
+        LottoResult result = new LottoResult(myLotto, winningLotto);
         assertThat(result.getRank()).isEqualTo(expectedRank);
     }
 
@@ -56,7 +56,7 @@ class LottoResultTest {
         stat.add(LottoRank.FIRST);
         stat.add(LottoRank.SECOND);
         stat.add(LottoRank.FIFTH);
-        long totalPrize = (LottoRank.FIRST.PRIZE + LottoRank.SECOND.PRIZE + LottoRank.FIFTH.PRIZE);
+        long totalPrize = (LottoRank.FIRST.prize + LottoRank.SECOND.prize + LottoRank.FIFTH.prize);
         double profitRate = totalPrize / (double) (3 * LottoPayment.LOTTO_COST);
         assertThat(stat.getPrizeAmount()).isEqualTo(totalPrize);
         assertThat(stat.getProfitRate()).isCloseTo(profitRate, within(0.0001));
