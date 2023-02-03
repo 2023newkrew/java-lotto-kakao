@@ -1,29 +1,31 @@
 package lotto.domain;
 
-import java.util.List;
+import lotto.config.LottoConfig;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    public static final int FIXED_SIZE = 6;
+    private final Set<LottoNumber> numbers;
 
-    private final List<LottoNumber> numbers;
+    public Lotto(List<Integer> numList) {
+        numbers = numList.stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toCollection(TreeSet::new));
 
-    public Lotto(List<LottoNumber> numbers) {
-        if(numbers.size() != FIXED_SIZE){
-            throw new RuntimeException("로또 수의 개수가 잘못되었습니다.");
+        if(numbers.size() != LottoConfig.LOTTO_SIZE){
+            throw new RuntimeException("로또 수의 개수가 잘못되었거나 중복된 수가 있습니다.");
         }
-        if (numbers.stream().distinct().count() != FIXED_SIZE) {
-            throw new RuntimeException("로또 수에 중복된 수가 있습니다.");
-        }
-        numbers.sort(LottoNumber::compare);
-        this.numbers = numbers;
     }
 
-    public List<LottoNumber> getNumbers() {
-        return numbers;
+    public Lotto(int... nums) {
+        this(Arrays.stream(nums).boxed().collect(Collectors.toList()));
     }
 
-    public int compare(Lotto other) {
-        return (int) numbers.stream().filter(other.numbers::contains).count();
+    public int getMatchCount(Lotto other) {
+        Set<LottoNumber> matchedSet = new TreeSet<>(numbers);
+        matchedSet.retainAll(other.numbers);
+        return matchedSet.size();
     }
 
     public boolean hasBonus(LottoNumber other) {

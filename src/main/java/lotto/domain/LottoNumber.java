@@ -1,13 +1,13 @@
 package lotto.domain;
 
-public class LottoNumber {
-    public static final int MINIMUM_BOUNDARY = 1;
-    public static final int MAXIMUM_BOUNDARY = 45;
+import lotto.config.LottoConfig;
 
-    private final int number;
+public class LottoNumber implements Comparable<LottoNumber> {
+
+    private final Integer number;
 
     public LottoNumber(int number) {
-        if (number < MINIMUM_BOUNDARY || number > MAXIMUM_BOUNDARY) {
+        if (number < LottoConfig.MIN_NUMBER || number > LottoConfig.MAX_NUMBER) {
             throw new RuntimeException();
         }
         this.number = number;
@@ -30,7 +30,8 @@ public class LottoNumber {
         return Integer.toString(number);
     }
 
-    public int compare(LottoNumber other) {
-        return number - other.number;
+    @Override
+    public int compareTo(LottoNumber other) {
+        return number.compareTo(other.number);
     }
 }

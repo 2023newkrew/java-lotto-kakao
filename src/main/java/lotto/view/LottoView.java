@@ -2,15 +2,21 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoView {
     private final Scanner scanner;
+    private final List<LottoRank> rankList;
 
     public LottoView() {
         scanner = new Scanner(System.in);
+        rankList = new ArrayList<>(Arrays.asList(LottoRank.values()));
+        rankList.remove(LottoRank.FAIL);
     }
 
     public int inputPurchase() {
@@ -18,8 +24,30 @@ public class LottoView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public void printAmount(int amount) {
-        System.out.println(amount + "개를 구매했습니다.");
+    private List<Integer> inputNumbers() {
+        return Arrays.stream(scanner.nextLine().replace(" ", "").split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    private List<List<Integer>> inputNumbers2D(Integer n) {
+        return Stream.generate(this::inputNumbers)
+                .limit(n)
+                .collect(Collectors.toList());
+    }
+
+    public int inputManualLottoCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public List<List<Integer>> inputManualLottoNumbers(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return inputNumbers2D(count);
+    }
+
+    public void printAmount(int manualLottoAmount, int autoLottoAmount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualLottoAmount, autoLottoAmount);
     }
 
     public void printLotto(Lotto lotto) {
@@ -33,33 +61,23 @@ public class LottoView {
         System.out.println();
     }
 
-    public Lotto inputWinNumbers() {
+    public List<Integer> inputWinningLottoNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return new Lotto(
-                Arrays.stream(scanner.nextLine().replace(" ", "").split(","))
-                        .map(Integer::parseInt)
-                        .map(LottoNumber::new)
-                        .collect(Collectors.toList())
-        );
+        return inputNumbers();
     }
 
-    public LottoNumber inputBonusNumber() {
+    public Integer inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new LottoNumber(scanner.nextInt());
-    }
-
-    public void printStatisticsText() {
-        System.out.println();
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        return scanner.nextInt();
     }
 
     public void printStatistics(Statistics stat) {
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoRank.FIFTH.COUNT, LottoRank.FIFTH.PRIZE, stat.getByRank(LottoRank.FIFTH));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoRank.FOURTH.COUNT, LottoRank.FOURTH.PRIZE, stat.getByRank(LottoRank.FOURTH));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoRank.THIRD.COUNT, LottoRank.THIRD.PRIZE, stat.getByRank(LottoRank.THIRD));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoRank.SECOND.COUNT, LottoRank.SECOND.PRIZE, stat.getByRank(LottoRank.SECOND));
-        System.out.printf("%d개 일치 (%d원)- %d개\n", LottoRank.FIRST.COUNT, LottoRank.FIRST.PRIZE, stat.getByRank(LottoRank.FIRST));
+        System.out.println();
+        System.out.println("당첨 통계");
+        System.out.println("---------");
+        for (LottoRank rank : rankList) {
+            System.out.printf("%d개 일치 (%d원)- %d개\n", rank.count, rank.prize, stat.getByRank(rank));
+        }
     }
 
     public void printTotalProfitRate(Statistics stat) {

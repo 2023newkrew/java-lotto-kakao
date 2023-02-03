@@ -1,29 +1,16 @@
 package lotto.domain;
 
 public class LottoResult {
-    private final Lotto myLotto;
-    private final Lotto winningLotto;
-    private final LottoNumber bonusNumber;
 
-    public LottoResult(Lotto myLotto, Lotto winningLotto, LottoNumber bonusNumber) {
-        this.myLotto = myLotto;
-        this.winningLotto = winningLotto;
-        this.bonusNumber = bonusNumber;
+    private final Integer matchCount;
+    private final Boolean matchedBonus;
+
+    public LottoResult(Lotto myLotto, WinningLotto winningLotto) {
+        this.matchCount = myLotto.getMatchCount(winningLotto);
+        this.matchedBonus = myLotto.hasBonus(winningLotto.getBonusNumber());
     }
 
     public LottoRank getRank() {
-        if( LottoRank.FIRST.COUNT == myLotto.compare(winningLotto))
-            return LottoRank.FIRST;
-        if(LottoRank.SECOND.COUNT == myLotto.compare(winningLotto)
-            && myLotto.hasBonus(bonusNumber))
-            return LottoRank.SECOND;
-        if(LottoRank.THIRD.COUNT == myLotto.compare(winningLotto))
-            return LottoRank.THIRD;
-        if(LottoRank.FOURTH.COUNT == myLotto.compare(winningLotto))
-            return LottoRank.FOURTH;
-        if(LottoRank.FIFTH.COUNT == myLotto.compare(winningLotto))
-            return LottoRank.FIFTH;
-
-        return LottoRank.FAIL;
+        return LottoRank.getRank(matchCount, matchedBonus);
     }
 }

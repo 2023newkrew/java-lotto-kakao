@@ -1,30 +1,37 @@
 package lotto;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
+import lotto.domain.Statistics;
+import lotto.domain.WinningLotto;
+import lotto.util.LottoConverter;
 import lotto.util.LottoPayment;
 import lotto.util.RandomLottoGenerator;
-import lotto.domain.Statistics;
 import lotto.view.LottoView;
+
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
         LottoView lottoView = new LottoView();
         RandomLottoGenerator generator = new RandomLottoGenerator();
-        int amount = LottoPayment.getAmount(lottoView.inputPurchase());
-        Lottos lottos = generator.generateLottos(amount);
+        LottoConverter converter = new LottoConverter();
 
-        lottoView.printAmount(amount);
+        int totalLottoAmount = LottoPayment.getAmount(lottoView.inputPurchase());
+        int manualLottoAmount = lottoView.inputManualLottoCount();
+        int autoLottoAmount = totalLottoAmount - manualLottoAmount;
+
+        Lottos manualLottos = converter.toLottos(lottoView.inputManualLottoNumbers(manualLottoAmount));
+        Lottos autoLottos = generator.generateLottos(autoLottoAmount);
+        Lottos lottos = Lottos.union(manualLottos, autoLottos);
+
+        lottoView.printAmount(manualLottoAmount, autoLottoAmount);
         lottoView.printLottos(lottos);
 
-        Lotto winLotto = lottoView.inputWinNumbers();
-        LottoNumber bonusNumber = lottoView.inputBonusNumber();
+        List<Integer> winningLottoNumbers = lottoView.inputWinningLottoNumber();
+        Integer bonusNumber = lottoView.inputBonusNumber();
+        WinningLotto winningLotto = converter.toWinningLotto(winningLottoNumbers, bonusNumber);
 
-        Statistics stat = new Statistics();
-        stat.build(lottos, winLotto, bonusNumber);
-
-        lottoView.printStatisticsText();
+        Statistics stat = new Statistics(lottos, winningLotto);
         lottoView.printStatistics(stat);
         lottoView.printTotalProfitRate(stat);
     }

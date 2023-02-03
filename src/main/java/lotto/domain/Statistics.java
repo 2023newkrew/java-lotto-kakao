@@ -1,52 +1,45 @@
 package lotto.domain;
 
+import lotto.util.LottoPayment;
+
+import java.util.*;
+
 public class Statistics {
-    private int FIRST;
-    private int SECOND;
-    private int THIRD;
-    private int FOURTH;
-    private int FIFTH;
+    private final Map<LottoRank, Integer> ranks;
     private int purchase;
 
-    public Statistics(){
-        FIRST = 0;
-        SECOND = 0;
-        THIRD = 0;
-        FOURTH = 0;
-        FIFTH = 0;
+    public Statistics() {
+        ranks = new EnumMap<>(Map.of(
+                LottoRank.FIRST, 0,
+                LottoRank.SECOND, 0,
+                LottoRank.THIRD, 0,
+                LottoRank.FOURTH, 0,
+                LottoRank.FIFTH, 0,
+                LottoRank.FAIL, 0
+        ));
     }
 
-    public void build(Lottos lottos, Lotto winLotto, LottoNumber bonusNumber) {
+    public Statistics(Lottos lottos, WinningLotto winningLotto) {
+        this();
         for (Lotto lotto : lottos) {
-            LottoResult result = new LottoResult(lotto, winLotto, bonusNumber);
+            LottoResult result = new LottoResult(lotto, winningLotto);
             add(result.getRank());
         }
     }
 
     public void add(LottoRank rank) {
-        if(rank == LottoRank.FIRST) FIRST++;
-        if(rank == LottoRank.SECOND) SECOND++;
-        if(rank == LottoRank.THIRD) THIRD++;
-        if(rank == LottoRank.FOURTH) FOURTH++;
-        if(rank == LottoRank.FIFTH) FIFTH++;
-        purchase += 1000;
+        ranks.merge(rank, 1, Integer::sum);
+        purchase += LottoPayment.LOTTO_COST;
     }
 
     public int getByRank(LottoRank rank) {
-        if(rank == LottoRank.FIRST) return FIRST;
-        if(rank == LottoRank.SECOND) return SECOND;
-        if(rank == LottoRank.THIRD) return THIRD;
-        if(rank == LottoRank.FOURTH) return FOURTH;
-        if(rank == LottoRank.FIFTH) return FIFTH;
-        return 0;
+        return ranks.get(rank);
     }
 
-    public int getPrizeAmount() {
-        return FIRST * LottoRank.FIRST.PRIZE
-                + SECOND * LottoRank.SECOND.PRIZE
-                + THIRD * LottoRank.THIRD.PRIZE
-                + FOURTH * LottoRank.FOURTH.PRIZE
-                + FIFTH * LottoRank.FIFTH.PRIZE;
+    public long getPrizeAmount() {
+        return Arrays.stream(LottoRank.values())
+                .mapToLong(rank -> ranks.get(rank) * rank.prize)
+                .sum();
     }
 
     public double getProfitRate() {
